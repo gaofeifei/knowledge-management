@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/public_nav.css">
+</head>
+<body>
+<div id="nav_left">
+    <div class="bot">
+        <div class="mainav">
+            <ul class="menu">
+                <li class="home">
+                    <h2>
+                        <b class="icon icon-globe" style="color: white"></b>
+                    </h2>
+                </li>
+                <li>
+                    <h2>
+                        <b class="icon icon-stethoscope"></b>
+                        <a href="">图谱分析</a>
+                    </h2>
+                    <ul class="menuList">
+                        <li class="analyze">
+                            <b class="icon icon-dashboard"></b>
+                            <a href="">专题分析</a>
+                        </li>
+                        <li class="groupore">
+                            <b class="icon icon-user-md"></b>
+                            <a href="">群体探索</a>
+                        </li>
+                        <li class="relation">
+                            <b class="icon icon-eye-open"></b>
+                            <a href="">关系探索</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>
+                        <b class="icon icon-cog"></b>
+                        <a href="">图谱管理</a>
+                    </h2>
+                    <ul class="menuList" style="display: none">
+                        <li class="addmap">
+                            <b class="icon icon-print"></b>
+                            <a href="">添加图谱</a>
+                        </li>
+                        <li class="compile">
+                            <b class="icon icon-pencil"></b>
+                            <a href="">编辑图谱</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>
+                        <b class="icon icon-user"></b>
+                        <a href="">我的图谱</a>
+                    </h2>
+                    <ul class="menuList" style="display: none">
+                        <li class="myspecial">
+                            <b class="icon icon-twitter-sign"></b>
+                            <a href="">我的专题</a>
+                        </li>
+                        <li class="mygroup">
+                            <b class="icon icon-github-alt"></b>
+                            <a href="">我的群体</a>
+                        </li>
+                        <li class="myfocus">
+                            <b class="icon icon-heart"></b>
+                            <a href="">我的关注</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+<div id="nav_top">
+    <div class="box">
+        <div class="tb_l">
+            <span class="knowledge">知识图谱系统
+                <i style="font-size: 26px;" class="icon icon-chevron-right"></i>
+                <strong id="tit" style="font-size: 24px;"></strong>
+            </span>
+        </div>
+    </div>
+    <div class="search">
+        <div class="ts_r">
+            <input class="word" type="text" placeholder="Search..."/>
+            <span class="icon icon-search glass magnify" style="cursor: pointer;"></span>
+            <!--<input class="switch" type="submit" value="高级搜索"/>-->
+            <button type="button" class="btn btn-primary switch" data-toggle="modal" data-target="#myModal">
+                高级搜索
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel">图谱搜索</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="mb_top">
+                                <div class="checkbox mbt1">
+                                    <label>
+                                        <input type="checkbox">  节点
+                                    </label>
+                                </div>
+                                <div class="mbt2" style="margin-left: 40px">
+                                    <span class="leixing">节点类型：</span>
+                                    <form>
+                                        <select name="" id="list">
+                                            <option value="">人物</option>
+                                            <option value="">事件</option>
+                                            <option value="">机构</option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <div class="mbt3" style="margin-left: 40px">
+                                    <span class="leixing">属性类型：</span>
+                                    <form>
+                                        <select name="" id="list1">
+                                            <option value="">姓名</option>
+                                            <option value="">身份</option>
+                                            <option value="">党派</option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <div class="mbt4" style="margin-left: 40px;margin-top: 10px;">
+                                    <span class="leixing">属性值：</span>
+                                    <input type="text" id="list2"/>
+                                    <span class="icon icon-plus jia" style="margin-left: 30px;cursor: pointer"></span>
+                                </div>
+                                <div class="conceal" style="display: none">
+                                    <form style="margin:10px 0 10px 40px;display: block">
+                                        <select name="">
+                                            <option value="">或</option>
+                                            <option value="">与</option>
+                                        </select>
+                                    </form>
+                                    <div class="conceal2" style="margin-left: 40px">
+                                        <span class="leixing">节点类型：</span>
+                                        <form>
+                                            <select name="" id="choose">
+                                                <option value="">人物</option>
+                                                <option value="">事件</option>
+                                                <option value="">机构</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                    <div class="conceal3" style="margin-left: 40px">
+                                        <span class="leixing">属性类型：</span>
+                                        <form>
+                                            <select name="" id="choose1">
+                                                <option value="">姓名</option>
+                                                <option value="">身份</option>
+                                                <option value="">党派</option>
+                                            </select>
+                                        </form>
+                                    </div>
+                                    <div class="conceal4" style="margin-left: 40px;margin-top: 10px;">
+                                        <span class="leixing">属性值：</span>
+                                        <input type="text" id="choose2"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="mb_bottom">
+                                <div class="checkbox mbb">
+                                    <label>
+                                        <input type="checkbox">  关系
+                                    </label>
+                                </div>
+                                <div class="mbb1" style="margin-left: 40px">
+                                    <span class="leixing">关系类型：</span>
+                                    <form>
+                                        <select name="" id="reion" style="width: 255px">
+                                            <option value="">同类关系</option>
+                                            <option value="">同专题关系</option>
+                                            <option value="">同属关系</option>
+                                            <option value="">其他关系</option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <div class="mbb2" style="margin-left: 40px">
+                                    <span class="leixing">子网络跳数：</span>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                            1跳
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                            2跳
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button id="makesure" type="button" class="btn btn-primary">确定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                #mb_top,#mb_bottom {
+                    margin-left: 80px;
+                }
+                #mb_top .mbt2,#mb_top .mbt3,#mb_top .mbt2 .leixing,#mb_top .mbt2 form,#mb_top .mbt3 .leixing,#mb_top .mbt3 form,
+                #mb_top .mbt4 .leixing,#mb_top .mbt4 .jia, #mb_top .conceal .leixing,#mb_top .conceal form,#mb_top .conceal .conceal2,
+                #mb_top .conceal .conceal3,#mb_bottom .leixing,#mb_bottom .mbb1 form,#mb_bottom .mbb2 .radio {
+                    display: inline-block;
+                }
+                #mb_top .mbt2 form #list,#mb_top .mbt3 form #list1,#mb_top .mbt4 #list2,#mb_top .conceal form select,
+                #mb_top .conceal2 form #choose,#mb_top .conceal3 form #choose1,#mb_top .conceal4 #choose2,#mb_bottom .mbb1 #reion {
+                    width: 70px;
+                    border: 1px solid #a5a5a5;
+                }
+                #mb_top .mbt4 #list2,#mb_top .conceal4 #choose2 {
+                    margin-left: 13px;
+                    width: 260px;
+                }
+            </style>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    //导航左边的动画效果
+    $(".menu h2").on("click", function() {
+        $(this).next().stop().slideToggle(500).parent().siblings().children("ul").slideUp(500);
+    });
+    var olis = $(".mainav .menuList li");
+    $.each(olis, function(index, item) {
+        $(this).hover(function() {
+            $(this).children().css({color:"orange"});
+        }, function() {
+            $(this).children().css({color:""});
+        })
+    });
+    //模态框
+//    $('#myModal').modal('toggle');
+    var full=0;
+    $(".jia").on('click',function () {
+        if (full==0){
+            $(".conceal").slideDown(300,function () {
+                full=1;
+            });
+        }else {
+            $(".conceal").slideUp(200,function () {
+                full=0;
+            });
+        }
+    });
+    $("#makesure").on('click',function () {
+        window.location.href='serp.html';
+    });
+    //页面点击跳转
+    $('.home').on('click',function () {
+        window.location.href='homepage.html';
+    });
+    $('.analyze').on('click',function () {
+        window.location.href='analyze.html';
+    });
+    $('.groupore').on('click',function () {
+        window.location.href='groupore.html';
+    });
+    $('.relation').on('click',function () {
+        window.location.href='relation.html';
+    });
+    $('.addmap').on('click',function () {
+        window.location.href='addmap.html';
+    });
+    $('.compile').on('click',function () {
+        window.location.href='compile.html';
+    });
+    $('.myspecial').on('click',function () {
+        window.location.href='myspecial.html';
+    });
+    $('.mygroup').on('click',function () {
+        window.location.href='mygroup.html';
+    });
+    $('.myfocus').on('click',function () {
+        window.location.href='myfocus.html';
+    });
+    $('.magnify').on('click',function () {
+        window.location.href='serp.html';
+    });
+    ~function(){
+        var title = window.parent.document.title;
+        window.parent.document.getElementById('tit').innerText=title;
+    }()
+</script>
+</body>
+</html>

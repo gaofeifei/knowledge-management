@@ -1,0 +1,197 @@
+/*清除初始的样式*/
+html,body,div,img,h1,h2,h3,h4,h5,h6,input,button,span,p,b,strong,em,li,ul,ol,dl,dt,dd,
+th,textarea,select,table,form {
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+ul,li,ol {
+    list-style: none;
+}
+img {
+    border:none;
+}
+input,select,textarea,button {
+    outline: none;
+    border: none;
+}
+a,a:link,a:hover,a:visited,a:active {
+    text-decoration: none;
+}
+/*内容样式*/
+#container {
+    margin-left: 125px;
+    padding: 20px 0 0;
+}
+#container .contop {
+    width: 100%;
+    margin: 30px 0 30px;
+}
+#container .contop .cp1,#container .contop .cp2,#container .contop .cp3 {
+    display: inline-block;
+    margin-left: 20px;
+}
+#container .contop .cp1 {
+    margin-left: 0;
+    color: black;
+    font-size: 16px;
+    font-weight: 900;
+}
+#container .contop .cp2 .more,#container .contop .cp3 .mores {
+    border: 1px solid #aeaeae;
+    width: 250px;
+    height: 25px;
+    padding: 3px 3px 3px 5px;
+    margin-left: 20px;
+}
+#container .contop .cp2 .checkbox,#container .contop .cp3 .checkbox {
+    display: inline-block;
+}
+#container .contop .cp4 {
+    width: 70px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    color: white;
+    background-color: #0099FF;
+    border-radius: 10px;
+    margin-left: 30px;
+}
+#container .contop .cp4:hover {
+    background-color: #4cae4c;
+}
+#container .result {
+    margin: 30px 0;
+}
+#container .result .re1{
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+    width: 150px;
+    height: 32px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #09F;
+}
+#container .result .re2 #complex {
+    width:600px;
+    height: 471px;
+    border: 2px solid #09F;
+    box-shadow: 3px 3px 3px #c9c2c7;
+}
+#container .result .re3 {
+    /*width:500px;*/
+    /*height: 400px;*/
+    margin-left: 20px;
+    /*border: 2px solid #09F;*/
+    /*box-shadow: 3px 3px 3px #c9c2c7;*/
+}
+#container .result .re3 .re3lf,#container .result .re3 .re3rg {
+    width: 240px;
+    float: left;
+}
+#container .result .re3 .re3lf .route,#container .result .re3 .re3rg .route {
+    padding: 15px;
+    border: 2px solid #0099FF;
+}
+#container .result .re3 .re3lf .route span,#container .result .re3 .re3rg .route span {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    color: #797979;
+    margin-top: 5px;
+}
+#container .result .re3 .re3lf .play,#container .result .re3 .re3rg .play{
+    width: 240px;
+    padding: 5px;
+    height: 160px;
+    margin-top: 15px;
+    border:2px solid #0099FF;
+    box-shadow: 2px 2px 2px #878787;
+    overflow: hidden;
+    background-color: #d9edf7;
+}
+#container .result .re3 .re3rg {
+    width: 265px;
+    border:2px solid #4cae4c;
+    padding: 10px;
+    background-color: #4cae4c;
+}
+#container .result .re3 .re3rg .play {
+    height: 138px;
+}
+#container .result .re3 .re3lf .play .play1,#container .result .re3 .re3rg .play .play1 {
+    width: 170px;
+    margin-top: 5px;
+    display: inline-block;
+}
+#container .result .re3 .re3lf .play1 .p11 span,#container .result .re3 .re3lf .play1 .p11 img,
+#container .result .re3 .re3lf .play1 .p22 span,#container .result .re3 .re3lf .play1 .p22 img,
+#container .result .re3 .re3rg .play1 .p11 span,#container .result .re3 .re3rg .play1 .p11 img,
+#container .result .re3 .re3rg .play1 .p22 span,#container .result .re3 .re3rg .play1 .p22 img{
+    display: inline-block;
+}
+#container .result .re3 .re3lf .play .play2,#container .result .re3 .re3rg .play .play2 {
+    width: 50px;
+    height: 55px;
+    display: inline-block;
+    margin-top: -20px;
+}
+#container .result .re3 .re3lf .play .play23 a,#container .result .re3 .re3rg .play .play23 a {
+    display: block;
+    margin-top: 5px;
+    color: #000;
+    font-weight: bold;
+    font-size: 10px;
+}
+#container .result .re3 .re3lf .play .play23 a span,#container .result .re3 .re3rg .play .play23 a span {
+    font-weight: 100;
+    padding-left: 20px;
+}
+#container .result .re3 .re3lf .play .play3 .bus1,#container .result .re3 .re3rg .play .play3 .bus1 {
+    font-size: 10px;
+    font-weight: bold;
+    display: inline-block;
+    padding-top: 2px;
+    color: #000;
+}
+#container .result .re3 .re3lf .play .play3 .bus2,#container .result .re3 .re3rg .play .play3 .bus2 {
+    color: #000;
+    display: inline-block;
+    margin-left: 5px;
+    background-color: #0099FF;
+    padding: 3px 2px 0 2px;
+    border-radius: 5px;
+    font-size: 8px;
+}
+/*#container .result .re3 .re3lf .play .play4 .shuoming,*/
+/*#container .result .re3 .re3rg .play .play4 .shuoming {*/
+    /*margin-top: 10px;*/
+    /*font-size: 12px;*/
+    /*color: rgba(184, 184, 184, 0.62);*/
+/*}*/
+#container .result .re3 .re3lf .play .play5,
+#container .result .re3 .re3rg .play .play5{
+    position: relative;
+    top:15px;
+    left: -5px;
+    z-index: 10;
+    width: 239px;
+    height: 40px;
+    transition: all 0.3s linear;
+}
+#container .result .re3 .re3lf .play .play5 a,
+#container .result .re3 .re3rg .play .play5 a{
+    display: block;
+    width: 100%;
+    height: 40px;
+    background-color: #0099FF;
+    line-height: 40px;
+    font-size: 12px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+}

@@ -1,0 +1,156 @@
+/*清除初始的样式*/
+html,body,div,img,h1,h2,h3,h4,h5,h6,input,button,span,p,b,strong,em,li,ul,ol,dl,dt,dd,
+th,textarea,select,table,form {
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+ul,li,ol {
+    list-style: none;
+}
+img {
+    border:none;
+}
+input,select,textarea,button {
+    outline: none;
+    border: none;
+}
+a,a:link,a:hover,a:visited,a:active {
+    text-decoration: none;
+}
+/*内容样式*/
+body {
+    background-color: #e4e4e4;
+}
+#container {
+    margin-left: 125px;
+    padding: 20px 0 0;
+}
+#container .main,#container .maintwo {
+    margin-top: 30px;
+}
+#container .main .main1 {
+    width: 1000px;
+    height: 300px;
+    border: 2px solid #0099FF;
+    box-shadow: 3px 3px 3px #c7c7c7;
+}
+#container .main .focusper {
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+    width: 150px;
+    height: 32px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #09F;
+}
+#container .main .main1 .grid {
+    margin: 30px 0 0 30px;
+    width: 700px;
+    float: left;
+}
+#container .main .main1 {
+    width: 1100px;
+}
+#container .main .table th,#container .main .table td {
+    text-align: center;
+}
+#container .main .table th {
+    color: white;
+    font-weight: 600;
+}
+#container .main .play,#container .maintwo .main1 .play {
+    float: left;
+    width: 240px;
+    padding: 5px;
+    height: 160px;
+    margin: 60px 0 0 40px;
+    border:1px solid #0099FF;
+    box-shadow: 2px 2px 2px #878787;
+}
+#container .main .play .play1,#container .maintwo .main1 .play .play1 {
+    width: 170px;
+    margin-top: 5px;
+    display: inline-block;
+}
+#container .main .play .play1 .p11 span,#container .main .play .play1 .p11 img,
+#container .main .play .play1 .p22 span,#container .main .play .play1 .p22 img,
+#container .maintwo .main1 .play .play1 .p11 span,#container .maintwo .main1 .play .play1 .p11 .img,
+#container .maintwo .main1 .play .play1 .p22 span,#container .maintwo .main1 .play .play1 .p22 .img {
+    display: inline-block;
+}
+#container .main .play .play2,#container .maintwo .main1 .play .play2 {
+    width: 50px;
+    height: 55px;
+    display: inline-block;
+    margin-top: -20px;
+}
+#container .main .play .play23 a,#container .maintwo .main1 .play .play23 a {
+    display: block;
+    margin-top: 5px;
+    color: #000;
+    font-weight: bold;
+    font-size: 10px;
+}
+#container .main .play .play23 a span,#container .maintwo .main1 .play .play23 a span {
+    font-weight: 100;
+    padding-left: 20px;
+}
+#container .main .play .play3 .bus1,#container .maintwo .main1 .play .play3 .bus1 {
+    font-size: 10px;
+    font-weight: bold;
+    display: inline-block;
+    padding-top: 2px;
+    color: #000;
+}
+#container .main .play .play3 .bus2,#container .maintwo .main1 .play .play3 .bus2 {
+    color: #000;
+    display: inline-block;
+    margin-left: 5px;
+    background-color: #0099FF;
+    padding: 3px 2px 0 2px;
+    border-radius: 5px;
+    font-size: 8px;
+}
+#container .maintwo .main1 .play .play4 .shuoming {
+    margin-top: 10px;
+    font-size: 12px;
+    color: rgba(75, 75, 75, 0.84);
+}
+/*第二个表格*/
+#container .maintwo .main1 {
+    width: 1000px;
+    height: 300px;
+    border: 2px solid #0099FF;
+    box-shadow: 3px 3px 3px #c7c7c7;
+}
+#container .maintwo .focusper {
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+    width: 150px;
+    height: 32px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #09F;
+}
+#container .maintwo .main1 .grid {
+    margin: 30px 0 0 30px;
+    width: 700px;
+    float: left;
+}
+#container .maintwo .main1 {
+    width: 1100px;
+}
+#container .maintwo .table th,#container .maintwo .table td {
+    text-align: center;
+}
+#container .maintwo .table th {
+    color: white;
+    font-weight: 600;
+}
+/*#container .maintwo .main1 .play*/

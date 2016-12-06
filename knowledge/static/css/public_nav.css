@@ -1,0 +1,120 @@
+/*清除初始的样式*/
+html,body,div,img,h1,h2,h3,h4,h5,h6,input,button,span,p,b,strong,em,li,ul,ol,dl,dt,dd,
+th,textarea,select,table,form {
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+ul,li,ol {
+    list-style: none;
+}
+img,button {
+    border:none;
+}
+input,select,textarea {
+    outline: none;
+    border: none;
+}
+a,a:link,a:hover,a:visited,a:active {
+    text-decoration: none;
+}
+body {
+    padding-right: 0px!important;
+}
+/*左侧导航条样式*/
+#nav_left {
+    position: fixed;
+    width: 70px;
+    height: 100%;
+    background-color: rgba(2, 4, 8, 0.84);
+    box-shadow: 4px 4px 4px #122B40;
+}
+#nav_left .bot .mainav {
+    width: 100%;
+}
+#nav_left .bot .mainav .menu {
+    width: 100%;
+}
+#nav_left .bot .mainav .menu h2 {
+    text-align: center;
+    margin-top: 30px;
+}
+#nav_left .bot .mainav .menu h2 b,#nav_left .bot .mainav .menu h2 a {
+    display: block;
+    color: orange;
+    font-size: 40px;
+}
+#nav_left .bot .mainav .menu h2 a {
+    margin-top: 20px;
+    font-size: 14px;
+}
+#nav_left .bot .mainav .menuList li {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+#nav_left .bot .mainav .menuList li b,#nav_left .bot .mainav .menuList li a {
+    display: block;
+    color: white;
+    font-size: 30px;
+}
+#nav_left .bot .mainav .menuList li a {
+    margin-top: 10px;
+    font-size: 12px;
+}
+/*上方导航样式*/
+#nav_top {
+    height: 70px;
+    padding: 10px 0 0 70px;
+    background-color: #eee;
+    margin-left: 65px;
+    box-shadow:3px 5px 3px #999;
+}
+#nav_top .box {
+    float: left;
+    /* display: inline-block; */
+    /* width: 300px; */
+    height: 50px;
+    margin-left: 30px;
+}
+#nav_top .box .knowledge {
+    font-size: 34px;
+    font-weight: 900;
+    color: black;
+}
+#nav_top .search {
+    float: right;
+    /* display: inline-block; */
+    margin-top: 1%;
+    margin-right: 5%;
+}
+#nav_top .search .ts_r .word {
+    width: 250px;
+    height: 30px;
+    padding: 5px 25px 5px 15px;
+    border: 1px solid rgba(171, 171, 171, 0.47);
+}
+#nav_top .search .ts_r .glass {
+    position: relative;
+    left: -30px;
+}
+#nav_top .search .ts_r .switch {
+    padding: 5px 15px;
+    /*height: 30px;*/
+    border-radius: 20px;
+    color: #fff;
+    font-weight: 800;
+    background-color: #0099FF;
+}
+#nav_top .search .ts_r .switch:hover {
+    background-color: #694ac4;
+}
+@media screen and (max-width:1060px) {
+    #nav_top {
+        min-width: 855px!important;
+    }
+    #nav_top .search {
+        margin-left: 15%!important;
+    }
+}

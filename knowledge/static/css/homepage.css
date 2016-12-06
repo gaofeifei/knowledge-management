@@ -1,0 +1,148 @@
+/*清除初始的样式*/
+html,body,div,img,h1,h2,h3,h4,h5,h6,input,button,span,p,b,strong,em,li,ul,ol,dl,dt,dd,
+th,textarea,select,table,form {
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+ul,li,ol {
+    list-style: none;
+}
+img {
+    border:none;
+}
+input,select,textarea,button {
+    outline: none;
+    border: none;
+}
+a,a:link,a:hover,a:visited,a:active {
+    text-decoration: none;
+}
+/* 清除浮动 */
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.clearfix {
+    zoom: 1;
+}
+/*内容样式--container*/
+#container {
+    margin-left: 75px;
+    padding: 20px 0 0 30px;
+}
+#container .con_lf {
+    /*width: 65%;*/
+    float: left;
+}
+#container .con_lf .clf_t .peo,#container .con_lf .clf_t .things {
+    display: inline-block;
+    width: 360px;
+    height: 130px;
+    border-radius: 20px;
+    background-color: #68AE00;
+    box-shadow:2px 2px 2px #2b542c;
+}
+#container .con_lf .clf_t .peo:hover,#container .con_lf .clf_t .things:hover {
+    background-color: #4b4b4b;
+}
+#container .con_lf .clf_t .peo .number,#container .con_lf .clf_t .peo .new,#container .con_lf .clf_t .things .new,
+#container .con_lf .clf_t .things .number{
+    display: block;
+    font-size: 44px;
+    color: white;
+    font-weight: 900;
+    position: relative;
+    top:20px;
+    left: 20px;
+}
+#container .con_lf .clf_t .peo .new,#container .con_lf .clf_t .things .new {
+    font-size: 16px;
+    top: 40px;
+    left: 25px;
+}
+#container .con_lf .clf_t .peo .png,#container .con_lf .clf_t .things .png{
+    float: right;
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: white;
+    margin: 5px 20px 0 0;
+}
+#container .con_lf .clf_t .things {
+    margin-left: 30px;
+    background-color: #FC8213;
+    box-shadow:2px 2px 2px #2b542c;
+}
+/*下方图表*/
+#container .con_lf .clf_bot {
+    /*width: 100%;*/
+    margin-top: 30px;
+}
+#container .con_lf .clf_bot .update {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+    width: 150px;
+    height: 32px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #09F;
+    margin-right: 65%;
+}
+#container .con_lf .clf_bot .chars {
+    display: inline-block;
+}
+#container .con_lf .clf_bot .chars .atlas,#container .con_lf .clf_bot .chars .map {
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    color: #4b4b4b;
+    font-weight: 600;
+    border: 1px solid silver;
+}
+#container .con_lf .clf_bot .chars .atlas {
+    border-top-left-radius:10px ;
+    border-bottom-left-radius: 10px;
+}
+#container .con_lf .clf_bot .chars .map {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+#container .con_lf .clf_bot #statis1,#container .con_lf .clf_bot #statis2 {
+    width: 750px;
+    height: 500px;
+    border: 1px solid #09F;
+}
+/*右侧图表样式*/
+#container .con_rg {
+    float: left;
+    margin-left: 20px;
+}
+#container .con_rg .conrgt .subject,#container .con_rg .colony .group{
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+    width: 150px;
+    height: 32px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #09F;
+}
+#container .con_rg .conrgt #special,#container .con_rg .colony #groupevents {
+    width: 450px;
+    height: 300px;
+    border: 1px solid #09F;
+}
+#container .con_rg .colony {
+    margin-top: 28px;
+}

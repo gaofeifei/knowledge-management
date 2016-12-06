@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>群体探索 - 群体对比</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/groupdiff.css">
+</head>
+<body>
+<div id="nav"></div>
+<div id="container">
+    <div class="present">
+        <span class="preone">
+            当前对比群体：
+            <a style="color: white;font-weight: 700;background-color: #0099FF" class="preonemd" href="">律师群体  <i class="icon icon-remove"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="color: white;font-weight: 700;background-color: #0099FF" class="preonemd" href="">维权群体  <i class="icon icon-remove"></i></a>
+        </span>
+        <div class="checkbox prethr" style="margin-left: 30px">
+            <label>
+                <input type="checkbox" class="ptnew"/> 加入新群体
+            </label>
+            <div class="prethrmd" style="display: none;margin-left: 10px;">
+                <form>
+                    <select name="" id="gup">
+                        <option value="">律师群体</option>
+                        <option value="">维权群体</option>
+                    </select>
+                </form>
+                <button class="ptm3">加入对比</button>
+            </div>
+        </div>
+    </div>
+    <div id="middle">
+        <div class="centre" style="height: 650px;">
+            <div style="position: relative;height: 1px;border-top:1px solid #ccc;margin: 30px 0;">
+            <p style="position: absolute;z-index:5;left: 43.5%;top:-28px;border-radius:10px;color: white;padding: 15px 25px;background-color: #00cc66;
+                font-weight: 900;font-size: 20px;">图谱对比</p>
+        </div>
+            <div class="midleft">
+                <p class="conevents">律师群体&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:#5e5e5e;font-size: 8px;">共<a href="" class="peonum">20</a>人</b></p>
+                <div id="eventimg">
+
+                </div>
+                <div id="eventimg2" style="display: none;">
+
+                </div>
+            </div>
+            <div class="midmid">
+                <p class="pane">交互面板</p>
+                <div class="condition">
+                    <!--111-->
+                    <div class="cdt2" style="margin: 20px 0;">
+                        <div class="radio">
+                            <label class="radio-inline" style="margin-left: 20px;color: #9d9d9d;font-size: 12px;line-height: 20px;">
+                                <input class="cdt211" type="radio" name="tions" value="option1" checked> 关系图谱
+                            </label>
+                            <label class="radio-inline" style="color: #9d9d9d;font-size: 12px;line-height: 20px;">
+                                <input class="cdt222" type="radio" name="tions" value="option2"> 地域图谱
+                            </label>
+                        </div>
+                    </div>
+                    <!--222-->
+                    <span class="cdt3" style="display: block;margin: 40px 0 0 20px;color: #777;font-size: 14px">节点扩展</span>
+                    <div class="cdt4">
+                        <div class="radio">
+                            <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                                <input class="per" type="radio" checked/> 扩展一层
+                            </label>
+                            <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                                <input class="per" type="radio"/> 扩展二层
+                            </label>
+                        </div>
+                    </div>
+                    <!--333-->
+                    <span class="cdt3" style="display: block;margin: 40px 0 0 20px;color: #777;font-size: 14px">关系筛选</span>
+                    <div class="cdt4">
+                        <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                            <label>
+                                <input type="radio" name="optionsRadios" value="option1" checked>
+                                全部节点
+                            </label>
+                        </div>
+                        <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                            <label>
+                                <input type="radio" name="optionsRadios" value="option2">
+                                相同节点
+                            </label>
+                        </div>
+                        <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                            <label>
+                                <input type="radio" name="optionsRadios" value="option3">
+                                不同节点
+                            </label>
+                        </div>
+                    </div>
+                    <!--444-->
+                    <button class="cdt5">确定</button>
+                </div>
+            </div>
+            <div class="midright" style="margin-right: 0">
+                <p class="placet">维权群体&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:#5e5e5e;font-size: 8px;">共<a href="" class="peonum">17</a>人</b></p>
+                <div id="placeimg">
+
+                </div>
+                <div id="placeimg2" style="display: none;">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="peotrast">
+            <div style="position: relative;height: 1px;border-top:1px solid #ccc;margin: 30px 0 50px;">
+                <p style="position: absolute;z-index:5;left: 43.5%;top:-28px;border-radius:10px;color: white;padding: 15px 25px;background-color: #00cc66;
+                font-weight: 900;font-size: 20px;">人物对比</p>
+            </div>
+            <div class="ptsone" style="color: #5e5e5e;font-size: 10px;padding-left: 60px;">
+                <span>排序指标：</span>
+                <label class="radio-inline" style="line-height: 18px;">
+                    <input type="radio" name="inli" value="option1" checked> 活跃度
+                </label>
+                <label class="radio-inline" style="line-height: 18px;">
+                    <input type="radio" name="inli" value="option2"> 重要度
+                </label>
+                <label class="radio-inline" style="line-height: 18px;">
+                    <input type="radio" name="inli" value="option3"> 敏感度
+                </label>
+            </div>
+            <div class="ptstwo" style="padding: 20px 60px;">
+                <div class="table-responsive" style="width: 500px;display: inline-block;margin-right: 10px;">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>姓名</th>
+                                <th>影响力</th>
+                                <th>活跃度</th>
+                                <th>敏感度</th>
+                                <th>业务标签</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>朱明勇</td>
+                                <td>100</td>
+                                <td>100</td>
+                                <td>80</td>
+                                <td>律师</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>邓海峰</td>
+                                <td>100</td>
+                                <td>100</td>
+                                <td>80</td>
+                                <td>律师</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>潘强</td>
+                                <td>95</td>
+                                <td>90</td>
+                                <td>80</td>
+                                <td>敏感人物</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>梅春来</td>
+                                <td>80</td>
+                                <td>50</td>
+                                <td>60</td>
+                                <td>律师</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>李兴</td>
+                                <td>60</td>
+                                <td>70</td>
+                                <td>40</td>
+                                <td>法律人士</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-responsive" style="width: 500px;display: inline-block;margin-left: 10px;">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>姓名</th>
+                            <th>影响力</th>
+                            <th>活跃度</th>
+                            <th>敏感度</th>
+                            <th>业务标签</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>朱明勇</td>
+                            <td>100</td>
+                            <td>100</td>
+                            <td>80</td>
+                            <td>律师</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>邓海峰</td>
+                            <td>100</td>
+                            <td>100</td>
+                            <td>80</td>
+                            <td>律师</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>潘强</td>
+                            <td>95</td>
+                            <td>90</td>
+                            <td>80</td>
+                            <td>敏感人物</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>梅春来</td>
+                            <td>80</td>
+                            <td>50</td>
+                            <td>60</td>
+                            <td>律师</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>李兴</td>
+                            <td>60</td>
+                            <td>70</td>
+                            <td>40</td>
+                            <td>法律人士</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="thingtrast">
+            <div style="position: relative;height: 1px;border-top:1px solid #ccc;margin: 30px 0 50px;">
+                <p style="position: absolute;z-index:5;left: 43.5%;top:-28px;border-radius:10px;color: white;padding: 15px 25px;background-color: #00cc66;
+                font-weight: 900;font-size: 20px;">事件对比</p>
+            </div>
+            <div class="ttone" style="color: #5e5e5e;font-size: 10px;padding-left: 60px;">
+                <span>排序指标：</span>
+                <label class="radio-inline" style="line-height: 18px;">
+                    <input type="radio" name="inlig" value="option1" checked> 发生时间
+                </label>
+                <label class="radio-inline" style="line-height: 18px;">
+                    <input type="radio" name="inlig" value="option2"> 参与人数
+                </label>
+                <label class="radio-inline" style="line-height: 18px;">
+                    <input type="radio" name="inlig" value="option3"> 热度
+                </label>
+            </div>
+            <div class="lawyer">
+                <p class="lawyer1" style="color: #000;font-size: 20px;font-weight: 700;margin:30px 0 10px 75px;">律师群体事件</p>
+                <div class="lawyer2">
+                    <div class="sjmr1">
+                        <img src="../image/left.png" alt="" class="left">
+                        <div id="case4" style="display: inline-block;width:1050px;overflow: hidden;">
+                            <div id="ru4" style="width: 4000px;">
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">跳楼事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">广东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/xuyuyu.png" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">跳楼</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/xuyuyu.png" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">大学生</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/xuyuyu.png" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">大学生</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/xuyuyu.png" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">大学生</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/xuyuyu.png" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">大学生</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/xuyuyu.png" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">大学生</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/xuyuyu.png" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">大学生</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/xuyuyu.png" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">大学生</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/xuyuyu.png" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">大学生</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/xuyuyu.png" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">大学生</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                        </div>
+                        <img src="../image/right.png" alt="" class="right">
+                    </div>
+                </div>
+            </div>
+            <div class="safeguard">
+                <p class="safeguard1" style="color: #000;font-size: 20px;font-weight: 700;margin:30px 0 10px 75px;">维权群体事件</p>
+                <div class="safeguard2">
+                    <div class="sjmr1">
+                        <img src="../image/left.png" alt="" class="left">
+                        <div id="case5" style="display: inline-block;width:1050px;overflow: hidden;">
+                            <div id="run5" style="width: 4000px;">
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">宋振宁事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">南京</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/songzhenning.jpg" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">猝死</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">宋振宁事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">南京</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/songzhenning.jpg" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">猝死</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">宋振宁事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">南京</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/songzhenning.jpg" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">猝死</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">宋振宁事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">南京</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/songzhenning.jpg" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">猝死</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">宋振宁事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">南京</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/songzhenning.jpg" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">猝死</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">宋振宁事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">南京</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/songzhenning.jpg" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">猝死</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">宋振宁事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">南京</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/songzhenning.jpg" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">猝死</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">宋振宁事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">南京</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/songzhenning.jpg" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">猝死</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">宋振宁事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">南京</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/songzhenning.jpg" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">猝死</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="play">
+                                    <div class="play1">
+                                        <div class="p11">
+                                            <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">宋振宁事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">南京</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                        </div>
+                                        <!--<div class="p22">-->
+                                        <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
+                                        <!--<span class="riqi">2016-08-19</span>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <img class="play2" src="../image/songzhenning.jpg" alt="">
+                                    <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                        <!--<a class="bus1">业务标签：</a>-->
+                                        <a class="bus2">诈骗</a>
+                                        <a class="bus2">猝死</a>
+                                        <a class="bus2">离世</a>
+                                    </div>
+                                    <div class="p22" style="margin-left: 7px;">
+                                        <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                        <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                                    </div>
+                                    <!--<div class="play4">-->
+                                    <!--<p class="shuoming">-->
+                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                    <!--</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="play5">-->
+                                    <!--<a href="">加入专题</a>-->
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                        </div>
+                        <img src="../image/right.png" alt="" class="right">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="textrast">
+            <div style="position: relative;height: 1px;border-top:1px solid #ccc;margin: 60px 0 50px;">
+                <p style="position: absolute;z-index:5;left: 43.5%;top:-28px;border-radius:10px;color: white;padding: 15px 25px;background-color: #00cc66;
+                font-weight: 900;font-size: 20px;">文本对比</p>
+            </div>
+            <div class="textrast1">
+                <p class="tone">高影响力微博</p>
+                <p class="ttwo">敏感微博</p>
+            </div>
+            <div class="tweets">
+                <div class="txtleft">
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
+                                错了爸。我不应该拿它煮茶叶蛋还一不
+                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                高三时，老师问我们：“屈原为什么选择端午节跳江自杀?”一位同学抢答：“因为他害怕高考!他文综不会，
+                                理综也不会，英语一窍不通，
+                                数学只能考个大鸭蛋。虽说他的诗歌天下第一，但作文却要求——文体不限，诗歌除外! ”
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
+                                错了爸。我不应该拿它煮茶叶蛋还一不
+                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
+                                错了爸。我不应该拿它煮茶叶蛋还一不
+                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
+                                错了爸。我不应该拿它煮茶叶蛋还一不
+                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <ul class="pager">
+                        <li><a href="#">上一页</a></li>
+                        <li><a href="#">下一页</a></li>
+                    </ul>
+                </div>
+                <div class="txtleft2" style="display:none;">
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
+                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
+                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                高三时，老师问我们：“屈原为什么选择端午节跳江自杀?”一位同学抢答：“因
+                                为他害怕高考!他文综不会，理综也不会，英语一窍不通，数学只
+                                能考个大鸭蛋。虽说他的诗歌天下第一，但作文却要求——文体不限，诗歌除外! ”                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
+                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
+                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <ul class="pager">
+                        <li><a href="#">上一页</a></li>
+                        <li><a href="#">下一页</a></li>
+                    </ul>
+                </div>
+                <div class="txtright" style="margin-left: 30px;">
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
+                                错了爸。我不应该拿它煮茶叶蛋还一不
+                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
+                                错了爸。我不应该拿它煮茶叶蛋还一不
+                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
+                                错了爸。我不应该拿它煮茶叶蛋还一不
+                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                高三时，老师问我们：“屈原为什么选择端午节跳江自杀?”一位同学抢答：“因为他害怕高考!他文综不会，
+                                理综也不会，英语一窍不通，数学只能考个大鸭蛋。
+                                虽说他的诗歌天下第一，但作文却要求——文体不限，诗歌除外! ”
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
+                                错了爸。我不应该拿它煮茶叶蛋还一不
+                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <ul class="pager">
+                        <li><a href="#">上一页</a></li>
+                        <li><a href="#">下一页</a></li>
+                    </ul>
+                </div>
+                <div class="txtright2" style="margin-left: 30px;display: none;">
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
+                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
+                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
+                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
+                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <div class="tlt">
+                        <p class="master">
+                            微博内容：
+                            <span class="master1">
+                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
+                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
+                            </span>
+                        </p>
+                        <div class="time">
+                            <span class="time1">来自微博用户：</span>
+                            <a class="time2">唐老鸭</a>
+                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
+                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
+                            <span class="time6">言论敏感度(78)</span>
+                        </div>
+                    </div>
+                    <ul class="pager">
+                        <li><a href="#">上一页</a></li>
+                        <li><a href="#">下一页</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../echarts/echarts.min.js"></script>
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script src="../js/groupdiff1.js"></script>
+<script src="../js/groupdiff2.js"></script>
+<script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+/*清除初始的样式*/
+html,body,div,img,h1,h2,h3,h4,h5,h6,input,button,span,p,b,strong,em,li,ul,ol,dl,dt,dd,
+th,textarea,select,table,form {
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+ul,li,ol {
+    list-style: none;
+}
+img {
+    border:none;
+}
+input,select,textarea,button {
+    outline: none;
+    border: none;
+}
+a,a:link,a:hover,a:visited,a:active {
+    text-decoration: none;
+}
+/*内容样式*/
+#container {
+    margin-left: 125px;
+    padding: 20px 0 0;
+}
+#container .main {
+    width: 1000px;
+    height: 500px;
+    border: 2px solid #0099FF;
+    box-shadow: 3px 3px 3px #c7c7c7;
+}
+#container .main .table th,#container .main .table td {
+    text-align: center;
+}
+#container .main .table th {
+    color: white;
+    font-weight: 600;
+}

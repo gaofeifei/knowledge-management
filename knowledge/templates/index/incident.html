@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件节点</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/person.css">
+</head>
+<body>
+<div id="nav"></div>
+<div id="container" style="padding-bottom: 30px;">
+    <div class="keyman">
+        <div class="kmlf" style="margin-top: 20px">
+            <img class="kmimg" src="../image/xuyuyu2.jpg" alt=""/>
+        </div>
+        <div class="kmrg">
+            <div class="kmrg1">
+                <div class="rgname">
+                    <span class="xingming" style="color: #000;font-weight: 900;font-size: 38px;margin-left: 15px;">徐玉玉事件</span>
+                    <img src="../image/dingwei.png" alt="" style="margin-left: 30px">
+                    <span class="difang" style="font-size: 8px">山东</span>
+                    <img src="../image/zhong.png" alt="" style="margin-left: 10px">
+                    <span class="influence">2016-09-09</span>
+                    <img src="../image/weibo1.png" alt="" style="margin-left: 10px">
+                    <span class="huoyuedu">1000</span>
+                    <img class="phones" src="../image/phones.png" alt="" width="75" height="75"
+                    style="position: relative;left: 40%;"/>
+                    <!--<img src="../image/mingan.png" alt="" style="margin-left: 10px">-->
+                    <!--<span class="mingan">80</span>-->
+                </div>
+            </div>
+            <div class="kmrg2" style="margin-left: 15px;">
+                <p>参与人数:  <span class="zhuce">2000</span></p>
+                <p>民众情绪： <span class="huoyue">消极</span></p>
+                <!--<p>认证类型:  <span class="renzheng">律师</span></p>-->
+                <!--<p>领域： <span class="lingyu">法律人士</span></p>-->
+                <p>业务标签：<span class="yewu">电信诈骗</span><span class="yewu">大学生</span></p>
+                <p>时间跨度：<span class="times1">2016-09-09</span><span class="times2">2016-09-10</span></p>
+                <p>事件描述：<span class="miaoshu">2016年8月26日， 徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世...</span></p>
+                <p class="rgcreat">
+                    节点创建时间：  <span class="date">2016-09-09</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    创建人：  <span class="peson">admin</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="history" data-toggle="modal" style="cursor: pointer">
+                        <span class="icon icon-pencil"></span>修改历史
+                    </span>
+                <div class="modal fade histant" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <table class="table">
+                                <caption style="font-size: 20px;font-weight: 900">修改历史</caption>
+                                <thead>
+                                <tr>
+                                    <th>操作</th>
+                                    <th>时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>admin  增加业务标签：“企业家</td>
+                                    <td>2016-09-12 12:22</td>
+                                </tr>
+                                <tr>
+                                    <td>admin  增加业务标签：“企业家</td>
+                                    <td>2016-09-12 12:22</td>
+                                </tr>
+                                <tr>
+                                    <td>admin  增加业务标签：“企业家</td>
+                                    <td>2016-09-12 12:22</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="associat" style="height: 380px;">
+        <div class="assleft">
+            <p class="assleft1">关联人物</p>
+            <div class="assleft2">
+                <div class="often">
+                    <p style="font-size: 14px;font-weight: 700;color: #333">频繁交互</p>
+                    <div class="oftenimg" style="margin:20px 0 20px 40px">
+                        <dl style="width: 55px;margin-right: 15px;display: inline-block">
+                            <dt><img src="../image/pangzi.png" alt=""></dt>
+                            <dd style="text-align: center;font-size: 8px;margin-top: 5px">被转发</dd>
+                        </dl>
+                        <dl style="width: 55px;margin-right: 15px;display: inline-block">
+                            <dt><img src="../image/songzhenning.jpg" alt=""></dt>
+                            <dd style="text-align: center;font-size: 8px;margin-top: 5px">转发</dd>
+                        </dl>
+                        <dl style="width: 55px;margin-right: 15px;display: inline-block">
+                            <dt><img src="../image/pangzi.png" alt=""></dt>
+                            <dd style="text-align: center;font-size: 8px;margin-top: 5px">评论</dd>
+                        </dl>
+                        <dl style="width: 55px;margin-right: 15px;display: inline-block">
+                            <dt><img src="../image/songzhenning.jpg" alt=""></dt>
+                            <dd style="text-align: center;font-size: 8px;margin-top: 5px">被转发</dd>
+                        </dl>
+                        <dl style="width: 55px;margin-right: 15px;display: inline-block">
+                            <dt><img src="../image/pangzi.png" alt=""></dt>
+                            <dd style="text-align: center;font-size: 8px;margin-top: 5px">被转发</dd>
+                        </dl>
+                    </div>
+                </div>
+                <hr style="border-style: dashed;border-color: #333333"/>
+                <div class="social">
+                    <p style="font-size: 14px;font-weight: 700;color: #333">社会关系</p>
+                    <div class="oftenimg" style="margin:20px 0 20px 40px">
+                        <dl style="width: 55px;margin-right: 15px;display: inline-block">
+                            <dt><img src="../image/ao.jpg" alt=""></dt>
+                            <dd style="text-align: center;font-size: 8px;margin-top: 5px">亲属</dd>
+                        </dl>
+                        <dl style="width: 55px;margin-right: 15px;display: inline-block">
+                            <dt><img src="../image/lo.jpg" alt=""></dt>
+                            <dd style="text-align: center;font-size: 8px;margin-top: 5px">朋友</dd>
+                        </dl>
+                        <dl style="width: 55px;margin-right: 15px;display: inline-block">
+                            <dt><img src="../image/pangzi.png" alt=""></dt>
+                            <dd style="text-align: center;font-size: 8px;margin-top: 5px">同事</dd>
+                        </dl>
+                        <dl style="width: 55px;margin-right: 15px;display: inline-block">
+                            <dt><img src="../image/ao.jpg" alt=""></dt>
+                            <dd style="text-align: center;font-size: 8px;margin-top: 5px">亲属</dd>
+                        </dl>
+                        <dl style="width: 55px;margin-right: 15px;display: inline-block">
+                            <dt><img src="../image/lo.jpg" alt=""></dt>
+                            <dd style="text-align: center;font-size: 8px;margin-top: 5px">朋友</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="assright" style="margin-left: 40px;">
+            <p class="assright1">关联事件</p>
+            <div class="assright2">
+                <img src="../image/left.png" alt="" class="left" style="margin-left: 17px">
+                <div class="assmids">
+                    <div class="assimgs">
+                        <div class="ass2img">
+                            <div class="play1">
+                                <div class="p11">
+                                    <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                </div>
+                            </div>
+                            <img class="play2" src="../image/xuyuyu.png" alt="">
+                            <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                <a class="bus2">诈骗</a>
+                                <a class="bus2">大学生</a>
+                                <a class="bus2">离世</a>
+                            </div>
+                            <div class="p22" style="margin-left: 7px;">
+                                <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                            </div>
+                        </div>
+                        <div class="ass2img">
+                            <div class="play1">
+                                <div class="p11">
+                                    <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                </div>
+                            </div>
+                            <img class="play2" src="../image/xuyuyu.png" alt="">
+                            <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                <a class="bus2">诈骗</a>
+                                <a class="bus2">大学生</a>
+                                <a class="bus2">离世</a>
+                            </div>
+                            <div class="p22" style="margin-left: 7px;">
+                                <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                            </div>
+                        </div>
+                        <div class="ass2img">
+                            <div class="play1">
+                                <div class="p11">
+                                    <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                </div>
+                            </div>
+                            <img class="play2" src="../image/xuyuyu.png" alt="">
+                            <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                <a class="bus2">诈骗</a>
+                                <a class="bus2">大学生</a>
+                                <a class="bus2">离世</a>
+                            </div>
+                            <div class="p22" style="margin-left: 7px;">
+                                <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                            </div>
+                        </div>
+                        <div class="ass2img">
+                            <div class="play1">
+                                <div class="p11">
+                                    <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                </div>
+                            </div>
+                            <img class="play2" src="../image/xuyuyu.png" alt="">
+                            <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                <a class="bus2">诈骗</a>
+                                <a class="bus2">大学生</a>
+                                <a class="bus2">离世</a>
+                            </div>
+                            <div class="p22" style="margin-left: 7px;">
+                                <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="assimgs">
+                        <div class="ass2img">
+                            <div class="play1">
+                                <div class="p11">
+                                    <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                </div>
+                            </div>
+                            <img class="play2" src="../image/xuyuyu.png" alt="">
+                            <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                <a class="bus2">诈骗</a>
+                                <a class="bus2">大学生</a>
+                                <a class="bus2">离世</a>
+                            </div>
+                            <div class="p22" style="margin-left: 7px;">
+                                <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                            </div>
+                        </div>
+                        <div class="ass2img">
+                            <div class="play1">
+                                <div class="p11">
+                                    <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                </div>
+                            </div>
+                            <img class="play2" src="../image/xuyuyu.png" alt="">
+                            <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                <a class="bus2">诈骗</a>
+                                <a class="bus2">大学生</a>
+                                <a class="bus2">离世</a>
+                            </div>
+                            <div class="p22" style="margin-left: 7px;">
+                                <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                            </div>
+                        </div>
+                        <div class="ass2img">
+                            <div class="play1">
+                                <div class="p11">
+                                    <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                </div>
+                            </div>
+                            <img class="play2" src="../image/xuyuyu.png" alt="">
+                            <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                <a class="bus2">诈骗</a>
+                                <a class="bus2">大学生</a>
+                                <a class="bus2">离世</a>
+                            </div>
+                            <div class="p22" style="margin-left: 7px;">
+                                <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                            </div>
+                        </div>
+                        <div class="ass2img">
+                            <div class="play1">
+                                <div class="p11">
+                                    <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
+                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">山东</span><!--
+                                        --><img src="../image/heart.png" alt="">
+                                </div>
+                            </div>
+                            <img class="play2" src="../image/xuyuyu.png" alt="">
+                            <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
+                                <a class="bus2">诈骗</a>
+                                <a class="bus2">大学生</a>
+                                <a class="bus2">离世</a>
+                            </div>
+                            <div class="p22" style="margin-left: 7px;">
+                                <span class="fasheng" style="font-weight: bold;font-size: 10px;">发生时间：</span>
+                                <span class="riqi" style="font-size: 8px">2016-08-19</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img src="../image/right.png" alt="" class="right">
+            </div>
+        </div>
+    </div>
+    <div class="mapion">
+        <p class="mapion1">图谱信息</p>
+        <div class="mapion2">
+            <div id="middle">
+                <div class="midleft">
+                    <div id="eventimg">
+
+                    </div>
+                </div>
+                <div class="midmid">
+                    <p class="pane">交互面板</p>
+                    <div class="condition">
+                        <!--111-->
+                        <span class="cdt1" style="display: block;margin: 20px 0 0 20px;color: #777;font-size: 14px">节点筛选</span>
+                        <div class="cdt2">
+                            <div class="checkbox">
+                                <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                                    <input class="per" type="checkbox"/> 人物
+                                </label>
+                                <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                                    <input class="per" type="checkbox"/> 事件
+                                </label>
+                            </div>
+                        </div>
+                        <!--222-->
+                        <span class="cdt3" style="display: block;margin: 20px 0 0 20px;color: #777;font-size: 14px">关系筛选</span>
+                        <div class="cdt4">
+                            <div class="checkbox">
+                                <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                                    <input class="per" type="checkbox"/> 好友关系
+                                </label>
+                                <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                                    <input class="per" type="checkbox"/> 同事关系
+                                </label>
+                                <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                                    <input class="per" type="checkbox"/> 亲属关系
+                                </label>
+                                <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                                    <input class="per" type="checkbox"/> 上下级关系
+                                </label>
+                                <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                                    <input class="per" type="checkbox"/> 其他
+                                </label>
+                            </div>
+                        </div>
+                        <!--333-->
+                        <span class="cdt3" style="display: block;margin: 20px 0 0 20px;color: #777;font-size: 14px">节点扩展</span>
+                        <div class="cdt4">
+                            <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+                                    扩展一层
+                                </label>
+                            </div>
+                            <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                    扩展二层
+                                </label>
+                            </div>
+                        </div>
+                        <!--444-->
+                        <button class="cdt5">确定</button>
+                    </div>
+                </div>
+                <div class="midright" style="margin-right: 0">
+                    <div id="placeimg">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="correlation">
+        <p class="correlation1">相关微博</p>
+        <div class="correlation2">
+            <div class="twleft">
+                <p class="lfone">高影响力微博</p>
+                <p class="lftwo">敏感微博</p>
+            </div>
+            <div class="twright">
+                <div class="twr1" style="background-color: rgb(238, 238, 238);">
+                    <p class="master">
+                        微博内容：
+                        <span class="master1">
+                            学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
+                        </span>
+                    </p>
+                    <p class="time">
+                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
+                        <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
+                        <span class="time5">评论数（56）</span>|&nbsp;
+                        <span class="time6">言论敏感度（87）</span>
+                    </p>
+                </div>
+                <div class="twr1">
+                    <p class="master">
+                        微博内容：
+                        <span class="master1">
+                            学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
+                        </span>
+                    </p>
+                    <p class="time">
+                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
+                        <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
+                        <span class="time5">评论数（56）</span>|&nbsp;
+                        <span class="time6">言论敏感度（87）</span>
+                    </p>
+                </div>
+                <div class="twr1" style="background-color: rgb(238, 238, 238);">
+                    <p class="master">
+                        微博内容：
+                        <span class="master1">
+                            学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
+                        </span>
+                    </p>
+                    <p class="time">
+                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
+                        <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
+                        <span class="time5">评论数（56）</span>|&nbsp;
+                        <span class="time6">言论敏感度（87）</span>
+                    </p>
+                </div>
+                <div class="twr1">
+                    <p class="master">
+                        微博内容：
+                        <span class="master1">
+                            学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
+                        </span>
+                    </p>
+                    <p class="time">
+                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
+                        <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
+                        <span class="time5">评论数（56）</span>|&nbsp;
+                        <span class="time6">言论敏感度（87）</span>
+                    </p>
+                </div>
+                <div class="twr1" style="background-color: rgb(238, 238, 238);">
+                    <p class="master">
+                        微博内容：
+                        <span class="master1">
+                            学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
+                        </span>
+                    </p>
+                    <p class="time">
+                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
+                        <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
+                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
+                        <span class="time5">评论数（56）</span>|&nbsp;
+                        <span class="time6">言论敏感度（87）</span>
+                    </p>
+                </div>
+            </div>
+            <div class="twright2" style="display: none;">
+                <div class="twr1" style="background-color: rgb(238, 238, 238);">
+                    <p class="master">
+                        微博内容：
+                        <span class="master1">
+                            今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
+                            美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
+                            没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
+                        </span>
+                    </p>
+                    <p class="time">
+                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
+                        <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
+                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
+                        <span class="time5">评论数（56）</span>|&nbsp;
+                        <span class="time6">言论敏感度（87）</span>
+                    </p>
+                </div>
+                <div class="twr1">
+                    <p class="master">
+                        微博内容：
+                        <span class="master1">
+                            今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
+                            美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
+                            没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
+                        </span>
+                    </p>
+                    <p class="time">
+                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
+                        <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
+                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
+                        <span class="time5">评论数（56）</span>|&nbsp;
+                        <span class="time6">言论敏感度（87）</span>
+                    </p>
+                </div>
+                <div class="twr1" style="background-color: rgb(238, 238, 238);">
+                    <p class="master">
+                        微博内容：
+                        <span class="master1">
+                            今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
+                            美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
+                            没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
+                        </span>
+                    </p>
+                    <p class="time">
+                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
+                        <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
+                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
+                        <span class="time5">评论数（56）</span>|&nbsp;
+                        <span class="time6">言论敏感度（87）</span>
+                    </p>
+                </div>
+                <div class="twr1">
+                    <p class="master">
+                        微博内容：
+                        <span class="master1">
+                            今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
+                            美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
+                            没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
+                        </span>
+                    </p>
+                    <p class="time">
+                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
+                        <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
+                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
+                        <span class="time5">评论数（56）</span>|&nbsp;
+                        <span class="time6">言论敏感度（87）</span>
+                    </p>
+                </div>
+                <div class="twr1" style="background-color: rgb(238, 238, 238);">
+                    <p class="master">
+                        微博内容：
+                        <span class="master1">
+                            今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
+                            美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
+                            没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
+                        </span>
+                    </p>
+                    <p class="time">
+                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
+                        <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
+                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
+                        <span class="time5">评论数（56）</span>|&nbsp;
+                        <span class="time6">言论敏感度（87）</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="medias" style="margin-top: 80px">
+        <p class="medias1">相关微博</p>
+        <div class="medias2">
+            <a href="https://baike.baidu.com/" class="baike"><img src="../image/baike.png" alt=""></a>
+            <a href="http://weibo.com/" class="sina"><img src="../image/weibo.png" alt=""></a>
+        </div>
+    </div>
+    <div class="fesswork" style="margin-top: 30px">
+        <p class="fesswork1">业务描述</p>
+        <div class="fesswork2">
+            <p style="margin-left: 20px">暂无业务描述······</p>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../echarts/echarts.min.js"></script>
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script src="../js/person.js"></script>
+<script>
+    $("#nav").load("public_nav.html");
+    $('.history').on('click',function () {
+        $('.histant').modal("show");
+    });
+    $(' #container .associat .assright .assright2 .left').hover(function () {
+        $(this).attr('src','../image/left_hv.png');
+    },function () {
+        $(this).attr('src','../image/left.png');
+    });
+    $(' #container .associat .assright .assright2 .right').hover(function () {
+        $(this).attr('src','../image/right_hv.png');
+    },function () {
+        $(this).attr('src','../image/right.png');
+    });
+
+    var go = 66;
+    $('#container .associat .assright .assright2 .right').on('click',function () {
+        if(go==66){
+            var plays=$("#container .associat .assright .assright2 .assimgs");
+            $(plays).css({
+                "-webkit-transform":"translateX(-400px)",
+                "-moz-transform":"translateX(-400px)",
+                "-ms-transform":"translateX(-400px)",
+                "-o-transform":"translateX(-400px)",
+                "transform":"translateX(-400px)",
+            });
+            go = 88;
+        } else{
+            var plays=$("#container .associat .assright .assright2 .assimgs");
+            $(plays).css({
+                "-webkit-transform":"translateX(0px)",
+                "-moz-transform":"translateX(0px)",
+                "-ms-transform":"translateX(0px)",
+                "-o-transform":"translateX(0px)",
+                "transform":"translateX(0px)",
+            });
+            go = 66;
+        }
+    });
+    $('#container .associat .assright .assright2 .left').on('click',function () {
+        if(go==66){
+            var plays=$("#container .associat .assright .assright2 .assimgs");
+            $(plays).css({
+                "-webkit-transform":"translateX(-400px)",
+                "-moz-transform":"translateX(-400px)",
+                "-ms-transform":"translateX(-400px)",
+                "-o-transform":"translateX(-400px)",
+                "transform":"translateX(-400px)",
+            });
+            go = 88;
+        } else{
+            var plays=$("#container .associat .assright .assright2 .assimgs");
+            $(plays).css({
+                "-webkit-transform":"translateX(0px)",
+                "-moz-transform":"translateX(0px)",
+                "-ms-transform":"translateX(0px)",
+                "-o-transform":"translateX(0px)",
+                "transform":"translateX(0px)",
+            });
+            go = 66;
+        }
+    });
+</script>
+</body>
+</html>

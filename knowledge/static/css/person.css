@@ -1,0 +1,256 @@
+/*清除初始的样式*/
+html,body,div,img,h1,h2,h3,h4,h5,h6,input,button,span,p,b,strong,em,li,ul,ol,dl,dt,dd,
+th,textarea,select,table,form {
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+ul,li,ol {
+    list-style: none;
+}
+img {
+    border:none;
+}
+input,select,textarea,button {
+    outline: none;
+    border: none;
+}
+a,a:link,a:hover,a:visited,a:active {
+    text-decoration: none;
+}
+/*内容样式*/
+#container {
+    margin-left: 125px;
+    padding: 20px 0 0;
+}
+#container .keyman {
+    width: 1200px;
+    height: 280px;
+    padding: 20px 50px;
+    background-color: #d9edf7;
+    border-radius: 10px;
+    border: 2px solid #0099FF;
+    box-shadow: 2px 2px 2px #878787;
+}
+#container .keyman .kmlf,#container .keyman .kmrg,#container .associat .assleft,
+#container .associat .assright,#container .associat .assright .assright2 .ass2img .play1,
+#container .associat .assright .assright2 .ass2img .play2,#container .associat .assright .assright2 .left,
+#container .associat .assright .assright2 .right,#container .associat .assright .assright2 .assmids,
+#container .associat .assright .assright2 .assmids .assimgs,#container .associat .assright .assright2 .assmids .assimgs .ass2img {
+    float: left;
+}
+#container .keyman .kmlf .kmimg {
+    width: 170px;
+    height: 200px;
+}
+#container .keyman .kmrg {
+    margin-left: 50px;
+}
+#container .keyman .kmrg .rgname span,#container .keyman .kmrg .rgname span,
+#container .associat .assright .assright2 .ass2img .play1 span,
+#container .associat .assright .assright2 .ass2img .play1 img,#container .medias .medias2 {
+    display: inline-block;
+}
+#container .keyman .kmrg .kmrg2 p {
+    letter-spacing: 5px;
+    font-size: 10px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+#container .keyman .kmrg .kmrg2 p span {
+    font-weight: 100;
+    font-size: 8px;
+}
+#container .keyman .kmrg .kmrg2 p .yewu {
+    color: white;
+    font-weight: 700;
+    padding: 3px 8px;
+    background-color: #0099FF;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+#container .keyman .kmrg .kmrg2 p .yewu,#container .keyman .kmrg .kmrg2 p .miaoshu,
+#container .keyman .kmrg .kmrg2 .rgcreat {
+    letter-spacing: 0;
+}
+#container .keyman .kmrg .kmrg2 .rgcreat {
+    color: #999;
+    font-size: 12px;
+}
+#container .keyman .kmrg .kmrg2 .histant th,#container .keyman .kmrg .kmrg2 .histant td {
+    text-align: center;
+}
+#container .mapion,#container .associat,#container .correlation {
+    width: 1200px;
+    height: 590px;
+    margin: 30px 0;
+}
+#container .mapion .mapion1,#container .associat .assleft .assleft1,
+#container .associat .assright .assright1,#container .correlation .correlation1,
+#container .medias .medias1,#container .fesswork .fesswork1 {
+    width: 150px;
+    height: 32px;
+    line-height: 32px;
+    color: white;
+    text-align: center;
+    background-color: #0099FF;
+    font-weight: 900;
+    border: 1px solid silver;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+#container .mapion .mapion2 #middle {
+    width: 1200px;
+    height: 560px;
+    border: 2px solid #0099FF;
+    padding: 20px;
+}
+#container .mapion .mapion2 #middle .midleft,#container .mapion .mapion2 #middle .midmid,
+#container .mapion .mapion2 #middle .midright {
+    float: left;
+    margin-right: 20px;
+}
+#container .mapion .mapion2 #middle .midleft #eventimg,#container .mapion .mapion2 #middle .midright #placeimg {
+    width: 450px;
+    height: 500px;
+    border: 1px solid #0099FF;
+}
+#container .mapion .mapion2 #middle .midmid {
+    width: 200px;
+    height: 500px;
+    border: 2px solid #a73cff;
+    border-radius: 5px;
+}
+#container .mapion .mapion2 #middle .midmid .pane {
+    color: white;
+    background-color: #a73cff;
+    font-size: 14px;
+    font-weight: 900;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+#container .mapion .mapion2 #middle .midmid .condition .cdt5 {
+    width: 100%;
+    background-color: #a73cff;
+    margin-top: 41px;
+    font-size: 18px;
+    font-weight: 900;
+    color: #fff;
+    text-align: center;
+}
+#container .mapion .mapion2 #middle .midmid .condition .cdt5:hover {
+    background-color: #00cc66;
+}
+#container .associat .assleft .assleft2,#container .associat .assright .assright2 {
+    width: 580px;
+    height: 340px;
+    padding: 20px;
+    border: 2px solid #0099FF;
+}
+#container .associat .assmids .assimgs {
+    transition: all 1s linear;
+}
+#container .associat .assright .assright2 .ass2img {
+    width: 170px;
+    padding: 5px;
+    height: 110px;
+    margin: 15px 15px 0 15px;
+    border: 2px solid #0099FF;
+    box-shadow: 2px 2px 2px #878787;
+}
+#container .associat .assright .assright2 .ass2img .play1 {
+    width: 100px;
+    padding-left: 10px;
+    margin-top: 5px;
+    float: left;
+}
+#container .associat .assright .assright2 .ass2img .play2 {
+    width: 50px;
+    height: 55px;
+}
+#container .associat .assright .assright2 .ass2img .play3 .bus1 {
+    font-weight: bold;
+    display: inline-block;
+    padding-top: 2px;
+    color: #000;
+}
+#container .associat .assright .assright2 .ass2img .play3 .bus2 {
+    color: #fff;
+    display: inline-block;
+    margin-left: 5px;
+    background-color: #0099FF;
+    padding: 3px 2px 0 2px;
+    border-radius: 5px;
+    font-size: 8px;
+}
+#container .associat .assright .assright2 .assmids {
+    width: 400px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+#container .associat .assright .assright2 .assimgs {
+    width: 800px;
+    display: inline-block;
+}
+#container .associat .assright .assright2 .right,#container .associat .assright .assright2 .left {
+    width: 50px;
+    height: 150px;
+    margin-top: 80px;
+    cursor: pointer;
+}
+#container .correlation .correlation2,#container .medias .medias2,#container .fesswork .fesswork2 {
+    width: 1200px;
+    padding: 20px 20px 30px 20px;
+    border: 2px solid #0099FF;
+}
+#container .correlation2 .twleft {
+    display: inline-block;
+    position: relative;
+    top: -170px;
+    right: -5px;
+}
+#container .correlation .correlation2 .twright,#container .correlation .correlation2 .twright2 {
+    display: inline-block;
+    width: 1100px;
+    /*height: 520px;*/
+    border: 1px solid #9d9d9d;
+    border-radius: 10px;
+    padding:30px;
+}
+#container .correlation2 .twleft p {
+    width: 28px;
+    text-align: center;
+    padding: 5px;
+    background-color: #0099ff;
+    color: white;
+    font-weight: 700;
+    border-radius: 5px;
+    border: 1px solid #337ab7;
+    margin-top: 40px;
+}
+#container .correlation .correlation2 .twleft .lftwo {
+    background-color: #00cc66;
+    margin-top: 10px;
+}
+#container .correlation2 .twright .twr1,#container .correlation2 .twright2 .twr1 {
+    padding: 10px 30px 20px;
+    border-radius: 10px;
+}
+#container .correlation2 .twright .twr1 .master,#container .correlation2 .twright2 .twr1 .master {
+    color: #4b4b4b;
+    font-weight: 700;
+    margin: 10px 0 20px 0;
+}
+#container .correlation2 .twright .twr1 .time,#container .correlation2 .twright2 .twr1 .time {
+    color: black;
+    font-size: 10px;
+}
+#container .medias .medias2 a img {
+    max-height: 50px;
+    margin-left: 20px;
+}
+#container .medias .medias2 .baike {
+
+}

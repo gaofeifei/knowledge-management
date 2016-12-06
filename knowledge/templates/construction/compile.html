@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图谱管理 - 编辑图谱</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/compile.css">
+</head>
+<body>
+<div id="nav"></div>
+<div id="container">
+    <div class="conleft">
+        <p class="lfone">节点编辑</p>
+        <p class="lftwo">关系编辑</p>
+    </div>
+    <div class="conright">
+        <div class="crt1">
+            <div class="crt111">
+                <span>节点类型：</span>
+                <select name="" id="list1">
+                    <option value="">关系1</option>
+                    <option value="">关系2</option>
+                </select>
+            </div>
+            <div class="crt122">
+                <span>节点名称：</span>
+                <input type="text"/>
+            </div>
+            <button class="crt133">确&nbsp;&nbsp;&nbsp;&nbsp;定</button>
+        </div>
+        <div class="crt2">
+            <div class="crt2lf">
+                <table class="table">
+                    <thead>
+                        <tr style="background-color: #0099FF;">
+                            <th>序号</th>
+                            <th>节点名称</th>
+                            <th>编辑</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="active">
+                            <td>1</td>
+                            <td>潘强</td>
+                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>郑再索</td>
+                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                        </tr>
+                        <tr class="active">
+                            <td>3</td>
+                            <td>徐丽萍</td>
+                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>任志强</td>
+                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                        </tr>
+                        <tr class="active">
+                            <td>5</td>
+                            <td>邓海峰</td>
+                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="crt2rg" style="float: left">
+                <div class="play">
+                    <div class="play1">
+                        <div class="p11">
+                            <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px;
+                                                            cursor: pointer">潘强</span><!--
+                                        --><img style="margin-left: 15px;" src="../image/fensishu.png" alt=""><!--
+                                        --><span class="difang" style="font-size: 8px">6720</span>
+                        </div>
+                        <div class="p22" style="margin-top: 5px">
+                            <img style="margin-left: 10px;" src="../image/influence.png" alt="">
+                            <span class="influence">3083</span>
+                            <img src="../image/huoyuedu.png" alt="">
+                            <span class="huoyuedu">254</span>
+                            <img src="../image/mingan.png" alt="">
+                            <span class="mingan">80</span>
+                        </div>
+                    </div>
+                    <img class="play2" src="../image/pangzi.png" alt="">
+                    <div class="play23" style="margin-left: 15px;margin-top: 10px">
+                        <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
+                        <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
+                    </div>
+                    <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
+                        <a class="bus1">业务标签：</a>
+                        <a class="bus2">律师</a>
+                        <a class="bus2">法律人士</a>
+                    </div>
+                    <div class="play4" style="padding-left: 15px;margin-top: 10px">
+                        <span class="geren">个人描述：</span>
+                        <span class="shuoming">
+                            你读过《三体》了吗？在国外都火了！[给力]】《三体》英文版在不到3个月里引起了西方社会......
+                        </span>
+                    </div>
+                    <!--<div class="play5">-->
+                        <!--<a href="">加入群体探索</a>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="conright2" style="display: none">
+        <div class="editor">
+            <div class="checkbox editor1">
+                <label>
+                    <input type="checkbox"> 输入节点1
+                </label>
+            </div>
+            <input type="text" class="editor111" style="width: 230px;padding: 5px;font-size: 12px"/>
+            <div class="checkbox editor2" style="margin-left: 50px">
+                <label>
+                    <input type="checkbox"> 输入节点2
+                </label>
+            </div>
+            <input type="text" class="editor222" style="width: 230px;padding: 5px;font-size: 12px"/>
+            <button class="editor3">确定</button>
+        </div>
+        <div class="listcell">
+            <div class="lcleft">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>节点1</th>
+                            <th>节点2</th>
+                            <th>关系</th>
+                            <th>编辑</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>潘强</td>
+                            <td>徐丽萍</td>
+                            <td>朋友</td>
+                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>潘强</td>
+                            <td>徐丽萍</td>
+                            <td>朋友</td>
+                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>潘强</td>
+                            <td>徐丽萍</td>
+                            <td>朋友</td>
+                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="lcright">
+                <p class="lcr1">
+                    <span class="lcrone">潘强</span>
+                    <span class="icon icon-paperclip"></span>
+                    <span class="lcrtwo">徐丽萍</span>
+                </p>
+                <div class="checkbox lcr2">
+                    <p class="chosion">
+                        选择关系
+                    </p>
+                    <label>
+                        <input type="checkbox" value="option1">  关系1
+                    </label>
+                    <label>
+                        <input type="checkbox" value="option1">  关系1
+                    </label>
+                    <label>
+                        <input type="checkbox" value="option1">  关系1
+                    </label>
+                    <label>
+                        <input type="checkbox" value="option1">  关系1
+                    </label>
+                    <label>
+                        <input type="checkbox" value="option1">  关系1
+                    </label>
+                    <label>
+                        <input type="checkbox" value="option1">  关系1
+                    </label>
+                    <label>
+                        <input type="checkbox" value="option1">  关系1
+                    </label>
+                    <label>
+                        <input type="checkbox" value="option1">  关系1
+                    </label>
+                    <label>
+                        <input type="checkbox" value="option1">  关系1
+                    </label>
+                    <label>
+                        <input type="checkbox" value="option1">  其他
+                    </label>
+                    <input type="text" class="other" style="border: 1px solid #a5a5a5;width: 150px;margin-left: -40px"/>
+                    <button class="yes" type="button" data-toggle="modal">确定</button>
+                    <div class="modal fade yes22" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title" id="mySmallModalLabel">提示信息</h4>
+                                </div>
+                                <div class="modal-body" style="text-align: center">
+                                    修改成功
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../echarts/echarts.min.js"></script>
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script src="../js/compile.js"></script>
+<script>
+    $("#nav").load("public_nav.html");
+    $('.yes').on('click',function () {
+        $('.yes22').modal("show");
+    });
+    $(".lfone").on('click',function () {
+        $(".conright").css({display:'block'});
+        $(".conright2").css({display:'none'});
+    });
+    $(".lftwo").on('click',function () {
+        $(".conright").css({display:'none'});
+        $(".conright2").css({display:'block'});
+    });
+    $('#container .conright .crt2 .crt2rg .play .p11 .xingming').on('click',function () {
+        window.open('person.html');
+    })
+
+</script>
+</body>
+</html>

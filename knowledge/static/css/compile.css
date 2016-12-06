@@ -1,0 +1,233 @@
+/*清除初始的样式*/
+html,body,div,img,h1,h2,h3,h4,h5,h6,input,button,span,p,b,strong,em,li,ul,ol,dl,dt,dd,
+th,textarea,select,table,form {
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+ul,li,ol {
+    list-style: none;
+}
+img {
+    border:none;
+}
+input,select,textarea,button {
+    outline: none;
+    border: none;
+}
+a,a:link,a:hover,a:visited,a:active {
+    text-decoration: none;
+}
+/*内容样式*/
+#container {
+    margin-left: 125px;
+    padding: 20px 0 0;
+}
+#container .conleft,#container .conright,#container .conright2 {
+    float: left;
+}
+#container .conleft .lfone,#container .conleft .lftwo {
+    width: 28px;
+    text-align: center;
+    padding: 5px;
+    background-color: #0099ff;
+    color: white;
+    font-weight: 700;
+    border-radius: 5px;
+    border: 1px solid #337ab7;
+    margin-top: 40px;
+    cursor: pointer;
+}
+#container .conleft .lftwo {
+    background-color: #00cc66;
+    margin-top: 10px;
+}
+#container .conright,#container .conright2 {
+    width: 1170px;
+    height: 500px;
+    padding: 30px 10px 10px 30px;
+    border: 2px solid #0099FF;
+    margin-bottom: 30px;
+    box-shadow: 3px 3px 3px #0099FF;
+}
+#container .conright .crt1 .crt111,#container .conright .crt1 .crt122,
+#container .conright .crt1 .crt133 {
+    display: inline-block;
+    margin-left: 30px;
+}
+#container .conright .crt1 .crt111 span,#container .conright .crt1 .crt122 span {
+    color: black;
+    font-weight: 700;
+    font-size: 14px;
+    margin-left: 30px;
+}
+#container .conright .crt1 .crt111 #list1,#container .conright .crt1 .crt122 input {
+    border: 1px solid #0099FF;
+    width: 200px;
+    padding: 5px;
+    margin-left: 10px;
+}
+#container .conright .crt1 .crt133 {
+    width: 70px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    color: white;
+    background-color: #0099FF;
+    border-radius: 10px;
+    margin-left: 50px;
+}
+#container .conright .crt1 .crt133:hover {
+    background-color: #4cae4c;
+}
+#container .conright .crt2 {
+    margin-left: 50px;
+    margin-top: 50px;
+}
+#container .conright .crt2 .crt2lf {
+    width: 400px;
+    float: left;
+}
+#container .conright .crt2 .crt2lf th {
+    color: white;
+    font-weight: 600;
+}
+#container .conright .crt2 .crt2lf th,#container .conright .crt2 .crt2lf td {
+    text-align: center;
+}
+#container .conright .crt2 .crt2rg .play {
+    width: 540px;
+    padding: 5px;
+    height: 220px;
+    /*margin-top: 15px;*/
+    margin-left: 30px;
+    border:2px solid #0099FF;
+    box-shadow: 2px 2px 2px #878787;
+}
+#container .conright .crt2 .crt2rg .play .play1 {
+    /*width: 170px;*/
+    margin-top: 5px;
+    display: inline-block;
+}
+#container .conright .crt2 .crt2rg .play1 .p11 span,#container .conright .crt2 .crt2rg .play1 .p11 img,
+#container .conright .crt2 .crt2rg .play1 .p22 span,#container .conright .crt2 .crt2rg .play1 .p22 img,
+#container .conright .crt2 .crt2rg .play1 .p11,#container .conright .crt2 .crt2rg .play1 .p22 {
+    display: inline-block;
+    margin-left: 5px;
+}
+#container .conright .crt2 .crt2rg .play .play2 {
+    position: relative;
+    top: 30px;
+    right: -100px;
+    width: 50px;
+    height: 55px;
+    display: inline-block;
+    /*margin-top: -20px;*/
+}
+#container .conright .crt2 .crt2rg .play .play23 a {
+    display: block;
+    margin-top: 5px;
+    color: #000;
+    font-weight: bold;
+    font-size: 10px;
+}
+#container .conright .crt2 .crt2rg .play .play23 a span {
+    font-weight: 100;
+    padding-left: 20px;
+}
+#container .conright .crt2 .crt2rg .play .play3 .bus1,#container .conright .crt2 .crt2rg .play .play4 .geren {
+    font-size: 10px;
+    font-weight: bold;
+    display: inline-block;
+    padding-top: 2px;
+    color: #000;
+}
+#container .conright .crt2 .crt2rg .play .play3 .bus2 {
+    color: #000;
+    display: inline-block;
+    margin-left: 5px;
+    background-color: #0099FF;
+    padding: 3px 2px 0 2px;
+    border-radius: 5px;
+    font-size: 8px;
+}
+#container .conright .crt2 .crt2rg .play .play4 .shuoming {
+    margin-top: 10px;
+    font-size: 12px;
+    color: rgba(42, 42, 42, 0.62);
+}
+#container .conright2 .editor .editor1,#container .conright2 .editor .editor2,#container .conright2 .editor .editor3,
+#container .conright2 .editor .editor111,#container .conright2 .editor .editor222 {
+    display: inline-block;
+}
+#container .conright2 .editor .editor111,#container .conright2 .editor .editor222 {
+    border: 1px solid #0099FF;
+}
+#container .conright2 .editor .editor3,#container .conright2 .listcell .lcright .lcr2 .yes {
+    display: inline-block;
+    width: 54px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    color: white;
+    background-color: #0099FF;
+    border-radius: 10px;
+    margin-left: 50px;
+}
+#container .conright2 .editor .editor3:hover,#container .conright2 .listcell .lcright .lcr2 .yes:hover {
+    background-color: #4cae4c;
+}
+#container .conright2 .editor {
+    margin-left: 30px;
+}
+#container .conright2 .listcell {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+#container .conright2 .listcell .lcleft th,#container .conright2 .listcell .lcleft td {
+    text-align: center;
+}
+#container .conright2 .listcell thead {
+    background-color: #00cc66;
+}
+#container .conright2 .listcell thead th {
+    color: white;
+    font-weight: 700;
+}
+#container .conright2 .listcell .lcleft,#container .conright2 .listcell .lcright {
+    float: left;
+}
+#container .conright2 .listcell .lcleft,#container .conright2 .listcell .lcright {
+    width: 450px;
+    height: 300px;
+}
+#container .conright2 .listcell .lcright {
+    margin-left: 30px;
+    border: 2px solid #0099FF;
+    box-shadow: 3px 3px 3px #a5a5a5;
+}
+#container .conright2 .listcell .lcright .lcr1,#container .conright2 .listcell .lcright .lcr2 {
+    margin: 20px 0 0 30px;
+}
+#container .conright2 .listcell .lcright .lcr1 span {
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 16px;
+    color: #5e5e5e;
+    font-weight: bold;
+}
+#container .conright2 .listcell .lcright .lcr2 .chosion {
+    font-size: 16px;
+    color: #222222;
+    font-weight: bold;
+}
+#container .conright2 .listcell .lcright .lcr2 label {
+    font-size: 14px;
+    color: #5e5e5e;
+    display: inline-block;
+    margin: 20px 50px 0 20px;
+}
+
+
+

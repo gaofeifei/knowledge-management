@@ -1,19 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图谱分析 - 专题结果</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/proults.css">
-</head>
-<body>
-<div id="nav"></div>
+{% extends "public_nav.html" %}
+{% block title %}<title>图谱分析 - 专题结果</title>{% endblock %}
+{% block my_css %}
+    <link rel="stylesheet" href="/static/css/proults.css">
+{% endblock %}
+
+{% block main %}
 <div id="container">
     <div class="present">
-        <span class="preone">当前选择：<a class="preonemd" href="">电信诈骗</a>专题 ，</span>
-        <span class="pretwo">共包含<a href="" class="pretwomd">6</a>个事件</span>
+        <span class="preone">当前选择：<a class="preonemd" href="###">电信诈骗</a>专题 ，</span>
+        <span class="pretwo">共包含<a href="###" class="pretwomd">6</a>个事件</span>
         <div class="checkbox prethr" style="margin-left: 30px">
             <label>
                 <input type="checkbox" class="ptnew"/> 选择新专题
@@ -116,23 +111,23 @@
             </div>
             <div class="deftwo">
                 <div class="sjmr1">
-                    <img src="../image/left.png" alt="" class="left">
+                    <img src="/static/image/left.png" alt="" class="left">
                     <div id="case" style="display: inline-block;width:1050px;overflow: hidden;">
                         <div id="run" style="width: 4000px;">
                             <div class="play">
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <!--<div class="p22">-->
                                         <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
                                         <!--<span class="riqi">2016-08-19</span>-->
                                     <!--</div>-->
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
                                     <!--<a class="bus1">业务标签：</a>-->
                                     <a class="bus2">诈骗</a>
@@ -156,16 +151,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <!--<div class="p22">-->
                                     <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
                                     <!--<span class="riqi">2016-08-19</span>-->
                                     <!--</div>-->
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
                                     <!--<a class="bus1">业务标签：</a>-->
                                     <a class="bus2">诈骗</a>
@@ -189,16 +184,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <!--<div class="p22">-->
                                     <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
                                     <!--<span class="riqi">2016-08-19</span>-->
                                     <!--</div>-->
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
                                     <!--<a class="bus1">业务标签：</a>-->
                                     <a class="bus2">诈骗</a>
@@ -222,16 +217,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <!--<div class="p22">-->
                                     <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
                                     <!--<span class="riqi">2016-08-19</span>-->
                                     <!--</div>-->
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
                                     <!--<a class="bus1">业务标签：</a>-->
                                     <a class="bus2">诈骗</a>
@@ -255,16 +250,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <!--<div class="p22">-->
                                     <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
                                     <!--<span class="riqi">2016-08-19</span>-->
                                     <!--</div>-->
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
                                     <!--<a class="bus1">业务标签：</a>-->
                                     <a class="bus2">诈骗</a>
@@ -288,16 +283,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <!--<div class="p22">-->
                                     <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
                                     <!--<span class="riqi">2016-08-19</span>-->
                                     <!--</div>-->
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
                                     <!--<a class="bus1">业务标签：</a>-->
                                     <a class="bus2">诈骗</a>
@@ -321,16 +316,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <!--<div class="p22">-->
                                     <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
                                     <!--<span class="riqi">2016-08-19</span>-->
                                     <!--</div>-->
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
                                     <!--<a class="bus1">业务标签：</a>-->
                                     <a class="bus2">诈骗</a>
@@ -354,16 +349,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <!--<div class="p22">-->
                                     <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
                                     <!--<span class="riqi">2016-08-19</span>-->
                                     <!--</div>-->
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
                                     <!--<a class="bus1">业务标签：</a>-->
                                     <a class="bus2">诈骗</a>
@@ -387,16 +382,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <!--<div class="p22">-->
                                     <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
                                     <!--<span class="riqi">2016-08-19</span>-->
                                     <!--</div>-->
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
                                     <!--<a class="bus1">业务标签：</a>-->
                                     <a class="bus2">诈骗</a>
@@ -420,16 +415,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 700;font-size: 16px;display: block">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <!--<div class="p22">-->
                                     <!--<span class="fasheng" style="font-weight: bold">发生时间：</span>-->
                                     <!--<span class="riqi">2016-08-19</span>-->
                                     <!--</div>-->
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 0px;vertical-align:bottom;">
                                     <!--<a class="bus1">业务标签：</a>-->
                                     <a class="bus2">诈骗</a>
@@ -451,7 +446,7 @@
                             </div>
                         </div>
                     </div>
-                    <img src="../image/right.png" alt="" class="right">
+                    <img src="/static/image/right.png" alt="" class="right">
                 </div>
             </div>
         </div>
@@ -468,23 +463,23 @@
             </div>
             <div class="sametwo">
                 <div class="sjmr1">
-                    <img src="../image/left.png" alt="" class="left">
+                    <img src="/static/image/left.png" alt="" class="left">
                     <div id="case1" style="display: inline-block;width:1050px;overflow: hidden;">
                         <div id="run1" style="width: 2100px;">
                             <div class="play">
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <div class="p22">
                                         <span class="fasheng" style="font-weight: bold">发生时间：</span>
                                         <span class="riqi">2016-08-19</span>
                                     </div>
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
                                     <a class="bus1">业务标签：</a>
                                     <a class="bus2">诈骗</a>
@@ -504,16 +499,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <div class="p22">
                                         <span class="fasheng" style="font-weight: bold">发生时间：</span>
                                         <span class="riqi">2016-08-19</span>
                                     </div>
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
                                     <a class="bus1">业务标签：</a>
                                     <a class="bus2">诈骗</a>
@@ -533,16 +528,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <div class="p22">
                                         <span class="fasheng" style="font-weight: bold">发生时间：</span>
                                         <span class="riqi">2016-08-19</span>
                                     </div>
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
                                     <a class="bus1">业务标签：</a>
                                     <a class="bus2">诈骗</a>
@@ -562,16 +557,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <div class="p22">
                                         <span class="fasheng" style="font-weight: bold">发生时间：</span>
                                         <span class="riqi">2016-08-19</span>
                                     </div>
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
                                     <a class="bus1">业务标签：</a>
                                     <a class="bus2">诈骗</a>
@@ -591,16 +586,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <div class="p22">
                                         <span class="fasheng" style="font-weight: bold">发生时间：</span>
                                         <span class="riqi">2016-08-19</span>
                                     </div>
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
                                     <a class="bus1">业务标签：</a>
                                     <a class="bus2">诈骗</a>
@@ -620,16 +615,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <div class="p22">
                                         <span class="fasheng" style="font-weight: bold">发生时间：</span>
                                         <span class="riqi">2016-08-19</span>
                                     </div>
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
                                     <a class="bus1">业务标签：</a>
                                     <a class="bus2">诈骗</a>
@@ -647,7 +642,7 @@
                             </div>
                         </div>
                     </div>
-                    <img src="../image/right.png" alt="" class="right">
+                    <img src="/static/image/right.png" alt="" class="right">
                 </div>
             </div>
         </div>
@@ -672,23 +667,23 @@
             </div>
             <div class="peotwo2">
                 <div class="sjmr1">
-                    <img src="../image/left.png" alt="" class="left">
+                    <img src="/static/image/left.png" alt="" class="left">
                     <div id="case2" style="display: inline-block;width:1050px;overflow: hidden;">
                         <div id="run2" style="width: 2100px;">
                             <div class="play">
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <div class="p22">
                                         <span class="fasheng" style="font-weight: bold">发生时间：</span>
                                         <span class="riqi">2016-08-19</span>
                                     </div>
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
                                     <a class="bus1">业务标签：</a>
                                     <a class="bus2">诈骗</a>
@@ -708,16 +703,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <div class="p22">
                                         <span class="fasheng" style="font-weight: bold">发生时间：</span>
                                         <span class="riqi">2016-08-19</span>
                                     </div>
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
                                     <a class="bus1">业务标签：</a>
                                     <a class="bus2">诈骗</a>
@@ -737,16 +732,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <div class="p22">
                                         <span class="fasheng" style="font-weight: bold">发生时间：</span>
                                         <span class="riqi">2016-08-19</span>
                                     </div>
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
                                     <a class="bus1">业务标签：</a>
                                     <a class="bus2">诈骗</a>
@@ -766,16 +761,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <div class="p22">
                                         <span class="fasheng" style="font-weight: bold">发生时间：</span>
                                         <span class="riqi">2016-08-19</span>
                                     </div>
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
                                     <a class="bus1">业务标签：</a>
                                     <a class="bus2">诈骗</a>
@@ -795,16 +790,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <div class="p22">
                                         <span class="fasheng" style="font-weight: bold">发生时间：</span>
                                         <span class="riqi">2016-08-19</span>
                                     </div>
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
                                     <a class="bus1">业务标签：</a>
                                     <a class="bus2">诈骗</a>
@@ -824,16 +819,16 @@
                                 <div class="play1">
                                     <div class="p11">
                                         <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                        --><img src="../image/dingwei.png" alt=""><!--
+                                        --><img src="/static/image/dingwei.png" alt=""><!--
                                         --><span class="difang" style="font-size: 8px">山东</span><!--
-                                        --><img src="../image/heart.png" alt="">
+                                        --><img src="/static/image/heart.png" alt="">
                                     </div>
                                     <div class="p22">
                                         <span class="fasheng" style="font-weight: bold">发生时间：</span>
                                         <span class="riqi">2016-08-19</span>
                                     </div>
                                 </div>
-                                <img class="play2" src="../image/xuyuyu.png" alt="">
+                                <img class="play2" src="/static/image/xuyuyu.png" alt="">
                                 <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
                                     <a class="bus1">业务标签：</a>
                                     <a class="bus2">诈骗</a>
@@ -851,7 +846,7 @@
                             </div>
                         </div>
                     </div>
-                    <img src="../image/right.png" alt="" class="right">
+                    <img src="/static/image/right.png" alt="" class="right">
                 </div>
             </div>
         </div>
@@ -888,12 +883,11 @@
         </div>
     </div>
 </div>
-<script src="../js/jquery-1.11.3.min.js"></script>
-<script src="../echarts/echarts.min.js"></script>
-<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
-<script src="../js/proults.js"></script>
+{% endblock %}
+
+{% block my_js %}
+<script src="/static/js/proults.js"></script>
 <script>
-    $("#nav").load("public_nav.html");
     $('.play5').on('click',function () {
         $('#join2').modal("show");
     });
@@ -919,34 +913,34 @@
     });
     //鼠标滑过
     $('#container #similar .definite .deftwo .left').hover(function () {
-        $(this).attr('src','../image/left_hv.png');
+        $(this).attr('src','/static/image/left_hv.png');
     },function () {
-        $(this).attr('src','../image/left.png');
+        $(this).attr('src','/static/image/left.png');
     });
     $('#container #similar .definite .deftwo .right').hover(function () {
-        $(this).attr('src','../image/right_hv.png');
+        $(this).attr('src','/static/image/right_hv.png');
     },function () {
-        $(this).attr('src','../image/right.png');
+        $(this).attr('src','/static/image/right.png');
     });
     $('#container #similar .samevent .sametwo .left').hover(function () {
-        $(this).attr('src','../image/left_hv.png');
+        $(this).attr('src','/static/image/left_hv.png');
     },function () {
-        $(this).attr('src','../image/left.png');
+        $(this).attr('src','/static/image/left.png');
     });
     $('#container #similar .samevent .sametwo .right').hover(function () {
-        $(this).attr('src','../image/right_hv.png');
+        $(this).attr('src','/static/image/right_hv.png');
     },function () {
-        $(this).attr('src','../image/right.png');
+        $(this).attr('src','/static/image/right.png');
     });
     $('#container #people .peotwo .peotwo2 .left').hover(function () {
-        $(this).attr('src','../image/left_hv.png');
+        $(this).attr('src','/static/image/left_hv.png');
     },function () {
-        $(this).attr('src','../image/left.png');
+        $(this).attr('src','/static/image/left.png');
     });
     $('#container #people .peotwo .peotwo2 .right').hover(function () {
-        $(this).attr('src','../image/right_hv.png');
+        $(this).attr('src','/static/image/right_hv.png');
     },function () {
-        $(this).attr('src','../image/right.png');
+        $(this).attr('src','/static/image/right.png');
     });
 
     //
@@ -1136,7 +1130,5 @@
         });
     });
 
-
 </script>
-</body>
-</html>
+{% endblock %}

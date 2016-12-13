@@ -66,7 +66,7 @@ a,a:link,a:hover,a:visited,a:active {
 }
 #container #middle {
     width: 1200px;
-    height: 2600px;
+    height: 2700px;
     margin-top: 30px;
     border: 2px solid #0099FF;
     padding: 20px;
@@ -121,32 +121,28 @@ a,a:link,a:hover,a:visited,a:active {
 }
 #container #middle .thingtrast .lawyer2 .left,#container #middle .thingtrast .lawyer2 .right,
 #container #middle .thingtrast .safeguard2 .left,#container #middle .thingtrast .safeguard2 .right{
-    width: 40px;
-    height: 95px;
+    width: 30px;
+    height: 35px;
     display: inline-block;
-    margin-top: -120px;
+    margin-top: -160px;
     cursor: pointer;
 }
 #container #middle .thingtrast .lawyer2 .play,#container #middle .thingtrast .safeguard2 .play {
-    width: 170px;
+    width: 240px;
     padding: 5px;
-    height: 110px;
-    margin-left: 30px;
-    margin-top: 15px;
+    height: 160px;
+    margin: 15px 0 0 15px;
     border:2px solid #0099FF;
     box-shadow: 2px 2px 2px #878787;
-    transition: all 1s linear;
-}
-#container #middle .thingtrast .lawyer2 .play,
-#container #middle .thingtrast .safeguard2 .play {
     overflow: hidden;
     display: inline-block;
+    background-color: #d2dcf7;
+    transition: all 1s linear;
 }
 #container #middle .thingtrast .lawyer2 .play1,#container #middle .thingtrast .safeguard2 .play1 {
-    width: 100px;
-    padding-left: 10px;
+    width: 170px;
     margin-top: 5px;
-    float: left;
+    display: inline-block;
 }
 #container #middle .thingtrast .lawyer2 .play1 .p11 span,#container #middle .thingtrast .lawyer2 .play1 .p11 img,
 #container #middle .thingtrast .safeguard2 .play1 .p11 span,#container #middle .thingtrast .safeguard2 .play1 .p11 img {
@@ -154,26 +150,68 @@ a,a:link,a:hover,a:visited,a:active {
 }
 #container #middle .thingtrast .lawyer2 .play2,
 #container #middle .thingtrast .safeguard2 .play2 {
-    float: left;
+    display: inline-block;
     width: 50px;
     height: 55px;
+    margin-top: -25px;
 }
 #container #middle .thingtrast .lawyer2 .play3 .bus1,
 #container #middle .thingtrast .safeguard2 .play3 .bus1 {
+    font-size: 10px;
     font-weight: bold;
     display: inline-block;
     padding-top: 2px;
     color: #000;
 }
+#container #middle .thingtrast .play .play23 a {
+    display: block;
+    margin-top: 5px;
+    color: #000;
+    font-weight: bold;
+    font-size: 10px;
+}
+#container #middle .thingtrast .play .play23 a span {
+    font-weight: 100;
+    padding-left: 20px;
+}
 #container #middle .thingtrast .lawyer2 .play3 .bus2,
 #container #middle .thingtrast .safeguard2 .play3 .bus2 {
-    color: #fff;
+    color: #000;
     display: inline-block;
-    margin-left: 7px;
+    margin-left: 5px;
     background-color: #0099FF;
     padding: 3px 2px 0 2px;
     border-radius: 5px;
     font-size: 8px;
+}
+/*#container #middle .thingtrast .lawyer2 .play .play4 .shuoming,*/
+/*#container #middle .thingtrast .safeguard2 .play .play4 .shuoming {*/
+    /*margin-top: 10px;*/
+    /*font-size: 12px;*/
+    /*color: rgba(39, 39, 39, 0.69);*/
+/*}*/
+#container #middle .thingtrast .lawyer2 .play .play5,
+#container #middle .thingtrast .safeguard2 .play .play5 {
+    position: relative;
+    top:15px;
+    left: -5px;
+    z-index: 10;
+    width: 236px;
+    height: 40px;
+    transition: all 0.3s linear;
+}
+#container #middle .thingtrast .lawyer2 .play .play5 a,
+#container #middle .thingtrast .safeguard2 .play .play5 a {
+    display: block;
+    width: 100%;
+    height: 40px;
+    background-color: #0099FF;
+    line-height: 40px;
+    font-size: 12px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
 }
 #container #middle .textrast .textrast1 p {
     /*width: 60px;*/
@@ -220,5 +258,42 @@ a,a:link,a:hover,a:visited,a:active {
 #container #middle .textrast .tweets .txtleft2 .time,#container #middle .textrast .tweets .txtright2 .time{
     color: black;
     font-size: 10px;
+}
+.add22 {
+    width: 70px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    color: white;
+    background-color: #0099FF;
+    border-radius: 10px;
+    display: inline-block;
+    margin-left: 30px;
+}
+.add22:hover {
+    background-color: #4cae4c;
+}
+.xinzeng .xz1,.xinzeng input,.xinzeng #list1 {
+    display: inline-block;
+}
+.xinzeng input,.xinzeng #list1 {
+    width: 130px;
+    height: 30px;
+    font-size: 12px;
+    line-height: 30px;
+    margin-left: 30px;
+    padding: 5px 5px 5px 10px;
+    border: 1px solid #5e5e5e;
+}
+.xinzeng .shij {
+    margin-left: 40px;
+    margin-top: 10px;
+}
+.xinzeng .shij a {
+    display: inline-block;
+    margin-left: 30px;
+    background-color: #0099FF;
+    color: white;
+    font-weight: bold;
 }
 

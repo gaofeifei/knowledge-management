@@ -1,82 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>首页</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/homepage.css">
-</head>
-<body>
-<div id="nav"></div>
-<div id="container">
-    <div class="con_lf">
-        <div class="clf_t">
-            <div class="peo">
-                <span class="png"><img src="../image/people.png" alt=""></span>
-                <span class="number">103253</span>
-                <span class="new">本周入库人数：100</span>
+{% extends "public_nav.html" %}
+{% block title %}<title>首页</title>{% endblock %}
+{% block my_css %}
+    <link rel="stylesheet" href="/static/css/homepage.css">
+{% endblock %}
+{% block main %}
+    <div id="container">
+        <div class="con_lf">
+            <div class="clf_t">
+                <div class="peo">
+                    <span class="png"><img src="/static/image/people.png" alt=""></span>
+                    <span class="number">103253</span>
+                    <span class="new">本周入库人数：100</span>
+                </div>
+                <div class="things">
+                    <span class="png"><img src="/static/image/things.png" alt=""></span>
+                    <span class="number">103253</span>
+                    <span class="new">本周入库事件：100</span>
+                </div>
             </div>
-            <div class="things">
-                <span class="png"><img src="../image/things.png" alt=""></span>
-                <span class="number">103253</span>
-                <span class="new">本周入库事件：100</span>
+            <div class="clf_bot">
+                <p class="update">最近更新</p>
+                <p class="chars">
+                    <button class="atlas" style="background-color: #09F;">图谱</button><!--
+                    --><button class="map">地图</button>
+                </p>
+                <div id="statis1">
+
+                </div>
+                <div id="statis2" style="display: none;">
+
+                </div>
             </div>
         </div>
-        <div class="clf_bot">
-            <p class="update">最近更新</p>
-            <p class="chars">
-                <button class="atlas" style="background-color: #09F;">图谱</button><!--
-                --><button class="map">地图</button>
-            </p>
-            <div id="statis1">
+        <div class="con_rg">
+            <div class="conrgt">
+                <p class="subject">专题统计</p>
+                <div id="special">
 
+                </div>
             </div>
-            <div id="statis2" style="display: none;">
+            <div class="colony">
+                <p class="group">群体统计</p>
+                <div id="groupevents">
 
-            </div>
-        </div>
-    </div>
-    <div class="con_rg">
-        <div class="conrgt">
-            <p class="subject">专题统计</p>
-            <div id="special">
-
-            </div>
-        </div>
-        <div class="colony">
-            <p class="group">群体统计</p>
-            <div id="groupevents">
-
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script src="../js/jquery-1.11.3.min.js"></script>
-<script src="../echarts/echarts.min.js"></script>
-<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
-<script src="../js/homepage1.js"></script>
-<script src="../js/homepage2.js"></script>
-<script src="../js/homepage3.js"></script>
-<script>
-    $("#nav").load("public_nav.html");
-//    var bus=$("#container .con_lf .clf_bot .chars button");
-//    $.each(bus,function (index,item) {
-//        $(item).on('click',function () {
-//            $(this).css({backgroundColor:"#09F"}).siblings().css({backgroundColor:""});
-//        })
-//    });
-    $(".atlas").on('click',function () {
-        $(this).css({backgroundColor:"#09F"}).siblings().css({backgroundColor:""});
-        $("#statis1").css({display:'block'});
-        $("#statis2").css({display:'none'});
-    });
-    $(".map").on('click',function () {
-        $(this).css({backgroundColor:"#09F"}).siblings().css({backgroundColor:""});
-        $("#statis2").css({display:'block'});
-        $("#statis1").css({display:'none'});
-    });
-</script>
-</body>
-</html>
+{% endblock %}
+
+{% block my_js %}  
+    <script src="/static/js/homepage1.js"></script>
+    <script src="/static/js/homepage2.js"></script>
+    <script src="/static/js/homepage3.js"></script>
+    <script>
+    //    var bus=$("#container .con_lf .clf_bot .chars button");
+    //    $.each(bus,function (index,item) {
+    //        $(item).on('click',function () {
+    //            $(this).css({backgroundColor:"#09F"}).siblings().css({backgroundColor:""});
+    //        })
+    //    });
+        $(".atlas").on('click',function () {
+            $(this).css({backgroundColor:"#09F"}).siblings().css({backgroundColor:""});
+            $("#statis1").css({display:'block'});
+            $("#statis2").css({display:'none'});
+        });
+        $(".map").on('click',function () {
+            $(this).css({backgroundColor:"#09F"}).siblings().css({backgroundColor:""});
+            $("#statis2").css({display:'block'});
+            $("#statis1").css({display:'none'});
+        });
+    </script>
+{% endblock %}

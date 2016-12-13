@@ -40,7 +40,8 @@ a,a:link,a:hover,a:visited,a:active {
 #container .con_lf .clf_t .peo,#container .con_lf .clf_t .things {
     display: inline-block;
     width: 360px;
-    height: 130px;
+    height: 100px;
+    margin: 15px 0;
     border-radius: 20px;
     background-color: #68AE00;
     box-shadow:2px 2px 2px #2b542c;
@@ -51,28 +52,33 @@ a,a:link,a:hover,a:visited,a:active {
 #container .con_lf .clf_t .peo .number,#container .con_lf .clf_t .peo .new,#container .con_lf .clf_t .things .new,
 #container .con_lf .clf_t .things .number{
     display: block;
-    font-size: 44px;
+    font-size: 34px;
     color: white;
     font-weight: 900;
     position: relative;
-    top:20px;
+    top: 10px;
     left: 20px;
 }
 #container .con_lf .clf_t .peo .new,#container .con_lf .clf_t .things .new {
     font-size: 16px;
-    top: 40px;
+    top: 20px;
     left: 25px;
 }
 #container .con_lf .clf_t .peo .png,#container .con_lf .clf_t .things .png{
     float: right;
     display: inline-block;
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     line-height: 120px;
     text-align: center;
     border-radius: 50%;
     background-color: white;
-    margin: 5px 20px 0 0;
+    margin: 12px 35px 0 0;
+}
+#container .con_lf .clf_t .png img {
+    width: 60px;
+    height: 60px;
+    margin-top: -46px;
 }
 #container .con_lf .clf_t .things {
     margin-left: 30px;

@@ -59,11 +59,11 @@ a,a:link,a:hover,a:visited,a:active {
 }
 #container .con_left #statis1,#container .con_left #statis2 {
     width: 550px;
-    height: 480px;
+    height: 520px;
     border: 1px solid #09F;
 }
 #container .con_right .re3lf,#container .con_right .re3rg {
-    width: 240px;
+    width: 500px;
     float: left;
 }
 #container .con_right .zou .zou1 {
@@ -73,16 +73,20 @@ a,a:link,a:hover,a:visited,a:active {
     width: 240px;
     padding: 5px;
     height: 160px;
+    display: inline-block;
     margin-bottom: 15px;
+    margin-left: 6px;
+    background-color: rgb(210, 220, 247);
     border:2px solid #0099FF;
     box-shadow: 2px 2px 2px #878787;
     overflow: hidden;
+    transition: all 0.5s linear;
 }
 #container .con_right .left,#container .con_right .right {
-    width: 50px;
-    height: 150px;
+    width: 30px;
+    height: 35px;
     float: left;
-    margin-top: 160px;
+    margin-top: 280px;
 }
 #container .con_right .re3lf .play .play1,#container .con_right .re3rg .play .play1 {
     width: 170px;
@@ -140,7 +144,7 @@ color: rgba(39, 39, 39, 0.69);
     top:15px;
     left: -5px;
     z-index: 10;
-    width: 239px;
+    width: 236px;
     height: 40px;
     transition: all 0.3s linear;
 }
@@ -156,4 +160,41 @@ color: rgba(39, 39, 39, 0.69);
     font-weight: bold;
     text-align: center;
     border-radius: 5px;
+}
+.add22 {
+    width: 70px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    color: white;
+    background-color: #0099FF;
+    border-radius: 10px;
+    display: inline-block;
+    margin-left: 30px;
+}
+.add22:hover {
+    background-color: #4cae4c;
+}
+.xinzeng .xz1,.xinzeng input,.xinzeng #list1 {
+    display: inline-block;
+}
+.xinzeng input,.xinzeng #list1 {
+    width: 130px;
+    height: 30px;
+    font-size: 12px;
+    line-height: 30px;
+    margin-left: 30px;
+    padding: 5px 5px 5px 10px;
+    border: 1px solid #5e5e5e;
+}
+.xinzeng .shij {
+    margin-left: 40px;
+    margin-top: 10px;
+}
+.xinzeng .shij a {
+    display: inline-block;
+    margin-left: 30px;
+    background-color: #0099FF;
+    color: white;
+    font-weight: bold;
 }

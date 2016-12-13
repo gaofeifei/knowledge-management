@@ -19,49 +19,83 @@
             var myChart = ec.init(document.getElementById('spread'));
 
             var option = {
-                title : {
-                    text: '世界人口总量',
-                    subtext: '数据来自网络'
+                title: {
+                    x: 'center',
+                    text: 'ECharts例子个数统计',
+                    subtext: 'Rainbow bar example',
+                    link: 'http://echarts.baidu.com/doc/example.html'
                 },
-                tooltip : {
-                    trigger: 'axis'
+                tooltip: {
+                    trigger: 'item'
                 },
-                legend: {
-                    data:['2011年', '2012年']
+                // toolbox: {
+                //     show: true,
+                //     feature: {
+                //         dataView: {show: true, readOnly: false},
+                //         restore: {show: true},
+                //         saveAsImage: {show: true}
+                //     }
+                // },
+                grid: {
+                    borderWidth: 0,
+                    y: 80,
+                    y2: 60
                 },
-                toolbox: {
-                    show : true,
-                    feature : {
-                        mark : {show: true},
-                        dataView : {show: true, readOnly: false},
-                        magicType: {show: true, type: ['line', 'bar']},
-                        restore : {show: true},
-                        saveAsImage : {show: true}
-                    }
-                },
-                calculable : true,
-                xAxis : [
+                xAxis: [
                     {
-                        type : 'value',
-                        boundaryGap : [0, 0.01]
-                    }
-                ],
-                yAxis : [
-                    {
-                        type : 'category',
-                        data : ['巴西','印尼','美国','印度','中国','世界人口(万)']
+                        type: 'category',
+                        show: false,
+                        data: ['Line', 'Bar', 'Scatter', 'K', 'Pie', 'Radar', 'Chord', 'Force', 'Map', 'Gauge', 'Funnel']
                     }
                 ],
-                series : [
+                yAxis: [
                     {
-                        name:'2011年',
-                        type:'bar',
-                        data:[18203, 23489, 29034, 104970, 131744, 630230]
-                    },
+                        type: 'value',
+                        show: false
+                    }
+                ],
+                series: [
                     {
-                        name:'2012年',
-                        type:'bar',
-                        data:[19325, 23438, 31000, 121594, 134141, 681807]
+                        name: 'ECharts例子个数统计',
+                        type: 'bar',
+                        itemStyle: {
+                            normal: {
+                                color: function(params) {
+                                    // build a color map as your need.
+                                    var colorList = [
+                                        '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                                        '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                                        '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                                    ];
+                                    return colorList[params.dataIndex]
+                                },
+                                label: {
+                                    show: true,
+                                    position: 'top',
+                                    formatter: '{b}\n{c}'
+                                }
+                            }
+                        },
+                        data: [12,21,10,4,12,5,6,5,25,23,7],
+                        // markPoint: {
+                        //     tooltip: {
+                        //         trigger: 'item',
+                        //         backgroundColor: 'rgba(0,0,0,0)',
+                        //     },
+                        //     data: [
+                        //         {xAxis:0, y: 350, name:'Line', symbolSize:20},
+                        //         {xAxis:1, y: 350, name:'Bar', symbolSize:20},
+                        //         {xAxis:2, y: 350, name:'Scatter', symbolSize:20},
+                        //         {xAxis:3, y: 350, name:'K', symbolSize:20},
+                        //         {xAxis:4, y: 350, name:'Pie', symbolSize:20},
+                        //         {xAxis:5, y: 350, name:'Radar', symbolSize:20},
+                        //         {xAxis:6, y: 350, name:'Chord', symbolSize:20},
+                        //         {xAxis:7, y: 350, name:'Force', symbolSize:20},
+                        //         {xAxis:8, y: 350, name:'Map', symbolSize:20},
+                        //         {xAxis:9, y: 350, name:'Gauge', symbolSize:20},
+                        //         {xAxis:10, y: 350, name:'Funnel', symbolSize:20},
+                        //     ]
+                        // }
                     }
                 ]
             };
@@ -176,7 +210,7 @@
                 ) { //点击的是边
                     var sourceNode = nodes.filter(function (n) {return n.name == data.source})[0];
                     var targetNode = nodes.filter(function (n) {return n.name == data.target})[0];
-                    console.log("选中了边 " + sourceNode.name + ' -> ' + targetNode.name + ' (' + data.weight + ')');
+                    //console.log("选中了边 " + sourceNode.name + ' -> ' + targetNode.name + ' (' + data.weight + ')');
                 } else { // 点击的是点
                     console.log("选中了" + data.name + '(' + data.value + ')');
                 }

@@ -70,24 +70,24 @@
     }
     //-----------左右箭头---------------
     $('#container #middle .thingtrast .lawyer2 .left').hover(function () {
-        $(this).attr('src','../image/left_hv.png');
+        $(this).attr('src','/static/image/left_hv.png');
     },function () {
-        $(this).attr('src','../image/left.png');
+        $(this).attr('src','/static/image/left.png');
     });
     $('#container #middle .thingtrast .lawyer2 .right').hover(function () {
-        $(this).attr('src','../image/right_hv.png');
+        $(this).attr('src','/static/image/right_hv.png');
     },function () {
-        $(this).attr('src','../image/right.png');
+        $(this).attr('src','/static/image/right.png');
     });
     $('#container #middle .thingtrast .safeguard2 .left').hover(function () {
-        $(this).attr('src','../image/left_hv.png');
+        $(this).attr('src','/static/image/left_hv.png');
     },function () {
-        $(this).attr('src','../image/left.png');
+        $(this).attr('src','/static/image/left.png');
     });
     $('#container #middle .thingtrast .safeguard2 .right').hover(function () {
-        $(this).attr('src','../image/right_hv.png');
+        $(this).attr('src','/static/image/right_hv.png');
     },function () {
-        $(this).attr('src','../image/right.png');
+        $(this).attr('src','/static/image/right.png');
     });
 
     //------------------滚动区域-----------------
@@ -96,11 +96,11 @@
         if(go==5){
             var plays=$("#container #middle .thingtrast .lawyer2 .play");
             $(plays).css({
-                "-webkit-transform":"translateX(-1020px)",
-                "-moz-transform":"translateX(-1020px)",
-                "-ms-transform":"translateX(-1020px)",
-                "-o-transform":"translateX(-1020px)",
-                "transform":"translateX(-1020px)",
+                "-webkit-transform":"translateX(-1050px)",
+                "-moz-transform":"translateX(-1050px)",
+                "-ms-transform":"translateX(-1050px)",
+                "-o-transform":"translateX(-1050px)",
+                "transform":"translateX(-1050px)",
             });
             go = 8;
         } else{
@@ -119,11 +119,11 @@
         if(go==5){
             var plays=$("#container #middle .thingtrast .lawyer2 .play");
             $(plays).css({
-                "-webkit-transform":"translateX(-1020px)",
-                "-moz-transform":"translateX(-1020px)",
-                "-ms-transform":"translateX(-1020px)",
-                "-o-transform":"translateX(-1020px)",
-                "transform":"translateX(-1020px)",
+                "-webkit-transform":"translateX(-1050px)",
+                "-moz-transform":"translateX(-1050px)",
+                "-ms-transform":"translateX(-1050px)",
+                "-o-transform":"translateX(-1050px)",
+                "transform":"translateX(-1050px)",
             });
             go = 8;
         } else{
@@ -142,11 +142,11 @@
         if(go==5){
             var plays=$("#container #middle .thingtrast .safeguard2 .play");
             $(plays).css({
-                "-webkit-transform":"translateX(-1020px)",
-                "-moz-transform":"translateX(-1020px)",
-                "-ms-transform":"translateX(-1020px)",
-                "-o-transform":"translateX(-1020px)",
-                "transform":"translateX(-1020px)",
+                "-webkit-transform":"translateX(-1050px)",
+                "-moz-transform":"translateX(-1050px)",
+                "-ms-transform":"translateX(-1050px)",
+                "-o-transform":"translateX(-1050px)",
+                "transform":"translateX(-1050px)",
             });
             go = 8;
         } else{
@@ -165,11 +165,11 @@
         if(go==5){
             var plays=$("#container #middle .thingtrast .safeguard2 .play");
             $(plays).css({
-                "-webkit-transform":"translateX(-1020px)",
-                "-moz-transform":"translateX(-1020px)",
-                "-ms-transform":"translateX(-1020px)",
-                "-o-transform":"translateX(-1020px)",
-                "transform":"translateX(-1020px)",
+                "-webkit-transform":"translateX(-1050px)",
+                "-moz-transform":"translateX(-1050px)",
+                "-ms-transform":"translateX(-1050px)",
+                "-o-transform":"translateX(-1050px)",
+                "transform":"translateX(-1050px)",
             });
             go = 8;
         } else{

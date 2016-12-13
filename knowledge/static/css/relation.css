@@ -107,21 +107,21 @@ a,a:link,a:hover,a:visited,a:active {
     width: 240px;
     padding: 5px;
     height: 160px;
-    margin-top: 15px;
+    margin: 15px auto 0;
     border:2px solid #0099FF;
     box-shadow: 2px 2px 2px #878787;
     overflow: hidden;
-    background-color: #d9edf7;
+    background-color: #d2dcf7;
+    transition: all 0.7s linear;
 }
 #container .result .re3 .re3rg {
     width: 265px;
-    border:2px solid #4cae4c;
-    padding: 10px;
-    background-color: #4cae4c;
+    /*border:2px solid #4cae4c;*/
+    /*padding: 10px;*/
 }
-#container .result .re3 .re3rg .play {
-    height: 138px;
-}
+/*#container .result .re3 .re3rg .play {*/
+    /*height: 138px;*/
+/*}*/
 #container .result .re3 .re3lf .play .play1,#container .result .re3 .re3rg .play .play1 {
     width: 170px;
     margin-top: 5px;
@@ -178,7 +178,7 @@ a,a:link,a:hover,a:visited,a:active {
     top:15px;
     left: -5px;
     z-index: 10;
-    width: 239px;
+    width: 236px;
     height: 40px;
     transition: all 0.3s linear;
 }
@@ -194,4 +194,41 @@ a,a:link,a:hover,a:visited,a:active {
     font-weight: bold;
     text-align: center;
     border-radius: 5px;
+}
+.add22 {
+    width: 70px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    color: white;
+    background-color: #0099FF;
+    border-radius: 10px;
+    display: inline-block;
+    margin-left: 30px;
+}
+.add22:hover {
+    background-color: #4cae4c;
+}
+.xinzeng .xz1,.xinzeng input,.xinzeng #list1 {
+    display: inline-block;
+}
+.xinzeng input,.xinzeng #list1 {
+    width: 130px;
+    height: 30px;
+    font-size: 12px;
+    line-height: 30px;
+    margin-left: 30px;
+    padding: 5px 5px 5px 10px;
+    border: 1px solid #5e5e5e;
+}
+.xinzeng .shij {
+    margin-left: 40px;
+    margin-top: 10px;
+}
+.xinzeng .shij a {
+    display: inline-block;
+    margin-left: 30px;
+    background-color: #0099FF;
+    color: white;
+    font-weight: bold;
 }

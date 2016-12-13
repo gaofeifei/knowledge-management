@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图谱管理 - 编辑图谱</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/compile.css">
-</head>
-<body>
-<div id="nav"></div>
+{% extends "public_nav.html" %}
+{% block title %}<title>图谱管理 - 编辑图谱</title>{% endblock %}
+{% block my_css %}
+    <link rel="stylesheet" href="/static/css/compile.css">
+    <style type="text/css">
+        .compile b,.compile a {
+            color: #0099FF!important;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
 <div id="container">
     <div class="conleft">
         <p class="lfone">节点编辑</p>
@@ -30,7 +30,7 @@
             </div>
             <button class="crt133">确&nbsp;&nbsp;&nbsp;&nbsp;定</button>
         </div>
-        <div class="crt2">
+        <div class="crt2" style="display:none;">
             <div class="crt2lf">
                 <table class="table">
                     <thead>
@@ -44,69 +44,95 @@
                         <tr class="active">
                             <td>1</td>
                             <td>潘强</td>
-                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                            <td>
+                                <a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class='delt' type="button" data-toggle="modal">删除</a>
+                            </td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>郑再索</td>
-                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                            <td>
+                                <a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class='delt' type="button" data-toggle="modal">删除</a>
+                            </td>
                         </tr>
                         <tr class="active">
                             <td>3</td>
                             <td>徐丽萍</td>
-                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                            <td>
+                                <a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class='delt' type="button" data-toggle="modal">删除</a>
+                            </td>
                         </tr>
                         <tr>
                             <td>4</td>
                             <td>任志强</td>
-                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                            <td>
+                                <a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class='delt' type="button" data-toggle="modal">删除</a>
+                            </td>
                         </tr>
                         <tr class="active">
                             <td>5</td>
                             <td>邓海峰</td>
-                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                            <td>
+                                <a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class='delt' type="button" data-toggle="modal">删除</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="crt2rg" style="float: left">
-                <div class="play">
-                    <div class="play1">
-                        <div class="p11">
-                            <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px;
-                                                            cursor: pointer">潘强</span><!--
-                                        --><img style="margin-left: 15px;" src="../image/fensishu.png" alt=""><!--
-                                        --><span class="difang" style="font-size: 8px">6720</span>
-                        </div>
-                        <div class="p22" style="margin-top: 5px">
-                            <img style="margin-left: 10px;" src="../image/influence.png" alt="">
-                            <span class="influence">3083</span>
-                            <img src="../image/huoyuedu.png" alt="">
-                            <span class="huoyuedu">254</span>
-                            <img src="../image/mingan.png" alt="">
-                            <span class="mingan">80</span>
-                        </div>
-                    </div>
-                    <img class="play2" src="../image/pangzi.png" alt="">
-                    <div class="play23" style="margin-left: 15px;margin-top: 10px">
-                        <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                        <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                    </div>
-                    <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                        <a class="bus1">业务标签：</a>
-                        <a class="bus2">律师</a>
-                        <a class="bus2">法律人士</a>
-                    </div>
-                    <div class="play4" style="padding-left: 15px;margin-top: 10px">
-                        <span class="geren">个人描述：</span>
-                        <span class="shuoming">
-                            你读过《三体》了吗？在国外都火了！[给力]】《三体》英文版在不到3个月里引起了西方社会......
-                        </span>
-                    </div>
-                    <!--<div class="play5">-->
-                        <!--<a href="">加入群体探索</a>-->
-                    <!--</div>-->
-                </div>
+            <p class='jump' style='float:left;font-size:12px;margin: 5px 0px 0 50px;display:none;'>
+                    <label class="radio-inline">
+                        <input type="radio" name="ioja" value="option1"> 1跳
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="ioja" value="option2"> 2跳
+                    </label>
+                    <label class="radio-inline">    
+                        <input type="radio" name="ioja" value="option2" checked> 全部
+                    </label>
+                    <button class="add22" type="button" data-toggle="modal">添加</button>
+            </p> 
+            <div class="crt2rg" style="float: left;margin: 40px 0 0 -250px;display:none;">
+                 <div class="play">
+                                                <div class="play1">
+                                                    <div class="p11">
+                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
+                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
+                                                --><span class="difang" style="font-size: 8px">6720</span><!--
+                                                --><img class='xin' style="margin-left: 10px;" src="/static/image/heart.png">
+                                                    </div>
+                                                    <div class="p22" style="margin-top: 5px">
+                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
+                                                        <span class="influence">3083</span>
+                                                        <img src="/static/image/huoyuedu.png" alt="">
+                                                        <span class="huoyuedu">254</span>
+                                                        <img src="/static/image/mingan.png" alt="">
+                                                        <span class="mingan">80</span>
+                                                    </div>
+                                                </div>
+                                                <img class="play2" src="/static/image/pangzi.png" alt="">
+                                                <div class="play23" style="margin-left: 15px;">
+                                                    <a href="###" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
+                                                    <a href="###" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
+                                                </div>
+                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
+                                                    <a class="bus1">业务标签：</a>
+                                                    <a class="bus2">律师</a>
+                                                    <a class="bus2">法律人士</a>
+                                                </div>
+                                                <!--<div class="play4">-->
+                                                <!--<p class="shuoming">-->
+                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                                <!--</p>-->
+                                                <!--</div>-->
+                                                <div class="play5" type="button" data-toggle="modal">
+                                                    <a>加入群体探索</a>
+                                                </div>
+                                            </div>
             </div>
         </div>
     </div>
@@ -127,7 +153,7 @@
             <button class="editor3">确定</button>
         </div>
         <div class="listcell">
-            <div class="lcleft">
+            <div class="lcleft" style="display:none;">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -163,7 +189,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="lcright">
+            <div class="lcright" style='display:none;'>
                 <p class="lcr1">
                     <span class="lcrone">潘强</span>
                     <span class="icon icon-paperclip"></span>
@@ -224,14 +250,181 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="join1" tabindex="-2">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">删除提示</h2>
+            </div>
+            <div class="modal-body">
+                <p>您确定删除吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="join6" tabindex="-3">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">编辑专题</h2>
+            </div>
+            <div class="modal-body">
+                <div class="xinzeng" style="margin-top: 20px;padding-left: 20px;">
+                            <!-- <p class="tit">新建专题</p> -->
+                            <form style="margin-left: 40px;">
+                                <span class="xz1">群体名称</span>
+                                <select name="" id="list1" onchange='check(this.value)'>
+                                    <option value="" disabled selected>请选择群体名称</option> 
+                                    <option value="新建群体">新建群体</option>
+                                    <option value="律师群体">律师群体</option>
+                                </select>
+                                <input type="text" class="shuru2" placeholder="请输入群体名称"/>
+                            </form>
+                            <div class="shij">
+                                <span class="sjr">加入人物</span>
+                                <a class="sj1">邓海峰 <b class="icon icon-remove det"></b> </a>
+                                <a class="sj2">潘强 <b class="icon icon-remove det"></b> </a>
+                            </div>
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="join4" tabindex="-2">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">温馨提示</h2>
+            </div>
+            <div class="modal-body">
+                <p>您已选择此专题，选择完毕后请点击右上角 “ 添加 ” 按钮，加入到专题中O(∩_∩)O<br>
+                    如您不需要可以再次点击取消选择专题</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="join5" tabindex="-1">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">编辑专题</h2>
+            </div>
+            <div class="modal-body">
+                <div class="xinzeng" style="margin-top: 20px;padding-left: 20px;">
+                    <!-- <p class="tit">专题编辑</p> -->
+                    <form style="margin-left: 40px;">
+                        <span class="xz1">专题名称</span>
+                        <select name="" id="list1" onchange='check2(this.value)'>
+                            <option value="" disabled selected>请选择专题名称</option> 
+                            <option value="新建专题">新建专题</option>
+                            <option value="电信诈骗">电信诈骗</option>
+                        </select>
+                        <input type="text" class="shuru2" placeholder="请输入专题名称" style='display:none'/>
+                    </form>
+                    <div class="shij">
+                        <span class="sjr">加入事件</span>
+                        <a class="sj1">徐玉玉事件 <b class="icon icon-remove det"></b> </a>
+                        <a class="sj2">大学生失联 <b class="icon icon-remove det"></b> </a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
-
-<script src="../js/jquery-1.11.3.min.js"></script>
-<script src="../echarts/echarts.min.js"></script>
-<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
-<script src="../js/compile.js"></script>
+{% block my_js %}
+<script src="/static/js/compile.js"></script>
 <script>
-    $("#nav").load("public_nav.html");
+    $.each($(".delt"),function(index,item){
+        $(item).on('click',function(){
+            $('#join1').modal("show");
+            $(item).parents('tr').hide();
+        });
+    })
+    var td2=$(".conright .table tr").find('td');
+    $.each(td2,function(index,item){
+        $(item).on('click',function () {
+            if (index==1) {
+                $(".conright .crt2rg").show(100);
+                $(".conright .jump").show(100);
+            };           
+        })
+    });
+    $("#container .conright2 .editor .editor3").on('click',function () {
+        $('.lcleft').show(20);
+    });
+    var xiu=$("#container .conright2 .listcell tr");
+    $.each(xiu,function(index,item){
+        $(item).on('click',function(){
+            var last = $(item).find('td')[$(item).find('td').length-1];
+            var last1 =$(last).find('a').eq(0);
+            var last2 =$(last).find('a').eq(1);
+            if ($(last1).text()=="修改") {
+                $('.lcright').show(20);
+            };
+            if ($(last2).text()=="删除") {
+                $('#join1').modal("show");
+            };
+            
+        })
+    });
+    $('.conright .add22').on('click',function () {
+        $('#join6').modal("show");
+    });
+    $('.conright2 .add22').on('click',function () {
+        $('#join5').modal("show");
+    });
+    $('#container .conright .crt1 .crt133').on('click',function(){
+        $("#container .conright .crt2").show(20);
+    })
+    $.each($('.menuList'),function(index,item){
+        $(item).css({display:'none'});
+        if (index==1) {
+            $(item).css({display:'block'});
+        };
+    });
     $('.yes').on('click',function () {
         $('.yes22').modal("show");
     });
@@ -243,10 +436,71 @@
         $(".conright").css({display:'none'});
         $(".conright2").css({display:'block'});
     });
-    $('#container .conright .crt2 .crt2rg .play .p11 .xingming').on('click',function () {
-        window.open('person.html');
+    $.each($('.conright .xingming'),function(index,item){
+        $(item).on('click',function () {
+            window.open('/index/person/');
+        })
     })
-
+    var play=$("#container .conright .play");
+        $.each(play,function (index,item) {
+            $(item).hover(function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(-40px)",
+                    "-moz-transform":"translateY(-40px)",
+                    "-ms-transform":"translateY(-40px)",
+                    "-o-transform":"translateY(-40px)",
+                    "transform":"translateY(-40px)",
+                })
+            },function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(40px)",
+                    "-moz-transform":"translateY(40px)",
+                    "-ms-transform":"translateY(40px)",
+                    "-o-transform":"translateY(40px)",
+                    "transform":"translateY(40px)",
+                })
+            });
+        });
+        $.each(play,function (index,item) {
+            var changecolor=1;
+            $(item).find(".play5").on('click',function(){
+                if (changecolor==1) {
+                    $(this).parent('.play').css({backgroundColor:'#09F'});
+                    changecolor=2;
+                    $('#join4').modal("show");
+                } else {
+                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                    changecolor=1;
+                }
+            }); 
+        });
+        var heart=$(".play .play1 .p11 .xin");
+        $.each(heart,function(index,item){
+            var chan=1;
+            $(item).on('click',function(){
+                if (chan==1) {
+                    $(this).attr('src','/static/image/focus.png');
+                    chan=2;
+                }else {
+                    $(this).attr('src','/static/image/heart.png');
+                    chan=1;
+                }
+                
+            })
+        });
+        function check(value){
+            if (value=='新建群体') {
+                $('.shuru2').show();
+            }else{
+                $('.shuru2').hide();
+            };
+        };
+        function check2(value){
+            if (value=='新建专题') {
+                $('.shuru2').show();
+            }else{
+                $('.shuru2').hide();
+            };
+        };
 </script>
-</body>
-</html>
+{% endblock %}

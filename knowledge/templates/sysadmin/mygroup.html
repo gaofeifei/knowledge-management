@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的图谱 - 我的群体</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/mygroup.css">
-</head>
-<body>
-<div id="nav"></div>
+{% extends "public_nav.html" %}
+{% block title %}<title>我的图谱 - 我的群体</title>{% endblock %}
+{% block my_css %}
+    <link rel="stylesheet" href="/static/css/mygroup.css">
+    <style type="text/css">
+        .mygroup b,.mygroup a {
+            color: #0099FF!important;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
 <div id="container">
     <div class="main">
         <table class="table">
@@ -74,12 +74,16 @@
         </table>
     </div>
 </div>
+{% endblock %}
 
-<script src="../js/jquery-1.11.3.min.js"></script>
-<script src="../js/mygroup.js"></script>
-<script>
-    $("#nav").load("public_nav.html");
-
+{% block my_js %}
+<script src="/static/js/mygroup.js"></script>
+<script type="text/javascript">
+    $.each($('.menuList'),function(index,item){
+        $(item).css({display:'none'});
+        if (index==2) {
+            $(item).css({display:'block'});
+        };
+    });
 </script>
-</body>
-</html>
+{% endblock %}

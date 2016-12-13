@@ -37,7 +37,7 @@ a,a:link,a:hover,a:visited,a:active {
 }
 #container .con_top .choose .tuli,#container .con_bot .add #shijian {
     width:1200px;
-    height: 400px;
+    /*height: 400px;*/
     border: 1px solid #09F;
     box-shadow: 3px 3px 3px #c9c2c7;
 }
@@ -48,7 +48,7 @@ a,a:link,a:hover,a:visited,a:active {
     width: 700px;
     height: 300px;
     margin-left: 30px;
-    display: inline-block;
+    float: left;
 }
 #container .con_top .choose .tuli .menu .zhmi {
     font-weight: 900;
@@ -68,7 +68,8 @@ a,a:link,a:hover,a:visited,a:active {
     width: 230px;
 }
 #container .con_top .choose .tuli .menu .msure,#container .con_bot .add #shijian .sjt .sjt2,
-#container .con_top .choose .tuli .menu .compare,#container .con_top .choose .tuli #condet .condet4 {
+#container .con_top .choose .tuli .menu .compare, #container .con_top .choose .tuli #condet .condet4,
+#container .con_bot .add #shijian .bag .sjmr1 .add22 {
     width: 70px;
     height: 32px;
     line-height: 32px;
@@ -80,17 +81,18 @@ a,a:link,a:hover,a:visited,a:active {
     margin-left: 30px;
 }
 #container .con_bot .add #shijian .sjt .sjt2:hover,#container .con_top .choose .tuli .menu .msure:hover,
-#container .con_top .choose .tuli .menu .compare:hover,#container .con_top .choose .tuli #condet .condet4:hover{
+#container .con_top .choose .tuli .menu .compare:hover,#container .con_top .choose .tuli #condet .condet4:hover,
+#container .con_bot .add #shijian .bag .sjmr1 .add22:hover {
     background-color: #4cae4c;
 }
 #container .con_top .choose .tuli #condet {
-    display: inline-block;
+    float: left;
     width: 300px;
     height: 220px;
     border: 2px solid #0099FF;
     border-radius: 5px;
     position: relative;
-    top: -240px;
+    /*top: -240px;*/
     left: 60px;
     padding: 20px;
 }
@@ -131,15 +133,15 @@ a,a:link,a:hover,a:visited,a:active {
 #container .con_bot .add #shijian .sjt .sjt1 {
     padding: 5px 5px 5px 10px;
     border:1px solid #c7c7c7;
-    margin-left: 20px;
+    margin:0 20px;
 }
 #container .con_bot .add #shijian .sjt .sjt2 {
-    margin-left: 15%;
+    margin-left: 5%;
 }
 #container .con_bot .add #shijian #site {
     width: 370px;
     height: 400px;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
     /*background-color: #3c763d;*/
     float: left;
 }
@@ -151,11 +153,16 @@ a,a:link,a:hover,a:visited,a:active {
     /*background-color: saddlebrown;*/
     float: left;
 }
-#container .con_bot .add #shijian .bag .sjmr1 .direct1,#container .con_bot .add #shijian .bag .sjmr2 .direct2 {
+#container .con_bot .add #shijian .bag .sjmr1 .direct1 {
+    text-align: right;
+    padding-right: 40px;
     font-weight: 900;
     font-size: 14px;
     color: black;
     display: block;
+}
+#container .con_bot .add #shijian .bag .sjmr1 #crmid {
+    transition: all 1s linear;
 }
 #container .con_bot .add #shijian .bag .play {
     width: 240px;
@@ -171,10 +178,10 @@ a,a:link,a:hover,a:visited,a:active {
     transition: all 0.8s linear;
 }
 #container .con_bot .add #shijian .bag .left,#container .con_bot .add #shijian .bag .right {
-    width: 25px;
-    height: 95px;
+    width: 30px;
+    height: 35px;
     display: inline-block;
-    margin-top: -140px;
+    margin-top: -340px;
     cursor: pointer;
 }
 #container .con_bot .add #shijian .bag .play .play1 {
@@ -245,45 +252,45 @@ a,a:link,a:hover,a:visited,a:active {
     text-align: center;
     border-radius: 5px;
 }
-#container .con_bot .add #shijian .bag .sjmr2 {
-    margin-top: 20px;
-}
-#container .con_bot .add #shijian .xinzeng .tit {
-    font-weight: 900;
-    font-size: 24px;
-    color: #070707;
-}
-#container .con_bot .add #shijian .xinzeng .xz1,#container .con_bot .add #shijian .xinzeng input,
-#container .con_bot .add #shijian .xinzeng #list1 {
+/*#container .con_bot .add #shijian .bag .sjmr2 {*/
+    /*margin-top: 20px;*/
+/*}*/
+/*#container .con_bot .add #shijian .xinzeng .tit {*/
+    /*font-weight: 900;*/
+    /*font-size: 24px;*/
+    /*color: #070707;*/
+/*}*/
+.xinzeng .xz1,.xinzeng input,.xinzeng #list1 {
     display: inline-block;
 }
-#container .con_bot .add #shijian .xinzeng form button {
-    width: 100px;
+/*#container .con_bot .add #shijian .xinzeng form button {*/
+    /*width: 100px;*/
+    /*height: 30px;*/
+    /*line-height: 30px;*/
+    /*font-size: 16px;*/
+    /*color: white;*/
+    /*font-weight: 900;*/
+    /*background-color: #0099FF;*/
+    /*border-radius: 5px;*/
+    /*margin-left: 5%*/
+/*}*/
+/*#container .con_bot .add #shijian .xinzeng form button:hover {*/
+    /*background-color: #4cae4c;*/
+/*}*/
+.xinzeng input,.xinzeng #list1 {
+    width: 140px;
     height: 30px;
-    line-height: 30px;
-    font-size: 16px;
-    color: white;
-    font-weight: 900;
-    background-color: #0099FF;
-    border-radius: 5px;
-    margin-left: 5%
-}
-#container .con_bot .add #shijian .xinzeng form button:hover {
-    background-color: #4cae4c;
-}
-#container .con_bot .add #shijian .xinzeng input,#container .con_bot .add #shijian .xinzeng #list1 {
-    width: 200px;
-    height: 30px;
+    font-size: 12px;
     line-height: 30px;
     margin-left: 30px;
     padding: 5px 5px 5px 10px;
     border: 1px solid #5e5e5e;
 }
-#container .con_bot .add #shijian .xinzeng .shij {
+.xinzeng .shij {
     margin-left: 40px;
     margin-top: 10px;
 }
-#container .con_bot .add #shijian .xinzeng .shij a {
+.xinzeng .shij a {
     display: inline-block;
     margin-left: 30px;
     background-color: #0099FF;

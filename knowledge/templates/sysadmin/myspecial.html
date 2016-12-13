@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的图谱 - 我的专题</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/myspecial.css">
-</head>
-<body>
-<div id="nav"></div>
+{% extends "public_nav.html" %}
+{% block title %}<title>我的图谱 - 我的专题</title>{% endblock %}
+{% block my_css %}
+    <link rel="stylesheet" href="/static/css/myspecial.css">
+    <style type="text/css">
+        .myspecial b,.myspecial a {
+            color: #0099FF!important;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
 <div id="container">
     <div class="main">
         <table class="table">
@@ -28,7 +28,7 @@
             <tr class="active">
                 <td>1</td>
                 <td>专题1</td>
-                <td><a href="">事件1、</a><a href="">事件2、</a><a href="">事件3</a></td>
+                <td><a href="#">事件1、</a><a href="#">事件2、</a><a href="#">事件3</a></td>
                 <td>3</td>
                 <td>2016-09-09</td>
                 <td>2016-09-09</td>
@@ -37,7 +37,7 @@
             <tr>
                 <td>2</td>
                 <td>专题1</td>
-                <td><a href="">事件1、</a><a href="">事件2、</a><a href="">事件3</a></td>
+                <td><a href="#">事件1、</a><a href="#">事件2、</a><a href="#">事件3</a></td>
                 <td>3</td>
                 <td>2016-09-09</td>
                 <td>2016-09-09</td>
@@ -46,7 +46,7 @@
             <tr class="active">
                 <td>3</td>
                 <td>专题1</td>
-                <td><a href="">事件1、</a><a href="">事件2、</a><a href="">事件3</a></td>
+                <td><a href="#">事件1、</a><a href="#">事件2、</a><a href="#">事件3</a></td>
                 <td>3</td>
                 <td>2016-09-09</td>
                 <td>2016-09-09</td>
@@ -55,7 +55,7 @@
             <tr>
                 <td>4</td>
                 <td>专题1</td>
-                <td><a href="">事件1、</a><a href="">事件2、</a><a href="">事件3</a></td>
+                <td><a href="#">事件1、</a><a href="#">事件2、</a><a href="#">事件3</a></td>
                 <td>3</td>
                 <td>2016-09-09</td>
                 <td>2016-09-09</td>
@@ -64,7 +64,7 @@
             <tr class="active">
                 <td>5</td>
                 <td>专题1</td>
-                <td><a href="">事件1、</a><a href="">事件2、</a><a href="">事件3</a></td>
+                <td><a href="#">事件1、</a><a href="#">事件2、</a><a href="#">事件3</a></td>
                 <td>3</td>
                 <td>2016-09-09</td>
                 <td>2016-09-09</td>
@@ -74,12 +74,15 @@
         </table>
     </div>
 </div>
-
-<script src="../js/jquery-1.11.3.min.js"></script>
-<script src="../js/myspecial.js"></script>
-<script>
-    $("#nav").load("public_nav.html");
-
+{% endblock %}
+{% block my_js %}
+<script src="/static/js/myspecial.js"></script>
+<script type="text/javascript">
+    $.each($('.menuList'),function(index,item){
+        $(item).css({display:'none'});
+        if (index==2) {
+            $(item).css({display:'block'});
+        };
+    });
 </script>
-</body>
-</html>
+{% endblock %}

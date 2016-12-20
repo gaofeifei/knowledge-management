@@ -14,8 +14,9 @@ http.socket_timeout = 9999
 
 reload(sys)
 sys.path.append('../../')
-from global_config import node_index_name, friend, interaction, relative, colleague, leader_member, user_tag
-from global_utils import graph
+from global_config import node_index_name, friend, interaction, relative, colleague, leader_member, user_tag, group_index_name,\
+                        group_rel
+from global_utils import graph, es_user_portrait
 
 class User(GraphObject):
     __primarykey__ = "uid"
@@ -53,6 +54,25 @@ def create_user2user_rel(rel_type):
     print "finish"
 
 
+def create_rel_from_uid2group(uid_list, group_id):
+    count = 0
+    Index = ManualIndexManager(graph)
+    node_index = Index.get_index(Node, node_index_name)
+    group_index = Index.get_index(Node, group_index_name)
+
+    tx = graph.begin()
+    for uid in uid_list:
+        node = node_index.get("uid", uid)[0]
+        group_node = group_index.get("group", group_id)[0]
+        rel = Relationship(node, group_rel, group_node)
+        tx.create(rel)
+        count += 1
+        if count % 100 == 0:
+            tx.commit()
+            print count
+            tx = graph.begin()
+    tx.commit()
+
 
 
 def query_db():
@@ -73,8 +93,14 @@ def query_db():
 
 
 if __name__ == "__main__":
-    for each in [interaction, relative, colleague, leader_member]:
-        create_user2user_rel(each)
+    #for each in [interaction, relative, colleague, leader_member]:
+    #create_user2user_rel(friend)
+    results = es_user_portrait.search(index="user_portrait", doc_type="user", body={"query":{"term":{"domain":"媒体"}}, "size":150})["hits"]["hits"]
+    uid_list = []
+    for item in results:
+        uid_list.append(item["_id"])
+    print uid_list
+    create_rel_from_uid2group(uid_list, "媒体")
 
 
 

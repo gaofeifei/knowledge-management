@@ -14,7 +14,7 @@ http.socket_timeout = 9999
 
 reload(sys)
 sys.path.append("../../")
-from global_config import location_index_name, node_index_name, domain_list, topic_list
+from global_config import location_index_name, node_index_name, domain_list, topic_list, special_event_index_name, event_index_name, event_special
 from global_utils import graph
 
 
@@ -34,6 +34,9 @@ class Location(GraphObject):
     __primarykey__ = 'location'
     location = Property()
 
+class SpecialEvent(GraphObject):
+    __primarykey__ = 'event'
+    event = Property()
 
 def create_node_location():
     Index = ManualIndexManager(graph)
@@ -71,6 +74,19 @@ def create_node_location():
 
     f.close()
 
+def put_in_special_event(event_name):
+    Index = ManualIndexManager(graph)
+    special_event_index = Index.get_or_create_index(Node, special_event_index_name)
+
+    exist = special_event_index.get("event", event_name)
+    if not exist:
+        node = Node("SpecialEvent", event=event_name)
+        tx = graph.begin()
+        tx.create(node)
+        tx.commit()
+        special_event_index.add("event", event_name, node)
+        return 1
+    return 0
 
 def put_in_node():
     Index = ManualIndexManager(graph) # manage index
@@ -195,6 +211,22 @@ def create_rel_from_uid2_topic():
     tx.commit()
 
 
+def create_rel_from_event_special(event, special_event):
+    Index = ManualIndexManager(graph) # manage index
+    event_index = Index.get_index(Node, event_index_name)
+    special_event_index = Index.get_index(Node, special_event_index_name)
+
+    node1 = event_index.get("event", event)[0]
+    node2 = special_event_index.get("event", special_event)[0]
+
+    rel = Relationship(node1, event_special, node2)
+    tx = graph.begin()
+    tx.create(rel)
+    tx.commit()
+
+
+
+
 def create_rel_from_uid2_location():
     Index = ManualIndexManager(graph) # manage index
     node_index = Index.get_index(Node, node_index_name)
@@ -230,5 +262,8 @@ if __name__ == "__main__":
     #create_rel_from_uid2_topic()
     #put_in_user_portrait()
     #create_node_location()
-    create_rel_from_uid2_location()
+    #create_rel_from_uid2_location()
+    #put_in_special_event("电信诈骗")
+    #create_rel_from_event_special("ma-lai-xi-ya-zhua-huo-dian-xin-qi-zha-an-fan-1482126431", "电信诈骗")
+    create_rel_from_event_special("ao-men-xuan-ju-fa-xin-zeng-jia-ai-guo-tiao-li-1482126431", "港澳台")
 

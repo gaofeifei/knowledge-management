@@ -2,16 +2,17 @@
 
 from elasticsearch import Elasticsearch
 
-user_portrait_host = ["219.224.134.225:9200"]
+user_portrait_host = ["219.224.134.225:9037"]
 user_portrait_port = "9200"
-event_host = ["219.224.134.225:9200"]
+event_host = ["219.224.134.225:9037"]
 event_port = "9200"
 neo4j_host = "219.224.134.213"
 neo4j_port = "7474"
 
 portrait_name = "user_portrait"
 portrait_type = "user"
-event_name = "event"
+event_name = "event" # 事件基本信息
+event_analysis_name = "event_analysis" # 事件分析结果
 event_type = "text"
 neo4j_name = "neo4j"
 neo4j_password = "database"
@@ -26,8 +27,9 @@ location_index_name = "location_index" #primary_key: location
 event_index_name = "event_index" # primary_key: event
 tag_index_name = "tag_index" # primary_key: tag
 special_event_index_name = "special_event_index" # primary_key: event
+# 港澳台，电信诈骗
 event_type_index_name = "event_type_index" # primary: type
-group_index_name = "group_index" # primary: group
+group_index_name = "group_index" # primary: group, rel: group
 
 
 domain_list = [u'高校', u'境内机构', u'境外机构', u'媒体', u'境外媒体', u'民间组织', u'法律机构及人士', \
@@ -45,12 +47,14 @@ organise = "organise" #组织
 discuss= "discuss" #讨论
 first = "first" #首发
 other_rel = "other_relationship" #其他关系
+group_rel = "group"
 
 
 # Relationship: Event-Event
 contain = "contain"
 casual = "casual"
 happen_together = "happen_together"
+event_special = "special_event" # 专题
 
 
 # Relatioship: User-User

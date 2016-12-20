@@ -10,8 +10,10 @@ from py2neo.ext.batman import ManualIndexManager
 from py2neo.ext.batman import ManualIndexWriteBatch
 http.socket_timeout = 9999
 
-graph = Graph('http://219.224.134.211:7474/db/data', user="neo4j", password="database")
-#graph = Graph()
+import sys
+sys.path.append("../../")
+from global_utils import graph
+from global_config import event_index_name, group_index_name
 
 class Event(GraphObject):
     __primarykey__ = "event_id"
@@ -31,8 +33,7 @@ class Group(GraphObject):
 # create a group with Group class
 def create_group(group_id, attribute_dict=dict()):
     Index = ManualIndexManager(graph) # manage index
-    index_name = "group_index"
-    group_index = Index.get_or_create_index(Node, index_name)
+    group_index = Index.get_or_create_index(Node, group_index_name)
     exist = group_index.get("group", group_id)
 
     if exist:
@@ -53,8 +54,7 @@ def create_group(group_id, attribute_dict=dict()):
 # create a event with Event class
 def create_event(event, attribute_dict=dict()):
     Index = ManualIndexManager(graph) # manage index
-    index_name = "event_index"
-    event_index = Index.get_or_create_index(Node, index_name)
+    event_index = Index.get_or_create_index(Node, event_index_name)
     exist = event_index.get("event", event)
 
     if exist:
@@ -226,10 +226,20 @@ if __name__ == "__main__":
     #get_user_attribute_by_index("1768871224")
     #create_event("电信诈骗", {"event_id":"电信诈骗"})
     #create_tag("法律人士", {"tag":"法律人士"})
-    create_group("律师")
+    create_group("法律人士")
     #get_user_attribute_by_cypher("1768871224")
     #get_rel_by_cypher("2582763431", "retweet")
     #update_rel_by_cypher("3293303045", "3272538233", "retweet", {"times": "10", "age":55})
 
+
+    """
+    event_name = ["yun-chao-che-ji-bi-nan-zi-huo-pei-chang-1482126431", "min-jin-dang-yi-yuan-cheng-yao-qing-da-lai-dui-kang-da-lu-1482126431", "xiang-gang-qian-zong-du-qian-ze-liang-you-er-ren-1482126431", \
+            "huai-yun-nv-jiao-shi-bei-jia-chang-ou-da-1482079340", "lao-tai-ao-ye-mai-cai-wei-er-zi-mai-fang-1482126431", "xi-an-hu-shi-huai-yun-er-tai-bei-po-ci-zhi-1482126431", \
+            "gong-an-bu-gua-pai-du-ban-shi-da-dian-xin-qi-zha-an-jian-1482127322", "ao-men-xuan-ju-fa-xin-zeng-jia-ai-guo-tiao-li-1482126431", \
+            "ma-lai-xi-ya-zhua-huo-dian-xin-qi-zha-an-fan-1482126431", "zhong-guo-zhi-shi-chan-quan-shen-qing-liang-shi-jie-di-yi-1482079340"]
+
+    for each in event_name:
+        create_event(each)
+    """
 
 

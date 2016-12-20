@@ -3,6 +3,7 @@
 import time
 import json
 import redis
+import sys
 from py2neo import Graph
 from py2neo import Node, Relationship
 from py2neo.ogm import GraphObject, Property
@@ -11,17 +12,11 @@ from py2neo.ext.batman import ManualIndexManager
 from py2neo.ext.batman import ManualIndexWriteBatch
 http.socket_timeout = 9999
 
-graph = Graph('http://219.224.134.213:7474/db/data', user="neo4j", password="database")
-#graph = Graph()
-#r = redis.StrictRedis(host="219.224.134.211", port="7381", db=15)
+reload(sys)
+sys.path.append("../../")
+from global_config import location_index_name, node_index_name, domain_list, topic_list
+from global_utils import graph
 
-domain_list = [u'高校', u'境内机构', u'境外机构', u'媒体', u'境外媒体', u'民间组织', u'法律机构及人士', \
-        u'政府机构及人士', u'媒体人士', u'活跃人士', u'草根', u'其他', u'商业人士']
-
-topic_list = [u'文体类_娱乐', u'科技类', u'经济类', u'教育类', u'民生类_环保', \
-        u'民生类_健康', u'军事类', u'政治类_外交', u'文体类_体育', u'民生类_交通', \
-        u'其他类', u'政治类_反腐', u'民生类_就业', u'政治类_暴恐', u'民生类_住房', \
-        u'民生类_法律', u'政治类_地区和平', u'政治类_宗教', u'民生类_社会保障']
 
 class User(GraphObject):
     __primarykey__ = "uid"
@@ -34,6 +29,48 @@ class Domain(GraphObject):
 class Topic(GraphObject):
     __primarykey__ = 'topic'
     topic = Property()
+
+class Location(GraphObject):
+    __primarykey__ = 'location'
+    location = Property()
+
+
+def create_node_location():
+    Index = ManualIndexManager(graph)
+    node_index = Index.get_index(Node, node_index_name)
+    location_index = Index.get_or_create_index(Node, location_index_name)
+
+    f = open("user_portrait.txt", "rb")
+    count = 0
+    update_node = []
+    index_list = []
+    in_set = set()
+    tx = graph.begin()
+    for item in f:
+        user_dict = json.loads(item)
+        each_location = user_dict["location"]
+        exist = location_index.get("location", each_location)
+        if not exist and each_location not in in_set:
+            node = Node("Location", location=each_location)
+            tx.create(node)
+            index_list.append([each_location,node])
+            count += 1
+            in_set.add(each_location)
+            if count % 10 == 0:
+                print count
+                tx.commit()
+                tx = graph.begin()
+                for item in index_list:
+                    location_index.add("location", item[0], item[1])
+                index_list = []
+    tx.commit()
+    if index_list:
+        for item in index_list:
+            location_index.add("location", item[0], item[1])
+    print "all done"
+
+    f.close()
+
 
 def put_in_node():
     Index = ManualIndexManager(graph) # manage index
@@ -158,10 +195,40 @@ def create_rel_from_uid2_topic():
     tx.commit()
 
 
+def create_rel_from_uid2_location():
+    Index = ManualIndexManager(graph) # manage index
+    node_index = Index.get_index(Node, node_index_name)
+    location_index = Index.get_index(Node, location_index_name)
+
+    tx = graph.begin()
+    count = 0
+    ts = time.time()
+    f = open("user_portrait.txt", "rb")
+    for line in f:
+        user_dict = json.loads(line)
+        uid = user_dict["uid"]
+        location = user_dict["location"]
+        if not location:
+            continue
+        user_node = node_index.get("uid", uid)[0]
+        location_node = location_index.get("location", location)[0]
+        rel = Relationship(user_node, "location", location_node)
+        tx.create(rel)
+        count += 1
+        if count % 1000 == 0:
+            tx.commit()
+            print count
+            te = time.time()
+            print te - ts
+            ts = te
+            tx = graph.begin()
+    tx.commit()
 
 if __name__ == "__main__":
     #put_in_node()
-    create_rel_from_uid2_domain()
-    create_rel_from_uid2_topic()
+    #create_rel_from_uid2_domain()
+    #create_rel_from_uid2_topic()
     #put_in_user_portrait()
+    #create_node_location()
+    create_rel_from_uid2_location()
 

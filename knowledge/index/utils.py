@@ -153,6 +153,8 @@ def query_new_relationship():
             tmp_rel = each[0]
             tmp_node = each[1]
             rel_type = tmp_rel.type()
+            if rel_type == "topic":
+                continue
             node_attri = dict(tmp_node)
             primary_key = node_attri[rel_node_mapping[rel_type]] # primary key value
             node_type = rel_node_type_mapping[rel_type] # end node type
@@ -163,3 +165,58 @@ def query_new_relationship():
             break
 
     return results
+
+
+# 地图
+def query_hot_location():
+    # query recent 7 days increase of node
+    current_ts = time.time()
+    former_ts = datetime2ts(ts2datetime(current_ts-week*24*3600))
+    query_node = {
+        "query":{
+            "bool":{
+                "must":[
+                    {"range":{
+                        "create_time":{
+                            "gte": former_ts,
+                            "lte": current_ts
+                        }
+                    }}
+                ]
+            }
+        },
+        "aggs":{
+            "all_location":{
+                "terms":{"field": "location", "size":400}
+            }
+        }
+    }
+
+    results = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, body=query_node)["aggregations"]["all_location"]["buckets"]
+
+    location_dict = dict()
+    for item in results:
+        if item["key"] == "" or item["key"] == "unknown" or item['key'] == u'其他':
+            continue
+        location_dict[item["key"]] = item["doc_count"]
+
+    filter_location = dict()
+    for k,v in location_dict.iteritems():
+        tmp = k.split(' ')
+        if u'北京' in k or u'天津' in k or u'上海' in k or u'重庆' in k or u'香港' in k or u'澳门' in k:
+            try:
+                filter_location[tmp[0]] += v
+            except:
+                filter_location[tmp[0]] = v
+        elif len(tmp) == 1:
+            continue
+        else:
+            try:
+                filter_location[tmp[1]] += v
+            except:
+                filter_location[tmp[1]] = v
+
+    return_results = sorted(filter_location.iteritems(), key=lambda x:x[1], reverse=True)
+
+    return return_results
+

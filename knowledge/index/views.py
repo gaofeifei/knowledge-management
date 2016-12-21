@@ -7,7 +7,7 @@ import os
 import time
 from datetime import date
 from datetime import datetime
-from utils import query_current_week_increase, query_special_event, query_group, query_new_relationship
+from utils import query_current_week_increase, query_special_event, query_group, query_new_relationship, query_hot_location
 
 
 mod = Blueprint('index', __name__, url_prefix='/index')
@@ -58,5 +58,12 @@ def ajax_count_group():
 @mod.route('/new_relationship/')
 def ajax_new_relationship():
     results = query_new_relationship()
+
+    return json.dumps(results)
+
+
+@mod.route('/new_map/')
+def ajax_new_map():
+    results = query_hot_location()
 
     return json.dumps(results)

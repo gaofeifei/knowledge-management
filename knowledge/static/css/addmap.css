@@ -121,19 +121,19 @@ a,a:link,a:hover,a:visited,a:active {
     padding: 5px;
     box-shadow: 3px 3px 3px #c9c2c7;
 }
-#container .relevant .relevant2 #complex,#container .relevanttwo .relevant2 #complex {
+#container .relevant .relevant2 #complex,#container .relevanttwo .relevant2 #complex2 {
     width:590px;
     height: 471px;
 }
-#container .relevant .relevant2 #complex #complex1,#container .relevant .relevant2 #complex #complex2,
-#container .relevant .relevant2 #complex #complex3,#container .relevant .relevant2 #complex #complex4,
-#container .relevant .relevant2 #complex #complex5,#container .relevant .relevant2 #complex #complex6,
-#container .relevanttwo .relevant2 #complex #complex1,#container .relevanttwo .relevant2 #complex #complex2,
-#container .relevanttwo .relevant2 #complex #complex3,#container .relevanttwo .relevant2 #complex #complex4,
-#container .relevanttwo .relevant2 #complex #complex5,#container .relevanttwo .relevant2 #complex #complex6{
-    width: 260px;
-    height: 160px;
-    background-color: #00cc66;
+/*#container .relevant .relevant2 #complex #complex1,#container .relevant .relevant2 #complex #complex2,*/
+/*#container .relevant .relevant2 #complex #complex3,#container .relevant .relevant2 #complex #complex4,*/
+/*#container .relevant .relevant2 #complex #complex5,#container .relevant .relevant2 #complex #complex6,*/
+/*#container .relevanttwo .relevant2 #complex #complex1,#container .relevanttwo .relevant2 #complex #complex2,*/
+/*#container .relevanttwo .relevant2 #complex #complex3,#container .relevanttwo .relevant2 #complex #complex4,*/
+/*#container .relevanttwo .relevant2 #complex #complex5,#container .relevanttwo .relevant2 #complex #complex6{*/
+#container .relevant .relevant2 #complex #complex1,#container .relevanttwo .relevant2 #complex2 #complex22 {
+    width: 590px;
+    height: 471px;
     float: left;
     margin: 15px 10px 0 15px;
 }
@@ -147,6 +147,7 @@ a,a:link,a:hover,a:visited,a:active {
 #container .relevant .relevant3 .re3lf, #container .relevanttwo .relevant3 .re3lf {
     width: 510px;
     float: left;
+    margin-left: 20px;
 }
 /*#container .relevant .relevant3 .re3lf .route,#container .relevant .relevant3 .re3rg .route {*/
     /*padding: 15px;*/

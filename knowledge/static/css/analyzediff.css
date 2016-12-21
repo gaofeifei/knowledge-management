@@ -29,45 +29,44 @@ a,a:link,a:hover,a:visited,a:active {
     padding: 5px 10px;
     border: 2px solid #0099FF;
 }
-/*#container .present .prethr .prethrmd form {*/
-    /*display: inline-block;*/
-    /*margin-right: 30px;*/
-/*}*/
-/*#container .present .prethr .prethrmd form #gup {*/
-    /*padding: 5px 5px 5px 10px;*/
-    /*border: 1px solid #c7c7c7;*/
-    /*font-size: 14px;*/
-    /*margin-left: 15px;*/
-    /*width: 230px;*/
-/*}*/
-#container .present .preone,#container .present .pretwo {
-/*,#container .present .prethr,*/
-/*#container .present .prethr .prethrmd .ptm1,#container .present .prethr .prethrmd #ptm2,*/
-/*#container .present .prethr .prethrmd .ptm3 {*/
+#container .present .prethr .prethrmd form {
+    display: inline-block;
+    margin-right: 30px;
+}
+#container .present .prethr .prethrmd form #gup {
+    padding: 5px 5px 5px 10px;
+    border: 1px solid #c7c7c7;
+    font-size: 14px;
+    margin-left: 15px;
+    width: 230px;
+}
+#container .present .preone,#container .present .pretwo,#container .present .prethr,
+#container .present .prethr .prethrmd .ptm1,#container .present .prethr .prethrmd #ptm2,
+#container .present .prethr .prethrmd .ptm3 {
     display: inline-block;
 }
-/*#container .present span,#container .present .prethr label,#container .present .prethr .prethrmd .ptm1,*/
-/*#container .present .prethr .prethrmd .ptm3 {*/
-    /*color: #5e5e5e;*/
-    /*font-weight: 700;*/
-    /*font-size: 14px;*/
-/*}*/
-/*#container .present .prethr .prethrmd .ptm3 {*/
-    /*width: 70px;*/
-    /*height: 26px;*/
-    /*line-height: 26px;*/
-    /*text-align: center;*/
-    /*color: white;*/
-    /*background-color: #0099FF;*/
-    /*border-radius: 10px;*/
-    /*margin-left: 50px;*/
-/*}*/
-/*#container .present .prethr .prethrmd .ptm3:hover {*/
-    /*background-color: #00cc66;*/
-/*}*/
+#container .present span,#container .present .prethr label,#container .present .prethr .prethrmd .ptm1,
+#container .present .prethr .prethrmd .ptm3 {
+    color: #5e5e5e;
+    font-weight: 700;
+    font-size: 14px;
+}
+#container .present .prethr .prethrmd .ptm3 {
+    width: 70px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    color: white;
+    background-color: #0099FF;
+    border-radius: 10px;
+    margin-left: 50px;
+}
+#container .present .prethr .prethrmd .ptm3:hover {
+    background-color: #00cc66;
+}
 #container #middle {
     width: 1200px;
-    height: 2700px;
+    height: 2400px;
     margin-top: 30px;
     border: 2px solid #0099FF;
     padding: 20px;
@@ -185,12 +184,12 @@ a,a:link,a:hover,a:visited,a:active {
     border-radius: 5px;
     font-size: 8px;
 }
-/*#container #middle .thingtrast .lawyer2 .play .play4 .shuoming,*/
-/*#container #middle .thingtrast .safeguard2 .play .play4 .shuoming {*/
-    /*margin-top: 10px;*/
-    /*font-size: 12px;*/
-    /*color: rgba(39, 39, 39, 0.69);*/
-/*}*/
+#container #middle .thingtrast .lawyer2 .play .play4 .shuoming,
+#container #middle .thingtrast .safeguard2 .play .play4 .shuoming {
+    margin-top: 10px;
+    font-size: 12px;
+    color: rgba(39, 39, 39, 0.69);
+}
 /*#container #middle .thingtrast .lawyer2 .play .play5,*/
 /*#container #middle .thingtrast .safeguard2 .play .play5 {*/
     /*position: relative;*/
@@ -214,52 +213,52 @@ a,a:link,a:hover,a:visited,a:active {
     /*text-align: center;*/
     /*border-radius: 5px;*/
 /*}*/
-#container #middle .textrast .textrast1 p {
-    /*width: 60px;*/
-    text-align: center;
-    padding: 5px 10px;
-    background-color: #0099ff;
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-    border-radius: 5px;
-    border: 1px solid #337ab7;
-    display: inline-block;
-    cursor: pointer;
-}
-#container #middle .textrast .textrast1 .tone {
-    margin: 0 20px 0 0px;
-    background-color: #f60;
-}
-#container #middle .textrast .textrast1 .ttwo {
-    background-color: #3c6;
-}
-#container #middle .textrast .tweets .txtleft,#container #middle .textrast .tweets .txtright,
-#container #middle .textrast .tweets .txtleft2,#container #middle .textrast .tweets .txtright2 {
+/*#container #middle .textrast .textrast1 p {*/
+    /*!*width: 60px;*!*/
+    /*text-align: center;*/
+    /*padding: 5px 10px;*/
+    /*background-color: #0099ff;*/
+    /*color: white;*/
+    /*font-size: 14px;*/
+    /*font-weight: 700;*/
+    /*border-radius: 5px;*/
+    /*border: 1px solid #337ab7;*/
+    /*display: inline-block;*/
+    /*cursor: pointer;*/
+/*}*/
+/*#container #middle .textrast .textrast1 .tone {*/
+    /*margin: 0 20px 0 0px;*/
+    /*background-color: #f60;*/
+/*}*/
+/*#container #middle .textrast .textrast1 .ttwo {*/
+    /*background-color: #3c6;*/
+/*}*/
+#container #middle .textrast .tweets .txtleft,#container #middle .textrast .tweets .txtright{
+/*#container #middle .textrast .tweets .txtleft2,#container #middle .textrast .tweets .txtright2 {*/
     /*display: inline-block;*/
     float: left;
     width: 550px;
-    height: 820px;
+    height: 500px;
     border: 1px solid #9d9d9d;
     border-radius: 10px;
     padding:20px;
 }
-#container #middle .textrast .tweets .txtleft .tlt,#container #middle .textrast .tweets .txtright .tlt,
-#container #middle .textrast .tweets .txtleft2 .tlt,#container #middle .textrast .tweets .txtright2 .tlt{
-    padding: 10px;
-    border-radius: 10px;
-}
-#container #middle .textrast .tweets .txtleft .master,#container #middle .textrast .tweets .txtright .master,
-#container #middle .textrast .tweets .txtleft2 .master,#container #middle .textrast .tweets .txtright2 .master{
-    color: #4b4b4b;
-    font-weight: 700;
-    margin: 10px 0 20px 0;
-}
-#container #middle .textrast .tweets .txtleft .time,#container #middle .textrast .tweets .txtright .time,
-#container #middle .textrast .tweets .txtleft2 .time,#container #middle .textrast .tweets .txtright2 .time{
-    color: black;
-    font-size: 10px;
-}
+/*#container #middle .textrast .tweets .txtleft .tlt,#container #middle .textrast .tweets .txtright .tlt,*/
+/*#container #middle .textrast .tweets .txtleft2 .tlt,#container #middle .textrast .tweets .txtright2 .tlt{*/
+    /*padding: 10px;*/
+    /*border-radius: 10px;*/
+/*}*/
+/*#container #middle .textrast .tweets .txtleft .master,#container #middle .textrast .tweets .txtright .master,*/
+/*#container #middle .textrast .tweets .txtleft2 .master,#container #middle .textrast .tweets .txtright2 .master{*/
+    /*color: #4b4b4b;*/
+    /*font-weight: 700;*/
+    /*margin: 10px 0 20px 0;*/
+/*}*/
+/*#container #middle .textrast .tweets .txtleft .time,#container #middle .textrast .tweets .txtright .time,*/
+/*#container #middle .textrast .tweets .txtleft2 .time,#container #middle .textrast .tweets .txtright2 .time{*/
+    /*color: black;*/
+    /*font-size: 10px;*/
+/*}*/
 .add22 {
     width: 70px;
     height: 26px;
@@ -274,10 +273,10 @@ a,a:link,a:hover,a:visited,a:active {
 .add22:hover {
     background-color: #4cae4c;
 }
-.xinzeng .xz1,.xinzeng input,.xinzeng #list1 {
+.xinjian .xz1,.xinjian input,.xinjian #list1 {
     display: inline-block;
 }
-.xinzeng input,.xinzeng #list1 {
+.xinjian input,.xinjian #list1 {
     width: 130px;
     height: 30px;
     font-size: 12px;
@@ -286,11 +285,11 @@ a,a:link,a:hover,a:visited,a:active {
     padding: 5px 5px 5px 10px;
     border: 1px solid #5e5e5e;
 }
-.xinzeng .shij {
+.xinjian .shij {
     margin-left: 40px;
     margin-top: 10px;
 }
-.xinzeng .shij a {
+.xinjian .shij a {
     display: inline-block;
     margin-left: 30px;
     background-color: #0099FF;

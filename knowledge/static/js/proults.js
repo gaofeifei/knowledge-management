@@ -18,12 +18,12 @@
             var myChart = ec.init(document.getElementById('eventimg'));
 
             var option = {
-                title : {
-                    text: '人物关系：乔布斯',
-                    subtext: '数据来自人立方',
-                    x:'right',
-                    y:'bottom'
-                },
+                // title : {
+                //     text: '人物关系：乔布斯',
+                //     subtext: '数据来自人立方',
+                //     x:'right',
+                //     y:'bottom'
+                // },
                 tooltip : {
                     trigger: 'item',
                     formatter: '{a} : {b}'
@@ -145,12 +145,12 @@
             var myChart = ec.init(document.getElementById('placeimg'));
 
             var option = {
-                title : {
-                    text: '全国主要城市空气质量（pm2.5）',
-                    subtext: 'data from PM25.in',
-                    sublink: 'http://www.pm25.in',
-                    x:'center'
-                },
+                // title : {
+                //     text: '全国主要城市空气质量（pm2.5）',
+                //     subtext: 'data from PM25.in',
+                //     sublink: 'http://www.pm25.in',
+                //     x:'center'
+                // },
                 tooltip : {
                     trigger: 'item'
                 },

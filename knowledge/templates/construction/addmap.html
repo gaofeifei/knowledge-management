@@ -131,7 +131,7 @@
         <div class="relevant" style="margin-left: -20px;display:none;">
             <div class="relevant1">相关节点
                 <p style='float:right;font-size:12px;margin-top:3px;'>
-                    <label class="radio-inline">
+                   <!--  <label class="radio-inline">
                         <input type="radio" name="idiefo" value="option1"> 1跳
                     </label>
                     <label class="radio-inline">
@@ -139,18 +139,14 @@
                     </label>
                     <label class="radio-inline">    
                         <input type="radio" name="idiefo" value="option2" checked> 全部
-                    </label>
+                    </label> -->
                     <button class="add22 add33" type="button" data-toggle="modal">添加</button>
                 </p>    
             </div>
             <div class="relevant2">
                 <div id="complex" style="float: left">
                     <div id="complex1"></div>
-                    <div id="complex2"></div>
-                    <div id="complex3"></div>
-                    <div id="complex4"></div>
-                    <div id="complex5"></div>
-                    <div id="complex6"></div>
+                    
                 </div>
                 <div class="relevant3" style="float: left;">
                     <div class="re3lf">
@@ -449,7 +445,7 @@
         <div class="relevanttwo" style="margin-left: -20px;display:none;">
             <div class="relevant1">相关节点
                 <p style='float:right;font-size:12px;margin-top:3px;'>
-                    <label class="radio-inline">
+                    <!-- <label class="radio-inline">
                         <input type="radio" name="idieerfo" value="option1"> 1跳
                     </label>
                     <label class="radio-inline">
@@ -457,18 +453,14 @@
                     </label>
                     <label class="radio-inline">    
                         <input type="radio" name="idieerfo" value="option2" checked> 全部
-                    </label>
+                    </label> -->
                     <button class="add22" type="button" data-toggle="modal">添加</button>
                 </p>    
             </div>
             <div class="relevant2">
-                <div id="complex" style="float: left">
-                    <div id="complex1"></div>
-                    <div id="complex2"></div>
-                    <div id="complex3"></div>
-                    <div id="complex4"></div>
-                    <div id="complex5"></div>
-                    <div id="complex6"></div>
+                <div id="complex2" style="float: left">
+                    <div id="complex22"></div>
+                    
                 </div>
                 <div class="relevant3" style="float: left;">
                     <div class="re3lf">
@@ -677,11 +669,14 @@
                 <div class="manual23">
                     <span>选择关系</span>
                     <select name="" id="list1">
-                        <option value="">关系1</option>
-                        <option value="">关系2</option>
+                        <option value="人物">人物</option>
+                        <option value="事件">事件</option>
                     </select>
                 </div>
             </div>
+            <div class="lat" style='float:right;margin:-26px 70px 0 0;'>
+                    <b class="icon icon-plus jia"></b>
+                </div>  
         </div>
         <div class="uploading">
             <div class="checkbox upload1">
@@ -813,6 +808,7 @@
 {% endblock %}
 {% block my_js %} 
     <script src="/static/js/addmap.js"></script>
+    <script src="/static/js/addmap2.js"></script>
     <script>
     $.each($('.menuList'),function(index,item){
         $(item).css({display:'none'});
@@ -839,7 +835,22 @@
             $(this).parent().fadeOut(300);
         });
     });
-     $('.relevant .add22').on('click',function () {
+    $.each($('.jia'),function(index,item){
+        $(item).on('click',function(){
+            var ming=$(this).parent().prev().html();
+            console.log(ming);
+            var str ="<div class='manual2' style='margin-top:10px;'>"+ming+"</div>"
+            $(this).parent().prev().after(str);
+        });
+    });
+    // $.each($('.jia'),function(index,item){
+    //     $(item).on('click',function(){
+    //         var ming=$(this).parent().parent().html();
+    //         var str ="<div class='manual2' style='margin-top:10px;'>"+ming+"</div>";
+    //         $('.manual2').after(str);
+    //     });
+    // });
+    $('.relevant .add22').on('click',function () {
         $('#join6').modal("show");
     });
     $('.relevanttwo .add22').on('click',function () {
@@ -881,6 +892,7 @@
             $(".crmrg").css({display:'none'});
             $(".task").css({display:'none'});
             $(".relevant").css({display:'none'});
+            $(".tasktwo").css({display:'block'});
             $(".tasktwo .task1").css({display:'block'});
         });
         $(".lfone").on('click',function () {
@@ -926,12 +938,12 @@
         });
         $.each( $(".relevant .xingming"),function(index,item){
             $(item).on('click',function () {
-                window.location.href='/index/person/';
+                window.open('/index/person/');
             });
         })
         $.each( $(".relevanttwo .xingming"),function(index,item){
             $(item).on('click',function () {
-                window.location.href='/index/search_result/';
+                window.open('/index/search_result/');
             });
         })
         $('.task .task1').on('click',function () {

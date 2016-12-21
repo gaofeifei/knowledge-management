@@ -40,10 +40,11 @@ a,a:link,a:hover,a:visited,a:active {
 }
 #container .contop .cp2 .more,#container .contop .cp3 .mores {
     border: 1px solid #aeaeae;
-    width: 250px;
+    width: 200px;
     height: 25px;
-    padding: 3px 3px 3px 5px;
-    margin-left: 20px;
+    font-size: 8px;
+    padding: 3px;
+    margin:0 5px;
 }
 #container .contop .cp2 .checkbox,#container .contop .cp3 .checkbox {
     display: inline-block;
@@ -76,38 +77,40 @@ a,a:link,a:hover,a:visited,a:active {
     background-color: #09F;
 }
 #container .result .re2 #complex {
-    width:600px;
-    height: 471px;
-    border: 2px solid #09F;
-    box-shadow: 3px 3px 3px #c9c2c7;
+    width:1200px;
+    height: 150px;
+    /*border: 2px solid #09F;*/
+    /*box-shadow: 3px 3px 3px #c9c2c7;*/
 }
 #container .result .re3 {
+    /*padding: 20px;*/
     /*width:500px;*/
     /*height: 400px;*/
-    margin-left: 20px;
+    /*margin-left: 20px;*/
     /*border: 2px solid #09F;*/
     /*box-shadow: 3px 3px 3px #c9c2c7;*/
 }
 #container .result .re3 .re3lf,#container .result .re3 .re3rg {
-    width: 240px;
-    float: left;
+    /*width: 240px;*/
+    /*float: left;*/
 }
 #container .result .re3 .re3lf .route,#container .result .re3 .re3rg .route {
     padding: 15px;
-    border: 2px solid #0099FF;
+    /*border: 2px solid #0099FF;*/
 }
 #container .result .re3 .re3lf .route span,#container .result .re3 .re3rg .route span {
-    display: block;
+    /*display: block;*/
     font-size: 12px;
     font-weight: bold;
     color: #797979;
-    margin-top: 5px;
+    /*margin-top: 5px;*/
 }
 #container .result .re3 .re3lf .play,#container .result .re3 .re3rg .play{
+    display: inline-block;
     width: 240px;
     padding: 5px;
     height: 160px;
-    margin: 15px auto 0;
+    margin: 15px 15px 0 0;
     border:2px solid #0099FF;
     box-shadow: 2px 2px 2px #878787;
     overflow: hidden;
@@ -115,9 +118,9 @@ a,a:link,a:hover,a:visited,a:active {
     transition: all 0.7s linear;
 }
 #container .result .re3 .re3rg {
-    width: 265px;
+    width: 1200px;
     /*border:2px solid #4cae4c;*/
-    /*padding: 10px;*/
+    padding-left: 20px;
 }
 /*#container .result .re3 .re3rg .play {*/
     /*height: 138px;*/
@@ -204,7 +207,7 @@ a,a:link,a:hover,a:visited,a:active {
     background-color: #0099FF;
     border-radius: 10px;
     display: inline-block;
-    margin-left: 30px;
+    /*margin-left: 30px;*/
 }
 .add22:hover {
     background-color: #4cae4c;

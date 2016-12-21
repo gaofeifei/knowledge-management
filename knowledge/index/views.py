@@ -7,7 +7,7 @@ import os
 import time
 from datetime import date
 from datetime import datetime
-from utils import query_current_week_increase, query_special_event, query_group
+from utils import query_current_week_increase, query_special_event, query_group, query_new_relationship
 
 
 mod = Blueprint('index', __name__, url_prefix='/index')
@@ -33,7 +33,7 @@ def show_event():
     return render_template('index/serp.html')
 
 
-# 近7天新增人数和事件数
+# 近7天新增人数和事件数，总数
 @mod.route('/current_week_increase/')
 def ajax_current_week_increase():
     result = query_current_week_increase()
@@ -54,3 +54,9 @@ def ajax_count_group():
 
     return json.dumps(results)
 
+
+@mod.route('/new_relationship/')
+def ajax_new_relationship():
+    results = query_new_relationship()
+
+    return json.dumps(results)

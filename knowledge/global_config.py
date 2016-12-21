@@ -47,7 +47,6 @@ organise = "organise" #组织
 discuss= "discuss" #讨论
 first = "first" #首发
 other_rel = "other_relationship" #其他关系
-group_rel = "group"
 
 
 # Relationship: Event-Event
@@ -66,4 +65,5 @@ leader_member = "leader_member" #上下级
 user_tag = "user_tag"
 
 
+group_rel = "group"
 

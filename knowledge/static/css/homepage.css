@@ -60,6 +60,7 @@ a,a:link,a:hover,a:visited,a:active {
     left: 20px;
 }
 #container .con_lf .clf_t .peo .new,#container .con_lf .clf_t .things .new {
+    display: inline;
     font-size: 16px;
     top: 20px;
     left: 25px;

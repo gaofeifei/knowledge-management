@@ -1,5 +1,5 @@
 {% extends "public_nav.html" %}
-{% block title %}<title>关系探索</title>{% endblock %}
+{% block title %}<title>节点探索</title>{% endblock %}
 {% block my_css %}
     <link rel="stylesheet" href="/static/css/relation.css">
     <style type="text/css">
@@ -12,299 +12,284 @@
 {% block main %}
 <div id="container">
     <div class="contop">
-        <span class="cp1">关系探索条件</span>
+        <span class="cp1">节点探索条件</span>
         <div class="cp2">
-            <div class="checkbox">
-                <label>
-                    <input class="per" type="checkbox"/> 节点1
-                </label>
-            </div>
-            <input class="more" type="text" placeholder="多个人物请用空格分隔..."/>
+            节点1
+            <input class="more" type="text" placeholder="请输入人物昵称、ID或者事件关键词..."/>
+            节点类型
+            <select name="" style='width:120px;padding:3px;border:1px solid #aeaeae;font-size:12px;'>
+                <option value="姓名">人物</option>
+                <option value="事件">事件</option>
+            </select> 
         </div>
         <div class="cp3">
-            <div class="checkbox">
-                <label>
-                    <input class="shi" type="checkbox"/> 节点2
-                </label>
-            </div>
-            <input class="mores" type="text" placeholder="多个事件请用空格分隔..."/>
+            节点2
+            <input class="mores" type="text" placeholder="请输入人物昵称、ID或者事件关键词..."/>
+            节点类型
+            <select name="" style='width:120px;padding:3px;border:1px solid #aeaeae;font-size:12px;'>
+                <option value="姓名">人物</option>
+                <option value="事件">事件</option>
+            </select> 
         </div>
-        <button class="cp4">关系探索</button>
+        <button class="cp4">节点探索</button>
     </div>
-    <div class="result">
-        <p class="re1">关系探索结果</p>
-        <div class="re2" style="float: left">
-            <div id="complex">
+    <div class="result" style='display:none;'>
+        <p class="re1">节点探索结果</p>
+        <div style="width:1200px;padding-bottom:20px;border: 2px solid #09F;box-shadow: 3px 3px 3px #c9c2c7;">
+            <div class="re2">
+                        <div id="complex">
 
-            </div>
-        </div>
-        <div class="re3" style="float: left;">
-            <div class="re3lf">
-                <p class="route">
-                    <span class="ru1">两者之间的最短路径为：</span>
-                    <span class="path">潘强 - 朱明勇 - 邓海峰 - 郑在索- 梅春来</span>
-                    <span class="dote">两者之间共三个节点</span>
-                </p>
-                <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div>
-                </div>
-                <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div>
-                </div>
-            </div>
-            <div class="re3rg" style="margin-left: 20px">
-                <p class="xuan">
-                    <label class="radio-inline">
-                        <input type="radio" name="idiefo" value="option1"> 1跳
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="idiefo" value="option2"> 2跳
-                    </label>
-                    <label class="radio-inline">    
-                        <input type="radio" name="idiefo" value="option2" checked> 全部
-                    </label>
-                    <button class="add22" type="button" data-toggle="modal">添加</button>
-                </p>    
-                <img src='/static/image/top.png' class="top" style='display:block;margin:10px auto 5px;'/>
-                <div class="midd" style='height:360px;overflow:hidden;'>
-                    <div class="midd2" style="height:1360px;transition: all 0.8s linear;">
-                        <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div>
-                        </div>
-                        <div class="play">
-                                                        <div class="play1">
-                                                            <div class="p11">
-                                                                <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                        --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                        --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                        --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                            </div>
-                                                            <div class="p22">
-                                                                <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                                <span class="influence">3083</span>
-                                                                <img src="/static/image/huoyuedu.png" alt="">
-                                                                <span class="huoyuedu">254</span>
-                                                                <img src="/static/image/mingan.png" alt="">
-                                                                <span class="mingan">80</span>
-                                                            </div>
-                                                        </div>
-                                                        <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                        <div class="play23" style="margin-left: 15px;">
-                                                            <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                            <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                        </div>
-                                                        <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                            <a class="bus1">业务标签：</a>
-                                                            <a class="bus2">律师</a>
-                                                            <a class="bus2">法律人士</a>
-                                                        </div>
-                                                        <!--<div class="play4">-->
-                                                        <!--<p class="shuoming">-->
-                                                        <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                        <!--</p>-->
-                                                        <!--</div>-->
-                                                        <div class="play5" type="button" data-toggle="modal">
-                                                            <a>加入群体探索</a>
-                                                        </div>
-                        </div>
-                        <div class="play">
-                                                        <div class="play1">
-                                                            <div class="p11">
-                                                                <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                        --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                        --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                        --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                            </div>
-                                                            <div class="p22">
-                                                                <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                                <span class="influence">3083</span>
-                                                                <img src="/static/image/huoyuedu.png" alt="">
-                                                                <span class="huoyuedu">254</span>
-                                                                <img src="/static/image/mingan.png" alt="">
-                                                                <span class="mingan">80</span>
-                                                            </div>
-                                                        </div>
-                                                        <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                        <div class="play23" style="margin-left: 15px;">
-                                                            <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                            <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                        </div>
-                                                        <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                            <a class="bus1">业务标签：</a>
-                                                            <a class="bus2">律师</a>
-                                                            <a class="bus2">法律人士</a>
-                                                        </div>
-                                                        <!--<div class="play4">-->
-                                                        <!--<p class="shuoming">-->
-                                                        <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                        <!--</p>-->
-                                                        <!--</div>-->
-                                                        <div class="play5" type="button" data-toggle="modal">
-                                                            <a>加入群体探索</a>
-                                                        </div>
-                        </div>
-                        <div class="play">
-                                                        <div class="play1">
-                                                            <div class="p11">
-                                                                <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                        --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                        --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                        --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                            </div>
-                                                            <div class="p22">
-                                                                <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                                <span class="influence">3083</span>
-                                                                <img src="/static/image/huoyuedu.png" alt="">
-                                                                <span class="huoyuedu">254</span>
-                                                                <img src="/static/image/mingan.png" alt="">
-                                                                <span class="mingan">80</span>
-                                                            </div>
-                                                        </div>
-                                                        <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                        <div class="play23" style="margin-left: 15px;">
-                                                            <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                            <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                        </div>
-                                                        <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                            <a class="bus1">业务标签：</a>
-                                                            <a class="bus2">律师</a>
-                                                            <a class="bus2">法律人士</a>
-                                                        </div>
-                                                        <!--<div class="play4">-->
-                                                        <!--<p class="shuoming">-->
-                                                        <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                        <!--</p>-->
-                                                        <!--</div>-->
-                                                        <div class="play5" type="button" data-toggle="modal">
-                                                            <a>加入群体探索</a>
-                                                        </div>
                         </div>
                     </div>
-                </div>  
-            
-                <img src="/static/image/bottom.png" class='bottom' style='display:block;margin:5px auto 0;'/>
-            </div>
+                    <div class="re3">
+                        <div class="re3lf" style="padding-left:75px;">
+                            <p class="route">
+                                <span class="ru1">两者之间的最短路径为：</span>
+                                <span class="path">潘强 - 朱明勇 - 邓海峰 - 郑在索- 梅春来</span>
+                                <span class="dote">两者之间共三个节点</span>
+                            </p>
+                            <div class="play">
+                                                            <div class="play1">
+                                                                <div class="p11">
+                                                                    <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
+                                                            --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
+                                                            --><span class="difang" style="font-size: 8px">6720</span><!--
+                                                            --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
+                                                                </div>
+                                                                <div class="p22">
+                                                                    <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
+                                                                    <span class="influence">3083</span>
+                                                                    <img src="/static/image/huoyuedu.png" alt="">
+                                                                    <span class="huoyuedu">254</span>
+                                                                    <img src="/static/image/mingan.png" alt="">
+                                                                    <span class="mingan">80</span>
+                                                                </div>
+                                                            </div>
+                                                            <img class="play2" src="/static/image/pangzi.png" alt="">
+                                                            <div class="play23" style="margin-left: 15px;">
+                                                                <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
+                                                                <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
+                                                            </div>
+                                                            <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
+                                                                <a class="bus1">业务标签：</a>
+                                                                <a class="bus2">律师</a>
+                                                                <a class="bus2">法律人士</a>
+                                                            </div>
+                                                            <!--<div class="play4">-->
+                                                            <!--<p class="shuoming">-->
+                                                            <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                                            <!--</p>-->
+                                                            <!--</div>-->
+                                                            <div class="play5" type="button" data-toggle="modal">
+                                                                <a>加入群体探索</a>
+                                                            </div>
+                            </div>
+                            <div class="play">
+                                                            <div class="play1">
+                                                                <div class="p11">
+                                                                    <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
+                                                            --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
+                                                            --><span class="difang" style="font-size: 8px">6720</span><!--
+                                                            --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
+                                                                </div>
+                                                                <div class="p22">
+                                                                    <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
+                                                                    <span class="influence">3083</span>
+                                                                    <img src="/static/image/huoyuedu.png" alt="">
+                                                                    <span class="huoyuedu">254</span>
+                                                                    <img src="/static/image/mingan.png" alt="">
+                                                                    <span class="mingan">80</span>
+                                                                </div>
+                                                            </div>
+                                                            <img class="play2" src="/static/image/pangzi.png" alt="">
+                                                            <div class="play23" style="margin-left: 15px;">
+                                                                <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
+                                                                <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
+                                                            </div>
+                                                            <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
+                                                                <a class="bus1">业务标签：</a>
+                                                                <a class="bus2">律师</a>
+                                                                <a class="bus2">法律人士</a>
+                                                            </div>
+                                                            <!--<div class="play4">-->
+                                                            <!--<p class="shuoming">-->
+                                                            <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                                            <!--</p>-->
+                                                            <!--</div>-->
+                                                            <div class="play5" type="button" data-toggle="modal">
+                                                                <a>加入群体探索</a>
+                                                            </div>
+                            </div>
+                        </div>
+                        <div class="re3rg">
+                            <p class="xuan" style="padding-right:110px;text-align:right;">
+                                <!-- <label class="radio-inline">
+                                    <input type="radio" name="idiefo" value="option1"> 1跳
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="idiefo" value="option2"> 2跳
+                                </label>
+                                <label class="radio-inline">    
+                                    <input type="radio" name="idiefo" value="option2" checked> 全部
+                                </label> -->
+                                <button class="add22">添加</button>
+                            </p>    
+                            <img src='/static/image/left.png' class="left" style='display:inline-block;margin: -160px 20px 0 0;'/>
+                            <div class="midd" style='width:1020px;overflow:hidden;display:inline-block;'>
+                                <div class="midd2" style="width:2040px;transition: all 0.8s linear;">
+                                    <div class="play">
+                                                            <div class="play1">
+                                                                <div class="p11">
+                                                                    <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
+                                                            --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
+                                                            --><span class="difang" style="font-size: 8px">6720</span><!--
+                                                            --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
+                                                                </div>
+                                                                <div class="p22">
+                                                                    <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
+                                                                    <span class="influence">3083</span>
+                                                                    <img src="/static/image/huoyuedu.png" alt="">
+                                                                    <span class="huoyuedu">254</span>
+                                                                    <img src="/static/image/mingan.png" alt="">
+                                                                    <span class="mingan">80</span>
+                                                                </div>
+                                                            </div>
+                                                            <img class="play2" src="/static/image/pangzi.png" alt="">
+                                                            <div class="play23" style="margin-left: 15px;">
+                                                                <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
+                                                                <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
+                                                            </div>
+                                                            <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
+                                                                <a class="bus1">业务标签：</a>
+                                                                <a class="bus2">律师</a>
+                                                                <a class="bus2">法律人士</a>
+                                                            </div>
+                                                            <!--<div class="play4">-->
+                                                            <!--<p class="shuoming">-->
+                                                            <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                                            <!--</p>-->
+                                                            <!--</div>-->
+                                                            <div class="play5" type="button" data-toggle="modal">
+                                                                <a>加入群体探索</a>
+                                                            </div>
+                                    </div>
+                                    <div class="play">
+                                                                    <div class="play1">
+                                                                        <div class="p11">
+                                                                            <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
+                                                                    --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
+                                                                    --><span class="difang" style="font-size: 8px">6720</span><!--
+                                                                    --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
+                                                                        </div>
+                                                                        <div class="p22">
+                                                                            <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
+                                                                            <span class="influence">3083</span>
+                                                                            <img src="/static/image/huoyuedu.png" alt="">
+                                                                            <span class="huoyuedu">254</span>
+                                                                            <img src="/static/image/mingan.png" alt="">
+                                                                            <span class="mingan">80</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <img class="play2" src="/static/image/pangzi.png" alt="">
+                                                                    <div class="play23" style="margin-left: 15px;">
+                                                                        <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
+                                                                        <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
+                                                                    </div>
+                                                                    <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
+                                                                        <a class="bus1">业务标签：</a>
+                                                                        <a class="bus2">律师</a>
+                                                                        <a class="bus2">法律人士</a>
+                                                                    </div>
+                                                                    <!--<div class="play4">-->
+                                                                    <!--<p class="shuoming">-->
+                                                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                                                    <!--</p>-->
+                                                                    <!--</div>-->
+                                                                    <div class="play5" type="button" data-toggle="modal">
+                                                                        <a>加入群体探索</a>
+                                                                    </div>
+                                    </div>
+                                    <div class="play">
+                                                                    <div class="play1">
+                                                                        <div class="p11">
+                                                                            <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
+                                                                    --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
+                                                                    --><span class="difang" style="font-size: 8px">6720</span><!--
+                                                                    --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
+                                                                        </div>
+                                                                        <div class="p22">
+                                                                            <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
+                                                                            <span class="influence">3083</span>
+                                                                            <img src="/static/image/huoyuedu.png" alt="">
+                                                                            <span class="huoyuedu">254</span>
+                                                                            <img src="/static/image/mingan.png" alt="">
+                                                                            <span class="mingan">80</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <img class="play2" src="/static/image/pangzi.png" alt="">
+                                                                    <div class="play23" style="margin-left: 15px;">
+                                                                        <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
+                                                                        <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
+                                                                    </div>
+                                                                    <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
+                                                                        <a class="bus1">业务标签：</a>
+                                                                        <a class="bus2">律师</a>
+                                                                        <a class="bus2">法律人士</a>
+                                                                    </div>
+                                                                    <!--<div class="play4">-->
+                                                                    <!--<p class="shuoming">-->
+                                                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                                                    <!--</p>-->
+                                                                    <!--</div>-->
+                                                                    <div class="play5" type="button" data-toggle="modal">
+                                                                        <a>加入群体探索</a>
+                                                                    </div>
+                                    </div>
+                                    <div class="play">
+                                                                    <div class="play1">
+                                                                        <div class="p11">
+                                                                            <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
+                                                                    --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
+                                                                    --><span class="difang" style="font-size: 8px">6720</span><!--
+                                                                    --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
+                                                                        </div>
+                                                                        <div class="p22">
+                                                                            <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
+                                                                            <span class="influence">3083</span>
+                                                                            <img src="/static/image/huoyuedu.png" alt="">
+                                                                            <span class="huoyuedu">254</span>
+                                                                            <img src="/static/image/mingan.png" alt="">
+                                                                            <span class="mingan">80</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <img class="play2" src="/static/image/pangzi.png" alt="">
+                                                                    <div class="play23" style="margin-left: 15px;">
+                                                                        <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
+                                                                        <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
+                                                                    </div>
+                                                                    <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
+                                                                        <a class="bus1">业务标签：</a>
+                                                                        <a class="bus2">律师</a>
+                                                                        <a class="bus2">法律人士</a>
+                                                                    </div>
+                                                                    <!--<div class="play4">-->
+                                                                    <!--<p class="shuoming">-->
+                                                                    <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
+                                                                    <!--</p>-->
+                                                                    <!--</div>-->
+                                                                    <div class="play5" type="button" data-toggle="modal">
+                                                                        <a>加入群体探索</a>
+                                                                    </div>
+                                    </div>
+                                </div>
+                            </div>  
+                        
+                            <img src="/static/image/right.png" class='right' style='display:inline-block;
+                                                    margin:-160px 0 0 24px;'/>
+                        </div>
+                    </div>
         </div>
-    </div>
-</div>
-<div class="modal fade" id="join4" tabindex="-2">
-    <div class="modal-dialog">
-        <div class=modal-content>
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>&times;</span>
-                </button>
-                <h2 class="modal-title">温馨提示</h2>
-            </div>
-            <div class="modal-body">
-                <p>您已选择此专题，选择完毕后请点击右上角 “ 添加 ” 按钮，加入到专题中O(∩_∩)O<br>
-                    如您不需要可以再次点击取消选择专题</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">
-                    确定
-                </button>
-            </div>
-        </div>
+        
     </div>
 </div>
 <div class="modal fade" id="join6" tabindex="-3">
@@ -346,10 +331,141 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="join1" tabindex="-2">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">添加提示</h2>
+            </div>
+            <div class="modal-body">
+                <p>您确定添加吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="join4" tabindex="-2">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">温馨提示</h2>
+            </div>
+            <div class="modal-body">
+                <p>您已选择此专题，选择完毕后请点击右上角 “ 添加 ” 按钮，加入到专题中O(∩_∩)O<br>
+                    如您不需要可以再次点击取消选择专题</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="join8" tabindex="-3">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">节点条件</h2>
+            </div>
+            <div class="modal-body">
+                <div class='left' style='width:40%;display:inline-block;margin-left:50px;'>
+                    <span>节点1</span>
+                    <div class="radio" style="margin-left:35px;">
+                        <label>
+                            <input type="radio" name="guanxi" value="option1" checked> 节点1
+                        </label>
+                    </div>
+                    <div class="radio" style="margin-left:35px;">
+                        <label>
+                            <input type="radio" name="guanxi" value="option1"> 节点1
+                        </label>
+                    </div>
+                    <div class="radio" style="margin-left:35px;">
+                        <label>
+                            <input type="radio" name="guanxi" value="option1"> 节点1
+                        </label>
+                    </div>
+                    <div class="radio" style="margin-left:35px;">
+                        <label>
+                            <input type="radio" name="guanxi" value="option1"> 节点1
+                        </label>
+                    </div>
+                    <div class="radio" style="margin-left:35px;">
+                        <label>
+                            <input type="radio" name="guanxi" value="option1"> 节点1
+                        </label>
+                    </div>
+                </div>
+                <div class='right' style='width:45%;display:inline-block;'>
+                    <span>节点2</span>
+                    <div class="radio" style="margin-left:35px;">
+                        <label>
+                            <input type="radio" name="sja" value="option1"> 节点2
+                        </label>
+                    </div>
+                    <div class="radio" style="margin-left:35px;">
+                        <label>
+                            <input type="radio" name="sja" value="option1"> 节点2
+                        </label>
+                    </div>
+                    <div class="radio" style="margin-left:35px;">
+                        <label>
+                            <input type="radio" name="sja" value="option1"> 节点2
+                        </label>
+                    </div>
+                    <div class="radio" style="margin-left:35px;">
+                        <label>
+                            <input type="radio" name="sja" value="option1" checked> 节点2
+                        </label>
+                    </div>
+                    <div class="radio" style="margin-left:35px;">
+                        <label>
+                            <input type="radio" name="sja" value="option1"> 节点2
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick='show()'>
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 {% block my_js %}
 <script src="/static/js/relation.js"></script>
 <script>
+    $('.cp4').on('click',function(){
+        $('#join8').modal("show");
+    });
+    $('.add22').on('click',function(){
+        $('#join6').modal("show");
+    });
+    function show(){
+        $(".result").show(300);
+    }
     function check(value){
         if (value=='新建群体') {
             $('.shuru2').show();
@@ -362,9 +478,9 @@
             $(this).parent().fadeOut(300);
         });
     });
-    $('.add22').on('click',function () {
-        $('#join6').modal("show");
-    });
+    // $('.add22').on('click',function () {
+    //     $('#join6').modal("show");
+    // });
     $.each($('.xingming'),function(index,item){
         $(item).on('click',function(){
             window.location.href='/index/person/';
@@ -396,10 +512,12 @@
                 if (changecolor==1) {
                     $(this).parent('.play').css({backgroundColor:'#09F'});
                     changecolor=2;
+                    $(this).find('a').text('取消群体探索');
                     $('#join4').modal("show");
                 } else {
                     $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
                     changecolor=1;
+                    $(this).find('a').text('加入群体探索');
                 }
             }); 
         });
@@ -416,29 +534,28 @@
             }
         })
     });
-    $('#container .result .re3 .re3rg .top').hover(function () {
-        $(this).attr('src','/static/image/top_hv.png');
+    $('#container .result .re3 .re3rg .left').hover(function () {
+        $(this).attr('src','/static/image/left_hv.png');
     },function () {
-        $(this).attr('src','/static/image/top.png');
+        $(this).attr('src','/static/image/left.png');
     });
-    $('#container .result .re3 .re3rg .bottom').hover(function () {
-        $(this).attr('src','/static/image/bottom_hv.png');
+    $('#container .result .re3 .re3rg .right').hover(function () {
+        $(this).attr('src','/static/image/right_hv.png');
     },function () {
-        $(this).attr('src','/static/image/bottom.png');
+        $(this).attr('src','/static/image/right.png');
     });
 
     //
     var go = 66;
-    $('#container .result .re3 .re3rg .top').on('click',function () {
+    $('#container .result .re3 .re3rg .left').on('click',function () {
         if(go==66){
-            console.log('123')
             var plays=$("#container .result .re3 .re3rg .midd2");
             $(plays).css({
-                "-webkit-transform":"translateY(-360px)",
-                "-moz-transform":"translateY(-360px)",
-                "-ms-transform":"translateY(-360px)",
-                "-o-transform":"translateY(-360px)",
-                "transform":"translateY(-360px)",
+                "-webkit-transform":"translateX(-518px)",
+                "-moz-transform":"translateX(-518px)",
+                "-ms-transform":"translateX(-518px)",
+                "-o-transform":"translateX(-518px)",
+                "transform":"translateX(-518px)",
             });
             go = 88;
         } else{
@@ -453,15 +570,15 @@
             go = 66;
         }
     });
-    $('#container .result .re3 .re3rg .bottom').on('click',function () {
+    $('#container .result .re3 .re3rg .right').on('click',function () {
         if(go==66){
             var plays=$("#container .result .re3 .re3rg .midd2");
             $(plays).css({
-                "-webkit-transform":"translateY(-360px)",
-                "-moz-transform":"translateY(-360px)",
-                "-ms-transform":"translateY(-360px)",
-                "-o-transform":"translateY(-360px)",
-                "transform":"translateY(-360px)",
+                "-webkit-transform":"translateX(-518px)",
+                "-moz-transform":"translateX(-518px)",
+                "-ms-transform":"translateX(-518px)",
+                "-o-transform":"translateX(-518px)",
+                "transform":"translateX(-518px)",
             });
             go = 88;
         } else{

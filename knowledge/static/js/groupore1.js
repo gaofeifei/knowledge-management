@@ -19,12 +19,12 @@
             var myChart = ec.init(document.getElementById('spread'));
 
             var option = {
-                title: {
-                    x: 'center',
-                    text: 'ECharts例子个数统计',
-                    subtext: 'Rainbow bar example',
-                    link: 'http://echarts.baidu.com/doc/example.html'
-                },
+                // title: {
+                //     x: 'center',
+                //     text: 'ECharts例子个数统计',
+                //     subtext: 'Rainbow bar example',
+                //     link: 'http://echarts.baidu.com/doc/example.html'
+                // },
                 tooltip: {
                     trigger: 'item'
                 },
@@ -57,7 +57,7 @@
                 ],
                 series: [
                     {
-                        name: 'ECharts例子个数统计',
+                        // name: 'ECharts例子个数统计',
                         type: 'bar',
                         itemStyle: {
                             normal: {

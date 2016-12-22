@@ -16,6 +16,11 @@ def theme_analysis():
 
     return render_template('theme/analyze.html')
 
+@mod.route('/different/')
+def theme_different():
+
+    return render_template('theme/analyzediff.html')
+
 @mod.route('/detail/')
 def show_detail():
 

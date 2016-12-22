@@ -20,8 +20,8 @@
             <div class="crt111">
                 <span>节点类型：</span>
                 <select name="" id="list1">
-                    <option value="">关系1</option>
-                    <option value="">关系2</option>
+                    <option value="人物">人物</option>
+                    <option value="事件">事件</option>
                 </select>
             </div>
             <div class="crt122">
@@ -45,47 +45,47 @@
                             <td>1</td>
                             <td>潘强</td>
                             <td>
-                                <a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a class='delt' type="button" data-toggle="modal">删除</a>
+                                <a class='xiugai'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class='delt' data-toggle="modal">删除</a>
                             </td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>郑再索</td>
                             <td>
-                                <a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a class='delt' type="button" data-toggle="modal">删除</a>
+                                <a class='xiugai'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class='delt' data-toggle="modal">删除</a>
                             </td>
                         </tr>
                         <tr class="active">
                             <td>3</td>
                             <td>徐丽萍</td>
                             <td>
-                                <a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a class='delt' type="button" data-toggle="modal">删除</a>
+                                <a class='xiugai'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class='delt' data-toggle="modal">删除</a>
                             </td>
                         </tr>
                         <tr>
                             <td>4</td>
                             <td>任志强</td>
                             <td>
-                                <a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a class='delt' type="button" data-toggle="modal">删除</a>
+                                <a class='xiugai'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class='delt' data-toggle="modal">删除</a>
                             </td>
                         </tr>
                         <tr class="active">
                             <td>5</td>
                             <td>邓海峰</td>
                             <td>
-                                <a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a class='delt' type="button" data-toggle="modal">删除</a>
+                                <a class='xiugai'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class='delt' data-toggle="modal">删除</a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <p class='jump' style='float:left;font-size:12px;margin: 5px 0px 0 50px;display:none;'>
-                    <label class="radio-inline">
+                    <!-- <label class="radio-inline">
                         <input type="radio" name="ioja" value="option1"> 1跳
                     </label>
                     <label class="radio-inline">
@@ -93,10 +93,10 @@
                     </label>
                     <label class="radio-inline">    
                         <input type="radio" name="ioja" value="option2" checked> 全部
-                    </label>
+                    </label> -->
                     <button class="add22" type="button" data-toggle="modal">添加</button>
             </p> 
-            <div class="crt2rg" style="float: left;margin: 40px 0 0 -250px;display:none;">
+            <div class="crt2rg" style="float: left;margin: 40px 0 0 -70px;display:none;">
                  <div class="play">
                                                 <div class="play1">
                                                     <div class="p11">
@@ -170,21 +170,21 @@
                             <td>潘强</td>
                             <td>徐丽萍</td>
                             <td>朋友</td>
-                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                            <td><a class='xiugai'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class='delt' data-toggle="modal">删除</a></td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>潘强</td>
                             <td>徐丽萍</td>
                             <td>朋友</td>
-                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                            <td><a class='xiugai'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class='delt' data-toggle="modal">删除</a></td>
                         </tr>
                         <tr>
                             <td>3</td>
                             <td>潘强</td>
                             <td>徐丽萍</td>
                             <td>朋友</td>
-                            <td><a>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a>删除</a></td>
+                            <td><a class='xiugai'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class='delt' data-toggle="modal">删除</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -372,6 +372,137 @@
         </div>
     </div>
 </div>
+<style>
+                    .main {
+                        /*height: 500px;*/
+                        padding:0 30px;
+                    }
+                    .main .topright input,.main .topright select,.main .bottom input {
+                        width: 100px;
+                        padding:2px 5px;
+                        border: 1px solid #5e5e5e;
+                        font-size: 12px;
+                        color: #5e5e5e;
+                        font-weight: 600;
+                    }
+                    .main .rgone,.main .rgtwo,.main .rgthr {
+                        margin-bottom: 12px;
+                    }
+                    .main .rgone,.main .rgtwo,.main .rgthr,.main .rgfour {
+                        margin-left: 20px;
+                    }
+                    .main .top {
+                        height: 150px;
+                        margin-top: 20px;
+                    }
+                    .main .bottom {
+                        width: 100%;
+                        margin-top: 20px;
+                    }
+                    .main .bottom input {
+                        width: 160px;
+                    }
+
+                </style>
+<div class="modal fade editmd" id="join7" tabindex="-3">
+                    <div class="modal-dialog">
+                        <div class=modal-content>
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                                <h2 class="modal-title">编辑群体</h2>
+                            </div>
+                            <div class="modal-body">
+                                <div class="main">
+                                    <div class="top">
+                                        <div class="topleft" style="float: left">
+                                            <img src="/static/image/pan.jpg" alt="" width="110" height="140"/>             
+                                        </div>
+                                        <div class="topright" style="float: left;margin-top: 6px">
+                                            <div class="rgone">
+                                            人物名称 <input type="text" class="sjmc" value="潘强" style="margin:0 20px"/>
+                                            粉丝数 <input type="text" class="fss"  style="margin-left:15px"/>
+                                            </div>
+                                            <div class="rgtwo">
+                                                影响力 &nbsp;&nbsp;&nbsp;<input type="text" class="fssj" style="margin:0 20px"/>
+                                                活跃度&nbsp;<input type="text" class="hyd"  style="margin-left:16px"/>
+                                            </div>
+                                            <div class="rgthr">
+                                                敏感度 <input type="text" class="mgd"  style="margin:0 32px"/>
+                                                领域 
+                                                <select name="" style="margin-left:18px">
+                                                    <option value="商业人士">商业人士</option>
+                                                </select>
+                                            </div>
+                                            <div class="rgfour">
+                                                注册地 &nbsp;
+                                                <select name="" style="margin:0 24px">
+                                                    <option value="北京">北京</option>
+                                                </select>
+                                                活跃地
+                                                <select name="" style="margin-left:12px">
+                                                    <option value="北京">北京</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        
+                                        <div class="bottwo" style="margin-bottom: 10px">
+                                            业务标签&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span style="padding: 2px;background-color: #0099FF;color: #ffffff;border-radius:5px;font-weight: 600">企业家 <b class="icon icon-remove det"></b></span>
+                                        </div>
+                                        <div class="botthr" style="margin-bottom: 10px">
+                                            个人描述&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <input type="text" class="miaoshu">
+                                        </div>
+                                        <div class="botfour" style="margin-bottom: 10px">
+                                            <span>相关媒体</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <div class="meiti" style="display: inline-block">
+                                                <span style="padding: 2px;background-color: #0099FF;color: #ffffff;
+                                                    border-radius:5px;font-weight: 600">百度百科 
+                                                    <b class="icon icon-remove det"></b>
+                                                </span>
+                                            </div>
+                                            <span style='float:right;'>
+                                                <b class="icon icon-plus zeng1"></b>
+                                            </span> 
+                                            <div class="mingcheng" style="margin-top: 10px">
+                                                媒体名称 &nbsp;&nbsp;&nbsp;&nbsp;<input type="text"/>
+                                                url &nbsp;&nbsp;&nbsp;&nbsp;<input type="text">
+                                            </div>
+                                        </div>
+                                        <div class="botfive" style="margin-bottom: 10px">
+                                            <span>业务描述</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <div class="meiti" style="display: inline-block">
+                                                <span style="padding: 2px;background-color: #0099FF;color: #ffffff;
+                                                        border-radius:5px;font-weight: 600">业务文档1
+                                                    <b class="icon icon-remove det"></b>
+                                                </span>
+                                            </div>
+                                            <span style='float:right;'>
+                                                <b class="icon icon-plus zeng2"></b>
+                                            </span> 
+                                            <div class="mingcheng" style="margin-top: 10px">
+                                                业务名称&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"/>
+                                                url &nbsp;&nbsp;&nbsp;&nbsp;<input type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-info" data-dismiss="modal">
+                                    关闭
+                                </button>
+                                <button type="button" class="btn btn-danger">
+                                    确定
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 {% endblock %}
 
 {% block my_js %}
@@ -380,7 +511,7 @@
     $.each($(".delt"),function(index,item){
         $(item).on('click',function(){
             $('#join1').modal("show");
-            $(item).parents('tr').hide();
+            // $(item).parents('tr').hide();
         });
     })
     var td2=$(".conright .table tr").find('td');
@@ -398,17 +529,21 @@
     var xiu=$("#container .conright2 .listcell tr");
     $.each(xiu,function(index,item){
         $(item).on('click',function(){
-            var last = $(item).find('td')[$(item).find('td').length-1];
-            var last1 =$(last).find('a').eq(0);
-            var last2 =$(last).find('a').eq(1);
-            if ($(last1).text()=="修改") {
-                $('.lcright').show(20);
-            };
-            if ($(last2).text()=="删除") {
-                $('#join1').modal("show");
-            };
+            $('.lcright').show(20);
             
         })
+    });
+    $.each($('.xiugai'),function(index,item){
+        $(item).on('click',function(){
+            $('#join7').modal("show");
+        })
+    })
+    $.each($('.zeng1'),function(index,item){
+        $('.zeng1').on('click',function(){
+            var ming=$(this).parent().next().html();
+            var str ="<div class='mingcheng' style='margin-top:10px;'>"+ming+"</div>"
+            $(this).parent().next().after(str);
+        });
     });
     $('.conright .add22').on('click',function () {
         $('#join6').modal("show");
@@ -467,10 +602,12 @@
                 if (changecolor==1) {
                     $(this).parent('.play').css({backgroundColor:'#09F'});
                     changecolor=2;
+                    $(this).find('a').text('取消群体探索');
                     $('#join4').modal("show");
                 } else {
                     $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
                     changecolor=1;
+                    $(this).find('a').text('加入群体探索');
                 }
             }); 
         });

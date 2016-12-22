@@ -9,13 +9,13 @@
             <div class="clf_t">
                 <div class="peo">
                     <span class="png"><img src="/static/image/people.png" alt=""></span>
-                    <span class="number">103253</span>
-                    <span class="new">本周入库人数：100</span>
+                    <span class="number number1"></span>
+                    <span class="new">本周入库人数：</span><span class="new new1"></span>
                 </div>
                 <div class="things">
                     <span class="png"><img src="/static/image/things.png" alt=""></span>
-                    <span class="number">103253</span>
-                    <span class="new">本周入库事件：100</span>
+                    <span class="number number2"></span>
+                    <span class="new">本周入库事件：</span><span class="new new2"></span>
                 </div>
             </div>
             <div class="clf_bot">
@@ -54,12 +54,6 @@
     <script src="/static/js/homepage2.js"></script>
     <script src="/static/js/homepage3.js"></script>
     <script>
-    //    var bus=$("#container .con_lf .clf_bot .chars button");
-    //    $.each(bus,function (index,item) {
-    //        $(item).on('click',function () {
-    //            $(this).css({backgroundColor:"#09F"}).siblings().css({backgroundColor:""});
-    //        })
-    //    });
         $(".atlas").on('click',function () {
             $(this).css({backgroundColor:"#09F"}).siblings().css({backgroundColor:""});
             $("#statis1").css({display:'block'});
@@ -70,5 +64,33 @@
             $("#statis2").css({display:'block'});
             $("#statis1").css({display:'none'});
         });
+        //发出请求----本周人数，事件
+        function place() {
+            //this.ajax_method='GET'; // body...
+        }
+        place.prototype= {
+            call_request:function(url,callback) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    async: true,
+                    success:callback
+                });
+            },
+        };
+        function territory(data) {
+            $(".number1").append(data[0]);
+            $(".number2").append(data[1]);
+            $(".new1").append(data[2]);
+            $(".new2").append(data[3]);
+        }
+
+        var place=new place();
+        function nums() {
+            var url = '/index/current_week_increase/';
+            place.call_request(url,territory);
+        }
+        nums();
     </script>
 {% endblock %}

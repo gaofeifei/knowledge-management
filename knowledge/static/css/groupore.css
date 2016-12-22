@@ -24,7 +24,8 @@ a,a:link,a:hover,a:visited,a:active {
     margin-left: 125px;
     padding: 20px 0 0;
 }
-#container .con_top .choose .ch1,#container .con_bot .add .add1 {
+#container .con_top .choose .ch1 {
+    display: inline-block;
     font-size: 20px;
     font-weight: 900;
     color: #fff;
@@ -41,35 +42,37 @@ a,a:link,a:hover,a:visited,a:active {
     border: 1px solid #09F;
     box-shadow: 3px 3px 3px #c9c2c7;
 }
-#container .con_top .choose .tuli .menu {
-    margin: 30px 0 30px 40px;
+#container .choose1 .menu {
+    width: 1200px;
+    padding: 30px 0 30px 30px;
+    border: 1px solid #09F;
+    box-shadow: 3px 3px 3px #c9c2c7;
 }
 #container .con_top .choose .tuli #spread {
-    width: 700px;
-    height: 300px;
-    margin-left: 30px;
-    float: left;
+    width: 1000px;
+    height: 500px;
+    margin:0 auto;
 }
-#container .con_top .choose .tuli .menu .zhmi {
+#container .choose1 .menu .zhmi {
     font-weight: 900;
     font-size: 14px;
     color: #4b4b4b;
     display: inline-block;
 }
-#container .con_top .choose .tuli .menu form {
+#container .choose1 .menu form {
     display: inline-block;
     margin-right: 30px;
 }
-#container .con_top .choose .tuli .menu form #list {
+#container .choose1 .menu form #list {
     padding: 5px 5px 5px 10px;
     border:1px solid #c7c7c7;
     font-size: 14px;
     margin-left: 15px;
-    width: 230px;
+    width: 200px;
 }
-#container .con_top .choose .tuli .menu .msure,#container .con_bot .add #shijian .sjt .sjt2,
-#container .con_top .choose .tuli .menu .compare, #container .con_top .choose .tuli #condet .condet4,
-#container .con_bot .add #shijian .bag .sjmr1 .add22 {
+#container .choose1 .menu .msure,#container .con_bot .add #shijian .sjt .sjt2,#shijian2 .sjt .sjt2,
+#container .choose1 .menu .compare, #container .choose1 #condet .condet4,#shijian2 .bag .sjmr1 .add22,
+#container .con_bot .add #shijian .bag .sjmr1 .add22,.add99 {
     width: 70px;
     height: 32px;
     line-height: 32px;
@@ -80,72 +83,53 @@ a,a:link,a:hover,a:visited,a:active {
     display: inline-block;
     margin-left: 30px;
 }
-#container .con_bot .add #shijian .sjt .sjt2:hover,#container .con_top .choose .tuli .menu .msure:hover,
-#container .con_top .choose .tuli .menu .compare:hover,#container .con_top .choose .tuli #condet .condet4:hover,
-#container .con_bot .add #shijian .bag .sjmr1 .add22:hover {
+#shijian2 .sjt .sjt2:hover,#shijian2 .bag .sjmr1 .add22:hover,
+#container .con_bot .add #shijian .sjt .sjt2:hover,#container .choose1 .menu .msure:hover,
+#container .choose1 .menu .compare:hover,#container .choose1 #condet .condet4:hover,
+#container .con_bot .add #shijian .bag .sjmr1 .add22:hover,.add99:hover {
     background-color: #4cae4c;
 }
-#container .con_top .choose .tuli #condet {
-    float: left;
-    width: 300px;
-    height: 220px;
-    border: 2px solid #0099FF;
-    border-radius: 5px;
-    position: relative;
-    /*top: -240px;*/
-    left: 60px;
-    padding: 20px;
-}
-#container .con_top .choose .tuli #condet span {
+#container .choose1 #condet span {
+    display: inline-block;
     font-size: 10px;
     color: #4b4b4b;
     font-weight: bold;
 }
-#container .con_top .choose .tuli #condet .condet2, #container .con_top .choose .tuli #condet .condet3 {
-    display: inline-block;
+#container .choose1 #condet .condet2, #container .choose1 #condet .condet3 {
     margin: 20px 10px 0 20px;
     background-color: #0099FF;
     color: white;
 }
-#container .con_top .choose .tuli #condet .condet4 {
-    position: absolute;
-    bottom: 50px;
-    right: 30px;
-}
-#container .con_top .choose .tuli #condet .condet2,#container .con_top .choose .tuli #condet .condet3,
-#container .con_top .choose .tuli #condet .condet4 {
-    display: none;
-}
 /*下部*/
 #container .con_bot {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    /*margin-top: 30px;*/
+    /*margin-bottom: 30px;*/
 }
-#container .con_bot .add #shijian .bag {
+#container .con_bot .add #shijian .bag,#shijian2 .bag {
     width: 100%;
     height:450px;
 }
-#container .con_bot .add #shijian .sjt {
+#container .con_bot .add #shijian .sjt,#shijian2 .sjt {
     margin: 20px 0 20px 30px;
     color: #4b4b4b;
     font-weight: 900;
 }
-#container .con_bot .add #shijian .sjt .sjt1 {
+#container .con_bot .add #shijian .sjt .sjt1,#shijian2 .sjt .sjt1 {
     padding: 5px 5px 5px 10px;
     border:1px solid #c7c7c7;
     margin:0 20px;
 }
-#container .con_bot .add #shijian .sjt .sjt2 {
+#container .con_bot .add #shijian .sjt .sjt2,#shijian2 .sjt .sjt2 {
     margin-left: 5%;
 }
-#container .con_bot .add #shijian #site {
+#container .con_bot .add #shijian #site,#shijian2 #site,#site2 {
     width: 370px;
     height: 400px;
     /*margin-left: 10px;*/
     /*background-color: #3c763d;*/
     float: left;
 }
-#container .con_bot .add #shijian .sjmr {
+#container .con_bot .add #shijian .sjmr,#shijian2 .sjmr,#tbrg {
     /*width: 765px;*/
     padding: 5px;
     /*margin-left: 10px;*/
@@ -153,7 +137,7 @@ a,a:link,a:hover,a:visited,a:active {
     /*background-color: saddlebrown;*/
     float: left;
 }
-#container .con_bot .add #shijian .bag .sjmr1 .direct1 {
+#container .con_bot .add #shijian .bag .sjmr1 .direct1,#shijian2 .bag .sjmr1 .direct1 {
     text-align: right;
     padding-right: 40px;
     font-weight: 900;
@@ -161,10 +145,12 @@ a,a:link,a:hover,a:visited,a:active {
     color: black;
     display: block;
 }
-#container .con_bot .add #shijian .bag .sjmr1 #crmid {
+#shijian2 .bag .sjmr1 #crmid,
+#container .con_bot .add #shijian .bag .sjmr1 #crmid,#tbrg #crmid2 {
     transition: all 1s linear;
 }
-#container .con_bot .add #shijian .bag .play {
+#shijian2 .bag .play,
+#container .con_bot .add #shijian .bag .play,#tbrg #crmid2 .play {
     width: 240px;
     padding: 5px;
     height: 160px;
@@ -172,52 +158,64 @@ a,a:link,a:hover,a:visited,a:active {
     margin-top: 15px;
     border:1px solid #0099FF;
     box-shadow: 2px 2px 2px #878787;
-    background-color: #d9edf7;
+    background-color: #d2dcf7;
     overflow: hidden;
     display: inline-block;
     transition: all 0.8s linear;
 }
-#container .con_bot .add #shijian .bag .left,#container .con_bot .add #shijian .bag .right {
+#shijian2 .bag .left,#shijian2 .bag .right,
+#container .con_bot .add #shijian .bag .left,#container .con_bot .add #shijian .bag .right,
+#tbrg .sjmr1 .left,#tbrg .sjmr1 .right {
     width: 30px;
     height: 35px;
     display: inline-block;
     margin-top: -340px;
     cursor: pointer;
 }
-#container .con_bot .add #shijian .bag .play .play1 {
+#shijian2 .bag .play .play1,
+#container .con_bot .add #shijian .bag .play .play1,#tbrg .play .play1 {
     width: 170px;
     margin-top: 5px;
     display: inline-block;
 }
+#shijian2 .play1 .p11 span,#container #shijian2 .play1 .p11 img,
+#container #shijian2 .play1 .p22 span,#container #shijian2 .play1 .p22 img,
 #container #shijian .play1 .p11 span,#container #shijian .play1 .p11 img,
-#container #shijian .play1 .p22 span,#container #shijian .play1 .p22 img{
+#container #shijian .play1 .p22 span,#container #shijian .play1 .p22 img,
+#tbrg .play .play1 .p11 span,#tbrg .play .play1 .p11 img,
+#tbrg .play .play1 .p22 span,#tbrg .play .play1 .p22 img {
     display: inline-block;
 }
-#container #shijian .play2 {
+#shijian2 .play2,
+#container #shijian .play2,#tbrg .play .play2 {
     width: 50px;
     height: 55px;
     display: inline-block;
     margin-top: -20px;
 }
-#container #shijian .play23 a {
+#shijian2 .play23 a,
+#container #shijian .play23 a,#tbrg .play .play23 a {
     display: block;
     margin-top: 5px;
     color: #000;
     font-weight: bold;
     font-size: 10px;
 }
-#container #shijian .play23 a span {
+#shijian2 .play23 a span,
+#container #shijian .play23 a span,#tbrg .play .play23 a span {
     font-weight: 100;
     padding-left: 20px;
 }
-#container #shijian .play3 .bus1 {
+#shijian2 .play3 .bus1,
+#container #shijian .play3 .bus1,#tbrg .play .play3 .bus1 {
     font-size: 10px;
     font-weight: bold;
     display: inline-block;
     padding-top: 2px;
     color: #000;
 }
-#container #shijian .play3 .bus2 {
+#shijian2 .play3 .bus2,
+#container #shijian .play3 .bus2,#tbrg .play .play3 .bus2 {
     color: #000;
     display: inline-block;
     margin-left: 5px;
@@ -226,12 +224,13 @@ a,a:link,a:hover,a:visited,a:active {
     border-radius: 5px;
     font-size: 8px;
 }
+#shijian2 .play4 .shuoming,
 #container #shijian .play4 .shuoming {
     margin-top: 10px;
     font-size: 12px;
     color: rgba(184, 184, 184, 0.62);
 }
-#container #shijian .play5 {
+#container #shijian .play5,#shijian2 .play5 {
     position: relative;
     top:15px;
     left: -5px;
@@ -240,7 +239,8 @@ a,a:link,a:hover,a:visited,a:active {
     height: 40px;
     transition: all 0.3s linear;
 }
-#container #shijian .play5 a {
+#shijian2 .play5 a,
+#container #shijian .play5 a,#tbrg .play .play5 a {
     display: block;
     width: 100%;
     height: 40px;
@@ -277,8 +277,17 @@ a,a:link,a:hover,a:visited,a:active {
 /*#container .con_bot .add #shijian .xinzeng form button:hover {*/
     /*background-color: #4cae4c;*/
 /*}*/
-.xinzeng input,.xinzeng #list1 {
+.xinzeng #list1 {
     width: 140px;
+    height: 30px;
+    font-size: 12px;
+    line-height: 30px;
+    margin-left: 30px;
+    padding: 5px 5px 5px 10px;
+    border: 1px solid #5e5e5e;
+}
+.xinzeng .shuru2 {
+    width: 130px;
     height: 30px;
     font-size: 12px;
     line-height: 30px;
@@ -297,7 +306,21 @@ a,a:link,a:hover,a:visited,a:active {
     color: white;
     font-weight: bold;
 }
-
+.add33 {
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    color: white;
+    padding: 2px 5px;
+    background-color: #0099FF;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+}
+.add33:hover {
+    background-color: #4cae4c;
+}
 
 
 

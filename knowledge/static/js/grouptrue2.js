@@ -241,10 +241,27 @@ $.each(play,function (index,item) {
         if (changecolor==1) {
             $(this).parent('.play').css({backgroundColor:'#09F'});
             changecolor=2;
+            $(this).find('a').text('取消专题');
             $('#join4').modal("show");
         } else {
             $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
             changecolor=1;
+            $(this).find('a').text('加入专题');
+        }
+    });
+});
+$.each($("#people .play"),function (index,item) {
+    var changecolor2=1;
+    $(item).find(".play5").on('click',function(){
+        if (changecolor2==1) {
+            $(this).parent('.play').css({backgroundColor:'#09F'});
+            changecolor2=2;
+            $(this).find('a').text('取消群体探索');
+            $('#join4').modal("show");
+        } else {
+            $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+            changecolor2=1;
+            $(this).find('a').text('加入群体探索');
         }
     });
 });
@@ -283,11 +300,11 @@ function check2(value){
 };
 $.each($("#people .xingming"),function(index,item){
     $(item).on('click',function () {
-        window.location.href='/index/person/';
+        window.open('/index/person/');
     });
 })
 $.each($("#similar .xingming"),function(index,item){
     $(item).on('click',function () {
-        window.location.href='/index/search_result/';
+        window.open('/index/search_result/');
     });
 })

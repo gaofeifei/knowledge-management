@@ -60,6 +60,7 @@ a,a:link,a:hover,a:visited,a:active {
     left: 20px;
 }
 #container .con_lf .clf_t .peo .new,#container .con_lf .clf_t .things .new {
+    display: inline;
     font-size: 16px;
     top: 20px;
     left: 25px;
@@ -76,8 +77,8 @@ a,a:link,a:hover,a:visited,a:active {
     margin: 12px 35px 0 0;
 }
 #container .con_lf .clf_t .png img {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     margin-top: -46px;
 }
 #container .con_lf .clf_t .things {

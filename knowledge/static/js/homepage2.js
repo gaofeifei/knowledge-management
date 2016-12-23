@@ -19,54 +19,92 @@
 
             var option = {
                 title : {
-                    text: '世界人口总量',
-                    subtext: '数据来自网络'
+                    // text: '世界人口总量',
+                    // subtext: '数据来自网络'
                 },
                 tooltip : {
                     trigger: 'axis'
                 },
-                legend: {
-                    data:['2011年', '2012年']
-                },
+                // legend: {
+                //     data:yy
+                // },
                 // toolbox: {
                 //     show : true,
-                    // feature : {
-                    //     mark : {show: true},
-                    //     dataView : {show: true, readOnly: false},
-                    //     magicType: {show: true, type: ['line', 'bar']},
-                    //     restore : {show: true},
-                    //     saveAsImage : {show: true}
-                    // }
+                //     feature : {
+                //         mark : {show: true},
+                //         dataView : {show: true, readOnly: false},
+                //         magicType: {show: true, type: ['line', 'bar']},
+                //         restore : {show: true},
+                //         saveAsImage : {show: true}
+                //     }
                 // },
                 calculable : true,
                 xAxis : [
                     {
                         type : 'value',
-                        boundaryGap : [0, 0.01]
+                        boundaryGap : [0, 0.01],
+                        data:[]
                     }
                 ],
                 yAxis : [
                     {
                         type : 'category',
-                        data : ['巴西','印尼','美国','印度','中国','世界人口(万)']
+                        data : []
                     }
                 ],
                 series : [
                     {
-                        name:'2011年',
+                        name:'事件名称',
                         type:'bar',
-                        data:[18203, 23489, 29034, 104970, 131744, 630230]
+                        data : []
                     },
                     {
-                        name:'2012年',
+                        name:'数量',
                         type:'bar',
-                        data:[19325, 23438, 31000, 121594, 134141, 681807]
+                        data:[]
                     }
                 ]
             };
 
+            //数据请求
+            $.get('/index/count_special_event/').done(function (data) {
+                // 填入数据
+                var data=eval(data);
+                xx=[];
+                for(var i=0;i<data.length;i++){
+                    xx.push(data[i][1]);
+                }
+                yy=[];
+                for(var i=0;i<data.length;i++){
+                    yy.push(data[i][0]);
+                }
+                myChart.setOption({
+                    xAxis: {
+                        type : 'value',
+                        boundaryGap : [0, 0.01],
+                        data: xx
+                    },
+                    yAxis: {
+                        type : 'category',
+                        data: yy
+                    },
+                    series: [
+                        {
+                            name:'事件名称',
+                            type:'bar',
+                            data : yy
+                        },
+                        {
+                            name:'数量',
+                            type:'bar',
+                            data: xx
+                        }
+                    ]
+                });
+            });
+
             // 为echarts对象加载数据
-            myChart.setOption(option);
+            // myChart.setOption(option);
         }
     );
 }();

@@ -8,6 +8,8 @@ event_host = ["219.224.134.225:9037"]
 event_port = "9200"
 neo4j_host = "219.224.134.213"
 neo4j_port = "7474"
+redis_host = "219.224.134.213"
+redis_port = "7381"
 
 portrait_name = "user_portrait"
 portrait_type = "user"

@@ -202,6 +202,8 @@ def query_hot_location():
 
     filter_location = dict()
     for k,v in location_dict.iteritems():
+        if u'海外' in k or u'其他' in k:
+            continue
         tmp = k.split(' ')
         if u'北京' in k or u'天津' in k or u'上海' in k or u'重庆' in k or u'香港' in k or u'澳门' in k:
             try:

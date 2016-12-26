@@ -49,7 +49,7 @@ def event_name_search(en_name):
 def group_tab_graph(group_name, node_type, relation_type, layer):
     s_string = 'START s0 = node:group_index(group="' + group_name + '")  \
                 MATCH (s0)-[r]-(s) RETURN s.uid as uid'
-    all_uid_list = []  #for map
+    all_uid_list = []
     user_list = graph.run(s_string)
     # b = Node("Group", group=group_name)
     # print g.degree(b),'-=-=-=-=-=----------------'
@@ -59,18 +59,16 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
     #     relation_type = ':' + relation_type
     user_relation = []
     # total_user = len(list(uid_list))
-    uid_list = {}
-    u_nodes_list = {} #all user nodes
-    e_nodes_list = {} #all event nodes
+    uid_list = []
+    u_nodes_list = [] #all user nodes
+    e_nodes_list = [] #all event nodes
     for uid in user_list:
         uid_value = str(uid['uid'])
         user_name = user_name_search(uid_value)
-        # print uid_value,'000000000000'
-        all_uid_list.append([str(uid_value),user_name])
-        uid_list[str(uid_value)] = user_name  #取uid
-        u_nodes_list[str(uid_value)] = user_name  #取uid
-    # u_nodes_list.extend(uid_list)
-    # all_uid_list.extend(uid_list)
+        print uid_value,'000000000000'
+        uid_list.append([str(uid_value),user_name])  #取uid
+    u_nodes_list.extend(uid_list)
+    all_uid_list.extend(uid_list)
 
     if layer == '1':  #扩展一层
         for uid_value in uid_list:
@@ -84,12 +82,12 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
                 end_id = dict(i['s1'])
                 if end_id.has_key('uid'):
                     user_name = user_name_search(end_id['uid'])
-                    u_nodes_list[str(end_id['uid'])] = user_name
+                    u_nodes_list.append([str(end_id['uid']),user_name])
                     all_uid_list.append([str(end_id['uid']),user_name])
                     user_relation.append([start_id,relation,end_id['uid']])
                 if end_id.has_key('envent_id'):
                     event_name = event_name_search(end_id['envent_id'])
-                    e_nodes_list[end_id['envent_id']]=event_name
+                    e_nodes_list.append([end_id['envent_id'],event_name])
                     user_relation.append([start_id,relation,end_id['envent_id']])
 
     if layer == '2':  #扩展两层
@@ -120,15 +118,15 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
                     middle_id = m_id['uid']
                     mid_uid_list.append(middle_id)
                     user_name = user_name_search(middle_id)
-                    # print middle_id,'2222222222222222222'
-                    u_nodes_list[str(middle_id)] = user_name
+                    print middle_id,'2222222222222222222'
+                    u_nodes_list.append([middle_id,user_name])
                     all_uid_list.append([middle_id,user_name])
                     user_relation.append([start_id,relation1,middle_id])
                 if m_id.has_key('envent_id'):
                     middle_id = m_id['envent_id']
                     mid_eid_list.append(middle_id)
                     event_name = event_name_search(middle_id)
-                    e_nodes_list[str(middle_id)] = event_name
+                    e_nodes_list.append([middle_id,event_name])
                     user_relation.append([start_id,relation1,middle_id])
         print mid_uid_list
         print mid_eid_list,'++++++++++++++++'
@@ -143,13 +141,13 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
                 end_id = dict(i['s2'])
                 if end_id.has_key('uid'):
                     user_name = user_name_search(end_id['uid'])
-                    # print end_id['uid'],'333333333333333333333333'
-                    u_nodes_list[end_id['uid']] = user_name
+                    print end_id['uid'],'333333333333333333333333'
+                    u_nodes_list.append([end_id['uid'],user_name])
                     all_uid_list.append([end_id['uid'],user_name])
                     user_relation.append([start_mid_id,relation2,end_id['uid']])
                 if end_id.has_key('envent_id'):
                     event_name = event_name_search(end_id['event_id'])
-                    e_nodes_list[end_id['event_id']] = event_name
+                    e_nodes_list.append([end_id['event_id'], event_name])
                     user_relation.append([start_mid_id,relation2,end_id['envent_id']])
         for mid_eid in mid_eid_list:
             c_string = 'START s1 = node:event_index(event="'+str(mid_eid)+'") '
@@ -159,14 +157,14 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
                 relation2 = i['r2'].type()
                 end_id = dict(i['s2'])
                 if end_id.has_key('uid'):
-                    # print end_id['uid'],'44444444444444444444444'
+                    print end_id['uid'],'44444444444444444444444'
                     user_name = user_name_search(end_id['uid'])
-                    u_nodes_list[end_id['uid']] = user_name
+                    u_nodes_list.append([end_id['uid'],user_name])
                     all_uid_list.append([end_id['uid'],user_name])
                     user_relation.append([mid_eid,relation2,end_id['uid']])
                 if end_id.has_key('envent_id'):
                     event_name = event_name_search(end_id['event_id'])
-                    e_nodes_list[end_id['event_id']] = event_name
+                    e_nodes_list.append([end_id['event_id'], event_name])
                     user_relation.append([mid_eid,relation2,end_id['envent_id']])
 
                 # user_relation.append([start_id,relation,end_id['envent_id']])

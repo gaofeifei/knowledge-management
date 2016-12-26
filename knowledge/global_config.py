@@ -57,6 +57,7 @@ pusher = "pusher"
 maker = "maker"
 other_rel = "other_relationship" #其他关系
 
+user_event_relation = ['join','organise','discuss','first','pusher','maker','other_relationship']
 
 # Relationship: Event-Event
 contain = "contain"
@@ -64,7 +65,7 @@ casual = "casual"
 happen_together = "happen_together"
 event_special = "special_event" # 专题
 
-event_relation_list = ['contain','casual','happen_together','special_event']
+event_relation_list = ['contain','casual','happen_together']
 
 
 # Relatioship: User-User

@@ -83,7 +83,8 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
                 relation = i['r'].type()
                 end_id = dict(i['s1'])
                 if end_id.has_key('uid'):
-                    u_nodes_list.append(end_id['uid'])
+                    user_name = user_name_search(end_id['uid'])
+                    u_nodes_list.append([end_id['uid'],user_name])
                     event_relation.append([start_id,relation,end_id['uid']])
                 if end_id.has_key('envent_id'):
                     event_name = event_name_search(end_id['envent_id'])

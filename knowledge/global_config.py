@@ -55,6 +55,8 @@ casual = "casual"
 happen_together = "happen_together"
 event_special = "special_event" # 专题
 
+event_relation_list = ['contain','casual','happen_together','special_event']
+
 
 # Relatioship: User-User
 friend = "friend" #好友

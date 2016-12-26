@@ -13,6 +13,24 @@ from py2neo.ext.batman import ManualIndexManager
 from py2neo.ext.batman import ManualIndexWriteBatch
 http.socket_timeout = 9999
 
+def user_name_search(en_name):
+    query_body = {
+        "query":{
+            "match":{
+                '_id':en_name
+            }
+        }
+    }
+    try:
+        name_results = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
+                body=query_body, fields=['uname'])['hits']['hits'][0]['fields']
+    except:
+        return ''
+    for k,v in name_results.iteritems():
+        ch_name = v[0]
+    # print ch_name.encode('utf-8')
+    return ch_name
+
 def event_name_search(en_name):
     query_body = {
         "query":{
@@ -40,23 +58,24 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
     # print g.degree(b),'-=-=-=-=-=----------------'
     if node_type!='':
         node_type = ':' + node_type
-    if relation_type!='':
-        relation_type = ':' + relation_type
+    # if relation_type!='':
+    #     relation_type = ':' + relation_type
     event_relation = []
     # total_event = len(list(event_list))
     event_list = []
-    nodes_list = [] #all nodes
+    e_nodes_list = [] #all event nodes
+    u_nodes_list = [] #all user nodes
     for event in event_result:
         event_value = event['event']
         event_name = event_name_search(event_value)
         event_list.append([event_value,event_name])#取event
-    nodes_list.extend(event_list)
+    e_nodes_list.extend(event_list)
     all_event_id.extend(event_list)
     # print nodes_list,'-=-=-=-===================='
     if layer == '1':  #扩展一层
         for event_value in event_list:
-            c_string = 'START s0 = node:event_index(event="'+str(event_value)+'") '
-            c_string += 'MATCH (s0)-[r'+relation_type+']-(s1'+node_type+') return s0,r,s1 LIMIT 3'
+            c_string = 'START s0 = node:event_index(event="'+str(event_value[0])+'") '
+            c_string += 'MATCH (s0)-[r]-(s1'+node_type+') WHERE type(r) in '+ json.dumps(relation_type) +' return s0,r,s1 LIMIT 3'
             print c_string
             result = graph.run(c_string)
             for i in list(result):
@@ -64,18 +83,18 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
                 relation = i['r'].type()
                 end_id = dict(i['s1'])
                 if end_id.has_key('uid'):
-                    nodes_list.append(end_id['uid'])
+                    u_nodes_list.append(end_id['uid'])
                     event_relation.append([start_id,relation,end_id['uid']])
                 if end_id.has_key('envent_id'):
                     event_name = event_name_search(end_id['envent_id'])
-                    nodes_list.append([end_id['envent_id'],event_name])
+                    e_nodes_list.append([end_id['envent_id'],event_name])
                     all_event_id.append([end_id['envent_id'], event_name])
                     event_relation.append([start_id,relation,end_id['envent_id']])
     if layer == '2':  #扩展两层
         print layer,'layer'
         for event_value in event_list:
-            c_string = 'START s0 = node:event_index(event="'+str(event_value)+'") '
-            c_string += 'MATCH (s0)-[r'+relation_type+']-(s1'+node_type+') return s0,r,s1 LIMIT 10'
+            c_string = 'START s0 = node:event_index(event="'+str(event_value[0])+'") '
+            c_string += 'MATCH (s0)-[r1]-(s1'+node_type+') WHERE type(r1) in '+ json.dumps(relation_type) +' return s0,r1,s1 LIMIT 10'
             print c_string,'==========='
             
             mid_eid_list = []  #存放第一层的数据，再以这些为起始点，扩展第二层
@@ -93,20 +112,20 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
                     middle_id = m_id['uid']
                     mid_uid_list.append(middle_id)
                     user_name = user_name_search(middle_id)
-                    nodes_list.append(middle_id)
+                    u_nodes_list.append([middle_id,user_name])
                     event_relation.append([start_id,relation1,middle_id])
                 if m_id.has_key('envent_id'):
                     middle_id = m_id['envent_id']
                     mid_eid_list.append(middle_id)
                     event_name = event_name_search(middle_id)
-                    nodes_list.append([middle_id,event_name])
+                    e_nodes_list.append([middle_id,event_name])
                     all_event_id.append([middle_id,event_name])
                     event_relation.append([start_id,relation1,middle_id])
         print mid_uid_list
         print mid_eid_list,'++++++++++++++++'
         for mid_uid in mid_uid_list:
             c_string = 'START s1 = node:node_index(uid="'+str(mid_uid)+'") '
-            c_string += 'MATCH (s1)-[r2'+relation_type+']->(s2'+node_type+') return s1,r2,s2 LIMIT 5'
+            c_string += 'MATCH (s1)-[r2]->(s2'+node_type+') WHERE type(r2) in '+ json.dumps(relation_type) +' return s1,r2,s2 LIMIT 5'
             uid_result = graph.run(c_string)
 
             for i in uid_result:
@@ -114,32 +133,32 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
                 end_id = dict(i['s2'])
                 if end_id.has_key('uid'):
                     user_name = user_name_search(end_id['uid'])
-                    nodes_list.append([end_id['uid'],user_name])
+                    u_nodes_list.append([end_id['uid'],user_name])
                     event_relation.append([mid_uid,relation2,end_id['uid']])
                 if end_id.has_key('envent_id'):
                     event_name = event_name_search(end_id['envent_id'])
-                    nodes_list.append([end_id['envent_id'], event_name])
+                    e_nodes_list.append([end_id['envent_id'], event_name])
                     all_event_id.append([end_id['envent_id'], event_name])
                     event_relation.append([mid_uid, relation2,end_id['envent_id']])
         for mid_eid in mid_eid_list:
             c_string = 'START s1 = node:event_index(event="'+str(mid_eid)+'") '
-            c_string += 'MATCH (s1)-[r2'+relation_type+']->(s2'+node_type+') return s1,r2,s2 LIMIT 5'
+            c_string += 'MATCH (s1)-[r2]->(s2'+node_type+')  WHERE type(r2) in '+ json.dumps(relation_type) +' return s1,r2,s2 LIMIT 5'
             eid_result = graph.run(c_string)
             for i in eid_result:
                 relation2 = i['r2'].type()
                 end_id = dict(i['s2'])
                 if end_id.has_key('uid'):
                     user_name = user_name_search(end_id['uid'])
-                    nodes_list.append([end_id['uid'],user_name])
+                    u_nodes_list.append([end_id['uid'],user_name])
                     event_relation.append([mid_eid,relation2,end_id['uid']])
                 if end_id.has_key('envent_id'):
                     event_name = event_name_search(end_id['envent_id'])
-                    nodes_list.append([end_id['envent_id'], event_name])
+                    e_nodes_list.append([end_id['envent_id'], event_name])
                     all_event_id.append([end_id['envent_id'], event_name])
                     event_relation.append([mid_eid, relation2,end_id['envent_id']])
 
-    return {'total_event':len(event_list),'nodes':nodes_list,'map_event_id':all_event_id,\
-            'relation':event_relation}   
+    return {'total_event':len(event_list),'user_nodes':u_nodes_list,'event_nodes':e_nodes_list,\
+            'map_event_id':all_event_id, 'relation':event_relation}   
 
 # 地图
 def theme_tab_map(theme_name, node_type, relation_type, layer):

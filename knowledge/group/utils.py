@@ -212,4 +212,4 @@ def group_tab_map(group_name, node_type, relation_type, layer):
                 filter_location[tmp[1]] = v
 
     return_results = sorted(filter_location.iteritems(), key=lambda x:x[1], reverse=True)
-    return return_results
+    return return_results[:500]

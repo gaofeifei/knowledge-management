@@ -8,6 +8,7 @@ import time
 from datetime import date
 from datetime import datetime
 import csv
+from  knowledge.global_config  import relation_list
 from utils import group_tab_graph, group_tab_map
 from py2neo import Node, Relationship, Graph, NodeSelector
 from py2neo.packages.httpstream import http
@@ -33,16 +34,21 @@ def group_comparison():
 def group_node_filter():
     group_name = request.args.get('group_name', u'媒体')
     node_type = request.args.get('node_type', '')#User,Event
-    relation_type = request.args.get('relation_type','')
+    relation_str = ','.join(relation_list)
+    relation_type = request.args.get('relation_type',relation_str)
+    relation_type_list = relation_type.split(',')
+    print relation_type_list,'!!!!!!!!'
     layer = request.args.get('layer','1') #'1' or '2'
-    tab_graph_result = group_tab_graph(group_name, node_type, relation_type, layer)   
+    tab_graph_result = group_tab_graph(group_name, node_type, relation_type_list, layer)   
     return json.dumps(tab_graph_result)
 
 @mod.route('/group_map_filter/')
 def group_map_filter():
     group_name = request.args.get('group_name', u'媒体')
     node_type = request.args.get('node_type', '')#User,Event
-    relation_type = request.args.get('relation_type','')
+    relation_str = ','.join(relation_list)
+    relation_type = request.args.get('relation_type',relation_str)
+    relation_type_list = relation_type.split(',')
     layer = request.args.get('layer','1') #'1' or '2'
-    tab_map_result = group_tab_map(group_name, node_type, relation_type, layer)   
+    tab_map_result = group_tab_map(group_name, node_type, relation_type_list, layer)   
     return json.dumps(tab_map_result)

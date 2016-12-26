@@ -2,13 +2,20 @@
 
 from elasticsearch import Elasticsearch
 
+user_profile_host = ["219.224.134.213:9200"]
 user_portrait_host = ["219.224.134.225:9037"]
+km_user_portrait_host = ["219.224.134.225:9037"]
 user_portrait_port = "9200"
 event_host = ["219.224.134.225:9037"]
 event_port = "9200"
 neo4j_host = "219.224.134.213"
 neo4j_port = "7474"
+redis_host = "219.224.134.213"
+redis_port = "7381"
 
+profile_index_name = "weibo_user"
+profile_index_type = "user"
+remote_portrait_name = "user_portrait_1222" # user portrait system
 portrait_name = "user_portrait"
 portrait_type = "user"
 event_name = "event" # 事件基本信息
@@ -46,6 +53,8 @@ join = "join" # 参与
 organise = "organise" #组织
 discuss= "discuss" #讨论
 first = "first" #首发
+pusher = "pusher"
+maker = "maker"
 other_rel = "other_relationship" #其他关系
 
 
@@ -54,6 +63,8 @@ contain = "contain"
 casual = "casual"
 happen_together = "happen_together"
 event_special = "special_event" # 专题
+
+event_relation_list = ['contain','casual','happen_together','special_event']
 
 
 # Relatioship: User-User
@@ -64,6 +75,7 @@ colleague = "colleague" #同事
 leader_member = "leader_member" #上下级
 user_tag = "user_tag"
 
+relation_list = ['friend','interaction','relative','colleague','leader_member','user_tag']
 
 group_rel = "group"
 

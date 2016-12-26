@@ -7,7 +7,7 @@ import os
 import time
 from datetime import date
 from datetime import datetime
-from knowledge.global_config  import event_relation_list
+from knowledge.global_config  import event_relation_list,user_event_relation
 from py2neo import Node, Relationship, Graph, NodeSelector
 from py2neo.packages.httpstream import http
 from utils import theme_tab_map, theme_tab_graph
@@ -38,7 +38,8 @@ def theme_node_filter():
     relation_str = ','.join(event_relation_list)
     relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
-    layer = request.args.get('layer','2') #'1' or '2'
+    relation_type_list.extend(user_event_relation)
+    layer = request.args.get('layer','1') #'1' or '2'
     filter_result = theme_tab_graph(theme_name, node_type, relation_type_list, layer)
     return json.dumps(filter_result)
 
@@ -49,6 +50,7 @@ def theme_map_filter():
     relation_str = ','.join(event_relation_list)
     relation_type = request.args.get('relation_type','')
     relation_type_list = relation_type.split(',')
+    relation_type_list.extend(user_event_relation)
     layer = request.args.get('layer','1') #'1' or '2'
     filter_map_result = theme_tab_map(theme_name, node_type, relation_type_list, layer)
     return json.dumps(filter_map_result)

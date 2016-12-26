@@ -79,7 +79,8 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
             print c_string
             result = graph.run(c_string)
             for i in list(result):
-                start_id = i['s0']['event_id']
+                start_id = dict(i['s0'])['event_id']
+                # print start_id,'============='
                 relation = i['r'].type()
                 end_id = dict(i['s1'])
                 if end_id.has_key('uid'):
@@ -96,7 +97,7 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
         for event_value in event_list:
             c_string = 'START s0 = node:event_index(event="'+str(event_value[0])+'") '
             c_string += 'MATCH (s0)-[r1]-(s1'+node_type+') WHERE type(r1) in '+ json.dumps(relation_type) +' return s0,r1,s1 LIMIT 10'
-            print c_string,'==========='
+            # print c_string,'==========='
             
             mid_eid_list = []  #存放第一层的数据，再以这些为起始点，扩展第二层
             mid_uid_list = []
@@ -105,7 +106,7 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
             # print list(result),'-----------------'
             for i in list(result):
                 print i
-                start_id = i['s0']['event']
+                start_id = i['s0']['event_id']
                 # start_id = s0['event']
                 relation1 = i['r1'].type()
                 m_id = dict(i['s1'])

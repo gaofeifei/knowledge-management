@@ -11,8 +11,7 @@ from knowledge.global_config  import event_relation_list
 from py2neo import Node, Relationship, Graph, NodeSelector
 from py2neo.packages.httpstream import http
 from utils import theme_tab_map, theme_tab_graph
-graph = Graph('http://219.224.134.213:7474/db/data', user='neo4j', password='database')
-g= graph.begin()
+
 http.socket_timeout = 9999
 
 mod = Blueprint('theme', __name__, url_prefix='/theme')

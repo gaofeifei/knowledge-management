@@ -64,6 +64,8 @@ casual = "casual"
 happen_together = "happen_together"
 event_special = "special_event" # 专题
 
+event_relation_list = ['contain','casual','happen_together','special_event']
+
 
 # Relatioship: User-User
 friend = "friend" #好友
@@ -73,6 +75,7 @@ colleague = "colleague" #同事
 leader_member = "leader_member" #上下级
 user_tag = "user_tag"
 
+relation_list = ['friend','interaction','relative','colleague','leader_member','user_tag']
 
 group_rel = "group"
 

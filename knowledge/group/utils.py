@@ -59,7 +59,7 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
     #     relation_type = ':' + relation_type
     user_relation = []
     # total_user = len(list(uid_list))
-    uid_list = {}
+    uid_list = []
     u_nodes_list = {} #all user nodes
     e_nodes_list = {} #all event nodes
     for uid in user_list:
@@ -67,7 +67,7 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
         user_name = user_name_search(uid_value)
         # print uid_value,'000000000000'
         all_uid_list.append([str(uid_value),user_name])
-        uid_list[str(uid_value)] = user_name  #取uid
+        uid_list.append([str(uid_value),user_name])# = user_name  #取uid
         u_nodes_list[str(uid_value)] = user_name  #取uid
     # u_nodes_list.extend(uid_list)
     # all_uid_list.extend(uid_list)
@@ -81,6 +81,7 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
             for i in list(result):
                 start_id = i['s0']['uid']
                 relation = i['r'].type()
+                # print relation,'!!!!!!!!!!!!!!!!!!'
                 end_id = dict(i['s1'])
                 if end_id.has_key('uid'):
                     user_name = user_name_search(end_id['uid'])

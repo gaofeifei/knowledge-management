@@ -63,13 +63,13 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
     event_relation = []
     # total_event = len(list(event_list))
     event_list = []
-    e_nodes_list = [] #all event nodes
-    u_nodes_list = [] #all user nodes
+    e_nodes_list = {} #all event nodes
+    u_nodes_list = {} #all user nodes
     for event in event_result:
         event_value = event['event']
         event_name = event_name_search(event_value)
         event_list.append([event_value,event_name])#取event
-    e_nodes_list.extend(event_list)
+        e_nodes_list[event_value] = event_name
     all_event_id.extend(event_list)
     # print nodes_list,'-=-=-=-===================='
     if layer == '1':  #扩展一层
@@ -85,11 +85,11 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
                 end_id = dict(i['s1'])
                 if end_id.has_key('uid'):
                     user_name = user_name_search(end_id['uid'])
-                    u_nodes_list.append([end_id['uid'],user_name])
+                    u_nodes_list[end_id['uid']] = user_name
                     event_relation.append([start_id,relation,end_id['uid']])
                 if end_id.has_key('envent_id'):
                     event_name = event_name_search(end_id['envent_id'])
-                    e_nodes_list.append([end_id['envent_id'],event_name])
+                    e_nodes_list[end_id['envent_id']] = event_name
                     all_event_id.append([end_id['envent_id'], event_name])
                     event_relation.append([start_id,relation,end_id['envent_id']])
     if layer == '2':  #扩展两层
@@ -114,13 +114,13 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
                     middle_id = m_id['uid']
                     mid_uid_list.append(middle_id)
                     user_name = user_name_search(middle_id)
-                    u_nodes_list.append([middle_id,user_name])
+                    u_nodes_list[middle_id] = user_name
                     event_relation.append([start_id,relation1,middle_id])
                 if m_id.has_key('envent_id'):
                     middle_id = m_id['envent_id']
                     mid_eid_list.append(middle_id)
                     event_name = event_name_search(middle_id)
-                    e_nodes_list.append([middle_id,event_name])
+                    e_nodes_list[middle_id] = event_name
                     all_event_id.append([middle_id,event_name])
                     event_relation.append([start_id,relation1,middle_id])
         print mid_uid_list
@@ -135,11 +135,11 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
                 end_id = dict(i['s2'])
                 if end_id.has_key('uid'):
                     user_name = user_name_search(end_id['uid'])
-                    u_nodes_list.append([end_id['uid'],user_name])
+                    u_nodes_list[end_id['uid']] = user_name
                     event_relation.append([mid_uid,relation2,end_id['uid']])
                 if end_id.has_key('envent_id'):
                     event_name = event_name_search(end_id['envent_id'])
-                    e_nodes_list.append([end_id['envent_id'], event_name])
+                    e_nodes_list[end_id['envent_id']] = event_name
                     all_event_id.append([end_id['envent_id'], event_name])
                     event_relation.append([mid_uid, relation2,end_id['envent_id']])
         for mid_eid in mid_eid_list:
@@ -151,11 +151,11 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
                 end_id = dict(i['s2'])
                 if end_id.has_key('uid'):
                     user_name = user_name_search(end_id['uid'])
-                    u_nodes_list.append([end_id['uid'],user_name])
+                    u_nodes_list[end_id['uid']] = user_name
                     event_relation.append([mid_eid,relation2,end_id['uid']])
                 if end_id.has_key('envent_id'):
                     event_name = event_name_search(end_id['envent_id'])
-                    e_nodes_list.append([end_id['envent_id'], event_name])
+                    e_nodes_list[end_id['envent_id']] = event_name
                     all_event_id.append([end_id['envent_id'], event_name])
                     event_relation.append([mid_eid, relation2,end_id['envent_id']])
 

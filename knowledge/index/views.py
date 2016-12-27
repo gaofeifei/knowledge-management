@@ -23,13 +23,15 @@ def show_searche_result():
 
     return render_template('index/incident.html')
 
-@mod.route('/event_detail/') #事件详细结果
+#事件详细页面上方卡片结果
+@mod.route('/event_detail/') 
 def show_search_event():
     event_name = request.args.get('event_name', '马来西亚抓获电信欺诈案犯')
     detail_e = query_event_detail(event_name)
     return json.dumps(detail_e)
 
-@mod.route('/event_detail_people/') #事件人物详细结果
+#事件人物详细结果
+@mod.route('/event_detail_people/') 
 def show_event_user():
     event_name = request.args.get('event_name', '马来西亚抓获电信欺诈案犯')
     detail_p = query_event_people(event_name)

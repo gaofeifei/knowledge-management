@@ -3,8 +3,10 @@
 import time
 import json
 from knowledge.global_config import portrait_name, portrait_type, event_name, event_analysis_name, \
-        neo4j_name, event_type, event_special, special_event_index_name, group_index_name, group_rel, node_index_name
-from knowledge.global_utils import es_user_portrait, es_event, graph
+        neo4j_name, event_type, event_special, special_event_index_name, group_index_name, \
+        group_rel, node_index_name,user_event_relation
+from knowledge.global_utils import es_user_portrait, es_event, graph,\
+        user_name_search, event_name_search
 from knowledge.parameter import rel_node_mapping, rel_node_type_mapping, index_threshold
 from knowledge.time_utils import ts2datetime, datetime2ts
 from py2neo import Node, Relationship
@@ -65,9 +67,7 @@ def query_current_week_increase():
 
     return results
 
-
 # query special event, return list
-
 def query_special_event():
     # step 1: query all special event
     c_string = "MATCH (n:SpecialEvent) RETURN n"
@@ -209,8 +209,23 @@ def query_event_people(event):
     event_detail = es_event.search(index=event_name, doc_type=event_type, \
                 body=query_body, _source=False, fields=['en_name'])['hits']['hits'][0]['fields']
     
-    event_id = event_detail['en_name']
-    return event_id[0]
+    event_id = event_detail['en_name'][0]
+    c_string = 'START s0 = node:event_index(event="'+str(event_id)+'") '
+    c_string += 'MATCH (s0)-[r]-(s1:User) return r,s1.uid as uid LIMIT 50'
+    print c_string
+    result = graph.run(c_string)
+    related_people = {}
+    for i in result:
+        relation = i['r'].type()
+        user_id = str(i['uid'])
+        user_name = user_name_search(user_id)
+        try:
+            related_people[relation].append([user_id,user_name])
+        except:
+            related_people[relation] = []
+            related_people[relation].append([user_id,user_name])
+            
+    return related_people
 
 
 
@@ -273,4 +288,3 @@ def query_hot_location():
     return_results = sorted(filter_location.iteritems(), key=lambda x:x[1], reverse=True)
 
     return return_results
-

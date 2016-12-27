@@ -63,9 +63,11 @@ user_event_relation = ['join','organise','discuss','first','pusher','maker','oth
 contain = "contain"
 casual = "casual"
 happen_together = "happen_together"
+event_other = 'event_other'#其他关系
+
 event_special = "special_event" # 专题
 
-event_relation_list = ['contain','casual','happen_together']
+event_relation_list = ['contain','casual','happen_together','event_other']
 
 
 # Relatioship: User-User

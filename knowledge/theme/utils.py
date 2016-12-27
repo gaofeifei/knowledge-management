@@ -13,6 +13,7 @@ from py2neo.ext.batman import ManualIndexManager
 from py2neo.ext.batman import ManualIndexWriteBatch
 http.socket_timeout = 9999
 
+#查找uid对应的名字
 def user_name_search(en_name):
     query_body = {
         "query":{
@@ -31,6 +32,7 @@ def user_name_search(en_name):
     # print ch_name.encode('utf-8')
     return ch_name
 
+#查找事件id对应的名字
 def event_name_search(en_name):
     query_body = {
         "query":{
@@ -46,6 +48,147 @@ def event_name_search(en_name):
         # print v
     return ch_name
 
+#查找该专题下事件关联的用户信息
+def related_user_search(uid_list,sort_flag):
+
+    query_body = {
+        'query':{
+            'terms':{'uid':uid_list}
+            },
+        "sort": [{sort_flag:'desc'}]
+    }
+    fields_list = ['activeness', 'importnace','sensitive','uname','fansnum',\
+                   'domain','topic_string','user_tag']
+
+    event_detail = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
+                body=query_body, _source=False, fields=fields_list)['hits']['hits']
+    detail_result = []
+    for i in event_detail:
+        fields = i['fields']
+        detail = dict()
+        for i in fields_list:
+            try:
+                detail[i] = fields[i][0]
+            except:
+                detail[i] = 'null'
+        detail_result.append(detail)
+    return detail_result
+
+#查找该专题下的事件主题河流数据
+def event_river_search(eid_list):
+    query_body = {
+        'query':{
+            'terms':{'en_name':eid_list}
+            },
+        # "sort": [{sort_flag:'desc'}]
+    }
+    
+    fields_list = ['name']
+
+    event_detail = es_event.search(index=event_analysis_name, doc_type=event_type, \
+                body=query_body, _source=False, fields=fields_list)['hits']['hits']
+    detail_result = []
+    for i in event_detail:
+        fields = i['fields']
+        detail = dict()
+        for i in fields_list:
+            try:
+                detail[i] = fields[i][0]
+            except:
+                detail[i] = 'null'
+        detail_result.append(detail)
+    return detail_result
+
+# 查找该专题下的包含事件卡片信息
+def event_detail_search(eid_list,sort_flag):
+
+    query_body = {
+        'query':{
+            'terms':{'en_name':eid_list}
+            },
+        "sort": [{sort_flag:'desc'}]
+    }
+    fields_list = ['name', 'counts','start_ts','location','renshu','user_tag','description']
+
+    event_detail = es_event.search(index=event_analysis_name, doc_type=event_type, \
+                body=query_body, _source=False, fields=fields_list)['hits']['hits']
+    detail_result = []
+    for i in event_detail:
+        fields = i['fields']
+        detail = dict()
+        for i in fields_list:
+            try:
+                detail[i] = fields[i][0]
+            except:
+                detail[i] = 'null'
+        detail_result.append(detail)
+    return detail_result
+
+def query_special_event():  #专题概览，所有专题及其事件数量
+    # step 1: query all special event
+    c_string = "MATCH (n:SpecialEvent) RETURN n"
+    result = graph.run(c_string)
+    special_event_list = []
+    for item in result:
+        special_event_list.append(dict(item[0]))
+    tmp_list = []
+    for item in special_event_list:
+        tmp_list.extend(item.values())
+
+    results = dict()
+    for v in tmp_list:
+        c_string = "START end_node=node:%s(event='%s') MATCH (m)-[r:%s]->(end_node) RETURN count(m)" %(special_event_index_name, v, event_special)
+        node_result = graph.run(c_string)
+        event_list = []
+        for item in node_result:
+            tmp = dict(item)
+            node_number = tmp.values()[0]
+        results[v] = node_number
+
+    return_results = sorted(results.iteritems(), key=lambda x:x[1], reverse=True)
+    return return_results
+
+def query_theme_river(theme_name):
+    s_string = 'START s0 = node:special_event_index(event="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.event_id as event' %theme_name
+    event_result = graph.run(s_string)
+    event_list = []
+    for event in event_result:
+        event_value = event['event']
+        event_list.append(event_value)
+    detail_result = event_river_search(event_list)
+    return detail_result
+
+def query_detail_theme(theme_name, sort_flag):
+    s_string = 'START s0 = node:special_event_index(event="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.event_id as event' %theme_name
+    event_result = graph.run(s_string)
+    event_list = []
+    for event in event_result:
+        event_value = event['event']
+        event_list.append(event_value)
+    detail_result = event_detail_search(event_list, sort_flag)
+    return detail_result
+
+def query_theme_user(theme_name, sort_flag):
+    s_string = 'START s0 = node:special_event_index(event="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.event_id as event' %theme_name
+    event_result = graph.run(s_string)
+    uid_list = []
+    for event in event_result:
+        # print 
+        event_value = event['event']
+        # event_list.append(event_value)
+        c_string = 'START s0 = node:event_index(event="'+str(event_value)+'") '
+        c_string += 'MATCH (s0)-[r]-(s1:User) return s1 LIMIT 50'
+        print c_string
+        result = graph.run(c_string)
+        for i in list(result):
+            end_id = dict(i['s1'])
+            uid_list.append(end_id['uid'])
+    print len(uid_list)
+    detail_result = related_user_search(uid_list, sort_flag)
+    return detail_result
 
 def theme_tab_graph(theme_name, node_type, relation_type, layer):
     s_string = 'START s0 = node:special_event_index(event="%s")\
@@ -63,13 +206,14 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
     event_relation = []
     # total_event = len(list(event_list))
     event_list = []
-    e_nodes_list = [] #all event nodes
-    u_nodes_list = [] #all user nodes
+    e_nodes_list = {} #all event nodes
+    u_nodes_list = {} #all user nodes
     for event in event_result:
+        print event,'==========='
         event_value = event['event']
         event_name = event_name_search(event_value)
         event_list.append([event_value,event_name])#取event
-    e_nodes_list.extend(event_list)
+        e_nodes_list[event_value] = event_name
     all_event_id.extend(event_list)
     # print nodes_list,'-=-=-=-===================='
     if layer == '1':  #扩展一层
@@ -85,11 +229,11 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
                 end_id = dict(i['s1'])
                 if end_id.has_key('uid'):
                     user_name = user_name_search(end_id['uid'])
-                    u_nodes_list.append([end_id['uid'],user_name])
+                    u_nodes_list[end_id['uid']] = user_name
                     event_relation.append([start_id,relation,end_id['uid']])
                 if end_id.has_key('envent_id'):
                     event_name = event_name_search(end_id['envent_id'])
-                    e_nodes_list.append([end_id['envent_id'],event_name])
+                    e_nodes_list[end_id['envent_id']] = event_name
                     all_event_id.append([end_id['envent_id'], event_name])
                     event_relation.append([start_id,relation,end_id['envent_id']])
     if layer == '2':  #扩展两层
@@ -114,13 +258,13 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
                     middle_id = m_id['uid']
                     mid_uid_list.append(middle_id)
                     user_name = user_name_search(middle_id)
-                    u_nodes_list.append([middle_id,user_name])
+                    u_nodes_list[middle_id] = user_name
                     event_relation.append([start_id,relation1,middle_id])
                 if m_id.has_key('envent_id'):
                     middle_id = m_id['envent_id']
                     mid_eid_list.append(middle_id)
                     event_name = event_name_search(middle_id)
-                    e_nodes_list.append([middle_id,event_name])
+                    e_nodes_list[middle_id] = event_name
                     all_event_id.append([middle_id,event_name])
                     event_relation.append([start_id,relation1,middle_id])
         print mid_uid_list
@@ -135,11 +279,11 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
                 end_id = dict(i['s2'])
                 if end_id.has_key('uid'):
                     user_name = user_name_search(end_id['uid'])
-                    u_nodes_list.append([end_id['uid'],user_name])
+                    u_nodes_list[end_id['uid']] = user_name
                     event_relation.append([mid_uid,relation2,end_id['uid']])
                 if end_id.has_key('envent_id'):
                     event_name = event_name_search(end_id['envent_id'])
-                    e_nodes_list.append([end_id['envent_id'], event_name])
+                    e_nodes_list[end_id['envent_id']] = event_name
                     all_event_id.append([end_id['envent_id'], event_name])
                     event_relation.append([mid_uid, relation2,end_id['envent_id']])
         for mid_eid in mid_eid_list:
@@ -151,11 +295,11 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
                 end_id = dict(i['s2'])
                 if end_id.has_key('uid'):
                     user_name = user_name_search(end_id['uid'])
-                    u_nodes_list.append([end_id['uid'],user_name])
+                    u_nodes_list[end_id['uid']] = user_name
                     event_relation.append([mid_eid,relation2,end_id['uid']])
                 if end_id.has_key('envent_id'):
                     event_name = event_name_search(end_id['envent_id'])
-                    e_nodes_list.append([end_id['envent_id'], event_name])
+                    e_nodes_list[end_id['envent_id']] = event_name
                     all_event_id.append([end_id['envent_id'], event_name])
                     event_relation.append([mid_eid, relation2,end_id['envent_id']])
 

@@ -166,6 +166,58 @@ def query_new_relationship():
 
     return results
 
+#事件信息面板
+def query_event_detail(event):
+    query_body = {
+        'query':{
+            'match':{'name':event}
+            }
+    }
+    analysis_fields_list = ['counts','location','renshu','user_tag','description']
+    fields_list = ['submit_ts', 'submit_user','start_ts','end_ts']
+    
+    event_detail = es_event.search(index=event_name, doc_type=event_type, \
+                body=query_body, _source=False, fields=fields_list)['hits']['hits']
+    event_detail_a = es_event.search(index=event_analysis_name, doc_type=event_type, \
+                body=query_body, _source=False, fields=analysis_fields_list)['hits']['hits']
+    # event_detail.extend(event_detail_a)
+    detail = dict()
+    for i in event_detail:
+        fields = i['fields']
+        for i in fields_list:
+            try:
+                detail[i] = fields[i][0]
+            except:
+                detail[i] = 'null'
+    for i in event_detail_a:
+        fields = i['fields']
+        for i in analysis_fields_list:
+            try:
+                detail[i] = fields[i][0]
+            except:
+                detail[i] = 'null'
+    return detail
+
+#事件相关人物
+def query_event_people(event):
+    query_body = {
+        'query':{
+            'match':{'name':event}
+            }
+    }
+    
+    event_detail = es_event.search(index=event_name, doc_type=event_type, \
+                body=query_body, _source=False, fields=['en_name'])['hits']['hits'][0]['fields']
+    
+    event_id = event_detail['en_name']
+    return event_id[0]
+
+
+
+#事件关联事件
+
+
+#事件相关微博
 
 # 地图
 def query_hot_location():

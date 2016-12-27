@@ -182,6 +182,7 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
 
 # 地图
 def group_tab_map(group_name, node_type, relation_type, layer):
+    black_country = [u'美国',u'其他',u'法国',u'英国']
     tab_graph_result = group_tab_graph(group_name, node_type, relation_type, layer)
     uid_list = [i[0] for i in tab_graph_result['map_uid']]
 
@@ -216,6 +217,8 @@ def group_tab_map(group_name, node_type, relation_type, layer):
         elif len(tmp) == 1:
             continue
         else:
+            if tmp[1] in black_country:
+                continue
             try:
                 filter_location[tmp[1]] += v
             except:

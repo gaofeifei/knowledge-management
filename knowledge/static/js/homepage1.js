@@ -84,14 +84,13 @@
     };
     function territory(data) {
         var data=eval(data);
-        console.log(data);
         var plate=[];
         $.each(data, function (index, item) {
             plate.push(
                 {name: item[0], value: item[1]}
             );
         });
-        console.log(plate)
+        // console.log(plate)
         // 路径配置
         require.config({
             paths: {
@@ -168,7 +167,7 @@
                                         }
                                     }
                                 },
-                                data : [plate[0]],
+                                data : plate,
                             },
                             geoCoord: {
                                 "海门":[121.15,31.89],
@@ -363,28 +362,28 @@
                                 "大庆":[125.03,46.58]
                             }
                         },
-                        {
-                            name: 'Top5',
-                            type: 'map',
-                            mapType: 'china',
-                            data:[],
-                            markPoint : {
-                                symbol:'emptyCircle',
-                                symbolSize : function (v){
-                                    return 10 + v/100
-                                },
-                                effect : {
-                                    show: true,
-                                    shadowBlur : 0
-                                },
-                                itemStyle:{
-                                    normal:{
-                                        label:{show:false}
-                                    }
-                                },
-                                data : [plate[0]]
-                            }
-                        }
+                        // {
+                        //     name: 'Top5',
+                        //     type: 'map',
+                        //     mapType: 'china',
+                        //     data:[],
+                        //     markPoint : {
+                        //         symbol:'emptyCircle',
+                        //         symbolSize : function (v){
+                        //             return 10 + v/100
+                        //         },
+                        //         effect : {
+                        //             show: true,
+                        //             shadowBlur : 0
+                        //         },
+                        //         itemStyle:{
+                        //             normal:{
+                        //                 label:{show:false}
+                        //             }
+                        //         },
+                        //         data : [plate[0]]
+                        //     }
+                        // }
                     ]
                 };
 

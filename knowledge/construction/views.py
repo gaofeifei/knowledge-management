@@ -43,7 +43,7 @@ def select_relation():
     result_dict["node"] = list1_set
     return json.dumps(result_dict)
 
-
+#select node
 @mod.route('/select_node')
 def select_node():
     list = []

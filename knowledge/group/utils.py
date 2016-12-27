@@ -5,7 +5,8 @@ import json
 from knowledge.global_config import portrait_name, portrait_type, event_name, event_analysis_name, \
         neo4j_name, event_type, event_special, special_event_index_name, group_index_name, \
         group_rel, node_index_name,user_tag,relation_list
-from knowledge.global_utils import es_user_portrait, es_event, graph
+from knowledge.global_utils import es_user_portrait, es_event, graph,\
+        user_name_search,event_name_search
 from knowledge.time_utils import ts2datetime, datetime2ts
 from py2neo import Node, Relationship
 from py2neo.ogm import GraphObject, Property
@@ -13,38 +14,6 @@ from py2neo.packages.httpstream import http
 from py2neo.ext.batman import ManualIndexManager
 from py2neo.ext.batman import ManualIndexWriteBatch
 http.socket_timeout = 9999
-
-def user_name_search(en_name):
-    query_body = {
-        "query":{
-            "match":{
-                '_id':en_name
-            }
-        }
-    }
-    try:
-        name_results = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
-                body=query_body, fields=['uname'])['hits']['hits'][0]['fields']
-    except:
-        return ''
-    for k,v in name_results.iteritems():
-        ch_name = v[0]
-    # print ch_name.encode('utf-8')
-    return ch_name
-
-def event_name_search(en_name):
-    query_body = {
-        "query":{
-            "match":{
-                '_id':en_name
-            }
-        }
-    }
-    name_results = es_event.search(index=event_name, doc_type=event_type, \
-                body=query_body,fields=['name'])['hits']['hits'][0]['fields']
-    for k,v in name_results.iteritems():
-        ch_name = v[0]
-    return ch_name
 
 def group_tab_graph(group_name, node_type, relation_type, layer):
     s_string = 'START s0 = node:group_index(group="' + group_name + '")  \

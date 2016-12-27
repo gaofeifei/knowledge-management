@@ -75,14 +75,14 @@ def related_user_search(uid_list,sort_flag):
     return detail_result
 
 #查找该专题下的事件主题河流数据
-def event_detail_search(eid_list):
-
+def event_river_search(eid_list):
     query_body = {
         'query':{
             'terms':{'en_name':eid_list}
             },
         # "sort": [{sort_flag:'desc'}]
     }
+    
     fields_list = ['name']
 
     event_detail = es_event.search(index=event_analysis_name, doc_type=event_type, \

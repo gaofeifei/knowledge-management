@@ -7,7 +7,8 @@ import os
 import time
 from datetime import date
 from datetime import datetime
-from utils import query_current_week_increase, query_special_event, query_group, query_new_relationship, query_hot_location
+from utils import query_current_week_increase, query_special_event, query_group,\
+     query_new_relationship, query_hot_location, query_event_detail,query_event_people
 
 
 mod = Blueprint('index', __name__, url_prefix='/index')
@@ -21,7 +22,19 @@ def index():
 def show_searche_result():
 
     return render_template('index/incident.html')
-    
+
+@mod.route('/event_detail/') #事件详细结果
+def show_search_event():
+    event_name = request.args.get('event_name', '马来西亚抓获电信欺诈案犯')
+    detail_e = query_event_detail(event_name)
+    return json.dumps(detail_e)
+
+@mod.route('/event_detail_people/') #事件人物详细结果
+def show_event_user():
+    event_name = request.args.get('event_name', '马来西亚抓获电信欺诈案犯')
+    detail_p = query_event_people(event_name)
+    return json.dumps(detail_p)
+
 @mod.route('/person/')
 def show_person():
 

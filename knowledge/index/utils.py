@@ -120,7 +120,7 @@ def query_group():
 
 def query_new_relationship():
     current_ts = time.time()
-    former_ts = datetime2ts(ts2datetime(current_ts-week*24*3600))
+    former_ts = datetime2ts(ts2datetime(current_ts-10*24*3600))
     query_node = {
         "query":{
             "bool":{
@@ -168,10 +168,10 @@ def query_new_relationship():
                 event_list.add(primary_key)
             else:
                 try:
-                    return_results[node_type][tmp_node] = tmp_node
+                    return_results[node_type][primary_key] = primary_key
                 except:
                     return_results[node_type] = dict()
-                    return_results[node_type][tmp_node] = tmp_node
+                    return_results[node_type][primary_key] = primary_key
             results.append([uid, rel_type, primary_key, node_type])
             total_set.add(uid)
             total_set.add(primary_key)
@@ -201,6 +201,7 @@ def query_new_relationship():
         for item in event_result:
             event_node[item["_id"]] = item["_source"]["name"]
         return_results["event_node"] = event_node
+    print return_results.keys()
 
     return return_results
 

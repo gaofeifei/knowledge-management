@@ -5,8 +5,8 @@ from global_config import *
 RUN_TYPE = 0
 
 # 关系类型与后续节点primary key的关系
-rel_node_mapping = {join: "event", organise: "event", discuss: "event", first: "event", other_rel: "event", \
-        group_rel: "group", contain: "event", casual: "event", happen_together:"event", event_special:"event", \
+rel_node_mapping = {join: "event_id", organise: "event_id", discuss: "event_id", first: "event_id", other_rel: "event_id",maker:"event_id",pusher:"event_id", \
+        group_rel: "group", contain: "event_id", casual: "event_id", happen_together:"event_id", event_special:"event_id", \
         friend: "uid", interaction: "uid", relative: "uid", colleague: "uid", leader_member: "uid", user_tag: "uid", \
         "domain": "domain", "topic": "topic", "location": "location", "event":"event_id"}
 

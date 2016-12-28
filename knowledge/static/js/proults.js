@@ -85,19 +85,24 @@ function events() {
     myChart.showLoading();
     $.getJSON(url, function (json) {
         var json=eval(json);
-
         // var categories = [{name:'人物'},{name:'事件'}];
-
-        var node_value=[],link_value=[],event_value=[];
+        var node_value=[],link_value=[];
+            // ,event_value=[];
         for (var key in json.user_nodes){
             var num1=Math.random()*(-1000-700)+1000;
             var num2=Math.random()*(-1000-700)+1000;
+            var name;
+            if (json.user_nodes[key]==''||json.user_nodes[key]=="unknow") {
+                name=key;
+            }else {
+                name=json.user_nodes[key];
+            };
             node_value.push(
                 {
                     x: num1,
                     y: num2,
                     id: key,
-                    name:json.user_nodes[key],
+                    name:name,
                     symbolSize: 14,
                     itemStyle: {
                         normal: {
@@ -107,15 +112,21 @@ function events() {
                 }
             );
         };
-        for (var key in json.event_nodes){
+        for (var key2 in json.event_nodes){
             var num3=Math.random()*(-1000-700)+1000;
             var num4=Math.random()*(-1000-700)+1000;
-            event_value.push(
+            var name2;
+            if (json.event_nodes[key2]==''||json.event_nodes[key2]=="unknow") {
+                name2=key2;
+            }else {
+                name2=json.event_nodes[key2];
+            }
+            node_value.push(
                 {
                     x: num3,
                     y: num4,
-                    id: key,
-                    name:json.event_nodes[key],
+                    id: key2,
+                    name:name2,
                     symbolSize: 14,
                     itemStyle: {
                         normal: {
@@ -132,14 +143,14 @@ function events() {
                     target: item[2]
                 }
             );
-        })
+        });
         myChart.hideLoading();
         myChart.setOption(option = {
             title: {
                 // text: 'NPM Dependencies'
             },
             legend: {
-                data: ["人物","事件"]
+                // data: ["人物","事件"]
                 // data:categories.map(function (a) {
                 //     return a;
                 // })
@@ -148,7 +159,7 @@ function events() {
             animationEasingUpdate: 'quinticInOut',
             series : [
                 {
-                    name:'人物',
+                    // name:'人物',
                     type: 'graph',
                     layout: 'none',
                     // progressiveThreshold: 700,
@@ -174,33 +185,33 @@ function events() {
                         }
                     }
                 },
-                {
-                    name:'事件',
-                    type: 'graph',
-                    layout: 'none',
-                    // progressiveThreshold: 700,
-                    // data:node_value,
-                    // edges: link_value,
-                    itemStyle:{
-                        normal:{
-                            color:'#a73cff'
-                        }
-                    },
-                    label: {
-                        emphasis: {
-                            position: 'right',
-                            show: true
-                        }
-                    },
-                    focusNodeAdjacency: true,
-                    lineStyle: {
-                        normal: {
-                            width: 1.5,
-                            curveness: 0.3,
-                            opacity: 0.8
-                        }
-                    }
-                },
+                // {
+                //     name:'事件',
+                //     type: 'graph',
+                //     layout: 'none',
+                //     // progressiveThreshold: 700,
+                //     // data:node_value,
+                //     // edges: link_value,
+                //     itemStyle:{
+                //         normal:{
+                //             color:'#a73cff'
+                //         }
+                //     },
+                //     label: {
+                //         emphasis: {
+                //             position: 'right',
+                //             show: true
+                //         }
+                //     },
+                //     focusNodeAdjacency: true,
+                //     lineStyle: {
+                //         normal: {
+                //             width: 1.5,
+                //             curveness: 0.3,
+                //             opacity: 0.8
+                //         }
+                //     }
+                // },
             ]
         }, true);
 
@@ -211,131 +222,21 @@ events();
 
 
 //地图配置，地址请求
-// function place() {
-//     //this.ajax_method='GET'; // body...
-// }
-// place.prototype= {
-//     call_request:function(url,callback) {
-//         $.ajax({
-//             url: url,
-//             type: 'GET',
-//             dataType: 'json',
-//             async: true,
-//             success:callback
-//         });
-//     },
-// };
-// // function territory(data) {
-// //     var data=eval(data);
-// //     var plate=[],local={};
-// //     $.each(data, function (index, item) {
-// //         plate.push(
-// //             {name: item[0],value: item[1]}
-// //         );
-// //         var myGeo = new BMap.Geocoder();
-// //         // 将地址解析结果显示在地图上,并调整地图视野
-// //         myGeo.getPoint(item[0], function(home){
-// //             if (home) {
-// //                 // local.push({item[0]:[point.lng,point.lat]})
-// //                 local[item[0]]=[home.lng,home.lat];
-// //             }
-// //         }, item[0]);
-// //     });
-// //     var geoCoordMap = local;
-// //
-// //     var convertData = function (pl) {
-// //         var res = [];
-// //         for (var i = 0; i < pl.length; i++) {
-// //             var geoCoord = geoCoordMap[pl[i].name];
-// //             if (geoCoord) {
-// //                 res.push({
-// //                     name: pl[i].name,
-// //                     value: geoCoord.concat(pl[i].value)
-// //                 });
-// //             }
-// //         }
-// //         return res;
-// //     };
-// //     var myChart = echarts.init(document.getElementById('placeimg'));
-// //     option = {
-// //         backgroundColor: '#404a59',
-// //         title: {
-// //             // text: '全国主要城市空气质量',
-// //             // subtext: 'data from PM25.in',
-// //             // sublink: 'http://www.pm25.in',
-// //             // x:'center',
-// //             // textStyle: {
-// //             //     color: '#fff'
-// //             // }
-// //         },
-// //         tooltip: {
-// //             trigger: 'item',
-// //         },
-// //         legend: {
-// //             orient: 'vertical',
-// //             y: 'bottom',
-// //             x:'right',
-// //             data:['pm2.5'],
-// //             textStyle: {
-// //                 color: '#fff'
-// //             }
-// //         },
-// //         visualMap: {
-// //             min: 0,
-// //             max: 200,
-// //             calculable: true,
-// //             inRange: {
-// //                 color: ['#50a3ba', '#eac736', '#d94e5d']
-// //             },
-// //             textStyle: {
-// //                 color: '#fff'
-// //             }
-// //         },
-// //         geo: {
-// //             map: 'china',
-// //             label: {
-// //                 emphasis: {
-// //                     show: false
-// //                 }
-// //             },
-// //             roam: true,
-// //             itemStyle: {
-// //                 normal: {
-// //                     areaColor: '#323c48',
-// //                     borderColor: '#111'
-// //                 },
-// //                 emphasis: {
-// //                     areaColor: '#2a333d'
-// //                 }
-// //             }
-// //         },
-// //         series: [
-// //             {
-// //                 name: 'pm2.5',
-// //                 type: 'scatter',
-// //                 coordinateSystem: 'geo',
-// //                 data: convertData(plate),
-// //                 symbolSize: 12,
-// //                 label: {
-// //                     normal: {
-// //                         show: false
-// //                     },
-// //                     emphasis: {
-// //                         show: false
-// //                     }
-// //                 },
-// //                 itemStyle: {
-// //                     emphasis: {
-// //                         borderColor: '#fff',
-// //                         borderWidth: 1
-// //                     }
-// //                 }
-// //             }
-// //         ]
-// //     };
-// //     // 为echarts对象加载数据
-// //     myChart.setOption(option);
-// // }
+
+function place() {
+    //this.ajax_method='GET'; // body...
+}
+place.prototype= {
+    call_request:function(url,callback) {
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success:callback
+        });
+    },
+};
 // function territory(data) {
 //     var data=eval(data);
 //     var plate=[],local={};
@@ -345,68 +246,198 @@ events();
 //         );
 //         var myGeo = new BMap.Geocoder();
 //         // 将地址解析结果显示在地图上,并调整地图视野
-//         myGeo.getPoint(item[0], function(point){
-//             if (point) {
-//                 local[item[0]]=[point.lng,point.lat];
+//         myGeo.getPoint(item[0], function(home){
+//             if (home) {
+//                 // local.push({item[0]:[point.lng,point.lat]})
+//                 local[item[0]]=[home.lng,home.lat];
 //             }
 //         }, item[0]);
 //     });
-//     // console.log(local);
+//     var geoCoordMap = local;
+//
+//     var convertData = function (pl) {
+//         var res = [];
+//         for (var i = 0; i < pl.length; i++) {
+//             var geoCoord = geoCoordMap[pl[i].name];
+//             if (geoCoord) {
+//                 res.push({
+//                     name: pl[i].name,
+//                     value: geoCoord.concat(pl[i].value)
+//                 });
+//             }
+//         }
+//         return res;
+//     };
 //     var myChart = echarts.init(document.getElementById('placeimg'));
-//     var option = {
-//         tooltip : {
-//             trigger: 'item'
+//     option = {
+//         backgroundColor: '#404a59',
+//         title: {
+//             // text: '全国主要城市空气质量',
+//             // subtext: 'data from PM25.in',
+//             // sublink: 'http://www.pm25.in',
+//             // x:'center',
+//             // textStyle: {
+//             //     color: '#fff'
+//             // }
 //         },
-//         dataRange: {
-//             min : 0,
-//             max : 500,
-//             calculable : true,
-//             color: ['maroon','purple','red','orange','yellow','lightgreen']
+//         tooltip: {
+//             trigger: 'item',
 //         },
 //         legend: {
 //             orient: 'vertical',
-//             x:'left',
-//             data:['事件及人物']
+//             y: 'bottom',
+//             x:'right',
+//             data:['pm2.5'],
+//             textStyle: {
+//                 color: '#fff'
+//             }
 //         },
-//         calculable : true,
-//         series : [
-//             {
-//                 name: '事件及人物',
-//                 type: 'map',
-//                 mapType: 'china',
-//                 hoverable: false,
-//                 //roam: true,
-//                 data: [],
-//                 markPoint: {
-//                     symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
-//                     itemStyle: {
-//                         normal: {
-//                             borderColor: '#87cefa',
-//                             borderWidth: 1,            // 标注边线线宽，单位px，默认为1
-//                             label: {
-//                                 show: false
-//                             }
-//                         },
-//                         emphasis: {
-//                             borderColor: '#1e90ff',
-//                             borderWidth: 5,
-//                             label: {
-//                                 show: false
-//                             }
-//                         }
-//                     },
-//                     data: plate,
+//         visualMap: {
+//             min: 0,
+//             max: 200,
+//             calculable: true,
+//             inRange: {
+//                 color: ['#50a3ba', '#eac736', '#d94e5d']
+//             },
+//             textStyle: {
+//                 color: '#fff'
+//             }
+//         },
+//         geo: {
+//             map: 'china',
+//             label: {
+//                 emphasis: {
+//                     show: false
+//                 }
+//             },
+//             roam: true,
+//             itemStyle: {
+//                 normal: {
+//                     areaColor: '#323c48',
+//                     borderColor: '#111'
 //                 },
-//                 geoCoord: local,
+//                 emphasis: {
+//                     areaColor: '#2a333d'
+//                 }
+//             }
+//         },
+//         series: [
+//             {
+//                 name: 'pm2.5',
+//                 type: 'scatter',
+//                 coordinateSystem: 'geo',
+//                 data: convertData(plate),
+//                 symbolSize: 12,
+//                 label: {
+//                     normal: {
+//                         show: false
+//                     },
+//                     emphasis: {
+//                         show: false
+//                     }
+//                 },
+//                 itemStyle: {
+//                     emphasis: {
+//                         borderColor: '#fff',
+//                         borderWidth: 1
+//                     }
+//                 }
 //             }
 //         ]
 //     };
 //     // 为echarts对象加载数据
 //     myChart.setOption(option);
 // }
-// var place=new place();
-// function nums() {
-//     var url = '/group/group_map_filter/';
-//     place.call_request(url,territory);
-// }
-// nums();
+function territory(data) {
+    var data=eval(data);
+    var plate=[],local={
+        "海门":[121.15,31.89],
+        "鄂尔多斯":[109.781327,39.608266],
+        "招远":[120.38,37.35],
+        "舟山":[122.207216,29.985295],
+        "齐齐哈尔":[123.97,47.33],
+        "盐城":[120.13,33.38],
+        "赤峰":[118.87,42.28],
+        "青岛":[120.33,36.07],
+        "乳山":[121.52,36.89],
+        "金昌":[102.188043,38.520089],
+        "泉州":[118.58,24.93],
+        "莱西":[120.53,36.86],
+        "日照":[119.46,35.42],
+        "胶南":[119.97,35.88],
+        "南通":[121.05,32.08],
+        "拉萨":[91.11,29.97],
+        "云浮":[112.02,22.93],
+    };
+    $.each(data, function (index, item) {
+        plate.push(
+            {name: item[0],value: item[1]}
+        );
+        // var myGeo = new BMap.Geocoder();
+        // // 将地址解析结果显示在地图上,并调整地图视野
+        // myGeo.getPoint(item[0], function(point){
+        //     if (point) {
+        //         //item[0]='"'+item[0]+'"';
+        //         local[item[0]]=[point.lng,point.lat];
+        //     }
+        // }, item[0]);
+    });
+    console.log(local);
+    var myChart = echarts.init(document.getElementById('placeimg'));
+    var option = {
+        tooltip : {
+            trigger: 'item'
+        },
+        dataRange: {
+            min : 0,
+            max : 500,
+            calculable : true,
+            color: ['maroon','purple','red','orange','yellow','lightgreen']
+        },
+        // legend: {
+        //     orient: 'vertical',
+        //     x:'left',
+        //     data:['事件及人物']
+        // },
+        calculable : true,
+        series : [
+            {
+                // name: '事件及人物',
+                type: 'map',
+                mapType: 'china',
+                hoverable: false,
+                //roam: true,
+                data: [],
+                markPoint: {
+                    symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#87cefa',
+                            borderWidth: 1,            // 标注边线线宽，单位px，默认为1
+                            label: {
+                                show: false
+                            }
+                        },
+                        emphasis: {
+                            borderColor: '#1e90ff',
+                            borderWidth: 5,
+                            label: {
+                                show: false
+                            }
+                        }
+                    },
+                    data: plate,
+                },
+                geoCoord:local,
+            }
+        ]
+    };
+    // 为echarts对象加载数据
+    myChart.setOption(option);
+}
+var place=new place();
+function nums() {
+    var url = '/group/group_map_filter/';
+    place.call_request(url,territory);
+}
+nums();

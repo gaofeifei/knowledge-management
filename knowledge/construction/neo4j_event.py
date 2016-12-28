@@ -9,7 +9,7 @@ from py2neo.ext.batman import ManualIndexManager
 from py2neo import Node, Relationship
 from py2neo.packages.httpstream import http
 from py2neo.ogm import GraphObject
-from global_utils import graph
+from knowledge.global_utils import graph
 es = Elasticsearch("219.224.134.225:9037", timeout=600)
 http.socket_timeout = 9999
 class Person(GraphObject):

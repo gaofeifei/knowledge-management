@@ -78,18 +78,24 @@ function events() {
     $.getJSON(url, function (json) {
         var json=eval(json);
         // var categories = [{name:'人物'},{name:'事件'}];
-        var node_value=[],link_value=[],event_value=[],
-            event_link=[];
+        var node_value=[], event_link=[];
+            // link_value=[],event_value=[],
         for (var key in json.user_nodes){
             var num1=Math.random()*(-1000-700)+1000;
             var num2=Math.random()*(-1000-700)+1000;
+            var name;
+            if (json.user_nodes[key]==''||json.user_nodes[key]=="unknow") {
+                name=key;
+            }else {
+                name=json.user_nodes[key];
+            }
             node_value.push(
                 {
                     x: num1,
                     y: num2,
                     id: key,
                     // name:json.user_nodes[key],
-                    name:key,
+                    name:name,
                     symbolSize: 14,
                     itemStyle: {
                         normal: {
@@ -99,15 +105,21 @@ function events() {
                 }
             );
         };
-        for (var key in json.event_nodes){
+        for (var key2 in json.event_nodes){
             var num3=Math.random()*(-1000-700)+1000;
             var num4=Math.random()*(-1000-700)+1000;
+            var name2;
+            if (json.event_nodes[key2]==''||json.event_nodes[key2]=="unknow") {
+                name2=key2;
+            }else {
+                name2=json.event_nodes[key2];
+            }
             node_value.push(
                 {
                     x: num3,
                     y: num4,
-                    id: key,
-                    name:json.event_nodes[key],
+                    id: key2,
+                    name:name2,
                     symbolSize: 14,
                     itemStyle: {
                         normal: {

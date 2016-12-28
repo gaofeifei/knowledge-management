@@ -4,7 +4,8 @@ import time
 import json
 from knowledge.global_config import portrait_name, portrait_type, event_name, event_analysis_name, \
         neo4j_name, event_type, event_special, special_event_index_name, group_index_name, group_rel, node_index_name
-from knowledge.global_utils import es_user_portrait, es_event, graph
+from knowledge.global_utils import es_user_portrait, es_event, graph,\
+        user_name_search, event_name_search
 from knowledge.time_utils import ts2datetime, datetime2ts
 from py2neo import Node, Relationship
 from py2neo.ogm import GraphObject, Property
@@ -12,41 +13,6 @@ from py2neo.packages.httpstream import http
 from py2neo.ext.batman import ManualIndexManager
 from py2neo.ext.batman import ManualIndexWriteBatch
 http.socket_timeout = 9999
-
-#查找uid对应的名字
-def user_name_search(en_name):
-    query_body = {
-        "query":{
-            "match":{
-                '_id':en_name
-            }
-        }
-    }
-    try:
-        name_results = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
-                body=query_body, fields=['uname'])['hits']['hits'][0]['fields']
-    except:
-        return ''
-    for k,v in name_results.iteritems():
-        ch_name = v[0]
-    # print ch_name.encode('utf-8')
-    return ch_name
-
-#查找事件id对应的名字
-def event_name_search(en_name):
-    query_body = {
-        "query":{
-            "match":{
-                '_id':en_name
-            }
-        }
-    }
-    name_results = es_event.search(index=event_name, doc_type=event_type, \
-                body=query_body,fields=['name'])['hits']['hits'][0]['fields']
-    for k,v in name_results.iteritems():
-        ch_name = v[0]
-        # print v
-    return ch_name
 
 #查找该专题下事件关联的用户信息
 def related_user_search(uid_list,sort_flag):

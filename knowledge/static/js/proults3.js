@@ -18,47 +18,39 @@ peo.prototype= {
     },
 };
 var peo=new peo();
-var url='/group/group_node_filter/';
-var friend='friend',relative='relative', colleague='colleague',leader_member='leader_member',
-    user_tag='user_tag',node_type;
-$("#friend").change(function () {
-    if($("#friend").prop("checked")) {
+var url='/theme/theme_node_filter/';
+var contain='contain',casual='casual', colleague='colleague',happen_together='happen_together',
+    event_other='event_other',node_type;
+$("#contain").change(function () {
+    if($("#contain").prop("checked")) {
         //选中时的操作
-        friend='friend';
+        contain='contain';
     } else {
-        friend=' ';
+        contain=' ';
     }
 });
-$("#relative").change(function () {
-    if($("#relative").prop("checked")) {
+$("#casual").change(function () {
+    if($("#casual").prop("checked")) {
         //选中时的操作
-        relative='relative';
+        casual='casual';
     } else {
-        relative=' ';
+        casual=' ';
     }
 });
-$("#colleague").change(function () {
-    if($("#colleague").prop("checked")) {
+$("#happen_together").change(function () {
+    if($("#happen_together").prop("checked")) {
         //选中时的操作
-        colleague='colleague';
+        happen_together='happen_together';
     } else {
-        colleague=' ';
+        happen_together=' ';
     }
 });
-$("#leader_member").change(function () {
-    if($("#leader_member").prop("checked")) {
+$("#event_other").change(function () {
+    if($("#event_other").prop("checked")) {
         //选中时的操作
-        leader_member='leader_member';
+        event_other='event_other';
     } else {
-        leader_member=' ';
-    }
-});
-$("#user_tag").change(function () {
-    if($("#user_tag").prop("checked")) {
-        //选中时的操作
-        user_tag='user_tag';
-    } else {
-        user_tag=' ';
+        event_other=' ';
     }
 });
 
@@ -67,10 +59,10 @@ function nums() {
     if ($("#event").is(":checked")){node_type='Event';}
     if ($("#user").is(":checked")){node_type='User';}
     if ($("#event").is(":checked")&&$("#user").is(":checked")){node_type='';}
-    if($('#onecg').is(':checked')) { layer=1; }
-    if($('#twocg').is(':checked')) { layer=2; }
-    url = '/group/group_node_filter/?node_type='+node_type+'&relation_type='+friend+','+relative+
-        ','+colleague+','+leader_member+','+user_tag+'&layer='+layer;
+    if($('#oneone').is(':checked')) { layer=1; }
+    if($('#twotwo').is(':checked')) { layer=2; }
+    url = '/theme/theme_node_filter/?node_type='+node_type+'&relation_type='+contain+','+casual+
+        ','+happen_together+','+event_other+'&layer='+layer;
     peo.call_request(url,events);
     console.log(url);
 };
@@ -85,10 +77,9 @@ function events() {
     myChart.showLoading();
     $.getJSON(url, function (json) {
         var json=eval(json);
-
         // var categories = [{name:'人物'},{name:'事件'}];
-
-        var node_value=[],link_value=[],event_value=[];
+        var node_value=[],link_value=[],event_value=[],
+            event_link=[];
         for (var key in json.user_nodes){
             var num1=Math.random()*(-1000-700)+1000;
             var num2=Math.random()*(-1000-700)+1000;
@@ -97,7 +88,8 @@ function events() {
                     x: num1,
                     y: num2,
                     id: key,
-                    name:json.user_nodes[key],
+                    // name:json.user_nodes[key],
+                    name:key,
                     symbolSize: 14,
                     itemStyle: {
                         normal: {
@@ -110,7 +102,7 @@ function events() {
         for (var key in json.event_nodes){
             var num3=Math.random()*(-1000-700)+1000;
             var num4=Math.random()*(-1000-700)+1000;
-            event_value.push(
+            node_value.push(
                 {
                     x: num3,
                     y: num4,
@@ -126,34 +118,41 @@ function events() {
             );
         };
         $.each(json.relation,function (index,item) {
-            link_value.push(
+            event_link.push(
                 {
                     source: item[0],
-                    target: item[2]
+                    target: ""+item[2]+""
                 }
             );
-        })
+        });
         myChart.hideLoading();
         myChart.setOption(option = {
             title: {
                 // text: 'NPM Dependencies'
             },
             legend: {
-                data: ["人物","事件"]
+                // data: ["人物"]
                 // data:categories.map(function (a) {
                 //     return a;
                 // })
             },
+            // edgeLabel: {
+            //     normal: {
+            //         show: false,
+            //         position: 'middle',
+            //         formatter:'{b} : {c}',
+            //     },
+            // },
             animationDurationUpdate: 1500,
             animationEasingUpdate: 'quinticInOut',
             series : [
                 {
-                    name:'人物',
+                    // name:'人物',
                     type: 'graph',
                     layout: 'none',
                     // progressiveThreshold: 700,
                     data:node_value,
-                    edges: link_value,
+                    edges: event_link,
                     itemStyle:{
                         normal:{
                             color:'#00cc66'
@@ -174,33 +173,33 @@ function events() {
                         }
                     }
                 },
-                {
-                    name:'事件',
-                    type: 'graph',
-                    layout: 'none',
-                    // progressiveThreshold: 700,
-                    // data:node_value,
-                    // edges: link_value,
-                    itemStyle:{
-                        normal:{
-                            color:'#a73cff'
-                        }
-                    },
-                    label: {
-                        emphasis: {
-                            position: 'right',
-                            show: true
-                        }
-                    },
-                    focusNodeAdjacency: true,
-                    lineStyle: {
-                        normal: {
-                            width: 1.5,
-                            curveness: 0.3,
-                            opacity: 0.8
-                        }
-                    }
-                },
+                // {
+                //     name:'事件',
+                //     type: 'graph',
+                //     layout: 'none',
+                //     progressiveThreshold: 700,
+                //     data:event_value,
+                //     edges: event_link,
+                //     itemStyle:{
+                //         normal:{
+                //             color:'#a73cff'
+                //         }
+                //     },
+                //     label: {
+                //         emphasis: {
+                //             position: 'right',
+                //             show: true
+                //         }
+                //     },
+                //     focusNodeAdjacency: true,
+                //     lineStyle: {
+                //         normal: {
+                //             width: 1.5,
+                //             curveness: 0.3,
+                //             opacity: 0.8
+                //         }
+                //     }
+                // },
             ]
         }, true);
 

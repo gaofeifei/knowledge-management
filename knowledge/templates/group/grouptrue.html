@@ -35,10 +35,10 @@
                     <div class="cdt2">
                         <div class="checkbox">
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox" checked/> 人物
+                                <input id='user' class="per" type="checkbox" checked/> 人物
                             </label>
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox" checked/> 事件
+                                <input id="event" class="per" type="checkbox" checked/> 事件
                             </label>
                         </div>
                     </div>
@@ -47,19 +47,19 @@
                     <div class="cdt4">
                         <div class="checkbox">
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox" checked/> 好友关系
+                                <input id='friend' class="per" type="checkbox" checked/> 好友关系
                             </label>
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox" checked/> 同事关系
+                                <input id='colleague' class="per" type="checkbox" checked/> 同事关系
                             </label>
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox" checked/> 亲属关系
+                                <input id='relative' class="per" type="checkbox" checked/> 亲属关系
                             </label>
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox" checked/> 上下级关系
+                                <input id='leader_member' class="per" type="checkbox" checked/> 上下级关系
                             </label>
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox" checked/> 其他
+                                <input id='user_tag' class="per" type="checkbox" checked/> 其他
                             </label>
                         </div>
                     </div>
@@ -68,14 +68,14 @@
                     <div class="cdt4">
                         <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
                             <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1"
+                                <input type="radio" name="yier" id="onecg" value="option1"
                                 checked>
                                 扩展一层
                             </label>
                         </div>
                         <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
                             <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                <input type="radio" name="yier" id="twocg" value="option2">
                                 扩展二层
                             </label>
                         </div>
@@ -1117,7 +1117,9 @@
 </div> -->
 {% endblock %}
 {% block my_js %}
-theme={{theme}}
+<script type="text/javascript">
+    
+</script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=oHDtLqS40HV7dTqlNWYUc5IYvSLq60pS">
 </script>
 <script src="/static/js/proults.js"></script>

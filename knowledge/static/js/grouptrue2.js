@@ -302,9 +302,9 @@ $.each($("#people .xingming"),function(index,item){
     $(item).on('click',function () {
         window.open('/index/person/');
     });
-})
+});
 $.each($("#similar .xingming"),function(index,item){
     $(item).on('click',function () {
         window.open('/index/search_result/');
     });
-})
+});

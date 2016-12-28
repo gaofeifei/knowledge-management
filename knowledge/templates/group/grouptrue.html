@@ -35,10 +35,10 @@
                     <div class="cdt2">
                         <div class="checkbox">
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox"/> 人物
+                                <input id='user' class="per" type="checkbox" checked/> 人物
                             </label>
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox"/> 事件
+                                <input id="event" class="per" type="checkbox" checked/> 事件
                             </label>
                         </div>
                     </div>
@@ -47,19 +47,19 @@
                     <div class="cdt4">
                         <div class="checkbox">
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox"/> 好友关系
+                                <input id='friend' class="per" type="checkbox" checked/> 好友关系
                             </label>
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox"/> 同事关系
+                                <input id='colleague' class="per" type="checkbox" checked/> 同事关系
                             </label>
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox"/> 亲属关系
+                                <input id='relative' class="per" type="checkbox" checked/> 亲属关系
                             </label>
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox"/> 上下级关系
+                                <input id='leader_member' class="per" type="checkbox" checked/> 上下级关系
                             </label>
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" type="checkbox"/> 其他
+                                <input id='user_tag' class="per" type="checkbox" checked/> 其他
                             </label>
                         </div>
                     </div>
@@ -68,13 +68,14 @@
                     <div class="cdt4">
                         <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
                             <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+                                <input type="radio" name="yier" id="onecg" value="option1"
+                                checked>
                                 扩展一层
                             </label>
                         </div>
                         <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
                             <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                <input type="radio" name="yier" id="twocg" value="option2">
                                 扩展二层
                             </label>
                         </div>
@@ -1116,7 +1117,41 @@
 </div> -->
 {% endblock %}
 {% block my_js %}
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=oHDtLqS40HV7dTqlNWYUc5IYvSLq60pS">
+</script>
 <script src="/static/js/proults.js"></script>
 <script src="/static/js/grouptrue2.js"></script>
+<script type="text/javascript">
+    // var myGeo = new BMap.Geocoder();
+    // // 将地址解析结果显示在地图上,并调整地图视野
+    // myGeo.getPoint("北京市", function(point){
+    //     if (point) {
+    //         console.log(point);
+    //     }else{
+    //         alert("您选择地址没有解析到结果!");
+    //     }
+    // }, "北京市");
 
+var didian={
+     "海门":[121.15,31.89],
+    "鄂尔多斯":[109.781327,39.608266],
+    "招远":[120.38,37.35],
+    "舟山":[122.207216,29.985295],
+    "齐齐哈尔":[123.97,47.33],
+    "盐城":[120.13,33.38],
+    "赤峰":[118.87,42.28],
+    "青岛":[120.33,36.07],
+    "乳山":[121.52,36.89],
+    "金昌":[102.188043,38.520089],
+    "泉州":[118.58,24.93],
+    "莱西":[120.53,36.86],
+    "日照":[119.46,35.42],
+    "胶南":[119.97,35.88],
+    "南通":[121.05,32.08],
+    "拉萨":[91.11,29.97],
+    "云浮":[112.02,22.93],
+};
+console.log(didian);
+</script>
 {% endblock %}

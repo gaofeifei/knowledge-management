@@ -47,7 +47,42 @@ def select_relation():
 @mod.route('/select_node')
 def select_node():
     list = []
-    result = select_rels_all("MATCH (n:Person) return n")
+    list_set = [] 
+    result = select_rels_all("MATCH (n:Person)-[r]-() return n")
     for item in result:
         list.append(item)
+    list_set=[i for i in set(list)]
+    return json.dumps(list_set)
+
+
+@mod.route('/select_event')
+def select_event_relation():
+    result_dict = {}
+    list = []
+    list1 = []
+    result = select_rels_all("MATCH (n:Person)-[r:admin]->(m) return n.uid,r,m.event_id")
+    for item in result:
+        id = item[0]
+        friend = item[1].type()
+        print friend
+        id2 = item[2]
+        a = (id, friend, id2)
+        list.append(a)
+        list1.append(id)
+        list1.append(id2)
+    list1_set = [i for i in set(list1)]
+    result_dict["relation"] = list
+    result_dict["node"] = list1_set
+    return json.dumps(result_dict)
+
+
+@mod.route('/select_event_node')
+def select_event_node():
+    list = []
+    list_set = []
+    result = select_rels_all("MATCH (n:Person)-[r:admin]-(m) return n,m")
+    for item in result:
+        list.append(item[0])
+        list.append(item[2])
+    list_set = [i for i in set(list)]
     return json.dumps(list)

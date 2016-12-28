@@ -22,6 +22,7 @@ def group():
 
 @mod.route('/detail/')
 def show_group_detail():
+    group_name = request.args.get('group_name', u'媒体')
 
     return render_template('group/grouptrue.html')
 

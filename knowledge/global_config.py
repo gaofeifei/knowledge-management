@@ -76,7 +76,7 @@ interaction = "interaction" #交互
 relative = "relative" #亲属
 colleague = "colleague" #同事
 leader_member = "leader_member" #上下级
-user_tag = "user_tag"
+user_tag = "user_tag"#其他
 
 relation_list = ['friend','interaction','relative','colleague','leader_member','user_tag']
 

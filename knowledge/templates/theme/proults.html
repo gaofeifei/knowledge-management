@@ -35,10 +35,10 @@
                 <div class="cdt2">
                     <div class="checkbox">
                         <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                            <input class="per" type="checkbox"/> 人物
+                            <input id='user' class="per" type="checkbox" checked/> 人物
                         </label>
                         <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                            <input class="per" type="checkbox"/> 事件
+                            <input id='event' class="per" type="checkbox" checked/> 事件
                         </label>
                     </div>
                 </div>
@@ -47,19 +47,16 @@
                 <div class="cdt4">
                     <div class="checkbox">
                         <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                            <input class="per" type="checkbox"/> 好友关系
+                            <input id='contain' class="per" type="checkbox" checked/> 包含关系
                         </label>
                         <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                            <input class="per" type="checkbox"/> 同事关系
+                            <input id='casual' class="per" type="checkbox" checked/> 因果关系
                         </label>
                         <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                            <input class="per" type="checkbox"/> 亲属关系
+                            <input id='happen_together' class="per" type="checkbox" checked/> 共同发生关系
                         </label>
                         <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                            <input class="per" type="checkbox"/> 上下级关系
-                        </label>
-                        <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                            <input class="per" type="checkbox"/> 其他
+                            <input id='event_other' class="per" type="checkbox" checked/> 其他关系
                         </label>
                     </div>
                 </div>
@@ -68,19 +65,20 @@
                 <div class="cdt4">
                     <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
                         <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+                            <input type="radio" name="optionsRadios" id="oneone" value="option1"
+                            checked>
                             扩展一层
                         </label>
                     </div>
                     <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
                         <label>
-                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                            <input type="radio" name="optionsRadios" id="twotwo" value="option2">
                             扩展二层
                         </label>
                     </div>
                 </div>
                 <!--444-->
-                <button class="cdt5">确定</button>
+                <button class="cdt5" style='margin-top:102px;'>确定</button>
             </div>
         </div>
         <div class="midright" style="margin-right: 0">
@@ -886,8 +884,8 @@
 {% endblock %}
 
 {% block my_js %}
-<script src="/static/js/proults.js"></script>
 <script src="/static/js/proults2.js"></script>
+<script src="/static/js/proults3.js"></script>
 <script>
     var show = 0;
     $(".ptnew").on("click",function () {

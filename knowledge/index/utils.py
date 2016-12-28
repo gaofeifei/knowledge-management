@@ -120,7 +120,7 @@ def query_group():
 
 def query_new_relationship():
     current_ts = time.time()
-    former_ts = datetime2ts(ts2datetime(current_ts-week*24*3600))
+    former_ts = datetime2ts(ts2datetime(current_ts-10*24*3600))
     query_node = {
         "query":{
             "bool":{
@@ -145,8 +145,12 @@ def query_new_relationship():
         uid_list.append(item['_id'])
 
     total_set = set()
+    return_results = dict()
     results = []
+    draw_uid_list = set() # appeared uid in index
+    event_list = set()
     for uid in uid_list:
+        draw_uid_list.add(uid)
         c_string = "START n=node:node_index(uid='%s') MATCH (n)-[r]->(m) RETURN r,m LIMIT 50" %uid
         each_result = graph.run(c_string)
         for each in each_result:
@@ -158,13 +162,48 @@ def query_new_relationship():
             node_attri = dict(tmp_node)
             primary_key = node_attri[rel_node_mapping[rel_type]] # primary key value
             node_type = rel_node_type_mapping[rel_type] # end node type
+            if node_type == "User":
+                draw_uid_list.add(primary_key)
+            elif node_type == "Event":
+                event_list.add(primary_key)
+            else:
+                try:
+                    return_results[node_type][primary_key] = primary_key
+                except:
+                    return_results[node_type] = dict()
+                    return_results[node_type][primary_key] = primary_key
             results.append([uid, rel_type, primary_key, node_type])
             total_set.add(uid)
             total_set.add(primary_key)
         if len(total_set) >= index_threshold:
             break
 
-    return results
+    return_results["relations"] = results
+    user_node_dict = dict()
+    draw_uid_list = list(draw_uid_list)
+    if draw_uid_list:
+        portrait_result = es_user_portrait.mget(index=portrait_name, doc_type=portrait_type, body={"ids":draw_uid_list})["docs"]
+        for item in portrait_result:
+            if item["found"]:
+                uname = item["_source"]["uname"]
+                if uname:
+                    user_node_dict[item["_id"]] = uname
+                else:
+                    user_node_dict[item["_id"]] = item["_id"]
+            else:
+                user_node_dict[item["_id"]] = item["_id"]
+    return_results["user_nodes"] = user_node_dict
+
+    if event_list:
+        event_node = dict()
+        event_list = list(event_list)
+        event_result = es_event.mget(index=event_name, doc_type=event_type, body={"ids":event_list})["docs"]
+        for item in event_result:
+            event_node[item["_id"]] = item["_source"]["name"]
+        return_results["event_node"] = event_node
+    print return_results.keys()
+
+    return return_results
 
 #事件信息面板
 def query_event_detail(event):
@@ -269,7 +308,7 @@ def query_hot_location():
 
     filter_location = dict()
     for k,v in location_dict.iteritems():
-        if u'海外' in k or u'其他' in k:
+        if u'海外' in k or u'其他' in k or u'英国' in k or u'美国' in k or u'日本' in k:
             continue
         tmp = k.split(' ')
         if u'北京' in k or u'天津' in k or u'上海' in k or u'重庆' in k or u'香港' in k or u'澳门' in k:

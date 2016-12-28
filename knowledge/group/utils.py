@@ -6,7 +6,7 @@ from knowledge.global_config import portrait_name, portrait_type, event_name, ev
         neo4j_name, event_type, event_special, special_event_index_name, group_index_name, \
         group_rel, node_index_name,user_tag,relation_list
 from knowledge.global_utils import es_user_portrait, es_event, graph,\
-        user_name_search,event_name_search
+        user_name_search,event_name_search, related_user_search,event_detail_search
 from knowledge.time_utils import ts2datetime, datetime2ts
 from py2neo import Node, Relationship
 from py2neo.ogm import GraphObject, Property
@@ -195,3 +195,69 @@ def group_tab_map(group_name, node_type, relation_type, layer):
 
     return_results = sorted(filter_location.iteritems(), key=lambda x:x[1], reverse=True)
     return return_results[:500]
+
+
+
+def query_group():  #群体概览
+    # step 1: query all group
+    c_string = "MATCH (n:Group) RETURN n"
+    result = graph.run(c_string)
+    group_list = []
+    for item in result:
+        group_list.append(dict(item[0]))
+    tmp_list = []
+    for item in group_list:
+        tmp_list.extend(item.values())
+
+    results = dict()
+    for v in tmp_list:
+        c_string = "START end_node=node:%s(group='%s') MATCH (m)-[r:%s]->(end_node) RETURN count(m)" %(group_index_name, v, group_rel)
+        node_result = graph.run(c_string)
+        event_list = []
+        for item in node_result:
+            tmp = dict(item)
+            node_number = tmp.values()[0]
+        results[v] = node_number
+
+    return_results = sorted(results.iteritems(), key=lambda x:x[1], reverse=True)
+    return return_results
+
+#群体关联人物卡片
+def query_group_user(group_name, sort_flag):
+    s_string = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name
+    group_result = graph.run(s_string)
+    uid_list = []
+    for i in group_result:
+        user_dict = dict(i)
+        usd = user_dict['user_id']
+        uid_list.append(usd)
+    print len(uid_list)
+    detail_result = related_user_search(uid_list, sort_flag)
+    # print len(detail_result),'!!!!!!'
+    return detail_result
+
+#群体关联事件卡片
+def query_group_event(group_name, sort_flag):
+    s_string = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name
+    group_result = graph.run(s_string)
+    event_list = []
+    for event in group_result:
+        user_dict = dict(event)
+        # print 
+        usd = user_dict['user_id']
+        # event_list.append(event_value)
+        c_string = 'START s0 = node:node_index(uid="'+str(usd)+'") '
+        c_string += 'MATCH (s0)-[r]-(s1:Event) return s1 LIMIT 50'
+        print c_string
+        result = graph.run(c_string)
+        for i in list(result):
+            print i
+            end_id = dict(i['s1'])
+            event_list.append(end_id['event_id'])
+    print event_list
+    print len(event_list)
+    event_list = [i for i in set(event_list) if i != u'大学生失联']
+    detail_result = event_detail_search(event_list, sort_flag)
+    return detail_result

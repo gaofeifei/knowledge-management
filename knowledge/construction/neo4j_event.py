@@ -125,16 +125,25 @@ def create_node_or_node_rel(node_key1, node1_id, node1_index_name, rel, node_key
     print node_index
     print group_index
     tx = graph.begin()
+    if len(node_index.get(node_key1, node1_id)) == 0:
+        print "node1 does not exist"
+        return 'node1 does not exist'
+    print node2_id,'======='
+    print group_index.get(node_key2, node2_id)
+    print 'node_key2',node_key2
+    if len(group_index.get(node_key2, node2_id)) == 0:
+        print "node2 does not exist"
+        return "node2 does not exist"    
     node1 = node_index.get(node_key1, node1_id)[0]
     node2 = group_index.get(node_key2, node2_id)[0]
     if not (node1 and node2):
         print "node does not exist"
         return None
-    c_string = "START start_node=node:%s(%s='%s'),end_node=node:%s(%s='%s') MATCH (start_node)-[r:%s]->(end_node) RETURN r" % (
-    node1_index_name, 'pname', node1_id, node2_index_name, 'pname', node2_id, rel)
+    c_string = "START start_node=node:%s(%s='%s'),end_node=node:%s(%s='%s') MATCH (start_node)-[r:%s]->(end_node) RETURN r" \
+         % (node1_index_name, node_key1, node1_id, node2_index_name, node_key2, node2_id, rel)
     print c_string
     result = graph.run(c_string)
-    print result
+    # print result
     rel_list = []
     for item in result:
         rel_list.append(item)

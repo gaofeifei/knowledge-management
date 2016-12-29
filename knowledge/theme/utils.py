@@ -45,7 +45,7 @@ def event_river_search(eid_list):
     query_body = {
         'query':{
             'terms':{'en_name':eid_list}
-            },
+            }
         # "sort": [{sort_flag:'desc'}]
     }
     
@@ -54,16 +54,18 @@ def event_river_search(eid_list):
     event_detail = es_event.search(index=event_analysis_name, doc_type=event_type, \
                 body=query_body, _source=False, fields=fields_list)['hits']['hits']
     detail_result = []
+    print event_detail
     for i in event_detail:
         fields = i['fields']
-        detail = dict()
-        for i in fields_list:
-            try:
-                detail[i] = fields[i][0]
-            except:
-                detail[i] = 'null'
-        detail_result.append(detail)
-    return detail_result
+
+        # detail = dict()
+        # for i in fields_list:
+        #     try:
+        #         detail[i] = fields[i][0]
+        #     except:
+        #         detail[i] = 'null'
+        # detail_result.append(detail)
+    return fields
 
 # 查找该专题下的包含事件卡片信息
 def event_detail_search(eid_list,sort_flag):
@@ -90,31 +92,8 @@ def event_detail_search(eid_list,sort_flag):
         detail_result.append(detail)
     return detail_result
 
-def query_special_event():  #专题概览，所有专题及其事件数量
-    # step 1: query all special event
-    c_string = "MATCH (n:SpecialEvent) RETURN n"
-    result = graph.run(c_string)
-    special_event_list = []
-    for item in result:
-        special_event_list.append(dict(item[0]))
-    tmp_list = []
-    for item in special_event_list:
-        tmp_list.extend(item.values())
 
-    results = dict()
-    for v in tmp_list:
-        c_string = "START end_node=node:%s(event='%s') MATCH (m)-[r:%s]->(end_node) RETURN count(m)" %(special_event_index_name, v, event_special)
-        node_result = graph.run(c_string)
-        event_list = []
-        for item in node_result:
-            tmp = dict(item)
-            node_number = tmp.values()[0]
-        results[v] = node_number
-
-    return_results = sorted(results.iteritems(), key=lambda x:x[1], reverse=True)
-    return return_results
-
-def query_theme_river(theme_name):
+def query_special_event(theme_name):  #专题概览，所有专题及其事件数量
     s_string = 'START s0 = node:special_event_index(event="%s")\
                 MATCH (s0)-[r]-(s) RETURN s.event_id as event' %theme_name
     event_result = graph.run(s_string)
@@ -123,7 +102,8 @@ def query_theme_river(theme_name):
         event_value = event['event']
         event_list.append(event_value)
     detail_result = event_river_search(event_list)
-    return detail_result
+    return len(event_list)
+    return {'event_num':len(event_list),'river_data':detail_result}
 
 def query_detail_theme(theme_name, sort_flag):
     s_string = 'START s0 = node:special_event_index(event="%s")\
@@ -185,7 +165,7 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
     if layer == '1':  #扩展一层
         for event_value in event_list:
             c_string = 'START s0 = node:event_index(event="'+str(event_value[0])+'") '
-            c_string += 'MATCH (s0)-[r]-(s1'+node_type+') WHERE type(r) in '+ json.dumps(relation_type) +' return s0,r,s1 LIMIT 3'
+            c_string += 'MATCH (s0)-[r]-(s1'+node_type+') WHERE type(r) in '+ json.dumps(relation_type) +' return s0,r,s1 LIMIT 10'
             print c_string
             result = graph.run(c_string)
             for i in list(result):

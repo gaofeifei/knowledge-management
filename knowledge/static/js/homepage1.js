@@ -4,20 +4,37 @@
 function picture() {
     var myChart = echarts.init(document.getElementById('statis1'));
     myChart.showLoading();
-    $.getJSON('/index/event_detail_people/', function (json) {
+    $.getJSON('/index/new_relationship/', function (json) {
         var json=eval(json);
-        console.log(json)
-        var node_value=[];
-        $.each(json, function (index, item) {
+        var domain=[],location=[],event=[],user=[],link=[];
+        for (var key in json.Domain) {
             var num1=Math.random()*(-1000-700)+1000;
             var num2=Math.random()*(-1000-700)+1000;
-            node_value.push(
+            domain.push(
                 {
                     x: num1,
                     y: num2,
-                    id: item[0],
-                    name:item[0],
-                    symbolSize: 22,
+                    id: key,
+                    name:json.Domain[key],
+                    symbolSize: 14,
+                    itemStyle: {
+                        normal: {
+                            color: 'blue'
+                        }
+                    }
+                }
+            );
+        };
+        for (var key in json.Location) {
+            var num1=Math.random()*(-1000-700)+1000;
+            var num2=Math.random()*(-1000-700)+1000;
+            domain.push(
+                {
+                    x: num1,
+                    y: num2,
+                    id: key,
+                    name:json.Location[key],
+                    symbolSize: 14,
                     itemStyle: {
                         normal: {
                             color: 'red'
@@ -25,44 +42,188 @@ function picture() {
                     }
                 }
             );
-
-        }),
+        };
+        for (var key in json.event_node) {
+            var num1=Math.random()*(-1000-700)+1000;
+            var num2=Math.random()*(-1000-700)+1000;
+            domain.push(
+                {
+                    x: num1,
+                    y: num2,
+                    id: key,
+                    name:json.event_node[key],
+                    symbolSize: 14,
+                    itemStyle: {
+                        normal: {
+                            color: 'purple'
+                        }
+                    }
+                }
+            );
+        };
+        for (var key in json.user_nodes) {
+            var num1=Math.random()*(-1000-700)+1000;
+            var num2=Math.random()*(-1000-700)+1000;
+            var name;
+            if (json.user_nodes[key]==''||json.user_nodes[key]=="unknown") {
+                name=key;
+            }else {
+                name=json.user_nodes[key];
+            };
+            domain.push(
+                {
+                    x: num1,
+                    y: num2,
+                    id: key,
+                    name:name,
+                    symbolSize: 14,
+                    itemStyle: {
+                        normal: {
+                            color: 'green'
+                        }
+                    }
+                }
+            );
+        };
+        for (var key in json.relations)
+        $.each(json.relations,function (index,item) {
+            link.push(
+                {
+                    source: item[0],
+                    target: item[2]
+                }
+            );
+        });
         myChart.hideLoading();
         myChart.setOption(option = {
             title: {
-                text: 'NPM Dependencies'
+                // text: 'NPM Dependencies'
             },
+            // legend: {
+            //     orient: 'top',
+            //     x:'left',
+            //     data:['社会','地方','事件','人物'],
+            // },
             animationDurationUpdate: 1500,
             animationEasingUpdate: 'quinticInOut',
             series : [
                 {
+                    // name:'社会',
                     type: 'graph',
                     layout: 'none',
                     // progressiveThreshold: 700,
-                    data:[node_value[0],node_value[97],node_value[126]],
-                    edges: [],
+                    data:domain,
+                    edges: link,
                     label: {
                         emphasis: {
-                            position: 'right',
+                            position: 'left',
                             show: true
                         }
                     },
                     focusNodeAdjacency: true,
                     lineStyle: {
                         normal: {
-                            width: 0.5,
+                            width: 1.5,
                             curveness: 0.3,
                             opacity: 0.7
                         }
                     }
-                }
+                },
+                // {
+                //     name:'社会',
+                //     type: 'graph',
+                //     layout: 'none',
+                //     // progressiveThreshold: 700,
+                //     // data:domain,
+                //     // edges: link,
+                //     label: {
+                //         emphasis: {
+                //             position: 'left',
+                //             show: true
+                //         }
+                //     },
+                //     focusNodeAdjacency: true,
+                //     lineStyle: {
+                //         normal: {
+                //             width: 1.5,
+                //             curveness: 0.3,
+                //             opacity: 0.7
+                //         }
+                //     }
+                // },
+                // {
+                //     name:'地方',
+                //     type: 'graph',
+                //     layout: 'none',
+                //     // progressiveThreshold: 700,
+                //     // data:location,
+                //     // edges: [],
+                //     label: {
+                //         emphasis: {
+                //             position: 'left',
+                //             show: true
+                //         }
+                //     },
+                //     focusNodeAdjacency: true,
+                //     lineStyle: {
+                //         normal: {
+                //             width: 1.5,
+                //             curveness: 0.3,
+                //             opacity: 0.7
+                //         }
+                //     }
+                // },
+                // {
+                //     name:'事件',
+                //     type: 'graph',
+                //     layout: 'none',
+                //     // progressiveThreshold: 700,
+                //     // data:event,
+                //     // edges: [],
+                //     label: {
+                //         emphasis: {
+                //             position: 'left',
+                //             show: true
+                //         }
+                //     },
+                //     focusNodeAdjacency: true,
+                //     lineStyle: {
+                //         normal: {
+                //             width: 1.5,
+                //             curveness: 0.3,
+                //             opacity: 0.7
+                //         }
+                //     }
+                // },
+                // {
+                //     name:'人物',
+                //     type: 'graph',
+                //     layout: 'none',
+                //     // progressiveThreshold: 700,
+                //     // data:user,
+                //     // edges: [],
+                //     label: {
+                //         emphasis: {
+                //             position: 'left',
+                //             show: true
+                //         }
+                //     },
+                //     focusNodeAdjacency: true,
+                //     lineStyle: {
+                //         normal: {
+                //             width: 1.5,
+                //             curveness: 0.3,
+                //             opacity: 0.7
+                //         }
+                //     }
+                // }
             ]
         }, true);
 
 
     });
 }
-// picture();
+picture();
 
 // 地图配置，地址请求
 function fly() {
@@ -365,4 +526,4 @@ function fly() {
 
     }
 }
-fly();
+// fly();

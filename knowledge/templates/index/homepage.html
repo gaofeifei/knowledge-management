@@ -50,8 +50,6 @@
 {% endblock %}
 
 {% block my_js %}  
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=oHDtLqS40HV7dTqlNWYUc5IYvSLq60pS">
-</script>
     <script src="/static/js/homepage1.js"></script>
     <script src="/static/js/homepage2.js"></script>
     <script src="/static/js/homepage3.js"></script>
@@ -94,14 +92,5 @@
             place.call_request(url,territory);
         }
         nums();
-    var myGeo = new BMap.Geocoder();
-    // 将地址解析结果显示在地图上,并调整地图视野
-    myGeo.getPoint("北京市", function(point){
-        if (point) {
-            console.log(typeof point.lng,point.lat);
-        }else{
-            alert("您选择地址没有解析到结果!");
-        }
-    }, "北京市");
     </script>
 {% endblock %}

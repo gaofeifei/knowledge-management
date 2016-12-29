@@ -107,29 +107,39 @@ people.prototype= {
 };
 function monkey(data) {
     var data=eval(data);
+    // console.log(data);
     $.each(data,function (index,item) {
+        // console.log(item[0].influence);
+        var name,influence,active;
+        if (item[0].uname==''||item[0].uname=='unknown') {
+            name=item[0].uid;
+        }else {
+            name=item[0].uname;
+        }
+        influence=item[0].influence.toFixed(0);
+        active=item[0].activeness.toFixed(2);
         var str='';
         str+='<div class="play">'+
             '<div class="play1">'+
             '<div class="p11">'+
-            '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--'+
+            '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
             '--><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--'+
-            '--><span class="difang" style="font-size: 8px">6720</span><!--'+
+            '--><span class="difang" style="font-size: 8px">'+item[0].fansnum+'</span><!--'+
             '--><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">'+
             '</div>'+
             '<div class="p22">'+
             '<img style="margin-left: 10px;" src="/static/image/influence.png" alt="">'+
-            '<span class="influence">3083</span>'+
+            '<span class="influence">'+influence+'</span>'+
             '<img src="/static/image/huoyuedu.png" alt="">'+
-            '<span class="huoyuedu">254</span>'+
+            '<span class="huoyuedu">'+active+'</span>'+
             '<img src="/static/image/mingan.png" alt="">'+
-            '<span class="mingan">80</span>'+
+            '<span class="mingan">'+item[0].sensitive+'</span>'+
             '</div>'+
             '</div>'+
             '<img class="play2" src="/static/image/pangzi.png" alt="">'+
             '<div class="play23" style="margin-left: 15px;">'+
-            '<a href="###" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>'+
-            '<a href="###" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>'+
+            '<a href="###" class="renzh1">认证类型:<span class="renzh11">'+item[0].verified+'</span></a>'+
+            '<a href="###" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item[0].domain+'</span></a>'+
             '</div>'+
             '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
             '<a class="bus1">业务标签：</a>'+
@@ -147,6 +157,68 @@ function monkey(data) {
             '</div>';
         $("#container .relevant .relevant3 .re3lf").append(str);
     });
+
+
+    //效果实现
+    var heart=$("#container .relevant2 .play .p11 .xin");
+    $.each(heart,function(index,item){
+        var chan=1;
+        $(item).on('click',function(){
+            if (chan==1) {
+                $(this).attr('src','/static/image/focus.png');
+                chan=2;
+            }else {
+                $(this).attr('src','/static/image/heart.png');
+                chan=1;
+            }
+        })
+    });
+
+    var play=$("#container .relevant3 .play");
+    $.each(play,function (index,item) {
+        $(item).hover(function () {
+            $(item).find(".play5").css({
+                "-webkit-transform":"translateY(-40px)",
+                "-moz-transform":"translateY(-40px)",
+                "-ms-transform":"translateY(-40px)",
+                "-o-transform":"translateY(-40px)",
+                "transform":"translateY(-40px)",
+            })
+        },function () {
+            $(item).find(".play5").css({
+                "-webkit-transform":"translateY(40px)",
+                "-moz-transform":"translateY(40px)",
+                "-ms-transform":"translateY(40px)",
+                "-o-transform":"translateY(40px)",
+                "transform":"translateY(40px)",
+            })
+        });
+    });
+    $.each(play,function (index,item) {
+        var changecolor=1;
+        $(item).find(".play5").on('click',function(){
+            if (changecolor==1) {
+                $(this).parent('.play').css({backgroundColor:'#09F'});
+                changecolor=2;
+                $('#join4').modal("show");
+                $(this).find("a").text('取消加入群体');
+            } else {
+                $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                changecolor=1;
+                $(this).find("a").text('加入群体探索');
+            }
+        });
+    });
+    $.each( $(".relevant .xingming"),function(index,item){
+        $(item).on('click',function () {
+            window.open('/index/person/');
+        });
+    })
+    $.each( $(".relevanttwo .xingming"),function(index,item){
+        $(item).on('click',function () {
+            window.open('/index/search_result/');
+        });
+    })
 }
 
 var people=new people();

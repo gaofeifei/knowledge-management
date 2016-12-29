@@ -61,3 +61,54 @@ def user_name_search(en_name):
     # print ch_name.encode('utf-8')
     return ch_name
 
+#查找该专题下事件关联的用户信息
+def related_user_search(uid_list,sort_flag):
+    query_body = {
+        'query':{
+            'terms':{'uid':uid_list}
+            },
+        "sort": [{sort_flag:'desc'}]
+    }
+    fields_list = ['activeness', 'importnace','sensitive','uname','fansnum',\
+                   'domain','topic_string','user_tag']
+
+    event_detail = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
+                body=query_body, _source=False, fields=fields_list)['hits']['hits']
+    detail_result = []
+    for i in event_detail:
+        fields = i['fields']
+        detail = dict()
+        for i in fields_list:
+            try:
+                detail[i] = fields[i][0]
+            except:
+                detail[i] = 'null'
+        detail_result.append(detail)
+    return detail_result
+
+
+# 查找该专题下的包含事件卡片信息
+def event_detail_search(eid_list,sort_flag):
+    print eid_list,'!!!!'
+
+    query_body = {
+        'query':{
+            'terms':{'en_name':eid_list}
+            },
+        "sort": [{sort_flag:'desc'}]
+    }
+    fields_list = ['name', 'counts','start_ts','location','renshu','user_tag','description']
+
+    event_detail = es_event.search(index=event_analysis_name, doc_type=event_type, \
+                body=query_body, _source=False, fields=fields_list)['hits']['hits']
+    detail_result = []
+    for i in event_detail:
+        fields = i['fields']
+        detail = dict()
+        for i in fields_list:
+            try:
+                detail[i] = fields[i][0]
+            except:
+                detail[i] = 'null'
+        detail_result.append(detail)
+    return detail_result

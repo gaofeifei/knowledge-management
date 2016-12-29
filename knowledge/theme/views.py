@@ -11,7 +11,7 @@ from knowledge.global_config  import event_relation_list,user_event_relation
 from py2neo import Node, Relationship, Graph, NodeSelector
 from py2neo.packages.httpstream import http
 from utils import theme_tab_map, theme_tab_graph,query_special_event,\
-                  query_detail_theme,query_theme_user
+                  query_detail_theme,query_theme_user, query_event_river
 
 http.socket_timeout = 9999
 
@@ -34,8 +34,7 @@ def show_detail():
 
 @mod.route('/overview/')
 def overview_theme():  #专题概览
-    theme_name = request.args.get('theme_name', '电信诈骗')
-    special_event = query_special_event(theme_name)
+    special_event = query_special_event()
 
     return json.dumps(special_event)
 
@@ -47,9 +46,9 @@ def detail_theme():  #专题包含事件滚动
     return json.dumps(detail_t)
 
 @mod.route('/theme_river/')
-def detail_river_theme():  #专题包含事件概览
+def detail_river_theme():  #专题包含事件河
     theme_name = request.args.get('theme_name', '电信诈骗')
-    detail_t = query_theme_river(theme_name)
+    detail_t = query_event_river(theme_name)
     return json.dumps(detail_t)
 
 @mod.route('/user_in_theme/')

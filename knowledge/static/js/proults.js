@@ -218,7 +218,7 @@ function events() {
 
     });
 }
-events();
+// events();
 
 
 //地图配置，地址请求
@@ -237,178 +237,54 @@ place.prototype= {
         });
     },
 };
-// function territory(data) {
-//     var data=eval(data);
-//     var plate=[],local={};
-//     $.each(data, function (index, item) {
-//         plate.push(
-//             {name: item[0],value: item[1]}
-//         );
-//         var myGeo = new BMap.Geocoder();
-//         // 将地址解析结果显示在地图上,并调整地图视野
-//         myGeo.getPoint(item[0], function(home){
-//             if (home) {
-//                 // local.push({item[0]:[point.lng,point.lat]})
-//                 local[item[0]]=[home.lng,home.lat];
-//             }
-//         }, item[0]);
-//     });
-//     var geoCoordMap = local;
-//
-//     var convertData = function (pl) {
-//         var res = [];
-//         for (var i = 0; i < pl.length; i++) {
-//             var geoCoord = geoCoordMap[pl[i].name];
-//             if (geoCoord) {
-//                 res.push({
-//                     name: pl[i].name,
-//                     value: geoCoord.concat(pl[i].value)
-//                 });
-//             }
-//         }
-//         return res;
-//     };
-//     var myChart = echarts.init(document.getElementById('placeimg'));
-//     option = {
-//         backgroundColor: '#404a59',
-//         title: {
-//             // text: '全国主要城市空气质量',
-//             // subtext: 'data from PM25.in',
-//             // sublink: 'http://www.pm25.in',
-//             // x:'center',
-//             // textStyle: {
-//             //     color: '#fff'
-//             // }
-//         },
-//         tooltip: {
-//             trigger: 'item',
-//         },
-//         legend: {
-//             orient: 'vertical',
-//             y: 'bottom',
-//             x:'right',
-//             data:['pm2.5'],
-//             textStyle: {
-//                 color: '#fff'
-//             }
-//         },
-//         visualMap: {
-//             min: 0,
-//             max: 200,
-//             calculable: true,
-//             inRange: {
-//                 color: ['#50a3ba', '#eac736', '#d94e5d']
-//             },
-//             textStyle: {
-//                 color: '#fff'
-//             }
-//         },
-//         geo: {
-//             map: 'china',
-//             label: {
-//                 emphasis: {
-//                     show: false
-//                 }
-//             },
-//             roam: true,
-//             itemStyle: {
-//                 normal: {
-//                     areaColor: '#323c48',
-//                     borderColor: '#111'
-//                 },
-//                 emphasis: {
-//                     areaColor: '#2a333d'
-//                 }
-//             }
-//         },
-//         series: [
-//             {
-//                 name: 'pm2.5',
-//                 type: 'scatter',
-//                 coordinateSystem: 'geo',
-//                 data: convertData(plate),
-//                 symbolSize: 12,
-//                 label: {
-//                     normal: {
-//                         show: false
-//                     },
-//                     emphasis: {
-//                         show: false
-//                     }
-//                 },
-//                 itemStyle: {
-//                     emphasis: {
-//                         borderColor: '#fff',
-//                         borderWidth: 1
-//                     }
-//                 }
-//             }
-//         ]
-//     };
-//     // 为echarts对象加载数据
-//     myChart.setOption(option);
-// }
 function territory(data) {
     var data=eval(data);
-    var plate=[],local={
-        "海门":[121.15,31.89],
-        "鄂尔多斯":[109.781327,39.608266],
-        "招远":[120.38,37.35],
-        "舟山":[122.207216,29.985295],
-        "齐齐哈尔":[123.97,47.33],
-        "盐城":[120.13,33.38],
-        "赤峰":[118.87,42.28],
-        "青岛":[120.33,36.07],
-        "乳山":[121.52,36.89],
-        "金昌":[102.188043,38.520089],
-        "泉州":[118.58,24.93],
-        "莱西":[120.53,36.86],
-        "日照":[119.46,35.42],
-        "胶南":[119.97,35.88],
-        "南通":[121.05,32.08],
-        "拉萨":[91.11,29.97],
-        "云浮":[112.02,22.93],
-    };
+    var plate=[],local={};
     $.each(data, function (index, item) {
         plate.push(
             {name: item[0],value: item[1]}
         );
-        // var myGeo = new BMap.Geocoder();
-        // // 将地址解析结果显示在地图上,并调整地图视野
-        // myGeo.getPoint(item[0], function(point){
-        //     if (point) {
-        //         //item[0]='"'+item[0]+'"';
-        //         local[item[0]]=[point.lng,point.lat];
-        //     }
-        // }, item[0]);
+        var myGeo = new BMap.Geocoder();
+        // 将地址解析结果显示在地图上,并调整地图视野
+        myGeo.getPoint(item[0], function(home){
+            if (home) {
+                // local.push({item[0]:[point.lng,point.lat]})
+                local[item[0]]=[home.lng,home.lat];
+            }
+        }, item[0]);
+        return false;
     });
+    console.log(plate);
     console.log(local);
     var myChart = echarts.init(document.getElementById('placeimg'));
-    var option = {
+    option = {
+        title : {
+            text: '全国主要城市空气质量（pm2.5）',
+            x:'center'
+        },
         tooltip : {
             trigger: 'item'
         },
+        // legend: {
+        //     orient: 'vertical',
+        //     x:'left',
+        //     data:['pm2.5']
+        // },
         dataRange: {
             min : 0,
             max : 500,
             calculable : true,
             color: ['maroon','purple','red','orange','yellow','lightgreen']
         },
-        // legend: {
-        //     orient: 'vertical',
-        //     x:'left',
-        //     data:['事件及人物']
-        // },
-        calculable : true,
         series : [
             {
-                // name: '事件及人物',
+                name: 'pm2.5',
                 type: 'map',
                 mapType: 'china',
                 hoverable: false,
-                //roam: true,
-                data: [],
-                markPoint: {
+                roam:true,
+                data : [],
+                markPoint : {
                     symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
                     itemStyle: {
                         normal: {
@@ -426,15 +302,18 @@ function territory(data) {
                             }
                         }
                     },
-                    data: plate,
+                    data : plate,
                 },
-                geoCoord:local,
-            }
+                geoCoord: {
+                    "北京":[116.3956451,39.929986],
+                },
+            },
         ]
     };
     // 为echarts对象加载数据
     myChart.setOption(option);
 }
+
 var place=new place();
 function nums() {
     var url = '/group/group_map_filter/';

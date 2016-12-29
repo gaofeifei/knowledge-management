@@ -64,7 +64,7 @@ function nums() {
     url = '/theme/theme_node_filter/?node_type='+node_type+'&relation_type='+contain+','+casual+
         ','+happen_together+','+event_other+'&layer='+layer;
     peo.call_request(url,events);
-    console.log(url);
+    // console.log(url);
 };
 
 $(".cdt5").on("click",function () {
@@ -88,7 +88,7 @@ function events() {
                 name=key;
             }else {
                 name=json.user_nodes[key];
-            }
+            };
             node_value.push(
                 {
                     x: num1,
@@ -222,202 +222,116 @@ events();
 
 
 //地图配置，地址请求
-// function place() {
-//     //this.ajax_method='GET'; // body...
-// }
-// place.prototype= {
-//     call_request:function(url,callback) {
-//         $.ajax({
-//             url: url,
-//             type: 'GET',
-//             dataType: 'json',
-//             async: true,
-//             success:callback
-//         });
-//     },
-// };
-// // function territory(data) {
-// //     var data=eval(data);
-// //     var plate=[],local={};
-// //     $.each(data, function (index, item) {
-// //         plate.push(
-// //             {name: item[0],value: item[1]}
-// //         );
-// //         var myGeo = new BMap.Geocoder();
-// //         // 将地址解析结果显示在地图上,并调整地图视野
-// //         myGeo.getPoint(item[0], function(home){
-// //             if (home) {
-// //                 // local.push({item[0]:[point.lng,point.lat]})
-// //                 local[item[0]]=[home.lng,home.lat];
-// //             }
-// //         }, item[0]);
-// //     });
-// //     var geoCoordMap = local;
-// //
-// //     var convertData = function (pl) {
-// //         var res = [];
-// //         for (var i = 0; i < pl.length; i++) {
-// //             var geoCoord = geoCoordMap[pl[i].name];
-// //             if (geoCoord) {
-// //                 res.push({
-// //                     name: pl[i].name,
-// //                     value: geoCoord.concat(pl[i].value)
-// //                 });
-// //             }
-// //         }
-// //         return res;
-// //     };
-// //     var myChart = echarts.init(document.getElementById('placeimg'));
-// //     option = {
-// //         backgroundColor: '#404a59',
-// //         title: {
-// //             // text: '全国主要城市空气质量',
-// //             // subtext: 'data from PM25.in',
-// //             // sublink: 'http://www.pm25.in',
-// //             // x:'center',
-// //             // textStyle: {
-// //             //     color: '#fff'
-// //             // }
-// //         },
-// //         tooltip: {
-// //             trigger: 'item',
-// //         },
-// //         legend: {
-// //             orient: 'vertical',
-// //             y: 'bottom',
-// //             x:'right',
-// //             data:['pm2.5'],
-// //             textStyle: {
-// //                 color: '#fff'
-// //             }
-// //         },
-// //         visualMap: {
-// //             min: 0,
-// //             max: 200,
-// //             calculable: true,
-// //             inRange: {
-// //                 color: ['#50a3ba', '#eac736', '#d94e5d']
-// //             },
-// //             textStyle: {
-// //                 color: '#fff'
-// //             }
-// //         },
-// //         geo: {
-// //             map: 'china',
-// //             label: {
-// //                 emphasis: {
-// //                     show: false
-// //                 }
-// //             },
-// //             roam: true,
-// //             itemStyle: {
-// //                 normal: {
-// //                     areaColor: '#323c48',
-// //                     borderColor: '#111'
-// //                 },
-// //                 emphasis: {
-// //                     areaColor: '#2a333d'
-// //                 }
-// //             }
-// //         },
-// //         series: [
-// //             {
-// //                 name: 'pm2.5',
-// //                 type: 'scatter',
-// //                 coordinateSystem: 'geo',
-// //                 data: convertData(plate),
-// //                 symbolSize: 12,
-// //                 label: {
-// //                     normal: {
-// //                         show: false
-// //                     },
-// //                     emphasis: {
-// //                         show: false
-// //                     }
-// //                 },
-// //                 itemStyle: {
-// //                     emphasis: {
-// //                         borderColor: '#fff',
-// //                         borderWidth: 1
-// //                     }
-// //                 }
-// //             }
-// //         ]
-// //     };
-// //     // 为echarts对象加载数据
-// //     myChart.setOption(option);
-// // }
-// function territory(data) {
-//     var data=eval(data);
-//     var plate=[],local={};
-//     $.each(data, function (index, item) {
-//         plate.push(
-//             {name: item[0],value: item[1]}
-//         );
-//         var myGeo = new BMap.Geocoder();
-//         // 将地址解析结果显示在地图上,并调整地图视野
-//         myGeo.getPoint(item[0], function(point){
-//             if (point) {
-//                 local[item[0]]=[point.lng,point.lat];
-//             }
-//         }, item[0]);
-//     });
-//     // console.log(local);
-//     var myChart = echarts.init(document.getElementById('placeimg'));
-//     var option = {
-//         tooltip : {
-//             trigger: 'item'
-//         },
-//         dataRange: {
-//             min : 0,
-//             max : 500,
-//             calculable : true,
-//             color: ['maroon','purple','red','orange','yellow','lightgreen']
-//         },
-//         legend: {
-//             orient: 'vertical',
-//             x:'left',
-//             data:['事件及人物']
-//         },
-//         calculable : true,
-//         series : [
-//             {
-//                 name: '事件及人物',
-//                 type: 'map',
-//                 mapType: 'china',
-//                 hoverable: false,
-//                 //roam: true,
-//                 data: [],
-//                 markPoint: {
-//                     symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
-//                     itemStyle: {
-//                         normal: {
-//                             borderColor: '#87cefa',
-//                             borderWidth: 1,            // 标注边线线宽，单位px，默认为1
-//                             label: {
-//                                 show: false
-//                             }
-//                         },
-//                         emphasis: {
-//                             borderColor: '#1e90ff',
-//                             borderWidth: 5,
-//                             label: {
-//                                 show: false
-//                             }
-//                         }
-//                     },
-//                     data: plate,
-//                 },
-//                 geoCoord: local,
-//             }
-//         ]
-//     };
-//     // 为echarts对象加载数据
-//     myChart.setOption(option);
-// }
-// var place=new place();
-// function nums() {
-//     var url = '/group/group_map_filter/';
-//     place.call_request(url,territory);
-// }
-// nums();
+
+function maps(data) {
+    // 路径配置
+    var data=eval(data);
+    var plate=[],local={};
+    $.each(data, function (index, item) {
+        plate.push(
+            {name: item[0],value: item[1]}
+        );
+        var myGeo = new BMap.Geocoder();
+        // 将地址解析结果显示在地图上,并调整地图视野
+        myGeo.getPoint(item[0], function(home){
+            if (home) {
+                // local.push({item[0]:[point.lng,point.lat]})
+                local[item[0]]=[home.lng,home.lat];
+            }
+        }, item[0]);
+        // return false;
+    });
+    console.log(plate,local);
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+    require(
+        [
+            'echarts',
+            'echarts/chart/map' // 使用柱状图就加载bar模块，按需加载
+        ],
+        function (ec) {
+            // 基于准备好的dom，初始化echarts图表
+            var myChart = ec.init(document.getElementById('placeimg'));
+
+            var option = {
+                title : {
+                    text: '全国主要城市空气质量（pm2.5）',
+                    subtext: 'data from PM25.in',
+                    sublink: 'http://www.pm25.in',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item'
+                },
+                legend: {
+                    orient: 'vertical',
+                    x:'left',
+                    data:['pm2.5']
+                },
+                dataRange: {
+                    min : 0,
+                    max : 500,
+                    calculable : true,
+                    color: ['maroon','purple','red','orange','yellow','lightgreen']
+                },
+                toolbox: {
+                    show : true,
+                    orient : 'vertical',
+                    x: 'right',
+                    y: 'center',
+                    feature : {
+                        mark : {show: true},
+                        dataView : {show: true, readOnly: false},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
+                    }
+                },
+                series : [
+                    {
+                        name: 'pm2.5',
+                        type: 'map',
+                        mapType: 'china',
+                        hoverable: false,
+                        roam:true,
+                        data : [],
+                        markPoint : {
+                            symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
+                            itemStyle: {
+                                normal: {
+                                    borderColor: '#87cefa',
+                                    borderWidth: 1,            // 标注边线线宽，单位px，默认为1
+                                    label: {
+                                        show: false
+                                    }
+                                },
+                                emphasis: {
+                                    borderColor: '#1e90ff',
+                                    borderWidth: 5,
+                                    label: {
+                                        show: false
+                                    }
+                                }
+                            },
+                            data : plate
+                        },
+                        geoCoord: local
+                    },
+                ]
+            };
+
+            // 为echarts对象加载数据
+            myChart.setOption(option);
+        }
+    );
+}
+var url="/group/group_map_filter/";
+$.ajax({
+    type: "GET",
+    dataType: "JSON",
+    async: true,
+    url: url,
+    success:maps
+});

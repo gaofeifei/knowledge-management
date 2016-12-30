@@ -85,6 +85,7 @@ function maps() {
         }, true);
 
 
+
     });
 }
 maps();
@@ -123,9 +124,9 @@ function monkey(data) {
             '<div class="play1">'+
             '<div class="p11">'+
             '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
+            '--><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png"><!--'+
             '--><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--'+
-            '--><span class="difang" style="font-size: 8px">'+item[0].fansnum+'</span><!--'+
-            '--><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">'+
+            '--><span class="difang" style="font-size: 8px">'+item[0].fansnum+'</span>'+
             '</div>'+
             '<div class="p22">'+
             '<img style="margin-left: 10px;" src="/static/image/influence.png" alt="">'+

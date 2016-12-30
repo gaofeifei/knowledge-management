@@ -444,6 +444,7 @@
                     <input type="text" class="manone"/>
                 </div>
                 <select name="" onchange='build(this.value)'>
+                    <option value="" disabled selected>请选择节点类型</option>
                     <option value="人物">人物</option>
                     <option value="事件">事件</option>
                 </select>
@@ -452,14 +453,18 @@
                     <input type="text" class="mantwo"/>
                 </div>
                 <select name="" onchange='build2(this.value)'>
+                    <option value="" disabled selected>请选择节点类型</option>
                     <option value="人物">人物</option>
                     <option value="事件">事件</option>
                 </select>
                 <div class="manual23">
                     <span>关系类型</span>
-                    <select class='manthr' onchange='build3(this.value)'>
-                        <option value="人物">人物</option>
-                        <option value="事件">事件</option>
+                    <select class='manthr'>
+                        <option value="" disabled selected>请选择节点类型</option>
+                        <option value="好友">好友</option>
+                        <option value="同事">同事</option>
+                        <option value="亲属">亲属</option>
+                        <option value="其他">其他</option>
                     </select>
                 </div>
             </div>
@@ -487,7 +492,7 @@
                             <h4 class="modal-title" id="mySmallModalLabel">添加提示信息</h4>
                         </div>
                         <div class="modal-body" style="text-align: center">
-                            添加成功
+                            <span id='ot'></span>
                         </div>
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
@@ -645,9 +650,7 @@
     $('.relevanttwo .add22').on('click',function () {
         $('#join2').modal("show");
     });  
-        $('.upload3').on('click',function () {
-            $('.upload333').modal("show");
-        });
+    
         $("#inlineRadio2").on('click',function () {
             $("#inlineRadio2").prop("checked",true);
             $("#inlineRadio3").prop("checked",false);
@@ -702,7 +705,7 @@
             });
         });
 
-        //关系的传送添加
+        //-----------关系的传送添加--------------
         transport.prototype= {
             call_request:function(url,callback) {
                 $.ajax({
@@ -718,24 +721,56 @@
         function transport() {
             //this.ajax_method='GET'; // body...
         }
+            
+            var onelx,twolx,oneidx,twoidx;
+            function build(value){
+                if (value=='人物') {
+                    onelx='uid';
+                    oneidx='node_index';
+                }else{
+                    onelx='event';
+                    oneidx='event_index';
+                };
+            };
+            function build2(value){
+                if (value=='人物') {
+                    twolx='uid';
+                    twoidx='node_index';
+                }else{
+                    twolx='event';
+                    twoidx='node_index';
+                };
+            }
         function trans() {
-            var url = '/construction/create_relation/';
-            transport.call_request(url,setup);
-        }
-        trans();
-       
-        function setup(data) {
-            //console.log(data);
-            var data=eval(data);
             var one=$(".manone").val();
-            var onelx;
-            // function build(value){
-            //     if (value=='人物') {
-            //         onelx=
-            //     }else{
-            //         $('').hide();
-            //     };
-            // }
+            var two=$(".mantwo").val();
+            if (one==''||two=='') {
+                alert('节点不能为空');
+            }else {
+                var url = '/construction/create_relation/?node_key1='+onelx+'&node1_id='+one+'&node1_index_name='+
+                oneidx+'&rel=join&node_key2='+twolx+'&node2_id='+two+'&node2_index_name='+twoidx;
+                // console.log(url);
+                transport.call_request(url,setup);
+            };
+            
+        }
+        $("#container .conright2 .uploading .upload3").on('click',function(){
+            trans();
+        });
+       
+        function setup(information) {
+            // var information=eval(information);
+            console.log(information);
+            if (information=='node1 does not exist') {
+                $("#ot").text('节点一不存在，请重新输入。');
+            }else if (information=='node2 does not exist') {
+                $("#ot").text('节点二不存在，请重新输入。');
+            }else if (information=='create success'){
+                $("#ot").text('节点创建成功。');
+            }else if (information=='The current two nodes already have a relationship') {
+                $("#ot").text('关系已经存在，请勿重复添加。');
+            };
+            $('.upload333').modal("show");
         }
         
         

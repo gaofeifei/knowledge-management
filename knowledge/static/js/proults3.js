@@ -227,21 +227,21 @@ function maps(data) {
     // 路径配置
     var data=eval(data);
     var plate=[],local={};
-    $.each(data, function (index, item) {
-        plate.push(
-            {name: item[0],value: item[1]}
-        );
-        var myGeo = new BMap.Geocoder();
-        // 将地址解析结果显示在地图上,并调整地图视野
-        myGeo.getPoint(item[0], function(home){
-            if (home) {
-                // local.push({item[0]:[point.lng,point.lat]})
-                local[item[0]]=[home.lng,home.lat];
-            }
-        }, item[0]);
-        // return false;
-    });
-    console.log(plate,local);
+    // $.each(data, function (index, item) {
+    //     plate.push(
+    //         {name: item[0],value: item[1]}
+    //     );
+    //     var myGeo = new BMap.Geocoder();
+    //     // 将地址解析结果显示在地图上,并调整地图视野
+    //     myGeo.getPoint(item[0], function(home){
+    //         if (home) {
+    //             // local.push({item[0]:[point.lng,point.lat]})
+    //             local[item[0]]=[home.lng,home.lat];
+    //         }
+    //     }, item[0]);
+    //     // return false;
+    // });
+    // console.log(plate,local);
     require.config({
         paths: {
             echarts: 'http://echarts.baidu.com/build/dist'

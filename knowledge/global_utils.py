@@ -44,7 +44,6 @@ def event_name_search(en_name):
         ch_name = v[0]
     return ch_name
 
-
 #查找uid对应的名字
 def user_name_search(en_name):
     query_body = {

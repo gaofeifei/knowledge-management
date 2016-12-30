@@ -64,7 +64,7 @@ def overview_group():
     return json.dumps(special_group)
 
 @mod.route('/user_num_group/')
-def user_num_group():  #群体包含人物滚动
+def user_num_group():  #群体包含人物数量
     group_name = request.args.get('group_name', '法律人士')
     detail_l = query_user_num(group_name)
     return json.dumps(detail_l)

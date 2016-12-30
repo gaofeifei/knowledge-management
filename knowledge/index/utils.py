@@ -78,7 +78,6 @@ def query_special_event():
     tmp_list = []
     for item in special_event_list:
         tmp_list.extend(item.values())
-
     results = dict()
     for v in tmp_list:
         c_string = "START end_node=node:%s(event='%s') MATCH (m)-[r:%s]->(end_node) RETURN count(m)" %(special_event_index_name, v, event_special)

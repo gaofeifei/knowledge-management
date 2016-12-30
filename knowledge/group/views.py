@@ -9,7 +9,7 @@ from datetime import date
 from datetime import datetime
 import csv
 from  knowledge.global_config  import relation_list,user_event_relation
-from utils import group_tab_graph, group_tab_map,query_group,query_group_user,query_group_event
+from utils import group_tab_graph, group_tab_map,query_group,query_group_user,query_group_event,query_group_weibo
 from py2neo import Node, Relationship, Graph, NodeSelector
 from py2neo.packages.httpstream import http
 
@@ -56,7 +56,7 @@ def group_map_filter():
     tab_map_result = group_tab_map(group_name, node_type, relation_type_list, layer)   
     return json.dumps(tab_map_result)
 
-@mod.route('/overview/')
+@mod.route('/overview/') #群体概览
 def overview_group():
     special_group = query_group()
 
@@ -66,8 +66,8 @@ def overview_group():
 def user_in_group():  #群体包含人物滚动
     group_name = request.args.get('group_name', '法律人士')
     sort_flag = request.args.get('sort_flag', 'activeness')
-    detail_t = query_group_user(group_name, sort_flag)
-    return json.dumps(detail_t)
+    detail_u = query_group_user(group_name, sort_flag)
+    return json.dumps(detail_u)
 
 @mod.route('/group_detail/')
 def detail_theme():  #群体包含事件滚动
@@ -75,3 +75,11 @@ def detail_theme():  #群体包含事件滚动
     sort_flag = request.args.get('sort_flag', 'counts')
     detail_t = query_group_event(group_name, sort_flag)
     return json.dumps(detail_t)
+
+@mod.route('/group_weibo/')
+def detail_weibo():  #群体包含微博
+    group_name = request.args.get('group_name', '法律人士')
+    weibo_type = request.args.get('weibo_type', 'influ') #sensi
+    sort_flag = request.args.get('sort_flag', 'counts')
+    detail_w = query_group_weibo(group_name, weibo_type, sort_flag)
+    return json.dumps(detail_w)

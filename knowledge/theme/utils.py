@@ -6,7 +6,7 @@ from knowledge.global_config import portrait_name, portrait_type, event_name, ev
         neo4j_name, event_type, event_special, special_event_index_name, group_index_name, group_rel, node_index_name
 from knowledge.global_utils import es_user_portrait, es_event, graph,\
         user_name_search, event_name_search
-from knowledge.time_utils import ts2datetime, datetime2ts
+from knowledge.time_utils import ts2datetime, datetime2ts,ts2date
 from py2neo import Node, Relationship
 from py2neo.ogm import GraphObject, Property
 from py2neo.packages.httpstream import http
@@ -49,23 +49,26 @@ def event_river_search(eid_list):
         # "sort": [{sort_flag:'desc'}]
     }
     
-    fields_list = ['name']
-
+    fields_list = ['time_type_weibo','name']
+    print eid_list
     event_detail = es_event.search(index=event_analysis_name, doc_type=event_type, \
                 body=query_body, _source=False, fields=fields_list)['hits']['hits']
-    detail_result = []
-    print event_detail
+    detail_result = {}
     for i in event_detail:
-        fields = i['fields']
-
-        # detail = dict()
-        # for i in fields_list:
-        #     try:
-        #         detail[i] = fields[i][0]
-        #     except:
-        #         detail[i] = 'null'
-        # detail_result.append(detail)
-    return fields
+        name_i = i['fields']['name'][0]
+        single_river = []
+        river = json.loads(i['fields']['time_type_weibo'][0])
+        print name_i.encode('utf-8')
+        for r in river:
+            time_r = []
+            river_value = 0
+            for ki, vi in r[1].iteritems():
+                river_value += vi
+            time_r.append(ts2date(r[0]))
+            time_r.append(river_value)
+            single_river.append(time_r)
+        detail_result[name_i]=single_river
+    return detail_result
 
 # 查找该专题下的包含事件卡片信息
 def event_detail_search(eid_list,sort_flag):
@@ -92,8 +95,34 @@ def event_detail_search(eid_list,sort_flag):
         detail_result.append(detail)
     return detail_result
 
+# query special event, return list
+def query_special_event():
+    # step 1: query all special event
+    c_string = "MATCH (n:SpecialEvent) RETURN n"
+    result = graph.run(c_string)
+    special_event_list = []
+    for item in result:
+        special_event_list.append(dict(item[0]))
+    tmp_list = []
+    for item in special_event_list:
+        tmp_list.extend(item.values())
 
-def query_special_event(theme_name):  #专题概览，所有专题及其事件数量
+    results = dict()
+    for v in tmp_list:
+        c_string = "START end_node=node:%s(event='%s') MATCH (m)-[r:%s]->(end_node) RETURN count(m)" %(special_event_index_name, v, event_special)
+        node_result = graph.run(c_string)
+        event_list = []
+        for item in node_result:
+            tmp = dict(item)
+            node_number = tmp.values()[0]
+        results[v] = node_number
+
+    return_results = sorted(results.iteritems(), key=lambda x:x[1], reverse=True)
+    return return_results
+
+
+
+def query_event_river(theme_name):  #专题概览，所有专题及其事件数量
     s_string = 'START s0 = node:special_event_index(event="%s")\
                 MATCH (s0)-[r]-(s) RETURN s.event_id as event' %theme_name
     event_result = graph.run(s_string)
@@ -102,7 +131,7 @@ def query_special_event(theme_name):  #专题概览，所有专题及其事件�
         event_value = event['event']
         event_list.append(event_value)
     detail_result = event_river_search(event_list)
-    return len(event_list)
+    # return len(event_list)
     return {'event_num':len(event_list),'river_data':detail_result}
 
 def query_detail_theme(theme_name, sort_flag):
@@ -155,7 +184,6 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
     e_nodes_list = {} #all event nodes
     u_nodes_list = {} #all user nodes
     for event in event_result:
-        print event,'==========='
         event_value = event['event']
         event_name = event_name_search(event_value)
         event_list.append([event_value,event_name])#取event
@@ -166,7 +194,7 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
         for event_value in event_list:
             c_string = 'START s0 = node:event_index(event="'+str(event_value[0])+'") '
             c_string += 'MATCH (s0)-[r]-(s1'+node_type+') WHERE type(r) in '+ json.dumps(relation_type) +' return s0,r,s1 LIMIT 10'
-            print c_string
+            # print c_string,'!!!!!'
             result = graph.run(c_string)
             for i in list(result):
                 start_id = dict(i['s0'])['event_id']
@@ -254,7 +282,7 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
 
 # 地图
 def theme_tab_map(theme_name, node_type, relation_type, layer):
-    
+    black_country = [u'美国',u'其他',u'法国',u'英国']
     tab_theme_result = theme_tab_graph(theme_name, node_type, relation_type, layer)
     uid_list_origin = tab_theme_result['map_event_id']
     uid_list = [i[0] for i in uid_list_origin]
@@ -270,10 +298,6 @@ def theme_tab_map(theme_name, node_type, relation_type, layer):
     # print geo_list,'!!!!!!!!!!!!!!!!!!'
     location_dict = dict()
     for geo in geo_list:
-        # geo = json.loads(geo_o)
-        # print geo,'=====/========'
-        # del geo[1]['total']
-        # del geo[1]['unknown']
         for k,v in geo[1].iteritems():
             if k == 'total' or k == 'unknown':
                 continue
@@ -287,6 +311,8 @@ def theme_tab_map(theme_name, node_type, relation_type, layer):
     filter_location = dict()
     for k,v in location_dict.iteritems():
         tmp = k.split(' ')
+        if tmp[1] in black_country:
+            continue
         if u'北京' in k or u'天津' in k or u'上海' in k or u'重庆' in k or u'香港' in k or u'澳门' in k:
             try:
                 filter_location[tmp[1]] += v

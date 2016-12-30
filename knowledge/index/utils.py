@@ -6,7 +6,7 @@ from knowledge.global_config import portrait_name, portrait_type, event_name, ev
         neo4j_name, event_type, event_special, special_event_index_name, group_index_name, \
         group_rel, node_index_name,user_event_relation
 from knowledge.global_utils import es_user_portrait, es_event, graph,\
-        user_name_search, event_name_search
+        user_name_search, event_name_search,event_name_to_id
 from knowledge.parameter import rel_node_mapping, rel_node_type_mapping, index_threshold
 from knowledge.time_utils import ts2datetime, datetime2ts
 from py2neo import Node, Relationship
@@ -211,11 +211,12 @@ def query_event_detail(event):
             'match':{'name':event}
             }
     }
-    analysis_fields_list = ['counts','location','renshu','user_tag','description']
+    analysis_fields_list = ['weibo_counts','location','uid_counts','user_tag','description']
     fields_list = ['submit_ts', 'submit_user','start_ts','end_ts']
     
     event_detail = es_event.search(index=event_name, doc_type=event_type, \
                 body=query_body, _source=False, fields=fields_list)['hits']['hits']
+
     event_detail_a = es_event.search(index=event_analysis_name, doc_type=event_type, \
                 body=query_body, _source=False, fields=analysis_fields_list)['hits']['hits']
     # event_detail.extend(event_detail_a)
@@ -265,10 +266,159 @@ def query_event_people(event):
             
     return related_people
 
+#控制面板地图
+def filter_event_map(event_name, node_type, relation_type, layer):
+    black_country = [u'美国',u'其他',u'法国',u'英国']
+    tab_theme_result = filter_event_nodes(event_name, node_type, relation_type, layer)
+    uid_list_origin = tab_theme_result['map_event_id']
+    print uid_list_origin,'000000000000000'
+    uid_list = [i[0] for i in uid_list_origin]
+    print uid_list
+    results = es_event.mget(index=event_analysis_name, doc_type=event_type, \
+                body={'ids': uid_list},_source=False, fields=['geo_weibo_count'])['docs']
+    
+    # print results
+    geo_list = []
+    for i in results:
+        # print type(i['fields']['geo_weibo_count'][0]),'==========='
+        geo_list.extend(json.loads(i['fields']['geo_weibo_count'][0]))
+    # print geo_list,'!!!!!!!!!!!!!!!!!!'
+    location_dict = dict()
+    for geo in geo_list:
+        for k,v in geo[1].iteritems():
+            if k == 'total' or k == 'unknown':
+                continue
+            location_dict[geo[0]+' '+k] = v
+    # print location_dict
+    # for item in results:
+    #     if item["key"] == "" or item["key"] == "unknown" or item['key'] == u'其他':
+    #         continue
+    #     location_dict[item["key"]] = item["doc_count"]
 
+    filter_location = dict()
+    for k,v in location_dict.iteritems():
+        tmp = k.split(' ')
+        if tmp[1] in black_country:
+            continue
+        if u'北京' in k or u'天津' in k or u'上海' in k or u'重庆' in k or u'香港' in k or u'澳门' in k:
+            try:
+                filter_location[tmp[1]] += v
+            except:
+                filter_location[tmp[1]] = v
+        elif len(tmp) == 1:
+            continue
+        else:
+            try:
+                # filter_location[k] += v
+                filter_location[tmp[1]] += v
+            except:
+                # filter_location[k] = v
+                filter_location[tmp[1]] = v
+ 
+    #检查一下群体和话题的两层关系，然后再看这个地理位置对不对修改了189/192行
+    return_results = sorted(filter_location.iteritems(), key=lambda x:x[1], reverse=True)
+    return return_results
 
-#事件关联事件
+#事件控制面板
+def filter_event_nodes(event_name, node_type, relation_type, layer):
+    event_name_id = event_name_to_id(event_name)
+    u_nodes_list = {}
+    e_nodes_list = {}
+    e_nodes_list[event_name] = event_name_id
+    all_event_id = []
+    all_event_id.append([event_name_id,event_name])
+    event_relation = []
+    if layer == '0':  #不扩展
+        pass
+    if layer == '1':  #扩展一层
+        c_string = 'START s0 = node:event_index(event="'+str(event_name_id)+'") '
+        c_string += 'MATCH (s0)-[r]-(s1'+node_type+') WHERE type(r) in '+ json.dumps(relation_type) +' return s0,r,s1 LIMIT 10'
+        print c_string,'!!!!!'
+        result = graph.run(c_string)
+        for i in list(result):
+            start_id = dict(i['s0'])['event_id']
+            # print start_id,'============='
+            relation = i['r'].type()
+            end_id = dict(i['s1'])
+            if end_id.has_key('uid'):
+                print end_id,'!!!!!!!!!!!!!!!!!!!1'
+                user_name = user_name_search(end_id['uid'])
+                # print user_name,'000000000000000000000'
+                u_nodes_list[end_id['uid']] = user_name
+                event_relation.append([start_id,relation,end_id['uid']])
+            if end_id.has_key('envent_id'):
+                event_name = event_name_search(end_id['envent_id'])
+                e_nodes_list[end_id['envent_id']] = event_name
+                all_event_id.append([end_id['envent_id'], event_name])
+                event_relation.append([start_id,relation,end_id['envent_id']])
+    if layer == '2':  #扩展两层
+        print layer,'layer'
+        c_string = 'START s0 = node:event_index(event="'+str(event_name_id)+'") '
+        c_string += 'MATCH (s0)-[r1]-(s1'+node_type+') WHERE type(r1) in '+ json.dumps(relation_type) +' return s0,r1,s1 LIMIT 10'
+        # print c_string,'==========='
+        
+        mid_eid_list = []  #存放第一层的数据，再以这些为起始点，扩展第二层
+        mid_uid_list = []
+        result = graph.run(c_string)
 
+        # print list(result),'-----------------'
+        for i in list(result):
+            print i
+            start_id = i['s0']['event_id']
+            # start_id = s0['event']
+            relation1 = i['r1'].type()
+            m_id = dict(i['s1'])
+            if m_id.has_key('uid'):
+                middle_id = m_id['uid']
+                mid_uid_list.append(middle_id)
+                user_name = user_name_search(middle_id)
+                u_nodes_list[middle_id] = user_name
+                event_relation.append([start_id,relation1,middle_id])
+            if m_id.has_key('envent_id'):
+                middle_id = m_id['envent_id']
+                mid_eid_list.append(middle_id)
+                event_name = event_name_search(middle_id)
+                e_nodes_list[middle_id] = event_name
+                all_event_id.append([middle_id,event_name])
+                event_relation.append([start_id,relation1,middle_id])
+        print mid_uid_list
+        print mid_eid_list,'++++++++++++++++'
+        for mid_uid in mid_uid_list:
+            c_string = 'START s1 = node:node_index(uid="'+str(mid_uid)+'") '
+            c_string += 'MATCH (s1)-[r2]->(s2'+node_type+') WHERE type(r2) in '+ json.dumps(relation_type) +' return s1,r2,s2 LIMIT 5'
+            uid_result = graph.run(c_string)
+
+            for i in uid_result:
+                relation2 = i['r2'].type()
+                end_id = dict(i['s2'])
+                if end_id.has_key('uid'):
+                    user_name = user_name_search(end_id['uid'])
+                    u_nodes_list[end_id['uid']] = user_name
+                    event_relation.append([mid_uid,relation2,end_id['uid']])
+                if end_id.has_key('envent_id'):
+                    event_name = event_name_search(end_id['envent_id'])
+                    e_nodes_list[end_id['envent_id']] = event_name
+                    all_event_id.append([end_id['envent_id'], event_name])
+                    event_relation.append([mid_uid, relation2,end_id['envent_id']])
+        for mid_eid in mid_eid_list:
+            c_string = 'START s1 = node:event_index(event="'+str(mid_eid)+'") '
+            c_string += 'MATCH (s1)-[r2]->(s2'+node_type+')  WHERE type(r2) in '+ json.dumps(relation_type) +' return s1,r2,s2 LIMIT 5'
+            eid_result = graph.run(c_string)
+            for i in eid_result:
+                relation2 = i['r2'].type()
+                end_id = dict(i['s2'])
+                if end_id.has_key('uid'):
+                    user_name = user_name_search(end_id['uid'])
+                    u_nodes_list[end_id['uid']] = user_name
+                    event_relation.append([mid_eid,relation2,end_id['uid']])
+                if end_id.has_key('envent_id'):
+                    event_name = event_name_search(end_id['envent_id'])
+                    e_nodes_list[end_id['envent_id']] = event_name
+                    all_event_id.append([end_id['envent_id'], event_name])
+                    event_relation.append([mid_eid, relation2,end_id['envent_id']])
+    # event_list = u_nodes_list.extend(e_nodes_list)
+    return {'total_event':0, 'user_nodes':u_nodes_list, 'event_nodes':e_nodes_list,\
+            'map_event_id':all_event_id, 'relation':event_relation}  
 
 #事件相关微博
 

@@ -65,7 +65,8 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
         u_nodes_list[str(uid_value)] = user_name  #取uid
     # u_nodes_list.extend(uid_list)
     # all_uid_list.extend(uid_list)
-
+    if layer == '0': #不扩展
+        pass
     if layer == '1':  #扩展一层
         for uid_value in uid_list:
             c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '

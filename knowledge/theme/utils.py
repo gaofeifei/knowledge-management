@@ -189,6 +189,8 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
         e_nodes_list[event_value] = event_name
     all_event_id.extend(event_list)
     # print nodes_list,'-=-=-=-===================='
+    if layer == '0':  #不扩展
+        pass
     if layer == '1':  #扩展一层
         for event_value in event_list:
             c_string = 'START s0 = node:event_index(event="'+str(event_value[0])+'") '

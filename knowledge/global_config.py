@@ -4,7 +4,7 @@ from elasticsearch import Elasticsearch
 
 user_profile_host = ["219.224.134.213:9200"]
 user_portrait_host = ["219.224.134.225:9037"]
-flow_text_host = ["219.224.134.216:9021"]
+flow_text_host = ["219.224.134.216:9201"]
 km_user_portrait_host = ["219.224.134.225:9037"]
 user_portrait_port = "9200"
 event_host = ["219.224.134.225:9037"]
@@ -18,7 +18,7 @@ profile_index_name = "weibo_user"
 profile_index_type = "user"
 remote_portrait_name = "user_portrait_1222" # user portrait system
 portrait_name = "user_portrait"
-flow_text_name = "flow_text_2016-11-27"
+flow_text_name = "flow_text_2016-11-26"
 portrait_type = "user"
 flow_text_type = "text"
 event_name = "event" # 事件基本信息
@@ -60,7 +60,7 @@ pusher = "pusher"#趋势推动
 maker = "maker"#趋势制造
 other_rel = "other_relationship" #其他关系
 
-user_event_relation = ['join','organise','discuss','first','pusher','maker','other_relationship']
+user_event_relation = ['join','pusher','maker','other_relationship']
 
 # Relationship: Event-Event
 contain = "contain"  #--主题关联
@@ -70,7 +70,7 @@ event_other = 'event_other'#其他关系
 
 event_special = "special_event" # 专题
 
-event_relation_list = ['contain','casual','happen_together','event_other']
+event_relation_list = ['contain','event_other']
 
 
 # Relatioship: User、机构--User
@@ -81,7 +81,7 @@ colleague = "colleague" #同事  都是业务关联
 leader_member = "leader_member" #上下级   都不要
 user_tag = "user_tag"#其他 都要
 
-relation_list = ['friend','interaction','relative','colleague','leader_member','user_tag']
+relation_list = ['friend','relative','colleague','user_tag']
 
 group_rel = "group"
 

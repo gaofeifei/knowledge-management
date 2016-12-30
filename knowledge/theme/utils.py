@@ -72,7 +72,6 @@ def event_river_search(eid_list):
 
 # 查找该专题下的包含事件卡片信息
 def event_detail_search(eid_list,sort_flag):
-
     query_body = {
         'query':{
             'terms':{'en_name':eid_list}

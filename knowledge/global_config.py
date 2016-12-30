@@ -60,7 +60,7 @@ pusher = "pusher"#趋势推动
 maker = "maker"#趋势制造
 other_rel = "other_relationship" #其他关系
 
-user_event_relation = ['join','organise','discuss','first','pusher','maker','other_relationship']
+user_event_relation = ['join','pusher','maker','other_relationship']
 
 # Relationship: Event-Event
 contain = "contain"  #--主题关联
@@ -70,7 +70,7 @@ event_other = 'event_other'#其他关系
 
 event_special = "special_event" # 专题
 
-event_relation_list = ['contain','casual','happen_together','event_other']
+event_relation_list = ['contain','event_other']
 
 
 # Relatioship: User、机构--User
@@ -81,7 +81,7 @@ colleague = "colleague" #同事  都是业务关联
 leader_member = "leader_member" #上下级   都不要
 user_tag = "user_tag"#其他 都要
 
-relation_list = ['friend','interaction','relative','colleague','leader_member','user_tag']
+relation_list = ['friend','relative','colleague','user_tag']
 
 group_rel = "group"
 

@@ -41,7 +41,7 @@ def overview_theme():  #专题概览
 @mod.route('/theme_detail/')
 def detail_theme():  #专题包含事件滚动
     theme_name = request.args.get('theme_name', '电信诈骗')
-    sort_flag = request.args.get('sort_flag', 'counts')
+    sort_flag = request.args.get('sort_flag', 'counts')#weibo_counts #uid_counts
     detail_t = query_detail_theme(theme_name, sort_flag)
     return json.dumps(detail_t)
 
@@ -62,10 +62,10 @@ def user_in_theme():  #专题包含人物滚动
 def theme_node_filter():
     theme_name = request.args.get('theme_name', '电信诈骗')
     node_type = request.args.get('node_type', '')#User,Event
+    event_relation_list.extend(user_event_relation)
     relation_str = ','.join(event_relation_list)
     relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
-    relation_type_list.extend(user_event_relation)
     layer = request.args.get('layer','1') #'1' or '2'
     filter_result = theme_tab_graph(theme_name, node_type, relation_type_list, layer)
     return json.dumps(filter_result)
@@ -74,10 +74,10 @@ def theme_node_filter():
 def theme_map_filter():
     theme_name = request.args.get('theme_name', '电信诈骗')
     node_type = request.args.get('node_type', '')#User,Event
+    event_relation_list.extend(user_event_relation)
     relation_str = ','.join(event_relation_list)
-    relation_type = request.args.get('relation_type','')
+    relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
-    relation_type_list.extend(user_event_relation)
     layer = request.args.get('layer','1') #'1' or '2'
     filter_map_result = theme_tab_map(theme_name, node_type, relation_type_list, layer)
     return json.dumps(filter_map_result)

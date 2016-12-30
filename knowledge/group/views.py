@@ -9,7 +9,8 @@ from datetime import date
 from datetime import datetime
 import csv
 from  knowledge.global_config  import relation_list,user_event_relation
-from utils import group_tab_graph, group_tab_map,query_group,query_group_user,query_group_event,query_group_weibo
+from utils import group_tab_graph, group_tab_map,query_group,query_group_user,query_group_event,\
+                  query_group_weibo, query_user_num
 from py2neo import Node, Relationship, Graph, NodeSelector
 from py2neo.packages.httpstream import http
 
@@ -62,6 +63,12 @@ def overview_group():
 
     return json.dumps(special_group)
 
+@mod.route('/user_num_group/')
+def user_num_group():  #群体包含人物滚动
+    group_name = request.args.get('group_name', '法律人士')
+    detail_l = query_user_num(group_name)
+    return json.dumps(detail_l)
+
 @mod.route('/user_in_group/')
 def user_in_group():  #群体包含人物滚动
     group_name = request.args.get('group_name', '法律人士')
@@ -79,7 +86,7 @@ def detail_theme():  #群体包含事件滚动
 @mod.route('/group_weibo/')
 def detail_weibo():  #群体包含微博
     group_name = request.args.get('group_name', '法律人士')
-    weibo_type = request.args.get('weibo_type', 'influ') #sensi
-    sort_flag = request.args.get('sort_flag', 'counts')
-    detail_w = query_group_weibo(group_name, weibo_type, sort_flag)
+    # weibo_type = request.args.get('weibo_type', 'influ') #sensi
+    sort_flag = request.args.get('sort_flag', 'retweeted')#sensitive
+    detail_w = query_group_weibo(group_name, sort_flag)
     return json.dumps(detail_w)

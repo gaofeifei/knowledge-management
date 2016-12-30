@@ -16,17 +16,29 @@ from py2neo.ext.batman import ManualIndexWriteBatch
 http.socket_timeout = 9999
 
 def user_weibo_search(uid_list,sort_flag):
+    # es.update(index="flow_text", doc_type="text", id=1,  body={“doc”:{“text”:“更新”, “user_fansnum”: 100}})
+
     query_body = {
         'query':{
             'terms':{'uid':uid_list}
             },
-        "sort": [{sort_flag:'desc'}]
+        "sort": [{sort_flag:'desc'}],
+        'size':200
     }
-    fields_list = ['text', 'uid','sensitive','comment','retweeted', 'timestamp']
-
+    fields_list = ['text', 'uid','sensitive','comment','retweeted', 'timestamp','sensitive_words_string']
     event_detail = es_flow_text.search(index=flow_text_name, doc_type=flow_text_type, \
                 body=query_body, _source=False, fields=fields_list)['hits']['hits']  #有问题
-    print len(event_detail),'!!!!!!!'
+    result = []
+    for event in event_detail:
+        event_dict ={}
+        uid = event['fields']['uid'][0]
+        uname = user_name_search(uid)
+        event_dict['uname'] = uname
+        for k,v in event['fields'].iteritems():
+            event_dict[k] = v[0]
+        result.append(event_dict)
+
+    return result
 
 def group_tab_graph(group_name, node_type, relation_type, layer):
     s_string = 'START s0 = node:group_index(group="' + group_name + '")  \
@@ -250,6 +262,18 @@ def query_group_user(group_name, sort_flag):
     # print len(detail_result),'!!!!!!'
     return detail_result
 
+#群体人物数量
+def query_user_num(group_name):
+    s_string = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name
+    group_result = graph.run(s_string)
+    uid_list = []
+    for i in group_result:
+        user_dict = dict(i)
+        usd = user_dict['user_id']
+        uid_list.append(usd)
+    return len(uid_list)
+
 #群体关联事件卡片
 def query_group_event(group_name, sort_flag):
     s_string = 'START s0 = node:group_index(group="%s")\
@@ -275,7 +299,7 @@ def query_group_event(group_name, sort_flag):
     detail_result = event_detail_search(event_list, sort_flag)
     return detail_result
 
-def query_group_weibo(group_name, weibo_type, sort_flag):
+def query_group_weibo(group_name, sort_flag):
     s_string = 'START s0 = node:group_index(group="%s")\
                 MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name
     group_result = graph.run(s_string)

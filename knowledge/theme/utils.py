@@ -79,7 +79,8 @@ def event_detail_search(eid_list,sort_flag):
             },
         "sort": [{sort_flag:'desc'}]
     }
-    fields_list = ['name', 'counts','start_ts','location','renshu','user_tag','description']
+
+    fields_list = ['name', 'weibo_counts','start_ts','location','uid_counts','user_tag','description']
 
     event_detail = es_event.search(index=event_analysis_name, doc_type=event_type, \
                 body=query_body, _source=False, fields=fields_list)['hits']['hits']
@@ -119,7 +120,6 @@ def query_special_event():
 
     return_results = sorted(results.iteritems(), key=lambda x:x[1], reverse=True)
     return return_results
-
 
 
 def query_event_river(theme_name):  #专题概览，所有专题及其事件数量

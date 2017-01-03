@@ -108,7 +108,6 @@ function guanlianrenwu() {
     function territory(data) {
         $("#run2").empty();
         var data=eval(data);
-        console.log(data);
         var str='';
         $.each(data,function (index,item) {
             var influe,name,huoyue,mingan,tag;
@@ -170,7 +169,6 @@ function guanlianrenwu() {
                 '</div>'+
                 '</div>';
         });
-        $("#run2").append(str);
         //卡片效果
         $.each($("#people .play"),function (index,item) {
             $(item).hover(function () {
@@ -219,12 +217,14 @@ function guanlianrenwu() {
                 }
             })
         });
+        $("#run2").append(str);
+
     };
     var place=new place();
 
     function nums() {
-        if($('#huoyue').is(':checked')) { point='activeness'; };
         if($('#zhongyao').is(':checked')) { point='importnace'; };
+        if($('#huoyue').is(':checked')) { point='activeness'; };
         if($('#mingan').is(':checked')) { point='sensitive'; }
         var point;
         var thname='电信诈骗';
@@ -239,6 +239,145 @@ function guanlianrenwu() {
     nums();
 }
 guanlianrenwu();
+
+function baohanshijian() {
+    function include() {
+        //this.ajax_method='GET'; // body...
+    }
+    include.prototype= {
+        call_request:function(url,callback) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success:callback
+            });
+        },
+    };
+    function territory(data) {
+        $("#run").empty();
+        var data=eval(data);
+        console.log(data);
+        var str='';
+        $.each(data,function (index,item) {
+            var weizhi,biaoqian,shuoming;
+            if (item.location=='null'){
+                weizhi='未知';
+            }else {
+                weizhi=item.location;
+            };
+            if (item.user_tag=='null'){
+                biaoqian='暂无';
+            }else {
+                biaoqian=item.user_tag;
+            };
+            if (item.description=='null'){
+                biaoqian='暂无数据';
+            }else {
+                biaoqian=item.user_tag;
+            };
+            function getLocalTime(nS) {
+                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,17)
+            };
+            str+='<div class="play">'+
+                '<div class="play1">'+
+                '<div class="p11">'+
+                '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
+                '--><img src="/static/image/dingwei.png" title="位置"><!--'+
+                '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+                '--><img class="xin" src="/static/image/heart.png" alt="">'+
+                '</div>'+
+                '<div class="p22">'+
+                '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
+                '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
+                '</div>'+
+                '</div>'+
+                '<img class="play2" src="/static/image/xuyuyu.png" alt="">'+
+                '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
+                '<a class="bus1">业务标签：</a>'+
+                '<a class="bus2">'+biaoqian+'</a>'+
+                '</div>'+
+                '<div class="play4">'+
+                '<p class="shuoming">'+
+                shuoming+
+                '</p>'+
+                '</div>'+
+                '<!-- <div class="play5" type="button" data-toggle="modal">'+
+                '<a>加入专题</a>'+
+                '</div> -->'+
+                '</div>';
+        });
+        //卡片效果
+        $.each($("#people .play"),function (index,item) {
+            $(item).hover(function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(-40px)",
+                    "-moz-transform":"translateY(-40px)",
+                    "-ms-transform":"translateY(-40px)",
+                    "-o-transform":"translateY(-40px)",
+                    "transform":"translateY(-40px)",
+                })
+            },function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(40px)",
+                    "-moz-transform":"translateY(40px)",
+                    "-ms-transform":"translateY(40px)",
+                    "-o-transform":"translateY(40px)",
+                    "transform":"translateY(40px)",
+                })
+            });
+        });
+        $.each($("#people .play"),function (index,item) {
+            var changecolorq=1;
+            $(item).find(".play5").on('click',function(){
+                if (changecolorq==1) {
+                    $(this).parent('.play').css({backgroundColor:'#09F'});
+                    $(this).find('a').text('取消群体探索');
+                    changecolorq=2;
+                    $('#join4').modal("show");
+                } else {
+                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                    $(this).find('a').text('加入群体探索');
+                    changecolorq=1;
+                }
+            });
+        });
+        var heart=$(".play .play1 .p11 .xin");
+        $.each(heart,function(index,item){
+            var chan=1;
+            $(item).on('click',function(){
+                if (chan==1) {
+                    $(this).attr('src','/static/image/focus.png');
+                    chan=2;
+                }else {
+                    $(this).attr('src','/static/image/heart.png');
+                    chan=1;
+                }
+            })
+        });
+        $("#run").append(str);
+    }
+
+    var include=new include();
+    function nums() {
+        if($('#fasheng').is(':checked')) { point='start_ts'; };
+        if($('#canyu').is(':checked')) { point='uid_counts'; };
+        if($('#redu').is(':checked')) { point='weibo_counts'; };
+        var point;
+        var thname='电信诈骗';
+        var url = '/theme/theme_detail/?theme_name='+thname+'&sort_flag='+point;
+        include.call_request(url,territory);
+    }
+    $.each($("#container #similar .definite .defone .radio input"),function (index,item) {
+        $(item).on('click',function () {
+            nums();
+        });
+    });
+    nums();
+};
+baohanshijian();
+
 
 
 

@@ -2,11 +2,11 @@
 
 import time
 import json
-from knowledge.global_config import portrait_name, portrait_type, event_name, event_analysis_name, \
+from knowledge.global_config import portrait_name,flow_text_name, portrait_type,flow_text_type,event_name, event_analysis_name, \
         neo4j_name, event_type, event_special, special_event_index_name, group_index_name, \
         group_rel, node_index_name,user_tag,relation_list
-from knowledge.global_utils import es_user_portrait, es_event, graph,\
-        user_name_search,event_name_search
+from knowledge.global_utils import es_user_portrait, es_flow_text, es_event, graph,\
+        user_name_search,event_name_search, related_user_search,event_detail_search
 from knowledge.time_utils import ts2datetime, datetime2ts
 from py2neo import Node, Relationship
 from py2neo.ogm import GraphObject, Property
@@ -14,6 +14,31 @@ from py2neo.packages.httpstream import http
 from py2neo.ext.batman import ManualIndexManager
 from py2neo.ext.batman import ManualIndexWriteBatch
 http.socket_timeout = 9999
+
+def user_weibo_search(uid_list,sort_flag):
+    # es.update(index="flow_text", doc_type="text", id=1,  body={“doc”:{“text”:“更新”, “user_fansnum”: 100}})
+
+    query_body = {
+        'query':{
+            'terms':{'uid':uid_list}
+            },
+        "sort": [{sort_flag:'desc'}],
+        'size':200
+    }
+    fields_list = ['text', 'uid','sensitive','comment','retweeted', 'timestamp','sensitive_words_string']
+    event_detail = es_flow_text.search(index=flow_text_name, doc_type=flow_text_type, \
+                body=query_body, _source=False, fields=fields_list)['hits']['hits']  #有问题
+    result = []
+    for event in event_detail:
+        event_dict ={}
+        uid = event['fields']['uid'][0]
+        uname = user_name_search(uid)
+        event_dict['uname'] = uname
+        for k,v in event['fields'].iteritems():
+            event_dict[k] = v[0]
+        result.append(event_dict)
+
+    return result
 
 def group_tab_graph(group_name, node_type, relation_type, layer):
     s_string = 'START s0 = node:group_index(group="' + group_name + '")  \
@@ -151,6 +176,7 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
 
 # 地图
 def group_tab_map(group_name, node_type, relation_type, layer):
+    black_country = [u'美国',u'其他',u'法国',u'英国']
     tab_graph_result = group_tab_graph(group_name, node_type, relation_type, layer)
     uid_list = [i[0] for i in tab_graph_result['map_uid']]
 
@@ -185,6 +211,8 @@ def group_tab_map(group_name, node_type, relation_type, layer):
         elif len(tmp) == 1:
             continue
         else:
+            if tmp[1] in black_country:
+                continue
             try:
                 filter_location[tmp[1]] += v
             except:
@@ -192,3 +220,95 @@ def group_tab_map(group_name, node_type, relation_type, layer):
 
     return_results = sorted(filter_location.iteritems(), key=lambda x:x[1], reverse=True)
     return return_results[:500]
+
+
+
+def query_group():  #群体概览
+    # step 1: query all group
+    c_string = "MATCH (n:Group) RETURN n"
+    result = graph.run(c_string)
+    group_list = []
+    for item in result:
+        group_list.append(dict(item[0]))
+    tmp_list = []
+    for item in group_list:
+        tmp_list.extend(item.values())
+
+    results = dict()
+    for v in tmp_list:
+        c_string = "START end_node=node:%s(group='%s') MATCH (m)-[r:%s]->(end_node) RETURN count(m)" %(group_index_name, v, group_rel)
+        node_result = graph.run(c_string)
+        event_list = []
+        for item in node_result:
+            tmp = dict(item)
+            node_number = tmp.values()[0]
+        results[v] = node_number
+
+    return_results = sorted(results.iteritems(), key=lambda x:x[1], reverse=True)
+    return return_results
+
+#群体关联人物卡片
+def query_group_user(group_name, sort_flag):
+    s_string = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name
+    group_result = graph.run(s_string)
+    uid_list = []
+    for i in group_result:
+        user_dict = dict(i)
+        usd = user_dict['user_id']
+        uid_list.append(usd)
+    print len(uid_list)
+    detail_result = related_user_search(uid_list, sort_flag)
+    # print len(detail_result),'!!!!!!'
+    return detail_result
+
+#群体人物数量
+def query_user_num(group_name):
+    s_string = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name
+    group_result = graph.run(s_string)
+    uid_list = []
+    for i in group_result:
+        user_dict = dict(i)
+        usd = user_dict['user_id']
+        uid_list.append(usd)
+    return len(uid_list)
+
+#群体关联事件卡片
+def query_group_event(group_name, sort_flag):
+    s_string = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name
+    group_result = graph.run(s_string)
+    event_list = []
+    for event in group_result:
+        user_dict = dict(event)
+        # print 
+        usd = user_dict['user_id']
+        # event_list.append(event_value)
+        c_string = 'START s0 = node:node_index(uid="'+str(usd)+'") '
+        c_string += 'MATCH (s0)-[r]-(s1:Event) return s1 LIMIT 50'
+        # print c_string
+        result = graph.run(c_string)
+        for i in list(result):
+            print i
+            end_id = dict(i['s1'])
+            event_list.append(end_id['event_id'])
+    print event_list
+    print len(event_list)
+    event_list = [i for i in set(event_list) if i != u'大学生失联']
+    detail_result = event_detail_search(event_list, sort_flag)
+    return detail_result
+
+def query_group_weibo(group_name, sort_flag):
+    s_string = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name
+    group_result = graph.run(s_string)
+    uid_list = []
+    for i in group_result:
+        user_dict = dict(i)
+        usd = user_dict['user_id']
+        uid_list.append(usd)
+    weibo_result = user_weibo_search(uid_list,sort_flag)
+    return weibo_result
+
+    

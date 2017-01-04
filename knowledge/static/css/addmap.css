@@ -4,7 +4,7 @@ th,textarea,select,table,form {
     margin: 0;
     padding: 0;
     -webkit-user-select: none;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "微软雅黑";
 }
 ul,li,ol {
     list-style: none;
@@ -114,13 +114,13 @@ a,a:link,a:hover,a:visited,a:active {
     border-top-right-radius: 10px;
     background-color: #051621;
 }
-#container .relevant .relevant2,#container .relevanttwo .relevant2 {
-    /*width: 1100px;*/
-    height: 570px;
-    border: 2px solid #09F;
-    padding: 5px;
-    box-shadow: 3px 3px 3px #c9c2c7;
-}
+/*#container .relevant .relevant2,#container .relevanttwo .relevant2 {*/
+    /*!*width: 1100px;*!*/
+    /*height: 570px;*/
+    /*border: 2px solid #09F;*/
+    /*padding: 5px;*/
+    /*box-shadow: 3px 3px 3px #c9c2c7;*/
+/*}*/
 #container .relevant .relevant2 #complex,#container .relevanttwo .relevant2 #complex2 {
     width:590px;
     height: 471px;
@@ -276,11 +276,14 @@ a,a:link,a:hover,a:visited,a:active {
     margin-left: 50px;
 }
 #container .conright2 .manual .manual2 .manual21 input,#container .conright2 .manual .manual2 .manual22 input,
-#container .conright2 .manual .manual2 .manual23 select {
+#container .conright2 .manual .manual2 .manual23 select,#container .conright2 .manual .manual2 select {
     border: 1px solid #0099FF;
-    width: 200px;
+    width: 150px;
     padding: 5px;
     margin-left: 10px;
+}
+#container .conright2 .manual .manual2 select {
+    width: 80px;
 }
 #container .conright2 .uploading .upload1 .filem {
     border: 1px solid #0099FF;

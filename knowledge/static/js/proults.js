@@ -1,629 +1,611 @@
 /**
  * Created by Administrator on 2016/11/30.
  */
-~function(){
-    // 路径配置
-    require.config({
-        paths: {
-            echarts: 'http://echarts.baidu.com/build/dist'
-        }
-    });
-    require(
-        [
-            'echarts',
-            'echarts/chart/force' // 使用柱状图就加载bar模块，按需加载
-        ],
-        function (ec) {
-            // 基于准备好的dom，初始化echarts图表
-            var myChart = ec.init(document.getElementById('eventimg'));
 
-            var option = {
-                // title : {
-                //     text: '人物关系：乔布斯',
-                //     subtext: '数据来自人立方',
-                //     x:'right',
-                //     y:'bottom'
-                // },
-                tooltip : {
-                    trigger: 'item',
-                    formatter: '{a} : {b}'
-                },
-                toolbox: {
-                    show : true,
-                    feature : {
-                        restore : {show: true},
-                        magicType: {show: true, type: ['force', 'chord']},
-                        saveAsImage : {show: true}
+//事件人物点配置
+function peo() {
+    //this.ajax_method='GET'; // body...
+}
+peo.prototype= {
+    call_request:function(url,callback) {
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success:events
+        });
+    },
+};
+var peo=new peo();
+var url='/group/group_node_filter/';
+var friend='friend',relative='relative', colleague='colleague',leader_member='leader_member',
+    user_tag='user_tag',node_type;
+$("#friend").change(function () {
+    if($("#friend").prop("checked")) {
+        //选中时的操作
+        friend='friend';
+    } else {
+        friend='';
+    }
+});
+$("#relative").change(function () {
+    if($("#relative").prop("checked")) {
+        //选中时的操作
+        relative='relative';
+    } else {
+        relative='';
+    }
+});
+$("#colleague").change(function () {
+    if($("#colleague").prop("checked")) {
+        //选中时的操作
+        colleague='colleague';
+    } else {
+        colleague='';
+    }
+});
+$("#leader_member").change(function () {
+    if($("#leader_member").prop("checked")) {
+        //选中时的操作
+        leader_member='leader_member';
+    } else {
+        leader_member='';
+    }
+});
+$("#user_tag").change(function () {
+    if($("#user_tag").prop("checked")) {
+        //选中时的操作
+        user_tag='user_tag';
+    } else {
+        user_tag='';
+    }
+});
+
+var layer;
+function nums() {
+    if ($("#event").is(":checked")){node_type='Event';}
+    if ($("#user").is(":checked")){node_type='User';}
+    if ($("#event").is(":checked")&&$("#user").is(":checked")){node_type='';}
+    if($('#onecg').is(':checked')) { layer=1; }
+    if($('#twocg').is(':checked')) { layer=2; }
+    url = '/group/group_node_filter/?node_type='+node_type+'&relation_type='+friend+','+relative+
+        ','+colleague+','+leader_member+','+user_tag+'&layer='+layer;
+    peo.call_request(url,events);
+};
+
+$(".cdt5").on("click",function () {
+    nums();
+});
+function events() {
+    // 路径配置
+    // 基于准备好的dom，初始化echarts图表
+    var myChart = echarts.init(document.getElementById('eventimg'));
+    myChart.showLoading();
+    $.getJSON(url, function (json) {
+        var json=eval(json);
+        // var categories = [{name:'人物'},{name:'事件'}];
+        var node_value=[],link_value=[];
+            // ,event_value=[];
+        for (var key in json.user_nodes){
+            var num1=Math.random()*(-1000-700)+1000;
+            var num2=Math.random()*(-1000-700)+1000;
+            var name;
+            if (json.user_nodes[key]==''||json.user_nodes[key]=="unknown") {
+                name=key;
+            }else {
+                name=json.user_nodes[key];
+            };
+            node_value.push(
+                {
+                    x: num1,
+                    y: num2,
+                    id: key,
+                    name:name,
+                    symbolSize: 14,
+                    itemStyle: {
+                        normal: {
+                            color: '#00cc66'
+                        }
+                    }
+                }
+            );
+        };
+        for (var key2 in json.event_nodes){
+            var num3=Math.random()*(-1000-700)+1000;
+            var num4=Math.random()*(-1000-700)+1000;
+            var name2;
+            if (json.event_nodes[key2]==''||json.event_nodes[key2]=="unknown") {
+                name2=key2;
+            }else {
+                name2=json.event_nodes[key2];
+            }
+            node_value.push(
+                {
+                    x: num3,
+                    y: num4,
+                    id: key2,
+                    name:name2,
+                    symbolSize: 14,
+                    itemStyle: {
+                        normal: {
+                            color: '#a73cff'
+                        }
+                    }
+                }
+            );
+        };
+        $.each(json.relation,function (index,item) {
+            link_value.push(
+                {
+                    source: item[0],
+                    target: item[2]
+                }
+            );
+        });
+        myChart.hideLoading();
+        myChart.setOption(option = {
+            title: {
+                // text: 'NPM Dependencies'
+            },
+            legend: {
+                // data: ["人物","事件"]
+                // data:categories.map(function (a) {
+                //     return a;
+                // })
+            },
+            animationDurationUpdate: 1500,
+            animationEasingUpdate: 'quinticInOut',
+            series : [
+                {
+                    // name:'人物',
+                    type: 'graph',
+                    layout: 'none',
+                    // progressiveThreshold: 700,
+                    data:node_value,
+                    edges: link_value,
+                    itemStyle:{
+                        normal:{
+                            color:'#00cc66'
+                        }
+                    },
+                    label: {
+                        emphasis: {
+                            position: 'right',
+                            show: true
+                        }
+                    },
+                    focusNodeAdjacency: true,
+                    lineStyle: {
+                        normal: {
+                            width: 1.5,
+                            curveness: 0.3,
+                            opacity: 0.8
+                        }
                     }
                 },
-                legend: {
-                    x: 'left',
-                    data:['家人','朋友']
-                },
-                series : [
-                    {
-                        type:'force',
-                        name : "人物关系",
-                        ribbonType: false,
-                        categories : [
-                            {
-                                name: '人物'
-                            },
-                            {
-                                name: '家人'
-                            },
-                            {
-                                name:'朋友'
-                            }
-                        ],
+                // {
+                //     name:'事件',
+                //     type: 'graph',
+                //     layout: 'none',
+                //     // progressiveThreshold: 700,
+                //     // data:node_value,
+                //     // edges: link_value,
+                //     itemStyle:{
+                //         normal:{
+                //             color:'#a73cff'
+                //         }
+                //     },
+                //     label: {
+                //         emphasis: {
+                //             position: 'right',
+                //             show: true
+                //         }
+                //     },
+                //     focusNodeAdjacency: true,
+                //     lineStyle: {
+                //         normal: {
+                //             width: 1.5,
+                //             curveness: 0.3,
+                //             opacity: 0.8
+                //         }
+                //     }
+                // },
+            ]
+        }, true);
+
+
+    });
+}
+events();
+
+
+//地图配置，地址请求
+function ditu() {
+    function place() {
+        //this.ajax_method='GET'; // body...
+    }
+    place.prototype= {
+        call_request:function(url,callback) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success:callback
+            });
+        },
+    };
+    function territory(data) {
+        var data=eval(data);
+        var plate=[],local={};
+        $.each(data, function (index, item) {
+            plate.push(
+                {name: item[0],value: item[1]}
+            );
+            var myGeo = new BMap.Geocoder();
+            // 将地址解析结果显示在地图上,并调整地图视野
+            myGeo.getPoint(item[0], function(home){
+                if (home) {
+                    // local.push({item[0]:[point.lng,point.lat]})
+                    local[item[0]]=[home.lng,home.lat];
+                }
+            }, item[0]);
+            return false;
+        });
+        console.log(plate);
+        console.log(local);
+        var myChart = echarts.init(document.getElementById('placeimg'));
+        option = {
+            title : {
+                text: '全国主要城市空气质量（pm2.5）',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item'
+            },
+            // legend: {
+            //     orient: 'vertical',
+            //     x:'left',
+            //     data:['pm2.5']
+            // },
+            dataRange: {
+                min : 0,
+                max : 500,
+                calculable : true,
+                color: ['maroon','purple','red','orange','yellow','lightgreen']
+            },
+            series : [
+                {
+                    name: 'pm2.5',
+                    type: 'map',
+                    mapType: 'china',
+                    hoverable: false,
+                    roam:true,
+                    data : [],
+                    markPoint : {
+                        symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
                         itemStyle: {
                             normal: {
+                                borderColor: '#87cefa',
+                                borderWidth: 1,            // 标注边线线宽，单位px，默认为1
                                 label: {
-                                    show: true,
-                                    textStyle: {
-                                        color: '#333'
-                                    }
-                                },
-                                nodeStyle : {
-                                    brushType : 'both',
-                                    borderColor : 'rgba(255,215,0,0.4)',
-                                    borderWidth : 1
-                                },
-                                linkStyle: {
-                                    type: 'curve'
+                                    show: false
                                 }
                             },
                             emphasis: {
+                                borderColor: '#1e90ff',
+                                borderWidth: 5,
                                 label: {
                                     show: false
-                                    // textStyle: null      // 默认使用全局文本样式，详见TEXTSTYLE
-                                },
-                                nodeStyle : {
-                                    //r: 30
-                                },
-                                linkStyle : {}
+                                }
                             }
                         },
-                        useWorker: false,
-                        minRadius : 15,
-                        maxRadius : 25,
-                        gravity: 1.1,
-                        scaling: 1.1,
-                        roam: 'move',
-                        nodes:[
-                            {category:0, name: '乔布斯', value : 10, label: '乔布斯\n（主要）'},
-                            {category:1, name: '丽萨-乔布斯',value : 2},
-                            {category:1, name: '保罗-乔布斯',value : 3},
-                            {category:1, name: '克拉拉-乔布斯',value : 3},
-                            {category:1, name: '劳伦-鲍威尔',value : 7},
-                        ],
-                        links : [
-                            {source : '丽萨-乔布斯', target : '乔布斯', weight : 1, name: '女儿'},
-                            {source : '保罗-乔布斯', target : '乔布斯', weight : 2, name: '父亲'},
-                            {source : '克拉拉-乔布斯', target : '乔布斯', weight : 1, name: '母亲'},
-                            {source : '劳伦-鲍威尔', target : '乔布斯', weight : 2},
-                            {source : '史蒂夫-沃兹尼艾克', target : '乔布斯', weight : 3, name: '合伙人'},
-                        ]
-                    }
-                ]
-            };
-            var ecConfig = require('echarts/config');
-            function focus(param) {
-                var data = param.data;
-                var links = option.series[0].links;
-                var nodes = option.series[0].nodes;
-                if (
-                    data.source !== undefined
-                    && data.target !== undefined
-                ) { //点击的是边
-                    var sourceNode = nodes.filter(function (n) {return n.name == data.source})[0];
-                    var targetNode = nodes.filter(function (n) {return n.name == data.target})[0];
-                    //console.log("选中了边 " + sourceNode.name + ' -> ' + targetNode.name + ' (' + data.weight + ')');
-                } else { // 点击的是点
-                    //console.log("选中了" + data.name + '(' + data.value + ')');
-                }
-            }
-            myChart.on(ecConfig.EVENT.CLICK, focus);
-
-            myChart.on(ecConfig.EVENT.FORCE_LAYOUT_END, function () {
-                // console.log(myChart.chart.force.getPosition());
-            });
-
-
-            // 为echarts对象加载数据
-            myChart.setOption(option);
-        }
-    );
-
-    require(
-        [
-            'echarts',
-            'echarts/chart/map' // 使用柱状图就加载bar模块，按需加载
-        ],
-        function (ec) {
-            // 基于准备好的dom，初始化echarts图表
-            var myChart = ec.init(document.getElementById('placeimg'));
-
-            var option = {
-                // title : {
-                //     text: '全国主要城市空气质量（pm2.5）',
-                //     subtext: 'data from PM25.in',
-                //     sublink: 'http://www.pm25.in',
-                //     x:'center'
-                // },
-                tooltip : {
-                    trigger: 'item'
-                },
-                legend: {
-                    orient: 'vertical',
-                    x:'left',
-                    data:['pm2.5']
-                },
-                dataRange: {
-                    min : 0,
-                    max : 500,
-                    calculable : true,
-                    color: ['maroon','purple','red','orange','yellow','lightgreen']
-                },
-                toolbox: {
-                    show : true,
-                    orient : 'vertical',
-                    x: 'right',
-                    y: 'center',
-                    feature : {
-                        mark : {show: true},
-                        dataView : {show: true, readOnly: false},
-                        restore : {show: true},
-                        saveAsImage : {show: true}
-                    }
-                },
-                series : [
-                    {
-                        name: 'pm2.5',
-                        type: 'map',
-                        mapType: 'china',
-                        hoverable: false,
-                        roam:true,
-                        data : [],
-                        markPoint : {
-                            symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
-                            itemStyle: {
-                                normal: {
-                                    borderColor: '#87cefa',
-                                    borderWidth: 1,            // 标注边线线宽，单位px，默认为1
-                                    label: {
-                                        show: false
-                                    }
-                                },
-                                emphasis: {
-                                    borderColor: '#1e90ff',
-                                    borderWidth: 5,
-                                    label: {
-                                        show: false
-                                    }
-                                }
-                            },
-                            data : [
-                                {name: "海门", value: 9},
-                                {name: "鄂尔多斯", value: 12},
-                                {name: "招远", value: 12},
-                                {name: "舟山", value: 12},
-                                {name: "齐齐哈尔", value: 14},
-                                {name: "盐城", value: 15},
-                                {name: "赤峰", value: 16},
-                                {name: "青岛", value: 18},
-                                {name: "乳山", value: 18},
-                                {name: "金昌", value: 19},
-                                {name: "泉州", value: 21},
-                                {name: "莱西", value: 21},
-                                {name: "日照", value: 21},
-                                {name: "胶南", value: 22},
-                                {name: "南通", value: 23},
-                                {name: "拉萨", value: 24},
-                                {name: "云浮", value: 24},
-                                {name: "梅州", value: 25},
-                                {name: "文登", value: 25},
-                                {name: "上海", value: 25},
-                                {name: "攀枝花", value: 25},
-                                {name: "威海", value: 25},
-                                {name: "承德", value: 25},
-                                {name: "厦门", value: 26},
-                                {name: "汕尾", value: 26},
-                                {name: "潮州", value: 26},
-                                {name: "丹东", value: 27},
-                                {name: "太仓", value: 27},
-                                {name: "曲靖", value: 27},
-                                {name: "烟台", value: 28},
-                                {name: "福州", value: 29},
-                                {name: "瓦房店", value: 30},
-                                {name: "即墨", value: 30},
-                                {name: "抚顺", value: 31},
-                                {name: "玉溪", value: 31},
-                                {name: "张家口", value: 31},
-                                {name: "阳泉", value: 31},
-                                {name: "莱州", value: 32},
-                                {name: "湖州", value: 32},
-                                {name: "汕头", value: 32},
-                                {name: "昆山", value: 33},
-                                {name: "宁波", value: 33},
-                                {name: "湛江", value: 33},
-                                {name: "揭阳", value: 34},
-                                {name: "荣成", value: 34},
-                                {name: "连云港", value: 35},
-                                {name: "葫芦岛", value: 35},
-                                {name: "常熟", value: 36},
-                                {name: "东莞", value: 36},
-                                {name: "河源", value: 36},
-                                {name: "淮安", value: 36},
-                                {name: "泰州", value: 36},
-                                {name: "南宁", value: 37},
-                                {name: "营口", value: 37},
-                                {name: "惠州", value: 37},
-                                {name: "江阴", value: 37},
-                                {name: "蓬莱", value: 37},
-                                {name: "韶关", value: 38},
-                                {name: "嘉峪关", value: 38},
-                                {name: "广州", value: 38},
-                                {name: "延安", value: 38},
-                                {name: "太原", value: 39},
-                                {name: "清远", value: 39},
-                                {name: "中山", value: 39},
-                                {name: "昆明", value: 39},
-                                {name: "寿光", value: 40},
-                                {name: "盘锦", value: 40},
-                                {name: "长治", value: 41},
-                                {name: "深圳", value: 41},
-                                {name: "珠海", value: 42},
-                                {name: "宿迁", value: 43},
-                                {name: "咸阳", value: 43},
-                                {name: "铜川", value: 44},
-                                {name: "平度", value: 44},
-                                {name: "佛山", value: 44},
-                                {name: "海口", value: 44},
-                                {name: "江门", value: 45},
-                                {name: "章丘", value: 45},
-                                {name: "肇庆", value: 46},
-                                {name: "大连", value: 47},
-                                {name: "临汾", value: 47},
-                                {name: "吴江", value: 47},
-                                {name: "石嘴山", value: 49},
-                                {name: "沈阳", value: 50},
-                                {name: "苏州", value: 50},
-                                {name: "茂名", value: 50},
-                                {name: "嘉兴", value: 51},
-                                {name: "长春", value: 51},
-                                {name: "胶州", value: 52},
-                                {name: "银川", value: 52},
-                                {name: "张家港", value: 52},
-                                {name: "三门峡", value: 53},
-                                {name: "锦州", value: 54},
-                                {name: "南昌", value: 54},
-                                {name: "柳州", value: 54},
-                                {name: "三亚", value: 54},
-                                {name: "自贡", value: 56},
-                                {name: "吉林", value: 56},
-                                {name: "阳江", value: 57},
-                                {name: "泸州", value: 57},
-                                {name: "西宁", value: 57},
-                                {name: "宜宾", value: 58},
-                                {name: "呼和浩特", value: 58},
-                                {name: "成都", value: 58},
-                                {name: "大同", value: 58},
-                                {name: "镇江", value: 59},
-                                {name: "桂林", value: 59},
-                                {name: "张家界", value: 59},
-                                {name: "宜兴", value: 59},
-                                {name: "北海", value: 60},
-                                {name: "西安", value: 61},
-                                {name: "金坛", value: 62},
-                                {name: "东营", value: 62},
-                                {name: "牡丹江", value: 63},
-                                {name: "遵义", value: 63},
-                                {name: "绍兴", value: 63},
-                                {name: "扬州", value: 64},
-                                {name: "常州", value: 64},
-                                {name: "潍坊", value: 65},
-                                {name: "重庆", value: 66},
-                                {name: "台州", value: 67},
-                                {name: "南京", value: 67},
-                                {name: "滨州", value: 70},
-                                {name: "贵阳", value: 71},
-                                {name: "无锡", value: 71},
-                                {name: "本溪", value: 71},
-                                {name: "克拉玛依", value: 72},
-                                {name: "渭南", value: 72},
-                                {name: "马鞍山", value: 72},
-                                {name: "宝鸡", value: 72},
-                                {name: "焦作", value: 75},
-                                {name: "句容", value: 75},
-                                {name: "北京", value: 79},
-                                {name: "徐州", value: 79},
-                                {name: "衡水", value: 80},
-                                {name: "包头", value: 80},
-                                {name: "绵阳", value: 80},
-                                {name: "乌鲁木齐", value: 84},
-                                {name: "枣庄", value: 84},
-                                {name: "杭州", value: 84},
-                                {name: "淄博", value: 85},
-                                {name: "鞍山", value: 86},
-                                {name: "溧阳", value: 86},
-                                {name: "库尔勒", value: 86},
-                                {name: "安阳", value: 90},
-                                {name: "开封", value: 90},
-                                {name: "济南", value: 92},
-                                {name: "德阳", value: 93},
-                                {name: "温州", value: 95},
-                                {name: "九江", value: 96},
-                                {name: "邯郸", value: 98},
-                                {name: "临安", value: 99},
-                                {name: "兰州", value: 99},
-                                {name: "沧州", value: 100},
-                                {name: "临沂", value: 103},
-                                {name: "南充", value: 104},
-                                {name: "天津", value: 105},
-                                {name: "富阳", value: 106},
-                                {name: "泰安", value: 112},
-                                {name: "诸暨", value: 112},
-                                {name: "郑州", value: 113},
-                                {name: "哈尔滨", value: 114},
-                                {name: "聊城", value: 116},
-                                {name: "芜湖", value: 117},
-                                {name: "唐山", value: 119},
-                                {name: "平顶山", value: 119},
-                                {name: "邢台", value: 119},
-                                {name: "德州", value: 120},
-                                {name: "济宁", value: 120},
-                                {name: "荆州", value: 127},
-                                {name: "宜昌", value: 130},
-                                {name: "义乌", value: 132},
-                                {name: "丽水", value: 133},
-                                {name: "洛阳", value: 134},
-                                {name: "秦皇岛", value: 136},
-                                {name: "株洲", value: 143},
-                                {name: "石家庄", value: 147},
-                                {name: "莱芜", value: 148},
-                                {name: "常德", value: 152},
-                                {name: "保定", value: 153},
-                                {name: "湘潭", value: 154},
-                                {name: "金华", value: 157},
-                                {name: "岳阳", value: 169},
-                                {name: "长沙", value: 175},
-                                {name: "衢州", value: 177},
-                                {name: "廊坊", value: 193},
-                                {name: "菏泽", value: 194},
-                                {name: "合肥", value: 229},
-                                {name: "武汉", value: 273},
-                                {name: "大庆", value: 279}
-                            ]
-                        },
-                        geoCoord: {
-                            "海门":[121.15,31.89],
-                            "鄂尔多斯":[109.781327,39.608266],
-                            "招远":[120.38,37.35],
-                            "舟山":[122.207216,29.985295],
-                            "齐齐哈尔":[123.97,47.33],
-                            "盐城":[120.13,33.38],
-                            "赤峰":[118.87,42.28],
-                            "青岛":[120.33,36.07],
-                            "乳山":[121.52,36.89],
-                            "金昌":[102.188043,38.520089],
-                            "泉州":[118.58,24.93],
-                            "莱西":[120.53,36.86],
-                            "日照":[119.46,35.42],
-                            "胶南":[119.97,35.88],
-                            "南通":[121.05,32.08],
-                            "拉萨":[91.11,29.97],
-                            "云浮":[112.02,22.93],
-                            "梅州":[116.1,24.55],
-                            "文登":[122.05,37.2],
-                            "上海":[121.48,31.22],
-                            "攀枝花":[101.718637,26.582347],
-                            "威海":[122.1,37.5],
-                            "承德":[117.93,40.97],
-                            "厦门":[118.1,24.46],
-                            "汕尾":[115.375279,22.786211],
-                            "潮州":[116.63,23.68],
-                            "丹东":[124.37,40.13],
-                            "太仓":[121.1,31.45],
-                            "曲靖":[103.79,25.51],
-                            "烟台":[121.39,37.52],
-                            "福州":[119.3,26.08],
-                            "瓦房店":[121.979603,39.627114],
-                            "即墨":[120.45,36.38],
-                            "抚顺":[123.97,41.97],
-                            "玉溪":[102.52,24.35],
-                            "张家口":[114.87,40.82],
-                            "阳泉":[113.57,37.85],
-                            "莱州":[119.942327,37.177017],
-                            "湖州":[120.1,30.86],
-                            "汕头":[116.69,23.39],
-                            "昆山":[120.95,31.39],
-                            "宁波":[121.56,29.86],
-                            "湛江":[110.359377,21.270708],
-                            "揭阳":[116.35,23.55],
-                            "荣成":[122.41,37.16],
-                            "连云港":[119.16,34.59],
-                            "葫芦岛":[120.836932,40.711052],
-                            "常熟":[120.74,31.64],
-                            "东莞":[113.75,23.04],
-                            "河源":[114.68,23.73],
-                            "淮安":[119.15,33.5],
-                            "泰州":[119.9,32.49],
-                            "南宁":[108.33,22.84],
-                            "营口":[122.18,40.65],
-                            "惠州":[114.4,23.09],
-                            "江阴":[120.26,31.91],
-                            "蓬莱":[120.75,37.8],
-                            "韶关":[113.62,24.84],
-                            "嘉峪关":[98.289152,39.77313],
-                            "广州":[113.23,23.16],
-                            "延安":[109.47,36.6],
-                            "太原":[112.53,37.87],
-                            "清远":[113.01,23.7],
-                            "中山":[113.38,22.52],
-                            "昆明":[102.73,25.04],
-                            "寿光":[118.73,36.86],
-                            "盘锦":[122.070714,41.119997],
-                            "长治":[113.08,36.18],
-                            "深圳":[114.07,22.62],
-                            "珠海":[113.52,22.3],
-                            "宿迁":[118.3,33.96],
-                            "咸阳":[108.72,34.36],
-                            "铜川":[109.11,35.09],
-                            "平度":[119.97,36.77],
-                            "佛山":[113.11,23.05],
-                            "海口":[110.35,20.02],
-                            "江门":[113.06,22.61],
-                            "章丘":[117.53,36.72],
-                            "肇庆":[112.44,23.05],
-                            "大连":[121.62,38.92],
-                            "临汾":[111.5,36.08],
-                            "吴江":[120.63,31.16],
-                            "石嘴山":[106.39,39.04],
-                            "沈阳":[123.38,41.8],
-                            "苏州":[120.62,31.32],
-                            "茂名":[110.88,21.68],
-                            "嘉兴":[120.76,30.77],
-                            "长春":[125.35,43.88],
-                            "胶州":[120.03336,36.264622],
-                            "银川":[106.27,38.47],
-                            "张家港":[120.555821,31.875428],
-                            "三门峡":[111.19,34.76],
-                            "锦州":[121.15,41.13],
-                            "南昌":[115.89,28.68],
-                            "柳州":[109.4,24.33],
-                            "三亚":[109.511909,18.252847],
-                            "自贡":[104.778442,29.33903],
-                            "吉林":[126.57,43.87],
-                            "阳江":[111.95,21.85],
-                            "泸州":[105.39,28.91],
-                            "西宁":[101.74,36.56],
-                            "宜宾":[104.56,29.77],
-                            "呼和浩特":[111.65,40.82],
-                            "成都":[104.06,30.67],
-                            "大同":[113.3,40.12],
-                            "镇江":[119.44,32.2],
-                            "桂林":[110.28,25.29],
-                            "张家界":[110.479191,29.117096],
-                            "宜兴":[119.82,31.36],
-                            "北海":[109.12,21.49],
-                            "西安":[108.95,34.27],
-                            "金坛":[119.56,31.74],
-                            "东营":[118.49,37.46],
-                            "牡丹江":[129.58,44.6],
-                            "遵义":[106.9,27.7],
-                            "绍兴":[120.58,30.01],
-                            "扬州":[119.42,32.39],
-                            "常州":[119.95,31.79],
-                            "潍坊":[119.1,36.62],
-                            "重庆":[106.54,29.59],
-                            "台州":[121.420757,28.656386],
-                            "南京":[118.78,32.04],
-                            "滨州":[118.03,37.36],
-                            "贵阳":[106.71,26.57],
-                            "无锡":[120.29,31.59],
-                            "本溪":[123.73,41.3],
-                            "克拉玛依":[84.77,45.59],
-                            "渭南":[109.5,34.52],
-                            "马鞍山":[118.48,31.56],
-                            "宝鸡":[107.15,34.38],
-                            "焦作":[113.21,35.24],
-                            "句容":[119.16,31.95],
-                            "北京":[116.46,39.92],
-                            "徐州":[117.2,34.26],
-                            "衡水":[115.72,37.72],
-                            "包头":[110,40.58],
-                            "绵阳":[104.73,31.48],
-                            "乌鲁木齐":[87.68,43.77],
-                            "枣庄":[117.57,34.86],
-                            "杭州":[120.19,30.26],
-                            "淄博":[118.05,36.78],
-                            "鞍山":[122.85,41.12],
-                            "溧阳":[119.48,31.43],
-                            "库尔勒":[86.06,41.68],
-                            "安阳":[114.35,36.1],
-                            "开封":[114.35,34.79],
-                            "济南":[117,36.65],
-                            "德阳":[104.37,31.13],
-                            "温州":[120.65,28.01],
-                            "九江":[115.97,29.71],
-                            "邯郸":[114.47,36.6],
-                            "临安":[119.72,30.23],
-                            "兰州":[103.73,36.03],
-                            "沧州":[116.83,38.33],
-                            "临沂":[118.35,35.05],
-                            "南充":[106.110698,30.837793],
-                            "天津":[117.2,39.13],
-                            "富阳":[119.95,30.07],
-                            "泰安":[117.13,36.18],
-                            "诸暨":[120.23,29.71],
-                            "郑州":[113.65,34.76],
-                            "哈尔滨":[126.63,45.75],
-                            "聊城":[115.97,36.45],
-                            "芜湖":[118.38,31.33],
-                            "唐山":[118.02,39.63],
-                            "平顶山":[113.29,33.75],
-                            "邢台":[114.48,37.05],
-                            "德州":[116.29,37.45],
-                            "济宁":[116.59,35.38],
-                            "荆州":[112.239741,30.335165],
-                            "宜昌":[111.3,30.7],
-                            "义乌":[120.06,29.32],
-                            "丽水":[119.92,28.45],
-                            "洛阳":[112.44,34.7],
-                            "秦皇岛":[119.57,39.95],
-                            "株洲":[113.16,27.83],
-                            "石家庄":[114.48,38.03],
-                            "莱芜":[117.67,36.19],
-                            "常德":[111.69,29.05],
-                            "保定":[115.48,38.85],
-                            "湘潭":[112.91,27.87],
-                            "金华":[119.64,29.12],
-                            "岳阳":[113.09,29.37],
-                            "长沙":[113,28.21],
-                            "衢州":[118.88,28.97],
-                            "廊坊":[116.7,39.53],
-                            "菏泽":[115.480656,35.23375],
-                            "合肥":[117.27,31.86],
-                            "武汉":[114.31,30.52],
-                            "大庆":[125.03,46.58]
-                        }
+                        data : plate,
                     },
-                    {
-                        name: 'Top5',
-                        type: 'map',
-                        mapType: 'china',
-                        data:[],
-                        markPoint : {
-                            symbol:'emptyCircle',
-                            symbolSize : function (v){
-                                return 10 + v/100
-                            },
-                            effect : {
-                                show: true,
-                                shadowBlur : 0
-                            },
-                            itemStyle:{
-                                normal:{
-                                    label:{show:false}
-                                }
-                            },
-                            data : [
-                                {name: "廊坊", value: 193},
-                                {name: "菏泽", value: 194},
-                                {name: "合肥", value: 229},
-                                {name: "武汉", value: 273},
-                                {name: "大庆", value: 279}
-                            ]
-                        }
-                    }
-                ]
+                    geoCoord: {
+                        "北京":[116.3956451,39.929986],
+                    },
+                },
+            ]
+        };
+        // 为echarts对象加载数据
+        myChart.setOption(option);
+    }
+
+    var place=new place();
+    function nums() {
+        var url = '/group/group_map_filter/';
+        place.call_request(url,territory);
+    }
+    nums();
+};
+// ditu();
+
+
+function guanlianrenwu() {
+    function include() {
+        //this.ajax_method='GET'; // body...
+    }
+    include.prototype= {
+        call_request:function(url,callback) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success:callback
+            });
+        },
+    };
+    function territory(data) {
+        $("#run").empty();
+        var data=eval(data);
+        var str='';
+        $.each(data,function (index,item) {
+            var influe,name,huoyue,mingan,tag;
+            if (item.importnace=='null'){
+                influe='暂无';
+            }else {
+                influe=item.importnace.toFixed(2);
             };
+            if (item.uname=='null'||item.uname=='unknown'||item.uname==''){
+                name='暂无';
+            }else {
+                name=item.uname;
+            };
+            var huoyue=item.activeness.toFixed(2);
+            if (item.sensitive=='null'||item.sensitive=='unknown'){
+                mingan='暂无';
+            }else {
+                mingan=item.sensitive.toFixed(2);
+            };
+            if (item.user_tag=='null'||item.sensitive=='unknown'){
+                tag='暂无';
+            }else {
+                tag=item.user_tag;
+            };
+            str+='<div class="play">'+
+                '<div class="play1">'+
+                '<div class="p11">'+
+                '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
+                '--><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""'+
+                'title=\'粉丝数\'><!--'+
+                '--><span class="difang" style="font-size: 8px">'+item.fansnum+'</span><!--'+
+                '--><img class=\'xin\' style="margin-left: 10px;" src="/static/image/heart.png">'+
+                '</div>'+
+                '<div class="p22" style="margin-top: 5px">'+
+                '<img style="margin-left: 10px;" src="/static/image/influence.png" title="重要度">'+
+                '<span class="influence">'+influe+'</span>'+
+                '<img src="/static/image/huoyuedu.png" title="活跃度">'+
+                '<span class="huoyuedu">'+huoyue+'</span>'+
+                '<img src="/static/image/mingan.png" title="敏感度">'+
+                '<span class="mingan">'+mingan+'</span>'+
+                '</div>'+
+                '</div>'+
+                '<img class="play2" src="/static/image/pangzi.png" alt="">'+
+                '<div class="play23" style="margin-left: 15px;">'+
+                '<a href="" class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
+                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>'+
+                '</div>'+
+                '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
+                '<a class="bus1">业务标签：</a>'+
+                '<a class="bus2">'+tag+'</a>'+
+                '</div>'+
+                '<!--<div class="play4">-->'+
+                '<!--<p class="shuoming">-->'+
+                '<!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->'+
+                '<!--</p>-->'+
+                '<!--</div>-->'+
+                '<div class="play5" type="button" data-toggle="modal">'+
+                '<a>加入群体探索</a>'+
+                '</div>'+
+                '</div>';
+        });
+        $("#run").append(str);
+        //卡片效果
+        $.each($(".play"),function (index,item) {
+            $(item).hover(function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(-40px)",
+                    "-moz-transform":"translateY(-40px)",
+                    "-ms-transform":"translateY(-40px)",
+                    "-o-transform":"translateY(-40px)",
+                    "transform":"translateY(-40px)",
+                })
+            },function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(40px)",
+                    "-moz-transform":"translateY(40px)",
+                    "-ms-transform":"translateY(40px)",
+                    "-o-transform":"translateY(40px)",
+                    "transform":"translateY(40px)",
+                })
+            });
+        });
+        $.each($(".play"),function (index,item) {
+            var changecolorq=1;
+            $(item).find(".play5").on('click',function(){
+                if (changecolorq==1) {
+                    $(this).parent('.play').css({backgroundColor:'#09F'});
+                    $(this).find('a').text('取消群体探索');
+                    changecolorq=2;
+                    $('#join4').modal("show");
+                } else {
+                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                    $(this).find('a').text('加入群体探索');
+                    changecolorq=1;
+                }
+            });
+        });
+        var heart=$(".play .play1 .p11 .xin");
+        $.each(heart,function(index,item){
+            var chan=1;
+            $(item).on('click',function(){
+                if (chan==1) {
+                    $(this).attr('src','/static/image/focus.png');
+                    chan=2;
+                }else {
+                    $(this).attr('src','/static/image/heart.png');
+                    chan=1;
+                }
+            })
+        });
+    }
 
+    var include=new include();
+    function nums() {
+        if($('#zhongyao').is(':checked')) { point='importnace'; };
+        if($('#huoyue').is(':checked')) { point='activeness'; };
+        if($('#mingan').is(':checked')) { point='sensitive'; };
+        var point;
+        var thname='法律人士';
+        var url = '/group/user_in_group/?group_name='+thname+'&sort_flag='+point;
+        include.call_request(url,territory);
+    }
+    $.each($("#container #similar .definite .defone .radio input"),function (index,item) {
+        $(item).on('click',function () {
+            nums();
+        });
+    });
+    nums();
+};
+guanlianrenwu();
 
-            // 为echarts对象加载数据
-            myChart.setOption(option);
-        }
-    );
+function guanlianshijian() {
+    function include() {
+        //this.ajax_method='GET'; // body...
+    }
+    include.prototype= {
+        call_request:function(url,callback) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success:callback
+            });
+        },
+    };
+    function territory(data) {
+        $("#run2").empty();
+        var data=eval(data);
+        var str='';
+        $.each(data,function (index,item) {
+            var weizhi,biaoqian,shuoming;
+            if (item.location=='null'){
+                weizhi='未知';
+            }else {
+                weizhi=item.location;
+            };
+            if (item.user_tag=='null'){
+                biaoqian='暂无';
+            }else {
+                biaoqian=item.user_tag;
+            };
+            if (item.description=='null'){
+                biaoqian='暂无数据';
+            }else {
+                biaoqian=item.user_tag;
+            };
+            function getLocalTime(nS) {
+                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,17)
+            };
+            str+='<div class="play">'+
+                '<div class="play1">'+
+                '<div class="p11">'+
+                '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
+                '--><img src="/static/image/dingwei.png" title="位置"><!--'+
+                '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+                '--><img class="xin" src="/static/image/heart.png" alt="">'+
+                '</div>'+
+                '<div class="p22">'+
+                '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
+                '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
+                '</div>'+
+                '</div>'+
+                '<img class="play2" src="/static/image/xuyuyu.png" alt="">'+
+                '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
+                '<a class="bus1">业务标签：</a>'+
+                '<a class="bus2">'+biaoqian+'</a>'+
+                '</div>'+
+                '<div class="play4">'+
+                '<p class="shuoming">'+
+                shuoming+
+                '</p>'+
+                '</div>'+
+                '<!-- <div class="play5" type="button" data-toggle="modal">'+
+                '<a>加入专题</a>'+
+                '</div> -->'+
+                '</div>';
+        });
+        //卡片效果
+        $.each($("#people .play"),function (index,item) {
+            $(item).hover(function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(-40px)",
+                    "-moz-transform":"translateY(-40px)",
+                    "-ms-transform":"translateY(-40px)",
+                    "-o-transform":"translateY(-40px)",
+                    "transform":"translateY(-40px)",
+                })
+            },function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(40px)",
+                    "-moz-transform":"translateY(40px)",
+                    "-ms-transform":"translateY(40px)",
+                    "-o-transform":"translateY(40px)",
+                    "transform":"translateY(40px)",
+                })
+            });
+        });
+        $.each($("#people .play"),function (index,item) {
+            var changecolorq=1;
+            $(item).find(".play5").on('click',function(){
+                if (changecolorq==1) {
+                    $(this).parent('.play').css({backgroundColor:'#09F'});
+                    $(this).find('a').text('取消群体探索');
+                    changecolorq=2;
+                    $('#join4').modal("show");
+                } else {
+                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                    $(this).find('a').text('加入群体探索');
+                    changecolorq=1;
+                }
+            });
+        });
+        var heart=$(".play .play1 .p11 .xin");
+        $.each(heart,function(index,item){
+            var chan=1;
+            $(item).on('click',function(){
+                if (chan==1) {
+                    $(this).attr('src','/static/image/focus.png');
+                    chan=2;
+                }else {
+                    $(this).attr('src','/static/image/heart.png');
+                    chan=1;
+                }
+            })
+        });
+        $("#run2").append(str);
+    }
 
-}();
+    var include=new include();
+    function nums() {
+        var point;
+        if($('#fasheng2').is(':checked')) { point='start_ts'; };
+        if($('#canyu2').is(':checked')) { point='uid_counts'; };
+        if($('#redu2').is(':checked')) { point='weibo_counts'; };
+        var thname='法律人士';
+        var url = '/group/group_detail/?group_name='+thname+'&sort_flag='+point;
+        include.call_request(url,territory);
+        console.log(url);
+    }
+    $.each($("#container #people .peotwo .peotwo1 .radio input"),function (index,item) {
+        $(item).on('click',function () {
+            nums();
+        });
+    });
+    nums();
+};
+guanlianshijian();

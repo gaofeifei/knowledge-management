@@ -41,7 +41,7 @@ def overview_theme():  #专题概览
 @mod.route('/theme_detail/')
 def detail_theme():  #专题包含事件滚动
     theme_name = request.args.get('theme_name', '电信诈骗')
-    sort_flag = request.args.get('sort_flag', 'counts')#weibo_counts #uid_counts
+    sort_flag = request.args.get('sort_flag', 'start_ts')#weibo_counts #uid_counts
     detail_t = query_detail_theme(theme_name, sort_flag)
     return json.dumps(detail_t)
 

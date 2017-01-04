@@ -226,22 +226,6 @@ events();
 function maps(data) {
     // 路径配置
     var data=eval(data);
-    var plate=[],local={};
-    $.each(data, function (index, item) {
-        plate.push(
-            {name: item[0],value: item[1]}
-        );
-        var myGeo = new BMap.Geocoder();
-        // 将地址解析结果显示在地图上,并调整地图视野
-        myGeo.getPoint(item[0], function(home){
-            if (home) {
-                // local.push({item[0]:[point.lng,point.lat]})
-                local[item[0]]=[home.lng,home.lat];
-            }
-        }, item[0]);
-        // return false;
-    });
-    console.log(plate,local);
     require.config({
         paths: {
             echarts: 'http://echarts.baidu.com/build/dist'
@@ -256,72 +240,87 @@ function maps(data) {
             // 基于准备好的dom，初始化echarts图表
             var myChart = ec.init(document.getElementById('placeimg'));
 
-            var option = {
-                title : {
-                    text: '全国主要城市空气质量（pm2.5）',
-                    subtext: 'data from PM25.in',
-                    sublink: 'http://www.pm25.in',
-                    x:'center'
-                },
-                tooltip : {
-                    trigger: 'item'
-                },
-                legend: {
-                    orient: 'vertical',
-                    x:'left',
-                    data:['pm2.5']
-                },
-                dataRange: {
-                    min : 0,
-                    max : 500,
-                    calculable : true,
-                    color: ['maroon','purple','red','orange','yellow','lightgreen']
-                },
-                toolbox: {
-                    show : true,
-                    orient : 'vertical',
-                    x: 'right',
-                    y: 'center',
-                    feature : {
-                        mark : {show: true},
-                        dataView : {show: true, readOnly: false},
-                        restore : {show: true},
-                        saveAsImage : {show: true}
+            var option;
+            var plate=[],local={};
+            $.each(data, function (index, item) {
+                plate.push(
+                    {name: item[0],value: item[1]}
+                );
+                var myGeo = new BMap.Geocoder();
+                // 将地址解析结果显示在地图上,并调整地图视野
+                myGeo.getPoint(item[0], function(home){
+                    if (home) {
+                        // local.push({item[0]:[point.lng,point.lat]})
+                        local[item[0]]=[home.lng,home.lat];
                     }
-                },
-                series : [
-                    {
-                        name: 'pm2.5',
-                        type: 'map',
-                        mapType: 'china',
-                        hoverable: false,
-                        roam:true,
-                        data : [],
-                        markPoint : {
-                            symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
-                            itemStyle: {
-                                normal: {
-                                    borderColor: '#87cefa',
-                                    borderWidth: 1,            // 标注边线线宽，单位px，默认为1
-                                    label: {
-                                        show: false
+                }, item[0]);
+
+                option = {
+                    title : {
+                        text: '全国主要城市空气质量（pm2.5）',
+                        subtext: 'data from PM25.in',
+                        sublink: 'http://www.pm25.in',
+                        x:'center'
+                    },
+                    tooltip : {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        x:'left',
+                        data:['pm2.5']
+                    },
+                    dataRange: {
+                        min : 0,
+                        max : 500,
+                        calculable : true,
+                        color: ['maroon','purple','red','orange','yellow','lightgreen']
+                    },
+                    toolbox: {
+                        show : true,
+                        orient : 'vertical',
+                        x: 'right',
+                        y: 'center',
+                        feature : {
+                            mark : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    series : [
+                        {
+                            name: 'pm2.5',
+                            type: 'map',
+                            mapType: 'china',
+                            hoverable: false,
+                            roam:true,
+                            data : [],
+                            markPoint : {
+                                symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
+                                itemStyle: {
+                                    normal: {
+                                        borderColor: '#87cefa',
+                                        borderWidth: 1,            // 标注边线线宽，单位px，默认为1
+                                        label: {
+                                            show: false
+                                        }
+                                    },
+                                    emphasis: {
+                                        borderColor: '#1e90ff',
+                                        borderWidth: 5,
+                                        label: {
+                                            show: false
+                                        }
                                     }
                                 },
-                                emphasis: {
-                                    borderColor: '#1e90ff',
-                                    borderWidth: 5,
-                                    label: {
-                                        show: false
-                                    }
-                                }
+                                data : plate
                             },
-                            data : plate
+                            geoCoord: local
                         },
-                        geoCoord: local
-                    },
-                ]
-            };
-
+                    ]
+                };
+            });
             // 为echarts对象加载数据
             myChart.setOption(option);
         }

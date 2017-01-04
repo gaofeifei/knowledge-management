@@ -7,7 +7,7 @@ from knowledge.global_config import portrait_name, portrait_type, event_name, ev
         group_rel, node_index_name,user_event_relation
 from knowledge.global_utils import es_user_portrait, es_event, graph,\
         user_name_search, event_name_search
-from knowledge.parameter import rel_node_mapping, rel_node_type_mapping, index_threshold
+from knowledge.parameter import rel_node_mapping, rel_node_type_mapping, index_threshold, WEEK
 from knowledge.time_utils import ts2datetime, datetime2ts
 from py2neo import Node, Relationship
 from py2neo.ogm import GraphObject, Property
@@ -16,7 +16,7 @@ from py2neo.ext.batman import ManualIndexManager
 from py2neo.ext.batman import ManualIndexWriteBatch
 http.socket_timeout = 9999
 
-week = 7
+week = WEEK
 
 def query_current_week_increase():
     # query recent 7 days increase of node
@@ -78,6 +78,7 @@ def query_special_event():
     tmp_list = []
     for item in special_event_list:
         tmp_list.extend(item.values())
+
     results = dict()
     for v in tmp_list:
         c_string = "START end_node=node:%s(event='%s') MATCH (m)-[r:%s]->(end_node) RETURN count(m)" %(special_event_index_name, v, event_special)
@@ -119,7 +120,7 @@ def query_group():
 
 def query_new_relationship():
     current_ts = time.time()
-    former_ts = datetime2ts(ts2datetime(current_ts-10*24*3600))
+    former_ts = datetime2ts(ts2datetime(current_ts-week*24*3600))
     query_node = {
         "query":{
             "bool":{
@@ -159,6 +160,8 @@ def query_new_relationship():
             if rel_type == "topic":
                 continue
             node_attri = dict(tmp_node)
+            if not node_attri:
+                continue
             primary_key = node_attri[rel_node_mapping[rel_type]] # primary key value
             node_type = rel_node_type_mapping[rel_type] # end node type
             if node_type == "User":

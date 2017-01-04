@@ -2,14 +2,16 @@
 
 import json
 from elasticsearch import Elasticsearch
+import time
 
-es = Elasticsearch("219.224.134.225:9200", timeout=600)
+es = Elasticsearch("219.224.134.225:9037", timeout=600)
 
 count = 0
 bulk_action = []
-with open("../../user_portrait.txt", "r") as f:
+with open("user_portrait.txt", "r") as f:
     for line in f:
         source = json.loads(line)
+        source["create_time"] = time.time()
         _id = source["uid"]
         bulk_action.extend([{"index":{"_id":_id}}, source])
         count += 1

@@ -23,6 +23,21 @@ def add_node():
 def add_relation():
     return render_template('construction/compile.html')
 
+@mod.route('/read_file/', methods=['GET','POST'])
+def new_in():#读取文件的内容
+    f_name = request.form['new_words']
+    flag = request.form['flag']
+
+    uid_list = []
+    line = f_name.split('\n')
+    if len(line) == 0:
+        return json.dumps('No Content!')
+    
+    for li in line:
+        uid_list.append(li)
+
+    return json.dumps(uid_list)
+
 
 @mod.route('/select_relation/')
 def select_relation():

@@ -160,6 +160,9 @@ def query_new_relationship():
             if rel_type == "topic":
                 continue
             node_attri = dict(tmp_node)
+            print "rel_type:", rel_type
+            print rel_node_mapping[rel_type]
+            print node_attri[rel_node_mapping[rel_type]]
             primary_key = node_attri[rel_node_mapping[rel_type]] # primary key value
             node_type = rel_node_type_mapping[rel_type] # end node type
             if node_type == "User":

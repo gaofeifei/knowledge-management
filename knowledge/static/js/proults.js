@@ -217,7 +217,7 @@ function events() {
 
     });
 }
-// events();
+events();
 
 
 //地图配置，地址请求
@@ -592,14 +592,14 @@ function guanlianshijian() {
 
     var include=new include();
     function nums() {
+        var point;
         if($('#fasheng2').is(':checked')) { point='start_ts'; };
         if($('#canyu2').is(':checked')) { point='uid_counts'; };
         if($('#redu2').is(':checked')) { point='weibo_counts'; };
-        var point;
         var thname='法律人士';
         var url = '/group/group_detail/?group_name='+thname+'&sort_flag='+point;
         include.call_request(url,territory);
-        console.log(url)
+        console.log(url);
     }
     $.each($("#container #people .peotwo .peotwo1 .radio input"),function (index,item) {
         $(item).on('click',function () {

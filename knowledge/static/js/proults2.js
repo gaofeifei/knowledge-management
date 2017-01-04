@@ -258,7 +258,6 @@ function baohanshijian() {
     function territory(data) {
         $("#run").empty();
         var data=eval(data);
-        console.log(data);
         var str='';
         $.each(data,function (index,item) {
             var weizhi,biaoqian,shuoming;
@@ -361,10 +360,10 @@ function baohanshijian() {
 
     var include=new include();
     function nums() {
+        var point;
         if($('#fasheng').is(':checked')) { point='start_ts'; };
         if($('#canyu').is(':checked')) { point='uid_counts'; };
         if($('#redu').is(':checked')) { point='weibo_counts'; };
-        var point;
         var thname='电信诈骗';
         var url = '/theme/theme_detail/?theme_name='+thname+'&sort_flag='+point;
         include.call_request(url,territory);

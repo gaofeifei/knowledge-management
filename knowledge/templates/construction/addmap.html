@@ -55,11 +55,76 @@
                 <span class="tslf1">事件名称</span>
                 <input type="text" class="tslf2" style="padding: 5px;margin-left: 10px;font-size: 12px;"/>
             </div>
-            <div class="tsrg" style="margin-left: 60px">
-                <span class="tsrg1">时间：</span>
-                <input type="date" class="tsrg2" style="width: 230px;padding: 5px;
-                font-size: 12px"/>
-                <button class="tsrg3" style="margin-left: 60px">确定</button>
+            <div class='leix' style='display:inline-block;margin-left: 20px;'>
+                <span style='display:inline-block;color: black;font-weight: 700;
+                font-size: 14px;'>
+                    事件类型
+                </span>
+                <select style='display:inline-block;width: 150px;padding: 5px;margin-left: 10px;
+                        font-size: 12px;border: 1px solid #0099FF;'>
+                    <option value='军事国防'>军事国防</option>
+                    <option value='交通'>交通</option>
+                    <option value='国土资源'>国土资源</option>
+                    <option value='境外敌对势力'>境外敌对势力</option>
+                    <option value='灾害'>灾害</option>
+                    <option value='社会公共安全'>社会公共安全</option>
+                    <option value='维权上访'>维权上访</option>
+                    <option value='信息产业'>信息产业</option>
+                    <option value='信息安全'>信息安全</option>
+                    <option value='工业'>工业</option>
+                    <option value='网络安全'>网络安全</option>
+                    <option value='中国共产党党务'>中国共产党党务</option>
+                    <option value='国家政务'>国家政务</option>
+                    <option value='外交'>外交</option>
+                    <option value='政法监察'>政法监察</option>
+                    <option value='综合党团'>综合党团</option>
+                    <option value='卫生'>卫生</option>
+                    <option value='文化体育'文化体育</option>
+                    <option value='旅游服务'>旅游服务</option>
+                    <option value='人力资源与社会保障'>人力资源与社会保障</option>
+                    <option value='人口计生'>人口计生</option>
+                    <option value='农业'>农业</option>
+                    <option value='住房与城乡建设'>住房与城乡建设</option>
+                    <option value='环境保护'>环境保护</option>
+                    <option value='能源'>能源</option>
+                    <option value='科技教育'>科技教育</option>
+                    <option value='商业贸易'>商业贸易</option>
+                    <option value='宏观经济'>宏观经济</option>
+                    <option value='财政金融'>财政金融</option>
+                </select>
+            </div>
+            <div class="tsrg" style='float:right;margin-top:-28px;'>
+                <span class="tsrg1" style='display:inline-block;margin:0;'>时间：</span>
+                <!-- <input type="date" class="tsrg2" style="width: 230px;padding: 5px;
+                font-size: 12px"/> -->
+                <div class="tsrg2" style="width: 480px!important;padding: 0;border:none;display:inline-block;
+                position:relative;top:7px;">
+                                <span style="display: inline-block;
+                                            position: relative;top: -8px;font-size: 14px;font-weight: 700;">从</span>
+                                <div class='' style="display: inline-block;width: 200px;margin: 20px 0 0 0;">
+                                    <div class="form-group" style="margin: 0">
+                                        <div class='input-group date' id='datetimepicker6'>
+                                            <input type='text' class="form-control start" style="height: 28px"/>
+                                            <span class="input-group-addon">
+                                                    <span class="icon icon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span style="display: inline-block;
+                                            position: relative;top: -8px;font-size: 14px;font-weight: 700;">到</span>
+                                <div class='' style="display: inline-block;width: 200px;">
+                                    <div class="form-group" style="margin: 0">
+                                        <div class='input-group date' id='datetimepicker7'>
+                                            <input type='text' class="form-control end" style="height: 28px"/>
+                                            <span class="input-group-addon">
+                                                    <span class="icon icon-calendar"></span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                <button class="tsrg3">确定</button>
             </div>
         </div>
         <div class="task">
@@ -245,186 +310,7 @@
                 </div>
                 <div class="relevant3" style="float: left;">
                     <div class="re3lf">
-                        <div class="play">
-                                            <div class="play1">
-                                               <div class="p11">
-                                                    <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                                    --><img src="/static/image/dingwei.png" alt=""><!--
-                                                    --><span class="difang" style="font-size: 8px">山东</span><!--
-                                                    --><img class='xin' src="/static/image/heart.png" alt="">
-                                                </div>
-                                                <div class="p22">
-                                                    <span class="fasheng" style="font-weight: bold">发生时间：</span>
-                                                    <span class="riqi">2016-08-19</span>
-                                                </div>
-                                            </div>
-                                            <img class="play2" src="/static/image/xuyuyu.png" alt="">
-                                            <div class="play3" style="display: inline-block;margin-top: 10px;
-                                                        vertical-align:bottom;">
-                                                <a class="bus1">业务标签：</a>
-                                                <a class="bus2">诈骗</a>
-                                                <a class="bus2">大学生</a>
-                                                <a class="bus2">离世</a>
-                                            </div>
-                                            <div class="play4">
-                                                <p class="shuoming">
-                                                    徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。
-                                                </p>
-                                            </div>
-                                            <div class="play5" type="button" data-toggle="modal">
-                                                <a>加入专题</a>
-                                           </div>
-                        </div>
-                        <div class="play">
-                                            <div class="play1">
-                                               <div class="p11">
-                                                    <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                                    --><img src="/static/image/dingwei.png" alt=""><!--
-                                                    --><span class="difang" style="font-size: 8px">山东</span><!--
-                                                    --><img class='xin' src="/static/image/heart.png" alt="">
-                                                </div>
-                                                <div class="p22">
-                                                    <span class="fasheng" style="font-weight: bold">发生时间：</span>
-                                                    <span class="riqi">2016-08-19</span>
-                                                </div>
-                                            </div>
-                                            <img class="play2" src="/static/image/xuyuyu.png" alt="">
-                                            <div class="play3" style="display: inline-block;margin-top: 10px;
-                                                        vertical-align:bottom;">
-                                                <a class="bus1">业务标签：</a>
-                                                <a class="bus2">诈骗</a>
-                                                <a class="bus2">大学生</a>
-                                                <a class="bus2">离世</a>
-                                            </div>
-                                            <div class="play4">
-                                                <p class="shuoming">
-                                                    徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。
-                                                </p>
-                                            </div>
-                                            <div class="play5" type="button" data-toggle="modal">
-                                                <a>加入专题</a>
-                                           </div>
-                        </div>
-                        <div class="play">
-                                            <div class="play1">
-                                               <div class="p11">
-                                                    <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                                    --><img src="/static/image/dingwei.png" alt=""><!--
-                                                    --><span class="difang" style="font-size: 8px">山东</span><!--
-                                                    --><img class='xin' src="/static/image/heart.png" alt="">
-                                                </div>
-                                                <div class="p22">
-                                                    <span class="fasheng" style="font-weight: bold">发生时间：</span>
-                                                    <span class="riqi">2016-08-19</span>
-                                                </div>
-                                            </div>
-                                            <img class="play2" src="/static/image/xuyuyu.png" alt="">
-                                            <div class="play3" style="display: inline-block;margin-top: 10px;
-                                                        vertical-align:bottom;">
-                                                <a class="bus1">业务标签：</a>
-                                                <a class="bus2">诈骗</a>
-                                                <a class="bus2">大学生</a>
-                                                <a class="bus2">离世</a>
-                                            </div>
-                                            <div class="play4">
-                                                <p class="shuoming">
-                                                    徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。
-                                                </p>
-                                            </div>
-                                            <div class="play5" type="button" data-toggle="modal">
-                                                <a>加入专题</a>
-                                           </div>
-                        </div>
-                        <div class="play">
-                                            <div class="play1">
-                                               <div class="p11">
-                                                    <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                                    --><img src="/static/image/dingwei.png" alt=""><!--
-                                                    --><span class="difang" style="font-size: 8px">山东</span><!--
-                                                    --><img class='xin' src="/static/image/heart.png" alt="">
-                                                </div>
-                                                <div class="p22">
-                                                    <span class="fasheng" style="font-weight: bold">发生时间：</span>
-                                                    <span class="riqi">2016-08-19</span>
-                                                </div>
-                                            </div>
-                                            <img class="play2" src="/static/image/xuyuyu.png" alt="">
-                                            <div class="play3" style="display: inline-block;margin-top: 10px;
-                                                        vertical-align:bottom;">
-                                                <a class="bus1">业务标签：</a>
-                                                <a class="bus2">诈骗</a>
-                                                <a class="bus2">大学生</a>
-                                                <a class="bus2">离世</a>
-                                            </div>
-                                            <div class="play4">
-                                                <p class="shuoming">
-                                                    徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。
-                                                </p>
-                                            </div>
-                                            <div class="play5" type="button" data-toggle="modal">
-                                                <a>加入专题</a>
-                                           </div>
-                        </div>
-                        <div class="play">
-                                            <div class="play1">
-                                               <div class="p11">
-                                                    <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                                    --><img src="/static/image/dingwei.png" alt=""><!--
-                                                    --><span class="difang" style="font-size: 8px">山东</span><!--
-                                                    --><img class='xin' src="/static/image/heart.png" alt="">
-                                                </div>
-                                                <div class="p22">
-                                                    <span class="fasheng" style="font-weight: bold">发生时间：</span>
-                                                    <span class="riqi">2016-08-19</span>
-                                                </div>
-                                            </div>
-                                            <img class="play2" src="/static/image/xuyuyu.png" alt="">
-                                            <div class="play3" style="display: inline-block;margin-top: 10px;
-                                                        vertical-align:bottom;">
-                                                <a class="bus1">业务标签：</a>
-                                                <a class="bus2">诈骗</a>
-                                                <a class="bus2">大学生</a>
-                                                <a class="bus2">离世</a>
-                                            </div>
-                                            <div class="play4">
-                                                <p class="shuoming">
-                                                    徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。
-                                                </p>
-                                            </div>
-                                            <div class="play5" type="button" data-toggle="modal">
-                                                <a>加入专题</a>
-                                           </div>
-                        </div>
-                        <div class="play">
-                                            <div class="play1">
-                                               <div class="p11">
-                                                    <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                                    --><img src="/static/image/dingwei.png" alt=""><!--
-                                                    --><span class="difang" style="font-size: 8px">山东</span><!--
-                                                    --><img class='xin' src="/static/image/heart.png" alt="">
-                                                </div>
-                                                <div class="p22">
-                                                    <span class="fasheng" style="font-weight: bold">发生时间：</span>
-                                                    <span class="riqi">2016-08-19</span>
-                                                </div>
-                                            </div>
-                                            <img class="play2" src="/static/image/xuyuyu.png" alt="">
-                                            <div class="play3" style="display: inline-block;margin-top: 10px;
-                                                        vertical-align:bottom;">
-                                                <a class="bus1">业务标签：</a>
-                                                <a class="bus2">诈骗</a>
-                                                <a class="bus2">大学生</a>
-                                                <a class="bus2">离世</a>
-                                            </div>
-                                            <div class="play4">
-                                                <p class="shuoming">
-                                                    徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。
-                                                </p>
-                                            </div>
-                                            <div class="play5" type="button" data-toggle="modal">
-                                                <a>加入专题</a>
-                                           </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -604,6 +490,16 @@
     <script src="/static/js/addmap.js"></script>
     <script src="/static/js/addmap2.js"></script>
     <script>
+    $(function () {
+        $('#datetimepicker6').datetimepicker();
+        $('#datetimepicker7').datetimepicker();
+        $("#datetimepicker6").on("dp.change",function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change",function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
     $.each($('.menuList'),function(index,item){
         $(item).css({display:'none'});
         if (index==1) {

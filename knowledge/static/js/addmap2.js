@@ -107,49 +107,55 @@ people.prototype= {
 };
 function monkey(data) {
     var data=eval(data);
-    console.log(data);
+    console.log(data)
+    var str='';
     $.each(data,function (index,item) {
-        // console.log(item[0].influence);
-        var name,influence,active;
-        if (item[0].uname==''||item[0].uname=='unknown') {
-            name=item[0].uid;
-        }else {
-            name=item[0].uname;
-        }
-        influence=item[0].influence.toFixed(0);
-        active=item[0].activeness.toFixed(2);
-        var str='';
+        var weizhi='未知',biaoqian='暂无',shuoming;
+        // if (item.location=='null'||item.location==''){
+        //     weizhi='未知';
+        // }else {
+        //     weizhi=item[0].location;
+        // };
+        // if (item.user_tag=='null'||item.user_tag==''){
+        //     biaoqian='暂无';
+        // }else {
+        //     biaoqian=item.user_tag;
+        // };
+        // if (item.description=='null'){
+        //     biaoqian='暂无数据';
+        // }else {
+        //     biaoqian=item.user_tag;
+        // };
+        function getLocalTime(nS) {
+            return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,17)
+        };
         str+='<div class="play">'+
             '<div class="play1">'+
             '<div class="p11">'+
-            '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--'+
-            '--><img src="/static/image/dingwei.png" alt=""><!--'+
-            '--><span class="difang" style="font-size: 8px">山东</span><!--'+
-            '--><img class=\'xin\' src="/static/image/heart.png" alt="">'+
-            '                                                </div>'+
-            '                                                <div class="p22">'+
-            '                                                    <span class="fasheng" style="font-weight: bold">发生时间：</span>'+
-            '                                                    <span class="riqi">2016-08-19</span>'+
-            '                                                </div>'+
-            '                                            </div>'+
-            '                                            <img class="play2" src="/static/image/xuyuyu.png" alt="">'+
-            '                                            <div class="play3" style="display: inline-block;margin-top: 10px;'+
-            '                                                        vertical-align:bottom;">'+
-            '                                                <a class="bus1">业务标签：</a>'+
-            '                                                <a class="bus2">诈骗</a>'+
-            '                                                <a class="bus2">大学生</a>'+
-            '                                                <a class="bus2">离世</a>'+
-            '                                            </div>'+
-            '                                            <div class="play4">'+
-            '                                                <p class="shuoming">'+
-            '                                                    徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。'+
-            '                                                </p>'+
-            '                                            </div>'+
-            '                                            <div class="play5" type="button" data-toggle="modal">'+
-            '                                                <a>加入专题</a>'+
-            '                                           </div>'+
-            '                        </div>';;
-        $("#container .relevanttwo .relevant3 .re3lf").append(str);
+            '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
+            '--><img src="/static/image/dingwei.png" title="位置"><!--'+
+            '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+            '--><img class="xin" src="/static/image/heart.png" alt="">'+
+            '</div>'+
+            '<div class="p22">'+
+            '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
+            '<span class="riqi">'+getLocalTime(item.start_ts)+'0</span>'+
+            '</div>'+
+            '</div>'+
+            '<img class="play2" src="/static/image/xuyuyu.png" alt="">'+
+            '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
+            '<a class="bus1">业务标签：</a>'+
+            '<a class="bus2">'+biaoqian+'</a>'+
+            '</div>'+
+            '<div class="play4">'+
+            '<p class="shuoming">'+
+            shuoming+
+            '</p>'+
+            '</div>'+
+            '<!-- <div class="play5" type="button" data-toggle="modal">'+
+            '<a>加入专题</a>'+
+            '</div> -->'+
+            '</div>';
     });
 
 
@@ -212,12 +218,13 @@ function monkey(data) {
         $(item).on('click',function () {
             window.open('/index/search_result/');
         });
-    })
+    });
+    $('#container .relevanttwo .relevant3 .re3lf').append(str);
 }
 
 var people=new people();
 function nums() {
-    var url = '/construction/select_node/';
+    var url = '/construction/select_event_node/';
     people.call_request(url,monkey);
 }
 nums();

@@ -108,8 +108,14 @@ function zong() {
     nums();
 };
 zong();
-~function(){
 
+function zhuantibianjisite() {
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
     //第二个图表
     require(
         [
@@ -231,4 +237,5 @@ zong();
             myChart.setOption(option);
         }
     );
-}();
+}
+zhuantibianjisite();

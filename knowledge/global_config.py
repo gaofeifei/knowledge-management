@@ -9,6 +9,7 @@ km_user_portrait_host = ["219.224.134.225:9037"]
 user_portrait_port = "9200"
 event_host = ["219.224.134.225:9037"]
 event_port = "9200"
+calculate_status_host=["219.224.134.225:9037"]
 neo4j_host = "219.224.134.213"
 neo4j_port = "7474"
 redis_host = "219.224.134.213"

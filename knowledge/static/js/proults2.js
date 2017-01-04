@@ -1,72 +1,385 @@
 /**
  * Created by Administrator on 2016/12/19.
  */
-    var myChart = echarts.init(document.getElementById('taltwo'));
-    // app.title = '单轴散点图';
-    var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
-        '7a', '8a', '9a','10a','11a',
-        '12p', '1p', '2p', '3p', '4p', '5p',
-        '6p', '7p', '8p', '9p', '10p', '11p'];
-    var days = ['Saturday', 'Friday', 'Thursday',
-        'Wednesday', 'Tuesday', 'Monday', 'Sunday'];
-
-    var data = [[0,0,5],[0,1,1],[0,2,0],[0,3,0],[0,4,0],[0,5,0],[0,6,0],
-        [0,7,0],[0,8,0],[0,9,0],[0,10,0],[0,11,2],[0,12,4],[0,13,1],[0,14,1],
-        [0,15,3],[0,16,4],[0,17,6],[0,18,4],[0,19,4],[0,20,3],[0,21,3],[0,22,2],
-        [0,23,5],[1,0,7],[1,1,0],[1,2,0],[1,3,0],[1,4,0],[1,5,0],[1,6,0],[1,7,0],
-        [1,8,0],[1,9,0],[1,10,5],[1,11,2],[1,12,2],[1,13,6],[1,14,9],[1,15,11],
-        [1,16,6],[1,17,7],[1,18,8],[1,19,12],[1,20,5],[1,21,5],[1,22,7],[1,23,2],
-        [2,0,1],[2,1,1],[2,2,0],[2,3,0],[2,4,0],[2,5,0],[2,6,0],[2,7,0],[2,8,0],
-        [2,9,0],[2,10,3],[2,11,2],[2,12,1],[2,13,9],[2,14,8],[2,15,10],[2,16,6],
-        [2,17,5],[2,18,5],[2,19,5],[2,20,7],[2,21,4],[2,22,2],[2,23,4],[3,0,7],
-        [3,1,3],[3,2,0],[3,3,0],[3,4,0],[3,5,0],[3,6,0],[3,7,0],[3,8,1],[3,9,0],
-        [3,10,5],[3,11,4],[3,12,7],[3,13,14],[3,14,13],[3,15,12],[3,16,9],[3,17,5],
-        [3,18,5],[3,19,10],[3,20,6],[3,21,4],[3,22,4],[3,23,1],[4,0,1],[4,1,3],[4,2,0],
-        [4,3,0],[4,4,0],[4,5,1],[4,6,0],[4,7,0],[4,8,0],[4,9,2],[4,10,4],[4,11,4],[4,12,2],
-        [4,13,4],[4,14,4],[4,15,14],[4,16,12],[4,17,1],[4,18,8],[4,19,5],[4,20,3],[4,21,7],
-        [4,22,3],[4,23,0],[5,0,2],[5,1,1],[5,2,0],[5,3,3],[5,4,0],[5,5,0],[5,6,0],[5,7,0],
-        [5,8,2],[5,9,0],[5,10,4],[5,11,1],[5,12,5],[5,13,10],[5,14,5],[5,15,7],[5,16,11],[5,17,6],
-        [5,18,0],[5,19,5],[5,20,3],[5,21,4],[5,22,2],[5,23,0],[6,0,1],[6,1,0],[6,2,0],[6,3,0],[6,4,0],
-        [6,5,0],[6,6,0],[6,7,0],[6,8,0],[6,9,0],[6,10,1],[6,11,0],[6,12,2],[6,13,1],[6,14,3],[6,15,4],[6,16,0],
-        [6,17,0],[6,18,0],[6,19,0],[6,20,1],[6,21,2],[6,22,2],[6,23,6]];
-    myChart.setOption(option = {
-        tooltip: {
-            position: 'top'
+function zhexiantu() {
+    function place() {
+        //this.ajax_method='GET'; // body...
+    }
+    place.prototype= {
+        call_request:function(url,callback) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success:callback
+            });
         },
-        title: [],
-        singleAxis: [],
-        series: []
-    }, true);
-    echarts.util.each(days, function (day, idx) {
-        option.title.push({
-            textBaseline: 'middle',
-            top: (idx + 0.5) * 100 / 7 + '%',
-            text: day
+    };
+    function territory(data) {
+        var data=eval(data);
+        $(".pretwomd").text(data.event_num);
+        var myChart = echarts.init(document.getElementById('taltwo'));
+        var thingname=[],thingnum=[],leng=[];
+        var s_series=[];
+        for (var key in data.river_data){
+            thingname.push(key);
+            leng.push(data.river_data[key].length);
+            var nums2=[];
+            $.each(data.river_data[key],function (index,item) {
+                nums2.push(item[1]);
+            });
+            s_series.push({
+                name: key,
+                type: 'line',
+                data: nums2
+            });
+        };
+        var xx=[];
+        var xmax=Math.max.apply(null, leng);
+        for (var x=0;x<xmax;x++){
+            xx.push(x+1);
+        };
+        // //时间去重
+        // var obj={};
+        // var time=[];
+        // for (var i=0;i<thingtime.length;i++){
+        //     obj[thingtime[i]]=thingtime[i];
+        // }
+        // for (var key in obj){
+        //     time.push(key);//相当于a.push(obj[key])
+        // }
+        // //-----
+        var option = {
+            title: {
+                // text: '折线图堆叠'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                // data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
+                data:thingname,
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                // data: ['周一','周二','周三','周四','周五','周六','周日']
+                data:xx,
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: s_series
+        };
+        myChart.setOption(option);
+    }
+
+    var place=new place();
+    function nums() {
+        var url = '/theme/theme_river/';
+        place.call_request(url,territory);
+    }
+    nums();
+}
+zhexiantu();
+
+function guanlianrenwu() {
+    function place() {
+        //this.ajax_method='GET'; // body...
+    }
+    place.prototype= {
+        call_request:function(url,callback) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success:callback
+            });
+        },
+    };
+    function territory(data) {
+        $("#run2").empty();
+        var data=eval(data);
+        var str='';
+        $.each(data,function (index,item) {
+            var influe,name,huoyue,mingan,tag;
+            if (item.importnace=='null'){
+                influe='无';
+            }else {
+                influe=item.importnace.toFixed(2);
+            };
+            if (item.uname=='null'||item.uname=='unknown'){
+                name='无';
+            }else {
+                name=item.uname;
+            };
+            var huoyue=item.activeness.toFixed(2);
+            if (item.sensitive=='null'||item.sensitive=='unknown'){
+                mingan='无';
+            }else {
+                mingan=item.sensitive.toFixed(2);
+            };
+            if (item.user_tag=='null'||item.sensitive=='unknown'){
+                tag='无';
+            }else {
+                tag=item.user_tag;
+            };
+            str+='<div class="play">'+
+                '<div class="play1">'+
+                '<div class="p11">'+
+                '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
+                '--><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""'+
+                'title=\'粉丝数\'><!--'+
+                '--><span class="difang" style="font-size: 8px">'+item.fansnum+'</span><!--'+
+                '--><img class=\'xin\' style="margin-left: 10px;" src="/static/image/heart.png">'+
+                '</div>'+
+                '<div class="p22" style="margin-top: 5px">'+
+                '<img style="margin-left: 10px;" src="/static/image/influence.png" title="重要度">'+
+                '<span class="influence">'+influe+'</span>'+
+                '<img src="/static/image/huoyuedu.png" title="活跃度">'+
+                '<span class="huoyuedu">'+huoyue+'</span>'+
+                '<img src="/static/image/mingan.png" title="敏感度">'+
+                '<span class="mingan">'+mingan+'</span>'+
+                '</div>'+
+                '</div>'+
+                '<img class="play2" src="/static/image/pangzi.png" alt="">'+
+                '<div class="play23" style="margin-left: 15px;">'+
+                '<a href="" class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
+                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>'+
+                '</div>'+
+                '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
+                '<a class="bus1">业务标签：</a>'+
+                '<a class="bus2">'+tag+'</a>'+
+                '</div>'+
+                '<!--<div class="play4">-->'+
+                '<!--<p class="shuoming">-->'+
+                '<!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->'+
+                '<!--</p>-->'+
+                '<!--</div>-->'+
+                '<div class="play5" type="button" data-toggle="modal">'+
+                '<a>加入群体探索</a>'+
+                '</div>'+
+                '</div>';
         });
-        option.singleAxis.push({
-            left: 150,
-            type: 'category',
-            boundaryGap: false,
-            data: hours,
-            top: (idx * 100 / 7 + 5) + '%',
-            height: (100 / 7 - 10) + '%',
-            axisLabel: {
-                interval: 2
-            }
+        //卡片效果
+        $.each($("#people .play"),function (index,item) {
+            $(item).hover(function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(-40px)",
+                    "-moz-transform":"translateY(-40px)",
+                    "-ms-transform":"translateY(-40px)",
+                    "-o-transform":"translateY(-40px)",
+                    "transform":"translateY(-40px)",
+                })
+            },function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(40px)",
+                    "-moz-transform":"translateY(40px)",
+                    "-ms-transform":"translateY(40px)",
+                    "-o-transform":"translateY(40px)",
+                    "transform":"translateY(40px)",
+                })
+            });
         });
-        option.series.push({
-            singleAxisIndex: idx,
-            coordinateSystem: 'singleAxis',
-            type: 'scatter',
-            data: [],
-            symbolSize: function (dataItem) {
-                return dataItem[1] * 4;
-            }
+        $.each($("#people .play"),function (index,item) {
+            var changecolorq=1;
+            $(item).find(".play5").on('click',function(){
+                if (changecolorq==1) {
+                    $(this).parent('.play').css({backgroundColor:'#09F'});
+                    $(this).find('a').text('取消群体探索');
+                    changecolorq=2;
+                    $('#join4').modal("show");
+                } else {
+                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                    $(this).find('a').text('加入群体探索');
+                    changecolorq=1;
+                }
+            });
+        });
+        var heart=$(".play .play1 .p11 .xin");
+        $.each(heart,function(index,item){
+            var chan=1;
+            $(item).on('click',function(){
+                if (chan==1) {
+                    $(this).attr('src','/static/image/focus.png');
+                    chan=2;
+                }else {
+                    $(this).attr('src','/static/image/heart.png');
+                    chan=1;
+                }
+            })
+        });
+        $("#run2").append(str);
+
+    };
+    var place=new place();
+
+    function nums() {
+        if($('#zhongyao').is(':checked')) { point='importnace'; };
+        if($('#huoyue').is(':checked')) { point='activeness'; };
+        if($('#mingan').is(':checked')) { point='sensitive'; }
+        var point;
+        var thname='电信诈骗';
+        var url = '/theme/user_in_theme/?theme_name='+thname+'&sort_flag='+point;
+        place.call_request(url,territory);
+    }
+    $.each($("#container #people .peotwo .peotwo1 .radio input"),function (index,item) {
+        $(item).on('click',function () {
+            nums();
         });
     });
-    echarts.util.each(data, function (dataItem) {
-        option.series[dataItem[0]].data.push([dataItem[1], dataItem[2]]);
+    nums();
+}
+guanlianrenwu();
+
+function baohanshijian() {
+    function include() {
+        //this.ajax_method='GET'; // body...
+    }
+    include.prototype= {
+        call_request:function(url,callback) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success:callback
+            });
+        },
+    };
+    function territory(data) {
+        $("#run").empty();
+        var data=eval(data);
+        var str='';
+        $.each(data,function (index,item) {
+            var weizhi,biaoqian,shuoming;
+            if (item.location=='null'){
+                weizhi='未知';
+            }else {
+                weizhi=item.location;
+            };
+            if (item.user_tag=='null'){
+                biaoqian='暂无';
+            }else {
+                biaoqian=item.user_tag;
+            };
+            if (item.description=='null'){
+                biaoqian='暂无数据';
+            }else {
+                biaoqian=item.user_tag;
+            };
+            function getLocalTime(nS) {
+                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,17)
+            };
+            str+='<div class="play">'+
+                '<div class="play1">'+
+                '<div class="p11">'+
+                '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
+                '--><img src="/static/image/dingwei.png" title="位置"><!--'+
+                '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+                '--><img class="xin" src="/static/image/heart.png" alt="">'+
+                '</div>'+
+                '<div class="p22">'+
+                '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
+                '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
+                '</div>'+
+                '</div>'+
+                '<img class="play2" src="/static/image/xuyuyu.png" alt="">'+
+                '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
+                '<a class="bus1">业务标签：</a>'+
+                '<a class="bus2">'+biaoqian+'</a>'+
+                '</div>'+
+                '<div class="play4">'+
+                '<p class="shuoming">'+
+                shuoming+
+                '</p>'+
+                '</div>'+
+                '<!-- <div class="play5" type="button" data-toggle="modal">'+
+                '<a>加入专题</a>'+
+                '</div> -->'+
+                '</div>';
+        });
+        //卡片效果
+        $.each($("#people .play"),function (index,item) {
+            $(item).hover(function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(-40px)",
+                    "-moz-transform":"translateY(-40px)",
+                    "-ms-transform":"translateY(-40px)",
+                    "-o-transform":"translateY(-40px)",
+                    "transform":"translateY(-40px)",
+                })
+            },function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(40px)",
+                    "-moz-transform":"translateY(40px)",
+                    "-ms-transform":"translateY(40px)",
+                    "-o-transform":"translateY(40px)",
+                    "transform":"translateY(40px)",
+                })
+            });
+        });
+        $.each($("#people .play"),function (index,item) {
+            var changecolorq=1;
+            $(item).find(".play5").on('click',function(){
+                if (changecolorq==1) {
+                    $(this).parent('.play').css({backgroundColor:'#09F'});
+                    $(this).find('a').text('取消群体探索');
+                    changecolorq=2;
+                    $('#join4').modal("show");
+                } else {
+                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                    $(this).find('a').text('加入群体探索');
+                    changecolorq=1;
+                }
+            });
+        });
+        var heart=$(".play .play1 .p11 .xin");
+        $.each(heart,function(index,item){
+            var chan=1;
+            $(item).on('click',function(){
+                if (chan==1) {
+                    $(this).attr('src','/static/image/focus.png');
+                    chan=2;
+                }else {
+                    $(this).attr('src','/static/image/heart.png');
+                    chan=1;
+                }
+            })
+        });
+        $("#run").append(str);
+    }
+
+    var include=new include();
+    function nums() {
+        var point;
+        if($('#fasheng').is(':checked')) { point='start_ts'; };
+        if($('#canyu').is(':checked')) { point='uid_counts'; };
+        if($('#redu').is(':checked')) { point='weibo_counts'; };
+        var thname='电信诈骗';
+        var url = '/theme/theme_detail/?theme_name='+thname+'&sort_flag='+point;
+        include.call_request(url,territory);
+    }
+    $.each($("#container #similar .definite .defone .radio input"),function (index,item) {
+        $(item).on('click',function () {
+            nums();
+        });
     });
-myChart.setOption(option);
+    nums();
+};
+baohanshijian();
+
+
+
+
+
 
 

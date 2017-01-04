@@ -83,10 +83,10 @@ def select_event_node():
     list_set = []
     result = select_rels_all("MATCH (n:Person)-[r:admin]-(m) return n,m")
     for item in result:
-        list.append(item[0])
-        list.append(item[2])
+        list.append(item[1])
+        # list.append(item[2])
     list_set = [i for i in set(list)]
-    return json.dumps(list)
+    return json.dumps(list_set)
 
 
 @mod.route('/create_relation/')

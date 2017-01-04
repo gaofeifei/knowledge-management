@@ -6,6 +6,7 @@ function picture() {
     myChart.showLoading();
     $.getJSON('/index/new_relationship/', function (json) {
         var json=eval(json);
+        console.log(json);
         var domain=[],location=[],event=[],user=[],link=[];
         for (var key in json.Domain) {
             var num1=Math.random()*(-1000-700)+1000;
@@ -219,8 +220,6 @@ function picture() {
                 // }
             ]
         }, true);
-
-
     });
 }
 picture();
@@ -249,7 +248,6 @@ function fly() {
     nums();
     function bird(data) {
         var data=eval(data);
-        console.log(data);
         var plate=[];
         $.each(data, function (index, item) {
             plate.push(

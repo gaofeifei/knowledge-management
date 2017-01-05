@@ -36,12 +36,12 @@ def group_comparison():
 def group_node_filter():
     group_name = request.args.get('group_name', u'媒体')
     node_type = request.args.get('node_type', '')#User,Event
+    relation_list.extend(user_event_relation)
     relation_str = ','.join(relation_list)
     relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
-    relation_type_list.extend(user_event_relation)
     print relation_type_list,'!!!!!!!!'
-    layer = request.args.get('layer','1') #'1' or '2'
+    layer = request.args.get('layer','0') #'0' '1' or '2'
     tab_graph_result = group_tab_graph(group_name, node_type, relation_type_list, layer)   
     return json.dumps(tab_graph_result)
 
@@ -49,11 +49,11 @@ def group_node_filter():
 def group_map_filter():
     group_name = request.args.get('group_name', u'媒体')
     node_type = request.args.get('node_type', '')#User,Event
+    relation_list.extend(user_event_relation)
     relation_str = ','.join(relation_list)
     relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
-    relation_type_list.extend(user_event_relation)
-    layer = request.args.get('layer','1') #'1' or '2'
+    layer = request.args.get('layer','0') # '0' '1' or '2'
     tab_map_result = group_tab_map(group_name, node_type, relation_type_list, layer)   
     return json.dumps(tab_map_result)
 

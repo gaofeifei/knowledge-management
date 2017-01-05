@@ -32,6 +32,22 @@ r = redis.StrictRedis(host=redis_host, port=redis_port, db=0)
 # user portrait interface: push user into redis list
 r_user = redis.StrictRedis(host=redis_host, port=redis_port, db=10)
 
+# event2id
+def event_name_to_id(en_name):
+    query_body = {
+        "query":{
+            "match":{
+                'name':en_name
+            }
+        }
+    }
+    name_results = es_event.search(index=event_name, doc_type=event_type, \
+                body=query_body,fields=['en_name'])['hits']['hits'][0]['fields']
+    for k,v in name_results.iteritems():
+        ch_name = v[0]
+    return ch_name
+
+
 #neo4j查询事件名
 def event_name_search(en_name):
     query_body = {

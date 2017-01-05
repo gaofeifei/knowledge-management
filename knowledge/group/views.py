@@ -9,8 +9,9 @@ from datetime import date
 from datetime import datetime
 import csv
 from  knowledge.global_config  import relation_list,user_event_relation
-from utils import group_tab_graph, group_tab_map,query_group,query_group_user,query_group_event,\
-                  query_group_weibo, query_user_num
+from utils import group_tab_graph, group_tab_map,query_group,query_group_user,query_group_event,search_related_user,\
+                  query_group_weibo, query_user_num,del_user_group_rel, user_list_group,add_user_group_rel,\
+                  search_related_user_card
 from py2neo import Node, Relationship, Graph, NodeSelector
 from py2neo.packages.httpstream import http
 
@@ -70,7 +71,7 @@ def user_num_group():  #群体包含人物数量
     return json.dumps(detail_l)
 
 @mod.route('/user_in_group/')
-def user_in_group():  #群体包含人物滚动
+def user_in_group():  #群体包含人物滚动,群体编辑上部分，卡片
     group_name = request.args.get('group_name', '法律人士')
     sort_flag = request.args.get('sort_flag', 'activeness')
     detail_u = query_group_user(group_name, sort_flag)
@@ -90,3 +91,39 @@ def detail_weibo():  #群体包含微博
     sort_flag = request.args.get('sort_flag', 'retweeted')#sensitive
     detail_w = query_group_weibo(group_name, sort_flag)
     return json.dumps(detail_w)
+
+@mod.route('/uid_in_group/')#群体编辑的上半部分-表格
+def uid_in_group():  #群体包含人物滚动
+    group_name = request.args.get('group_name', '法律人士')
+    # uid = request.args.get('uid', '2682428145')
+    uid_list = user_list_group(group_name)
+    return json.dumps(uid_list)
+
+@mod.route('/del_user_in_group/')
+def del_user_in_group():  #群体编辑-删除人物
+    group_name = request.args.get('group_name', '法律人士')
+    uid = request.args.get('uid', '2682428145')
+    flag = del_user_group_rel(group_name, uid)
+    return json.dumps(flag)
+
+@mod.route('/add_user_in_group/')#--------没写完！！！！！！！！！！！！！！！！！！！1
+def add_user_in_group():  #群体编辑-增加人物
+    group_name = request.args.get('group_name', '法律人士')
+    uid = request.args.get('uid', '2682428145')
+    flag = add_user_group_rel(group_name, uid)
+    return json.dumps(flag)
+
+@mod.route('/search_related_people/')
+def search_related_people():  #群体编辑-增加前先搜索人物
+    # group_name = request.args.get('group_name', '法律人士')
+    search_item = request.args.get('item', '358')
+    flag = search_related_user(search_item)
+    return json.dumps(flag)
+
+@mod.route('/search_related_people_card/')
+def search_related_people_card():  #群体编辑-增加前先搜索人物,卡片部分
+    # group_name = request.args.get('group_name', '法律人士')
+    search_item = request.args.get('item', '358')
+    layer = request.args.get('layer', '1')#'2'  'all'
+    flag = search_related_user_card(search_item,layer)
+    return json.dumps(flag)

@@ -2,11 +2,12 @@
 
 import time
 import json
-from knowledge.global_config import portrait_name, portrait_type, event_name, event_analysis_name, \
+import operator 
+from knowledge.global_config import portrait_name, flow_text_name, portrait_type, flow_text_type, event_name, event_analysis_name, \
         neo4j_name, event_type, event_special, special_event_index_name, group_index_name, \
         group_rel, node_index_name,user_event_relation
-from knowledge.global_utils import es_user_portrait, es_event, graph,\
-        user_name_search, event_name_search,event_name_to_id
+from knowledge.global_utils import es_user_portrait, es_flow_text, es_event, graph,\
+        user_name_search, event_name_search,event_name_to_id,es_search_sth,event_detail_search
 from knowledge.parameter import rel_node_mapping, rel_node_type_mapping, index_threshold, WEEK
 from knowledge.time_utils import ts2datetime, datetime2ts
 from py2neo import Node, Relationship
@@ -239,6 +240,39 @@ def query_event_detail(event):
             except:
                 detail[i] = 'null'
     return detail
+#人物-上方大卡片
+def query_person_detail(uid):
+    query_body = {
+        'query':{
+            'match':{'uid':uid}
+            }
+    }
+    fields_list = ['uname','fansnum', 'influence','importnace','activeness','sensitive','location',\
+                   'activity_geo', 'domain','topic_string','tag','photo_url','description','create_time',\
+                   'create_user']
+    
+    event_detail = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
+                body=query_body, _source=False, fields=fields_list)['hits']['hits']
+
+    # event_detail_a = es_event.search(index=event_analysis_name, doc_type=event_type, \
+    #             body=query_body, _source=False, fields=analysis_fields_list)['hits']['hits']
+    # event_detail.extend(event_detail_a)
+    detail = dict()
+    for i in event_detail:
+        fields = i['fields']
+        for i in fields_list:
+            try:
+                detail[i] = fields[i][0]
+            except:
+                detail[i] = 'null'
+    # for i in event_detail_a:
+    #     fields = i['fields']
+    #     for i in analysis_fields_list:
+    #         try:
+    #             detail[i] = fields[i][0]
+    #         except:
+    #             detail[i] = 'null'
+    return detail
 
 #事件相关人物
 def query_event_people(event):
@@ -268,6 +302,97 @@ def query_event_people(event):
             related_people[relation].append([user_id,user_name])
             
     return related_people
+
+#事件相关事件
+def query_event_event(event,layer):
+    query_body = {
+        'query':{
+            'match':{'name':event}
+            }
+    }
+    
+    event_detail = es_event.search(index=event_name, doc_type=event_type, \
+                body=query_body, _source=False, fields=['en_name'])['hits']['hits'][0]['fields']
+    
+    event_id = event_detail['en_name'][0]
+    if layer == '1' or layer == 'all':
+        c_string = 'START s0 = node:event_index(event="'+str(event_id)+'") '
+        c_string += 'MATCH (s0)-[r]-(s1:Event) return r,s1 LIMIT 50'
+    if layer == '2':
+        c_string = 'START s0 = node:event_index(event="'+str(event_id)+'") '
+        c_string += 'MATCH (s0)-[r]-(a)-[b]-(s1:Event) return r,s1 LIMIT 50'
+    print c_string
+    result = graph.run(c_string)
+    event_list = []
+    for i in result:
+        print i
+        relation = i['r'].type()
+        e_id = str(i['s1']['event_id'])
+        event_list.append(e_id)
+    if layer == 'all':
+        c_string = 'START s0 = node:event_index(event="'+str(event_id)+'") '
+        c_string += 'MATCH (s0)-[r]-(a)-[b]-(s1:Event) return r,s1 LIMIT 50'
+        print c_string
+        result = graph.run(c_string)
+        event_list = []
+        for i in result:
+            print i
+            relation = i['r'].type()
+            e_id = str(i['s1']['event_id'])
+            event_list.append(e_id)
+
+    related_event = event_detail_search(event_list, 'start_ts')
+            
+    return related_event
+
+
+#人物相关人物
+def query_person_people(uid,node_type):
+    # query_body = {
+    #     'query':{
+    #         'match':{'uid':uid}
+    #         }
+    # }
+    
+    # event_detail = es_event.search(index=event_name, doc_type=event_type, \
+    #             body=query_body, _source=False, fields=['en_name'])['hits']['hits'][0]['fields']
+    
+    # event_id = event_detail['en_name'][0]
+    c_string = 'START s0 = node:node_index(uid="'+str(uid)+'") '
+    c_string += 'MATCH (s0)-[r]-(s1:'+node_type+') return r,s1.uid as uid LIMIT 5'
+    print c_string
+    result = graph.run(c_string)
+    related_people = {}
+    for i in result:
+        relation = i['r'].type()
+        user_id = str(i['uid'])
+        user_name = user_name_search(user_id)
+        try:
+            related_people[relation].append([user_id,user_name])
+        except:
+            related_people[relation] = []
+            related_people[relation].append([user_id,user_name])
+            
+    return related_people
+
+#人物相关事件
+def query_person_event(uid,node_type):
+
+    c_string = 'START s0 = node:node_index(uid="'+str(uid)+'") '
+    c_string += 'MATCH (s0)-[r]-(s1:'+node_type+') return r,s1 LIMIT 5'
+    print c_string
+    result = graph.run(c_string)
+    related_people = {}
+    event_list = []
+    for i in result:
+        print i
+        relation = i['r'].type()
+        e_id = str(i['s1']['event_id'])
+        event_list.append(e_id)
+
+    related_event = event_detail_search(event_list, 'start_ts')
+            
+    return related_event
 
 #控制面板地图
 def filter_event_map(event_name, node_type, relation_type, layer):
@@ -423,7 +548,6 @@ def filter_event_nodes(event_name, node_type, relation_type, layer):
     return {'total_event':0, 'user_nodes':u_nodes_list, 'event_nodes':e_nodes_list,\
             'map_event_id':all_event_id, 'relation':event_relation}  
 
-#事件相关微博
 
 # 地图
 def query_hot_location():
@@ -479,3 +603,54 @@ def query_hot_location():
     return_results = sorted(filter_location.iteritems(), key=lambda x:x[1], reverse=True)
 
     return return_results
+
+
+#事件相关微博
+def get_weibo(event_name, weibo_type):
+    event_id = event_name_to_id(event_name)
+    weibo_list = es_search_sth(event_id, ['retweet_order_weibo'])
+    weibolist = json.loads(weibo_list)
+    result_weibo = []
+    for i in weibolist:
+        weibo_dict = i[1]
+        weibo_dict['mid'] = i[0]
+        uid = i[1]['uid']
+        uname = user_name_search(uid)
+        # weibo_dict['uname'] = uname
+        weibo_dict['date'] = ts2datetime(weibo_dict['timestamp'])
+        result_weibo.append(weibo_dict)
+    if weibo_type == 'sensitive':
+        result_weibo = sorted(result_weibo, key=operator.itemgetter('sensitive'), reverse=True)
+    return result_weibo[:200]
+
+# def user_weibo_search(uid_list,sort_flag):
+#     # es.update(index="flow_text", doc_type="text", id=1,  body={“doc”:{“text”:“更新”, “user_fansnum”: 100}})
+
+
+#人物相关微博
+def get_user_weibo(uid, weibo_type):
+    # weibo_list = es_search_sth(uid, ['time_order_weibo'])
+
+    query_body = {
+        'query':{
+            'term':{'uid':uid}
+            }
+        # "sort": [{weibo_type:'desc'}],
+        # 'size':500
+    }
+    fields_list = ['text', 'uid','sensitive','comment','retweeted', 'timestamp','sensitive_words_string']
+    event_detail = es_flow_text.search(index=flow_text_name, doc_type=flow_text_type, \
+                body=query_body, _source=False, fields=fields_list)['hits']['hits']  
+    print event_detail,'============='
+    result = []
+    for event in event_detail:
+        event_dict ={}
+        uid = event['fields']['uid'][0]
+        uname = user_name_search(uid)
+        event_dict['uname'] = uname
+        for k,v in event['fields'].iteritems():
+            event_dict[k] = v[0]
+        result.append(event_dict)
+    result_weibo = sorted(result, key=operator.itemgetter('sensitive'), reverse=True)
+
+    return result_weibo

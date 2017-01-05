@@ -9,7 +9,8 @@ from datetime import date
 from datetime import datetime
 from knowledge.global_config  import event_relation_list,user_event_relation
 from utils import query_current_week_increase, query_special_event, query_group,filter_event_map,\
-     query_new_relationship, query_hot_location, query_event_detail,query_event_people,filter_event_nodes
+     query_new_relationship, query_hot_location, query_event_detail,query_event_people,filter_event_nodes,\
+     get_weibo,query_person_detail,query_person_people,query_person_event,query_event_event,get_user_weibo
 
 
 mod = Blueprint('index', __name__, url_prefix='/index')
@@ -24,21 +25,50 @@ def show_searche_result():
 
     return render_template('index/incident.html')
 
-#事件详细页面上方卡片结果
+#事件-详细页面上方卡片结果
 @mod.route('/event_detail/') 
 def show_search_event():
     event_name = request.args.get('event_name', u'马来西亚抓获电信欺诈案犯')
     detail_e = query_event_detail(event_name)
     return json.dumps(detail_e)
 
-#事件人物详细结果
+#人物-详细页面上方卡片结果
+@mod.route('/person_detail/') 
+def show_search_person():
+    uid = request.args.get('uid', '1765891182')
+    detail_e = query_person_detail(uid)
+    return json.dumps(detail_e)
+
+#事件-人物关联结果
 @mod.route('/event_detail_people/') 
 def show_event_user():
     event_name = request.args.get('event_name', u'马来西亚抓获电信欺诈案犯')
     detail_p = query_event_people(event_name)
     return json.dumps(detail_p)
 
-#事件控制面板--图谱
+#事件-事件关联结果
+@mod.route('/event_detail_event/') 
+def show_event_event():
+    event_name = request.args.get('event_name', u'马来西亚抓获电信欺诈案犯')
+    layer = request.args.get('layer', '2') #'1'  '2' 'all'
+    detail_p = query_event_event(event_name, layer)
+    return json.dumps(detail_p)
+
+#人物-人物关联结果
+@mod.route('/person_detail_people/')
+def show_person_user():
+    uid = request.args.get('uid', '1765891182')
+    detail_p = query_person_people(uid,'User')
+    return json.dumps(detail_p)
+
+#人物-事件关联结果
+@mod.route('/person_detail_event/') 
+def show_person_event():
+    uid = request.args.get('uid', '5722859628')
+    detail_p = query_person_event(uid,'Event')
+    return json.dumps(detail_p)
+
+#事件-控制面板--图谱
 @mod.route('/event_node_filter/')
 def event_node_filter():
     event_name = request.args.get('event_name', u'马来西亚抓获电信欺诈案犯')
@@ -52,7 +82,7 @@ def event_node_filter():
     detail_p = filter_event_nodes(event_name, node_type, relation_type_list,layer)
     return json.dumps(detail_p)
 
-#事件控制面板--地图
+#事件-控制面板--地图
 @mod.route('/event_map_filter/')
 def event_map_filter():
     event_name = request.args.get('event_name', u'马来西亚抓获电信欺诈案犯')
@@ -66,6 +96,21 @@ def event_map_filter():
     detail_p = filter_event_map(event_name, node_type, relation_type_list,layer)
     return json.dumps(detail_p)
 
+#事件-相关微博
+@mod.route('/event_weibo/')
+def event_weibo():
+    event_name = request.args.get('event_name', u'马来西亚抓获电信欺诈案犯')
+    weibo_type = request.args.get('weibo_type', 'retweeted') #sensitive
+    weibo_list = get_weibo(event_name, weibo_type)
+    return json.dumps(weibo_list)
+
+#人物-相关微博
+@mod.route('/user_weibo/')
+def user_weibo():
+    uid = request.args.get('uid', '6011293891')
+    weibo_type = request.args.get('weibo_type', 'retweeted') #sensitive
+    weibo_list = get_user_weibo(uid, weibo_type)
+    return json.dumps(weibo_list)
 
 @mod.route('/person/')
 def show_person():

@@ -41,7 +41,7 @@ def group_node_filter():
     relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
     print relation_type_list,'!!!!!!!!'
-    layer = request.args.get('layer','1') #'0' '1' or '2'
+    layer = request.args.get('layer','0') #'0' '1' or '2'
     tab_graph_result = group_tab_graph(group_name, node_type, relation_type_list, layer)   
     return json.dumps(tab_graph_result)
 
@@ -53,7 +53,7 @@ def group_map_filter():
     relation_str = ','.join(relation_list)
     relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
-    layer = request.args.get('layer','1') # '0' '1' or '2'
+    layer = request.args.get('layer','0') # '0' '1' or '2'
     tab_map_result = group_tab_map(group_name, node_type, relation_type_list, layer)   
     return json.dumps(tab_map_result)
 

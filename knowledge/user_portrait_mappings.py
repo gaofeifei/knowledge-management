@@ -107,7 +107,8 @@ index_info = {
                     "type": "long"
                 },
                 "gender": {
-                    "type": "long"
+                    "type": "string",
+                    "index": "not_analyzed"
                 },
                 "location": {
                     "type": "string",

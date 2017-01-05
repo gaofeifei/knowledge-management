@@ -14,10 +14,10 @@ def user_push_redis(uid_list, task_name, upload_time, ):
     print "user redis success !"
 
 
-def event_push_redis(event_name, start_time, end_time, upload_time):
-    result = [event_name, start_time, end_time, upload_time]
+def event_push_redis(event_name, event_type,start_time, end_time, upload_time):
+    result = [event_name,event_type ,start_time, end_time, upload_time]
     r.lpush("event_portrait_task", json.dumps(result))
-    event_id = "event" + start_time + end_time + str(upload_time)
+    event_id = "event" +"_"+ start_time +"_"+end_time +"_"+ str(upload_time)
     es.index(index="event_status", doc_type="text", id=event_id,
              body={"upload_time": upload_time, "complete_time": 0, "status": 1, "founder": "zsj", "event": event_name,
                    "start_time": start_time, "end_time": end_time})

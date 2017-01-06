@@ -301,6 +301,8 @@ def query_event_people(event):
         photo = name_photo['photo_url']
 
         try:
+            if len(related_people[relation])>5:
+                continue
             related_people[relation].append([user_id,user_name,photo])
         except:
             related_people[relation] = []
@@ -371,12 +373,17 @@ def query_person_people(uid,node_type):
     for i in result:
         relation = i['r'].type()
         user_id = str(i['uid'])
-        user_name = user_name_search(user_id)
+        name_photo = user_search_sth(user_id, ['uname', 'photo_url'])
+        user_name = name_photo['uname']
+        photo = name_photo['photo_url']
+
         try:
-            related_people[relation].append([user_id,user_name])
+            if len(related_people[relation])>5:
+                continue
+            related_people[relation].append([user_id,user_name,photo])
         except:
             related_people[relation] = []
-            related_people[relation].append([user_id,user_name])
+            related_people[relation].append([user_id,user_name,photo])
             
     return related_people
 

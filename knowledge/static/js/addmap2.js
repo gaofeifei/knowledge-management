@@ -289,7 +289,57 @@ function jiedianshijian() {
 jiedianshijian();
 
 //--文件传输----
-function wenjianchuanshu() {
+function handleFileSelect(evt){
+    var files = evt;
+    for(var i=0,f;f=files[i];i++){
+        var reader = new FileReader();
+        reader.onload = function (oFREvent) {
+            var a = oFREvent.target.result;
+            $.ajax({
+                type:"POST",
+                url:"/construction/read_file/",
+                dataType: "json",
+                async:false,
+                data:{new_words:a},
+                success: function(data){
+                    if( data ){
+                        var data=data;
+                        wenjianchuanshu(data);
+                        // alert("批量导入成功！");
+                    }
+                }
+            });
+        };
+        reader.readAsText(f,'GB2312');
+    }
+}
+function wenjianchuanshu(uid) {
+    function place() {
+        //this.ajax_method='GET'; // body...
+    }
+    place.prototype= {
+        call_request:function(url,callback) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success:callback
+            });
+        },
+    };
+    function territory(data) {
+        console.log(data);
+    }
+    var place=new place();
+    function nums(timestamp) {
+        var url = '/construction/user_upload_file/?uid_list='+uid+'&upload_time='+timestamp;
+        place.call_request(url,territory);
+    }
 
+    $("#container .conright .crm .crm2").on('click',function () {
+        var timestamp=new Date().getTime();
+        nums(timestamp);
+    });
 };
-wenjianchuanshu();
+

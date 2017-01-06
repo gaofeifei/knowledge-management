@@ -6,7 +6,9 @@ function picture() {
     myChart.showLoading();
     $.getJSON('/index/new_relationship/', function (json) {
         var json=eval(json);
-        console.log(json);
+        if(!json.user_nodes=='') {
+            $("#statis1").append('<span style="position: absolute;top: 50%;left:40%;">暂无新数据更新~~</span>');
+        };
         var domain=[],location=[],event=[],user=[],link=[];
         for (var key in json.Domain) {
             var num1=Math.random()*(-1000-700)+1000;
@@ -254,7 +256,7 @@ function fly() {
                 {name: item[0], value: item[1]}
             );
         });
-        // console.log(plate)
+        console.log(plate)
         // 路径配置
         var myChart = echarts.init(document.getElementById('statis2'));
         var option = {
@@ -494,34 +496,10 @@ function fly() {
                         "大庆":[125.03,46.58]
                     }
                 },
-                // {
-                //     name: 'Top5',
-                //     type: 'map',
-                //     mapType: 'china',
-                //     data:[],
-                //     markPoint : {
-                //         symbol:'emptyCircle',
-                //         symbolSize : function (v){
-                //             return 10 + v/100
-                //         },
-                //         effect : {
-                //             show: true,
-                //             shadowBlur : 0
-                //         },
-                //         itemStyle:{
-                //             normal:{
-                //                 label:{show:false}
-                //             }
-                //         },
-                //         data : [plate[0]]
-                //     }
-                // }
             ]
         };
         // 为echarts对象加载数据
         myChart.setOption(option);
-
-
     }
 }
-// fly();
+fly();

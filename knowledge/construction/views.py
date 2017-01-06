@@ -23,9 +23,8 @@ def add_relation():
     return render_template('construction/compile.html')
 
 @mod.route('/read_file/', methods=['GET','POST'])
-def new_in():#读取文件的内容
+def new_in():
     f_name = request.form['new_words']
-    flag = request.form['flag']
 
     uid_list = []
     line = f_name.split('\n')
@@ -114,7 +113,7 @@ def create_relation():
     node2_index_name = request.args.get('node2_index_name', 'event_index')
     flag = create_node_or_node_rel(node_key1, node1_id, node1_index_name, rel,\
            node_key2, node2_id, node2_index_name)
-return json.dumps(flag)
+    return json.dumps(flag)
 
 
 
@@ -132,5 +131,14 @@ def add_node_event():
     event_push_redis(event_name,event_type,start_time,end_time,upload_time)
     return '1'
 
-
+@mod.route('/user_upload_file/')
+def upload_file():
+    uid_list = request.args.get('uid_list', '')
+    upload_time = request.args.get('upload_time', '')
+    if uid_list =='' or upload_time=='':
+        print ("null")
+        return 0
+    print uid_list
+    task_name="user"+"-"+len(uid_list)+str(upload_time)
+    user_push_redis(uid_list, task_name, upload_time)
 

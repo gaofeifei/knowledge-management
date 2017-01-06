@@ -35,7 +35,8 @@
                     <input type="checkbox"/> 上传文件:
                 </label>
                 <div class="form-group">
-                    <input type="file" id="exampleInputFile" multiple/>
+                    <input type="file" id="exampleInputFile" 
+                    multiple onchange="handleFileSelect(this.files)"/>
                 </div>
             </div>
             <button class="crm2">上传</button>

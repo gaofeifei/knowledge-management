@@ -262,12 +262,12 @@ function baohanshijian() {
                 biaoqian=item.user_tag;
             };
             if (item.description=='null'){
-                biaoqian='暂无数据';
+                shuoming='暂无数据';
             }else {
-                biaoqian=item.user_tag;
+                shuoming=item.user_tag;
             };
             function getLocalTime(nS) {
-                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,17)
+                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18)
             };
             str+='<div class="play">'+
                 '<div class="play1">'+

@@ -78,6 +78,29 @@ def event_name_search(en_name):
         ch_name = v[0]
     return ch_name
 
+#查找uid对应的字段
+def user_search_sth(en_name,fields_list):
+    query_body = {
+        "query":{
+            "match":{
+                '_id':en_name
+            }
+        }
+    }
+    try:
+        name_results = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
+                body=query_body, fields=fields_list)['hits']['hits'][0]['fields']
+    except:
+        name_dict = {}
+        for i in fields_list:
+            name_dict[i] =''
+        return name_dict
+    name_dict = {}
+    for k,v in name_results.iteritems():
+        name_dict[k] = v[0]
+    # print ch_name.encode('utf-8')
+    return name_dict
+
 #查找uid对应的名字
 def user_name_search(en_name):
     query_body = {
@@ -106,7 +129,7 @@ def related_user_search(uid_list,sort_flag):
         "sort": [{sort_flag:'desc'}]
     }
     fields_list = ['activeness', 'importnace','sensitive','uname','fansnum',\
-                   'domain','topic_string','user_tag']
+                   'domain','topic_string','user_tag','uid']
 
     event_detail = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
                 body=query_body, _source=False, fields=fields_list)['hits']['hits']
@@ -131,7 +154,7 @@ def event_detail_search(eid_list,sort_flag):
             },
         "sort": [{sort_flag:'desc'}]
     }
-    fields_list = ['name', 'counts','start_ts','location','renshu','user_tag','description']
+    fields_list = ['name', 'en_name', 'weibo_counts','start_ts','location','uid_counts','user_tag','description']
 
     event_detail = es_event.search(index=event_analysis_name, doc_type=event_type, \
                 body=query_body, _source=False, fields=fields_list)['hits']['hits']

@@ -314,7 +314,7 @@ def query_group_weibo(group_name, sort_flag):
 
 def del_user_group_rel(group_name, uid):
     s_string = 'START s0 = node:group_index(group="%s"),s = node:node_index(uid="%s")\
-                MATCH (s0)-[r]-(s) RETURN r' %(group_name, uid)
+                MATCH (s0)-[r]-(s) DELETE r' %(group_name, uid)
 
     print s_string
     graph.run(s_string)
@@ -339,21 +339,23 @@ def user_list_group(group_name):
     uid_list_l = []
     for i in uid_list:
         uid_this = dict(i)['uid']
-        uid_list_l.append(uid_this)
+        user_name = user_name_search(uid_this)
+        uid_list_l.append([uid_this, user_name])
     return uid_list_l
 
 def search_related_user_card(item,layer):
+    print item,'-------------'
     query_body = {
         "query":{
             'bool':{
-                'should':[{
+                'should':[
                     {"wildcard":{'uid':'*'+str(item)+'*'}},            
                     {"wildcard":{'uname':'*'+str(item)+'*'}}
-                }]
+                ]
             }
 
         },
-        'size':10000
+        'size':100
     }
     only_uid = []
     user_uid_list = []
@@ -373,11 +375,34 @@ def search_related_user_card(item,layer):
         user_uid_list.append([uid, uname])
     print  len(user_uid_list),'========='
     if layer == '1':
-        related_user_search(only_uid, 'activeness')
+        for uid_value in user_uid_list: 
+            c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
+            c_string += 'MATCH (s0)-[r1]-(s1:User) return s0,r1,s1 LIMIT 100'
+            result = graph.run(c_string)
+            for i in list(result):
+                m_id = dict(i['s1'])['uid']
+                only_uid.append(m_id)
+        result_card = related_user_search(only_uid, 'activeness')
     if layer == '2':
-        related_user_search()
-    if layer == '3':
-        search_related_user(item)
+        for uid_value in user_uid_list: 
+            c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
+            c_string += 'MATCH (s0)-[r1]-()-[r]-(s1:User) return s1 LIMIT 100'
+            result = graph.run(c_string)
+            for i in list(result):
+                m_id = dict(i['s1'])['uid']
+                only_uid.append(m_id)
+        result_card = related_user_search(only_uid, 'activeness')
+
+    if layer == 'all':
+        uid_list_all =[]
+        result = search_related_user(item)
+        uid_dict = result['user_nodes']
+        for k,v in uid_dict.iteritems():
+            uid_list_all.append(k)
+        result_card = related_user_search(uid_list_all,'activeness')
+
+    return result_card
+
 
 def search_related_user(item):
     query_body = {

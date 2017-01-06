@@ -78,6 +78,29 @@ def event_name_search(en_name):
         ch_name = v[0]
     return ch_name
 
+#查找uid对应的字段
+def user_search_sth(en_name,fields_list):
+    query_body = {
+        "query":{
+            "match":{
+                '_id':en_name
+            }
+        }
+    }
+    try:
+        name_results = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
+                body=query_body, fields=fields_list)['hits']['hits'][0]['fields']
+    except:
+        name_dict = {}
+        for i in fields_list:
+            name_dict[i] =''
+        return name_dict
+    name_dict = {}
+    for k,v in name_results.iteritems():
+        name_dict[k] = v[0]
+    # print ch_name.encode('utf-8')
+    return name_dict
+
 #查找uid对应的名字
 def user_name_search(en_name):
     query_body = {

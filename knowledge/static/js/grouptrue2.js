@@ -308,3 +308,4 @@ $.each($("#similar .xingming"),function(index,item){
         window.open('/index/search_result/');
     });
 });
+

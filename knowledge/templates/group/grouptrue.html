@@ -2,6 +2,19 @@
 {% block title %}<title>图谱分析 - 群体结果</title>{% endblock %}
 {% block my_css %}
     <link rel="stylesheet" href="/static/css/grouptrue.css">
+    <style type="text/css">
+        #container #middle .midmid .condition .cdt4 span.dian {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #777;
+            margin-left: 40px;
+        }
+        #container #middle .midmid .condition .cdt4 .checkbox {
+            margin: 0;
+        }
+    </style>
 {% endblock %}
 
 {% block main %}
@@ -31,49 +44,74 @@
                 <p class="pane">交互面板</p>
                 <div class="condition">
                     <!--111-->
-                    <span class="cdt1" style="display: block;margin: 20px 0 0 20px;color: #777;font-size: 14px">节点筛选</span>
+                    <span class="cdt1" style="display: block;margin: 5px 0 0 20px;color: #777;font-size: 14px">节点筛选</span>
                     <div class="cdt2">
                         <div class="checkbox">
-                            <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                            <label style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
                                 <input id='user' class="per" type="checkbox" checked/> 人物
                             </label>
-                            <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input id="event" class="per" type="checkbox" checked/> 事件
+                            <label style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                <input id="event" class="per" type="checkbox"/> 事件
                             </label>
                         </div>
                     </div>
                     <!--222-->
-                    <span class="cdt3" style="display: block;margin: 20px 0 0 20px;color: #777;font-size: 14px">关系筛选</span>
+                    <span class="cdt3" style="display: block;margin: 5px 0 0 20px;color: #777;font-size: 14px">关系筛选</span>
                     <div class="cdt4">
                         <div class="checkbox">
-                            <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input id='friend' class="per" type="checkbox" checked/> 好友关系
+                            <span class="dian"></span>
+                            <span style='display:inline-block;margin: 5px 0 0 0px;color: #777;font-size: 12px;'>
+                                人物 - 事件关系
+                            </span>
+                            <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                <input id='join' class="join" type="checkbox" checked/> 参与讨论
                             </label>
-                            <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input id='colleague' class="per" type="checkbox" checked/> 同事关系
+                            <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                <input id='pusher' class="pusher" type="checkbox" checked/> 趋势推动
                             </label>
-                            <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input id='relative' class="per" type="checkbox" checked/> 亲属关系
+                            <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                <input id='make' class="make" type="checkbox" checked/> 趋势制造
                             </label>
-                            <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input id='leader_member' class="per" type="checkbox" checked/> 上下级关系
+                            <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                <input id='other' class="other" type="checkbox" checked/> 其他关系
                             </label>
-                            <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input id='user_tag' class="per" type="checkbox" checked/> 其他
+                        </div>
+                        <div class="checkbox" class='evnt'>
+                            <span class="dian"></span>
+                            <span style='display: inline-block;margin: 5px 0 0 0px;color: #777;font-size: 12px;'>
+                                人物 - 人物关系
+                            </span>
+                            <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                <input id='friend' class="emain" type="checkbox" checked/> 交互
+                            </label>
+                            <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                <input id='relative' class="evother" type="checkbox" checked/> 亲属
+                            </label>
+                            <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                <input id='colleague' class="emain" type="checkbox" checked/> 业务关联
+                            </label>
+                            <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                <input id='user_tag' class="evother" type="checkbox" checked/> 其他
                             </label>
                         </div>
                     </div>
                     <!--333-->
-                    <span class="cdt3" style="display: block;margin: 20px 0 0 20px;color: #777;font-size: 14px">节点扩展</span>
+                    <span class="cdt3" style="display: block;margin: 5px 0 0 20px;color: #777;font-size: 14px">节点扩展</span>
                     <div class="cdt4">
-                        <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                        <div class="radio" style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
                             <label>
-                                <input type="radio" name="yier" id="onecg" value="option1"
+                                <input type="radio" name="yier" id="zero" value="option1"
                                 checked>
+                                不扩展
+                            </label>
+                        </div>
+                        <div class="radio" style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                            <label>
+                                <input type="radio" name="yier" id="onecg" value="option1">
                                 扩展一层
                             </label>
                         </div>
-                        <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                        <div class="radio" style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
                             <label>
                                 <input type="radio" name="yier" id="twocg" value="option2">
                                 扩展二层
@@ -81,7 +119,7 @@
                         </div>
                     </div>
                     <!--444-->
-                    <button class="cdt5">确定</button>
+                    <button class="cdt5" style='margin-top:7px;'>确定</button>
                 </div>
             </div>
             <div class="midright" style="margin-right: 0">
@@ -435,7 +473,7 @@
                     <p class="lftwo">敏感微博</p>
                 </div>
                 <div class="twright">
-                    <div class="twr1">
+                    <!-- <div class="twr1">
                         <p class="master">
                             微博内容：
                             <span class="master1">
@@ -450,71 +488,7 @@
                             <span class="time5">评论数（56）</span>|&nbsp;
                             <span class="time6">言论敏感度（87）</span>
                         </p>
-                    </div>
-                    <div class="twr1">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="twright2" style="display: none;">
                     <div class="twr1">
@@ -735,17 +709,80 @@
 
 <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=oHDtLqS40HV7dTqlNWYUc5IYvSLq60pS">
 </script>-->
+<script type="text/javascript" src='/static/js/jquery.pagination.min.js'></script>
 <script src="/static/js/proults.js"></script>
 <script src="/static/js/grouptrue2.js"></script>
 <script type="text/javascript">
-    // var myGeo = new BMap.Geocoder();
-    // // 将地址解析结果显示在地图上,并调整地图视野
-    // myGeo.getPoint("北京市", function(point){
-    //     if (point) {
-    //         console.log(point);
-    //     }else{
-    //         alert("您选择地址没有解析到结果!");
-    //     }
-    // }, "北京市");
+$('.twright').pagination({
+    pageCount: 50,
+    jump: true,
+    callback:function(api){
+        var data = {
+            page: api.getCurrent(),
+            group_name: '法律人士',
+            sort_flag: 'retweeted'
+        };
+        function getLocalTime(nS) {     
+           return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
+        }   
+        $.getJSON('/group/group_weibo/',data,
+            function(data){
+            var data=eval(data);
+            console.log(data);
+            var str='',name,time;
+            $.each(data,function(index,item){
+                if (item.uname==''||item.uname=='unknown') {
+                    name=item.uid;
+                }else {
+                    name=item.uname;
+                };
+                str+='<div class="twr1">'+
+'                        <p class="master">'+
+'                            微博内容：'+
+'                            <span class="master1">'+
+                        item.text+
+'                            </span>'+
+'                        </p>'+
+'                        <p class="time">'+
+'                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
+'                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+'                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
+                            getLocalTime(item.timestamp)+'</i></span>'+
+'                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（'+item.retweeted+'）</span>|&nbsp;'+
+'                            <span class="time5">评论数（'+item.comment+'）</span>|&nbsp;'+
+'                            <span class="time6">言论敏感度（'+item.sensitive+'）</span>'+
+'                        </p>'+
+'                    </div>';
+            });
+            
+        });
+    }
+});
+   function gaoyingxiangliweibo() {
+        function place() {
+            //this.ajax_method='GET'; // body...
+        }
+        place.prototype= {
+            call_request:function(url,callback) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    async: true,
+                    success:callback
+                });
+            },
+        };
+        function territory(data) {
+            
+        };
+        var place=new place();
+        function nums() {
+            var url = '/group/group_weibo/?group_name='+'法律人士'+'&sort_flag=retweeted';
+            place.call_request(url,territory);
+        }
+        nums();
+    };
+    gaoyingxiangliweibo();
 </script>
 {% endblock %}

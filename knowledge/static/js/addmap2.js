@@ -10,7 +10,6 @@ function things() {
     myChart.showLoading();
     $.getJSON('/construction/select_event/', function (json) {
         var json=eval(json);
-        console.log(json)
         // var categories = [{name:'人物'},{name:'事件'}];
         var node_value=[], link_value=[];
         // link_value=[],event_value=[],
@@ -107,7 +106,6 @@ people.prototype= {
 };
 function monkey(data) {
     var data=eval(data);
-    console.log(data)
     var str='';
     $.each(data,function (index,item) {
         var weizhi='未知',biaoqian='暂无',shuoming;
@@ -228,4 +226,120 @@ function nums() {
     people.call_request(url,monkey);
 }
 nums();
+
+
+//添加节点中的----事件
+
+var lx;
+function check8(value) {
+    lx=value;
+};
+function jiedianshijian() {
+    //获取数据，准备传送
+    //------------
+    function place() {
+        //this.ajax_method='GET'; // body...
+    }
+    place.prototype= {
+        call_request:function(url,callback) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success:callback
+            });
+        },
+    };
+    function event(data) {
+        var data=eval(data);
+        if (data=='1'){
+            alert('创建成功');
+        }else {
+            alert('创建失败');
+        }
+    }
+    var place=new place();
+    function nums(sjmc,sjlx,timefrom,timeto,timestamp) {
+        var url = '/construction/event_node_create/?event_name='+sjmc+'&event_type='+lx+
+            '&start_time='+timefrom+'&end_time='+timeto+'&upload_time='+timestamp;
+        place.call_request(url,event);
+    }
+
+    $("#container .conright .things .tsrg .tsrg3").on('click',function () {
+        var sjmc=$("#container .conright .things .tslf .tslf2").val();
+        var sjlx=lx;
+        var start = $('#container .things .tsrg .tsrg2 .start').val();
+        var end = $('#container .things .tsrg .tsrg2 .end').val();
+        var timefrom = Date.parse(new Date(start)) / 1000;
+        var timeto = Date.parse(new Date(end)) / 1000;
+        if (sjmc==''){
+            alert('请输入事件名称');
+        }else {
+            if (timefrom > timeto) {
+                alert('您输入的时间有误，请选择正确的时间');
+            }else{
+                var timestamp=new Date().getTime();
+                nums(sjmc,sjlx,timefrom,timeto,timestamp);
+            }
+        };
+
+    })
+}
+jiedianshijian();
+
+//--文件传输----
+function handleFileSelect(evt){
+    var files = evt;
+    for(var i=0,f;f=files[i];i++){
+        var reader = new FileReader();
+        reader.onload = function (oFREvent) {
+            var a = oFREvent.target.result;
+            $.ajax({
+                type:"POST",
+                url:"/construction/read_file/",
+                dataType: "json",
+                async:false,
+                data:{new_words:a},
+                success: function(data){
+                    if( data ){
+                        var data=data;
+                        wenjianchuanshu(data);
+                        // alert("批量导入成功！");
+                    }
+                }
+            });
+        };
+        reader.readAsText(f,'GB2312');
+    }
+}
+function wenjianchuanshu(uid) {
+    function place() {
+        //this.ajax_method='GET'; // body...
+    }
+    place.prototype= {
+        call_request:function(url,callback) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success:callback
+            });
+        },
+    };
+    function territory(data) {
+        console.log(data);
+    }
+    var place=new place();
+    function nums(timestamp) {
+        var url = '/construction/user_upload_file/?uid_list='+uid+'&upload_time='+timestamp;
+        place.call_request(url,territory);
+    }
+
+    $("#container .conright .crm .crm2").on('click',function () {
+        var timestamp=new Date().getTime();
+        nums(timestamp);
+    });
+};
 

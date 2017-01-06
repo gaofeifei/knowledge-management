@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from flask import Blueprint, url_for, render_template, request, abort, flash, session, redirect
 from neo4j_event import select_rels_all, select_rels, create_person, create_rel_from_uid2group, create_node_or_node_rel, \
     update_node, update_node_or_node_rel, delete_rel, delete_node
@@ -9,6 +7,7 @@ import os
 import time
 from datetime import date
 from datetime import datetime
+from  draw_redis import *
 # from knowledge.global_utils import event_name_search
 
 mod = Blueprint('construction', __name__, url_prefix='/construction')
@@ -24,9 +23,8 @@ def add_relation():
     return render_template('construction/compile.html')
 
 @mod.route('/read_file/', methods=['GET','POST'])
-def new_in():#读取文件的内容
+def new_in():
     f_name = request.form['new_words']
-    flag = request.form['flag']
 
     uid_list = []
     line = f_name.split('\n')
@@ -116,3 +114,31 @@ def create_relation():
     flag = create_node_or_node_rel(node_key1, node1_id, node1_index_name, rel,\
            node_key2, node2_id, node2_index_name)
     return json.dumps(flag)
+
+
+
+
+@mod.route('/event_node_create/')
+def add_node_event():
+    event_name = request.args.get('event_name','')
+    event_type = request.args.get('event_type','')
+    start_time = request.args.get('start_time','')
+    end_time = request.args.get('end_time','')
+    upload_time = request.args.get('upload_time','')
+    if event_name == '' or event_type == '' or start_time == ''or end_time == ''or upload_time == '' :
+        print ("event is null")
+        return '0'
+    event_push_redis(event_name,event_type,start_time,end_time,upload_time)
+    return '1'
+
+@mod.route('/user_upload_file/')
+def upload_file():
+    uid_list = request.args.get('uid_list', '')
+    upload_time = request.args.get('upload_time', '')
+    if uid_list =='' or upload_time=='':
+        print ("null")
+        return 0
+    print uid_list
+    task_name="user"+"-"+len(uid_list)+str(upload_time)
+    user_push_redis(uid_list, task_name, upload_time)
+

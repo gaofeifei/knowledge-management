@@ -6,7 +6,7 @@ import operator
 from knowledge.global_config import portrait_name, flow_text_name, portrait_type, flow_text_type, event_name, event_analysis_name, \
         neo4j_name, event_type, event_special, special_event_index_name, group_index_name, \
         group_rel, node_index_name,user_event_relation
-from knowledge.global_utils import es_user_portrait, es_flow_text, es_event, graph,\
+from knowledge.global_utils import es_user_portrait, es_flow_text, es_event, graph,user_search_sth,\
         user_name_search, event_name_search,event_name_to_id,es_search_sth,event_detail_search
 
 from knowledge.parameter import rel_node_mapping, rel_node_type_mapping, index_threshold, WEEK
@@ -216,7 +216,7 @@ def query_event_detail(event):
             'match':{'name':event}
             }
     }
-    analysis_fields_list = ['weibo_counts','location','uid_counts','user_tag','description']
+    analysis_fields_list = ['weibo_counts','location','uid_counts','user_tag','description','photo_url']
     fields_list = ['submit_ts', 'submit_user','start_ts','end_ts']
     
     event_detail = es_event.search(index=event_name, doc_type=event_type, \
@@ -295,12 +295,18 @@ def query_event_people(event):
     for i in result:
         relation = i['r'].type()
         user_id = str(i['uid'])
-        user_name = user_name_search(user_id)
+        name_photo = user_search_sth(user_id, ['uname', 'photo_url'])
+        print name_photo,'===!!!=='
+        user_name = name_photo['uname']
+        photo = name_photo['photo_url']
+
         try:
-            related_people[relation].append([user_id,user_name])
+            if len(related_people[relation])>5:
+                continue
+            related_people[relation].append([user_id,user_name,photo])
         except:
             related_people[relation] = []
-            related_people[relation].append([user_id,user_name])
+            related_people[relation].append([user_id,user_name,photo])
             
     return related_people
 
@@ -367,12 +373,17 @@ def query_person_people(uid,node_type):
     for i in result:
         relation = i['r'].type()
         user_id = str(i['uid'])
-        user_name = user_name_search(user_id)
+        name_photo = user_search_sth(user_id, ['uname', 'photo_url'])
+        user_name = name_photo['uname']
+        photo = name_photo['photo_url']
+
         try:
-            related_people[relation].append([user_id,user_name])
+            if len(related_people[relation])>5:
+                continue
+            related_people[relation].append([user_id,user_name,photo])
         except:
             related_people[relation] = []
-            related_people[relation].append([user_id,user_name])
+            related_people[relation].append([user_id,user_name,photo])
             
     return related_people
 

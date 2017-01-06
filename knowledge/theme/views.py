@@ -10,8 +10,9 @@ from datetime import datetime
 from knowledge.global_config  import event_relation_list,user_event_relation
 from py2neo import Node, Relationship, Graph, NodeSelector
 from py2neo.packages.httpstream import http
-from utils import theme_tab_map, theme_tab_graph,query_special_event,\
-                  query_detail_theme,query_theme_user, query_event_river
+from utils import theme_tab_map, theme_tab_graph,query_special_event,event_list_theme,\
+                  query_detail_theme,query_theme_user, query_event_river,del_e_theme_rel,\
+                  search_related_event_f,search_related_e_card
 
 http.socket_timeout = 9999
 
@@ -39,7 +40,7 @@ def overview_theme():  #专题概览
     return json.dumps(special_event)
 
 @mod.route('/theme_detail/')
-def detail_theme():  #专题包含事件滚动
+def detail_theme():  #专题包含事件滚动卡片,专题编辑上方卡片
     theme_name = request.args.get('theme_name', '电信诈骗')
     sort_flag = request.args.get('sort_flag', 'start_ts')#weibo_counts #uid_counts
     detail_t = query_detail_theme(theme_name, sort_flag)
@@ -81,3 +82,32 @@ def theme_map_filter():
     layer = request.args.get('layer','1') #'0' or '1' or '2'
     filter_map_result = theme_tab_map(theme_name, node_type, relation_type_list, layer)
     return json.dumps(filter_map_result)
+
+@mod.route('/event_in_theme/')#专题编辑的上半部分-表格
+def event_in_theme():  
+    theme_name = request.args.get('theme_name', '电信诈骗')
+    # uid = request.args.get('uid', '2682428145')
+    event_list = event_list_theme(theme_name)
+    return json.dumps(event_list)
+
+@mod.route('/del_event_in_theme/')
+def del_event_in_theme():  #专题编辑-删除事件
+    theme_name = request.args.get('theme_name', '电信诈骗')
+    event_id = request.args.get('event_id', 'gong-an-bu-gua-pai-du-ban-shi-da-dian-xin-qi-zha-an-jian-1482127322')
+    flag = del_e_theme_rel(theme_name, event_id)
+    return json.dumps(flag)
+
+@mod.route('/search_related_event/')
+def search_related_event():  #专题编辑-编辑前先搜索人物,图谱
+    # group_name = request.args.get('group_name', '法律人士')
+    search_item = request.args.get('item', '马来')
+    user_graph = search_related_event_f(search_item)
+    return json.dumps(user_graph)
+
+@mod.route('/search_related_event_card/')
+def search_related_event_card():  #专题编辑-增加前先搜索人物,卡片部分
+    # group_name = request.args.get('group_name', '法律人士')
+    search_item = request.args.get('item', '马来')
+    layer = request.args.get('layer', 'all')#'2'  'all'
+    event_card = search_related_e_card(search_item, layer)
+    return json.dumps(event_card)

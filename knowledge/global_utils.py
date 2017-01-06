@@ -154,7 +154,7 @@ def event_detail_search(eid_list,sort_flag):
             },
         "sort": [{sort_flag:'desc'}]
     }
-    fields_list = ['name', 'en_name', 'weibo_counts','start_ts','location','uid_counts','user_tag','description']
+    fields_list = ['name', 'en_name', 'weibo_counts','start_ts','location','uid_counts','user_tag','description','photo_url']
 
     event_detail = es_event.search(index=event_analysis_name, doc_type=event_type, \
                 body=query_body, _source=False, fields=fields_list)['hits']['hits']

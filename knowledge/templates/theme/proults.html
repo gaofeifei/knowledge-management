@@ -2,6 +2,19 @@
 {% block title %}<title>图谱分析 - 专题结果</title>{% endblock %}
 {% block my_css %}
     <link rel="stylesheet" href="/static/css/proults.css">
+    <style type="text/css">
+        #container #middle .midmid .condition .cdt4 span.dian {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #777;
+            margin-left: 40px;
+        }
+        #container #middle .midmid .condition .cdt4 .checkbox {
+            margin: 0;
+        }
+    </style>
 {% endblock %}
 
 {% block main %}
@@ -29,48 +42,69 @@
         </div>
         <div class="midmid">
             <p class="pane">交互面板</p>
-            <div class="condition">
+            <div class="condition" style='position:relative;'>
                 <!--111-->
-                <span class="cdt1" style="display: block;margin: 20px 0 0 20px;color: #777;font-size: 14px">节点筛选</span>
+                <span class="cdt1" style="display: block;margin: 10px 0 0 20px;color: #777;font-size: 14px">节点筛选</span>
                 <div class="cdt2">
                     <div class="checkbox">
-                        <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                            <input id='user' class="per" type="checkbox" checked/> 人物
+                        <label style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                            <input id='user' class="per" type="checkbox"/> 人物
                         </label>
-                        <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                        <label style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
                             <input id='event' class="per" type="checkbox" checked/> 事件
                         </label>
                     </div>
                 </div>
                 <!--222-->
-                <span class="cdt3" style="display: block;margin: 20px 0 0 20px;color: #777;font-size: 14px">关系筛选</span>
+                <span class="cdt3" style="display: block;margin: 10px 0 0 20px;color: #777;font-size: 14px">关系筛选</span>
                 <div class="cdt4">
-                    <div class="checkbox">
+                    <div class="checkbox" class='perent'>
+                        <span class="dian"></span>
+                        <span style='display:inline-block;margin: 10px 0 0 0px;color: #777;font-size: 12px;'>
+                            人物 - 事件关系
+                        </span>
                         <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                            <input id='contain' class="per" type="checkbox" checked/> 包含关系
+                            <input id='join' class="join" type="checkbox" checked/> 参与讨论
                         </label>
                         <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                            <input id='casual' class="per" type="checkbox" checked/> 因果关系
+                            <input id='pusher' class="pusher" type="checkbox" checked/> 趋势推动
                         </label>
                         <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                            <input id='happen_together' class="per" type="checkbox" checked/> 共同发生关系
+                            <input id='make' class="make" type="checkbox" checked/> 趋势制造
                         </label>
                         <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                            <input id='event_other' class="per" type="checkbox" checked/> 其他关系
+                            <input id='other' class="other" type="checkbox" checked/> 其他关系
+                        </label>
+                    </div>
+                    <div class="checkbox" class='evnt'>
+                        <span class="dian"></span>
+                        <span style='display: inline-block;margin: 10px 0 0 0px;color: #777;font-size: 12px;'>
+                            事件 - 事件关系
+                        </span>
+                        <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                            <input id='emain' class="emain" type="checkbox" checked/> 主题关联
+                        </label>
+                        <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                            <input id='evother' class="evother" type="checkbox" checked/> 其他关系
                         </label>
                     </div>
                 </div>
                 <!--333-->
-                <span class="cdt3" style="display: block;margin: 20px 0 0 20px;color: #777;font-size: 14px">节点扩展</span>
+                <span class="cdt3" style="display: block;margin: 10px 0 0 20px;color: #777;font-size: 14px">节点扩展</span>
                 <div class="cdt4">
-                    <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                    <div class="radio" style="display: block;margin-left: 50px;margin-top: 5px;color: #9d9d9d;font-size: 12px">
                         <label>
-                            <input type="radio" name="optionsRadios" id="oneone" value="option1"
-                            checked>
+                            <input type="radio" name="optionsRadios" id="none" checked>
+                            不扩展
+                        </label>
+                    </div>
+                    <div class="radio" style="display: block;margin-left: 50px;margin-top: 5px;color: #9d9d9d;font-size: 12px">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="oneone" value="option1">
                             扩展一层
                         </label>
                     </div>
-                    <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                    <div class="radio" style="display: block;margin-left: 50px;margin-top: 5px;color: #9d9d9d;font-size: 12px">
                         <label>
                             <input type="radio" name="optionsRadios" id="twotwo" value="option2">
                             扩展二层
@@ -78,7 +112,7 @@
                     </div>
                 </div>
                 <!--444-->
-                <button class="cdt5" style='margin-top:102px;'>确定</button>
+                <button class="cdt5" style='position:absolute;bottom:-37px;margin:0;'>确定</button>
             </div>
         </div>
         <div class="midright" style="margin-right: 0">

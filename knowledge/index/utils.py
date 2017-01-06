@@ -216,7 +216,7 @@ def query_event_detail(event):
             'match':{'name':event}
             }
     }
-    analysis_fields_list = ['weibo_counts','location','uid_counts','user_tag','description']
+    analysis_fields_list = ['weibo_counts','location','uid_counts','user_tag','description','photo_url']
     fields_list = ['submit_ts', 'submit_user','start_ts','end_ts']
     
     event_detail = es_event.search(index=event_name, doc_type=event_type, \

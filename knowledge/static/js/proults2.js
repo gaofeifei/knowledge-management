@@ -40,16 +40,6 @@ function zhexiantu() {
         for (var x=0;x<xmax;x++){
             xx.push(x+1);
         };
-        // //时间去重
-        // var obj={};
-        // var time=[];
-        // for (var i=0;i<thingtime.length;i++){
-        //     obj[thingtime[i]]=thingtime[i];
-        // }
-        // for (var key in obj){
-        //     time.push(key);//相当于a.push(obj[key])
-        // }
-        // //-----
         var option = {
             title: {
                 // text: '折线图堆叠'

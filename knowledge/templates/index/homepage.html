@@ -24,7 +24,7 @@
                     <button class="atlas" style="background-color: #09F;">图谱</button><!--
                     --><button class="map">地图</button>
                 </p>
-                <div id="statis1">
+                <div id="statis1" style="position:relative;">
 
                 </div>
                 <div id="statis2" style="display: none;">
@@ -54,6 +54,13 @@
     <script src="/static/js/homepage2.js"></script>
     <script src="/static/js/homepage3.js"></script>
     <script>
+        // $.ajax({ 
+        //      type: "GET", 
+        //      url: "/static/echarts/city_geo.txt", 
+        //      success: function(url){
+        //         console.log(city_geo['']);
+        //      }
+        // });
         $(".atlas").on('click',function () {
             $(this).css({backgroundColor:"#09F"}).siblings().css({backgroundColor:""});
             $("#statis1").css({display:'block'});

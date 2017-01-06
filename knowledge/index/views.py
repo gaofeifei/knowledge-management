@@ -7,10 +7,11 @@ import os
 import time
 from datetime import date
 from datetime import datetime
-from knowledge.global_config  import event_relation_list,user_event_relation
+from knowledge.global_config  import event_relation_list,user_event_relation,relation_list
 from utils import query_current_week_increase, query_special_event, query_group,filter_event_map,\
      query_new_relationship, query_hot_location, query_event_detail,query_event_people,filter_event_nodes,\
-     get_weibo,query_person_detail,query_person_people,query_person_event,query_event_event,get_user_weibo
+     get_weibo,query_person_detail,query_person_people,query_person_event,query_event_event,get_user_weibo,\
+     group_tab_graph,group_tab_map
 
 
 mod = Blueprint('index', __name__, url_prefix='/index')
@@ -50,7 +51,7 @@ def show_event_user():
 @mod.route('/event_detail_event/') 
 def show_event_event():
     event_name = request.args.get('event_name', u'马来西亚抓获电信欺诈案犯')
-    layer = request.args.get('layer', '2') #'1'  '2' 'all'
+    layer = request.args.get('layer', 'all') #'1'  '2' 'all'
     detail_p = query_event_event(event_name, layer)
     return json.dumps(detail_p)
 
@@ -65,7 +66,8 @@ def show_person_user():
 @mod.route('/person_detail_event/') 
 def show_person_event():
     uid = request.args.get('uid', '5722859628')
-    detail_p = query_person_event(uid,'Event')
+    layer = request.args.get('layer', 'all') #'1'  '2' 'all'
+    detail_p = query_person_event(uid,layer)
     return json.dumps(detail_p)
 
 #事件-控制面板--图谱
@@ -95,6 +97,33 @@ def event_map_filter():
     layer = request.args.get('layer','0') #'1' or '2'
     detail_p = filter_event_map(event_name, node_type, relation_type_list,layer)
     return json.dumps(detail_p)
+
+#人物-控制面板-图谱
+@mod.route('/group_node_filter/')
+def group_node_filter():
+    uid = request.args.get('uid', '1006385463')
+    node_type = request.args.get('node_type', '')#User,Event
+    relation_list.extend(user_event_relation)
+    relation_str = ','.join(relation_list)
+    relation_type = request.args.get('relation_type',relation_str)
+    relation_type_list = relation_type.split(',')
+    print relation_type_list,'!!!!!!!!'
+    layer = request.args.get('layer','2') #'0' '1' or '2'
+    tab_graph_result = group_tab_graph(uid, node_type, relation_type_list, layer)   
+    return json.dumps(tab_graph_result)
+
+#人物-控制面板-地图
+@mod.route('/group_map_filter/')
+def group_map_filter():
+    uid = request.args.get('uid', '1006385463')
+    node_type = request.args.get('node_type', '')#User,Event
+    relation_list.extend(user_event_relation)
+    relation_str = ','.join(relation_list)
+    relation_type = request.args.get('relation_type',relation_str)
+    relation_type_list = relation_type.split(',')
+    layer = request.args.get('layer','1')  # '0' '1' or '2'
+    tab_map_result = group_tab_map(uid, node_type, relation_type_list, layer)   
+    return json.dumps(tab_map_result)
 
 #事件-相关微博
 @mod.route('/event_weibo/')

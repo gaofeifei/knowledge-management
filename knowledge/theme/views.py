@@ -66,7 +66,7 @@ def theme_node_filter():
     relation_str = ','.join(event_relation_list)
     relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
-    layer = request.args.get('layer','1') #'1' or '2'
+    layer = request.args.get('layer','0') # '0' '1' or '2'
     filter_result = theme_tab_graph(theme_name, node_type, relation_type_list, layer)
     return json.dumps(filter_result)
 
@@ -78,6 +78,6 @@ def theme_map_filter():
     relation_str = ','.join(event_relation_list)
     relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
-    layer = request.args.get('layer','1') #'1' or '2'
+    layer = request.args.get('layer','1') #'0' or '1' or '2'
     filter_map_result = theme_tab_map(theme_name, node_type, relation_type_list, layer)
     return json.dumps(filter_map_result)

@@ -32,7 +32,38 @@ r = redis.StrictRedis(host=redis_host, port=redis_port, db=0)
 # user portrait interface: push user into redis list
 r_user = redis.StrictRedis(host=redis_host, port=redis_port, db=10)
 
-#neo4j查询事件名
+# event2id
+def event_name_to_id(en_name):
+    query_body = {
+        "query":{
+            "match":{
+                'name':en_name
+            }
+        }
+    }
+    name_results = es_event.search(index=event_name, doc_type=event_type, \
+                body=query_body,fields=['en_name'])['hits']['hits'][0]['fields']
+    for k,v in name_results.iteritems():
+        ch_name = v[0]
+    return ch_name
+
+# event_search_sth
+def es_search_sth(en_name,fields_list):
+    print fields_list
+    query_body = {
+        "query":{
+            "match":{
+                'en_name':en_name
+            }
+        }
+    }
+    sth_results = es_event.search(index=event_analysis_name, doc_type=event_type, \
+                body=query_body,fields=fields_list)['hits']['hits'][0]['fields']
+    for k,v in sth_results.iteritems():
+        sth_name = v[0]
+    return sth_name
+
+#es：事件id查找事件名
 def event_name_search(en_name):
     query_body = {
         "query":{
@@ -66,7 +97,7 @@ def user_name_search(en_name):
     # print ch_name.encode('utf-8')
     return ch_name
 
-#查找该专题下事件关联的用户信息
+#查找该专题下事件关联的用户信息,用户卡片
 def related_user_search(uid_list,sort_flag):
     query_body = {
         'query':{
@@ -92,10 +123,8 @@ def related_user_search(uid_list,sort_flag):
     return detail_result
 
 
-# 查找该专题下的包含事件卡片信息
+# 查找该专题下的包含事件卡片信息，事件卡片
 def event_detail_search(eid_list,sort_flag):
-    print eid_list,'!!!!'
-
     query_body = {
         'query':{
             'terms':{'en_name':eid_list}

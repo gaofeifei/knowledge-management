@@ -2,7 +2,7 @@
 
 import time
 import json
-from knowledge.global_config import portrait_name,flow_text_name, portrait_type,flow_text_type,event_name, event_analysis_name, \
+from knowledge.global_config import portrait_name, flow_text_name, portrait_type, flow_text_type, event_name, event_analysis_name, \
         neo4j_name, event_type, event_special, special_event_index_name, group_index_name, \
         group_rel, node_index_name,user_tag,relation_list
 from knowledge.global_utils import es_user_portrait, es_flow_text, es_event, graph,\
@@ -65,7 +65,8 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
         u_nodes_list[str(uid_value)] = user_name  #取uid
     # u_nodes_list.extend(uid_list)
     # all_uid_list.extend(uid_list)
-
+    if layer == '0': #不扩展
+        pass
     if layer == '1':  #扩展一层
         for uid_value in uid_list:
             c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
@@ -311,4 +312,168 @@ def query_group_weibo(group_name, sort_flag):
     weibo_result = user_weibo_search(uid_list,sort_flag)
     return weibo_result
 
-    
+def del_user_group_rel(group_name, uid):
+    s_string = 'START s0 = node:group_index(group="%s"),s = node:node_index(uid="%s")\
+                MATCH (s0)-[r]-(s) RETURN r' %(group_name, uid)
+
+    print s_string
+    graph.run(s_string)
+    return 'true'
+
+def add_user_group_rel(group_name, uid):
+    s_string = 'START s0 = node:group_index(group="%s"),s = node:node_index(uid="%s")\
+                MATCH (s0)-[r]-(s) RETURN r' %(group_name, uid)
+
+    print s_string
+    graph.run(s_string)
+    return 'true'
+
+
+
+def user_list_group(group_name):
+    s_string = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s:User) RETURN s.uid as uid' %(group_name)
+
+    print s_string
+    uid_list = graph.run(s_string)
+    uid_list_l = []
+    for i in uid_list:
+        uid_this = dict(i)['uid']
+        uid_list_l.append(uid_this)
+    return uid_list_l
+
+def search_related_user_card(item,layer):
+    query_body = {
+        "query":{
+            'bool':{
+                'should':[{
+                    {"wildcard":{'uid':'*'+str(item)+'*'}},            
+                    {"wildcard":{'uname':'*'+str(item)+'*'}}
+                }]
+            }
+
+        },
+        'size':10000
+    }
+    only_uid = []
+    user_uid_list = []
+    u_nodes_list = {}
+
+    try:
+        name_results = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
+                body=query_body, fields=['uid','uname'])['hits']['hits']
+        # print name_results,'@@@@@@@@@@@@@@@@@'
+    except:
+        return 'does not exist'
+    for i in name_results:
+        uid = i['fields']['uid'][0]
+        uname = i['fields']['uname'][0]
+        only_uid.append(uid)
+        u_nodes_list[uid] = uname
+        user_uid_list.append([uid, uname])
+    print  len(user_uid_list),'========='
+    if layer == '1':
+        related_user_search(only_uid, 'activeness')
+    if layer == '2':
+        related_user_search()
+    if layer == '3':
+        search_related_user(item)
+
+def search_related_user(item):
+    query_body = {
+        "query":{
+            'bool':{
+                'should':[
+                    {"wildcard":{'uid':'*'+str(item)+'*'}},            
+                    {"wildcard":{'uname':'*'+str(item)+'*'}}         
+                ]
+            }
+
+        },
+        'size':10
+    }
+    only_uid = []
+    user_uid_list = []
+    u_nodes_list = {}
+
+    try:
+        name_results = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
+                body=query_body, fields=['uid','uname'])['hits']['hits']
+        # print name_results,'@@@@@@@@@@@@@@@@@'
+    except:
+        return 'does not exist'
+    for i in name_results:
+        print i
+        uid = i['fields']['uid'][0]
+        uname = i['fields']['uname'][0]
+        only_uid.append(uid)
+        u_nodes_list[uid] = uname
+        user_uid_list.append([uid, uname])
+    print  len(user_uid_list)
+    e_nodes_list = {}
+    user_relation = []
+    mid_uid_list = []  #存放第一层的数据，再以这些为起始点，扩展第二层
+    mid_eid_list = []
+    for uid_value in user_uid_list: 
+        c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
+        c_string += 'MATCH (s0)-[r1]-(s1) return s0,r1,s1 LIMIT 1'
+
+        result = graph.run(c_string)
+        # print list(result),'-----------------'
+        for i in list(result):
+            start_id = i['s0']['uid']
+            # # start_id = s0['uid']
+            relation1 = i['r1'].type()
+            m_id = dict(i['s1'])
+            if m_id.has_key('uid'):
+                middle_id = m_id['uid']
+                mid_uid_list.append(middle_id)
+                user_name = user_name_search(middle_id)
+                # print middle_id,'2222222222222222222'
+                u_nodes_list[str(middle_id)] = user_name
+                user_relation.append([start_id,relation1,middle_id])
+            if m_id.has_key('envent_id'):
+                middle_id = m_id['envent_id']
+                mid_eid_list.append(middle_id)
+                event_name = event_name_search(middle_id)
+                e_nodes_list[str(middle_id)] = event_name
+                user_relation.append([start_id,relation1,middle_id])
+    print len(mid_uid_list)
+    print len(mid_eid_list),'++++++++++++++++'
+    for mid_uid in mid_uid_list:
+        c_string = 'START s1 = node:node_index(uid="'+str(mid_uid)+'") '
+        c_string += 'MATCH (s1)-[r2]->(s2:User) return s1,r2,s2 LIMIT 5'
+        # print c_string
+        result = graph.run(c_string)
+        for i in result:
+            start_mid_id = i['s1']['uid']
+            relation2 = i['r2'].type()
+            end_id = dict(i['s2'])
+            if end_id.has_key('uid'):
+                user_name = user_name_search(end_id['uid'])
+                # print end_id['uid'],'333333333333333333333333'
+                u_nodes_list[end_id['uid']] = user_name
+                user_relation.append([start_mid_id,relation2,end_id['uid']])
+            if end_id.has_key('envent_id'):
+                event_name = event_name_search(end_id['event_id'])
+                e_nodes_list[end_id['event_id']] = event_name
+                user_relation.append([start_mid_id,relation2,end_id['envent_id']])
+    for mid_eid in mid_eid_list:
+        c_string = 'START s1 = node:event_index(event="'+str(mid_eid)+'") '
+        c_string += 'MATCH (s1)-[r2]->(s2:User) return s1,r2,s2 LIMIT 3'
+        event_result = graph.run(c_string)
+        for i in event_result:
+            relation2 = i['r2'].type()
+            end_id = dict(i['s2'])
+            if end_id.has_key('uid'):
+                # print end_id['uid'],'44444444444444444444444'
+                user_name = user_name_search(end_id['uid'])
+                u_nodes_list[end_id['uid']] = user_name
+                user_relation.append([mid_eid,relation2,end_id['uid']])
+            if end_id.has_key('envent_id'):
+                event_name = event_name_search(end_id['event_id'])
+                e_nodes_list[end_id['event_id']] = event_name
+                user_relation.append([mid_eid,relation2,end_id['envent_id']])
+    return {'total_user':len(user_uid_list),'user_nodes':u_nodes_list,'event_nodes':e_nodes_list,\
+            'relation':user_relation,'draw_nodes_length':len(u_nodes_list)}
+

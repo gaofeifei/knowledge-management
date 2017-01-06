@@ -79,7 +79,7 @@ def event_detail_search(eid_list,sort_flag):
             },
         "sort": [{sort_flag:'desc'}]
     }
-    fields_list = ['name', 'counts','start_ts','location','renshu','user_tag','description']
+    fields_list = ['name', 'weibo_counts','start_ts','location','uid_counts','user_tag','description']
 
     event_detail = es_event.search(index=event_analysis_name, doc_type=event_type, \
                 body=query_body, _source=False, fields=fields_list)['hits']['hits']
@@ -190,6 +190,8 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
         e_nodes_list[event_value] = event_name
     all_event_id.extend(event_list)
     # print nodes_list,'-=-=-=-===================='
+    if layer == '0':  #不扩展
+        pass
     if layer == '1':  #扩展一层
         for event_value in event_list:
             c_string = 'START s0 = node:event_index(event="'+str(event_value[0])+'") '

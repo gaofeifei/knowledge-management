@@ -106,24 +106,24 @@ def del_user_in_group():  #群体编辑-删除人物
     flag = del_user_group_rel(group_name, uid)
     return json.dumps(flag)
 
-@mod.route('/add_user_in_group/')#--------没写完！！！！！！！！！！！！！！！！！！！1
-def add_user_in_group():  #群体编辑-增加人物
-    group_name = request.args.get('group_name', '法律人士')
-    uid = request.args.get('uid', '2682428145')
-    flag = add_user_group_rel(group_name, uid)
-    return json.dumps(flag)
-
 @mod.route('/search_related_people/')
 def search_related_people():  #群体编辑-增加前先搜索人物
     # group_name = request.args.get('group_name', '法律人士')
     search_item = request.args.get('item', '358')
-    flag = search_related_user(search_item)
-    return json.dumps(flag)
+    user_graph = search_related_user(search_item)
+    return json.dumps(user_graph)
 
 @mod.route('/search_related_people_card/')
 def search_related_people_card():  #群体编辑-增加前先搜索人物,卡片部分
     # group_name = request.args.get('group_name', '法律人士')
-    search_item = request.args.get('item', '358')
-    layer = request.args.get('layer', '1')#'2'  'all'
-    flag = search_related_user_card(search_item,layer)
+    search_item = request.args.get('item', '3548')
+    layer = request.args.get('layer', 'all')#'2'  'all'
+    user_card = search_related_user_card(search_item,layer)
+    return json.dumps(user_card)
+
+@mod.route('/add_user_in_group/')   #--------没写完！！！！！！！！！！！！！！！！！！！
+def add_user_in_group():  #群体编辑-增加人物
+    group_name = request.args.get('group_name', '法律人士')
+    uid = request.args.get('uid', '2682428145')
+    flag = add_user_group_rel(group_name, uid)
     return json.dumps(flag)

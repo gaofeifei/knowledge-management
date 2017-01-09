@@ -90,11 +90,12 @@ a,a:link,a:hover,a:visited,a:active {
     float: left;
 }
 #container .conright .crt2 .crt2lf th {
-    color: white;
+    /*color: white;*/
     font-weight: 600;
 }
 #container .conright .crt2 .crt2lf th,#container .conright .crt2 .crt2lf td {
     text-align: center;
+    width: 133px;
 }
 #container .conright .crt2 .crt2rg .play {
     width: 240px;

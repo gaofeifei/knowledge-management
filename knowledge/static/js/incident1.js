@@ -27,7 +27,7 @@ function guanlianrenwu() {
                     name=item[1];
                 };
                 if (item[2]==''){
-                    picture='/static/image/pangzi.png';
+                    // picture='/static/image/pangzi.png';
                 }else {
                     picture=item[2];
                 };

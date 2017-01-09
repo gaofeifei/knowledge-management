@@ -1,20 +1,16 @@
 # -*-coding:utf-8-*-
-import time
 import json
-import redis
 import sys
 from elasticsearch import Elasticsearch
-from py2neo import Graph
 from py2neo.ext.batman import ManualIndexManager
 from py2neo import Node, Relationship
 from py2neo.packages.httpstream import http
 from py2neo.ogm import GraphObject
 from knowledge.global_utils import graph
-es = Elasticsearch("219.224.134.225:9037", timeout=600)
+from knowledge.global_config import *
+from myutil import get_type_key
+from knowledge.global_utils import es_event as es
 http.socket_timeout = 9999
-class Person(GraphObject):
-    __primarykey__ = "pname"
-    pname = property()
 
 # 对es进行读取数据
 def get_es_node():
@@ -85,7 +81,7 @@ def create_person(node_type, node_key, node_id, node_name_index, attribute_dict=
                 person_node[k] = v
             graph.push(person_node)
         else:
-            person_node = Node(node_type, pname=node_id)
+            person_node = Node(node_type, uid=node_id)
             for k, v in attribute_dict.iteritems():
                 person_node[k] = v
             graph.create(person_node)
@@ -116,6 +112,51 @@ def create_rel_from_uid2group(node_key,uid_list, node_index_name, group_rel, gro
             tx = graph.begin()
     tx.commit()
 
+#多对多创建节点关系([node1_type,node1_id],rel,[node2_type,node2_id])
+def nodes_rels(list):
+    count = 0
+    Index = ManualIndexManager(graph)
+    node_index = Index.get_index(Node, node_index_name)
+    event_index = Index.get_index(Node, event_index_name)
+    tx = graph.begin()
+    if not (node_index and event_index):
+        print "node or group does not exist"
+        return "0"
+    for item in list:
+        node1_key = get_type_key(item[0][0])
+        node2_key = get_type_key(item[2][0])
+        node1_uid = item[0][1]
+        node2_uid = item[2][1]
+        rel = item[1]
+        if node1_key == '' or node2_key == '' or node1_uid == '' or node2_uid == '' or rel == '':
+            return '0'
+        if node1_key == "uid":
+            if node2_key == 'uid':
+                node1 = node_index.get(node1_key, node1_uid)[0]
+                node2 = node_index.get(node2_key, node2_uid)[0]
+                print 11
+            else:
+                node1 = node_index.get(node1_key, node1_uid)[0]
+                node2 = event_index.get(node2_key, node2_uid)[0]
+                print 12
+        else:
+            if node2_key == 'uid':
+                node1 = event_index.get(node1_key, node1_uid)[0]
+                node2 = node_index.get(node2_key, node2_uid)[0]
+                print 21
+            else:
+                node1 = event_index.get(node1_key, node1_uid)[0]
+                node2 = event_index.get(node2_key, node2_uid)[0]
+                print 22
+        rel = Relationship(node1, rel, node2)
+        tx.create(rel)
+        count += 1
+        if count % 100 == 0:
+            tx.commit()
+            print count
+            tx = graph.begin()
+    tx.commit()
+    return '1'
 
 # 对单节点和单节点建立关系
 def create_node_or_node_rel(node_key1, node1_id, node1_index_name, rel, node_key2, node2_id, node2_index_name):
@@ -234,29 +275,3 @@ def delete_node(node_key, node_id, node_index_name):
     return True
 
 
-
-
-if __name__ == '__main__':
-    result = get_es_node()
-    for item in result:
-        print item
-        id = item["_id"]
-        source = item["_source"]
-        create_person("Person","pname",id,"zsj",source)
-    # create_rel_from_uid2uid("20120672101", "zsj", "friend", "20130672140", "zsj")
-    # update_node("pname","20120672101","zsj",{"username":"xiaozhu"})
-    # create_person("pname","20120672012","zsj")
-    # create_node_or_node_rel("20120672012","zsj","friend","20120672101","zsj")
-    # delete_node("pname","20120672012","zsj")
-    # create_node_or_node_rel("1050896727", "zsj", "friend", "1133792272", "zsj")
-    # delete_node("pname","1050896727","zsj")
-    # create_node_or_node_rel("pname","1219964394","zsj","friend","pname","1162178432","zsj")
-    # delete_rel("pname","1219964394","zsj","friend","pname","1133792272","zsj")
-    # list = select_rels("pname", "1219964394", "zsj")
-    # print list
-    result =select_rels_all("match (n:Person) return n")
-    result=json.dumps(result)
-    print result
-    # 创建节点与节点关系的问题（节点和节点之间的查询语句有点问题 然后如果用match比较慢！）
-    # 删除节点的问题 如果我把该节点删除，是直接进行删除，还是把该节点的所有关系进行删除 然后在删除该节点。
-    # 更新节点间的关系的时候是先把该节点的当前关系删除后，在进行节点的创建，还是直接可以更新节点的数据。

@@ -274,7 +274,6 @@ def node_or_node_update():
     else:
         return '0'
 
-
 @mod.route('/nodes_or_nodes_rel/')
 def nodes_create_rels():
     list = request.args.get('list', '')

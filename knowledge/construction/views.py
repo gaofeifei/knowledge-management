@@ -137,8 +137,8 @@ def upload_file():
     upload_time = request.args.get('upload_time', '')
     if uid_list =='' or upload_time=='':
         print ("null")
-        return 0
+        return '0'
     print uid_list
     task_name="user"+"-"+len(uid_list)+str(upload_time)
     user_push_redis(uid_list, task_name, upload_time)
-
+    return '1'

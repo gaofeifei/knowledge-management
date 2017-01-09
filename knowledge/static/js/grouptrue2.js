@@ -5,14 +5,6 @@ $.each($(".det"),function(index,item){
     $(item).on('click',function(){
         $(this).parent().fadeOut(300);
     })
-})
-$("#container #total .twleft .lfone").on('click',function () {
-    $(".twright").css({display:'inline-block'});
-    $(".twright2").css({display:'none'});
-});
-$("#container #total .twleft .lftwo").on('click',function () {
-    $(".twright").css({display:'none'});
-    $(".twright2").css({display:'inline-block'});
 });
 $("#container #total .twright .twr1:even").css("background-color","#eeeeee");
 $("#container #total .twright2 .twr1:even").css("background-color","#eeeeee");

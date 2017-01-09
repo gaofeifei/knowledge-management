@@ -9,10 +9,13 @@
             height: 10px;
             border-radius: 50%;
             background-color: #777;
-            margin-left: 40px;
+            margin-left: 40px;说
         }
         #container #middle .midmid .condition .cdt4 .checkbox {
             margin: 0;
+        }
+        .In-table {
+            width:100%!important;
         }
     </style>
 {% endblock %}
@@ -423,7 +426,7 @@
             #container #total .twleft {
                 display: inline-block;
                 position: relative;
-                top: -180px;
+                top: -100px;
                 right: -5px;
             }
             #container #total .twleft p {
@@ -473,6 +476,26 @@
                     <p class="lftwo">敏感微博</p>
                 </div>
                 <div class="twright">
+                    <div id="group_emotion_loading" style="display:block;text-align:center;">
+                        正在加载，请稍后...
+                    </div>
+                    <div id="influeweibo" style="overflow-x: auto; overflow-y: auto;height:320px;">
+                        <table id="input-table" class="In-table">
+                            <tbody class="In-table">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class='fanye' style="width:100%;text-align:center;">
+                          <span style="display:inline-block;">每页显示<input type="text" id="PageNo" size="3" value="3" style='text-align:center;border:1px solid #ccc;'/>组</span>
+                          <div id="div-button" style="display:inline-block;margin-left:5px;">
+                          <input type="button" value="首页" id="F-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                          <input type="button" value="上一页" id="Pre-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                          <input type="button" value="下一页" id="Nex-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                          <input type="button" value="尾页" id="L-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                    </div>
+
+                    <span style="display:inline-block;">&nbsp;当前第<span id="s2"></span>页</span>
+                    <span style="display:inline-block;">总共<span id="s1"></span>页</span>
                     <!-- <div class="twr1">
                         <p class="master">
                             微博内容：
@@ -484,103 +507,11 @@
                             <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
                             <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
                             <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
+                            <span class="time4" style="display: inline-block;margin-left: 30%">转发数（213）</span>|&nbsp;
                             <span class="time5">评论数（56）</span>|&nbsp;
                             <span class="time6">言论敏感度（87）</span>
                         </p>
                     </div> -->
-                </div>
-                <div class="twright2" style="display: none;">
-                    <div class="twr1">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                                美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                                没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                                美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                                没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                                美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                                没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                                美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                                没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                                美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                                没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -709,106 +640,12 @@
 
 <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=oHDtLqS40HV7dTqlNWYUc5IYvSLq60pS">
 </script>-->
-<script type="text/javascript" src='/static/js/jquery.pagination.min.js'></script>
 <script src="/static/js/proults.js"></script>
 <script src="/static/js/grouptrue2.js"></script>
 <script type="text/javascript">
-var sjPager = window.sjPager = {
-        opts: {
-            //默认属性
-            pageSize: 10,
-            preText: "pre",
-            nextText: "next",
-            firstText: "First",
-            lastText: "Last",
-            shiftingLeft: 3,
-            shiftingRight: 3,
-            preLeast: 2,
-            nextLeast: 2,
-            showFirst: true,
-            showLast: true,
-             url: "/group/group_weibo/",
-            type: "GET",
-            dataType: "JSON",
-            searchParam: {},
-            beforeSend: null,
-            success: function (data) {
-            /*
-            *返回的数据根据自己需要处理
-            */
-            var data=eval(data);
-            console.log(data);
-            var str='',name,time;
-            $.each(data,function(index,item){
-                if (item.uname==''||item.uname=='unknown') {
-                    name=item.uid;
-                }else {
-                    name=item.uname;
-                };
-                str+='<div class="twr1">'+
-'                        <p class="master">'+
-'                            微博内容：'+
-'                            <span class="master1">'+
-                        item.text+
-'                            </span>'+
-'                        </p>'+
-'                        <p class="time">'+
-'                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
-'                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
-'                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
-                            getLocalTime(item.timestamp)+'</i></span>'+
-'                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（'+item.retweeted+'）</span>|&nbsp;'+
-'                            <span class="time5">评论数（'+item.comment+'）</span>|&nbsp;'+
-'                            <span class="time6">言论敏感度（'+item.sensitive+'）</span>'+
-'                        </p>'+
-'                    </div>';
-            });
-            $(".twright").append(str);
-        },
-            complete: null,
-            error: function () {
-                alert("抱歉,请求出错,请重新请求！");
-            },
-        },
-        pagerElement: null,//分页dom元素
-        commonHtmlText: {
-            //公共文本变量
-        },
-        init: function (obj, op) {
-            //对象初始化
-        },
-        doPage: function (index, pageSize, searchParam) {
-            //执行分页方法
-        },
-        getTotalPage: function () {
-            //获取总页数
-        },
-        createPreAndFirstBtn: function (pageTextArr) {
-            //创建上一页、首页按钮链接
-        },
-        createNextAndLastBtn: function (pageTextArr) {
-            //创建下一页、尾页按钮链接
-        },
-        createIndexBtn: function (pageTextArr) {
-            //中间分页索引按钮链接
-        },
-        renderHtml: function (pageTextArr) {
-            //渲染分页控件到页面
-        },
-        createSpan: function (text, className) {
-            //创建span
-        },
-        createIndexText: function (index, text) {
-            //创建索引文本
-        },
-        jumpToPage: function () {
-            //跳转到
-        }
-    };
-    $.fn.sjAjaxPager = function (option) {
-         return sjPager.init($(this), option);
-     };
-
+function getLocalTime(nS) {
+    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,20)
+};
 
    function gaoyingxiangliweibo() {
         function place() {
@@ -826,14 +663,350 @@ var sjPager = window.sjPager = {
             },
         };
         function territory(data) {
-            
+            var data=eval(data);
+            Draw_weibo_table(data);
         };
         var place=new place();
-        function nums() {
-            var url = '/group/group_weibo/?group_name='+'法律人士'+'&sort_flag=retweeted';
+        
+        function nums(s) {
+            var url;
+            if (s==1) {
+                url = '/group/group_weibo/?group_name='+'法律人士'+'&sort_flag=retweeted';
+            }else {
+                url = '/group/group_weibo/?group_name='+'法律人士'+'&sort_flag=sensitive';
+            };
+        
             place.call_request(url,territory);
         }
-        nums();
+        nums(1);
+        $("#container #total .twleft .lfone").on('click',function () {
+            // $("#container #total .twright").empty();
+            nums(1);
+        });
+        $("#container #total .twleft .lftwo").on('click',function () {
+            // $("#container #total .twright").empty();
+            nums(2);
+        });
+        function Draw_weibo_table(data){
+          $('#group_emotion_loading').css('display', 'none');
+          $('#input-table').show();
+          var dataArray = data;
+          var PageNo=document.getElementById('PageNo');                   //设置每页显示行数
+          var InTb=document.getElementById('input-table');               //表格
+          var Fp=document.getElementById('F-page');                      //首页
+          var Nep=document.getElementById('Nex-page');                  //下一页
+          var Prp=document.getElementById('Pre-page');                  //上一页
+          var Lp=document.getElementById('L-page');                     //尾页
+          var S1=document.getElementById('s1');                         //总页数
+          var S2=document.getElementById('s2');                         //当前页数
+          var currentPage;                                              //定义变量表示当前页数
+          var SumPage;     
+
+              if(PageNo.value!="")                                       //判断每页显示是否为空
+              {
+                  InTb.innerHTML='';                                     //每次进来都清空表格
+                  S2.innerHTML='';                                        //每次进来清空当前页数
+                  currentPage=1;                                          //首页为1
+                  S2.appendChild(document.createTextNode(currentPage));
+                  S1.innerHTML='';                                        //每次进来清空总页数
+                  if(dataArray.length%PageNo.value==0)                    //判断总的页数
+                  {
+                      SumPage=parseInt(dataArray.length/PageNo.value);
+                  }
+                  else
+                  {
+                      SumPage=parseInt(dataArray.length/PageNo.value)+1
+                  }
+                  S1.appendChild(document.createTextNode(SumPage));
+                  var oTBody=document.createElement('tbody');               //创建tbody
+                  oTBody.setAttribute('class','In-table');                   //定义class
+                  InTb.appendChild(oTBody);
+                  //将创建的tbody添加入table
+                  var html_c = '';
+                  if(dataArray==''){
+                    html_c = "<div style='width:100%;'><span><img src='/static/img/pencil-icon.png' style='height:12px;width:12px;margin:0px;margin-right:8px;float:left;'>用户未发布任何微博</span></div>";
+                      oTBody.innerHTML = html_c;
+                }else{
+            
+                  for(i=0;i<parseInt(PageNo.value);i++)
+                  {                                                          //循环打印数组值
+                      oTBody.insertRow(i);
+                    var name;
+                    if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
+                        name=dataArray[i].uid;
+                    }else {
+                        name=dataArray[i].uname;
+                    };
+                      html_c = '<div class="twr1">'+
+'                        <p class="master">'+
+'                            微博内容：'+
+'                            <span class="master1">'+
+                        dataArray[i].text+
+'                            </span>'+
+'                        </p>'+
+'                        <p class="time">'+
+'                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
+'                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+'                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
+                            getLocalTime(dataArray[i].timestamp)+'</i></span>'+
+                            '<span style="display: inline-block;float:right;">'+
+'                            <span class="time4">转发数（'+dataArray[i].retweeted+'）</span>|&nbsp;'+
+'                            <span class="time5">评论数（'+dataArray[i].comment+'）</span>|&nbsp;'+
+'                            <span class="time6">言论敏感度（'+dataArray[i].sensitive+'）</span></span>'+
+'                        </p>'+
+'                    </div>';
+                         oTBody.rows[i].insertCell(0);
+                         oTBody.rows[i].cells[0].innerHTML = html_c;                    
+                  }
+              }
+          }
+           Fp.onclick=function()
+          {
+
+              if(PageNo.value!="")                                       //判断每页显示是否为空
+              {
+                  InTb.innerHTML='';                                     //每次进来都清空表格
+                  S2.innerHTML='';                                        //每次进来清空当前页数
+                  currentPage=1;                                          //首页为1
+                  S2.appendChild(document.createTextNode(currentPage));
+                  S1.innerHTML='';                                        //每次进来清空总页数
+                  if(dataArray.length%PageNo.value==0)                    //判断总的页数
+                  {
+                      SumPage=parseInt(dataArray.length/PageNo.value);
+                  }
+                  else
+                  {
+                      SumPage=parseInt(dataArray.length/PageNo.value)+1
+                  }
+                  S1.appendChild(document.createTextNode(SumPage));
+                  var oTBody=document.createElement('tbody');               //创建tbody
+                  oTBody.setAttribute('class','In-table');                   //定义class
+                  InTb.appendChild(oTBody);                                     //将创建的tbody添加入table
+                  var html_c = '';
+
+                  if(dataArray==''){
+                    html_c = "<div style='width:100%;'><span style='margin-left:20px;'>用户未发布任何微博</span></div>";
+                      oTBody.rows[0].cells[0].innerHTML = html_c;
+                }else{
+            
+                  for(i=0;i<parseInt(PageNo.value);i++)
+                  {                                                          //循环打印数组值
+                      oTBody.insertRow(i);
+                    var name;
+                    if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
+                        name=dataArray[i].uid;
+                    }else {
+                        name=dataArray[i].uname;
+                    };
+                      html_c = '<div class="twr1">'+
+'                        <p class="master">'+
+'                            微博内容：'+
+'                            <span class="master1">'+
+                        dataArray[i].text+
+'                            </span>'+
+'                        </p>'+
+'                        <p class="time">'+
+'                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
+'                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+'                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
+                            getLocalTime(dataArray[i].timestamp)+'</i></span>'+
+                            '<span style="display:inline-block;float:right;">'+
+'                            <span class="time4">转发数（'+dataArray[i].retweeted+'）</span>|&nbsp;'+
+'                            <span class="time5">评论数（'+dataArray[i].comment+'）</span>|&nbsp;'+
+'                            <span class="time6">言论敏感度（'+dataArray[i].sensitive+'）</span></span>'+
+'                        </p>'+
+'                    </div>';
+                         oTBody.rows[i].insertCell(0);
+                         oTBody.rows[i].cells[0].innerHTML = html_c;                    
+                  }
+              }
+          }
+          }
+          Nep.onclick=function()
+          {
+              if(currentPage<SumPage)                                 //判断当前页数小于总页数
+              {
+                  InTb.innerHTML='';
+                  S1.innerHTML='';
+                  if(dataArray.length%PageNo.value==0)
+                  {
+                      SumPage=parseInt(dataArray.length/PageNo.value);
+                  }
+                  else
+                  {
+                      SumPage=parseInt(dataArray.length/PageNo.value)+1
+                  }
+                  S1.appendChild(document.createTextNode(SumPage));
+                  S2.innerHTML='';
+                  currentPage=currentPage+1;
+                  S2.appendChild(document.createTextNode(currentPage));
+                  var oTBody=document.createElement('tbody');
+                  oTBody.setAttribute('class','In-table');
+                  InTb.appendChild(oTBody);
+                  var a;                                                 //定义变量a
+                  a=PageNo.value*(currentPage-1);                       //a等于每页显示的行数乘以上一页数
+                  var c;                                                  //定义变量c
+                  if(dataArray.length-a>=PageNo.value)                  //判断下一页数组数据是否小于每页显示行数
+                  {
+                      c=PageNo.value;
+                  }
+                  else
+                  {
+                      c=dataArray.length-a;
+                  }
+                  for(i=0;i<c;i++)
+                  {
+                         oTBody.insertRow(i);
+                         var name;
+                    if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
+                        name=dataArray[i].uid;
+                    }else {
+                        name=dataArray[i].uname;
+                    };
+                          oTBody.rows[i].insertCell(0);
+                        html_c = '<div class="twr1">'+
+'                        <p class="master">'+
+'                            微博内容：'+
+'                            <span class="master1">'+
+                        dataArray[i+a].text+
+'                            </span>'+
+'                        </p>'+
+'                        <p class="time">'+
+'                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
+'                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+'                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
+                            getLocalTime(dataArray[i+a].timestamp)+'</i></span>'+
+                            '<span style="float:right;display:inline-block;">'+
+'                            <span class="time4">转发数（'+dataArray[i+a].retweeted+'）</span>|&nbsp;'+
+'                            <span class="time5">评论数（'+dataArray[i+a].comment+'）</span>|&nbsp;'+
+'                            <span class="time6">言论敏感度（'+dataArray[i+a].sensitive+'）</span></span>'+
+'                        </p>'+
+'                    </div>';
+                        oTBody.rows[i].cells[0].innerHTML = html_c;                      
+                                                                         //数组从第i+a开始取值
+                  }
+              }
+          }
+
+          Prp.onclick=function()
+          {
+              if(currentPage>1)                        //判断当前是否在第一页
+              {
+                  InTb.innerHTML='';
+                  S1.innerHTML='';
+                  if(dataArray.length%PageNo.value==0)
+                  {
+                      SumPage=parseInt(dataArray.length/PageNo.value);
+                  }
+                  else
+                  {
+                      SumPage=parseInt(dataArray.length/PageNo.value)+1
+                  }
+                  S1.appendChild(document.createTextNode(SumPage));
+                  S2.innerHTML='';
+                  currentPage=currentPage-1;
+                  S2.appendChild(document.createTextNode(currentPage));
+                  var oTBody=document.createElement('tbody');
+                  oTBody.setAttribute('class','In-table');
+                  InTb.appendChild(oTBody);
+                  var a;
+                  a=PageNo.value*(currentPage-1);
+                  for(i=0;i<parseInt(PageNo.value);i++)
+                  {
+                      oTBody.insertRow(i);
+                      var name;
+                    if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
+                        name=dataArray[i].uid;
+                    }else {
+                        name=dataArray[i].uname;
+                    };
+                      oTBody.rows[i].insertCell(0);
+                      html_c = '<div class="twr1">'+
+'                        <p class="master">'+
+'                            微博内容：'+
+'                            <span class="master1">'+
+                        dataArray[i+a].text+
+'                            </span>'+
+'                        </p>'+
+'                        <p class="time">'+
+'                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
+'                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+'                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
+                            getLocalTime(dataArray[i+a].timestamp)+'</i></span>'+
+                            '<span style="float:right;display:inline-block;">'+
+'                            <span class="time4">转发数（'+dataArray[i+a].retweeted+'）</span>|&nbsp;'+
+'                            <span class="time5">评论数（'+dataArray[i+a].comment+'）</span>|&nbsp;'+
+'                            <span class="time6">言论敏感度（'+dataArray[i+a].sensitive+'）</span></span>'+
+'                        </p>'+
+'                    </div>';
+                        oTBody.rows[i].cells[0].innerHTML = html_c;
+                  }
+              }
+          }
+
+           Lp.onclick=function()
+          {
+                  InTb.innerHTML='';
+                  S1.innerHTML='';
+                  if(dataArray.length%PageNo.value==0)
+                  {
+                      SumPage=parseInt(dataArray.length/PageNo.value);
+                  }
+                  else
+                  {
+                      SumPage=parseInt(dataArray.length/PageNo.value)+1
+                  }
+                  S1.appendChild(document.createTextNode(SumPage));
+                  S2.innerHTML='';
+                  currentPage=SumPage;
+                  S2.appendChild(document.createTextNode(currentPage));
+                  var oTBody=document.createElement('tbody');
+                  oTBody.setAttribute('class','In-table');
+                  InTb.appendChild(oTBody);
+                  var a;
+                  a=PageNo.value*(currentPage-1);
+                  var c;
+                  if(dataArray.length-a>=PageNo.value)
+                  {
+                      c=PageNo.value;
+                  }
+                  else
+                  {
+                      c=dataArray.length-a;
+                  }
+                  for(i=0;i<c;i++)
+                  {
+                      oTBody.insertRow(i);
+                      var name;
+                    if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
+                        name=dataArray[i].uid;
+                    }else {
+                        name=dataArray[i].uname;
+                    };
+                        oTBody.rows[i].insertCell(0);
+                      html_c = '<div class="twr1">'+
+'                        <p class="master">'+
+'                            微博内容：'+
+'                            <span class="master1">'+
+                        dataArray[i+a].text+
+'                            </span>'+
+'                        </p>'+
+'                        <p class="time">'+
+'                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
+'                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+'                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
+                            getLocalTime(dataArray[i+a].timestamp)+'</i></span>'+
+                            '<span style="display:inline-block;float:right;">'+
+'                            <span class="time4">转发数（'+dataArray[i+a].retweeted+'）</span>|&nbsp;'+
+'                            <span class="time5">评论数（'+dataArray[i+a].comment+'）</span>|&nbsp;'+
+'                            <span class="time6">言论敏感度（'+dataArray[i+a].sensitive+'）</span></span>'+
+'                        </p>'+
+'                    </div>';
+                        oTBody.rows[i].cells[0].innerHTML = html_c;
+                  }
+          }
+
+        }
     };
     gaoyingxiangliweibo();
 </script>

@@ -1,4 +1,4 @@
-var node_type;
+var node_type,uids;
 function leixing(value) {
     if (value=='人物'){
         node_type=1;
@@ -69,110 +69,126 @@ function jiedianbianji() {
                     },
                 },
                 {
-                    title: "编辑",//标题
+                    title: "修改",//标题
                     field: "",//键名
                     sortable: true,//是否可排序
                     order: "desc",//默认排序方式
                     align: "center",//水平
                     valign: "middle",//垂直
                     formatter: function (value, row, index) {
-                        return "<a class='xiugai'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class='delt' data-toggle='modal'>删除</a>";
+                        return "<a class='xiugai'>修改</a>";
                     },
-
+                },
+                {
+                    title: "删除",//标题
+                    field: "",//键名
+                    sortable: true,//是否可排序
+                    order: "desc",//默认排序方式
+                    align: "center",//水平
+                    valign: "middle",//垂直
+                    formatter: function (value, row, index) {
+                        return "<a class='delt' data-toggle='modal'>删除</a>";
+                    },
                 },
 
             ],
             onClickRow: function (row, tr) {
-                //进行你的操作，如弹出新窗口
-                //图片
-                if (row.photo_url==''||row.photo_url=='unknown'){
-                    $("#join7 .main .topleft img").attr('src','/static/image/pan.jpg');
-                }else {
-                    $("#join7 .main .topleft img").attr('src',row.photo_url);
+                // console.log($(tr.context).index());
+                if ($(tr.context).index()==2) {
+                    //进行你的操作，如弹出新窗口
+                    //图片
+                    uids=row.uid;
+                    if (row.photo_url==''||row.photo_url=='unknown'){
+                        $("#join7 .main .topleft img").attr('src','/static/image/pan.jpg');
+                    }else {
+                        $("#join7 .main .topleft img").attr('src',row.photo_url);
+                    };
+                    //名字
+                    if (row.uname==''||row.uname=='unknown'){
+                        $("#join7 .sjmc").val(row.uid);
+                    }else {
+                        $("#join7 .sjmc").val(row.uname);
+                    };
+                    //粉丝
+                    if (row.fansnum==''||row.fansnum=='unknown'){
+                        $("#join7 .fss").val('暂无数据');
+                    }else {
+                        $("#join7 .fss").val(row.fansnum);
+                    };
+                    //影响力
+                    if (row.influence==''||row.influence=='unknown'){
+                        $("#join7 .fssj").val('暂无数据');
+                    }else {
+                        var n=row.influence;
+                        $("#join7 .fssj").val(n.toFixed(2));
+                    };
+                    //活跃度
+                    if (row.activeness==''||row.activeness=='unknown'){
+                        $("#join7 .hyd").val('暂无数据');
+                    }else {
+                        var n=row.activeness;
+                        $("#join7 .hyd").val(n.toFixed(2));
+                    };
+                    //敏感度
+                    if (row.statusnum==''||row.statusnum=='unknown'){
+                        $("#join7 .mgd").val('暂无数据');
+                    }else {
+                        var n=row.statusnum;
+                        $("#join7 .mgd").val(n.toFixed(2));
+                    };
+                    //领域
+                    if (row.domain==''||row.domain=='unknown'){
+                        $("#join7 .ly").append('<option value="暂无数据">暂无数据</option>');
+                    }else {
+                        $("#join7 .ly").append('<option value="'+row.domain+'">'+row.domain+'</option>');
+                    };
+                    //注册地
+                    if (row.location==''||row.location=='unknown'){
+                        $("#join7 .zcd").val("暂无数据");
+                    }else {
+                        $("#join7 .zcd").val(row.location);
+                    };
+                    //活跃地
+                    if (row.activity_geo==''||row.activity_geo=='unknown'){
+                        $("#join7 .hydi").append('<option value="暂无数据">暂无数据</option>');
+                    }else {
+                        $("#join7 .hydi").append('<option value="'+row.domain+'">'+row.activity_geo.replace(/&/g,' ')+'</option>');
+                    };
+                    $('#join7').modal("show");
+                    
                 };
-                //名字
-                if (row.uname==''||row.uname=='unknown'){
-                    $("#join7 .sjmc").val(row.uid);
-                }else {
-                    $("#join7 .sjmc").val(row.uname);
-                };
-                //粉丝
-                if (row.fansnum==''||row.fansnum=='unknown'){
-                    $("#join7 .fss").val('暂无数据');
-                }else {
-                    $("#join7 .fss").val(row.fansnum);
-                };
-                //影响力
-                if (row.influence==''||row.influence=='unknown'){
-                    $("#join7 .fssj").val('暂无数据');
-                }else {
-                    var n=row.influence;
-                    $("#join7 .fssj").val(n.toFixed(2));
-                };
-                //活跃度
-                if (row.activeness==''||row.activeness=='unknown'){
-                    $("#join7 .hyd").val('暂无数据');
-                }else {
-                    var n=row.activeness;
-                    $("#join7 .hyd").val(n.toFixed(2));
-                };
-                //敏感度
-                if (row.statusnum==''||row.statusnum=='unknown'){
-                    $("#join7 .mgd").val('暂无数据');
-                }else {
-                    var n=row.statusnum;
-                    $("#join7 .mgd").val(n.toFixed(2));
-                };
-                //领域
-                if (row.domain==''||row.domain=='unknown'){
-                    $("#join7 .ly").append('<option value="暂无数据">暂无数据</option>');
-                }else {
-                    $("#join7 .ly").append('<option value="'+row.domain+'">'+row.domain+'</option>');
-                };
-                //注册地
-                if (row.location==''||row.location=='unknown'){
-                    $("#join7 .zcd").append('<option value="暂无数据">暂无数据</option>');
-                }else {
-                    $("#join7 .zcd").append('<option value="'+row.location+'">'+row.location+'</option>');
-                };
-                $('#join7').modal("show");
-                //活跃地
-                if (row.activity_geo==''||row.activity_geo=='unknown'){
-                    $("#join7 .hydi").append('<option value="暂无数据">暂无数据</option>');
-                }else {
-                    $("#join7 .hydi").append('<option value="'+row.domain+'">'+row.activity_geo.replace(/&/g,' ')+'</option>');
-                };
-                $('#join7').modal("show");
+                if ($(tr.context).index()==3) {
+                    $('#join1').modal("show");
+                }
             },
             onClickCell:function (value,$element,row) {
-                var influe,name,huoyue,mingan,tag;
-                if (row.importance=='null'){
-                    influe='无';
-                }else {
-                    var n=row.importance;
-                    console.log(n)
-                    influe=n.toFixed(2);
-                };
-                if (row.uname=='null'||row.uname=='unknown'){
-                    name='无';
-                }else {
-                    name=row.uname;
-                };
-                var m=row.activeness;
-                var huoyue=m.toFixed(2);
-                // if (row.sensitive=='null'||row.sensitive=='unknown'){
-                //     mingan='无';
-                // }else {
-                //     var m=row.sensitive;
-                //     mingan=m.toFixed(2);
-                // };
-                if (row.user_tag=='null'||row.sensitive=='unknown'){
-                    tag='无';
-                }else {
-                    tag=row.user_tag;
-                };
                 if (value=='uname'){
-                    $(".conright .crt2rg").append(
+                    var influe,name,huoyue,mingan,tag;
+                    if (row.importance=='null'){
+                        influe='无';
+                    }else {
+                        var n=row.importance;
+                        influe=n.toFixed(2);
+                    };
+                    if (row.uname=='null'||row.uname=='unknown'){
+                        name='无';
+                    }else {
+                        name=row.uname;
+                    };
+                    var m=row.activeness;
+                    var huoyue=m.toFixed(2);
+                    // if (row.sensitive=='null'||row.sensitive=='unknown'){
+                    //     mingan='无';
+                    // }else {
+                    //     var m=row.sensitive;
+                    //     mingan=m.toFixed(2);
+                    // };
+                    if (row.user_tag=='null'||row.sensitive=='unknown'){
+                        tag='无';
+                    }else {
+                        tag=row.user_tag;
+                    };
+                    $(".conright .crt3 .crt2rg").append(
                         '<div class="play">'+
                         '<div class="play1">'+
                         '<div class="p11">'+
@@ -210,14 +226,11 @@ function jiedianbianji() {
                         '</div>'+
                         '</div>'
                     );
-                    $(".conright .crt2rg").show(100);
-                    $(".conright .jump").show(100);
-                }
+                    $(".conright .crt3").css({display:'inline-block',});
+                };
             }
-        }
-    );
+        });
     };
-
     var place=new place();
     function nums(node_type,uid) {
         var url = '/construction/fuzzy_query/?node_type='+node_type+'&uid='+uid;
@@ -227,6 +240,86 @@ function jiedianbianji() {
         var uid=$("#container .conright .crt1 .crt122 .uidcc").val();
         nums(node_type,uid);
     });
+
+    var lingyu,huoyuedi;
+    function lingyu(value) {
+        lingyu=value;
+    };
+    function huoyuedi(value) {
+        huoyuedi=value;
+    };
+    function suregai() {
+        var name=$("#join7 .sjmc").val();
+        var fans=$("#join7 .fss").val();
+        var influ=$("#join7 .fssj").val();
+        var hyd=$("#join7 .hyd").val();
+        var mgd=$("#join7 .mgd").val();
+        var lingyu=lingyu;
+        var zhucedi=$("#join7 .zcd").val();
+        var huoyuedi=huoyuedi;
+        var job = {
+            "uname":name,"fansnum":fans, "influence":influ, "activeness":hyd,
+            "domain":lingyu,"location":zhucedi,"activeness_geo":huoyuedi,
+        };
+        function boba() {
+            //this.ajax_method='GET'; // body...
+        }
+        boba.prototype= {
+            call_request:function(url,callback) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    async: true,
+                    success:callback
+                });
+            },
+        };
+        function maton(data) {
+            var data=eval(data);
+            if (data==0){
+                $('#fail').modal("show");
+            }else {
+                $('#succ').modal("show");
+            };
+        };
+        var boba=new boba();
+        function nums2() {
+            var url = '/construction/update_node/?node_type='+node_type+'&uid='+uids+'&attribute_dict='+job;
+            boba.call_request(url,maton);
+        }
+        nums2();
+    };
+    function delt() {
+        function bmw() {
+            //this.ajax_method='GET'; // body...
+        }
+        bmw.prototype= {
+            call_request:function(url,callback) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    async: true,
+                    success:callback
+                });
+            },
+        };
+        function dte(data) {
+            var data=eval(data);
+            if (data==0){
+                $('#fail2').modal("show");
+            }else {
+                $('#succ2').modal("show");
+            };
+        }
+        var bmw=new bmw();
+        function nums3() {
+            var url = '/construction/delete_node/?node_type='+node_type+'&uid='+uids;
+            bmw.call_request(url,dte);
+        }
+        nums3();
+    }
 
 };
 jiedianbianji();

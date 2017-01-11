@@ -1,7 +1,7 @@
 # -*-coding:utf-8-*-
 from flask import Blueprint, url_for, render_template, request, abort, flash, session, redirect
 from neo4j_event import select_rels_all, select_rels, create_person, create_rel_from_uid2group, create_node_or_node_rel, \
-    update_node, update_node_or_node_rel, delete_rel, delete_node
+    update_node, update_node_or_node_rel, delete_rel, delete_node,nodes_rels
 from knowledge.global_config import *
 import json
 import csv
@@ -9,7 +9,7 @@ import os
 import time
 from datetime import date
 from datetime import datetime
-from  draw_redis import *
+from draw_redis import *
 
 # from knowledge.global_utils import event_name_search
 
@@ -277,5 +277,5 @@ def node_or_node_update():
 @mod.route('/nodes_or_nodes_rel/')
 def nodes_create_rels():
     list = request.args.get('list', '')
-    result = nodes_create_rels(list)
-    return result
+    result = nodes_rels(list)
+    return json.dumps(result)

@@ -36,6 +36,28 @@ def get_es_node():
                        body=query_search)['hits']['hits']
     return result
 
+def get_es_status(index_name):
+    query_search = {
+        "query": {
+            "bool": {
+                "must": [
+                    {
+                        "match_all": {}
+                    }
+                ],
+                "must_not": [],
+                "should": []
+            }
+        },
+        "from": 0,
+        "size": 3,
+        "sort": [],
+        "aggs": {}
+    }
+    print "ss"
+    result = es.search(index=index_name, doc_type="text",
+                       body=query_search)['hits']['hits']
+    return result
 
 # 返回需要的查询结果
 def select_rels_all(c_string):

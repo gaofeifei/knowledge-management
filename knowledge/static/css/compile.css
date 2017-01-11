@@ -97,7 +97,7 @@ a,a:link,a:hover,a:visited,a:active {
     text-align: center;
     width: 133px;
 }
-#container .conright .crt2 .crt2rg .play {
+#container .conright .crt3 .crt2rg .play {
     width: 240px;
     padding: 5px;
     height: 160px;
@@ -110,41 +110,41 @@ a,a:link,a:hover,a:visited,a:active {
     display: inline-block;
     transition: all 0.8s linear;
 }
-#container .conright .crt2 .crt2rg .play .play1 {
+#container .conright .crt3 .crt2rg .play .play1 {
     width: 170px;
     margin-top: 5px;
     display: inline-block;
 }
-#container .conright .crt2 .crt2rg .play1 .p11 span,#container .conright .crt2 .crt2rg .play1 .p11 img,
-#container .conright .crt2 .crt2rg .play1 .p22 span,#container .conright .crt2 .crt2rg .play1 .p22 img,
-#container .conright .crt2 .crt2rg .play1 .p11,#container .conright .crt2 .crt2rg .play1 .p22 {
+#container .conright .crt3 .crt2rg .play1 .p11 span,#container .conright .crt3 .crt2rg .play1 .p11 img,
+#container .conright .crt3 .crt2rg .play1 .p22 span,#container .conright .crt3 .crt2rg .play1 .p22 img,
+#container .conright .crt3 .crt2rg .play1 .p11,#container .conright .crt3 .crt2rg .play1 .p22 {
     display: inline-block;
 }
-#container .conright .crt2 .crt2rg .play .play2 {
+#container .conright .crt3 .crt2rg .play .play2 {
     width: 50px;
     height: 55px;
     display: inline-block;
     margin-top: -20px;
 }
-#container .conright .crt2 .crt2rg .play .play23 a {
+#container .conright .crt3 .crt2rg .play .play23 a {
     display: block;
     margin-top: 5px;
     color: #000;
     font-weight: bold;
     font-size: 10px;
 }
-#container .conright .crt2 .crt2rg .play .play23 a span {
+#container .conright .crt3 .crt2rg .play .play23 a span {
     font-weight: 100;
     padding-left: 20px;
 }
-#container .conright .crt2 .crt2rg .play .play3 .bus1,#container .conright .crt2 .crt2rg .play .play4 .geren {
+#container .conright .crt3 .crt2rg .play .play3 .bus1,#container .conright .crt3 .crt2rg .play .play4 .geren {
     font-size: 10px;
     font-weight: bold;
     display: inline-block;
     padding-top: 2px;
     color: #000;
 }
-#container .conright .crt2 .crt2rg .play .play3 .bus2 {
+#container .conright .crt3 .crt2rg .play .play3 .bus2 {
     color: #000;
     display: inline-block;
     margin-left: 5px;
@@ -153,12 +153,12 @@ a,a:link,a:hover,a:visited,a:active {
     border-radius: 5px;
     font-size: 8px;
 }
-#container .conright .crt2 .crt2rg .play .play4 .shuoming {
+#container .conright .crt3 .crt2rg .play .play4 .shuoming {
     margin-top: 10px;
     font-size: 12px;
     color: rgba(42, 42, 42, 0.62);
 }
-#container .conright .crt2 .crt2rg .play .play5 {
+#container .conright .crt3 .crt2rg .play .play5 {
     position: relative;
     top:15px;
     left: -5px;
@@ -167,7 +167,7 @@ a,a:link,a:hover,a:visited,a:active {
     height: 40px;
     transition: all 0.3s linear;
 }
-#container .conright .crt2 .crt2rg .play .play5 a {
+#container .conright .crt3 .crt2rg .play .play5 a {
     display: block;
     width: 100%;
     height: 40px;

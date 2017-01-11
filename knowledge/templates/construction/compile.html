@@ -32,11 +32,14 @@
             </div>
             <button class="crt133">确&nbsp;&nbsp;&nbsp;&nbsp;定</button>
         </div>
-        <div class="crt2" style="width:400px;">
+        <div class="crt2" style="width:400px;display:inline-block;">
             <div class="crt2lf" id='crt2lf'>
                 
             </div>
-            <p class='jump' style='float:left;font-size:12px;margin: 5px 0px 0 50px;display:none;'>
+            
+        </div>
+        <div class="crt3" style='display:none;position:relative;top:60px;'>
+            <p class='jump' style='float:left;font-size:12px;margin: 5px 0px 0 50px;'>
                     <!-- <label class="radio-inline">
                         <input type="radio" name="ioja" value="option1"> 1跳
                     </label>
@@ -48,100 +51,70 @@
                     </label> -->
                     <button class="add22" type="button" data-toggle="modal">添加</button>
             </p> 
-            <div class="crt2rg" style="float: left;margin: 40px 0 0 -70px;display:none;">
+            <div class="crt2rg" style="float: left;margin: 40px 0 0 -70px;">
                 
             </div>
-        </div>
+        </div>  
     </div>
     <div class="conright2" style="display: none">
         <div class="editor">
             <div class="checkbox editor1">
                 <label>
-                    <input type="checkbox"> 输入节点1
+                    <input type="checkbox" id='node1'/> 输入节点1
                 </label>
             </div>
             <input type="text" class="editor111" style="width: 230px;padding: 5px;font-size: 12px"/>
             <div class="checkbox editor2" style="margin-left: 50px">
                 <label>
-                    <input type="checkbox"> 输入节点2
+                    <input type="checkbox" id='node2'/> 输入节点2
                 </label>
             </div>
             <input type="text" class="editor222" style="width: 230px;padding: 5px;font-size: 12px"/>
             <button class="editor3">确定</button>
         </div>
         <div class="listcell">
-            <div class="lcleft" style="display:none;">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>序号</th>
-                            <th>节点1</th>
-                            <th>节点2</th>
-                            <th>关系</th>
-                            <th>编辑</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>潘强</td>
-                            <td>徐丽萍</td>
-                            <td>朋友</td>
-                            <td><a class='xiugai'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class='delt' data-toggle="modal">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>潘强</td>
-                            <td>徐丽萍</td>
-                            <td>朋友</td>
-                            <td><a class='xiugai'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class='delt' data-toggle="modal">删除</a></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>潘强</td>
-                            <td>徐丽萍</td>
-                            <td>朋友</td>
-                            <td><a class='xiugai'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class='delt' data-toggle="modal">删除</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="lcleft" id='lcleft' style="display:none;">
+                
             </div>
             <div class="lcright" style='display:none;'>
                 <p class="lcr1">
-                    <span class="lcrone">潘强</span>
+                    <span class="lcrone"></span>
                     <span class="icon icon-paperclip"></span>
-                    <span class="lcrtwo">徐丽萍</span>
+                    <span class="lcrtwo"></span>
                 </p>
                 <div class="checkbox lcr2">
                     <p class="chosion">
                         选择关系
                     </p>
+                    <!-- 人与事关系 -->
                     <label>
-                        <input type="checkbox" value="option1">  关系1
+                        <input type="checkbox" value="option1">  参与讨论
                     </label>
                     <label>
-                        <input type="checkbox" value="option1">  关系1
+                        <input type="checkbox" value="option1">  趋势推动
                     </label>
                     <label>
-                        <input type="checkbox" value="option1">  关系1
+                        <input type="checkbox" value="option1">  趋势制造
                     </label>
                     <label>
-                        <input type="checkbox" value="option1">  关系1
+                        <input type="checkbox" value="option1">  其他关系
+                    </label>
+                    <!-- 事与事关系 -->
+                    <label>
+                        <input type="checkbox" value="option1">  主题关联
                     </label>
                     <label>
-                        <input type="checkbox" value="option1">  关系1
+                        <input type="checkbox" value="option1">  其他关系
+                    </label>
+                    <!-- 人与人关系 -->
+                    <label>
+                        <input type="checkbox" value="option1">  交互
                     </label>
                     <label>
-                        <input type="checkbox" value="option1">  关系1
+                        <input type="checkbox" value="option1">  亲属
                     </label>
                     <label>
-                        <input type="checkbox" value="option1">  关系1
-                    </label>
-                    <label>
-                        <input type="checkbox" value="option1">  关系1
-                    </label>
-                    <label>
-                        <input type="checkbox" value="option1">  关系1
+                        <input type="checkbox" value="option1">  业务关联
                     </label>
                     <label>
                         <input type="checkbox" value="option1">  其他
@@ -151,7 +124,6 @@
                     <div class="modal fade yes22" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog modal-sm">
                             <div class="modal-content">
-
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                     <h4 class="modal-title" id="mySmallModalLabel">提示信息</h4>
@@ -163,6 +135,64 @@
                         </div><!-- /.modal-dialog -->
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-sm" id='please' tabindex="-1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      请勾选您输入的节点。
+    </div>
+  </div>
+</div>
+<div class="modal fade bs-example-modal-sm" id='fail' tabindex="-1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      修改失败。请重新修改。
+    </div>
+  </div>
+</div>
+<div class="modal fade bs-example-modal-sm" id="succ" tabindex="-1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      修改成功。
+    </div>
+  </div>
+</div>
+<div class="modal fade bs-example-modal-sm" id='fail2' tabindex="-1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      删除失败。请重新操作。
+    </div>
+  </div>
+</div>
+<div class="modal fade bs-example-modal-sm" id="succ2" tabindex="-1">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      删除成功。
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="join55" tabindex="-2">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">删除提示</h2>
+            </div>
+            <div class="modal-body">
+                <p>您确定删除吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick='detrel()'>
+                    确定
+                </button>
             </div>
         </div>
     </div>
@@ -183,7 +213,7 @@
                 <button type="button" class="btn btn-info" data-dismiss="modal">
                     关闭
                 </button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick='delt()'>
                     确定
                 </button>
             </div>
@@ -290,37 +320,36 @@
     </div>
 </div>
 <style>
-                    .main {
-                        /*height: 500px;*/
-                        padding:0 30px;
-                    }
-                    .main .topright input,.main .topright select,.main .bottom input {
-                        width: 100px;
-                        padding:2px 5px;
-                        border: 1px solid #5e5e5e;
-                        font-size: 12px;
-                        color: #5e5e5e;
-                        font-weight: 600;
-                    }
-                    .main .rgone,.main .rgtwo,.main .rgthr {
-                        margin-bottom: 12px;
-                    }
-                    .main .rgone,.main .rgtwo,.main .rgthr,.main .rgfour {
-                        margin-left: 20px;
-                    }
-                    .main .top {
-                        height: 150px;
-                        margin-top: 20px;
-                    }
-                    .main .bottom {
-                        width: 100%;
-                        margin-top: 20px;
-                    }
-                    .main .bottom input {
-                        width: 160px;
-                    }
-
-                </style>
+    .main {
+        /*height: 500px;*/
+        padding:0 30px;
+    }
+    .main .topright input,.main .topright select,.main .bottom input {
+        width: 100px;
+        padding:2px 5px;
+        border: 1px solid #5e5e5e;
+        font-size: 12px;
+        color: #5e5e5e;
+        font-weight: 600;
+    }
+    .main .rgone,.main .rgtwo,.main .rgthr {
+        margin-bottom: 12px;
+    }
+    .main .rgone,.main .rgtwo,.main .rgthr,.main .rgfour {
+        margin-left: 20px;
+    }
+    .main .top {
+        height: 150px;
+        margin-top: 20px;
+    }
+    .main .bottom {
+        width: 100%;
+        margin-top: 20px;
+    }
+    .main .bottom input {
+        width: 160px;
+    }
+</style>
 <div class="modal fade editmd" id="join7" tabindex="-3">
     <div class="modal-dialog">
         <div class=modal-content>
@@ -348,17 +377,20 @@
                             <div class="rgthr">
                                 敏感度 <input type="text" class="mgd"  style="margin:0 32px"/>
                                 领域 
-                                <select class="ly" style="margin-left:18px">
+                                <select class="ly" style="margin-left:18px" onchange='lingyu(this.value)'>
+                                    <option value="" disabled selected>请选择领域</option>
                                     <!-- <option value="商业人士">商业人士</option> -->
                                 </select>
                             </div>
                             <div class="rgfour">
                                 注册地 &nbsp;
-                                <select class="zcd" style="margin:0 24px">
+                                <input class="zcd" style="margin:0 24px"/>
+                                <!-- <select class="zcd"  onchange='zhucedi(this.value)'>  -->
                                     <!-- <option value="北京">北京</option> -->
-                                </select>
+                                <!-- </select> -->
                                 活跃地
-                                <select class="hydi" style="margin-left:12px">
+                                <select class="hydi" style="margin-left:12px" onchange='huoyuedi(this.value)'>
+                                    <option value="" disabled selected>请选择活跃地</option>
                                     <!-- <option value="北京">北京</option> -->
                                 </select>
                             </div>
@@ -413,7 +445,7 @@
                 <button type="button" class="btn btn-info" data-dismiss="modal">
                     关闭
                 </button>
-                <button type="button" class="btn btn-danger">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick='suregai(this)'>
                     确定
                 </button>
             </div>
@@ -424,12 +456,13 @@
 
 {% block my_js %}
 <script src="/static/js/compile.js"></script>
+<script src="/static/js/compile2.js"></script>
 <script src="/static/js/bootstrap-table.min.js"></script>
 <script src="/static/js/bootstrap-table-zh-CN.min.js"></script>
 <script>
     $.each($(".delt"),function(index,item){
         $(item).on('click',function(){
-            $('#join1').modal("show");
+            // $('#join1').modal("show");
             // $(item).parents('tr').hide();
         });
     })
@@ -442,15 +475,15 @@
     //         };           
     //     })
     // });
-    $("#container .conright2 .editor .editor3").on('click',function () {
-        $('.lcleft').show(20);
-    });
-    var xiu=$("#container .conright2 .listcell tr");
-    $.each(xiu,function(index,item){
-        $(item).on('click',function(){
-            $('.lcright').show(20);
-        })
-    });
+    // $("#container .conright2 .editor .editor3").on('click',function () {
+    //     $('.lcleft').show(20);
+    // });
+    // var xiu=$("#container .conright2 .listcell tr");
+    // $.each(xiu,function(index,item){
+    //     $(item).on('click',function(){
+    //         $('.lcright').show(20);
+    //     })
+    // });
     // $.each($('.xiugai'),function(index,item){
     //     $(item).on('click',function(){
     //         $('#join7').modal("show");

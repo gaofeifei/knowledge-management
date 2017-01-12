@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 2016/11/30.
  */
+var thname='电信诈骗';
 
 //事件人物点配置
 function peo() {
@@ -18,7 +19,7 @@ peo.prototype= {
     },
 };
 var peo=new peo();
-var url='/theme/theme_node_filter/';
+var url='/theme/theme_node_filter/?theme_name='+thname;
 
 function peo2() {
     //this.ajax_method='GET'; // body...
@@ -35,7 +36,7 @@ peo2.prototype= {
     },
 };
 var peo2=new peo2();
-var url2='/theme/theme_map_filter/';
+var url2='/theme/theme_map_filter/?theme_name='+thname;
 
 var join='join',pusher='pusher', maker='maker',other_rel='other_relationship',
     contain='contain',event_other='event_other',node_type;
@@ -96,9 +97,9 @@ function nums() {
     if($('#oneone').is(':checked')) { layer=1; }
     if($('#twotwo').is(':checked')) { layer=2; }
 
-    url = '/theme/theme_node_filter/?theme_name='+'电信诈骗'+'&node_type='+node_type+'&relation_type='+join+','+pusher+
+    url = '/theme/theme_node_filter/?theme_name='+thname+'&node_type='+node_type+'&relation_type='+join+','+pusher+
         ','+maker+','+other_rel+','+contain+','+event_other+'&layer='+layer;
-    url2="/theme/theme_map_filter/?theme_name="+'电信诈骗'+'&node_type='+node_type+'&relation_type='+join+','+pusher+
+    url2="/theme/theme_map_filter/?theme_name="+thname+'&node_type='+node_type+'&relation_type='+join+','+pusher+
         ','+maker+','+other_rel+','+contain+','+event_other+'&layer='+layer;
     peo.call_request(url,events);
     peo2.call_request(url2,maps);

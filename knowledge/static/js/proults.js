@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/11/30.
  */
-
+var groupname='媒体';
 //事件人物点配置
 function peo() {
     //this.ajax_method='GET'; // body...
@@ -18,7 +18,7 @@ peo.prototype= {
     },
 };
 var peo=new peo();
-var url='/group/group_node_filter/';
+var url='/group/group_node_filter/?group_name='+groupname;
 
 function peo2() {
     //this.ajax_method='GET'; // body...
@@ -35,7 +35,7 @@ peo2.prototype= {
     },
 };
 var peo2=new peo2();
-var url2='/group/group_map_filter/';
+var url2='/group/group_map_filter/?group_name='+groupname;
 
 var friend='friend',relative='relative', colleague='colleague', user_tag='user_tag',
     join='join',pusher='pusher', maker='maker',other_rel='other_relationship',
@@ -113,10 +113,10 @@ function nums() {
     if($('#zero').is(':checked')) { layer=0; }
     if($('#onecg').is(':checked')) { layer=1; }
     if($('#twocg').is(':checked')) { layer=2; }
-    url = '/group/group_node_filter/?node_type='+node_type+'&relation_type='+friend+','+relative+
+    url = '/group/group_node_filter/?group_name='+groupname+'&node_type='+node_type+'&relation_type='+friend+','+relative+
         ','+colleague+','+user_tag+','+join+','+pusher+
         ','+maker+','+other_rel+'&layer='+layer;
-    url2 = '/group/group_map_filter/?node_type='+node_type+'&relation_type='+friend+','+relative+
+    url2 = '/group/group_map_filter/?group_name='+groupname+'&node_type='+node_type+'&relation_type='+friend+','+relative+
         ','+colleague+','+user_tag+','+join+','+pusher+
         ','+maker+','+other_rel+'&layer='+layer;
     peo.call_request(url,events);
@@ -867,8 +867,7 @@ function guanlianrenwu() {
         if($('#huoyue').is(':checked')) { point='activeness'; };
         if($('#mingan').is(':checked')) { point='sensitive'; };
         var point;
-        var thname='法律人士';
-        var url = '/group/user_in_group/?group_name='+thname+'&sort_flag='+point;
+        var url = '/group/user_in_group/?group_name='+groupname+'&sort_flag='+point;
         include.call_request(url,territory);
     }
     $.each($("#container #similar .definite .defone .radio input"),function (index,item) {
@@ -1004,8 +1003,7 @@ function guanlianshijian() {
         if($('#fasheng2').is(':checked')) { point='start_ts'; };
         if($('#canyu2').is(':checked')) { point='uid_counts'; };
         if($('#redu2').is(':checked')) { point='weibo_counts'; };
-        var thname='法律人士';
-        var url = '/group/group_detail/?group_name='+thname+'&sort_flag='+point;
+        var url = '/group/group_detail/?group_name='+groupname+'&sort_flag='+point;
         include.call_request(url,territory);
     }
     $.each($("#container #people .peotwo .peotwo1 .radio input"),function (index,item) {

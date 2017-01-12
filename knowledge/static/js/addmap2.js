@@ -10,6 +10,7 @@ function things() {
     myChart.showLoading();
     $.getJSON('/construction/select_event/', function (json) {
         var json=eval(json);
+        // console.log(json)
         // var categories = [{name:'人物'},{name:'事件'}];
         var node_value=[], link_value=[];
         // link_value=[],event_value=[],

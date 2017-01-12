@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 2016/12/19.
  */
+var thname='电信诈骗';
 function zhexiantu() {
     function place() {
         //this.ajax_method='GET'; // body...
@@ -73,7 +74,7 @@ function zhexiantu() {
 
     var place=new place();
     function nums() {
-        var url = '/theme/theme_river/';
+        var url = '/theme/theme_river/?theme_name'+thname;
         place.call_request(url,territory);
     }
     nums();
@@ -217,7 +218,6 @@ function guanlianrenwu() {
         if($('#huoyue').is(':checked')) { point='activeness'; };
         if($('#mingan').is(':checked')) { point='sensitive'; }
         var point;
-        var thname='电信诈骗';
         var url = '/theme/user_in_theme/?theme_name='+thname+'&sort_flag='+point;
         place.call_request(url,territory);
     }
@@ -354,7 +354,6 @@ function baohanshijian() {
         if($('#fasheng').is(':checked')) { point='start_ts'; };
         if($('#canyu').is(':checked')) { point='uid_counts'; };
         if($('#redu').is(':checked')) { point='weibo_counts'; };
-        var thname='电信诈骗';
         var url = '/theme/theme_detail/?theme_name='+thname+'&sort_flag='+point;
         include.call_request(url,territory);
     }

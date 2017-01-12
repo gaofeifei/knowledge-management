@@ -2,6 +2,7 @@
  * Created by Administrator on 2016/12/2.
  */
 //事件人物点配置
+var themename='马来西亚抓获电信欺诈案犯';
 function peo() {
     //this.ajax_method='GET'; // body...
 }
@@ -17,7 +18,7 @@ peo.prototype= {
     },
 };
 var peo=new peo();
-var url='/group/group_node_filter/';
+var url='/index/event_node_filter/';
 
 function peo2() {
     //this.ajax_method='GET'; // body...
@@ -34,7 +35,7 @@ peo2.prototype= {
     },
 };
 var peo2=new peo2();
-var url2='/group/group_map_filter/';
+var url2='/index/event_map_filter/';
 
 var friend='friend',relative='relative', colleague='colleague', user_tag='user_tag',
     join='join',pusher='pusher', maker='maker',other_rel='other_relationship',
@@ -112,10 +113,10 @@ function nums() {
     if($('#zero').is(':checked')) { layer=0; }
     if($('#onecg').is(':checked')) { layer=1; }
     if($('#twocg').is(':checked')) { layer=2; }
-    url = '/group/group_node_filter/?node_type='+node_type+'&relation_type='+friend+','+relative+
+    url = '/index/event_node_filter/?event_name='+themename+'&node_type='+node_type+'&relation_type='+friend+','+relative+
         ','+colleague+','+user_tag+','+join+','+pusher+
         ','+maker+','+other_rel+'&layer='+layer;
-    url2 = '/group/group_map_filter/?node_type='+node_type+'&relation_type='+friend+','+relative+
+    url2 = '/index/event_map_filter/?event_name='+themename+'&node_type='+node_type+'&relation_type='+friend+','+relative+
         ','+colleague+','+user_tag+','+join+','+pusher+
         ','+maker+','+other_rel+'&layer='+layer;
     peo.call_request(url,events);
@@ -132,6 +133,7 @@ function events() {
     myChart.showLoading();
     $.getJSON(url, function (json) {
         var json=eval(json);
+        console.log(json);
         // var categories = [{name:'人物'},{name:'事件'}];
         var node_value=[],link_value=[];
         // ,event_value=[];
@@ -173,7 +175,7 @@ function events() {
                     x: num3,
                     y: num4,
                     id: key2,
-                    name:name2,
+                    name:key2,
                     symbolSize: 14,
                     itemStyle: {
                         normal: {
@@ -266,7 +268,6 @@ function events() {
     });
 }
 events();
-
 
 //地图配置，地址请求
 function ditu() {

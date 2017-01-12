@@ -20,6 +20,17 @@
     #container .associat .assright .assright2 .play .play5 {
         top: 15px;
     }
+    span.dian {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #777;
+        margin-left: 40px;
+    }
+    .checkbox,.radio {
+        margin: 5px 0;
+    }
 </style>
 {% endblock %}
 
@@ -27,32 +38,32 @@
     <div id="container">
         <div class="keyman">
             <div class="kmlf" style="margin-top: 20px">
-                <img class="kmimg" src="/static/image/pan.jpg" alt=""/>
+                <img class="kmimg" src="" alt=""/>
             </div>
             <div class="kmrg">
                 <div class="kmrg1">
                     <div class="rgname">
-                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 38px;margin-left: 15px;">潘强</span>
-                        <img src="/static/image/fensishu.png" alt="" style="margin-left: 30px">
-                        <span class="difang" style="font-size: 8px">6720</span>
-                        <img src="/static/image/influence.png" alt="" style="margin-left: 10px">
-                        <span class="influence">3083</span>
-                        <img src="/static/image/huoyuedu.png" alt="" style="margin-left: 10px">
-                        <span class="huoyuedu">254</span>
-                        <img src="/static/image/mingan.png" alt="" style="margin-left: 10px">
-                        <span class="mingan">80</span>
+                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 38px;margin-left: 15px;"></span>
+                        <img src="/static/image/fensishu.png" title="粉丝数" style="margin-left: 30px">
+                        <span class="difang" style="font-size: 8px"></span>
+                        <img src="/static/image/influence.png" title="影响力" style="margin-left: 10px">
+                        <span class="influence"></span>
+                        <img src="/static/image/huoyuedu.png" title="活跃度" style="margin-left: 10px">
+                        <span class="huoyuedu"></span>
+                        <img src="/static/image/mingan.png" title="敏感度" style="margin-left: 10px">
+                        <span class="mingan"></span>
                     </div>
                 </div>
                 <div class="kmrg2" style="margin-left: 15px;">
-                    <p>注册地:  <span class="zhuce">北京</span></p>
-                    <p>活跃地： <span class="huoyue">北京</span></p>
-                    <p>认证类型:  <span class="renzheng">律师</span></p>
-                    <p>领域： <span class="lingyu">法律人士</span></p>
-                    <p>业务标签：<span class="yewu">律师</span><span class="yewu">律师</span></p>
-                    <p>个人描述：<span class="miaoshu">你读过《三体》了吗？在国外都火了！[给力]】《三体》英文版在不到3个月里引起了西方社会/static/static/static</span></p>
+                    <p>注册地:  <span class="zhuce"></span></p>
+                    <p>活跃地： <span class="huoyue"></span></p>
+                    <p>认证类型:  <span class="renzheng"></span></p>
+                    <p>领域： <span class="lingyu"></span></p>
+                    <p>业务标签：<span class="yewu"></span></p>
+                    <p>个人描述：<span class="miaoshu"></span></p>
                     <p class="rgcreat">
-                        节点创建时间：  <span class="date">2016-09-09</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                        创建人：  <span class="peson">admin</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        节点创建时间：  <span class="date"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        创建人：  <span class="peson"></span>&nbsp;&nbsp;&nbsp;&nbsp;
                         <span class="icon icon-pencil edit" data-toggle="modal" style="cursor: pointer">编辑</span>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <span class="history" data-toggle="modal" style="cursor: pointer">修改历史</span>
@@ -101,58 +112,84 @@
                     <div class="midmid">
                         <p class="pane">交互面板</p>
                         <div class="condition">
-                            <!--111-->
-                            <span class="cdt1" style="display: block;margin: 20px 0 0 20px;color: #777;font-size: 14px">节点筛选</span>
-                            <div class="cdt2">
-                                <div class="checkbox">
-                                    <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                        <input class="per" type="checkbox"/> 人物
-                                    </label>
-                                    <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                        <input class="per" type="checkbox"/> 事件
-                                    </label>
-                                </div>
+                        <!--111-->
+                        <span class="cdt1" style="display: block;margin: 5px 0 0 20px;color: #777;font-size: 14px">节点筛选</span>
+                        <div class="cdt2">
+                            <div class="checkbox">
+                                <label style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                    <input id='user' class="per" type="checkbox" checked/> 人物
+                                </label>
+                                <label style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                    <input id="event" class="per" type="checkbox"/> 事件
+                                </label>
                             </div>
-                            <!--222-->
-                            <span class="cdt3" style="display: block;margin: 20px 0 0 20px;color: #777;font-size: 14px">关系筛选</span>
-                            <div class="cdt4">
-                                <div class="checkbox">
-                                    <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                        <input class="per" type="checkbox"/> 好友关系
-                                    </label>
-                                    <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                        <input class="per" type="checkbox"/> 同事关系
-                                    </label>
-                                    <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                        <input class="per" type="checkbox"/> 亲属关系
-                                    </label>
-                                    <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                        <input class="per" type="checkbox"/> 上下级关系
-                                    </label>
-                                    <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                        <input class="per" type="checkbox"/> 其他
-                                    </label>
-                                </div>
-                            </div>
-                            <!--333-->
-                            <span class="cdt3" style="display: block;margin: 20px 0 0 20px;color: #777;font-size: 14px">节点扩展</span>
-                            <div class="cdt4">
-                                <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-                                        扩展一层
-                                    </label>
-                                </div>
-                                <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                        扩展二层
-                                    </label>
-                                </div>
-                            </div>
-                            <!--444-->
-                            <button class="cdt5">确定</button>
                         </div>
+                        <!--222-->
+                        <span class="cdt3" style="display: block;margin: 5px 0 0 20px;color: #777;font-size: 14px">关系筛选</span>
+                        <div class="cdt4">
+                            <div class="checkbox" style=''>
+                                <span class="dian"></span>
+                                <span style='display:inline-block;margin: 5px 0 0 0px;color: #777;font-size: 12px;'>
+                                    人物 - 事件关系
+                                </span>
+                                <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                    <input id='join' class="join" type="checkbox" checked/> 参与讨论
+                                </label>
+                                <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                    <input id='pusher' class="pusher" type="checkbox" checked/> 趋势推动
+                                </label>
+                                <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                    <input id='make' class="make" type="checkbox" checked/> 趋势制造
+                                </label>
+                                <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                    <input id='other' class="other" type="checkbox" checked/> 其他关系
+                                </label>
+                            </div>
+                            <div class="checkbox" class='evnt' style=''>
+                                <span class="dian"></span>
+                                <span style='display: inline-block;margin: 5px 0 0 0px;color: #777;font-size: 12px;'>
+                                    人物 - 人物关系
+                                </span>
+                                <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                    <input id='friend' class="emain" type="checkbox" checked/> 交互
+                                </label>
+                                <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                    <input id='relative' class="evother" type="checkbox" checked/> 亲属
+                                </label>
+                                <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                    <input id='colleague' class="emain" type="checkbox" checked/> 业务关联
+                                </label>
+                                <label style="display: block;margin-top:5px;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                    <input id='user_tag' class="evother" type="checkbox" checked/> 其他
+                                </label>
+                            </div>
+                        </div>
+                        <!--333-->
+                        <span class="cdt3" style="display: block;margin: 5px 0 0 20px;color: #777;font-size: 14px">节点扩展</span>
+                        <div class="cdt4" style=''>
+                            <div class="radio" style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                <label>
+                                    <input type="radio" name="yier" id="zero" value="option1"
+                                    checked>
+                                    不扩展
+                                </label>
+                            </div>
+                            <div class="radio" style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                <label>
+                                    <input type="radio" name="yier" id="onecg" value="option1">
+                                    扩展一层
+                                </label>
+                            </div>
+                            <div class="radio" style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
+                                <label>
+                                    <input type="radio" name="yier" id="twocg" value="option2">
+                                    扩展二层
+                                </label>
+                            </div>
+                        </div>
+                        <!--444-->
+                        <button class="cdt5" style='margin-top:2px;'>确定</button>
+                    </div>
                     </div>
                     <div class="midright" style="margin-right: 0">
                         <div id="placeimg">
@@ -169,52 +206,18 @@
                     <div class="often">
                         <p style="font-size: 14px;font-weight: 700;color: #333">频繁交互</p>
                         <div class="oftenimg" style="margin:20px 0 20px 40px">
-                            <dl style="width: 55px;margin-right: 15px;display: inline-block">
+                            <!-- <dl style="width: 55px;margin-right: 15px;display: inline-block">
                                 <dt><img src="/static/image/pangzi.png" alt=""></dt>
                                 <dd style="text-align: center;font-size: 8px;margin-top: 5px">被转发</dd>
-                            </dl>
-                            <dl style="width: 55px;margin-right: 15px;display: inline-block">
-                                <dt><img src="/static/image/songzhenning.jpg" alt=""></dt>
-                                <dd style="text-align: center;font-size: 8px;margin-top: 5px">转发</dd>
-                            </dl>
-                            <dl style="width: 55px;margin-right: 15px;display: inline-block">
-                                <dt><img src="/static/image/pangzi.png" alt=""></dt>
-                                <dd style="text-align: center;font-size: 8px;margin-top: 5px">评论</dd>
-                            </dl>
-                            <dl style="width: 55px;margin-right: 15px;display: inline-block">
-                                <dt><img src="/static/image/songzhenning.jpg" alt=""></dt>
-                                <dd style="text-align: center;font-size: 8px;margin-top: 5px">被转发</dd>
-                            </dl>
-                            <dl style="width: 55px;margin-right: 15px;display: inline-block">
-                                <dt><img src="/static/image/pangzi.png" alt=""></dt>
-                                <dd style="text-align: center;font-size: 8px;margin-top: 5px">被转发</dd>
-                            </dl>
+                            </dl> -->
+                        
                         </div>
                     </div>
-                    <hr style="border-style: dashed;border-color: #333333"/>
+                    <!-- <hr style="border-style: dashed;border-color: #333333"/> -->
                     <div class="social">
                         <p style="font-size: 14px;font-weight: 700;color: #333">社会关系</p>
                         <div class="oftenimg" style="margin:20px 0 20px 40px">
-                            <dl style="width: 55px;margin-right: 15px;display: inline-block">
-                                <dt><img src="/static/image/ao.jpg" alt=""></dt>
-                                <dd style="text-align: center;font-size: 8px;margin-top: 5px">亲属</dd>
-                            </dl>
-                            <dl style="width: 55px;margin-right: 15px;display: inline-block">
-                                <dt><img src="/static/image/lo.jpg" alt=""></dt>
-                                <dd style="text-align: center;font-size: 8px;margin-top: 5px">朋友</dd>
-                            </dl>
-                            <dl style="width: 55px;margin-right: 15px;display: inline-block">
-                                <dt><img src="/static/image/pangzi.png" alt=""></dt>
-                                <dd style="text-align: center;font-size: 8px;margin-top: 5px">同事</dd>
-                            </dl>
-                            <dl style="width: 55px;margin-right: 15px;display: inline-block">
-                                <dt><img src="/static/image/ao.jpg" alt=""></dt>
-                                <dd style="text-align: center;font-size: 8px;margin-top: 5px">亲属</dd>
-                            </dl>
-                            <dl style="width: 55px;margin-right: 15px;display: inline-block">
-                                <dt><img src="/static/image/lo.jpg" alt=""></dt>
-                                <dd style="text-align: center;font-size: 8px;margin-top: 5px">朋友</dd>
-                            </dl>
+                            
                         </div>
                     </div>
                 </div>
@@ -238,300 +241,11 @@
             <div class="assright2" style='padding:10px 0 10px 10px;'>
                 <img src="/static/image/left.png" alt="" class="left" style='margin-right:5px;'>
                 <div id="case" style="float:left;width:490px;overflow: hidden;">
-                                <div id='crmid' style='width:1000px;transition: all 0.5s linear;'>
-                                    <div id="run" style="width: 490px;display:inline-block;">
-                                        <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div>
-                                        </div>
-                                        <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div>
-                                        </div>
-                                        <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div>
-                                        </div>
-                                        <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div>
-                                        </div>
-                                    </div>
-                                    <div id="run2" style="width: 490px;display:inline-block;margin-left:6px;">
-                                        <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div>
-                                        </div>
-                                        <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div>
-                                        </div>
-                                        <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div>
-                                        </div>
-                                        <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div id='crmid' style='width:2000px;transition: all 0.5s linear;'>
+                        <div id="run" style="display:inline-block;">
+                            
+                        </div>
+                    </div>
                 </div>
                 <img src="/static/image/right.png" alt="" class="right">
             </div>
@@ -545,178 +259,27 @@
                     <p class="lftwo">敏感微博</p>
                 </div>
                 <div class="twright">
-                    <div class="twr1" style="background-color: rgb(238, 238, 238);">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1" style="background-color: rgb(238, 238, 238);">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1" style="background-color: rgb(238, 238, 238);">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
+                    <div id="group_emotion_loading" style="display:block;text-align:center;">
+                        正在加载，请稍后...
                 </div>
-                <div class="twright2" style="display: none;">
-                    <div class="twr1" style="background-color: rgb(238, 238, 238);">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                                美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                                没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
+                <div id="influeweibo" style="overflow-x: auto; overflow-y: auto;height:320px;">
+                    <table id="input-table" class="In-table">
+                        <tbody class="In-table">
+                        </tbody>
+                    </table>
+                </div>
+                <div class='fanye' style="width:100%;text-align:center;">
+                      <span style="display:inline-block;">每页显示<input type="text" id="PageNo" size="3" value="3" style='text-align:center;border:1px solid #ccc;'/>组</span>
+                      <div id="div-button" style="display:inline-block;margin-left:5px;">
+                          <input type="button" value="首页" id="F-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                          <input type="button" value="上一页" id="Pre-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                          <input type="button" value="下一页" id="Nex-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                          <input type="button" value="尾页" id="L-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
                     </div>
-                    <div class="twr1">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                                美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                                没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1" style="background-color: rgb(238, 238, 238);">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                                美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                                没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                                美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                                没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
-                    <div class="twr1" style="background-color: rgb(238, 238, 238);">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                                美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                                没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                            </span>
-                        </p>
-                        <p class="time">
-                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                            <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                            <span class="time5">评论数（56）</span>|&nbsp;
-                            <span class="time6">言论敏感度（87）</span>
-                        </p>
-                    </div>
+
+                    <span style="display:inline-block;">&nbsp;当前第<span id="s2"></span>页</span>
+                    <span style="display:inline-block;">总共<span id="s1"></span>页</span>
+                
                 </div>
             </div>
         </div>
@@ -795,139 +358,140 @@
     </div>
 </div>
 <style>
-                    .main {
-                        /*height: 500px;*/
-                        padding:0 30px;
-                    }
-                    .main .topright input,.main .topright select,.main .bottom input {
-                        width: 100px;
-                        padding:2px 5px;
-                        border: 1px solid #5e5e5e;
-                        font-size: 12px;
-                        color: #5e5e5e;
-                        font-weight: 600;
-                    }
-                    .main .rgone,.main .rgtwo,.main .rgthr {
-                        margin-bottom: 12px;
-                    }
-                    .main .rgone,.main .rgtwo,.main .rgthr,.main .rgfour {
-                        margin-left: 20px;
-                    }
-                    .main .top {
-                        height: 150px;
-                        margin-top: 20px;
-                    }
-                    .main .bottom {
-                        width: 100%;
-                        margin-top: 20px;
-                    }
-                    .main .bottom input {
-                        width: 160px;
-                    }
+    .main {
+        /*height: 500px;*/
+        padding:0 30px;
+    }
+    .main .topright input,.main .topright select,.main .bottom input {
+        width: 100px;
+        padding:2px 5px;
+        border: 1px solid #5e5e5e;
+        font-size: 12px;
+        color: #5e5e5e;
+        font-weight: 600;
+    }
+    .main .rgone,.main .rgtwo,.main .rgthr {
+        margin-bottom: 12px;
+    }
+    .main .rgone,.main .rgtwo,.main .rgthr,.main .rgfour {
+        margin-left: 20px;
+    }
+    .main .top {
+        height: 150px;
+        margin-top: 20px;
+    }
+    .main .bottom {
+        width: 100%;
+        margin-top: 20px;
+    }
+    .main .bottom input {
+        width: 160px;
+    }
 
-                </style>
+</style>
 <div class="modal fade editmd" id="join" tabindex="-3">
-                    <div class="modal-dialog">
-                        <div class=modal-content>
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                                <h2 class="modal-title">编辑群体</h2>
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">编辑群体</h2>
+            </div>
+            <div class="modal-body">
+                <div class="main">
+                    <div class="top">
+                        <div class="topleft" style="float: left">
+                            <img src="/static/image/pan.jpg" alt="" width="110" height="140"/>             
+                        </div>
+                        <div class="topright" style="float: left;margin-top: 6px">
+                            <div class="rgone">
+                            人物名称 <input type="text" class="sjmc" value="潘强" style="margin:0 20px"/>
+                            粉丝数 <input type="text" class="fss"  style="margin-left:15px"/>
                             </div>
-                            <div class="modal-body">
-                                <div class="main">
-                                    <div class="top">
-                                        <div class="topleft" style="float: left">
-                                            <img src="/static/image/pan.jpg" alt="" width="110" height="140"/>             
-                                        </div>
-                                        <div class="topright" style="float: left;margin-top: 6px">
-                                            <div class="rgone">
-                                            人物名称 <input type="text" class="sjmc" value="潘强" style="margin:0 20px"/>
-                                            粉丝数 <input type="text" class="fss"  style="margin-left:15px"/>
-                                            </div>
-                                            <div class="rgtwo">
-                                                影响力 &nbsp;&nbsp;&nbsp;<input type="text" class="fssj" style="margin:0 20px"/>
-                                                活跃度&nbsp;<input type="text" class="hyd"  style="margin-left:16px"/>
-                                            </div>
-                                            <div class="rgthr">
-                                                敏感度 <input type="text" class="mgd"  style="margin:0 32px"/>
-                                                领域 
-                                                <select name="" style="margin-left:18px">
-                                                    <option value="商业人士">商业人士</option>
-                                                </select>
-                                            </div>
-                                            <div class="rgfour">
-                                                注册地 &nbsp;
-                                                <select name="" style="margin:0 24px">
-                                                    <option value="北京">北京</option>
-                                                </select>
-                                                活跃地
-                                                <select name="" style="margin-left:12px">
-                                                    <option value="北京">北京</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="bottom">
-                                        
-                                        <div class="bottwo" style="margin-bottom: 10px">
-                                            业务标签&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span style="padding: 2px;background-color: #0099FF;color: #ffffff;border-radius:5px;font-weight: 600">企业家 <b class="icon icon-remove det"></b></span>
-                                        </div>
-                                        <div class="botthr" style="margin-bottom: 10px">
-                                            个人描述&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <input type="text" class="miaoshu">
-                                        </div>
-                                        <div class="botfour" style="margin-bottom: 10px">
-                                            <span>相关媒体</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <div class="meiti" style="display: inline-block">
-                                                <span style="padding: 2px;background-color: #0099FF;color: #ffffff;
-                                                    border-radius:5px;font-weight: 600">百度百科 
-                                                    <b class="icon icon-remove det"></b>
-                                                </span>
-                                            </div>
-                                            <span style='float:right;'>
-                                                <b class="icon icon-plus zeng1"></b>
-                                            </span> 
-                                            <div class="mingcheng" style="margin-top: 10px">
-                                                媒体名称 &nbsp;&nbsp;&nbsp;&nbsp;<input type="text"/>
-                                                url &nbsp;&nbsp;&nbsp;&nbsp;<input type="text">
-                                            </div>
-                                        </div>
-                                        <div class="botfive" style="margin-bottom: 10px">
-                                            <span>业务描述</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <div class="meiti" style="display: inline-block">
-                                                <span style="padding: 2px;background-color: #0099FF;color: #ffffff;
-                                                        border-radius:5px;font-weight: 600">业务文档1
-                                                    <b class="icon icon-remove det"></b>
-                                                </span>
-                                            </div>
-                                            <span style='float:right;'>
-                                                <b class="icon icon-plus zeng2"></b>
-                                            </span> 
-                                            <div class="mingcheng" style="margin-top: 10px">
-                                                业务名称&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"/>
-                                                url &nbsp;&nbsp;&nbsp;&nbsp;<input type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="rgtwo">
+                                影响力 &nbsp;&nbsp;&nbsp;<input type="text" class="fssj" style="margin:0 20px"/>
+                                活跃度&nbsp;<input type="text" class="hyd"  style="margin-left:16px"/>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-info" data-dismiss="modal">
-                                    关闭
-                                </button>
-                                <button type="button" class="btn btn-danger">
-                                    确定
-                                </button>
+                            <div class="rgthr">
+                                敏感度 <input type="text" class="mgd"  style="margin:0 32px"/>
+                                领域 
+                                <select name="" style="margin-left:18px">
+                                    <option value="商业人士">商业人士</option>
+                                </select>
+                            </div>
+                            <div class="rgfour">
+                                注册地 &nbsp;
+                                <select name="" style="margin:0 24px">
+                                    <option value="北京">北京</option>
+                                </select>
+                                活跃地
+                                <select name="" style="margin-left:12px">
+                                    <option value="北京">北京</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        
+                        <div class="bottwo" style="margin-bottom: 10px">
+                            业务标签&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span style="padding: 2px;background-color: #0099FF;color: #ffffff;border-radius:5px;font-weight: 600">企业家 <b class="icon icon-remove det"></b></span>
+                        </div>
+                        <div class="botthr" style="margin-bottom: 10px">
+                            个人描述&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="text" class="miaoshu">
+                        </div>
+                        <div class="botfour" style="margin-bottom: 10px">
+                            <span>相关媒体</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="meiti" style="display: inline-block">
+                                <span style="padding: 2px;background-color: #0099FF;color: #ffffff;
+                                    border-radius:5px;font-weight: 600">百度百科 
+                                    <b class="icon icon-remove det"></b>
+                                </span>
+                            </div>
+                            <span style='float:right;'>
+                                <b class="icon icon-plus zeng1"></b>
+                            </span> 
+                            <div class="mingcheng" style="margin-top: 10px">
+                                媒体名称 &nbsp;&nbsp;&nbsp;&nbsp;<input type="text"/>
+                                url &nbsp;&nbsp;&nbsp;&nbsp;<input type="text">
+                            </div>
+                        </div>
+                        <div class="botfive" style="margin-bottom: 10px">
+                            <span>业务描述</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="meiti" style="display: inline-block">
+                                <span style="padding: 2px;background-color: #0099FF;color: #ffffff;
+                                        border-radius:5px;font-weight: 600">业务文档1
+                                    <b class="icon icon-remove det"></b>
+                                </span>
+                            </div>
+                            <span style='float:right;'>
+                                <b class="icon icon-plus zeng2"></b>
+                            </span> 
+                            <div class="mingcheng" style="margin-top: 10px">
+                                业务名称&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"/>
+                                url &nbsp;&nbsp;&nbsp;&nbsp;<input type="text">
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 {% block my_js %}
-    <script src="/static/js/person.js"></script>
+<script src="/static/js/person.js"></script>
+<script src="/static/js/person2.js"></script>
 <script>
     $('.history').on('click',function () {
         $('.histant').modal("show");
@@ -957,14 +521,14 @@
             $(this).parent().next().after(str);
         });
     });
-    $("#container .correlation2 .twleft .lfone").on('click',function(){
-            $('#container .correlation .correlation2 .twright').show();
-            $('#container .correlation .correlation2 .twright2').hide();
-        });
-    $("#container .correlation2 .twleft .lftwo").on('click',function(){
-        $('#container .correlation .correlation2 .twright').hide();
-        $('#container .correlation .correlation2 .twright2').show();
-    }); 
+    // $("#container .correlation2 .twleft .lfone").on('click',function(){
+    //         $('#container .correlation .correlation2 .twright').show();
+    //         $('#container .correlation .correlation2 .twright2').hide();
+    //     });
+    // $("#container .correlation2 .twleft .lftwo").on('click',function(){
+    //     $('#container .correlation .correlation2 .twright').hide();
+    //     $('#container .correlation .correlation2 .twright2').show();
+    // }); 
     var heart=$("#container .associat .assright2 #case #crmid #run .play .play1 .p11 .xin");
         $.each(heart,function(index,item){
             var chan=1;
@@ -1071,5 +635,71 @@ var play=$("#container .associat .assright .assright2 .play");
             go = 66;
         }
     });
+
+
+    function peokapian(){
+        function place() {
+            //this.ajax_method='GET'; // body...
+        }
+        place.prototype= {
+            call_request:function(url,callback) {
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    async: true,
+                    success:callback
+                });
+            },
+        };
+        function territory(data) {
+            var data=eval(data);
+            var location,tag,description,srcimg;
+            function getLocalTime(nS) {     
+               return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10).replace(/:\d{1,2}$/,' ');     
+            }  
+            if (data.photo_url=='null') {
+                srcimg='/static/image/pan.jpg';
+            }else{
+                srcimg=data.photo_url;
+            }; 
+            if (data.location=='null') {
+                location='暂无';
+            }else {
+                location=data.location;
+            };
+            if (data.tag=='null') {
+                tag='暂无';
+            }else {
+                tag=data.user_tag;
+            };
+            if (data.description=='') {
+                description='暂无';
+            }else {
+                description=data.description;
+            };
+            $('#container .keyman .kmlf .kmimg').attr('src',srcimg)
+            $("#container .keyman .kmrg .rgname .xingming").append(data.uname);
+            $("#container .keyman .kmrg .rgname .difang").append(data.fansnum);
+            $("#container .keyman .kmrg .rgname .influence").append(data.influence.toFixed(2));
+            $("#container .keyman .kmrg .rgname .huoyuedu").append(data.activeness.toFixed(2));
+            $("#container .keyman .kmrg .rgname .mingan").append(data.sensitive.toFixed(2));
+            $("#container .keyman .kmrg .kmrg2 .zhuce").append(location);
+            $("#container .keyman .kmrg .kmrg2 .huoyue").append(data.activity_geo.replace(/&/g,' '));
+            $("#container .keyman .kmrg .kmrg2 .renzheng").append(data.domain);
+            $("#container .keyman .kmrg .kmrg2 .lingyu").append(data.topic_string.replace(/&/g,' '));
+            $("#container .keyman .kmrg .kmrg2 .yewu").append(tag);
+            $("#container .keyman .kmrg .kmrg2 p .miaoshu").append(description);
+            $("#container .keyman .kmrg .kmrg2 .rgcreat .date").append(getLocalTime(data.create_time));
+            $("#container .keyman .kmrg .kmrg2 p.rgcreat .peson").append(data.create_user);
+        };
+        var place=new place();
+        function nums() {
+            var url = '/index/person_detail/';
+            place.call_request(url,territory);
+        }
+        nums();
+    }
+    peokapian();
 </script>
 {% endblock %}

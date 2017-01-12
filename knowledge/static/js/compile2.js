@@ -1,14 +1,15 @@
 function guanxibianji() {
     var node1,node2,oldrel,newrel;
-    if ($("#node1").is(':checked')&&$("#node2").is(':checked')){
-        node1=$("#container .conright2 .editor .editor111").val();
-        node2=$("#container .conright2 .editor .editor222").val();
-        $("#container .conright2 .editor .editor3").on('click',function () {
+    $("#container .conright2 .editor .editor3").on('click',function () {
+        if ($("#node1").is(':checked')&&$("#node2").is(':checked')){
+            node1=$("#container .conright2 .editor .editor111").val();
+            node2=$("#container .conright2 .editor .editor222").val();
             go();
-        });
-    }else {
-        $('#please').modal("show");
-    }
+        }else {
+            $('#please').modal("show");
+        }
+
+    });
 
     function run() {
         //this.ajax_method='GET'; // body...
@@ -59,28 +60,28 @@ function guanxibianji() {
                 },
                 {
                     title: "节点1",//标题
-                    field: "uname",//键名
+                    field: "uname1",//键名
                     sortable: true,//是否可排序
                     order: "desc",//默认排序方式
                     align: "center",//水平
                     valign: "middle",//垂直
                     formatter: function (value, row, index) {
-                        if (row[0][1]==''||row[0][1]=='unknown'){
-                            value=row[0][0];
+                        if (row.uname1==''||row.uname1=='unknown'){
+                            value=uid1;
                         }
                         return value;
                     },
                 },
                 {
                     title: "节点2",//标题
-                    field: "uname",//键名
+                    field: "uname2",//键名
                     sortable: true,//是否可排序
                     order: "desc",//默认排序方式
                     align: "center",//水平
                     valign: "middle",//垂直
                     formatter: function (value, row, index) {
-                        if (row[2][1]==''||row[2][1]=='unknown'){
-                            value=row[2][0];
+                        if (row.uname2==''||row.uname2=='unknown'){
+                            value=uid2;
                         }
                         return value;
                     },
@@ -93,11 +94,11 @@ function guanxibianji() {
                     align: "center",//水平
                     valign: "middle",//垂直
                     formatter: function (value, row, index) {
-                        if (row[1]==''||row[1]=='unknown'){
+                        if (row.rel==''||row.rel=='unknown'){
                             value='暂无数据';
                         }else {
-                            value=row[1];
-                            oldrel=row[1];
+                            value=row.rel;
+                            oldrel=row.rel;
                         }
                         return value;
                     },

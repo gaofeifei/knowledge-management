@@ -241,8 +241,14 @@ def node_or_node_query():
         rel = item[2].type()
         uid2 = item[3]
         uname2 = item[4]
-        a = ([uid1, uname1], rel, [uid2, uname2])
-        list.append(a)
+
+        result={}
+        result["uid1"]=uid1
+        result["uname1"]=uname1
+        result["rel"]=rel
+        result["uid2"]=uid2
+        result["uname2"]=uname2
+        list.append(res)
     return json.dumps(list)
 
 

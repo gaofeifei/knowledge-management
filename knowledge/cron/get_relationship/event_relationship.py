@@ -131,7 +131,7 @@ def event_input(event_dict,max_data):
         event_keywords[k] = keywords
 
         row = dict()
-        row['des'] = '_'.join(list(keywords)[0:10])
+        row['des'] = '&'.join(list(keywords)[0:10])
         weight = float(0)
         if not v.has_key('type'):
             weight = weight + 0

@@ -158,3 +158,29 @@ sensitive_weight = 0.3
 type_weight = 0.6
 weibo_weight = 0.2
 people_weight = 0.2
+
+#人物相似度各指标权重
+p1_weight = 0.1
+p2_weight = 0.3
+p3_weight = 0.2
+p4_weight = 0.2
+p5_weight = 0.2
+
+#事件相似度各指标权重
+e1_weight = 0.2
+e2_weight = 0.2
+e3_weight = 0.3
+e4_weight = 0.3
+
+#专题相似度各指标权重
+t1_weight = 0.4
+t2_weight = 0.3
+t3_weight = 0.3
+
+#群体相似度各指标权重
+q1_weight = 0.4
+q2_weight = 0.3
+q3_weight = 0.3
+
+
+

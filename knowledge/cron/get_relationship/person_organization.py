@@ -185,7 +185,7 @@ def person_organization(people_dict,max_data):#计算人物-人物，人物-机�
         max_data 每个字段对应的最大值，类型是字典
         示例：{'influence':influence,'importance':importance,'activeness':activeness,'sensitive':sensitive}
 
-        输入数据:
+        输出数据:
         node_weight 节点权重字典，键是uid，值是该节点对应的权重
         people_list 人物节点列表，存储人物uid
         organization_list 机构节点列表，存储机构uid

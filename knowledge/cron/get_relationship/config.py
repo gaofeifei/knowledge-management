@@ -126,6 +126,20 @@ def cut_des(text):
 
 ##加载分词工具结束
 
+##加载事件类别对应的权重
+EVENT_PATH = os.path.join(ABSOLUTE_DICT_PATH, 'event_type.csv')
+
+def load_event_type():
+    reader = csv.reader(file(EVENT_PATH, 'rb'))
+    event_type = dict()
+    for e_t,weight in reader:
+        event_type[e_t] = float(weight)
+    return event_type
+
+event_type_dict = load_event_type()
+
+##加载事件类别对应的权重结束
+
 or_list = [1,2,3,4,5,6,7,8]#新浪企业账户类型
 interaction_count = 100
 N_GRAM = 5#词共现窗口长度
@@ -139,3 +153,8 @@ influence_weight = 0.3
 importance_weight = 0.3
 activeness_weight = 0.1
 sensitive_weight = 0.3
+
+#事件各指标权重
+type_weight = 0.6
+weibo_weight = 0.2
+people_weight = 0.2

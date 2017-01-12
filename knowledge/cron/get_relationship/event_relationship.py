@@ -7,7 +7,8 @@ import csv
 import sys
 import json
 from elasticsearch import Elasticsearch
-from config import contain,re_cut,SW,black_word,cx_dict,N_GRAM,WORD_N,TOPIC_N
+from config import contain,re_cut,SW,black_word,cx_dict,N_GRAM,WORD_N,TOPIC_N,event_type_dict,\
+                     type_weight,weibo_weight,people_weight
 from topic_rank import get_topic_word,get_graph,get_final_result
 
 def list2dict(data):
@@ -86,34 +87,85 @@ def get_keywords_relationship(event_keywords):
 
     return contain_list
 
-def event_input(event_dict):
+def event_input(event_dict,max_data):
     '''
         输入数据：
         event_dict 事件属性字典
-        键是事件关键词或者区分事件的东西，值是微博序列
+        键是事件关键词或者区分事件的东西，值是事件的属性，包括微博文本、事件类型、微博数、参与人数
+        示例：
+        {event1:{'text':[text1,text2,...],'type':type,'weibo':weibo,'people':people},
+        event2:{'text':[text1,text2,...],'type':type,'weibo':weibo,'people':people},...}
+
+        max_data 事件属性对应的最大值，字典类型，示例：{'weibo':max_weibo,'people':max_people}
 
         输出数据：
+        event_dis 事件描述和权重字典
+        示例：
+        {event1:{'dis':string,'weight':weight},event2:{'dis':string,'weight':weight},...}
+
         contain_list 事件关系列表
         示例：[[event1,event2,'contain'],[event1,event2,'contain'],...]
     '''
+    data_keys = ['weibo','people']
+
     if len(event_dict) == 0:
-        return []
+        return {},[]
+
+    if len(max_data) == 0:#没有最大值的处理方式
+        max_data = {'weibo':0,'people':0}
+
+    if len(max_data) < 2:#有的键没有
+        for key in data_keys:
+            if not max_data.has_key(key):
+                max_data[key] = 0
     
     event_keywords = dict()
+    event_dis = dict()
     for k,v in event_dict.iteritems():
-        if len(v) == 0:
+        if not v.has_key('text'):#没有文本
+            keywords = set()
+        elif len(v['text']) == 0:#没有文本
             keywords = set()
         else:
-            keywords = get_keyword(v)
+            keywords = get_keyword(v['text'])#提取关键词
         event_keywords[k] = keywords
+
+        row = dict()
+        row['des'] = '_'.join(list(keywords)[0:10])
+        weight = float(0)
+        if not v.has_key('type'):
+            weight = weight + 0
+        elif event_type_dict.has_key(v['type']):
+            weight = weight + event_type_dict[v['type']]*type_weight
+        else:
+            weight = weight + 0
+
+        if not v.has_key('weibo'):
+            weight = weight + 0
+        elif max_data['weibo'] > 0:
+            weight = weight + (float(v['weibo'])/float(max_data['weibo'])*4)*weibo_weight
+        else:
+            weight = weight + 0
+
+        if not v.has_key('people'):
+            weight = weight + 0
+        elif max_data['people'] > 0:
+            weight = weight + (float(v['people'])/float(max_data['people'])*4)*people_weight
+        else:
+            weight = weight + 0
+
+        row['weight'] = weight
+        event_dis[k] = row
+        
 
     contain_list = get_keywords_relationship(event_keywords)#根据关键词判定事件之间的关系
 
-    return contain_list
+    return event_dis,contain_list
 
 if __name__ == '__main__':
-    event_dict = {'111':['新苏联慢慢浮出水面，二代要完成一代未尽之事//@阑夕:制度自信[偷笑]','马书记啊，你还坚守阵地啊，盈利多少了华信'],\
-                   '222':['福建南平浦城人，与叶选宁叶飞无关','真真切切时能力之外的资本等于零','很多人在妄猜其家族身份渊源，但忽视最重要的华信能源的业务核心，很多事国家没法以国家名义去做，会被西方国家以安全为由阻止，只能他这种企业做，比如在欧洲法国、西班牙等国家拥有与石油炼化、销售终端系统相配套的百万吨级石油储运系统。依托欧洲终端，重点获取中亚、中东、非洲地区上游资源']}
-    contain_list = event_input(event_dict)
+    event_dict = {'111':{'text':['新苏联慢慢浮出水面，二代要完成一代未尽之事//@阑夕:制度自信[偷笑]','马书记啊，你还坚守阵地啊，盈利多少了华信'],'type':'rights','weibo':2,'people':10},\
+                   '222':{'text':['福建南平浦城人，与叶选宁叶飞无关','真真切切时能力之外的资本等于零','很多人在妄猜其家族身份渊源，但忽视最重要的华信能源的业务核心，很多事国家没法以国家名义去做，会被西方国家以安全为由阻止，只能他这种企业做，比如在欧洲法国、西班牙等国家拥有与石油炼化、销售终端系统相配套的百万吨级石油储运系统。依托欧洲终端，重点获取中亚、中东、非洲地区上游资源'],'type':'diplomacy','weibo':5,'people':100}}
+    max_data = {'weibo':100,'people':1000}
+    event_dis,contain_list = event_input(event_dict,max_data)
 
-    print contain_list    
+    print event_dis,    

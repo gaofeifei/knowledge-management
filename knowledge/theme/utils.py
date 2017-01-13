@@ -153,19 +153,39 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
     # if relation_type!='':
     #     relation_type = ':' + relation_type
     event_relation = []
+    only_event_o = []
     # total_event = len(list(event_list))
     event_list = []
     e_nodes_list = {} #all event nodes
     u_nodes_list = {} #all user nodes
     for event in event_result:
         event_value = event['event']
+        only_event_o.append(event_value)
         event_name = event_name_search(event_value)
         event_list.append([event_value,event_name])#取event
         e_nodes_list[event_value] = event_name
     all_event_id.extend(event_list)
     # print nodes_list,'-=-=-=-===================='
     if layer == '0':  #不扩展
-        pass
+        for event_value in event_list:
+            c_string = 'START s0 = node:event_index(event="'+str(event_value[0])+'") '
+            c_string += 'MATCH (s0)-[r]-(s1) WHERE s1.event_id in '+ json.dumps(event_value) +' return s0,r,s1 LIMIT 10'
+            print c_string,'!!!!!'
+            result = graph.run(c_string)
+            for i in list(result):
+                start_id = dict(i['s0'])['event_id']
+                # print start_id,'============='
+                relation = i['r'].type()
+                end_id = dict(i['s1'])
+                if end_id.has_key('uid'):
+                    user_name = user_name_search(end_id['uid'])
+                    u_nodes_list[end_id['uid']] = user_name
+                    event_relation.append([start_id,relation,end_id['uid']])
+                if end_id.has_key('envent_id'):
+                    event_name = event_name_search(end_id['envent_id'])
+                    e_nodes_list[end_id['envent_id']] = event_name
+                    all_event_id.append([end_id['envent_id'], event_name])
+                    event_relation.append([start_id,relation,end_id['envent_id']])
     if layer == '1':  #扩展一层
         for event_value in event_list:
             c_string = 'START s0 = node:event_index(event="'+str(event_value[0])+'") '

@@ -1,7 +1,20 @@
 {% extends "public_nav.html" %}
 {% block title %}<title>事件节点</title>{% endblock %}
 {% block my_css %}
-    <link rel="stylesheet" href="/static/css/person.css">
+    <link rel="stylesheet" href="/static/css/incident.css">
+    <style type="text/css">
+        span.dian {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #777;
+            margin-left: 40px;
+        }
+        .checkbox,.radio {
+            margin: 5px 0;
+        }
+    </style>
 {% endblock %}
 
 {% block main %}
@@ -168,7 +181,7 @@
                         <!--222-->
                         <span class="cdt3" style="display: block;margin: 5px 0 0 20px;color: #777;font-size: 14px">关系筛选</span>
                         <div class="cdt4">
-                            <div class="checkbox">
+                            <div class="checkbox" style=''>
                                 <span class="dian"></span>
                                 <span style='display:inline-block;margin: 5px 0 0 0px;color: #777;font-size: 12px;'>
                                     人物 - 事件关系
@@ -186,7 +199,7 @@
                                     <input id='other' class="other" type="checkbox" checked/> 其他关系
                                 </label>
                             </div>
-                            <div class="checkbox" class='evnt'>
+                            <div class="checkbox" class='evnt' style=''>
                                 <span class="dian"></span>
                                 <span style='display: inline-block;margin: 5px 0 0 0px;color: #777;font-size: 12px;'>
                                     人物 - 人物关系
@@ -207,7 +220,7 @@
                         </div>
                         <!--333-->
                         <span class="cdt3" style="display: block;margin: 5px 0 0 20px;color: #777;font-size: 14px">节点扩展</span>
-                        <div class="cdt4">
+                        <div class="cdt4" style=''>
                             <div class="radio" style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
                                 <label>
                                     <input type="radio" name="yier" id="zero" value="option1"
@@ -229,7 +242,7 @@
                             </div>
                         </div>
                         <!--444-->
-                        <button class="cdt5" style='margin-top:7px;'>确定</button>
+                        <button class="cdt5" style='margin-top:2px;'>确定</button>
                     </div>
                 </div>
                 <div class="midright" style="margin-right: 0">
@@ -248,182 +261,33 @@
                 <p class="lftwo">敏感微博</p>
             </div>
             <div class="twright">
-                <div class="twr1" style="background-color: rgb(238, 238, 238);">
-                    <p class="master">
-                        微博内容：
-                        <span class="master1">
-                            学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                        </span>
-                    </p>
-                    <p class="time">
-                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                        <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                        <span class="time5">评论数（56）</span>|&nbsp;
-                        <span class="time6">言论敏感度（87）</span>
-                    </p>
+                <div id="group_emotion_loading" style="display:block;text-align:center;">
+                        正在加载，请稍后...
                 </div>
-                <div class="twr1">
-                    <p class="master">
-                        微博内容：
-                        <span class="master1">
-                            学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                        </span>
-                    </p>
-                    <p class="time">
-                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                        <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                        <span class="time5">评论数（56）</span>|&nbsp;
-                        <span class="time6">言论敏感度（87）</span>
-                    </p>
+                <div id="influeweibo" style="overflow-x: auto; overflow-y: auto;height:320px;">
+                    <table id="input-table" class="In-table">
+                        <tbody class="In-table">
+                        </tbody>
+                    </table>
                 </div>
-                <div class="twr1" style="background-color: rgb(238, 238, 238);">
-                    <p class="master">
-                        微博内容：
-                        <span class="master1">
-                            学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                        </span>
-                    </p>
-                    <p class="time">
-                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                        <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                        <span class="time5">评论数（56）</span>|&nbsp;
-                        <span class="time6">言论敏感度（87）</span>
-                    </p>
+                <div class='fanye' style="width:100%;text-align:center;">
+                      <span style="display:inline-block;">每页显示<input type="text" id="PageNo" size="3" value="3" style='text-align:center;border:1px solid #ccc;'/>组</span>
+                      <div id="div-button" style="display:inline-block;margin-left:5px;">
+                      <input type="button" value="首页" id="F-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                      <input type="button" value="上一页" id="Pre-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                      <input type="button" value="下一页" id="Nex-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                      <input type="button" value="尾页" id="L-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
                 </div>
-                <div class="twr1">
-                    <p class="master">
-                        微博内容：
-                        <span class="master1">
-                            学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                        </span>
-                    </p>
-                    <p class="time">
-                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                        <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                        <span class="time5">评论数（56）</span>|&nbsp;
-                        <span class="time6">言论敏感度（87）</span>
-                    </p>
-                </div>
-                <div class="twr1" style="background-color: rgb(238, 238, 238);">
-                    <p class="master">
-                        微博内容：
-                        <span class="master1">
-                            学渣：“人活在世上，就是要做正确的选择！”老师：“这就是你判断题全部打钩的原因？”
-                        </span>
-                    </p>
-                    <p class="time">
-                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                        <a class="time2">唐老鸭</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                        <span class="time5">评论数（56）</span>|&nbsp;
-                        <span class="time6">言论敏感度（87）</span>
-                    </p>
-                </div>
+
+                <span style="display:inline-block;">&nbsp;当前第<span id="s2"></span>页</span>
+                <span style="display:inline-block;">总共<span id="s1"></span>页</span>
             </div>
             <div class="twright2" style="display: none;">
-                <div class="twr1" style="background-color: rgb(238, 238, 238);">
-                    <p class="master">
-                        微博内容：
-                        <span class="master1">
-                            今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                            美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                            没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                        </span>
-                    </p>
-                    <p class="time">
-                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                        <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                        <span class="time5">评论数（56）</span>|&nbsp;
-                        <span class="time6">言论敏感度（87）</span>
-                    </p>
-                </div>
-                <div class="twr1">
-                    <p class="master">
-                        微博内容：
-                        <span class="master1">
-                            今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                            美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                            没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                        </span>
-                    </p>
-                    <p class="time">
-                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                        <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                        <span class="time5">评论数（56）</span>|&nbsp;
-                        <span class="time6">言论敏感度（87）</span>
-                    </p>
-                </div>
-                <div class="twr1" style="background-color: rgb(238, 238, 238);">
-                    <p class="master">
-                        微博内容：
-                        <span class="master1">
-                            今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                            美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                            没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                        </span>
-                    </p>
-                    <p class="time">
-                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                        <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                        <span class="time5">评论数（56）</span>|&nbsp;
-                        <span class="time6">言论敏感度（87）</span>
-                    </p>
-                </div>
-                <div class="twr1">
-                    <p class="master">
-                        微博内容：
-                        <span class="master1">
-                            今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                            美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                            没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                        </span>
-                    </p>
-                    <p class="time">
-                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                        <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                        <span class="time5">评论数（56）</span>|&nbsp;
-                        <span class="time6">言论敏感度（87）</span>
-                    </p>
-                </div>
-                <div class="twr1" style="background-color: rgb(238, 238, 238);">
-                    <p class="master">
-                        微博内容：
-                        <span class="master1">
-                            今天带着侄子去超市碰到一美女，他走过去问：姐姐，你长得好漂亮哦！有男友了嘛？
-                            美女笑笑说：还没有呢！你咋那么可爱呢？侄子指了指我，我心想，这孩子还挺为我考虑。
-                            没想到熊孩子说：我叔叔也没有女友。但是你别找他这样的，太抠！冰激凌都不给我买！我。。。
-                        </span>
-                    </p>
-                    <p class="time">
-                        <span class="time1">来自微博用户：</span>&nbsp;&nbsp;
-                        <a class="time2">米老鼠</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span class="time3">发表于&nbsp;&nbsp;<i>2016-11-11</i></span>
-                        <span class="time4" style="display: inline-block;margin-left: 40%">转发数（213）</span>|&nbsp;
-                        <span class="time5">评论数（56）</span>|&nbsp;
-                        <span class="time6">言论敏感度（87）</span>
-                    </p>
-                </div>
+                
             </div>
         </div>
     </div>
-    <div class="medias">
+    <div class="medias" style='margin-top:20px;'>
         <p class="medias1">相关平台</p>
         <div class="medias2">
             <a href="https://baike.baidu.com/" class="baike"><img src="/static/image/baike.png" alt=""></a>
@@ -437,138 +301,137 @@
         </div>
     </div>
 </div>
-                <style>
-                    .main {
-                        /*height: 500px;*/
-                        padding:0 30px;
-                    }
-                    .main .topright input,.main .topright select,.main .bottom input {
-                        width: 100px;
-                        padding:2px 5px;
-                        border: 1px solid #5e5e5e;
-                        font-size: 12px;
-                        color: #5e5e5e;
-                        font-weight: 600;
-                    }
-                    .main .rgone,.main .rgtwo,.main .rgthr {
-                        margin-bottom: 12px;
-                    }
-                    .main .rgone,.main .rgtwo,.main .rgthr,.main .rgfour {
-                        margin-left: 20px;
-                    }
-                    .main .top {
-                        height: 150px;
-                        margin-top: 20px;
-                    }
-                    .main .bottom {
-                        width: 100%;
-                        margin-top: 20px;
-                    }
-                    .main .bottom input {
-                        width: 160px;
-                    }
-
-                </style>
-                <div class="modal fade editmd" id="join" tabindex="-3">
-                    <div class="modal-dialog">
-                        <div class=modal-content>
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">
-                                    <span>&times;</span>
-                                </button>
-                                <h2 class="modal-title">编辑群体</h2>
+<style>
+    .main {
+        /*height: 500px;*/
+        padding:0 30px;
+    }
+    .main .topright input,.main .topright select,.main .bottom input {
+        width: 100px;
+        padding:2px 5px;
+        border: 1px solid #5e5e5e;
+        font-size: 12px;
+        color: #5e5e5e;
+        font-weight: 600;
+    }
+    .main .rgone,.main .rgtwo,.main .rgthr {
+        margin-bottom: 12px;
+    }
+    .main .rgone,.main .rgtwo,.main .rgthr,.main .rgfour {
+        margin-left: 20px;
+    }
+    .main .top {
+        height: 150px;
+        margin-top: 20px;
+    }
+    .main .bottom {
+        width: 100%;
+        margin-top: 20px;
+    }
+    .main .bottom input {
+        width: 160px;
+    }
+</style>
+<div class="modal fade editmd" id="join7" tabindex="-3">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">编辑群体</h2>
+            </div>
+            <div class="modal-body">
+                <div class="main">
+                    <div class="top">
+                        <div class="topleft" style="float: left">
+                            <img src="/static/image/xuyuyu2.jpg" alt="" width="120" height="140"/>             
+                        </div>
+                        <div class="topright" style="float: left;margin-top: 6px">
+                            <div class="rgone">
+                            事件名称 <input type="text" class="sjmc" value="徐玉玉事件" style="margin:0 20px"/>
                             </div>
-                            <div class="modal-body">
-                                <div class="main">
-                                    <div class="top">
-                                        <div class="topleft" style="float: left">
-                                            <img src="/static/image/xuyuyu2.jpg" alt="" width="120" height="140"/>             
-                                        </div>
-                                        <div class="topright" style="float: left;margin-top: 6px">
-                                            <div class="rgone">
-                                            事件名称 <input type="text" class="sjmc" value="徐玉玉事件" style="margin:0 20px"/>
-                                            </div>
-                                            <div class="rgtwo">
-                                                发生时间 <input type="text" class="fssj" style="margin:0 20px"/>
-                                                发生地
-                                                <select name="" style="margin-left:15px">
-                                                    <option value="">山东</option>
-                                                </select>
-                                            </div>
-                                            <div class="rgthr">
-                                                事件类型
-                                                <select name=""style="margin:0 20px">
-                                                    <option value="">诈骗</option>
-                                                </select>
-                                                参与人数 <input type="text" class="cyrs"/>
-                                            </div>
-                                            <div class="rgfour">
-                                                民众情绪
-                                                <select name=""style="margin:0 20px">
-                                                    <option value="">消极</option>
-                                                </select>
-                                                微博数量 <input type="text" class="wbsl"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="bottom">
-                                        <div class="botone" style="margin-bottom: 10px">
-                                            时间跨度&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="kai"/> - <input type="text" class="jie"/>
-                                        </div>
-                                        <div class="bottwo" style="margin-bottom: 10px">
-                                            业务标签&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span style="padding: 2px;background-color: #0099FF;color: #ffffff;border-radius:5px;font-weight: 600">企业家 <b class="icon icon-remove det"></b></span>
-                                        </div>
-                                        <div class="botthr" style="margin-bottom: 10px">
-                                            事件描述&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <input type="text" class="miaoshu">
-                                        </div>
-                                        <div class="botfour" style="margin-bottom: 10px">
-                                            <span>相关媒体</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <div class="meiti" style="display: inline-block">
-                                                <span style="padding: 2px;background-color: #0099FF;color: #ffffff;
-                                                    border-radius:5px;font-weight: 600">百度百科 
-                                                    <b class="icon icon-remove det"></b>
-                                                </span>
-                                            </div>
-                                            <span style='float:right;'>
-                                                <b class="icon icon-plus zeng1"></b>
-                                            </span> 
-                                            <div class="mingcheng" style="margin-top: 10px">
-                                                媒体名称 &nbsp;&nbsp;&nbsp;&nbsp;<input type="text"/>
-                                                url &nbsp;&nbsp;&nbsp;&nbsp;<input type="text">
-                                            </div>
-                                        </div>
-                                        <div class="botfive" style="margin-bottom: 10px">
-                                            <span>业务描述</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <div class="meiti" style="display: inline-block">
-                                                <span style="padding: 2px;background-color: #0099FF;color: #ffffff;
-                                                        border-radius:5px;font-weight: 600">业务文档1
-                                                    <b class="icon icon-remove det"></b>
-                                                </span>
-                                            </div>
-                                            <span style='float:right;'>
-                                                <b class="icon icon-plus zeng2"></b>
-                                            </span> 
-                                            <div class="mingcheng" style="margin-top: 10px">
-                                                业务名称&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"/>
-                                                url &nbsp;&nbsp;&nbsp;&nbsp;<input type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="rgtwo">
+                                发生时间 <input type="text" class="fssj" style="margin:0 20px"/>
+                                发生地
+                                <select name="" style="margin-left:15px">
+                                    <option value="">山东</option>
+                                </select>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-info" data-dismiss="modal">
-                                    关闭
-                                </button>
-                                <button type="button" class="btn btn-danger">
-                                    确定
-                                </button>
+                            <div class="rgthr">
+                                事件类型
+                                <select name=""style="margin:0 20px">
+                                    <option value="">诈骗</option>
+                                </select>
+                                参与人数 <input type="text" class="cyrs"/>
+                            </div>
+                            <div class="rgfour">
+                                民众情绪
+                                <select name=""style="margin:0 20px">
+                                    <option value="">消极</option>
+                                </select>
+                                微博数量 <input type="text" class="wbsl"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div class="botone" style="margin-bottom: 10px">
+                            时间跨度&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="kai"/> - <input type="text" class="jie"/>
+                        </div>
+                        <div class="bottwo" style="margin-bottom: 10px">
+                            业务标签&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span style="padding: 2px;background-color: #0099FF;color: #ffffff;border-radius:5px;font-weight: 600">企业家 <b class="icon icon-remove det"></b></span>
+                        </div>
+                        <div class="botthr" style="margin-bottom: 10px">
+                            事件描述&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="text" class="miaoshu">
+                        </div>
+                        <div class="botfour" style="margin-bottom: 10px">
+                            <span>相关媒体</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="meiti" style="display: inline-block">
+                                <span style="padding: 2px;background-color: #0099FF;color: #ffffff;
+                                    border-radius:5px;font-weight: 600">百度百科 
+                                    <b class="icon icon-remove det"></b>
+                                </span>
+                            </div>
+                            <span style='float:right;'>
+                                <b class="icon icon-plus zeng1"></b>
+                            </span> 
+                            <div class="mingcheng" style="margin-top: 10px">
+                                媒体名称 &nbsp;&nbsp;&nbsp;&nbsp;<input type="text"/>
+                                url &nbsp;&nbsp;&nbsp;&nbsp;<input type="text">
+                            </div>
+                        </div>
+                        <div class="botfive" style="margin-bottom: 10px">
+                            <span>业务描述</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="meiti" style="display: inline-block">
+                                <span style="padding: 2px;background-color: #0099FF;color: #ffffff;
+                                        border-radius:5px;font-weight: 600">业务文档1
+                                    <b class="icon icon-remove det"></b>
+                                </span>
+                            </div>
+                            <span style='float:right;'>
+                                <b class="icon icon-plus zeng2"></b>
+                            </span> 
+                            <div class="mingcheng" style="margin-top: 10px">
+                                业务名称&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"/>
+                                url &nbsp;&nbsp;&nbsp;&nbsp;<input type="text">
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="join2" tabindex="-2">
     <div class="modal-dialog">
         <div class=modal-content>
@@ -639,7 +502,7 @@
         $('.histant').modal("show");
     });
     $('.edit').on('click',function () {
-        $('.editmd').modal("show");
+        $('#join7').modal("show");
     });
     function check(value){
         if (value=='新建专题') {
@@ -756,14 +619,14 @@
             }); 
         });
         //
-        $("#container .correlation2 .twleft .lfone").on('click',function(){
-            $('#container .correlation .correlation2 .twright').show();
-            $('#container .correlation .correlation2 .twright2').hide();
-        });
-        $("#container .correlation2 .twleft .lftwo").on('click',function(){
-            $('#container .correlation .correlation2 .twright').hide();
-            $('#container .correlation .correlation2 .twright2').show();
-        });  
+        // $("#container .correlation2 .twleft .lfone").on('click',function(){
+        //     $('#container .correlation .correlation2 .twright').show();
+        //     $('#container .correlation .correlation2 .twright2').hide();
+        // });
+        // $("#container .correlation2 .twleft .lftwo").on('click',function(){
+        //     $('#container .correlation .correlation2 .twright').hide();
+        //     $('#container .correlation .correlation2 .twright2').show();
+        // });  
 
         function kapian(){
             function place() {
@@ -784,7 +647,7 @@
                 var data=eval(data);
                 var location,tag,description;
                 function getLocalTime(nS) {     
-                   return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
+                   return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10).replace(/:\d{1,2}$/,' ');     
                 }   
                 if (data.location=='null') {
                     location='暂无';

@@ -108,6 +108,6 @@ def search_related_event():  #专题编辑-编辑前先搜索人物,图谱
 def search_related_event_card():  #专题编辑-增加前先搜索人物,卡片部分
     # group_name = request.args.get('group_name', '法律人士')
     search_item = request.args.get('item', '马来')
-    layer = request.args.get('layer', 'all')#'2'  'all'
+    layer = request.args.get('layer', '2')#'2'  'all'
     event_card = search_related_e_card(search_item, layer)
     return json.dumps(event_card)

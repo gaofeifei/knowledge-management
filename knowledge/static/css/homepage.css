@@ -127,6 +127,8 @@ a,a:link,a:hover,a:visited,a:active {
 #container .con_lf .clf_bot #statis1,#container .con_lf .clf_bot #statis2 {
     width: 750px;
     height: 500px;
+    line-height: 500px;
+    text-align: center;
     border: 1px solid #09F;
 }
 /*右侧图表样式*/

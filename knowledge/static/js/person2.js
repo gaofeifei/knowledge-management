@@ -1,5 +1,4 @@
-var eventname='马来西亚抓获电信欺诈案犯';
-
+var uid=1765891182;
 function guanlianrenwu() {
     function place() {
         //this.ajax_method='GET'; // body...
@@ -17,12 +16,13 @@ function guanlianrenwu() {
     };
     function territory(data) {
         var data=eval(data);
+        console.log(data);
         var str='',str1='',str2='',str3='';
         var name,name1,name2,name3,picture,picture1,picture2,picture3;
-        if (!data.join){
+        if (!data.friend){
             $("#container .associat .assleft .assleft2 .often .oftenimg").text('<span style="text-align: center">暂无数据~~</span>');
         }else {
-            $.each(data.join,function (index,item) {
+            $.each(data.friend,function (index,item) {
                 if (item[1]==''){
                     name=item[0];
                 }else {
@@ -40,11 +40,11 @@ function guanlianrenwu() {
                     '</dl>';
             });
             $("#container .associat .assleft .assleft2 .often .oftenimg").append(str);
-        }
-        if (!data.pusher){
+        };
+        if (!data.social){
             $("#container .associat .assleft .assleft2 .social .oftenimg").append('<span style="text-align: center">暂无数据~~</span>');
         }else {
-            $.each(data.pusher,function (index,item) {
+            $.each(data.social,function (index,item) {
                 if (item[1]==''){
                     name1=item[0];
                 }else {
@@ -63,55 +63,11 @@ function guanlianrenwu() {
             });
             $("#container .associat .assleft .assleft2 .social .oftenimg").append(str1);
         }
-        if (!data.maker){
-            $("#container .associat .assleft .assleft2 .make .oftenimg").append('<span style="text-align: center">暂无数据~~</span>');
-        }else {
-            $.each(data.maker,function (index,item) {
-                if (item[1]==''){
-                    name2=item[0];
-                }else {
-                    name2=item[1];
-                };
-                if (item[2]==''){
-                    picture2='/static/image/pangzi.png';
-                }else {
-                    picture2=item[2];
-                };
-                str2+='<dl style="width: 55px;margin-right: 15px;display: inline-block;">'+
-                    '<dt><img src="'+picture2+'" title="'+name2+'"></dt>'+
-                    '<dd style="width: 55px;white-space:nowrap;overflow:hidden;text-overflow: ellipsis;text-align: center;' +
-                    'font-size: 8px;margin-top: 5px">'+name2+'</dd>'+
-                    '</dl>';
-            });
-            $("#container .associat .assleft .assleft2 .make .oftenimg").append(str2);
-        }
-        if (!data.other_rel){
-            $("#container .associat .assleft .assleft2 .other .oftenimg").append('<span style="text-align: center">暂无数据~~</span>');
-        }else{
-            $.each(data.other_rel,function (index,item) {
-                if (item[1]==''){
-                    name3=item[0];
-                }else {
-                    name3=item[1];
-                };
-                if (item[2]==''){
-                    picture3='/static/image/pangzi.png';
-                }else {
-                    picture3=item[2];
-                };
-                str3+='<dl style="width: 55px;margin-right: 15px;display: inline-block;">'+
-                    '<dt><img src="'+picture3+'" title="'+name3+'"></dt>'+
-                    '<dd style="width: 55px;white-space:nowrap;overflow:hidden;text-overflow: ellipsis;text-align: center;' +
-                    'font-size: 8px;margin-top: 5px">'+name3+'</dd>'+
-                    '</dl>';
-            });
-            $("#container .associat .assleft .assleft2 .other .oftenimg").append(str3);
-        }
 
     }
     var place=new place();
     function nums() {
-        var url = '/index/event_detail_people/';
+        var url = '/index/person_detail_people/?uid='+uid;
         place.call_request(url,territory);
     }
     nums();
@@ -211,11 +167,10 @@ function guanlianshijian() {
                 }
             })
         });
-    }
-
+    };
     var touch=new touch();
     function nums() {
-        var url = '/index/event_detail_event/';
+        var url = '/index/person_detail_event/';
         touch.call_request(url,things);
     }
     nums();
@@ -249,9 +204,9 @@ function gaoyingxiangliweibo() {
     function nums(s) {
         var url;
         if (s==1) {
-            url = '/index/event_weibo/?event_name='+eventname+'&weibo_type=retweeted';
+            url = '/index/event_weibo/?uid='+uid+'&weibo_type=retweeted';
         }else {
-            url = '/index/event_weibo/?event_name='+eventname+'&weibo_type=sensitive';
+            url = '/index/event_weibo/?uid='+uid+'&weibo_type=sensitive';
         };
         place.call_request(url,territory);
     }

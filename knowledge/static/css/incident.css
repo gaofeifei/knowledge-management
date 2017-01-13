@@ -111,8 +111,6 @@ a,a:link,a:hover,a:visited,a:active {
 #container .mapion .mapion2 #middle .midleft #eventimg,#container .mapion .mapion2 #middle .midright #placeimg {
     width: 450px;
     height: 500px;
-    line-height: 500px;
-    text-align: center;
     border: 1px solid #0099FF;
 }
 #container .mapion .mapion2 #middle .midmid {
@@ -239,7 +237,7 @@ a,a:link,a:hover,a:visited,a:active {
 #container .correlation2 .twleft {
     display: inline-block;
     position: relative;
-    top: -120px;
+    top: -110px;
     right: -5px;
 }
 #container .correlation .correlation2 .twright,#container .correlation .correlation2 .twright2 {

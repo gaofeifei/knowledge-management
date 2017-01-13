@@ -9,7 +9,7 @@
             height: 10px;
             border-radius: 50%;
             background-color: #777;
-            margin-left: 40px;说
+            margin-left: 40px;
         }
         #container #middle .midmid .condition .cdt4 .checkbox {
             margin: 0;
@@ -731,17 +731,25 @@ function getLocalTime(nS) {
                   for(i=0;i<parseInt(PageNo.value);i++)
                   {                                                          //循环打印数组值
                       oTBody.insertRow(i);
-                    var name;
+                    var name,minganwords1,minganwords2;
                     if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
                         name=dataArray[i].uid;
                     }else {
                         name=dataArray[i].uname;
                     };
+                    if (dataArray[i].sensitive_words_string=='') {
+                        null;
+                    }else{
+                        minganwords1=dataArray[i].sensitive_words_string;
+                    };
+                    minganwords2=$(dataArray[i].text.match(eval("/"+minganwords1+"/")))[0];
+                 
                       html_c = '<div class="twr1">'+
 '                        <p class="master">'+
 '                            微博内容：'+
 '                            <span class="master1">'+
-                        dataArray[i].text+
+
+                        dataArray[i].text.replace(minganwords2,"<i style='color: red;'>"+minganwords2+"</i>")+
 '                            </span>'+
 '                        </p>'+
 '                        <p class="time">'+
@@ -792,17 +800,25 @@ function getLocalTime(nS) {
                   for(i=0;i<parseInt(PageNo.value);i++)
                   {                                                          //循环打印数组值
                       oTBody.insertRow(i);
-                    var name;
+                    var name,minganwords1,minganwords2;
                     if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
                         name=dataArray[i].uid;
                     }else {
                         name=dataArray[i].uname;
                     };
+                    if (dataArray[i].sensitive_words_string=='') {
+                        null;
+                    }else{
+                        minganwords1=dataArray[i].sensitive_words_string;
+                    };
+                    minganwords2=$(dataArray[i].text.match(eval("/"+minganwords1+"/")))[0];
+                 
                       html_c = '<div class="twr1">'+
 '                        <p class="master">'+
 '                            微博内容：'+
 '                            <span class="master1">'+
-                        dataArray[i].text+
+
+                        dataArray[i].text.replace(minganwords2,"<i style='color: red;'>"+minganwords2+"</i>")+
 '                            </span>'+
 '                        </p>'+
 '                        <p class="time">'+
@@ -857,18 +873,25 @@ function getLocalTime(nS) {
                   for(i=0;i<c;i++)
                   {
                          oTBody.insertRow(i);
-                         var name;
+                         var name,minganwords1,minganwords2;
                     if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
                         name=dataArray[i].uid;
                     }else {
                         name=dataArray[i].uname;
                     };
                           oTBody.rows[i].insertCell(0);
-                        html_c = '<div class="twr1">'+
+                    if (dataArray[i].sensitive_words_string=='') {
+                        null;
+                    }else{
+                        minganwords1=dataArray[i].sensitive_words_string;
+                    };
+                    minganwords2=$(dataArray[i].text.match(eval("/"+minganwords1+"/")))[0];
+                 
+                      html_c = '<div class="twr1">'+
 '                        <p class="master">'+
 '                            微博内容：'+
 '                            <span class="master1">'+
-                        dataArray[i+a].text+
+                        dataArray[i].text.replace(minganwords2,"<i style='color: red;'>"+minganwords2+"</i>")+
 '                            </span>'+
 '                        </p>'+
 '                        <p class="time">'+
@@ -914,18 +937,26 @@ function getLocalTime(nS) {
                   for(i=0;i<parseInt(PageNo.value);i++)
                   {
                       oTBody.insertRow(i);
-                      var name;
+                      var name,minganwords1,minganwords2;
                     if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
                         name=dataArray[i].uid;
                     }else {
                         name=dataArray[i].uname;
                     };
                       oTBody.rows[i].insertCell(0);
+                    if (dataArray[i].sensitive_words_string=='') {
+                        null;
+                    }else{
+                        minganwords1=dataArray[i].sensitive_words_string;
+                    };
+                    minganwords2=$(dataArray[i].text.match(eval("/"+minganwords1+"/")))[0];
+                 
                       html_c = '<div class="twr1">'+
 '                        <p class="master">'+
 '                            微博内容：'+
 '                            <span class="master1">'+
-                        dataArray[i+a].text+
+
+                        dataArray[i].text.replace(minganwords2,"<i style='color: red;'>"+minganwords2+"</i>")+
 '                            </span>'+
 '                        </p>'+
 '                        <p class="time">'+
@@ -977,18 +1008,26 @@ function getLocalTime(nS) {
                   for(i=0;i<c;i++)
                   {
                       oTBody.insertRow(i);
-                      var name;
+                      var name,minganwords1,minganwords2;
                     if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
                         name=dataArray[i].uid;
                     }else {
                         name=dataArray[i].uname;
                     };
                         oTBody.rows[i].insertCell(0);
+                    if (dataArray[i].sensitive_words_string=='') {
+                        null;
+                    }else{
+                        minganwords1=dataArray[i].sensitive_words_string;
+                    };
+                    minganwords2=$(dataArray[i].text.match(eval("/"+minganwords1+"/")))[0];
+                 
                       html_c = '<div class="twr1">'+
 '                        <p class="master">'+
 '                            微博内容：'+
 '                            <span class="master1">'+
-                        dataArray[i+a].text+
+
+                        dataArray[i].text.replace(minganwords2,"<i style='color: red;'>"+minganwords2+"</i>")+
 '                            </span>'+
 '                        </p>'+
 '                        <p class="time">'+

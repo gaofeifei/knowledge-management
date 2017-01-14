@@ -27,7 +27,7 @@ def user_weibo_search(uid_list,sort_flag):
     }
     fields_list = ['text', 'uid','sensitive','comment','retweeted', 'timestamp','sensitive_words_string']
     event_detail = es_flow_text.search(index=flow_text_name, doc_type=flow_text_type, \
-                body=query_body, _source=False, fields=fields_list)['hits']['hits']  #有问题
+                body=query_body, _source=False, fields=fields_list)['hits']['hits']  
     result = []
     for event in event_detail:
         event_dict ={}
@@ -365,7 +365,7 @@ def user_list_group(group_name):
     return uid_list_l
 
 def search_related_user_card(item,layer):
-    print item,'-------------'
+    # print item,'-------------'
     query_body = {
         "query":{
             'bool':{
@@ -522,4 +522,139 @@ def search_related_user(item):
                 user_relation.append([mid_eid,relation2,end_id['envent_id']])
     return {'total_user':len(user_uid_list),'user_nodes':u_nodes_list,'event_nodes':e_nodes_list,\
             'relation':user_relation,'draw_nodes_length':len(u_nodes_list)}
+
+def compare_user_group(group_name1,group_name2,sort_flag,diff):
+    s_string1 = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name1
+    group_result1 = graph.run(s_string1)
+    uid_list1 = []
+    for i in group_result1:
+        user_dict = dict(i)
+        usd = user_dict['user_id']
+        uid_list1.append(usd)
+    print len(uid_list1)
+
+    s_string2 = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name2
+    group_result2 = graph.run(s_string2)
+    uid_list2 = []
+    for i in group_result2:
+        user_dict = dict(i)
+        usd = user_dict['user_id']
+        uid_list2.append(usd)
+    print len(uid_list2)
+
+    if diff == '0':
+        detail_result1 = related_user_search(uid_list1,sort_flag)
+        detail_result2 = related_user_search(uid_list2,sort_flag)
+
+    if diff == '1':
+        same_u = set(uid_list1)&set(uid_list2)
+        same_u = [i for i in same_u]
+        detail_result1 = related_user_search(same_u,sort_flag)
+        detail_result2 = related_user_search(same_u,sort_flag)
+
+    if diff == '2':
+        diff_u1 = set(uid_list1) - (set(uid_list1)&set(uid_list2))
+        diff_u1 = [i for i in diff_u1]
+        diff_u2 = set(uid_list2) - (set(uid_list1)&set(uid_list2))
+        diff_u2 = [i for i in diff_u2]
+        detail_result1 = related_user_search(diff_u1,sort_flag)
+        detail_result2 = related_user_search(diff_u2,sort_flag)
+    return {'detail_result1':detail_result1,'detail_result2':detail_result2}
+
+def compare_event_group(group_name1,group_name2,sort_flag,diff):
+    s_string1 = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name1
+    group_result1 = graph.run(s_string1)
+    event_list1 = []
+    for event in group_result1:
+        user_dict = dict(event)
+        usd = user_dict['user_id']
+        c_string = 'START s0 = node:node_index(uid="'+str(usd)+'") '
+        c_string += 'MATCH (s0)-[r]-(s1:Event) return s1 LIMIT 50'
+        # print c_string
+        result = graph.run(c_string)
+        for i in list(result):
+            print i
+            end_id = dict(i['s1'])
+            event_list1.append(end_id['event_id'])
+    print len(event_list1)
+
+    s_string2 = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name2
+    group_result2 = graph.run(s_string2)
+    event_list2 = []
+    for event in group_result2:
+        user_dict = dict(event)
+        usd = user_dict['user_id']
+        c_string = 'START s0 = node:node_index(uid="'+str(usd)+'") '
+        c_string += 'MATCH (s0)-[r]-(s2:Event) return s2 LIMIT 50'
+        # print c_string
+        result = graph.run(c_string)
+        for i in list(result):
+            print i
+            end_id = dict(i['s2'])
+            event_list2.append(end_id['event_id'])
+    print len(event_list2)
+
+    if diff == '0':
+        detail_result1 = event_detail_search(event_list1,sort_flag)
+        detail_result2 = event_detail_search(event_list2,sort_flag)
+
+    if diff == '1':
+        same_e = set(event_list1)&set(event_list2)
+        same_e = [i for i in same_e]
+        detail_result1 = event_detail_search(same_e,sort_flag)
+        detail_result2 = event_detail_search(same_e,sort_flag)
+
+    if diff == '2':
+        diff_e1 = set(event_list1) - (set(event_list1)&set(event_list2))
+        diff_e1 = [i for i in diff_e1]
+        diff_e2 = set(event_list2) - (set(event_list1)&set(event_list2))
+        diff_e2 = [i for i in diff_e2]
+        detail_result1 = event_detail_search(diff_e1,sort_flag)
+        detail_result2 = event_detail_search(diff_e2,sort_flag)
+    return {'detail_result1':detail_result1,'detail_result2':detail_result2}
+
+def compare_weibo_group(group_name1, group_name2, sort_flag, diff):
+    s_string1 = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name1
+    group_result1 = graph.run(s_string1)
+    uid_list1 = []
+    for i in group_result1:
+        user_dict = dict(i)
+        usd = user_dict['user_id']
+        uid_list1.append(usd)
+    print len(uid_list1)
+
+    s_string2 = 'START s0 = node:group_index(group="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.uid as user_id' %group_name2
+    group_result2 = graph.run(s_string2)
+    uid_list2 = []
+    for i in group_result2:
+        user_dict = dict(i)
+        usd = user_dict['user_id']
+        uid_list2.append(usd)
+    print len(uid_list2)
+
+    if diff == '0':
+        detail_result1 = user_weibo_search(uid_list1,sort_flag)
+        detail_result2 = user_weibo_search(uid_list2,sort_flag)
+
+    if diff == '1':
+        same_u = set(uid_list1)&set(uid_list2)
+        same_u = [i for i in same_u]
+        detail_result1 = user_weibo_search(same_u,sort_flag)
+        detail_result2 = user_weibo_search(same_u,sort_flag)
+
+    if diff == '2':
+        diff_u1 = set(uid_list1) - (set(uid_list1)&set(uid_list2))
+        diff_u1 = [i for i in diff_u1]
+        diff_u2 = set(uid_list2) - (set(uid_list1)&set(uid_list2))
+        diff_u2 = [i for i in diff_u2]
+        detail_result1 = user_weibo_search(diff_u1,sort_flag)
+        detail_result2 = user_weibo_search(diff_u2,sort_flag)
+
+    return {'detail_result1':detail_result1,'detail_result2':detail_result2}
 

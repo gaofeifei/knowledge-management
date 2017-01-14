@@ -12,7 +12,7 @@ from py2neo import Node, Relationship, Graph, NodeSelector
 from py2neo.packages.httpstream import http
 from utils import theme_tab_map, theme_tab_graph,query_special_event,event_list_theme,\
                   query_detail_theme,query_theme_user, query_event_river,del_e_theme_rel,\
-                  search_related_event_f,search_related_e_card
+                  search_related_event_f,search_related_e_card, compare_user_theme, compare_event_theme
 
 http.socket_timeout = 9999
 
@@ -47,7 +47,7 @@ def detail_theme():  #专题包含事件滚动卡片,专题编辑上方卡片
     return json.dumps(detail_t)
 
 @mod.route('/theme_river/')
-def detail_river_theme():  #专题包含事件河
+def detail_river_theme():  #专题包含事件河,数量走势图信息
     theme_name = request.args.get('theme_name', '电信诈骗')
     detail_t = query_event_river(theme_name)
     return json.dumps(detail_t)
@@ -99,15 +99,32 @@ def del_event_in_theme():  #专题编辑-删除事件
 
 @mod.route('/search_related_event/')
 def search_related_event():  #专题编辑-编辑前先搜索人物,图谱
-    # group_name = request.args.get('group_name', '法律人士')
     search_item = request.args.get('item', '马来')
     user_graph = search_related_event_f(search_item)
     return json.dumps(user_graph)
 
 @mod.route('/search_related_event_card/')
 def search_related_event_card():  #专题编辑-增加前先搜索人物,卡片部分
-    # group_name = request.args.get('group_name', '法律人士')
     search_item = request.args.get('item', '马来')
     layer = request.args.get('layer', '2')#'2'  'all'
     event_card = search_related_e_card(search_item, layer)
     return json.dumps(event_card)
+
+
+@mod.route('/e_compare_user/')   
+def e_compare_user():  #专题对比，人物表格对比
+    theme_name1 = request.args.get('theme_name1', '电信诈骗')
+    theme_name2 = request.args.get('theme_name2', '港澳台')
+    sort_flag = request.args.get('sort_flag', 'activeness')#influence, sensitive
+    diff = request.args.get('diff', '2')# '1', '2'  0:全部 1相同  2不同
+    result = compare_user_theme(theme_name1, theme_name2, sort_flag, diff)
+    return json.dumps(result)
+
+@mod.route('/e_compare_event/')   
+def e_compare_event():  #专题对比，事件卡片对比
+    theme_name1 = request.args.get('theme_name1', '电信诈骗')
+    theme_name2 = request.args.get('theme_name2', '港澳台')
+    sort_flag = request.args.get('sort_flag', 'start_ts')#uid_counts, weibo_counts
+    diff = request.args.get('diff', '0')# '1', '2'  0:全部 1相同  2不同
+    result = compare_event_theme(theme_name1, theme_name2, sort_flag, diff)
+    return json.dumps(result)

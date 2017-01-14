@@ -11,7 +11,7 @@ import csv
 from  knowledge.global_config  import relation_list,user_event_relation
 from utils import group_tab_graph, group_tab_map,query_group,query_group_user,query_group_event,search_related_user,\
                   query_group_weibo, query_user_num,del_user_group_rel, user_list_group,add_user_group_rel,\
-                  search_related_user_card
+                  search_related_user_card, compare_user_group, compare_event_group,compare_weibo_group
 from py2neo import Node, Relationship, Graph, NodeSelector
 from py2neo.packages.httpstream import http
 
@@ -80,7 +80,7 @@ def user_in_group():  #群体包含人物滚动,群体编辑上部分，卡片
 @mod.route('/group_detail/')
 def detail_theme():  #群体包含事件滚动
     group_name = request.args.get('group_name', '法律人士')
-    sort_flag = request.args.get('sort_flag', 'counts')
+    sort_flag = request.args.get('sort_flag', 'weibo_counts')
     detail_t = query_group_event(group_name, sort_flag)
     return json.dumps(detail_t)
 
@@ -127,3 +127,30 @@ def add_user_in_group():  #群体编辑-增加人物
     uid = request.args.get('uid', '2682428145')
     flag = add_user_group_rel(group_name, uid)
     return json.dumps(flag)
+
+@mod.route('/g_compare_user/')   
+def g_compare_user():  #群体对比，人物对比
+    group_name1 = request.args.get('group_name1', '法律人士')
+    group_name2 = request.args.get('group_name2', '法律人士')
+    sort_flag = request.args.get('sort_flag', 'activeness')#influence, sensitive
+    diff = request.args.get('diff', '0')# '1', '2'  0:全部 1相同  2不同
+    result = compare_user_group(group_name1,group_name2,sort_flag,diff)
+    return json.dumps(result)
+
+@mod.route('/g_compare_event/')   
+def g_compare_event():  #群体对比，事件对比
+    group_name1 = request.args.get('group_name1', '法律人士')
+    group_name2 = request.args.get('group_name2', '媒体')
+    sort_flag = request.args.get('sort_flag', 'start_ts')#uid_counts, weibo_counts
+    diff = request.args.get('diff', '0')# '1', '2'  0:全部 1相同  2不同
+    result = compare_event_group(group_name1,group_name2,sort_flag,diff)
+    return json.dumps(result)
+
+@mod.route('/g_compare_weibo/')   
+def g_compare_weibo():  #群体对比，微博对比
+    group_name1 = request.args.get('group_name1', '法律人士')
+    group_name2 = request.args.get('group_name2', '媒体')
+    sort_flag = request.args.get('sort_flag', 'retweeted')#sensitive
+    diff = request.args.get('diff', '0')# '1', '2'  0:全部 1相同  2不同
+    result = compare_weibo_group(group_name1,group_name2,sort_flag,diff)
+    return json.dumps(result)

@@ -5,7 +5,7 @@ import json
 from knowledge.global_config import portrait_name, portrait_type, event_name, event_analysis_name, \
         neo4j_name, event_type, event_special, special_event_index_name, group_index_name, group_rel, node_index_name
 from knowledge.global_utils import es_user_portrait, es_event, graph,\
-        user_name_search, event_name_search,event_detail_search
+        user_name_search, event_name_search,event_detail_search, related_user_search
 from knowledge.time_utils import ts2datetime, datetime2ts,ts2date
 from py2neo import Node, Relationship
 from py2neo.ogm import GraphObject, Property
@@ -13,32 +13,6 @@ from py2neo.packages.httpstream import http
 from py2neo.ext.batman import ManualIndexManager
 from py2neo.ext.batman import ManualIndexWriteBatch
 http.socket_timeout = 9999
-
-#查找该专题下事件关联的用户信息
-def related_user_search(uid_list,sort_flag):
-
-    query_body = {
-        'query':{
-            'terms':{'uid':uid_list}
-            },
-        "sort": [{sort_flag:'desc'}]
-    }
-    fields_list = ['activeness', 'importnace','sensitive','uname','fansnum',\
-                   'domain','topic_string','user_tag']
-
-    event_detail = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
-                body=query_body, _source=False, fields=fields_list)['hits']['hits']
-    detail_result = []
-    for i in event_detail:
-        fields = i['fields']
-        detail = dict()
-        for i in fields_list:
-            try:
-                detail[i] = fields[i][0]
-            except:
-                detail[i] = 'null'
-        detail_result.append(detail)
-    return detail_result
 
 #查找该专题下的事件主题河流数据
 def event_river_search(eid_list):
@@ -498,7 +472,7 @@ def search_related_e_card(item,layer):
             result = graph.run(c_string)
             for i in list(result):
                 ss_id = dict(i['ss'])
-                print ss_id,'???????????/'
+                # print ss_id,'???????????/'
                 if ss_id.has_key('uid') or ss_id.has_key('event_id'):
                     m_id = dict(i['s1'])['event_id']
                     if m_id not in only_eid:
@@ -517,3 +491,94 @@ def search_related_e_card(item,layer):
         result_card = event_detail_search(eid_list_all,'start_ts')
 
     return result_card
+
+
+def compare_user_theme(theme_name1, theme_name2, sort_flag,diff):
+    s_string1 = 'START s0 = node:special_event_index(event="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.event_id as event' %theme_name1
+    event_result1 = graph.run(s_string1)
+    uid_list1 = []
+    for event in event_result1:
+        # print 
+        event_value = event['event']
+        # event_list.append(event_value)
+        c_string = 'START s0 = node:event_index(event="'+str(event_value)+'") '
+        c_string += 'MATCH (s0)-[r]-(s1:User) return s1 LIMIT 50'
+        print c_string
+        result = graph.run(c_string)
+        for i in list(result):
+            end_id = dict(i['s1'])
+            uid_list1.append(end_id['uid'])
+
+    s_string2 = 'START s0 = node:special_event_index(event="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.event_id as event' %theme_name2
+    event_result2 = graph.run(s_string2)
+    uid_list2 = []
+    for event in event_result2:
+        # print 
+        event_value = event['event']
+        # event_list.append(event_value)
+        c_string = 'START s0 = node:event_index(event="'+str(event_value)+'") '
+        c_string += 'MATCH (s0)-[r]-(s1:User) return s1 LIMIT 100'
+        result = graph.run(c_string)
+        for i in list(result):
+            end_id = dict(i['s1'])
+            uid_list2.append(end_id['uid'])
+
+    if diff == '0':
+        uid_list1 = [i for i in set(uid_list1)]
+        uid_list2 = [i for i in set(uid_list2)]
+        detail_result1 = related_user_search(uid_list1,sort_flag)
+        detail_result2 = related_user_search(uid_list2,sort_flag)
+
+    if diff == '1':
+        same_u = set(uid_list1)&set(uid_list2)
+        same_u = [i for i in same_u]
+        detail_result1 = related_user_search(same_u,sort_flag)
+        detail_result2 = related_user_search(same_u,sort_flag)
+
+    if diff == '2':
+        diff_u1 = set(uid_list1) - (set(uid_list1)&set(uid_list2))
+        diff_u1 = [i for i in diff_u1]
+        diff_u2 = set(uid_list2) - (set(uid_list1)&set(uid_list2))
+        diff_u2 = [i for i in diff_u2]
+        detail_result1 = related_user_search(diff_u1,sort_flag)
+        detail_result2 = related_user_search(diff_u2,sort_flag)
+    return {'detail_result1':detail_result1,'detail_result2':detail_result2}
+
+def compare_event_theme(theme_name1, theme_name2, sort_flag, diff):
+
+    s_string1 = 'START s0 = node:special_event_index(event="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.event_id as event' %theme_name1
+    event_result1 = graph.run(s_string1)
+    event_list1 = []
+    for event in event_result1:
+        event_value = event['event']
+        event_list1.append(event_value)
+
+    s_string2 = 'START s0 = node:special_event_index(event="%s")\
+                MATCH (s0)-[r]-(s) RETURN s.event_id as event' %theme_name2
+    event_result2 = graph.run(s_string2)
+    event_list2 = []
+    for event in event_result2:
+        event_value = event['event']
+        event_list2.append(event_value)
+
+    if diff == '0':
+        detail_result1 = event_detail_search(event_list1,sort_flag)
+        detail_result2 = event_detail_search(event_list2,sort_flag)
+
+    if diff == '1':
+        same_e = set(event_list1)&set(event_list2)
+        same_e = [i for i in same_e]
+        detail_result1 = event_detail_search(same_e,sort_flag)
+        detail_result2 = event_detail_search(same_e,sort_flag)
+
+    if diff == '2':
+        diff_e1 = set(event_list1) - (set(event_list1)&set(event_list2))
+        diff_e1 = [i for i in diff_e1]
+        diff_e2 = set(event_list2) - (set(event_list1)&set(event_list2))
+        diff_e2 = [i for i in diff_e2]
+        detail_result1 = event_detail_search(diff_e1,sort_flag)
+        detail_result2 = event_detail_search(diff_e2,sort_flag)
+    return {'detail_result1':detail_result1,'detail_result2':detail_result2}

@@ -12,7 +12,8 @@ from py2neo import Node, Relationship, Graph, NodeSelector
 from py2neo.packages.httpstream import http
 from utils import theme_tab_map, theme_tab_graph,query_special_event,event_list_theme,\
                   query_detail_theme,query_theme_user, query_event_river,del_e_theme_rel,\
-                  search_related_event_f,search_related_e_card, compare_user_theme, compare_event_theme
+                  search_related_event_f,search_related_e_card, compare_user_theme, compare_event_theme,\
+                  compare_graph_theme,compare_map_theme
 
 http.socket_timeout = 9999
 
@@ -67,6 +68,8 @@ def theme_node_filter():
     relation_str = ','.join(event_relation_list)
     relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
+    relation_type_list.extend(user_event_relation)
+    
     layer = request.args.get('layer','0') # '0' '1' or '2'
     filter_result = theme_tab_graph(theme_name, node_type, relation_type_list, layer)
     return json.dumps(filter_result)
@@ -79,6 +82,7 @@ def theme_map_filter():
     relation_str = ','.join(event_relation_list)
     relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
+    relation_type_list.extend(user_event_relation)
     layer = request.args.get('layer','1') #'0' or '1' or '2'
     filter_map_result = theme_tab_map(theme_name, node_type, relation_type_list, layer)
     return json.dumps(filter_map_result)
@@ -127,4 +131,22 @@ def e_compare_event():  #专题对比，事件卡片对比
     sort_flag = request.args.get('sort_flag', 'start_ts')#uid_counts, weibo_counts
     diff = request.args.get('diff', '0')# '1', '2'  0:全部 1相同  2不同
     result = compare_event_theme(theme_name1, theme_name2, sort_flag, diff)
+    return json.dumps(result)
+
+@mod.route('/t_compare_graph/')   
+def g_compare_graph():  #专题对比，图谱对比
+    theme_name1 = request.args.get('theme_name1', '电信诈骗')
+    theme_name2 = request.args.get('theme_name2', '港澳台')
+    layer = request.args.get('layer','0') #'0' '1' or '2'
+    diff = request.args.get('diff', '0')# '1', '2'  0:全部 1相同  2不同
+    result = compare_graph_theme(theme_name1, theme_name2,layer,diff)
+    return json.dumps(result)
+
+@mod.route('/t_compare_map/')   
+def g_compare_map():  #专题对比，地图对比
+    theme_name1 = request.args.get('theme_name1', '电信诈骗')
+    theme_name2 = request.args.get('theme_name2', '港澳台')
+    layer = request.args.get('layer','1') #'0' '1' or '2'
+    diff = request.args.get('diff', '0')# '1', '2'  0:全部 1相同  2不同
+    result = compare_map_theme(theme_name1, theme_name2,layer,diff)
     return json.dumps(result)

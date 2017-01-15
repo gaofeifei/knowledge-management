@@ -11,7 +11,8 @@ import csv
 from  knowledge.global_config  import relation_list,user_event_relation
 from utils import group_tab_graph, group_tab_map,query_group,query_group_user,query_group_event,search_related_user,\
                   query_group_weibo, query_user_num,del_user_group_rel, user_list_group,add_user_group_rel,\
-                  search_related_user_card, compare_user_group, compare_event_group,compare_weibo_group
+                  search_related_user_card, compare_user_group, compare_event_group,compare_weibo_group, compare_graph_group,\
+                  compare_map_group
 from py2neo import Node, Relationship, Graph, NodeSelector
 from py2neo.packages.httpstream import http
 
@@ -41,6 +42,7 @@ def group_node_filter():
     relation_str = ','.join(relation_list)
     relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
+    relation_type_list.extend(user_event_relation)
     print relation_type_list,'!!!!!!!!'
     layer = request.args.get('layer','0') #'0' '1' or '2'
     tab_graph_result = group_tab_graph(group_name, node_type, relation_type_list, layer)   
@@ -54,6 +56,7 @@ def group_map_filter():
     relation_str = ','.join(relation_list)
     relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
+    relation_type_list.extend(user_event_relation)
     layer = request.args.get('layer','0') # '0' '1' or '2'
     tab_map_result = group_tab_map(group_name, node_type, relation_type_list, layer)   
     return json.dumps(tab_map_result)
@@ -153,4 +156,22 @@ def g_compare_weibo():  #群体对比，微博对比
     sort_flag = request.args.get('sort_flag', 'retweeted')#sensitive
     diff = request.args.get('diff', '0')# '1', '2'  0:全部 1相同  2不同
     result = compare_weibo_group(group_name1,group_name2,sort_flag,diff)
+    return json.dumps(result)
+
+@mod.route('/g_compare_graph/')   
+def g_compare_graph():  #群体对比，图谱对比
+    group_name1 = request.args.get('group_name1', '法律人士')
+    group_name2 = request.args.get('group_name2', '媒体')
+    layer = request.args.get('layer','1') #'0' '1' or '2'
+    diff = request.args.get('diff', '0')# '1', '2'  0:全部 1相同  2不同
+    result = compare_graph_group(group_name1,group_name2,layer,diff)
+    return json.dumps(result)
+
+@mod.route('/g_compare_map/')   
+def g_compare_map():  #群体对比，地图对比
+    group_name1 = request.args.get('group_name1', '法律人士')
+    group_name2 = request.args.get('group_name2', '媒体')
+    layer = request.args.get('layer','1') #'0' '1' or '2'
+    diff = request.args.get('diff', '0')# '1', '2'  0:全部 1相同  2不同
+    result = compare_map_group(group_name1,group_name2,layer,diff)
     return json.dumps(result)

@@ -126,10 +126,11 @@ def related_user_search(uid_list,sort_flag):
         'query':{
             'terms':{'uid':uid_list}
             },
+        'size':200,
         "sort": [{sort_flag:'desc'}]
     }
-    fields_list = ['activeness', 'importnace','sensitive','uname','fansnum',\
-                   'domain','topic_string','user_tag','uid']
+    fields_list = ['activeness', 'influence','sensitive','uname','fansnum','statusnum',\
+                   'domain','topic_string','user_tag','uid','activity_geo_aggs']
 
     event_detail = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
                 body=query_body, _source=False, fields=fields_list)['hits']['hits']
@@ -152,6 +153,7 @@ def event_detail_search(eid_list,sort_flag):
         'query':{
             'terms':{'en_name':eid_list}
             },
+        'size':100,
         "sort": [{sort_flag:'desc'}]
     }
     fields_list = ['name', 'en_name', 'weibo_counts','start_ts','location','uid_counts','user_tag','description','photo_url']

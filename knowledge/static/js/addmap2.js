@@ -344,3 +344,29 @@ function wenjianchuanshu(uid) {
     });
 };
 
+//添加关系的文件读取函数
+function relationFileSelect(evt){
+    var files = evt;
+    for(var i=0,f;f=files[i];i++){
+        var reader = new FileReader();
+        reader.onload = function (oFREvent) {
+            var a = oFREvent.target.result;
+            $.ajax({
+                type:"POST",
+                url:"/construction/read_relation/",
+                dataType: "json",
+                async:false,
+                data:{new_words:a},
+                success: function(data){
+                    if( data ){
+                        var data=data;
+                        console.log(data);
+                        //请在此部分写传输给翟树杰数据的函数wenjianchuanshu(data);
+                        // alert("批量导入成功！");
+                    }
+                }
+            });
+        };
+        reader.readAsText(f,'GB2312');
+    }
+}

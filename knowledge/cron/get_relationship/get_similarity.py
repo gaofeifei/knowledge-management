@@ -93,11 +93,11 @@ def people_similarity(p_first,p_second):
         weight_dis = p_second['weight']
         max_data = p_second['weight']
     else:
-        weight_dis = 0
-        max_data = 0
+        weight_dis = -1
+        max_data = -1
         
-    if max_data > 0:
-        s3 = float(weight_dis)/float(max_data)
+    if max_data >= 0:
+        s3 = 1 - float(weight_dis)/float(max_data)
     else:
         s3 = 0
 
@@ -194,11 +194,11 @@ def event_similarity(p_first,p_second):
         weight_dis = p_second['weight']
         max_data = p_second['weight']
     else:
-        weight_dis = 0
-        max_data = 0
+        weight_dis = -1
+        max_data = -1
         
-    if max_data > 0:
-        s2 = float(weight_dis)/float(max_data)
+    if max_data >= 0:
+        s2 = 1 - float(weight_dis)/float(max_data)
     else:
         s2 = 0
 

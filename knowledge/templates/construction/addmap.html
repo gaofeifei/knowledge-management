@@ -367,7 +367,8 @@
                     <input type="checkbox"/> 上传文件:
                 </label>
                 <div class="form-group filem">
-                    <input type="file" multiple/>
+                    <input type="file" id="exampleInputFile" 
+                    multiple onchange="relationFileSelect(this.files)"/>
                 </div>
             </div>
             <button class="upload2">上传</button>

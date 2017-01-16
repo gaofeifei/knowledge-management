@@ -27,7 +27,7 @@ def add_relation():
 
 
 @mod.route('/read_file/', methods=['GET', 'POST'])
-def new_in():
+def read_node():
     f_name = request.form['new_words']
 
     uid_list = []
@@ -37,6 +37,21 @@ def new_in():
 
     for li in line:
         uid_list.append(li)
+
+    return json.dumps(uid_list)
+
+@mod.route('/read_relation/', methods=['GET', 'POST'])
+def read_relation():
+    f_name = request.form['new_words']
+
+    uid_list = []
+    line = f_name.split('\n')
+    if len(line) == 0:
+        return json.dumps('No Content!')
+
+    for li in line:
+        n1,n2,r = li.split(',')
+        uid_list.append([n1,n2,r])
 
     return json.dumps(uid_list)
 

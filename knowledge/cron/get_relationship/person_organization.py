@@ -173,7 +173,7 @@ def get_interaction_r(uid_interaction):#提取交互关系
 
     return interaction_list
 
-def person_organization(people_dict):#计算人物-人物，人物-机构之间的关系
+def person_organization(people_dict,max_data):#计算人物-人物，人物-机构之间的关系
     '''
         输入数据：
         people_dict 人物属性字典，键是人物uid，值是人物对应的属性
@@ -182,24 +182,59 @@ def person_organization(people_dict):#计算人物-人物，人物-机构之间�
         {uid1:{'influence':influence,'importance':importance,'activeness':activeness,'sensitive':sensitive},
          uid2:{'influence':influence,'importance':importance,'activeness':activeness,'sensitive':sensitive},...}
 
-        输入数据:
+        max_data 每个字段对应的最大值，类型是字典
+        示例：{'influence':influence,'importance':importance,'activeness':activeness,'sensitive':sensitive}
+
+        输出数据:
         node_weight 节点权重字典，键是uid，值是该节点对应的权重
         people_list 人物节点列表，存储人物uid
         organization_list 机构节点列表，存储机构uid
         colleague_list 业务关联关系列表，示例：[[uid1,uid2,'colleague'],[uid1,uid2,'colleague'],...]
         interaction_list 交互关系列表,示例：[[uid1,uid2,'friend',weight],[uid1,uid2,'friend',weight],...]
     '''
-    if len(people_dict) == 0:
+    data_keys = ['influence','importance','activeness','sensitive']
+
+    if len(people_dict) == 0:#没有人物信息直接返回空
         return {},[],[],[],[]
+
+    if len(max_data) == 0:#没有最大值的处理方式
+        max_data = {'influence':0,'importance':0,'activeness':0,'sensitive':0}
+
+    if len(max_data) < 4:#有的键没有
+        for key in data_keys:
+            if not max_data.has_key(key):
+                max_data[key] = 0
+        
     
     uidlist = []
     node_weight = dict()
+    
     for k,v in people_dict.iteritems():
         if k not in uidlist:
             uidlist.append(k)
         else:
             continue
-        weight = v['influence']*influence_weight + v['importance']*importance_weight + v['activeness']*activeness_weight + v['sensitive']*sensitive_weight
+        weight = float(0)
+        if max_data['influence'] > 0:
+            weight = weight + (float(v['influence'])/float(max_data['influence'])*100)*influence_weight
+        else:
+            weight = weight + 0
+
+        if max_data['importance'] > 0:
+            weight = weight + (float(v['importance'])/float(max_data['importance'])*100)*influence_weight
+        else:
+            weight = weight + 0
+
+        if max_data['activeness'] > 0:
+            weight = weight + (float(v['activeness'])/float(max_data['activeness'])*100)*influence_weight
+        else:
+            weight = weight + 0
+
+        if max_data['sensitive'] > 0:
+            weight = weight + (float(v['sensitive'])/float(max_data['sensitive'])*100)*influence_weight
+        else:
+            weight = weight + 0
+
         node_weight[k] = weight
     
     uid_profile = get_profile_by_uid(uidlist)
@@ -214,6 +249,7 @@ if __name__ == '__main__':
                    '2668385597':{'influence':239.14604181492643,'importance':37.92910857314217,'activeness': 3.8413448092288176,'sensitive':0},\
                    '1875189917':{'influence':35.14293596094034,'importance': 75.00237282450387,'activeness':3.069333012116046,'sensitive':1},\
                    '1743112547':{'influence':748.9551196012842,'importance':39.0233041893824,'activeness':2.0765276967147064,'sensitive':0}}
-    node_weight,people_list,organization_list,colleague_list,interaction_list = person_organization(people_dict)
+    max_data = {'influence':748.9551196012842,'importance':75.00237282450387,'activeness':3.8413448092288176,'sensitive':1}
+    node_weight,people_list,organization_list,colleague_list,interaction_list = person_organization(people_dict,max_data)
 
-    print colleague_list,interaction_list
+    print node_weight

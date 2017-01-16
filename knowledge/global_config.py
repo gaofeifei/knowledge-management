@@ -79,7 +79,7 @@ event_other = 'event_other'#其他关系
 
 event_special = "special_event" # 专题
 
-event_relation_list = ['contain','event_other']
+event_relation_list = ['contain','event_other','special_event']
 
 
 # Relatioship: User、Organization--User

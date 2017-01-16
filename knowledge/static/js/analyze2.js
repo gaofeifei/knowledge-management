@@ -160,7 +160,7 @@
             myChart.on(ecConfig.EVENT.CLICK, focus)
 
             myChart.on(ecConfig.EVENT.FORCE_LAYOUT_END, function () {
-                console.log(myChart.chart.force.getPosition());
+                // console.log(myChart.chart.force.getPosition());
             });
             // 为echarts对象加载数据
             myChart.setOption(option);

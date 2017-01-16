@@ -248,7 +248,7 @@ def node_or_node_query():
         result["rel"]=rel
         result["uid2"]=uid2
         result["uname2"]=uname2
-        list.append(res)
+        list.append(result)
     return json.dumps(list)
 
 

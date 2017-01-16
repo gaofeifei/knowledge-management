@@ -312,7 +312,7 @@ def theme_tab_map(theme_name, node_type, relation_type, layer):
 def event_list_theme(event):
     s_string = 'START s0 = node:special_event_index(event="%s")\
                 MATCH (s0)-[r]-(s:Event) RETURN s' %(event)
-    print s_string
+    # print s_string
     e_list = graph.run(s_string)
     e_list_l = []
     for i in e_list:
@@ -335,9 +335,9 @@ def search_related_event_f(item):
         "query":{
             'bool':{
                 'should':[
-                    {"wildcard":{'keywords':'*'+str(item)+'*'}},            
-                    {"wildcard":{'en_name':'*'+str(item)+'*'}},            
-                    {"wildcard":{'name':'*'+str(item)+'*'}}         
+                    {"wildcard":{'keywords':'*'+str(item.encode('utf-8'))+'*'}},            
+                    {"wildcard":{'en_name':'*'+str(item.encode('utf-8'))+'*'}},            
+                    {"wildcard":{'name':'*'+str(item.encode('utf-8'))+'*'}}         
                 ]
             }
 
@@ -431,9 +431,9 @@ def search_related_e_card(item,layer):
         "query":{
             'bool':{
                 'should':[
-                    {"wildcard":{'keywords':'*'+str(item)+'*'}},            
-                    {"wildcard":{'en_name':'*'+str(item)+'*'}},            
-                    {"wildcard":{'name':'*'+str(item)+'*'}}         
+                    {"wildcard":{'keywords':'*'+str(item.encode('utf-8'))+'*'}},            
+                    {"wildcard":{'en_name':'*'+str(item.encode('utf-8'))+'*'}},            
+                    {"wildcard":{'name':'*'+str(item.encode('utf-8'))+'*'}}         
                 ]
             }
 

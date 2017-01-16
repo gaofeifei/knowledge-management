@@ -129,8 +129,8 @@ def related_user_search(uid_list,sort_flag):
         'size':200,
         "sort": [{sort_flag:'desc'}]
     }
-    fields_list = ['activeness', 'influence','sensitive','uname','fansnum','statusnum',\
-                   'domain','topic_string','user_tag','uid','activity_geo_aggs']
+    fields_list = ['activeness', 'influence','sensitive','uname','fansnum',\
+                   'domain','topic_string','user_tag','uid','photo_url','activity_geo_aggs', 'statusnum']
 
     event_detail = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
                 body=query_body, _source=False, fields=fields_list)['hits']['hits']

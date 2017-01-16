@@ -656,7 +656,7 @@ var play=$("#container .associat .assright .assright2 .play");
             var data=eval(data);
             var location,tag,description,srcimg;
             function getLocalTime(nS) {     
-               return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10).replace(/:\d{1,2}$/,' ');     
+               return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10).replace(/:\d{1,2}$/,' ');    
             }  
             if (data.photo_url=='null') {
                 srcimg='/static/image/pan.jpg';

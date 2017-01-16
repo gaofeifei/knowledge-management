@@ -192,6 +192,7 @@ function events() {
                 }
             );
         });
+        console.log(link_value)
         myChart.hideLoading();
         myChart.setOption(option = {
             title: {

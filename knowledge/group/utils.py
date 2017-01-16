@@ -376,7 +376,7 @@ def user_list_group(group_name):
     s_string = 'START s0 = node:group_index(group="%s")\
                 MATCH (s0)-[r]-(s:User) RETURN s.uid as uid' %(group_name)
 
-    print s_string
+    # print s_string
     uid_list = graph.run(s_string)
     uid_list_l = []
     for i in uid_list:
@@ -391,8 +391,8 @@ def search_related_user_card(item,layer):
         "query":{
             'bool':{
                 'should':[
-                    {"wildcard":{'uid':'*'+str(item)+'*'}},            
-                    {"wildcard":{'uname':'*'+str(item)+'*'}}
+                    {"wildcard":{'uid':'*'+str(item.encode('utf-8'))+'*'}},            
+                    {"wildcard":{'uname':'*'+str(item.encode('utf-8'))+'*'}}
                 ]
             }
 
@@ -450,8 +450,8 @@ def search_related_user(item):
         "query":{
             'bool':{
                 'should':[
-                    {"wildcard":{'uid':'*'+str(item)+'*'}},            
-                    {"wildcard":{'uname':'*'+str(item)+'*'}}         
+                    {"wildcard":{'uid':'*'+str(item.encode('utf-8'))+'*'}},            
+                    {"wildcard":{'uname':'*'+str(item.encode('utf-8'))+'*'}}         
                 ]
             }
 

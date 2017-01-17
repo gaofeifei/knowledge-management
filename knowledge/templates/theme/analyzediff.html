@@ -6,12 +6,6 @@
         .fixed-table-pagination .pagination-detail {
             display: none;
         }
-        .bootstrap-table .table:not(.table-condensed)>tbody>tr>td {
-            width: 55px!important;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow:ellipsis;
-        }
     </style>
 {% endblock %}
 
@@ -73,13 +67,13 @@
                     <div class="cdt4">
                         <div class="radio">
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" name="tiosadns" type="radio" checked/> 不扩展
+                                <input class="per" id='bu' name="tiosadns" type="radio" checked/> 不扩展
                             </label>
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" name="tiosadns" type="radio" checked/> 扩展一层
+                                <input class="per" id='yi' name="tiosadns" type="radio"/> 扩展一层
                             </label>
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" name="tiosadns" type="radio"/> 扩展二层
+                                <input class="per" id='er' name="tiosadns" type="radio"/> 扩展二层
                             </label>
                         </div>
                     </div>
@@ -88,19 +82,19 @@
                     <div class="cdt4">
                         <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
                             <label>
-                                <input type="radio" name="optionsRadios" value="option1" checked>
+                                <input type="radio" name="optionsRadios" id="quan" checked>
                                 全部节点
                             </label>
                         </div>
                         <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
                             <label>
-                                <input type="radio" name="optionsRadios" value="option2">
+                                <input type="radio" name="optionsRadios" id="xiangtong">
                                 相同节点
                             </label>
                         </div>
                         <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
                             <label>
-                                <input type="radio" name="optionsRadios" value="option3">
+                                <input type="radio" name="optionsRadios" value="butong">
                                 不同节点
                             </label>
                         </div>

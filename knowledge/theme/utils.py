@@ -375,7 +375,10 @@ def search_related_event_f(item):
         name_results = es_event.search(index=event_name, doc_type=event_type, \
                 body=query_body, fields=['name','en_name'])['hits']['hits']
     except:
-        return 'does not exist'
+        return 'node does not exist'
+    if len(name_results) == 0:
+        return 'node does not exist'
+    print name_results,'*********************'
     for i in name_results:
         print i
         name = i['fields']['name'][0]
@@ -470,9 +473,12 @@ def search_related_e_card(item,layer):
     try:
         name_results = es_event.search(index=event_name, doc_type=event_type, \
                 body=query_body, fields=['name','en_name'])['hits']['hits']
-        # print name_results,'@@@@@@@@@@@@@@@@@'
+        print name_results,'@@@@@@@@@@@@@@@@@'
     except:
-        return 'does not ex2ist'
+        return 'node does not exist'
+    print name_results,'@@@@@@@@@@@@@@@@@------------#######################'
+    if len(name_results) == 0:
+        return 'node does not exist'
     for i in name_results:
         print i
         name = i['fields']['name'][0]
@@ -513,6 +519,8 @@ def search_related_e_card(item,layer):
     if layer == 'all':
         eid_list_all =[]
         result = search_related_event_f(item)
+        if result == 'node does not exist':
+            return 'node does not exist'
         eid_dict = result['event_nodes']
         for k,v in eid_dict.iteritems():
             eid_list_all.append(k)

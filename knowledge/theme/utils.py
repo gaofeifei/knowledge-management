@@ -376,8 +376,9 @@ def search_related_event_f(item):
                 body=query_body, fields=['name','en_name'])['hits']['hits']
     except:
         return 'does not exist'
+    print name_results,'****************'
     for i in name_results:
-        print i
+        return i,'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11'
         name = i['fields']['name'][0]
         en_name = i['fields']['en_name'][0]
         only_eid.append(en_name)
@@ -411,8 +412,9 @@ def search_related_event_f(item):
                 event_name2 = event_name_search(middle_id)
                 e_nodes_list[middle_id] = event_name2
                 event_relation.append([start_id,relation1,middle_id])
-    print mid_uid_list
-    print mid_eid_list,'++++++++++++++++'
+
+    # print mid_uid_list
+    # print mid_eid_list,'++++++++++++++++'
     for mid_uid in mid_uid_list:
         c_string = 'START s1 = node:node_index(uid="'+str(mid_uid)+'") '
         c_string += 'MATCH (s1)-[r2]->(s2:Event) return s1,r2,s2 LIMIT 5'

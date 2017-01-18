@@ -102,10 +102,10 @@ function guanlianrenwu() {
         var str='';
         $.each(data,function (index,item) {
             var influe,name,huoyue,mingan,tag;
-            if (item.importnace=='null'){
+            if (item.influence=='null'){
                 influe='无';
             }else {
-                influe=item.importnace.toFixed(2);
+                influe=item.influence.toFixed(2);
             };
             if (item.uname=='null'||item.uname=='unknown'){
                 name='无';
@@ -133,7 +133,7 @@ function guanlianrenwu() {
                 '--><img class=\'xin\' style="margin-left: 10px;" src="/static/image/heart.png">'+
                 '</div>'+
                 '<div class="p22" style="margin-top: 5px">'+
-                '<img style="margin-left: 10px;" src="/static/image/influence.png" title="重要度">'+
+                '<img style="margin-left: 10px;" src="/static/image/influence.png" title="影响力">'+
                 '<span class="influence">'+influe+'</span>'+
                 '<img src="/static/image/huoyuedu.png" title="活跃度">'+
                 '<span class="huoyuedu">'+huoyue+'</span>'+

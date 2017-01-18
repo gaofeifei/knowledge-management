@@ -1,7 +1,7 @@
 {% extends "public_nav.html" %}
 {% block title %}<title>图谱管理 - 编辑图谱</title>{% endblock %}
 {% block my_css %}
-    <link rel="stylesheet" href="/static/css/bootstrap-table.min.css">
+    <!-- <link rel="stylesheet" href="/static/css/bootstrap-table.min.css"> -->
     <link rel="stylesheet" href="/static/css/compile.css">
     <style type="text/css">
         .compile b,.compile a {
@@ -21,7 +21,7 @@
             <div class="crt111">
                 <span>节点类型：</span>
                 <select name="" id="list1" onchange='leixing(this.value)'>
-                    <option value="" disabled selected>请选择事件类型</option>
+                    <option value="" disabled selected>请选择节点类型</option>
                     <option value="人物">人物</option>
                     <option value="事件">事件</option>
                 </select>
@@ -538,8 +538,8 @@
 {% block my_js %}
 <script src="/static/js/compile.js"></script>
 <script src="/static/js/compile2.js"></script>
-<script src="/static/js/bootstrap-table.min.js"></script>
-<script src="/static/js/bootstrap-table-zh-CN.min.js"></script>
+<!-- <script src="/static/js/bootstrap-table.min.js"></script>
+<script src="/static/js/bootstrap-table-zh-CN.min.js"></script> -->
 <script>
     $.each($(".delt"),function(index,item){
         $(item).on('click',function(){

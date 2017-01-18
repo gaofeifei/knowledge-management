@@ -175,6 +175,7 @@ function events() {
                 }
             );
         });
+        console.log(event_link)
         myChart.hideLoading();
         myChart.setOption(option = {
             title: {
@@ -259,111 +260,6 @@ function events() {
 events();
 
 //地图配置，地址请求
-
-// function maps(data) {
-//     // 路径配置
-//     var data=eval(data);
-//     // console.log(data);
-//     // $.each(data,function (index,item) {
-//     //     $.ajax({
-//     //         type: "GET",
-//     //         url: "/static/echarts/chinaCity_geo.txt",
-//     //         success: function(url){
-//     //             console.log(url.city_geo[item[0]]);
-//     //         }
-//     //     });
-//     // });
-//
-//     require.config({
-//         paths: {
-//             echarts: 'http://echarts.baidu.com/build/dist'
-//         }
-//     });
-//     require(
-//         [
-//             'echarts',
-//             'echarts/chart/map' // 使用柱状图就加载bar模块，按需加载
-//         ],
-//         function (ec) {
-//             // 基于准备好的dom，初始化echarts图表
-//             var myChart = ec.init(document.getElementById('placeimg'));
-//             var option;
-//             var plate=[],local={};
-//             $.each(data, function (index, item) {
-//                 plate.push(
-//                     {name: item[0],value: item[1]}
-//                 );
-//             });
-//             option = {
-//                 title : {
-//                     text: '全国主要城市空气质量（pm2.5）',
-//                     subtext: 'data from PM25.in',
-//                     sublink: 'http://www.pm25.in',
-//                     x:'center'
-//                 },
-//                 tooltip : {
-//                     trigger: 'item'
-//                 },
-//                 legend: {
-//                     orient: 'vertical',
-//                     x:'left',
-//                     data:['pm2.5']
-//                 },
-//                 dataRange: {
-//                     min : 0,
-//                     max : 500,
-//                     calculable : true,
-//                     color: ['maroon','purple','red','orange','yellow','lightgreen']
-//                 },
-//                 toolbox: {
-//                     show : true,
-//                     orient : 'vertical',
-//                     x: 'right',
-//                     y: 'center',
-//                     feature : {
-//                         mark : {show: true},
-//                         dataView : {show: true, readOnly: false},
-//                         restore : {show: true},
-//                         saveAsImage : {show: true}
-//                     }
-//                 },
-//                 series : [
-//                     {
-//                         name: 'pm2.5',
-//                         type: 'map',
-//                         mapType: 'china',
-//                         hoverable: false,
-//                         roam:true,
-//                         data : [],
-//                         markPoint : {
-//                             symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
-//                             itemStyle: {
-//                                 normal: {
-//                                     borderColor: '#87cefa',
-//                                     borderWidth: 1,            // 标注边线线宽，单位px，默认为1
-//                                     label: {
-//                                         show: false
-//                                     }
-//                                 },
-//                                 emphasis: {
-//                                     borderColor: '#1e90ff',
-//                                     borderWidth: 5,
-//                                     label: {
-//                                         show: false
-//                                     }
-//                                 }
-//                             },
-//                             data : plate
-//                         },
-//                         geoCoord: local
-//                     },
-//                 ]
-//             };
-//             // 为echarts对象加载数据
-//             myChart.setOption(option);
-//         }
-//     );
-// }
 
 function maps() {
     var myChart = echarts.init(document.getElementById('placeimg'));
@@ -820,10 +716,8 @@ function maps() {
             };
             // myChart.setOption(option);
         }else {
-            alert('无数据');
+            $("#placeimg").append('<span>暂时无新数据更新~~</span> ');
         }
     });
-
-
 }
 maps();

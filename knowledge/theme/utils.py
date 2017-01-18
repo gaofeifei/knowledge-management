@@ -334,7 +334,7 @@ def theme_tab_map(theme_name, node_type, relation_type, layer):
 def event_list_theme(event):
     s_string = 'START s0 = node:special_event_index(event="%s")\
                 MATCH (s0)-[r]-(s:Event) RETURN s' %(event)
-    print s_string
+    # print s_string
     e_list = graph.run(s_string)
     e_list_l = []
     for i in e_list:
@@ -357,9 +357,9 @@ def search_related_event_f(item):
         "query":{
             'bool':{
                 'should':[
-                    {"wildcard":{'keywords':'*'+str(item)+'*'}},            
-                    {"wildcard":{'en_name':'*'+str(item)+'*'}},            
-                    {"wildcard":{'name':'*'+str(item)+'*'}}         
+                    {"wildcard":{'keywords':'*'+str(item.encode('utf-8'))+'*'}},            
+                    {"wildcard":{'en_name':'*'+str(item.encode('utf-8'))+'*'}},            
+                    {"wildcard":{'name':'*'+str(item.encode('utf-8'))+'*'}}         
                 ]
             }
 
@@ -375,10 +375,11 @@ def search_related_event_f(item):
         name_results = es_event.search(index=event_name, doc_type=event_type, \
                 body=query_body, fields=['name','en_name'])['hits']['hits']
     except:
-        return 'does not exist'
-    print name_results,'****************'
+        return 'node does not exist'
+    if len(name_results) == 0:
+        return 'node does not exist'
+    print name_results,'*********************'
     for i in name_results:
-        return i,'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11'
         name = i['fields']['name'][0]
         en_name = i['fields']['en_name'][0]
         only_eid.append(en_name)
@@ -455,9 +456,9 @@ def search_related_e_card(item,layer):
         "query":{
             'bool':{
                 'should':[
-                    {"wildcard":{'keywords':'*'+str(item)+'*'}},            
-                    {"wildcard":{'en_name':'*'+str(item)+'*'}},            
-                    {"wildcard":{'name':'*'+str(item)+'*'}}         
+                    {"wildcard":{'keywords':'*'+str(item.encode('utf-8'))+'*'}},            
+                    {"wildcard":{'en_name':'*'+str(item.encode('utf-8'))+'*'}},            
+                    {"wildcard":{'name':'*'+str(item.encode('utf-8'))+'*'}}         
                 ]
             }
 
@@ -472,9 +473,12 @@ def search_related_e_card(item,layer):
     try:
         name_results = es_event.search(index=event_name, doc_type=event_type, \
                 body=query_body, fields=['name','en_name'])['hits']['hits']
-        # print name_results,'@@@@@@@@@@@@@@@@@'
+        print name_results,'@@@@@@@@@@@@@@@@@'
     except:
-        return 'does not ex2ist'
+        return 'node does not exist'
+    print name_results,'@@@@@@@@@@@@@@@@@------------#######################'
+    if len(name_results) == 0:
+        return 'node does not exist'
     for i in name_results:
         print i
         name = i['fields']['name'][0]
@@ -515,6 +519,8 @@ def search_related_e_card(item,layer):
     if layer == 'all':
         eid_list_all =[]
         result = search_related_event_f(item)
+        if result == 'node does not exist':
+            return 'node does not exist'
         eid_dict = result['event_nodes']
         for k,v in eid_dict.iteritems():
             eid_list_all.append(k)

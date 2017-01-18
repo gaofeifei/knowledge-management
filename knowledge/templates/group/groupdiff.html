@@ -2,6 +2,11 @@
 {% block title %}<title>群体探索 - 群体对比</title>{% endblock %}
 {% block my_css %}
     <link rel="stylesheet" href="/static/css/groupdiff.css">
+    <style type="text/css">
+        .fixed-table-pagination .pagination-detail {
+            display: none;
+        }
+    </style>
 {% endblock %}
 
 {% block main %}
@@ -61,10 +66,13 @@
                     <div class="cdt4">
                         <div class="radio">
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" name="tiosadns" type="radio" checked/> 扩展一层
+                                <input class="per" id='bu' name="tiosadns" type="radio" checked/> 不扩展
                             </label>
                             <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
-                                <input class="per" name="tiosadns" type="radio"/> 扩展二层
+                                <input class="per" id='yi' name="tiosadns" type="radio"/> 扩展一层
+                            </label>
+                            <label style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
+                                <input class="per" id='er' name="tiosadns" type="radio"/> 扩展二层
                             </label>
                         </div>
                     </div>
@@ -73,19 +81,19 @@
                     <div class="cdt4">
                         <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
                             <label>
-                                <input type="radio" name="optionsRadios" value="option1" checked>
+                                <input type="radio" name="optionsRadios" value="option1" id='quan' checked>
                                 全部节点
                             </label>
                         </div>
                         <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
                             <label>
-                                <input type="radio" name="optionsRadios" value="option2">
+                                <input type="radio" name="optionsRadios" value="option2" id='xiangtong'>
                                 相同节点
                             </label>
                         </div>
                         <div class="radio" style="display: block;margin-left: 50px;margin-top: 10px;color: #9d9d9d;font-size: 12px">
                             <label>
-                                <input type="radio" name="optionsRadios" value="option3">
+                                <input type="radio" name="optionsRadios" value="option3" id='butong'>
                                 不同节点
                             </label>
                         </div>
@@ -113,13 +121,13 @@
             <div class="ptsone" style="color: #5e5e5e;font-size: 10px;padding-left: 60px;">
                 <span>排序指标：</span>
                 <label class="radio-inline" style="line-height: 18px;">
-                    <input type="radio" name="inli" value="option1" checked> 活跃度
+                    <input type="radio" name="inli" id="option1" checked> 活跃度
                 </label>
                 <label class="radio-inline" style="line-height: 18px;">
-                    <input type="radio" name="inli" value="option2"> 重要度
+                    <input type="radio" name="inli" id="option2"> 影响力
                 </label>
                 <label class="radio-inline" style="line-height: 18px;">
-                    <input type="radio" name="inli" value="option3"> 敏感度
+                    <input type="radio" name="inli" id="option3"> 敏感度
                 </label>
                 <div style='float:right;margin-right:65px;'>
                         <button type="button" class="btn btn-primary xiangtong" 
@@ -130,118 +138,16 @@
                                                     style="font-size:14px;font-weight:700;">全部人物</button>
                     </div>  
             </div>
-            <div class="ptstwo" style="padding: 20px 60px;">
-                <div class="table-responsive" style="width: 500px;display: inline-block;margin-right: 10px;">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>序号</th>
-                                <th>姓名</th>
-                                <th>影响力</th>
-                                <th>活跃度</th>
-                                <th>敏感度</th>
-                                <th>业务标签</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>朱明勇</td>
-                                <td>100</td>
-                                <td>100</td>
-                                <td>80</td>
-                                <td>律师</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>邓海峰</td>
-                                <td>100</td>
-                                <td>100</td>
-                                <td>80</td>
-                                <td>律师</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>潘强</td>
-                                <td>95</td>
-                                <td>90</td>
-                                <td>80</td>
-                                <td>敏感人物</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>梅春来</td>
-                                <td>80</td>
-                                <td>50</td>
-                                <td>60</td>
-                                <td>律师</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>李兴</td>
-                                <td>60</td>
-                                <td>70</td>
-                                <td>40</td>
-                                <td>法律人士</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <div class="ptstwo" style="padding: 20px 40px;">
+                <div style="width: 520px;display: inline-block;margin-right: 10px;">
+                     <div id="tab1" style="width: 520px;">
+                    
+                    </div>
                 </div>
-                <div class="table-responsive" style="width: 500px;display: inline-block;margin-left: 10px;">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>序号</th>
-                            <th>姓名</th>
-                            <th>影响力</th>
-                            <th>活跃度</th>
-                            <th>敏感度</th>
-                            <th>业务标签</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>朱明勇</td>
-                            <td>100</td>
-                            <td>100</td>
-                            <td>80</td>
-                            <td>律师</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>邓海峰</td>
-                            <td>100</td>
-                            <td>100</td>
-                            <td>80</td>
-                            <td>律师</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>潘强</td>
-                            <td>95</td>
-                            <td>90</td>
-                            <td>80</td>
-                            <td>敏感人物</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>梅春来</td>
-                            <td>80</td>
-                            <td>50</td>
-                            <td>60</td>
-                            <td>律师</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>李兴</td>
-                            <td>60</td>
-                            <td>70</td>
-                            <td>40</td>
-                            <td>法律人士</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div style="width: 520px;display: inline-block;">
+                     <div id="tab2" style="width: 520px;">
+                    
+                    </div>
                 </div>
             </div>
         </div>
@@ -253,17 +159,18 @@
             <div class="ttone" style="color: #5e5e5e;font-size: 10px;padding-left: 60px;">
                 <span>排序指标：</span>
                 <label class="radio-inline" style="line-height: 18px;">
-                    <input type="radio" name="inlig" value="option1" checked> 发生时间
+                    <input type="radio" name="inlig" id="option12" checked> 发生时间
                 </label>
                 <label class="radio-inline" style="line-height: 18px;">
-                    <input type="radio" name="inlig" value="option2"> 参与人数
+                    <input type="radio" name="inlig" id="option22"> 参与人数
                 </label>
                 <label class="radio-inline" style="line-height: 18px;">
-                    <input type="radio" name="inlig" value="option3"> 热度
+                    <input type="radio" name="inlig" id="option32"> 热度
                 </label>
             </div>
             <div class="lawyer">
-                <div class="lawyer1" style="color: #000;font-size: 20px;font-weight: 700;margin:30px 0 10px 75px;">律师群体事件
+                <div class="lawyer1" style="color: #000;font-size: 20px;font-weight: 700;margin:30px 0 10px 75px;">
+                    <span class='lawyer111'>媒体</span>
                     <!-- <p class="direct1" style='float:right;font-size:12px;color: #9d9d9d;margin-right: 60px;'>
                         <label class="radio-inline">
                             <input type="radio" name="angle" value="option1"> 1跳
@@ -277,11 +184,11 @@
                         <button class="add22" type="button" data-toggle="modal">添加</button>
                     </p> -->
                     <div style='float:right;margin-right:65px;'>
-                        <button type="button" class="btn btn-primary xiangtong" 
+                        <button type="button" class="btn btn-primary xiangtong2" 
                                                     style="font-size:14px;font-weight:700;">相同群体</button>
-                        <button type="button" class="btn btn-primary butong"
+                        <button type="button" class="btn btn-primary butong2"
                                                     style="font-size:14px;font-weight:700;">不同群体</button>
-                        <button type="button" class="btn btn-primary quanbu"
+                        <button type="button" class="btn btn-primary quanbu2"
                                                     style="font-size:14px;font-weight:700;">全部群体</button>
                     </div>  
                 </div>
@@ -289,187 +196,8 @@
                     <div class="sjmr1" style='padding-left:30px;'>
                         <img src="/static/image/left.png" alt="" class="left">
                         <div id="case4" style="display: inline-block;width:1050px;overflow: hidden;">
-                            <div id="ru4" style="width: 4000px;">
-                                <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class='xin' style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22" style="margin-top: 5px">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <!-- <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div> -->
-                                            </div>
-                                            <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class='xin' style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22" style="margin-top: 5px">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <!-- <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div> -->
-                                            </div>
-                                            <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class='xin' style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22" style="margin-top: 5px">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <!-- <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div> -->
-                                            </div>
-                                            <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class='xin' style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22" style="margin-top: 5px">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <!-- <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div> -->
-                                            </div>
-                                            <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class='xin' style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22" style="margin-top: 5px">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <!-- <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div> -->
-                                            </div>
+                            <div id="run4" style="width: 4000px;">
+                                
                             </div>
                         </div>
                         <img src="/static/image/right.png" alt="" class="right">
@@ -477,192 +205,13 @@
                 </div>
             </div>
             <div class="safeguard">
-                <p class="safeguard1" style="color: #000;font-size: 20px;font-weight: 700;margin:30px 0 10px 75px;">维权群体事件</p>
+                <p class="safeguard1" style="color: #000;font-size: 20px;font-weight: 700;margin:30px 0 10px 75px;">法律人士</p>
                 <div class="safeguard2">
                     <div class="sjmr1" style='padding-left:30px;'>
                         <img src="/static/image/left.png" alt="" class="left">
                         <div id="case5" style="display: inline-block;width:1050px;overflow: hidden;">
                             <div id="run5" style="width: 4000px;">
-                                <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class='xin' style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22" style="margin-top: 5px">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <!-- <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div> -->
-                                            </div>
-                                            <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class='xin' style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22" style="margin-top: 5px">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <!-- <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div> -->
-                                            </div>
-                                            <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class='xin' style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22" style="margin-top: 5px">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <!-- <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div> -->
-                                            </div>
-                                            <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class='xin' style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22" style="margin-top: 5px">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <!-- <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div> -->
-                                            </div>
-                                            <div class="play">
-                                                <div class="play1">
-                                                    <div class="p11">
-                                                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">潘强</span><!--
-                                                --><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--
-                                                --><span class="difang" style="font-size: 8px">6720</span><!--
-                                                --><img class='xin' style="margin-left: 10px;" src="/static/image/heart.png">
-                                                    </div>
-                                                    <div class="p22" style="margin-top: 5px">
-                                                        <img style="margin-left: 10px;" src="/static/image/influence.png" alt="">
-                                                        <span class="influence">3083</span>
-                                                        <img src="/static/image/huoyuedu.png" alt="">
-                                                        <span class="huoyuedu">254</span>
-                                                        <img src="/static/image/mingan.png" alt="">
-                                                        <span class="mingan">80</span>
-                                                    </div>
-                                                </div>
-                                                <img class="play2" src="/static/image/pangzi.png" alt="">
-                                                <div class="play23" style="margin-left: 15px;">
-                                                    <a href="" class="renzh1">认证类型:<span class="renzh11">法律机构及人士</span></a>
-                                                    <a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>
-                                                </div>
-                                                <div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">
-                                                    <a class="bus1">业务标签：</a>
-                                                    <a class="bus2">律师</a>
-                                                    <a class="bus2">法律人士</a>
-                                                </div>
-                                                <!--<div class="play4">-->
-                                                <!--<p class="shuoming">-->
-                                                <!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->
-                                                <!--</p>-->
-                                                <!--</div>-->
-                                                <!-- <div class="play5" type="button" data-toggle="modal">
-                                                    <a>加入群体探索</a>
-                                                </div> -->
-                                            </div>
+                                
                             </div>
                         </div>
                         <img src="/static/image/right.png" alt="" class="right">
@@ -679,297 +228,23 @@
                 <p class="tone">高影响力微博</p>
                 <p class="ttwo">敏感微博</p>
                 <div style='float:right;margin-right:65px;'>
-                        <button type="button" class="btn btn-primary xiangtong" 
+                        <button type="button" class="btn btn-primary xiangtong3" 
                                                     style="font-size:14px;font-weight:700;">相同文本</button>
-                        <button type="button" class="btn btn-primary butong"
+                        <button type="button" class="btn btn-primary butong3"
                                                     style="font-size:14px;font-weight:700;">不同文本</button>
-                        <button type="button" class="btn btn-primary quanbu"
+                        <button type="button" class="btn btn-primary quanbu3"
                                                     style="font-size:14px;font-weight:700;">全部文本</button>
                     </div>  
             </div>
             <div class="tweets">
                 <div class="txtleft">
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
-                                错了爸。我不应该拿它煮茶叶蛋还一不
-                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                高三时，老师问我们：“屈原为什么选择端午节跳江自杀?”一位同学抢答：“因为他害怕高考!他文综不会，
-                                理综也不会，英语一窍不通，
-                                数学只能考个大鸭蛋。虽说他的诗歌天下第一，但作文却要求——文体不限，诗歌除外! ”
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
-                                错了爸。我不应该拿它煮茶叶蛋还一不
-                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
-                                错了爸。我不应该拿它煮茶叶蛋还一不
-                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
-                                错了爸。我不应该拿它煮茶叶蛋还一不
-                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <ul class="pager">
-                        <li><a href="#">上一页</a></li>
-                        <li><a href="#">下一页</a></li>
-                    </ul>
+                    
                 </div>
                 <div class="txtleft2" style="display:none;">
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
-                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
-                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                高三时，老师问我们：“屈原为什么选择端午节跳江自杀?”一位同学抢答：“因
-                                为他害怕高考!他文综不会，理综也不会，英语一窍不通，数学只
-                                能考个大鸭蛋。虽说他的诗歌天下第一，但作文却要求——文体不限，诗歌除外! ”                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
-                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
-                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <ul class="pager">
-                        <li><a href="#">上一页</a></li>
-                        <li><a href="#">下一页</a></li>
-                    </ul>
+                    
                 </div>
                 <div class="txtright" style="margin-left: 30px;">
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
-                                错了爸。我不应该拿它煮茶叶蛋还一不
-                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
-                                错了爸。我不应该拿它煮茶叶蛋还一不
-                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
-                                错了爸。我不应该拿它煮茶叶蛋还一不
-                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                高三时，老师问我们：“屈原为什么选择端午节跳江自杀?”一位同学抢答：“因为他害怕高考!他文综不会，
-                                理综也不会，英语一窍不通，数学只能考个大鸭蛋。
-                                虽说他的诗歌天下第一，但作文却要求——文体不限，诗歌除外! ”
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                爸。 。我错了。。我不该在众多茶叶中拿了最贵的。。，我也不知道你的茶叶可以贵到1500一两。。我
-                                错了爸。我不应该拿它煮茶叶蛋还一不
-                                小心放了很多。。但是爸。。。咱能别嚎了么。。门还没有关。。邻居都上来了。。
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <ul class="pager">
-                        <li><a href="#">上一页</a></li>
-                        <li><a href="#">下一页</a></li>
-                    </ul>
+                    
                 </div>
                 <div class="txtright2" style="margin-left: 30px;display: none;">
                     <div class="tlt">
@@ -989,78 +264,6 @@
                             <span class="time6">言论敏感度(78)</span>
                         </div>
                     </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
-                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
-                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
-                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
-                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
-                    </div>
-                    <ul class="pager">
-                        <li><a href="#">上一页</a></li>
-                        <li><a href="#">下一页</a></li>
-                    </ul>
                 </div>
             </div>
 

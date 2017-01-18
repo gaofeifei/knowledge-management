@@ -37,7 +37,7 @@ def use_topicrank(text_list,tr_list,n_gram,word_n,topic_n):
         sort_word = get_graph(tr_list,n_gram,word_dis)
         for w1,w2 in sort_word:
             word_list.append([w1,w2*d_weight])#结果乘上该话题的概率
-        keyword = get_final_result(word_list)
+    keyword = get_final_result(word_list)
 
     wordlist = []
     for i in range(0,len(keyword)):

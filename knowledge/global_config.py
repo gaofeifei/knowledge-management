@@ -3,13 +3,13 @@
 from elasticsearch import Elasticsearch
 
 user_profile_host = ["219.224.134.216:9201"]
-user_portrait_host = ["219.224.134.225:9037"]
+user_portrait_host = ["219.224.134.212:9037"]
 flow_text_host = ["219.224.134.216:9201"]
-km_user_portrait_host = ["219.224.134.225:9037"]
+km_user_portrait_host = ["219.224.134.212:9037"]
 user_portrait_port = "9200"
-event_host = ["219.224.134.225:9037"]
+event_host = ["219.224.134.212:9037"]
 event_port = "9200"
-calculate_status_host=["219.224.134.225:9037"]
+calculate_status_host=["219.224.134.212:9037"]
 neo4j_host = "219.224.134.213"
 neo4j_port = "7474"
 redis_host = "219.224.134.213"
@@ -79,7 +79,7 @@ event_other = 'event_other'#其他关系
 
 event_special = "special_event" # 专题
 
-event_relation_list = ['contain','event_other','special_event']
+event_relation_list = ['contain','event_other']
 
 
 # Relatioship: User、Organization--User

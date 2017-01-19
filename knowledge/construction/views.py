@@ -241,12 +241,22 @@ def delete_nodes():
 @mod.route('/node_or_node_query/')
 def node_or_node_query():
     node1_uid = request.args.get('node1_uid', '')
+    node1_type = request.args.get('node1_type','')
     node2_uid = request.args.get('node2_uid', '')
+    node2_type = request.args.get('node2_type','')
+    if node1_type== '2':
+        node1_index_name=event_index_name
+    else:
+        node1_index_name=node_index_name
+    if node2_type== '2':
+        node2_index_name=event_index_name
+    else:
+        node2_index_name=node_index_name
     if node1_uid == '' or node2_uid == '':
         print ("incoming there null")
         return '0'
     c_string = "start start_node= node:%s('uid:*%s*'),end_node=node:%s('uid:*%s*') match (start_node)-[r]->(end_node) return start_node.uid,start_node.uname,r,end_node.uid,end_node.uname order by start_node.id limit 10" \
-                % (node_index_name, node1_uid, node_index_name, node2_uid)
+                % (node1_index_name, node1_uid, node2_index_name, node2_uid)
     print c_string
     result = select_rels_all(c_string)
     list = []

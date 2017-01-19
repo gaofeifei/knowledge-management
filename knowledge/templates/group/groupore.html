@@ -174,7 +174,7 @@
                                     </p>
                                 </div>    
                                 <img src="/static/image/left.png" alt="" class="left">
-                                <div id="case" style="display: inline-block;width:750px;overflow: hidden;">
+                                <div id="case" style="display: inline-block;width:750px;height:360px;overflow: hidden;">
                                     <div id='crmid' style='width:1500px;'>
                                         <div id="run" style="width: 750px;">
                                             
@@ -310,7 +310,7 @@
                                     <option value="新建群体">新建群体</option>
                                     <option value="律师群体">律师群体</option>
                                 </select> -->
-                                <input type="text" class="shuru2" placeholder="请输入群体名称"/>
+                                <input type="text" class="shuru2" id='shuru2' placeholder="请输入群体名称"/>
                             </form>
                             <div class="shij">
                                 <span class="sjr">加入人物</span>
@@ -323,7 +323,7 @@
                 <button type="button" class="btn btn-info" data-dismiss="modal">
                     关闭
                 </button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick='sureadd2()'>
                     确定
                 </button>
             </div>
@@ -364,6 +364,75 @@
             </div>
             <div class="modal-body">
                 <p>请您输入正确的人物或事件名称。（不能为空）</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="del_ject" tabindex="-2">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">删除提示</h2>
+            </div>
+            <div class="modal-body">
+                <p>您确定删除吗？</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick='delete_yes()'>
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="del_cg" tabindex="-2">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">删除提示</h2>
+            </div>
+            <div class="modal-body">
+                <p>删除成功</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="del_sb" tabindex="-2">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">删除提示</h2>
+            </div>
+            <div class="modal-body">
+                <p>删除失败</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" data-dismiss="modal">

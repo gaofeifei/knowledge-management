@@ -1,3 +1,12 @@
+Array.prototype.removeByValue = function(val) {
+    for(var i=0; i<this.length; i++) {
+        if(this[i] == val) {
+            this.splice(i, 1);
+            break;
+        }
+    }
+}
+var node_ids=[];
 function quntixinjianyonghushijian() {
     function place() {
         //this.ajax_method='GET'; // body...
@@ -15,7 +24,7 @@ function quntixinjianyonghushijian() {
     };
     function territory(data) {
         var json=eval(data);
-        var myChart = echarts.init(document.getElementById('site'));
+        var myChart = echarts.init(document.getElementById('site2'));
         myChart.showLoading();
         // var categories = [{name:'人物'},{name:'事件'}];
         var node_value=[],link_value=[];
@@ -135,7 +144,7 @@ function quntixinjianyonghushijian() {
         },
     };
     function territory2(data) {
-        $(".xinzeng .add #shijian2 .bag").show(20);
+        $(".con_bot .add #shijian .bag").show(20);
         var data=eval(data);
         var str='';
         function getLocalTime(nS) {
@@ -215,7 +224,7 @@ function quntixinjianyonghushijian() {
         // }
 
         // $("#container .associat .assright .assright2 #case #crmid").width(cwidth);
-        $(".xinzeng #shijian2 .sjmr .sjmr1 #case #crmid #run").append(str);
+        $("#container .con_bot .add .sjmr #case #crmid #run").append(str);
         //卡片效果
         var heart=$(".play .play1 .p11 .xin");
         $.each(heart,function(index,item){
@@ -249,7 +258,6 @@ function quntixinjianyonghushijian() {
                 })
             });
         });
-
         $.each($(".play"),function (index,item) {
             var changecolor=1;
             $(item).find(".play5").on('click',function(){
@@ -281,8 +289,8 @@ function quntixinjianyonghushijian() {
         place2.call_request(url2,territory2);
     };
     var maths='all',s;
-    $("#shijian2 .sjt .sjt2").on('click',function () {
-        s=$("#shijian2 .sjt .sjt1").val();
+    $("#container .con_bot .sjt .sjt2").on('click',function () {
+        s=$("#container .con_bot .sjt .sjt1").val();
         if (!s==''){
             nums(s);
             nums2(s,maths);
@@ -309,4 +317,28 @@ function quntixinjianyonghushijian() {
     });
 
 };
-// quntixinjianyonghushijian();
+quntixinjianyonghushijian();
+
+function sureadd2() {
+    var node_ids2=node_ids.join(',');
+    var newpro=$("#shuru2").val();
+    var newurl='/group/g_create_new_relation/?node1_id='+node_ids2+'&node2_id='+newpro;
+    console.log(newurl)
+    $.ajax({
+        url: newurl,
+        type: 'GET',
+        dataType: 'json',
+        async: true,
+        success:n_join
+    });
+    function n_join(data) {
+        var data=eval(data);
+        console.log(data)
+        if (data==2){
+
+            $('#chengong').modal("show");
+        }else {
+            $('#shibai').modal("show");
+        }
+    }
+}

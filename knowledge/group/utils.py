@@ -805,7 +805,7 @@ def g_create_rel(node_key1, node1_list, node1_index_name, rel, node_key2, node2_
     Index = ManualIndexManager(graph)
     u_node_index = Index.get_index(Node, node1_index_name)
     group_index = Index.get_index(Node, node2_index_name)
-    print u_node_index,'------------------------===========-----------'
+    # print u_node_index,'------------------------===========-----------'
     print group_index
     tx = graph.begin()
 
@@ -817,7 +817,7 @@ def g_create_rel(node_key1, node1_list, node1_index_name, rel, node_key2, node2_
             return '1'
         c_string = "START start_node=node:%s(%s='%s'),end_node=node:%s(%s='%s') MATCH (start_node)-[r:%s]->(end_node) RETURN r" % (
         node1_index_name, node_key1, node1_id, node2_index_name, node_key2, node2_id, rel)
-        print c_string
+        # print c_string
         result = graph.run(c_string)
         rel_list = []
         for item in result:
@@ -838,7 +838,7 @@ def g_create_node_and_rel(node_key1, node1_list, node1_index_name,rel, node_key2
     group_index = Index.get_index(Node, node2_index_name)
     c_string = "START end_node=node:%s(%s='%s')  RETURN end_node"\
                  % (node2_index_name, node_key2, node2_id)
-    print c_string
+    # print c_string
     result = graph.run(c_string)
     node_l = []
     for i in result:

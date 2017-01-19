@@ -81,13 +81,6 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
     relation = [i for i in set(relation)]
     result = draw_graph(relation)
     for i in only_uid_no:
-        # u_name = user_name_search(i)
-        # try:
-        #     result['node']['uid'][i] = u_name
-
-        # except:
-        #     result['node']['uid'] ={}
-        #     result['node']['uid'][i] = u_name
         try:
             result['map_uid'].append(i)
         except:
@@ -97,126 +90,6 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
     # print len(result['node']['uid']), len(result['map_uid'])
     return result
 
-    # if layer == '0': #不扩展
-    #     for uid_value in uid_list:
-    #         c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
-    #         c_string += 'MATCH (s0)-[r]-(s1:User) WHERE s1.uid in '+ json.dumps(only_uid_no) +' return s0,r,s1 LIMIT 1'
-    #         print c_string
-    #         result = graph.run(c_string)
-    #         for i in list(result):
-    #             start_id = i['s0']['uid']
-    #             relation = i['r'].type()
-    #             # print relation,'!!!!!!!!!!!!!!!!!!'
-    #             end_id = dict(i['s1'])
-    #             if end_id.has_key('uid'):
-    #                 user_name = user_name_search(end_id['uid'])
-    #                 u_nodes_list[str(end_id['uid'])] = user_name
-    #                 all_uid_list.append([str(end_id['uid']),user_name])
-    #                 user_relation.append([start_id,relation,end_id['uid']])
-    #             if end_id.has_key('envent_id'):
-    #                 event_name = event_name_search(end_id['envent_id'])
-    #                 e_nodes_list[end_id['envent_id']]=event_name
-    #                 user_relation.append([start_id,relation,end_id['envent_id']])
-
-    # if layer == '1':  #扩展一层
-    #     for uid_value in uid_list:
-    #         c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
-    #         c_string += 'MATCH (s0)-[r]-(s1'+ node_type +') WHERE type(r) in '+ json.dumps(relation_type) +' return s0,r,s1 LIMIT 1'
-    #         # print c_string
-    #         result = graph.run(c_string)
-    #         for i in list(result):
-    #             start_id = i['s0']['uid']
-    #             relation = i['r'].type()
-    #             # print relation,'!!!!!!!!!!!!!!!!!!'
-    #             end_id = dict(i['s1'])
-    #             if end_id.has_key('uid'):
-    #                 user_name = user_name_search(end_id['uid'])
-    #                 u_nodes_list[str(end_id['uid'])] = user_name
-    #                 all_uid_list.append([str(end_id['uid']),user_name])
-    #                 user_relation.append([start_id,relation,end_id['uid']])
-    #             if end_id.has_key('envent_id'):
-    #                 event_name = event_name_search(end_id['envent_id'])
-    #                 e_nodes_list[end_id['envent_id']]=event_name
-    #                 user_relation.append([start_id,relation,end_id['envent_id']])
-
-    # if layer == '2':  #扩展两层
-    #     print layer,'layer'
-    #     mid_eid_list = []  #存放第一层的数据，再以这些为起始点，扩展第二层
-    #     mid_uid_list = []
-    #     for uid_value in uid_list[:50]:  #现在只选择50个点
-    #         c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
-    #         c_string += 'MATCH (s0)-[r1]-(s1'+node_type+') WHERE type(r1) in '+ json.dumps(relation_type) +'return s0,r1,s1 LIMIT 1'
-    #         # print c_string
-    #         # c_string += 'MATCH (s0)-[r]->(s1:Domain) RETURN s0.uid ,r,s1.uid' #只包含某一类的节点
-    #         # # c_string += 'MATCH (s0)-[r:topic]->(s1) RETURN s0.uid ,r,s1.uid' #只包含某一类的关系
-    #         # c_string += 'MATCH (s0)-[r1'+relation_type+']-(s1'+node_type+')-\
-    #         #        [r2'+relation_type+']->(s2'+node_type+') RETURN s0,r1,s1,r2,s2 LIMIT 3' #两层无向关系
-    #         # # c_string += 'MATCH (s0)-[r]->(s1) RETURN s0,r,s1' #一层有向关系
-    #         # # c_string += 'MATCH (s0)-[r]-(s1) RETURN s0,r,s1' #一层无向关系
-    #         # print c_string,'================'
-
-    #         result = graph.run(c_string)
-    #         # print list(result),'-----------------'
-    #         for i in list(result):
-    #             start_id = i['s0']['uid']
-    #             # # start_id = s0['uid']
-    #             relation1 = i['r1'].type()
-    #             m_id = dict(i['s1'])
-    #             if m_id.has_key('uid'):
-    #                 middle_id = m_id['uid']
-    #                 mid_uid_list.append(middle_id)
-    #                 user_name = user_name_search(middle_id)
-    #                 # print middle_id,'2222222222222222222'
-    #                 u_nodes_list[str(middle_id)] = user_name
-    #                 all_uid_list.append([middle_id,user_name])
-    #                 user_relation.append([start_id,relation1,middle_id])
-    #             if m_id.has_key('envent_id'):
-    #                 middle_id = m_id['envent_id']
-    #                 mid_eid_list.append(middle_id)
-    #                 event_name = event_name_search(middle_id)
-    #                 e_nodes_list[str(middle_id)] = event_name
-    #                 user_relation.append([start_id,relation1,middle_id])
-    #     print mid_uid_list
-    #     print mid_eid_list,'++++++++++++++++'
-    #     for mid_uid in mid_uid_list:
-    #         c_string = 'START s1 = node:node_index(uid="'+str(mid_uid)+'") '
-    #         c_string += 'MATCH (s1)-[r2]->(s2'+node_type+') WHERE type(r2) in '+ json.dumps(relation_type) +' return s1,r2,s2 LIMIT 3'
-    #         # print c_string
-    #         result = graph.run(c_string)
-    #         for i in result:
-    #             start_mid_id = i['s1']['uid']
-    #             relation2 = i['r2'].type()
-    #             end_id = dict(i['s2'])
-    #             if end_id.has_key('uid'):
-    #                 user_name = user_name_search(end_id['uid'])
-    #                 # print end_id['uid'],'333333333333333333333333'
-    #                 u_nodes_list[end_id['uid']] = user_name
-    #                 all_uid_list.append([end_id['uid'],user_name])
-    #                 user_relation.append([start_mid_id,relation2,end_id['uid']])
-    #             if end_id.has_key('envent_id'):
-    #                 event_name = event_name_search(end_id['event_id'])
-    #                 e_nodes_list[end_id['event_id']] = event_name
-    #                 user_relation.append([start_mid_id,relation2,end_id['envent_id']])
-    #     for mid_eid in mid_eid_list:
-    #         c_string = 'START s1 = node:event_index(event="'+str(mid_eid)+'") '
-    #         c_string += 'MATCH (s1)-[r2]->(s2'+node_type+') WHERE type(r2) in '+ json.dumps(relation_type) +' return s1,r2,s2 LIMIT 3'
-    #         event_result = graph.run(c_string)
-    #         for i in event_result:
-    #             relation2 = i['r2'].type()
-    #             end_id = dict(i['s2'])
-    #             if end_id.has_key('uid'):
-    #                 # print end_id['uid'],'44444444444444444444444'
-    #                 user_name = user_name_search(end_id['uid'])
-    #                 u_nodes_list[end_id['uid']] = user_name
-    #                 all_uid_list.append([end_id['uid'],user_name])
-    #                 user_relation.append([mid_eid,relation2,end_id['uid']])
-    #             if end_id.has_key('envent_id'):
-    #                 event_name = event_name_search(end_id['event_id'])
-    #                 e_nodes_list[end_id['event_id']] = event_name
-    #                 user_relation.append([mid_eid,relation2,end_id['envent_id']])
-
-    # return {'total_user':len(uid_list),'user_nodes':u_nodes_list,'event_nodes':e_nodes_list,\
-    #         'map_uid':all_uid_list,'relation':user_relation,'draw_nodes_length':len(u_nodes_list)}
 
 # 地图
 def group_tab_map(group_name, node_type, relation_type, layer):
@@ -789,7 +662,7 @@ def draw_graph(relation_list):
                     else:
                         eu_name = m[primary_key]
                 if len(aa) <1 or len(aa) >1:
-                    primary_key = 'User'
+                    primary_key = 'uid'
                     primary_value = m[primary_key]
                     if m['uid'] != None:
                         eu_name = user_name_search(m['uid'])
@@ -927,4 +800,57 @@ def compare_map_group(group_name1,group_name2,layer,diff):
     uid_list2 = graph_result['u2']['map_uid']
     map_result2 = draw_map(uid_list2)
     return {'u1':map_result1, 'u2':map_result2}
+
+def g_create_rel(node_key1, node1_list, node1_index_name, rel, node_key2, node2_id, node2_index_name):
+    Index = ManualIndexManager(graph)
+    u_node_index = Index.get_index(Node, node1_index_name)
+    group_index = Index.get_index(Node, node2_index_name)
+    print u_node_index,'------------------------===========-----------'
+    print group_index
+    tx = graph.begin()
+
+    for node1_id in node1_list:
+        node1 = u_node_index.get(node_key1, str(node1_id))[0]
+        node2 = group_index.get(node_key2, node2_id)[0]
+        if not (node1 and node2):
+            print "node does not exist"
+            return '1'
+        c_string = "START start_node=node:%s(%s='%s'),end_node=node:%s(%s='%s') MATCH (start_node)-[r:%s]->(end_node) RETURN r" % (
+        node1_index_name, node_key1, node1_id, node2_index_name, node_key2, node2_id, rel)
+        print c_string
+        result = graph.run(c_string)
+        rel_list = []
+        for item in result:
+            rel_list.append(item)
+        print rel_list,'----------------'
+        if not rel_list:
+            rel_g = Relationship(node1, rel, node2)
+            graph.create(rel_g)
+            print "create success"
+        else:
+            print "The current two nodes already have a relationship"
+            # return '0'
+    return '2'
+
+def g_create_node_and_rel(node_key1, node1_list, node1_index_name,rel, node_key2, node2_id, node2_index_name):
+    print node1_list,'!!!!!!!!@@@@@@@@@@@'
+    Index = ManualIndexManager(graph) # manage index
+    group_index = Index.get_index(Node, node2_index_name)
+    c_string = "START end_node=node:%s(%s='%s')  RETURN end_node"\
+                 % (node2_index_name, node_key2, node2_id)
+    print c_string
+    result = graph.run(c_string)
+    node_l = []
+    for i in result:
+        # node1_l
+        node_l.append(i[0])
+    if len(node_l)>0:#判断对否有该节点存在
+        return 'group already exist'
+    else:
+        new_group = Node('Group', group=node2_id)
+        graph.create(new_group)
+        group_index.add("group", node2_id, new_group)
+        # return 'succeed'
+    info = g_create_rel(node_key1, node1_list, node1_index_name, rel, node_key2, node2_id, node2_index_name)
+    return info
 

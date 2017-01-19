@@ -7,7 +7,12 @@ import os
 import time
 from datetime import date
 from datetime import datetime
-from knowledge.global_config  import event_relation_list,user_event_relation,relation_list
+from knowledge.global_config import portrait_name, flow_text_name, portrait_type, flow_text_type, event_name, event_analysis_name, \
+        neo4j_name, event_type, event_special, special_event_index_name, group_index_name, \
+        group_rel, node_index_name,user_event_relation, event_relation_list, relation_list
+from knowledge.global_utils import es_user_portrait, es_flow_text, es_event, graph,user_search_sth,\
+        user_name_search, event_name_search,event_name_to_id,es_search_sth,event_detail_search, related_user_search
+
 from utils import query_current_week_increase, query_special_event, query_group,filter_event_map,\
      query_new_relationship, query_hot_location, query_event_detail,query_event_people,filter_event_nodes,\
      get_weibo,query_person_detail,query_person_people,query_person_event,query_event_event,get_user_weibo,\
@@ -212,7 +217,7 @@ def search_advance_graph():  #高级搜索
     event_graph = advance_graph(search_item)
     return json.dumps({'user':user_graph,'event':event_graph})
 
-@mod.route('/search_advance_card_user/')
+@mod.route('/search_advance_card_user/')  #搜uid或name，领域 话题 活跃地 用户标签
 def search_advance_card_user():  #高级搜索，卡片
     result = {}
     query_data = {}
@@ -221,9 +226,9 @@ def search_advance_card_user():  #高级搜索，卡片
     condition_num = 0
     query_list = []
     fuzz_item = ['activity_geo']
-    multi_item = ['character_sentiment','character_text','domain','topic_string']
+    multi_item = ['domain','topic_string']
     simple_fuzz_item = ['uid', 'uname']
-    item_data = request.args.get('term', '')
+    item_data = request.args.get('term', '23')
     #print 'item_data:', item_data
     for item in simple_fuzz_item:
         if item_data:
@@ -259,27 +264,21 @@ def search_advance_card_user():  #高级搜索，卡片
                 nest_body_list.append({'wildcard':{item:'*'+term+'*'}})
             condition_num += 1
             query.append({'bool':{'should':nest_body_list}})
+    print query,'---------'
         
-        
-    size = 1000
+    size = 10
     sort = '_score'
     #print 'query condition:', query
-    result = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
-                    body={'query':{'bool':{'must':query}}, 'sort':[{sort:{'order':'desc'}}], 'size':size})['hits']['hits']
-    return json.dumps(result)
+    if condition_num >0:
+        result = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
+                    body={'query':{'bool':{'must':query}}, 'sort':[{sort:{'order':'desc'}}], 'size':size},fields= ['uid'])['hits']['hits']
+    else:
+        result = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
+                body={'query':{'match_all':{}}, 'sort':[{sort:{"order":"desc"}}], 'size':size}, fields= ['uid'])['hits']['hits']
+    id_list = []
+    for i in result:
+        id_list.append(i['fields']['uid'][0])
 
-
-
-
-    node_type = request.args.get('node_type', 'User') #节点类型 User event
-    uid = request.args.get('uid', '32')  #uid
-    uname = request.args.get('uname', '2')  #昵称
-    domain = request.args.get('domain', u'境内机构,境外机构,媒体,境外媒体')  #身份  多个用逗号分隔
-    topic = request.args.get('topic', u'文体类_娱乐,科技类')  #领域  多个用逗号分隔
-    tag = request.args.get('tag', '')  #标签
-
-    result = advance_search_card(node_type,uid, uname, domain, topic, tag)
-    advance_graph(result['id'])
-    # user_card = search_related_user_card(search_item,layer)
-    # event_card = search_related_e_card(search_item, layer)
+    layer = request.args.get('layer', '1')  #1,2,all
+    result = advance_search_card(id_list,layer)   
     return json.dumps(result)

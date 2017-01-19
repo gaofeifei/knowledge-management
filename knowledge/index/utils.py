@@ -1056,8 +1056,8 @@ def group_tab_graph(root_uid, node_type, relation_type, layer):
 def group_tab_map(uid, node_type, relation_type, layer):
     black_country = [u'美国',u'其他',u'法国',u'英国']
     tab_graph_result = group_tab_graph(uid, node_type, relation_type, layer)
-    uid_list = [i[0] for i in tab_graph_result['map_uid']]
-
+    uid_list = [i for i in tab_graph_result['map_uid']]
+    # print uid_list,'++++wwwwwwwwwwwww'
     query_body = {
         'query':{
             'terms':{'uid':uid_list}
@@ -1438,60 +1438,41 @@ def search_related_e_card(item,layer):
     return result_card
 
 
-def advance_search_card(node_type,term,activity_geo,tag):
-    result = {}
-    query_data = {}
-    query = []
-    query_list = []
-    condition_num = 0
-    query_list = []
-    fuzz_item = ['activity_geo']
-    multi_item = ['domain','topic_string']
-    simple_fuzz_item = ['uid', 'uname']
-    item_data = request.args.get('term', '')
-    #print 'item_data:', item_data
-    for item in simple_fuzz_item:
-        if item_data:
-            query_list.append({'wildcard':{item: '*'+item_data+'*'}})
-            condition_num += 1
-    if query_list:
-        query.append({'bool': {'should': query_list}}) 
-    for item in fuzz_item:
-        item_data = activity_geo
-        if item_data:
-            query.append({'wildcard':{item:'*'+item_data+'*'}})
-            condition_num += 1
-    # # custom_attribute
-    # tag_items = request.args.get('tag', '')
-    # if tag_items != '':
-    #     tag_item_list = tag_items.split(',')
-    #     for tag_item in tag_item_list:
-    #         attribute_name_value = tag_item.split(':')
-    #         attribute_name = attribute_name_value[0]
-    #         attribute_value = attribute_name_value[1]
-    #         field_key = submit_user + '-tag'
-    #         if attribute_name and attribute_value:
-    #             query.append({'wildcard':{field_key: '*'+attribute_name + '-' + attribute_value+'*'}})
-    #             condition_num += 1
+def advance_search_card(name_results,layer):
+    only_uid = name_results
+    u_nodes_list = {}
+    user_uid_list = []
+    for i in name_results:
+        uid = i
+        uname = user_name_search(i)
+        u_nodes_list[uid] = uname
+        user_uid_list.append([uid, uname])
+    print  len(user_uid_list),'========='
+    if layer == '1':
+        for uid_value in user_uid_list: 
+            c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
+            c_string += 'MATCH (s0)-[r1]-(s1:User) return s0,r1,s1 LIMIT 100'
+            result = graph.run(c_string)
+            for i in list(result):
+                m_id = dict(i['s1'])['uid']
+                only_uid.append(m_id)
+        result_card = related_user_search(only_uid, 'activeness')
+    if layer == '2':
+        for uid_value in user_uid_list: 
+            c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
+            c_string += 'MATCH (s0)-[r1]-()-[r]-(s1:User) return s1 LIMIT 100'
+            result = graph.run(c_string)
+            for i in list(result):
+                m_id = dict(i['s1'])['uid']
+                only_uid.append(m_id)
+        result_card = related_user_search(only_uid, 'activeness')
 
-    for item in multi_item:
-        nest_body = {}
-        nest_body_list = []
-        item_data = request.args.get(item, '')
-        if item_data:
-            term_list = item_data.split(',')
-            for term in term_list:
-                nest_body_list.append({'wildcard':{item:'*'+term+'*'}})
-            condition_num += 1
-            query.append({'bool':{'should':nest_body_list}})
-        
-        
-    size = 1000
-    sort = '_score'
-    #print 'query condition:', query
-    result = search_portrait(condition_num, query, sort, size)
-    return json.dumps(result)
+    if layer == 'all':
+        uid_list_all =[]
+        result = search_related_user(item)
+        uid_dict = result['user_nodes']
+        for k,v in uid_dict.iteritems():
+            uid_list_all.append(k)
+        result_card = related_user_search(uid_list_all,'activeness')
 
-    result = es_user_portrait.search(index=index_name, doc_type=index_type, \
-                    body={'query':{'bool':{'must':query}}, 'sort':[{sort:{'order':'desc'}}], 'size':size})['hits']['hits']
-    return node_results
+    return result_card

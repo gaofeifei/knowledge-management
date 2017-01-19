@@ -14,7 +14,8 @@
     <div class="present">
         <span class="preone"><!-- <i class="icon icon-remove det"></i> -->
             当前对比群体：
-            <a style="color: white;font-weight: 700;background-color: #0099FF" class="preonemd">律师群体  </a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="color: white;font-weight: 700;background-color: #0099FF" class="preonemd">律师群体  </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
             <a style="color: white;font-weight: 700;background-color: #0099FF" class="preonemd">维权群体  </a>
         </span>
         <!-- <div class="checkbox prethr" style="margin-left: 30px">
@@ -227,7 +228,7 @@
             <div class="textrast1">
                 <p class="tone">高影响力微博</p>
                 <p class="ttwo">敏感微博</p>
-                <div style='float:right;margin-right:65px;'>
+                <div style='float:right;margin-right:65px;margin-top:-2px;'>
                         <button type="button" class="btn btn-primary xiangtong3" 
                                                     style="font-size:14px;font-weight:700;">相同文本</button>
                         <button type="button" class="btn btn-primary butong3"
@@ -238,34 +239,51 @@
             </div>
             <div class="tweets">
                 <div class="txtleft">
-                    
-                </div>
-                <div class="txtleft2" style="display:none;">
-                    
-                </div>
-                <div class="txtright" style="margin-left: 30px;">
-                    
-                </div>
-                <div class="txtright2" style="margin-left: 30px;display: none;">
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
-                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
+                    <div id="group_emotion_loading" style="display:block;text-align:center;">
+                        正在加载，请稍后...
                     </div>
+                    <div id="influeweibo" style="overflow-x: auto; overflow-y: auto;height:580px;">
+                        <table id="input-table" class="In-table">
+                            <tbody class="In-table">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class='fanye' style="width:100%;text-align:center;margin-top:10px;">
+                          <span style="display:inline-block;">每页显示<input type="text" id="PageNo" size="3" value="5" style='text-align:center;border:1px solid #ccc;'/>组</span>
+                          <div id="div-button" style="display:inline-block;margin-left:5px;">
+                              <input type="button" value="首页" id="F-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="上一页" id="Pre-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="下一页" id="Nex-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="尾页" id="L-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                          </div>
+
+                    <span style="display:inline-block;">&nbsp;当前第<span id="s2"></span>页</span>
+                    <span style="display:inline-block;">总共<span id="s1"></span>页</span>
                 </div>
+                
             </div>
+            <div class="txtright" style="margin-left:10px;">
+                    <div id="group_emotion_loading2" style="display:block;text-align:center;">
+                        正在加载，请稍后...
+                    </div>
+                    <div id="influeweibo2" style="overflow-x: auto; overflow-y: auto;height:580px;">
+                        <table id="input-table2" class="In-table">
+                            <tbody class="In-table">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class='fanye2' style="width:100%;text-align:center;margin-top:10px;">
+                          <span style="display:inline-block;">每页显示<input type="text" id="PageNo2" size="3" value="5" style='text-align:center;border:1px solid #ccc;'/>组</span>
+                          <div id="div-button2" style="display:inline-block;margin-left:5px;">
+                              <input type="button" value="首页" id="F-page2" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="上一页" id="Pre-page2" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="下一页" id="Nex-page2" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="尾页" id="L-page2" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                          </div>
+
+                    <span style="display:inline-block;">&nbsp;当前第<span id="s22"></span>页</span>
+                    <span style="display:inline-block;">总共<span id="s12"></span>页</span>
+                </div>
 
         </div>
     </div>

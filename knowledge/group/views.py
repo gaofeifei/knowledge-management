@@ -107,7 +107,7 @@ def del_user_in_group():  #群体编辑-删除人物
     group_name = request.args.get('group_name', '法律人士')
     uid = request.args.get('uid', '2682428145')
     flag = del_user_group_rel(group_name, uid)
-    return json.dumps(flag)
+    return json.dumps(flag)  #返回小写true成功
 
 @mod.route('/search_related_people/')
 def search_related_people():  #群体编辑-增加前先搜索人物

@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/11/25.
  */
-var groupname,groupname1,ii,jj;
+var groupname,groupname1,ii,jj,node_ids=[];
 function qunti(value) {
     groupname=value;
     jj=1;
@@ -506,6 +506,7 @@ function yonghushijian() {
                 photo=item.photo_url;
             };
             str+='<div class="play">'+
+                '<span id="uid" style="display:none;">'+item.uid+'</span>'+
                 '<div class="play1">'+
                 '<div class="p11">'+
                 '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
@@ -564,6 +565,45 @@ function yonghushijian() {
                 }
             })
         });
+        $.each($(".play"),function (index,item) {
+            $(item).hover(function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(-40px)",
+                    "-moz-transform":"translateY(-40px)",
+                    "-ms-transform":"translateY(-40px)",
+                    "-o-transform":"translateY(-40px)",
+                    "transform":"translateY(-40px)",
+                })
+            },function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(40px)",
+                    "-moz-transform":"translateY(40px)",
+                    "-ms-transform":"translateY(40px)",
+                    "-o-transform":"translateY(40px)",
+                    "transform":"translateY(40px)",
+                })
+            });
+        });
+
+        $.each($(".play"),function (index,item) {
+            var changecolor=1;
+            $(item).find(".play5").on('click',function(){
+                if (changecolor==1) {
+                    $(this).parent('.play').css({backgroundColor:'#09F'});
+                    changecolor=2;
+                    node_ids.push($(this).siblings('#uid').html());
+                    $(this).find('a').text('取消群体探索');
+                    $('#join3').modal("show");
+                } else {
+                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                    changecolor=1;
+                    var $a = $(this).siblings('#uid').html();
+                    node_ids.removeByValue($a);
+                    $(this).find('a').text('加入群体探索');
+                }
+                console.log(node_ids)
+            });
+        });
     };
     var place=new place();
     var place2=new place2();
@@ -586,6 +626,7 @@ function yonghushijian() {
         };
 
     });
+
     $.each($("#shijian2 .bag .sjmr1 .direct1 input"),function (index,item) {
         $(item).on('click',function () {
             if (index==0){
@@ -601,9 +642,38 @@ function yonghushijian() {
         });
 
     });
+
 };
 yonghushijian();
 
+function sureadd() {
+    var node_ids2=node_ids.join(',');
+    var addurl='/group/g_create_relation/?node1_id='+node_ids2+'&node2_id='+groupname1;
+    $.ajax({
+        url: addurl,
+        type: 'GET',
+        dataType: 'json',
+        async: true,
+        success:g_join
+    });
+    function g_join(data) {
+        var data=eval(data);
+        if (data==2){
+            $('#chengong').modal("show");
+        }else {
+            $('#shibai').modal("show");
+        }
+    }
+}
+
+Array.prototype.removeByValue = function(val) {
+    for(var i=0; i<this.length; i++) {
+        if(this[i] == val) {
+            this.splice(i, 1);
+            break;
+        }
+    }
+}
 ~function(){
     // 路径配置
     //第二个图表

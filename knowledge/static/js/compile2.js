@@ -1,3 +1,19 @@
+var chos1_type,chos2_type;
+function choselx1(value) {
+    if (value=='人物'){
+        chos1_type=1;
+    }else {
+        chos1_type=2;
+    }
+};
+function choselx2(value) {
+    if (value=='人物'){
+        chos2_type=1;
+    }else {
+        chos2_type=2;
+    }
+};
+
 function guanxibianji() {
     var node1,node2,oldrel,newrel;
     $("#container .conright2 .editor .editor3").on('click',function () {

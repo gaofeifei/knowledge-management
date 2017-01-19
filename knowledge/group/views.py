@@ -107,7 +107,7 @@ def del_user_in_group():  #群体编辑-删除人物
     group_name = request.args.get('group_name', '法律人士')
     uid = request.args.get('uid', '2820157832')
     flag = del_user_group_rel(group_name, uid)
-    return json.dumps(flag)
+    return json.dumps(flag)  #返回小写true成功
 
 @mod.route('/g_create_relation/')#添加到已有群体
 def g_create_relation():

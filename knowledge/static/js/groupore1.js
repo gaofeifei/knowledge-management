@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/11/25.
  */
-var groupname,groupname1,ii,jj;
+var groupname,groupname1,ii,jj,node_ids=[];
 function qunti(value) {
     groupname=value;
     jj=1;
@@ -210,6 +210,12 @@ function quntibiaoge() {
                 },
 
             ],
+            onClickRow: function (row, tr) {
+                if ($(tr.context).index()==2) {
+                    del_uid=row[0];
+                    $('#del_ject').modal("show");
+                }
+            }
 
         });
     };
@@ -228,6 +234,8 @@ function quntibiaoge() {
             $('.instr').show(20);
         }
     });
+
+
 };
 quntibiaoge();
 
@@ -506,6 +514,7 @@ function yonghushijian() {
                 photo=item.photo_url;
             };
             str+='<div class="play">'+
+                '<span id="uid" style="display:none;">'+item.uid+'</span>'+
                 '<div class="play1">'+
                 '<div class="p11">'+
                 '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
@@ -564,6 +573,45 @@ function yonghushijian() {
                 }
             })
         });
+        $.each($(".play"),function (index,item) {
+            $(item).hover(function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(-40px)",
+                    "-moz-transform":"translateY(-40px)",
+                    "-ms-transform":"translateY(-40px)",
+                    "-o-transform":"translateY(-40px)",
+                    "transform":"translateY(-40px)",
+                })
+            },function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(40px)",
+                    "-moz-transform":"translateY(40px)",
+                    "-ms-transform":"translateY(40px)",
+                    "-o-transform":"translateY(40px)",
+                    "transform":"translateY(40px)",
+                })
+            });
+        });
+
+        $.each($(".play"),function (index,item) {
+            var changecolor=1;
+            $(item).find(".play5").on('click',function(){
+                if (changecolor==1) {
+                    $(this).parent('.play').css({backgroundColor:'#09F'});
+                    changecolor=2;
+                    node_ids.push($(this).siblings('#uid').html());
+                    $(this).find('a').text('取消群体探索');
+                    $('#join3').modal("show");
+                } else {
+                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                    changecolor=1;
+                    var $a = $(this).siblings('#uid').html();
+                    node_ids.removeByValue($a);
+                    $(this).find('a').text('加入群体探索');
+                }
+                console.log(node_ids)
+            });
+        });
     };
     var place=new place();
     var place2=new place2();
@@ -586,6 +634,7 @@ function yonghushijian() {
         };
 
     });
+
     $.each($("#shijian2 .bag .sjmr1 .direct1 input"),function (index,item) {
         $(item).on('click',function () {
             if (index==0){
@@ -601,135 +650,58 @@ function yonghushijian() {
         });
 
     });
+
 };
 yonghushijian();
 
-~function(){
-    // 路径配置
-    //第二个图表
-    require.config({
-        paths: {
-            echarts: 'http://echarts.baidu.com/build/dist'
-        }
+function sureadd() {
+    var node_ids2=node_ids.join(',');
+    var addurl='/group/g_create_relation/?node1_id='+node_ids2+'&node2_id='+groupname1;
+    $.ajax({
+        url: addurl,
+        type: 'GET',
+        dataType: 'json',
+        async: true,
+        success:g_join
     });
-    require(
-        [
-            'echarts',
-            'echarts/chart/force' // 使用柱状图就加载bar模块，按需加载
-        ],
-        function (ec) {
-            // 基于准备好的dom，初始化echarts图表
-            var myChart = ec.init(document.getElementById('site'));
-
-            var option = {
-                title : {
-                    text: '人物关系：乔布斯',
-                    subtext: '数据来自人立方',
-                    x:'right',
-                    y:'bottom'
-                },
-                tooltip : {
-                    trigger: 'item',
-                    formatter: '{a} : {b}'
-                },
-                legend: {
-                    x: 'left',
-                    data:['家人','朋友']
-                },
-                series : [
-                    {
-                        type:'force',
-                        name : "人物关系",
-                        ribbonType: false,
-                        categories : [
-                            {
-                                name: '人物'
-                            },
-                            {
-                                name: '家人'
-                            },
-                            {
-                                name:'朋友'
-                            }
-                        ],
-                        itemStyle: {
-                            normal: {
-                                label: {
-                                    show: true,
-                                    textStyle: {
-                                        color: '#333'
-                                    }
-                                },
-                                nodeStyle : {
-                                    brushType : 'both',
-                                    borderColor : 'rgba(255,215,0,0.4)',
-                                    borderWidth : 1
-                                },
-                                linkStyle: {
-                                    type: 'curve'
-                                }
-                            },
-                            emphasis: {
-                                label: {
-                                    show: false
-                                    // textStyle: null      // 默认使用全局文本样式，详见TEXTSTYLE
-                                },
-                                nodeStyle : {
-                                    //r: 30
-                                },
-                                linkStyle : {}
-                            }
-                        },
-                        useWorker: false,
-                        minRadius : 15,
-                        maxRadius : 25,
-                        gravity: 1.1,
-                        scaling: 1.1,
-                        roam: 'move',
-                        nodes:[
-                            {category:0, name: '乔布斯', value : 10, label: '乔布斯\n（主要）'},
-                            {category:1, name: '丽萨-乔布斯',value : 2},
-                            {category:1, name: '保罗-乔布斯',value : 3},
-                            {category:1, name: '克拉拉-乔布斯',value : 3},
-                            {category:1, name: '劳伦-鲍威尔',value : 7},
-                            {category:2, name: '史蒂夫-沃兹尼艾克',value : 5},
-                            {category:2, name: '奥巴马',value : 8},
-                        ],
-                        links : [
-                            {source : '丽萨-乔布斯', target : '乔布斯', weight : 1, name: '女儿'},
-                            {source : '保罗-乔布斯', target : '乔布斯', weight : 2, name: '父亲'},
-                            {source : '克拉拉-乔布斯', target : '乔布斯', weight : 1, name: '母亲'},
-                            {source : '劳伦-鲍威尔', target : '乔布斯', weight : 2},
-                            {source : '史蒂夫-沃兹尼艾克', target : '乔布斯', weight : 3, name: '合伙人'},
-                            {source : '奥巴马', target : '乔布斯', weight : 1},
-                        ]
-                    }
-                ]
-            };
-            var ecConfig = require('echarts/config');
-            function focus(param) {
-                var data = param.data;
-                var links = option.series[0].links;
-                var nodes = option.series[0].nodes;
-                if (
-                    data.source !== undefined
-                    && data.target !== undefined
-                ) { //点击的是边
-                    var sourceNode = nodes.filter(function (n) {return n.name == data.source})[0];
-                    var targetNode = nodes.filter(function (n) {return n.name == data.target})[0];
-                    //console.log("选中了边 " + sourceNode.name + ' -> ' + targetNode.name + ' (' + data.weight + ')');
-                } else { // 点击的是点
-                    //console.log("选中了" + data.name + '(' + data.value + ')');
-                }
-            }
-            myChart.on(ecConfig.EVENT.CLICK, focus);
-
-            myChart.on(ecConfig.EVENT.FORCE_LAYOUT_END, function () {
-                //console.log(myChart.chart.force.getPosition());
-            });
-
-            // 为echarts对象加载数据
-            myChart.setOption(option);
+    function g_join(data) {
+        var data=eval(data);
+        if (data==2){
+            $('#chengong').modal("show");
+        }else {
+            $('#shibai').modal("show");
         }
-    );
-}();
+    }
+}
+
+Array.prototype.removeByValue = function(val) {
+    for(var i=0; i<this.length; i++) {
+        if(this[i] == val) {
+            this.splice(i, 1);
+            break;
+        }
+    }
+}
+
+
+//群体编辑表格中删除
+var del_uid;
+function delete_yes() {
+    var del_url='/group/del_user_in_group/?group_name='+groupname1+'&uid='+del_uid;
+    console.log(del_url);
+    $.ajax({
+        url: del_url,
+        type: 'GET',
+        dataType: 'json',
+        async: true,
+        success:del_sure
+    });
+    function del_sure(data) {
+        var data=eval(data);
+        if (data=='true'){
+            $("#del_cg").modal("show");
+        }else {
+            $("#del_sb").modal("show");
+        }
+    }
+}

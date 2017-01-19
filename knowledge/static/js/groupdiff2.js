@@ -32,18 +32,18 @@
     $("#container #middle .textrast .tweets .txtright2 .tlt:even").css("background-color","#eeeeee");
 
     //--------------点击按钮实现高影响力微博和敏感微博的切换
-    $('#container #middle .textrast .textrast1 .tone').on('click',function () {
-        $("#container #middle .textrast .tweets .txtleft").css({display:'inline-block'});
-        $("#container #middle .textrast .tweets .txtright").css({display:'inline-block'});
-        $("#container #middle .textrast .tweets .txtleft2").css({display:'none'});
-        $("#container #middle .textrast .tweets .txtright2").css({display:'none'});
-    });
-    $('#container #middle .textrast .textrast1 .ttwo').on('click',function () {
-        $("#container #middle .textrast .tweets .txtleft2").css({display:'inline-block'});
-        $("#container #middle .textrast .tweets .txtright2").css({display:'inline-block'});
-        $("#container #middle .textrast .tweets .txtleft").css({display:'none'});
-        $("#container #middle .textrast .tweets .txtright").css({display:'none'});
-    });
+    // $('#container #middle .textrast .textrast1 .tone').on('click',function () {
+    //     $("#container #middle .textrast .tweets .txtleft").css({display:'inline-block'});
+    //     $("#container #middle .textrast .tweets .txtright").css({display:'inline-block'});
+    //     $("#container #middle .textrast .tweets .txtleft2").css({display:'none'});
+    //     $("#container #middle .textrast .tweets .txtright2").css({display:'none'});
+    // });
+    // $('#container #middle .textrast .textrast1 .ttwo').on('click',function () {
+    //     $("#container #middle .textrast .tweets .txtleft2").css({display:'inline-block'});
+    //     $("#container #middle .textrast .tweets .txtright2").css({display:'inline-block'});
+    //     $("#container #middle .textrast .tweets .txtleft").css({display:'none'});
+    //     $("#container #middle .textrast .tweets .txtright").css({display:'none'});
+    // });
     //---------------相同的文字染色--------------
     var txtlf = $('#container #middle .textrast .tweets .txtleft .master .master1');
     var txtlf2 = $('#container #middle .textrast .tweets .txtleft2 .master .master1');

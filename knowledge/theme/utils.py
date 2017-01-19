@@ -346,7 +346,7 @@ def event_list_theme(event):
 
 def del_e_theme_rel(theme_name, event_id):
     s_string = 'START s0 = node:special_event_index(event="%s"),s3 = node:event_index(event="%s")\
-                MATCH (s0)-[r]-(s) DELETE r' %(theme_name, event_id)
+                MATCH (s0)-[r]-(s3) DELETE r' %(theme_name, event_id)
 
     print s_string
     graph.run(s_string)
@@ -861,4 +861,56 @@ def compare_map_theme(theme_name1,theme_name2,layer,diff):
     eid_list2 = graph_result['e2']['map_eid']
     map_resulte2 = draw_map(eid_list2)
     return {'e1':map_resulte1, 'e2':map_resulte2}
+
+def create_rel(node_key1, node1_list, node1_index_name, rel, node_key2, node2_id, node2_index_name):
+    Index = ManualIndexManager(graph)
+    node_index = Index.get_index(Node, node1_index_name)
+    group_index = Index.get_index(Node, node2_index_name)
+    print node_index
+    print group_index
+    tx = graph.begin()
+    for node1_id in node1_list:
+        node1 = node_index.get(node_key1, node1_id)[0]
+        node2 = group_index.get(node_key2, node2_id)[0]
+        if not (node1 and node2):
+            print "node does not exist"
+            return '1'
+        c_string = "START start_node=node:%s(%s='%s'),end_node=node:%s(%s='%s') MATCH (start_node)-[r:%s]->(end_node) RETURN r" % (
+        node1_index_name, node_key1, node1_id, node2_index_name, node_key2, node2_id, rel)
+        print c_string
+        result = graph.run(c_string)
+        rel_list = []
+        for item in result:
+            rel_list.append(item)
+        print rel_list,'----------------'
+        if not rel_list:
+            rel2 = Relationship(node1, rel, node2)
+            graph.create(rel2)
+            print "create success"
+        # else:
+        #     print "The current two nodes already have a relationship"
+        #     return '0'
+    return '2'
+
+def create_node_and_rel(node_key1, node1_list, node1_index_name,\
+                        rel, node_key2, node2_id, node2_index_name):
+    Index = ManualIndexManager(graph) # manage index
+    theme_index = Index.get_index(Node, node2_index_name)
+    c_string = "START end_node=node:%s(%s='%s')  RETURN end_node"\
+                 % (node2_index_name, node_key2, node2_id)
+    print c_string
+    result = graph.run(c_string)
+    node_l = []
+    for i in result:
+        # node1_l
+        node_l.append(i[0])
+    if len(node_l)>0:#判断对否有该节点存在
+        return 'theme already exist'
+    else:
+        new_theme = Node('SpecialEvent', event=node2_id)
+        graph.create(new_theme)
+        theme_index.add("event", node2_id, new_theme)
+        # return 'succeed'
+    info = create_rel(node_key1, node1_list, node1_index_name, rel, node_key2, node2_id, node2_index_name)
+    return info
 

@@ -12,7 +12,7 @@ from  knowledge.global_config  import relation_list,user_event_relation
 from utils import group_tab_graph, group_tab_map,query_group,query_group_user,query_group_event,search_related_user,\
                   query_group_weibo, query_user_num,del_user_group_rel, user_list_group,add_user_group_rel,\
                   search_related_user_card, compare_user_group, compare_event_group,compare_weibo_group, compare_graph_group,\
-                  compare_map_group
+                  compare_map_group, g_create_rel, g_create_node_and_rel
 from py2neo import Node, Relationship, Graph, NodeSelector
 from py2neo.packages.httpstream import http
 
@@ -105,9 +105,27 @@ def uid_in_group():  #群体包含人物滚动
 @mod.route('/del_user_in_group/')
 def del_user_in_group():  #群体编辑-删除人物
     group_name = request.args.get('group_name', '法律人士')
-    uid = request.args.get('uid', '2682428145')
+    uid = request.args.get('uid', '2820157832')
     flag = del_user_group_rel(group_name, uid)
     return json.dumps(flag)  #返回小写true成功
+
+@mod.route('/g_create_relation/')#添加到已有群体
+def g_create_relation():
+    node1_id = request.args.get('node1_id', '2820157832')   #'123,456'
+    node1_list = node1_id.split(',')
+    node2_id = request.args.get('node2_id', '法律人士')
+    flag = g_create_rel('uid', node1_list, 'node_index', 'group', \
+                                   'group', node2_id, 'group_index')
+    return json.dumps(flag)
+
+@mod.route('/g_create_new_relation/')#添加到新群体
+def g_create_new_relation():
+    node1_id = request.args.get('node1_id', '2820157832')  #'123,456'
+    node1_list = node1_id.split(',')
+    node2_id = request.args.get('node2_id', '律师3')
+    flag = g_create_node_and_rel('uid', node1_list, 'node_index', 'group', \
+                                   'group', node2_id, 'group_index')
+    return json.dumps(flag)
 
 @mod.route('/search_related_people/')
 def search_related_people():  #群体编辑-增加前先搜索人物
@@ -123,13 +141,6 @@ def search_related_people_card():  #群体编辑-增加前先搜索人物,卡片
     layer = request.args.get('layer', 'all')#'2'  'all'
     user_card = search_related_user_card(search_item,layer)
     return json.dumps(user_card)
-
-@mod.route('/add_user_in_group/')   #--------没写完！！！！！！！！！！！！！！！！！！！
-def add_user_in_group():  #群体编辑-增加人物
-    group_name = request.args.get('group_name', '法律人士')
-    uid = request.args.get('uid', '2682428145')
-    flag = add_user_group_rel(group_name, uid)
-    return json.dumps(flag)
 
 @mod.route('/g_compare_user/')   
 def g_compare_user():  #群体对比，人物对比

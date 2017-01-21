@@ -31,8 +31,8 @@ def theme_different():
 
 @mod.route('/detail/')
 def show_detail():
-
-    return render_template('theme/proults.html')
+    t_name = request.args.get('t_name', '电信诈骗')
+    return render_template('theme/proults.html', t_name = t_name)
 
 @mod.route('/overview/')
 def overview_theme():  #专题概览
@@ -103,14 +103,14 @@ def del_event_in_theme():  #专题编辑-删除事件
 
 @mod.route('/search_related_event/')
 def search_related_event():  #专题编辑-编辑前先搜索人物,图谱
-    search_item = request.args.get('item', '马来')
+    search_item = request.args.get('item', u'马来')
     user_graph = search_related_event_f(search_item)
     return json.dumps(user_graph)
 
 @mod.route('/search_related_event_card/')
 def search_related_event_card():  #专题编辑-增加前先搜索人物,卡片部分
-    search_item = request.args.get('item', '马来')
-    layer = request.args.get('layer', '2')#'2'  'all'
+    search_item = request.args.get('item', u'马来')
+    layer = request.args.get('layer', '2')#'2'  'all'--all有问题
     event_card = search_related_e_card(search_item, layer)
     return json.dumps(event_card)
 

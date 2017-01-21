@@ -152,6 +152,7 @@ function quntibiaoge() {
     };
     function territory(data) {
         var data=eval(data);
+        $('#sheet2').bootstrapTable('load',data);
         $('#sheet2').bootstrapTable({
             //url: influ_url,
             data:data,
@@ -609,7 +610,7 @@ function yonghushijian() {
                     node_ids.removeByValue($a);
                     $(this).find('a').text('加入群体探索');
                 }
-                console.log(node_ids)
+                console.log(node_ids);
             });
         });
     };

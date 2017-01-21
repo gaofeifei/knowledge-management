@@ -94,14 +94,15 @@ def search_way(node1,node2,node_type1,node_type2):
     index_type_dict = {'User':'node_index', 'Event':'event_index'}
     primary_idct = {'User':'uid','Event':'event'}
     key_dict = {'User':'uid','Event':'event_id'}
-    
+    origin_idlist = [node1,node2]
+    print origin_idlist
     if node_type1 == 'User':
         start_node_card = related_user_search([node1],'activeness')[0]
     else:
         start_node_card = event_detail_search([node1],'start_ts')[0]
 
     if node_type2 == 'User':
-        end_node_card = related_user_search([node2],'activeness')
+        end_node_card = related_user_search([node2],'activeness')[0]
         print end_node_card
     else:
         end_node_card = event_detail_search([node2],'start_ts')[0]
@@ -111,8 +112,9 @@ def search_way(node1,node2,node_type1,node_type2):
     c_string += 'MATCH p = allShortestPaths(node1-[r*..10]-node2) RETURN r'
     # return c_string
     result = graph.run(c_string)
-    uid_list = []#for card
-    eid_list = []#for card
+
+    # uid_list = []#for card
+    # eid_list = []#for card
     middle_card = []#for card, middle nodes
     uid_dict = {}#for graph
     eid_dict = {}#for graph
@@ -123,56 +125,69 @@ def search_way(node1,node2,node_type1,node_type2):
     #     return 'haha'
     # else:
     #     return [relation_all[0]['r'] , relation_all[1]['r']]
-    test = []
     for relation in relation_all:
+        # print list(relation['r']),'99999999999999999'
+        if len(list(relation['r'])) < 2:
+            return 0
         # print relation,'relation'
         for i in relation['r']:
-            print 'iiiii',i
-            test.append(i)
+            # print 'iiiii',i
             a =  walk(i)
             this_relation = []
             for m in a: #a=[node1,r,node2]
                 try:
-                    print m.type(),'!!!!!!!!!'
+                    m.type()
                 except:
                     aa = m.labels()
+                    # if m['uid'] == u'2708456183':
+                    #     print a,'-----############3'
+                    #     time.sleep(10)
+                    # print m['uid'],'__________uid00000000000'
                     # print aa,'############'
                     aa = [i for i in aa]
                     if len(aa) == 1:
                         if aa[0] == 'User':
                             eu_name = user_name_search(m['uid'])
                             uid_dict[m['uid']] = eu_name
-                            mid_card = related_user_search([m['uid']],'activeness')
-                            if len(mid_card) == 0:
-                                middle_card.append({'uid':m['uid']})
-                            else:
-                                # print len(mid_card), '!!!!!!!!!!!!!'
-                                middle_card.append(mid_card[0])
+                            this_relation.append([m[key_dict[aa[0]]], eu_name])
+                            if m['uid'] not  in origin_idlist:
+                                # print m['uid'], origin_idlist,'inininini'
+                                mid_card = related_user_search([m['uid']],'activeness')
+                                if len(mid_card) == 0:
+                                    middle_card.append({'uid':m['uid']})
+                                else:
+                                    # print len(mid_card), '!!!!!!!!!!!!!'
+                                    middle_card.append(mid_card[0])
+                            # else:
+                            #     print m['uid'], origin_idlist,'yes@@@@@@@'
 
                         if aa[0] == 'Event':
                             eu_name = event_name_search(m['event_id'])
                             eid_dict[m['event_id']] = eu_name
-                            mid_card = event_detail_search([m['event_id']],'start_ts')
-                            if len(mid_card) == 0:
-                                middle_card.append({'event_id':m['event_id']})
-                            else:
-                                middle_card.append(mid_card[0])
+                            this_relation.append([m[key_dict[aa[0]]], eu_name])
+                            if m['event_id'] not in origin_idlist:
+                                mid_card = event_detail_search([m['event_id']],'start_ts')
+                                if len(mid_card) == 0:
+                                    middle_card.append({'event_id':m['event_id']})
+                                else:
+                                    middle_card.append(mid_card[0])
                                 # eid_list.append(m['event_id'])
-                        this_relation.append([m[key_dict[aa[0]]], eu_name])
                         # print m[key_dict[aa[0]]]
-                    if len(aa) >1:
+                    if len(aa) >1:  #针对多个属性的点，
                         eu_name = user_name_search(m['uid'])
                         uid_dict[m['uid']] = eu_name
-                        mid_card = related_user_search([m['uid']],'activeness')
-                        if len(mid_card) == 0:
-                            middle_card.append({'uid':m['uid']})
-                        else:
-                            middle_card.append(mid_card[0])                        
-                        middle_card.append(mid_card)
-                        uid_list.append(m['uid'])
-                        this_relation.append(m['uid'])
+                        this_relation.append([m['uid'], eu_name])
+                        if m['uid'] not in origin_idlist:
+                            mid_card = related_user_search([m['uid']],'activeness')
+                            if len(mid_card) == 0:
+                                middle_card.append({'uid':m['uid']})
+                            else:
+                                middle_card.append(mid_card[0])                        
+                            middle_card.append(mid_card)
+                            # uid_list.append(m['uid'])
                         # print m['uid']
-            relation_result.append(this_relation)
+            if len(this_relation)>1:
+                relation_result.append(this_relation)
     return {'relation':relation_result, 'start_node_card':start_node_card, 'end_node_card':end_node_card,\
             'user_nodes':uid_dict, 'event_nodes': eid_dict, 'middle_card':middle_card}
 

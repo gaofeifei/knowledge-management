@@ -23,7 +23,7 @@ function jiedianbianji() {
     };
     function territory(data) {
         var data=eval(data);
-        console.log(data);
+        $('#crt2lf').bootstrapTable('load',data);
         $('#crt2lf').bootstrapTable({
             //url: influ_url,
             data:data[0],

@@ -1,8 +1,6 @@
 /**
  * Created by Administrator on 2016/11/30.
  */
-var groupname1='法律人士';
-var groupname2="媒体";
 
 //图谱地图对比
 function picmap() {
@@ -84,7 +82,9 @@ function picmap() {
             //         }
             //     );
             // };
+            var g_down_peo1=0;
             for (var key2 in json.u1.node.uid){
+                g_down_peo1++;
                 var num3=Math.random()*(-1000-700)+1000;
                 var num4=Math.random()*(-1000-700)+1000;
                 var name2;
@@ -102,12 +102,13 @@ function picmap() {
                         symbolSize: 14,
                         itemStyle: {
                             normal: {
-                                color: '#a73cff'
+                                color: '#ffa500'
                             }
                         }
                     }
                 );
             };
+            $("#container #middle .centre .midleft .conevents .peonum").html(g_down_peo1);
             // for (var key3 in json.u1.node.event){
             //     var num5=Math.random()*(-1000-700)+1000;
             //     var num6=Math.random()*(-1000-700)+1000;
@@ -231,7 +232,9 @@ function picmap() {
                     }
                 );
             };
+            var g_down_peo2=0;
             for (var key2 in json.u2.node.uid){
+                g_down_peo2++;
                 var num3=Math.random()*(-1000-700)+1000;
                 var num4=Math.random()*(-1000-700)+1000;
                 var name2;
@@ -249,12 +252,13 @@ function picmap() {
                         symbolSize: 14,
                         itemStyle: {
                             normal: {
-                                color: '#a73cff'
+                                color: '#ffa500'
                             }
                         }
                     }
                 );
             };
+            $("#container #middle .centre .midright .placet .peonum").html(g_down_peo2);
             // for (var key3 in json.u2.node.event){
             //     var num5=Math.random()*(-1000-700)+1000;
             //     var num6=Math.random()*(-1000-700)+1000;
@@ -1292,6 +1296,8 @@ function renwuduibi(numa2) {
     };
     function territory2(data) {
         var data=eval(data);
+        $('#tab1').bootstrapTable('load',data.detail_result1);
+        $('#tab2').bootstrapTable('load',data.detail_result2);
         $('#tab1').bootstrapTable({
             //url: influ_url,
             data:data.detail_result1,
@@ -1535,7 +1541,7 @@ function shijianduibi(numa) {
         var str1='';
         var str2='';
         $.each(data.detail_result1,function (index,item) {
-            var weizhi,biaoqian,shuoming;
+            var weizhi,biaoqian,shuoming,photo;
             if (item.location=='null'){
                 weizhi='未知';
             }else {
@@ -1550,6 +1556,11 @@ function shijianduibi(numa) {
                 shuoming='暂无数据';
             }else {
                 shuoming=item.user_tag;
+            };
+            if (item.photo_url=='null'){
+                photo='/static/image/xuyuyu.png';
+            }else {
+                photo=item.photo_url;
             };
             function getLocalTime(nS) {
                 return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18)
@@ -1567,7 +1578,7 @@ function shijianduibi(numa) {
                 '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
                 '</div>'+
                 '</div>'+
-                '<img class="play2" src="/static/image/xuyuyu.png" alt="">'+
+                '<img class="play2" src="'+photo+'" alt="">'+
                 '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
                 '<a class="bus1">业务标签：</a>'+
                 '<a class="bus2">'+biaoqian+'</a>'+
@@ -1583,7 +1594,7 @@ function shijianduibi(numa) {
                 '</div>';
         });
         $.each(data.detail_result2,function (index,item) {
-            var weizhi,biaoqian,shuoming;
+            var weizhi,biaoqian,shuoming,photo;
             if (item.location=='null'){
                 weizhi='未知';
             }else {
@@ -1598,6 +1609,11 @@ function shijianduibi(numa) {
                 shuoming='暂无数据';
             }else {
                 shuoming=item.user_tag;
+            };
+            if (item.photo_url=='null'){
+                photo='/static/image/xuyuyu.png';
+            }else {
+                photo=item.photo_url;
             };
             function getLocalTime(nS) {
                 return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18)
@@ -1615,7 +1631,7 @@ function shijianduibi(numa) {
                 '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
                 '</div>'+
                 '</div>'+
-                '<img class="play2" src="/static/image/xuyuyu.png" alt="">'+
+                '<img class="play2" src="'+photo+'" alt="">'+
                 '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
                 '<a class="bus1">业务标签：</a>'+
                 '<a class="bus2">'+biaoqian+'</a>'+
@@ -1630,42 +1646,11 @@ function shijianduibi(numa) {
                 '</div> -->'+
                 '</div>';
         });
+
+        $("#run4").append(str1);
+        $("#run5").append(str2);
         //卡片效果
-        $.each($(".play"),function (index,item) {
-            $(item).hover(function () {
-                $(item).find(".play5").css({
-                    "-webkit-transform":"translateY(-40px)",
-                    "-moz-transform":"translateY(-40px)",
-                    "-ms-transform":"translateY(-40px)",
-                    "-o-transform":"translateY(-40px)",
-                    "transform":"translateY(-40px)",
-                })
-            },function () {
-                $(item).find(".play5").css({
-                    "-webkit-transform":"translateY(40px)",
-                    "-moz-transform":"translateY(40px)",
-                    "-ms-transform":"translateY(40px)",
-                    "-o-transform":"translateY(40px)",
-                    "transform":"translateY(40px)",
-                })
-            });
-        });
-        $.each($(".play"),function (index,item) {
-            var changecolorq=1;
-            $(item).find(".play5").on('click',function(){
-                if (changecolorq==1) {
-                    $(this).parent('.play').css({backgroundColor:'#09F'});
-                    $(this).find('a').text('取消群体探索');
-                    changecolorq=2;
-                    $('#join4').modal("show");
-                } else {
-                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
-                    $(this).find('a').text('加入群体探索');
-                    changecolorq=1;
-                }
-            });
-        });
-        var heart=$(".play .play1 .p11 .xin");
+        var heart=$("#container .play .play1 .p11 .xin");
         $.each(heart,function(index,item){
             var chan=1;
             $(item).on('click',function(){
@@ -1678,8 +1663,6 @@ function shijianduibi(numa) {
                 }
             })
         });
-        $("#run4").append(str1);
-        $("#run5").append(str2);
     }
     var thing=new thing();
     var point,numberd=numa;
@@ -1737,7 +1720,6 @@ function wenbenduibi() {
         function nums() {
             var url = '/group/g_compare_weibo/?group_name1='+groupname1+'&group_name2='+
                 groupname2+'&sort_flag='+flag+'&diff='+diff;
-            console.log(url);
             place.call_request(url,territory);
         }
         nums();

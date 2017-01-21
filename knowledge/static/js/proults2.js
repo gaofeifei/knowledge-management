@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/12/19.
  */
-var thname='电信诈骗';
+var thname=theme_explanation;
 function zhexiantu() {
     function place() {
         //this.ajax_method='GET'; // body...
@@ -19,7 +19,7 @@ function zhexiantu() {
     };
     function territory(data) {
         var data=eval(data);
-        $(".pretwomd").text(data.event_num);
+        // $(".pretwomd").text(data.event_num);
         var myChart = echarts.init(document.getElementById('taltwo'));
         var thingname=[],thingnum=[],leng=[];
         var s_series=[];
@@ -101,31 +101,37 @@ function guanlianrenwu() {
         var data=eval(data);
         var str='';
         $.each(data,function (index,item) {
-            var influe,name,huoyue,mingan,tag;
-            if (item.influence=='null'){
+            var influe,name,mingan,tag,photo;
+            if (item.influence==''||item.influence=='unknown'){
                 influe='无';
             }else {
                 influe=item.influence.toFixed(2);
             };
-            if (item.uname=='null'||item.uname=='unknown'){
-                name='无';
+            if (item.uname==''||item.uname=='unknown'){
+                name=item.uid;
             }else {
                 name=item.uname;
             };
             var huoyue=item.activeness.toFixed(2);
-            if (item.sensitive=='null'||item.sensitive=='unknown'){
+            if (item.sensitive==''||item.sensitive=='unknown'){
                 mingan='无';
             }else {
                 mingan=item.sensitive.toFixed(2);
             };
-            if (item.user_tag=='null'||item.sensitive=='unknown'){
+            if (item.user_tag==''||item.sensitive=='unknown'){
                 tag='无';
             }else {
                 tag=item.user_tag;
             };
+            if (item.photo_url==''||item.photo_url=='unknown'){
+                photo='/static/image/pangzi.png';
+            }else {
+                photo=item.photo_url;
+            };
             str+='<div class="play">'+
                 '<div class="play1">'+
                 '<div class="p11">'+
+                '<span id="uid" style="display: none">'+item.uid+'</span>'+
                 '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
                 '--><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""'+
                 'title=\'粉丝数\'><!--'+
@@ -141,10 +147,10 @@ function guanlianrenwu() {
                 '<span class="mingan">'+mingan+'</span>'+
                 '</div>'+
                 '</div>'+
-                '<img class="play2" src="/static/image/pangzi.png" alt="">'+
+                '<img class="play2" src="'+photo+'" alt="">'+
                 '<div class="play23" style="margin-left: 15px;">'+
                 '<a href="" class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
-                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>'+
+                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string+'</span></a>'+
                 '</div>'+
                 '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
                 '<a class="bus1">业务标签：</a>'+
@@ -160,6 +166,7 @@ function guanlianrenwu() {
                 '</div>'+
                 '</div>';
         });
+        $("#run2").append(str);
         //卡片效果
         $.each($("#people .play"),function (index,item) {
             $(item).hover(function () {
@@ -208,8 +215,13 @@ function guanlianrenwu() {
                 }
             })
         });
-        $("#run2").append(str);
-
+        $.each($("#people .xingming"),function(index,item){
+            $(item).on('click',function () {
+                var p_uid=$(this).siblings('#uid').html();
+                // console.log(p_uid)
+                window.open('/index/person/?p_uid='+p_uid);
+            });
+        })
     };
     var place=new place();
 
@@ -248,6 +260,7 @@ function baohanshijian() {
     function territory(data) {
         $("#run").empty();
         var data=eval(data);
+        console.log(data);
         var str='';
         $.each(data,function (index,item) {
             var weizhi,biaoqian,shuoming;
@@ -297,8 +310,10 @@ function baohanshijian() {
                 '</div> -->'+
                 '</div>';
         });
+
+        $("#run").append(str);
         //卡片效果
-        $.each($("#people .play"),function (index,item) {
+        $.each($(".play"),function (index,item) {
             $(item).hover(function () {
                 $(item).find(".play5").css({
                     "-webkit-transform":"translateY(-40px)",
@@ -317,7 +332,7 @@ function baohanshijian() {
                 })
             });
         });
-        $.each($("#people .play"),function (index,item) {
+        $.each($("play"),function (index,item) {
             var changecolorq=1;
             $(item).find(".play5").on('click',function(){
                 if (changecolorq==1) {
@@ -345,7 +360,13 @@ function baohanshijian() {
                 }
             })
         });
-        $("#run").append(str);
+        $.each($("#similar .xingming"),function(index,item){
+            $(item).on('click',function () {
+                var t_uid=$(this).html();
+                // console.log(p_uid)
+                window.open('/index/search_result/?t_uid='+t_uid);
+            });
+        })
     }
 
     var include=new include();

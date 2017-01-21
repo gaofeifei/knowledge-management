@@ -2,9 +2,10 @@
  * Created by Administrator on 2016/11/24.
  */
 var theme_list=[];
-var thname1,thname2,m,n,node_ids=[];
+var thname1,thname2,m=0,n=0,node_ids=[],t_name;
 function chakan(value) {
     thname1=value;
+    t_name=thname1;
     m=1;
 };
 function bianji(value) {
@@ -50,7 +51,7 @@ function zong() {
                     aa=1;
                 }
             });
-        })
+        });
 
         // 路径配置
         require.config({
@@ -123,10 +124,13 @@ function zong() {
                         }
                     ]
                 };
+
                 // 为echarts对象加载数据
                 myChart.setOption(option);
             }
         );
+
+
     }
 
     var place=new place();
@@ -142,7 +146,8 @@ $("#container .choose1 .menu .msure").on('click',function () {
     if (!m==1){
         $("#join99").modal("show");
     }else {
-        window.open("/theme/detail/");
+        // window.open("/theme/detail/?theme_explanation="+thname1);
+        window.open("/theme/detail/?t_name="+t_name);
     }
 });
 $("#container .choose1 .menu .compare").on('click',function () {

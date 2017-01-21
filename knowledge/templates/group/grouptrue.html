@@ -23,8 +23,8 @@
 {% block main %}
     <div id="container">
         <div class="present">
-            <span class="preone">当前选择：<a class="preonemd" href="###">律师群体</a> ，</span>
-            <span class="pretwo">共包含<a href="###" class="pretwomd">6</a>个人物</span>
+            <span class="preone">当前选择：<a class="preonemd" href="###"></a> ，</span>
+            <span class="pretwo">共包含<a href="###" class="pretwomd"></a>个人物</span>
             <div class="checkbox prethr" style="margin-left: 30px">
                 <label>
                     <input type="checkbox" class="ptnew"/> 选择新群体
@@ -640,6 +640,12 @@
 
 <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=oHDtLqS40HV7dTqlNWYUc5IYvSLq60pS">
 </script>-->
+<script type="text/javascript">
+    var groupname='{{group_name}}';
+    // var theme_num='{{t_num}}';
+    $("#container .present .preone .preonemd").html(groupname);
+    // $("#container .present .pretwo .pretwomd").html(theme_num);
+</script>
 <script src="/static/js/proults.js"></script>
 <script src="/static/js/grouptrue2.js"></script>
 <script type="text/javascript">

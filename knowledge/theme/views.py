@@ -31,7 +31,11 @@ def theme_different():
 
 @mod.route('/detail/')
 def show_detail():
-    t_name = request.args.get('t_name', '电信诈骗')
+
+    # return render_template('theme/proults.html')
+    t_name = request.args.get('t_name', u'电信诈骗')
+    # t_num = request.args.get('t_num', u'电信诈骗')
+    # t_name=t_name.decode('utf-8')
     return render_template('theme/proults.html', t_name = t_name)
 
 @mod.route('/overview/')

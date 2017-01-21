@@ -13,6 +13,10 @@ $(".ptnew").on("click",function () {
     if (show==0) {
         $(".prethrmd").css({display:'inline-block'});
         show = 1;
+        $('#container .present .prethr .prethrmd .ptm3').on('click',function(){
+            var gnew_name=$('#container .present .prethr .prethrmd #ptm2').val();
+            window.open("/group/detail/?group_name="+gnew_name);
+        });
     }else {
         $(".prethrmd").css({display:'none'});
         show = 0;

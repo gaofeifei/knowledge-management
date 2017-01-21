@@ -529,7 +529,6 @@
     </div>
 </div> -->
 {% endblock %}
-
 {% block my_js %}
 <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=oHDtLqS40HV7dTqlNWYUc5IYvSLq60pS">
 </script>-->
@@ -537,6 +536,8 @@
 <script src="/static/js/proults3.js"></script>
 <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
 <script>
+    var tt_name = '{{t_name}}'
+    console.log(tt_name)
     var show = 0;
     $(".ptnew").on("click",function () {
         if (show==0) {

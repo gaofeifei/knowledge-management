@@ -5,7 +5,7 @@ Array.prototype.removeByValue = function(val) {
             break;
         }
     }
-}
+};
 var node_ids=[];
 function quntixinjianyonghushijian() {
     function place() {
@@ -274,7 +274,6 @@ function quntixinjianyonghushijian() {
                     node_ids.removeByValue($a);
                     $(this).find('a').text('加入群体探索');
                 }
-                console.log(node_ids)
             });
         });
     };
@@ -335,7 +334,6 @@ function sureadd2() {
         var data=eval(data);
         console.log(data)
         if (data==2){
-
             $('#chengong').modal("show");
         }else {
             $('#shibai').modal("show");

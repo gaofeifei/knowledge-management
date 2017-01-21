@@ -1,5 +1,5 @@
-var themename1='电信诈骗';
-var themename2='港澳台';
+var themename1=theme_diff.theme1;
+var themename2=theme_diff.theme2;
 //事件对比
 function shijianduibi(numa) {
     function thing() {
@@ -217,6 +217,7 @@ function renwuduibi(numa2) {
     };
     function territory2(data) {
         var data=eval(data);
+        $('#tab1').bootstrapTable('load',data);
         $('#tab1').bootstrapTable({
             //url: influ_url,
             data:data.detail_result1,
@@ -312,6 +313,7 @@ function renwuduibi(numa2) {
             ],
 
         });
+        $('#tab2').bootstrapTable('load',data);
         $('#tab2').bootstrapTable({
             //url: influ_url,
             data:data.detail_result2,

@@ -438,6 +438,29 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="liangge" tabindex="-2">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">温馨提示</h2>
+            </div>
+            <div class="modal-body">
+                <p>您只能选择两个专题进行比较，不能多于或少于两个。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block js %}
@@ -503,11 +526,11 @@
     //     $('.instr').show(20);
     // });
     $('.condet4').on('click',function () {
-        window.open("/theme/different/?theme1="+theme_list[0]+'&theme2='+theme_list[1]);
-        // $('#aaa').modal("show");
-    });
-    $('#spread').on('click',function () {
-        window.open("/theme/detail/");
+        if (theme_list.length==2) {
+            window.open("/theme/different/?theme1="+theme_list[0]+'&theme2='+theme_list[1]);
+        }else{
+            $('#liangge').modal("show");
+        };
         // $('#aaa').modal("show");
     });
     $('.add22').on('click',function () {
@@ -527,9 +550,6 @@
             window.open('/index/search_result/');
         })
     });
-    // $("#container .choose1 .menu .msure").on("click",function () {
-    //     window.open("/theme/detail/");
-    // });
     $('#container .left').hover(function () {
         $(this).attr('src','/static/image/left_hv.png');
     },function () {

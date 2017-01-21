@@ -21,7 +21,7 @@
 <div id="container" style="padding-bottom: 30px;">
     <div class="keyman">
         <div class="kmlf" style="margin-top: 20px">
-            <img class="kmimg" src="/static/image/xuyuyu2.jpg" alt=""/>
+            <img class="kmimg" src="" alt=""/>
         </div>
         <div class="kmrg">
             <div class="kmrg1">
@@ -495,6 +495,10 @@
 {% endblock %}
 
 {% block my_js %}
+<script type="text/javascript">
+    var themename='{{t_uid}}';
+    var eventname='{{t_uid}}';
+</script>
 <script type="text/javascript" src='/static/js/incident1.js'></script>
 <script type="text/javascript" src='/static/js/incident2.js'></script>
 <script>
@@ -645,10 +649,16 @@
             };
             function territory(data) {
                 var data=eval(data);
-                var location,tag,description;
+                console.log(data);
+                var location,tag,description,photo;
                 function getLocalTime(nS) {     
                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10).replace(/:\d{1,2}$/,' ');     
-                }   
+                }
+                if (data.photo_url=='null') {
+                    photo='/static/image/xuyuyu2.jpg';
+                }else {
+                    photo=data.photo_url;
+                };   
                 if (data.location=='null') {
                     location='暂无';
                 }else {
@@ -664,7 +674,8 @@
                 }else {
                     description=data.description;
                 };
-                // $("#container .keyman .kmrg .rgname .xingming")
+                $('#container .keyman .kmlf .kmimg').attr('src',photo);
+                $("#container .keyman .kmrg .rgname .xingming").html(themename);
                 $("#container .keyman .kmrg .rgname .difang").append(location);
                 $("#container .keyman .kmrg .rgname .influence").append(getLocalTime(data.start_ts));
                 $("#container .keyman .kmrg .rgname .huoyuedu").append(data.weibo_counts);
@@ -678,8 +689,9 @@
             };
             var place=new place();
             function nums() {
-                var url = '/index/event_detail/';
+                var url = '/index/event_detail/?event_name='+themename;
                 place.call_request(url,territory);
+                console.log(url)
             }
             nums();
         }

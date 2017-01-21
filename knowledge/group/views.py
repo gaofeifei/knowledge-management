@@ -27,12 +27,14 @@ def group():
 def show_group_detail():
     group_name = request.args.get('group_name', u'媒体')
 
-    return render_template('group/grouptrue.html')
+    return render_template('group/grouptrue.html',group_name = group_name )
 
 @mod.route('/comparison/')
 def group_comparison():
+    group_name1 = request.args.get('group_name1', u'媒体')
+    group_name2 = request.args.get('group_name2', u'法律人士')
 
-    return render_template('group/groupdiff.html')
+    return render_template('group/groupdiff.html',group_name1 = group_name1,group_name2 = group_name2 )
 
 @mod.route('/group_node_filter/')
 def group_node_filter():

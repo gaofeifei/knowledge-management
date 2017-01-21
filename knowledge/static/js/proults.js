@@ -1,7 +1,6 @@
 /**
  * Created by Administrator on 2016/11/30.
  */
-var groupname='媒体';
 //事件人物点配置
 function peo() {
     //this.ajax_method='GET'; // body...
@@ -36,7 +35,6 @@ peo2.prototype= {
 };
 var peo2=new peo2();
 var url2='/group/group_map_filter/?group_name='+groupname;
-
 var friend='friend',relative='relative', colleague='colleague', user_tag='user_tag',
     join='join',pusher='pusher', maker='maker',other_rel='other_relationship',
     node_type;
@@ -133,17 +131,16 @@ function events() {
     myChart.showLoading();
     $.getJSON(url, function (json) {
         var json=eval(json);
-        // var categories = [{name:'人物'},{name:'事件'}];
-        var node_value=[],link_value=[];
-            // ,event_value=[];
-        for (var key in json.user_nodes){
+        var node_value=[],link_value=[],g_down_nums=0;
+        for (var key in json.node.uid){
+            g_down_nums++;
             var num1=Math.random()*(-1000-700)+1000;
             var num2=Math.random()*(-1000-700)+1000;
             var name;
-            if (json.user_nodes[key]==''||json.user_nodes[key]=="unknown") {
+            if (json.node.uid[key]==''||json.node.uid[key]=="unknown") {
                 name=key;
             }else {
-                name=json.user_nodes[key];
+                name=json.node.uid[key];
             };
             node_value.push(
                 {
@@ -154,20 +151,21 @@ function events() {
                     symbolSize: 14,
                     itemStyle: {
                         normal: {
-                            color: '#00cc66'
+                            color: '#ffa500'
                         }
                     }
                 }
             );
         };
-        for (var key2 in json.event_nodes){
+        $("#container .present .pretwo .pretwomd").html(g_down_nums);
+        for (var key2 in json.node.group){
             var num3=Math.random()*(-1000-700)+1000;
             var num4=Math.random()*(-1000-700)+1000;
             var name2;
-            if (json.event_nodes[key2]==''||json.event_nodes[key2]=="unknown") {
+            if (json.node.group[key2]==''||json.node.group[key2]=="unknown") {
                 name2=key2;
             }else {
-                name2=json.event_nodes[key2];
+                name2=json.node.group[key2];
             }
             node_value.push(
                 {
@@ -178,13 +176,13 @@ function events() {
                     symbolSize: 14,
                     itemStyle: {
                         normal: {
-                            color: '#a73cff'
+                            color: 'blue'
                         }
                     }
                 }
             );
         };
-        $.each(json.relation,function (index,item) {
+        $.each(json.result_relation,function (index,item) {
             link_value.push(
                 {
                     source: item[0],
@@ -750,67 +748,77 @@ function guanlianrenwu() {
         $("#run").empty();
         var data=eval(data);
         var str='';
-        $.each(data,function (index,item) {
-            var influe,name,huoyue,mingan,tag;
-            if (item.importnace=='null'){
-                influe='暂无';
-            }else {
-                influe=item.importnace.toFixed(2);
-            };
-            if (item.uname=='null'||item.uname=='unknown'||item.uname==''){
-                name='暂无';
-            }else {
-                name=item.uname;
-            };
-            var huoyue=item.activeness.toFixed(2);
-            if (item.sensitive=='null'||item.sensitive=='unknown'){
-                mingan='暂无';
-            }else {
-                mingan=item.sensitive.toFixed(2);
-            };
-            if (item.user_tag=='null'||item.sensitive=='unknown'){
-                tag='暂无';
-            }else {
-                tag=item.user_tag;
-            };
-            str+='<div class="play">'+
-                '<div class="play1">'+
-                '<div class="p11">'+
-                '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
-                '--><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""'+
-                'title=\'粉丝数\'><!--'+
-                '--><span class="difang" style="font-size: 8px">'+item.fansnum+'</span><!--'+
-                '--><img class=\'xin\' style="margin-left: 10px;" src="/static/image/heart.png">'+
-                '</div>'+
-                '<div class="p22" style="margin-top: 5px">'+
-                '<img style="margin-left: 10px;" src="/static/image/influence.png" title="重要度">'+
-                '<span class="influence">'+influe+'</span>'+
-                '<img src="/static/image/huoyuedu.png" title="活跃度">'+
-                '<span class="huoyuedu">'+huoyue+'</span>'+
-                '<img src="/static/image/mingan.png" title="敏感度">'+
-                '<span class="mingan">'+mingan+'</span>'+
-                '</div>'+
-                '</div>'+
-                '<img class="play2" src="/static/image/pangzi.png" alt="">'+
-                '<div class="play23" style="margin-left: 15px;">'+
-                '<a href="" class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
-                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>'+
-                '</div>'+
-                '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
-                '<a class="bus1">业务标签：</a>'+
-                '<a class="bus2">'+tag+'</a>'+
-                '</div>'+
-                '<!--<div class="play4">-->'+
-                '<!--<p class="shuoming">-->'+
-                '<!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->'+
-                '<!--</p>-->'+
-                '<!--</div>-->'+
-                '<div class="play5" type="button" data-toggle="modal">'+
-                '<a>加入群体探索</a>'+
-                '</div>'+
-                '</div>';
-        });
-        $("#run").append(str);
+        if (data){
+            $.each(data,function (index,item) {
+                var influe,name,huoyue,mingan,tag,photo;
+                if (item.influence=='null'||item.influence=='unknown'){
+                    influe='暂无';
+                }else {
+                    influe=item.influence.toFixed(2);
+                };
+                if (item.uname=='null'||item.uname=='unknown'||item.uname==''){
+                    name=item.uid;
+                }else {
+                    name=item.uname;
+                };
+                var huoyue=item.activeness.toFixed(2);
+                if (item.sensitive=='null'||item.sensitive=='unknown'){
+                    mingan='暂无';
+                }else {
+                    mingan=item.sensitive.toFixed(2);
+                };
+                if (item.user_tag=='null'||item.sensitive=='unknown'){
+                    tag='暂无';
+                }else {
+                    tag=item.user_tag;
+                };
+                if (item.photo_url==''||item.photo_url=='null'||item.photo_url=='unknown'){
+                    photo='/static/image/pangzi.png';
+                }else {
+                    photo=item.photo_url;
+                };
+                str+='<div class="play">'+
+                    '<div class="play1">'+
+                    '<div class="p11">'+
+                    '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
+                    '--><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""'+
+                    'title=\'粉丝数\'><!--'+
+                    '--><span class="difang" style="font-size: 8px">'+item.fansnum+'</span><!--'+
+                    '--><img class=\'xin\' style="margin-left: 10px;" src="/static/image/heart.png">'+
+                    '</div>'+
+                    '<div class="p22" style="margin-top: 5px">'+
+                    '<img style="margin-left: 10px;" src="/static/image/influence.png" title="影响力">'+
+                    '<span class="influence">'+influe+'</span>'+
+                    '<img src="/static/image/huoyuedu.png" title="活跃度">'+
+                    '<span class="huoyuedu">'+huoyue+'</span>'+
+                    '<img src="/static/image/mingan.png" title="敏感度">'+
+                    '<span class="mingan">'+mingan+'</span>'+
+                    '</div>'+
+                    '</div>'+
+                    '<img class="play2" src="'+photo+'" alt="">'+
+                    '<div class="play23" style="margin-left: 15px;">'+
+                    '<a class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
+                    '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>'+
+                    '</div>'+
+                    '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
+                    '<a class="bus1">业务标签：</a>'+
+                    '<a class="bus2">'+tag+'</a>'+
+                    '</div>'+
+                    '<!--<div class="play4">-->'+
+                    '<!--<p class="shuoming">-->'+
+                    '<!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->'+
+                    '<!--</p>-->'+
+                    '<!--</div>-->'+
+                    '<div class="play5" type="button" data-toggle="modal">'+
+                    '<a>加入群体探索</a>'+
+                    '</div>'+
+                    '</div>';
+            });
+            $("#run").append(str);
+        }else {
+            $("#run").append('暂无数据！！');
+        }
+
         //卡片效果
         $.each($(".play"),function (index,item) {
             $(item).hover(function () {
@@ -899,7 +907,8 @@ function guanlianshijian() {
         var data=eval(data);
         var str='';
         $.each(data,function (index,item) {
-            var weizhi,biaoqian,shuoming;
+            console.log(item)
+            var weizhi,biaoqian,shuoming,photo;
             if (item.location=='null'){
                 weizhi='未知';
             }else {
@@ -914,6 +923,11 @@ function guanlianshijian() {
                 biaoqian='暂无数据';
             }else {
                 biaoqian=item.user_tag;
+            };
+            if (item.photo_url=='null'||item.photo_url==''){
+                photo='/static/image/xuyuyu.png';
+            }else {
+                photo=item.photo_url;
             };
             function getLocalTime(nS) {
                 return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,17)
@@ -931,7 +945,7 @@ function guanlianshijian() {
                 '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
                 '</div>'+
                 '</div>'+
-                '<img class="play2" src="/static/image/xuyuyu.png" alt="">'+
+                '<img class="play2" src="'+photo+'" alt="">'+
                 '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
                 '<a class="bus1">业务标签：</a>'+
                 '<a class="bus2">'+biaoqian+'</a>'+

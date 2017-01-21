@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 2016/11/25.
  */
+var group_list=[];
 var groupname,groupname1,ii,jj,node_ids=[];
 function qunti(value) {
     groupname=value;
@@ -15,8 +16,16 @@ $("#container .choose1 .menu .msure").on('click',function () {
     if (!jj==1){
         $("#join99").modal("show");
     }else {
-        window.open('/group/detail/');
+        window.open('/group/detail/?group_name='+groupname);
     }
+});
+$('.condet4').on('click',function () {
+    if (group_list.length==2) {
+        window.open("/group/comparison/?group_name1="+group_list[0]+'&group_name2='+group_list[1]);
+    }else{
+        $('#liangge').modal("show");
+    };
+    // $('#aaa').modal("show");
 });
 $("#container .choose1 .menu .compare").on('click',function () {
     if (!jj==1){
@@ -25,6 +34,7 @@ $("#container .choose1 .menu .compare").on('click',function () {
         $('#condet').show(30);
     }
 });
+
 function zongqunti() {
     function place() {
         //this.ajax_method='GET'; // body...
@@ -46,10 +56,25 @@ function zongqunti() {
         $.each(data,function (index,item) {
             $("#container .choose1 .menu form #list").append('<option value="'+item[0]+'">'+item[0]+'</option>');
             $(".xinzeng #list1").append('<option value="'+item[0]+'">'+item[0]+'</option>');
-            $("#container .choose1 .menu #condet .condet1").after('<span class="condet2">'+item[0]+'<b class="icon icon-remove det"></b></span>')
+            $("#container .choose1 .menu #condet .condet1").after('<span class="condet2"><i>'+item[0]+'</i><b class="icon icon-remove det"></b></span>')
             anlname.push(item[0]);
             anlnum.push(item[1]);
         });
+        var condet2_g=$('#container .choose1 .menu #condet .condet2');
+        $.each(condet2_g,function (index,item) {
+            var gg=1;
+            $(item).on('click',function () {
+                if (gg==1){
+                    $(this).css({backgroundColor:'rgb(76, 174, 76)'});
+                    gg=2;
+                    group_list.push($(this).find('i').html());
+                }else {
+                    $(this).css({backgroundColor:'#0099FF'});
+                    gg=1;
+                }
+            });
+        });
+
         // 路径配置
         require.config({
             paths: {
@@ -65,6 +90,8 @@ function zongqunti() {
             function (ec) {
                 // 基于准备好的dom，初始化echarts图表
                 var myChart = ec.init(document.getElementById('spread'));
+                var ecConfig = require('echarts/config');
+                myChart.on(ecConfig.EVENT.CLICK, eConsole);
                 var option = {
                     // title: {
                     //     x: 'center',
@@ -94,6 +121,7 @@ function zongqunti() {
                             show: false
                         }
                     ],
+                    clickable : true,
                     series: [
                         {
                             // name: 'ECharts例子个数统计',
@@ -125,6 +153,14 @@ function zongqunti() {
                 myChart.setOption(option);
             }
         );
+        // function eConsole(param) {
+        //     if (typeof param.seriesIndex == 'undefined') {
+        //         return;
+        //     }
+        //     if (param.type == 'click') {
+        //         alert(param.date);
+        //     }
+        // }
     };
     var place=new place();
     function nums() {
@@ -134,6 +170,8 @@ function zongqunti() {
     nums();
 };
 zongqunti();
+
+
 
 function quntibiaoge() {
     function place() {
@@ -536,7 +574,7 @@ function yonghushijian() {
                 '<img class="play2" src="'+photo+'" alt="">'+
                 '<div class="play23" style="margin-left: 15px;">'+
                 '<a href="" class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
-                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>'+
+                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string+'</span></a>'+
                 '</div>'+
                 '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
                 '<a class="bus1">业务标签：</a>'+

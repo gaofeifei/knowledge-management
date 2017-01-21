@@ -445,6 +445,29 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="liangge" tabindex="-2">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">温馨提示</h2>
+            </div>
+            <div class="modal-body">
+                <p>您只能选择两个群体进行比较，不能多于或少于两个。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 {% block my_js %}
     <script src="/static/js/groupore1.js"></script>
@@ -464,13 +487,13 @@
             $(".xinjian").css({display:"block"});
         });
         $(".gai").on('click',function(){
-        $(".tuli").show(20);
-        $(".choose1").hide(20);
-        $(".con_bot").hide(20);
-        $(".xinzeng").hide(20);
-        $(this).css({backgroundColor:"#4cae4c"});
-        $(this).siblings('.ch1').css({backgroundColor:"#0099FF"});
-    });
+            $(".tuli").show(20);
+            $(".choose1").hide(20);
+            $(".con_bot").hide(20);
+            $(".xinzeng").hide(20);
+            $(this).css({backgroundColor:"#4cae4c"});
+            $(this).siblings('.ch1').css({backgroundColor:"#0099FF"});
+        });
     $(".cha").on('click',function(){
         $(".tuli").hide(20);
         $(".con_bot").hide(20);
@@ -651,15 +674,7 @@
                 }
             }); 
         });
-        // $("#container .choose1 .menu .msure").on('click',function () {
-        //     window.open('/group/detail/');
-        // });
-         $("#spread").on('click',function () {
-            window.open('/group/detail/');
-        });
-        $(".condet4").on('click',function () {
-            window.open('/group/comparison/');
-        });
+    
         $.each( $(".xingming"),function(index,item){
             $(item).on('click',function () {
                 window.open('/index/person/');

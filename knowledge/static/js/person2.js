@@ -1,4 +1,4 @@
-var uid=1765891182;
+// var uid=1765891182;
 function guanlianrenwu() {
     function place() {
         //this.ajax_method='GET'; // body...
@@ -170,7 +170,7 @@ function guanlianshijian() {
     };
     var touch=new touch();
     function nums() {
-        var url = '/index/person_detail_event/';
+        var url = '/index/person_detail_event/?uid='+uid;
         touch.call_request(url,things);
     }
     nums();

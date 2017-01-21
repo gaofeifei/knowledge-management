@@ -117,6 +117,10 @@ function show(){
     }
 };
 function relation_line(data) {
+    $("#container .result .re3 .re3rg .midd .midd2").empty();
+    $('#container .result .re3 .re3lf .route .path').empty();
+    $('#container .result .re3 .re3lf .route .dote .geshu').empty();
+    $('#container .result .re3 .re3lf #se_ka').empty();
     var json=eval(data);
     console.log(json);
     var myChart = echarts.init(document.getElementById('complex'));
@@ -124,7 +128,7 @@ function relation_line(data) {
     var node_value=[],link_value=[];
     for (var key in json.user_nodes){
         var num1=Math.random()*(-10000-700)+10000;
-        var num2=Math.random()*(-1000-700)+1000;
+        var num2=Math.random()*(-500-700)+500;
         var name;
         if (json.user_nodes[key]==''||json.user_nodes[key]=="unknown") {
             name=key;
@@ -148,7 +152,7 @@ function relation_line(data) {
     };
     for (var key2 in json.event_nodes){
         var num3=Math.random()*(-10000-700)+10000;
-        var num4=Math.random()*(-1000-700)+1000;
+        var num4=Math.random()*(-500-700)+500;
         var name2;
         if (json.event_nodes[key2]==''||json.event_nodes[key2]=="unknown") {
             name2=key2;
@@ -173,8 +177,8 @@ function relation_line(data) {
     $.each(json.relation,function (index,item) {
         link_value.push(
             {
-                source: item[0],
-                target: ""+item[2]+""
+                source: item[0][0],
+                target: ""+item[1][0]+""
             }
         );
     });
@@ -225,7 +229,7 @@ function relation_line(data) {
     //--------------------
     var uname1,uname2;
     if (json.start_node_card.uid){
-        if (!json.start_node_card.uname){
+        if (json.start_node_card.uname==''){
             uname1=json.start_node_card.uid;
         }else {
             uname1=json.start_node_card.uname;
@@ -257,7 +261,7 @@ function relation_line(data) {
         }else {
             photo=json.start_node_card.photo_url;
         };
-        $('#container .result .re3 .re3lf').append(
+        $('#container .result .re3 .re3lf #se_ka').append(
             '<div class="play">'+
             '<span id="uid" style="display:none;">'+json.start_node_card.uid+'</span>'+
             '<div class="play1">'+
@@ -280,7 +284,7 @@ function relation_line(data) {
             '<img class="play2" src="'+photo+'" alt="">'+
             '<div class="play23" style="margin-left: 15px;">'+
             '<a href="###" class="renzh1">认证类型:<span class="renzh11">'+json.start_node_card.topic_string+'</span></a>'+
-            '<a href="###" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22"></span></a>'+
+            '<a href="###" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string+'</span></a>'+
             '</div>'+
             '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
             '<a class="bus1">业务标签：</a>'+
@@ -297,7 +301,7 @@ function relation_line(data) {
             '</div>'
         );
     }else {
-        uname1=json.start_node_card.uname;
+        uname1=json.start_node_card.name;
         var weizhi,biaoqian,shuoming,photo;
         if (json.start_node_card.location=='null'){
             weizhi='未知';
@@ -319,7 +323,7 @@ function relation_line(data) {
         }else {
             shuoming=json.start_node_card.user_tag;
         };
-        $('#container .result .re3 .re3lf').append(
+        $('#container .result .re3 .re3lf #se_ka').append(
             '<div class="play">'+
             '<div class="play1">'+
             '<div class="p11">'+
@@ -351,7 +355,7 @@ function relation_line(data) {
     };
 
     if (json.end_node_card.uid){
-        if (!json.end_node_card.uname){
+        if (json.end_node_card.uname==''){
             uname2=json.end_node_card.uid;
         }else {
             uname2=json.end_node_card.uname;
@@ -383,7 +387,7 @@ function relation_line(data) {
         }else {
             photo2=json.end_node_card.photo_url;
         };
-        $('#container .result .re3 .re3lf').append(
+        $('#container .result .re3 .re3lf #se_ka').append(
             '<div class="play">'+
             '<span id="uid" style="display:none;">'+json.end_node_card.uid+'</span>'+
             '<div class="play1">'+
@@ -406,7 +410,7 @@ function relation_line(data) {
             '<img class="play2" src="'+photo2+'" alt="">'+
             '<div class="play23" style="margin-left: 15px;">'+
             '<a href="###" class="renzh1">认证类型:<span class="renzh11">'+json.end_node_card.topic_string+'</span></a>'+
-            '<a href="###" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22"></span></a>'+
+            '<a href="###" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string+'</span></a>'+
             '</div>'+
             '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
             '<a class="bus1">业务标签：</a>'+
@@ -423,7 +427,7 @@ function relation_line(data) {
             '</div>'
         );
     }else {
-        uname2=json.end_node_card.uname;
+        uname2=json.end_node_card.name;
         var weizhi2,biaoqian2,shuoming2,photo2;
         if (json.end_node_card.location=='null'){
             weizhi2='未知';
@@ -445,7 +449,7 @@ function relation_line(data) {
         }else {
             shuoming2=json.end_node_card.user_tag;
         };
-        $('#container .result .re3 .re3lf').append(
+        $('#container .result .re3 .re3lf #se_ka').append(
             '<div class="play">'+
             '<div class="play1">'+
             '<div class="p11">'+
@@ -481,7 +485,7 @@ function relation_line(data) {
     $.each(json.middle_card,function (index,item) {
         if (item.uid){
             var influe,name,huoyue,mingan,tag,photo;
-            if (item.influence=='null'){
+            if (item.influence==''){
                 influe='无';
             }else {
                 influe=item.influence.toFixed(2);
@@ -529,7 +533,7 @@ function relation_line(data) {
                 '<img class="play2" src="'+photo+'" alt="">'+
                 '<div class="play23" style="margin-left: 15px;">'+
                 '<a href="" class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
-                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>'+
+                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string+'</span></a>'+
                 '</div>'+
                 '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
                 '<a class="bus1">业务标签：</a>'+
@@ -596,6 +600,54 @@ function relation_line(data) {
         }
     });
     $("#container .result .re3 .re3rg .midd .midd2").append(line_mid);
+    //卡片效果
+    $.each($(".play"),function (index,item) {
+        $(item).hover(function () {
+            $(item).find(".play5").css({
+                "-webkit-transform":"translateY(-40px)",
+                "-moz-transform":"translateY(-40px)",
+                "-ms-transform":"translateY(-40px)",
+                "-o-transform":"translateY(-40px)",
+                "transform":"translateY(-40px)",
+            })
+        },function () {
+            $(item).find(".play5").css({
+                "-webkit-transform":"translateY(40px)",
+                "-moz-transform":"translateY(40px)",
+                "-ms-transform":"translateY(40px)",
+                "-o-transform":"translateY(40px)",
+                "transform":"translateY(40px)",
+            })
+        });
+    });
+    $.each($(".play"),function (index,item) {
+        var changecolorq=1;
+        $(item).find(".play5").on('click',function(){
+            if (changecolorq==1) {
+                $(this).parent('.play').css({backgroundColor:'#09F'});
+                $(this).find('a').text('取消群体探索');
+                changecolorq=2;
+                $('#join4').modal("show");
+            } else {
+                $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                $(this).find('a').text('加入群体探索');
+                changecolorq=1;
+            }
+        });
+    });
+    var heart=$(".play .play1 .p11 .xin");
+    $.each(heart,function(index,item){
+        var chan=1;
+        $(item).on('click',function(){
+            if (chan==1) {
+                $(this).attr('src','/static/image/focus.png');
+                chan=2;
+            }else {
+                $(this).attr('src','/static/image/heart.png');
+                chan=1;
+            }
+        })
+    });
 }
 function getLocalTime(nS) {
     return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18);

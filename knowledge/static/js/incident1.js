@@ -1,4 +1,4 @@
-var eventname='马来西亚抓获电信欺诈案犯';
+// var eventname='马来西亚抓获电信欺诈案犯';
 
 function guanlianrenwu() {
     function place() {

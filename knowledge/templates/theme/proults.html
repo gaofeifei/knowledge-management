@@ -20,7 +20,7 @@
 {% block main %}
 <div id="container">
     <div class="present">
-        <span class="preone">当前选择：<a class="preonemd" href="###">电信诈骗</a>专题 ，</span>
+        <span class="preone">当前选择：<a class="preonemd" href="###"></a>专题 ，</span>
         <span class="pretwo">共包含<a href="###" class="pretwomd"></a>个事件</span>
         <div class="checkbox prethr" style="margin-left: 30px">
             <label>
@@ -423,14 +423,14 @@
                                 <select name="" id="list1" onchange='check(this.value)'>
                                     <option value="" disabled selected>请选择群体名称</option> 
                                     <option value="新建群体">新建群体</option>
-                                    <option value="律师群体">律师群体</option>
+                                    <!-- <option value="律师群体">律师群体</option> -->
                                 </select>
                                 <input type="text" class="shuru2" placeholder="请输入群体名称"/>
                             </form>
                             <div class="shij">
                                 <span class="sjr">加入人物</span>
-                                <a class="sj1">邓海峰 <b class="icon icon-remove det"></b> </a>
-                                <a class="sj2">潘强 <b class="icon icon-remove det"></b> </a>
+                                <!-- <a class="sj1">邓海峰 <b class="icon icon-remove det"></b> </a>
+                                <a class="sj2">潘强 <b class="icon icon-remove det"></b> </a> -->
                             </div>
                         </div>
             </div>
@@ -532,17 +532,23 @@
 {% block my_js %}
 <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=oHDtLqS40HV7dTqlNWYUc5IYvSLq60pS">
 </script>-->
+<script type="text/javascript">
+    var theme_explanation='{{t_name}}';
+    $("#container .present .preone .preonemd").html(theme_explanation);
+</script>
 <script src="/static/js/proults2.js"></script>
 <script src="/static/js/proults3.js"></script>
 <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
 <script>
-    var tt_name = '{{t_name}}'
-    console.log(tt_name)
     var show = 0;
     $(".ptnew").on("click",function () {
         if (show==0) {
             $(".prethrmd").css({display:'inline-block'});
             show = 1;
+            $('#container .present .prethr .prethrmd .ptm3').on('click',function(){
+                var tnew_name=$('#container .present .prethr .prethrmd #ptm2').val();
+                window.open("/theme/detail/?t_name="+tnew_name);
+            });
         }else {
             $(".prethrmd").css({display:'none'});
             show = 0;
@@ -792,11 +798,6 @@ function check2(value){
         $('.shuru2').hide();
     };
 };
-$.each($("#people .xingming"),function(index,item){
-    $(item).on('click',function () {
-        window.open('/index/person/');
-    });
-})
 $.each($("#similar .xingming"),function(index,item){
     $(item).on('click',function () {
         window.open('/index/search_result/');

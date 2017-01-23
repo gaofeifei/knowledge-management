@@ -1,5 +1,5 @@
 {% extends "public_nav.html" %}
-{% block title %}<title>节点探索</title>{% endblock %}
+{% block title %}<title>关系探索</title>{% endblock %}
 {% block my_css %}
     <link rel="stylesheet" href="/static/css/relation.css">
     <style type="text/css">
@@ -12,9 +12,9 @@
 {% block main %}
 <div id="container">
     <div class="contop">
-        <span class="cp1">节点探索条件</span>
+        <span class="cp1">关系探索条件</span>
         <div class="cp2">
-            节点1
+            起始节点
             <input class="more" type="text" placeholder="请输入人物昵称、ID或者事件关键词..."/>
             节点类型
             <select onchange="leixing1(this.value)" style='width:120px;padding:3px;border:1px solid #aeaeae;font-size:12px;'>
@@ -24,7 +24,7 @@
             </select> 
         </div>
         <div class="cp3">
-            节点2
+            终止节点
             <input class="mores" type="text" placeholder="请输入人物昵称、ID或者事件关键词..."/>
             节点类型
             <select onchange="leixing2(this.value)" style='width:120px;padding:3px;border:1px solid #aeaeae;font-size:12px;'>
@@ -33,10 +33,10 @@
                 <option value="事件">事件</option>
             </select> 
         </div>
-        <button class="cp4">节点探索</button>
+        <button class="cp4">关系探索</button>
     </div>
     <div class="result" style='display:none;'>
-        <p class="re1">节点探索结果</p>
+        <p class="re1">关系探索结果</p>
         <div style="width:1200px;padding-bottom:20px;border: 2px solid #09F;box-shadow: 3px 3px 3px #c9c2c7;">
             <div class="re2">
                         <div id="complex">

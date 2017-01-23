@@ -56,7 +56,7 @@ function zongqunti() {
         $.each(data,function (index,item) {
             $("#container .choose1 .menu form #list").append('<option value="'+item[0]+'">'+item[0]+'</option>');
             $(".xinzeng #list1").append('<option value="'+item[0]+'">'+item[0]+'</option>');
-            $("#container .choose1 .menu #condet .condet1").after('<span class="condet2"><i>'+item[0]+'</i><b class="icon icon-remove det"></b></span>')
+            $("#container .choose1 .menu #condet .condet1").after('<span class="condet2"><i>'+item[0]+'</i></span>')
             anlname.push(item[0]);
             anlnum.push(item[1]);
         });
@@ -90,8 +90,8 @@ function zongqunti() {
             function (ec) {
                 // 基于准备好的dom，初始化echarts图表
                 var myChart = ec.init(document.getElementById('spread'));
-                var ecConfig = require('echarts/config');
-                myChart.on(ecConfig.EVENT.CLICK, eConsole);
+                //var ecConfig = require('echarts/config');
+                //myChart.on(ecConfig.EVENT.CLICK, eConsole);
                 var option = {
                     // title: {
                     //     x: 'center',

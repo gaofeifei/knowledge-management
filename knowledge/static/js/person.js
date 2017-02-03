@@ -174,7 +174,7 @@ function events() {
                     x: num3,
                     y: num4,
                     id: key2,
-                    name:key2,
+                    name:name2,
                     symbolSize: 14,
                     itemStyle: {
                         normal: {

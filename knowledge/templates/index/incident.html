@@ -26,7 +26,8 @@
         <div class="kmrg">
             <div class="kmrg1">
                 <div class="rgname">
-                    <span class="xingming" style="color: #000;font-weight: 900;font-size: 38px;margin-left: 15px;">徐玉玉事件</span>
+                    <span class="xingming" style="color: #000;font-weight: 900;font-size: 38px;margin-left: 15px;">
+                    </span>
                     <img src="/static/image/dingwei.png" alt="" style="margin-left: 30px">
                     <span class="difang" style="font-size: 8px"></span>
                     <img src="/static/image/zhong.png" alt="" style="margin-left: 10px">
@@ -34,7 +35,7 @@
                     <img src="/static/image/weibo1.png" alt="" style="margin-left: 10px">
                     <span class="huoyuedu"></span>
                     <img class="phones" src="/static/image/phones.png" alt="" width="75" height="75"
-                    style="position: relative;left: 30%;"/>
+                    style=""/>
                     <!--<img src="/image/mingan.png" alt="" style="margin-left: 10px">-->
                     <!--<span class="mingan">80</span>-->
                 </div>
@@ -130,13 +131,13 @@
                 <p class='guanlian' style='display:inline-block;'>关联事件</span>
                 <p class="xuan" style='display:inline-block;float:right;'>
                     <label class="radio-inline">
-                        <input type="radio" name="idiefo" value="option1"> 1跳
+                        <input type="radio" name="idiefo" id="option1"> 1跳
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="idiefo" value="option2"> 2跳
+                        <input type="radio" name="idiefo" id="option2"> 2跳
                     </label>
                     <label class="radio-inline">    
-                        <input type="radio" name="idiefo" value="option2" checked> 全部
+                        <input type="radio" name="idiefo" id="option3" checked> 全部
                     </label>
                     <button class="add22" type="button" data-toggle="modal">添加</button>
                 </p>              
@@ -144,8 +145,8 @@
             <div class="assright2" style='padding:10px 0 10px 10px;'>
                 <img src="/static/image/left.png" alt="" class="left" style='margin-right:5px;'>
                 <div id="case" style="float:left;width:490px;overflow: hidden;">
-                    <div id='crmid' style='width:1500px;transition: all 0.5s linear;'>
-                        <div id="run" style=''>
+                    <div id='crmid' style='width:490px;transition: all 0.5s linear;'>
+                        <div id="run" style='width:15000px;'>
                            
                         </div>
                     </div>
@@ -649,7 +650,6 @@
             };
             function territory(data) {
                 var data=eval(data);
-                console.log(data);
                 var location,tag,description,photo;
                 function getLocalTime(nS) {     
                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10).replace(/:\d{1,2}$/,' ');     
@@ -691,7 +691,6 @@
             function nums() {
                 var url = '/index/event_detail/?event_name='+themename;
                 place.call_request(url,territory);
-                console.log(url)
             }
             nums();
         }

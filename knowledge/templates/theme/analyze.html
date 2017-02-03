@@ -101,7 +101,7 @@
                                 </p> -->
                                 <img src="/static/image/left.png" style="" class="left">
                                 <div id="case" style="display: inline-block;width:750px;height:340px;overflow: hidden;">
-                                    <div id="crmid" style="width:1500px;">
+                                    <div id="crmid" style="width:750px;">
                                         <div id="run" style="width: 750px;height:340px;float:left;">
                                             
                                         </div>
@@ -136,7 +136,7 @@
                                         </p>
                                         <img src="/static/image/left.png" alt="" class="left">
                                         <div id="case" style="display: inline-block;width:750px;overflow: hidden;">
-                                            <div id="crmid" style="width:1500px;">
+                                            <div id="crmid" style="width:750px;">
                                                 <div id="run12" style="width: 750px;height:340px;float:left;">
                                                     
                                                 </div>
@@ -179,7 +179,7 @@
                             </p>
                             <img src="/static/image/left.png" alt="" class="left">
                             <div id="case" style="display: inline-block;width:750px;height:360px;overflow: hidden;">
-                                <div id='crmid' style='width:1500px;'>
+                                <div id='crmid' style='width:750px;'>
                                     <div id="run33" style="width: 750px;">
                                         
                                     </div>
@@ -217,8 +217,8 @@
                     </form>
                     <div class="shij">
                         <span class="sjr">加入事件</span>
-                        <a class="sj1">徐玉玉事件 <b class="icon icon-remove det"></b> </a>
-                        <a class="sj2">大学生失联 <b class="icon icon-remove det"></b> </a>
+                        <a class="sj1"></a>
+                        <!-- <a class="sj2">大学生失联 <b class="icon icon-remove det"></b> </a> -->
                     </div>
                 </div>
             </div>
@@ -540,16 +540,16 @@
     $('.add44').on('click',function(){
         $('#join1').modal("show");
     });
-    $.each($(".det"),function(index,item){
-        $(item).on('click',function(){
-            $(this).parent().fadeOut(300);
-        })
-    })
-    $.each($('.xingming'),function(index,item){
-        $(item).on('click',function(){
-            window.open('/index/search_result/');
-        })
-    });
+    // $.each($(".det"),function(index,item){
+    //     $(item).on('click',function(){
+    //         $(this).parent().fadeOut(300);
+    //     })
+    // })
+    // $.each($('.xingming'),function(index,item){
+    //     $(item).on('click',function(){
+    //         window.open('/index/search_result/');
+    //     })
+    // });
     $('#container .left').hover(function () {
         $(this).attr('src','/static/image/left_hv.png');
     },function () {

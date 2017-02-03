@@ -245,7 +245,6 @@ function theme_newbuild_searchut() {
                 })
             });
         });
-
         $.each($(".play"),function (index,item) {
             var changecolor=1;
             $(item).find(".play5").on('click',function(){
@@ -266,6 +265,11 @@ function theme_newbuild_searchut() {
             });
         });
 
+        $.each($('.xinzeng .sjmr .sjmr1 #case #crmid #run12 .xingming'),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
+        });
     };
     var place=new place();
     var place2=new place2();
@@ -568,6 +572,11 @@ function theme_newbuild_searchut() {
                 }
             });
         });
+        $.each($('#container .con_bot .add .sjmr #case #crmid #run33 .xingming'),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
+        });
     };
     var place=new place();
     var place2=new place2();
@@ -581,6 +590,8 @@ function theme_newbuild_searchut() {
     };
     var maths='all',s;
     $("#container .con_bot .sjt .sjt2").on('click',function () {
+        $('#site2').empty();
+        $('#container .con_bot .add #case #run33').empty();
         s=$("#container .con_bot .sjt .sjt1").val();
         if (!s==''){
             nums(s);

@@ -119,40 +119,13 @@ function shijianduibi(numa) {
                 '</div> -->'+
                 '</div>';
         });
+        $("#run4").append(str1);
+        $("#run5").append(str2);
         //卡片效果
-        $.each($(".play"),function (index,item) {
-            $(item).hover(function () {
-                $(item).find(".play5").css({
-                    "-webkit-transform":"translateY(-40px)",
-                    "-moz-transform":"translateY(-40px)",
-                    "-ms-transform":"translateY(-40px)",
-                    "-o-transform":"translateY(-40px)",
-                    "transform":"translateY(-40px)",
-                })
-            },function () {
-                $(item).find(".play5").css({
-                    "-webkit-transform":"translateY(40px)",
-                    "-moz-transform":"translateY(40px)",
-                    "-ms-transform":"translateY(40px)",
-                    "-o-transform":"translateY(40px)",
-                    "transform":"translateY(40px)",
-                })
-            });
-        });
-        $.each($(".play"),function (index,item) {
-            var changecolorq=1;
-            $(item).find(".play5").on('click',function(){
-                if (changecolorq==1) {
-                    $(this).parent('.play').css({backgroundColor:'#09F'});
-                    $(this).find('a').text('取消群体探索');
-                    changecolorq=2;
-                    $('#join4').modal("show");
-                } else {
-                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
-                    $(this).find('a').text('加入群体探索');
-                    changecolorq=1;
-                }
-            });
+        $.each($('.xingming'),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
         });
         var heart=$(".play .play1 .p11 .xin");
         $.each(heart,function(index,item){
@@ -167,8 +140,6 @@ function shijianduibi(numa) {
                 }
             })
         });
-        $("#run4").append(str1);
-        $("#run5").append(str2);
     }
     var thing=new thing();
     var point,numberd=numa;

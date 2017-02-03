@@ -265,6 +265,7 @@ function quntibiaoge() {
         place.call_request(url,territory);
     }
     $(".xinzeng .add99").on('click',function () {
+        $('#container .xinzeng .instr #tbrg #case2 #run3').empty();
         if (!ii==1){
             $("#join99").modal("show");
         }else {
@@ -371,6 +372,11 @@ function biaogequnti() {
                 }
             })
         });
+        $.each( $(".xingming"),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
+        })
     };
     var touch=new touch();
     function nums() {
@@ -573,8 +579,8 @@ function yonghushijian() {
                 '</div>'+
                 '<img class="play2" src="'+photo+'" alt="">'+
                 '<div class="play23" style="margin-left: 15px;">'+
-                '<a href="" class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
-                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string+'</span></a>'+
+                '<a class="renzh1">认证类型:<span class="renzh11">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
+                '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
                 '</div>'+
                 '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
                 '<a class="bus1">业务标签：</a>'+
@@ -648,9 +654,14 @@ function yonghushijian() {
                     node_ids.removeByValue($a);
                     $(this).find('a').text('加入群体探索');
                 }
-                console.log(node_ids);
+                // console.log(node_ids);
             });
         });
+        $.each( $(".xingming"),function(index,item){
+            $(item).on('click',function () {
+                window.open('/index/person/?p_uid'+$('.play #uid').html());
+            });
+        })
     };
     var place=new place();
     var place2=new place2();
@@ -664,6 +675,8 @@ function yonghushijian() {
     };
     var maths='all',s;
     $("#shijian2 .sjt .sjt2").on('click',function () {
+        $('#shijian2 .bag #site').empty();
+        $('#shijian2 .bag .sjmr1 #crmid #run').empty();
         s=$("#shijian2 .sjt .sjt1").val();
         if (!s==''){
             nums(s);

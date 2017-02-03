@@ -103,7 +103,7 @@ function guanlianrenwu() {
         $.each(data,function (index,item) {
             var influe,name,mingan,tag,photo;
             if (item.influence==''||item.influence=='unknown'){
-                influe='无';
+                influe=0;
             }else {
                 influe=item.influence.toFixed(2);
             };
@@ -114,7 +114,7 @@ function guanlianrenwu() {
             };
             var huoyue=item.activeness.toFixed(2);
             if (item.sensitive==''||item.sensitive=='unknown'){
-                mingan='无';
+                mingan=0;
             }else {
                 mingan=item.sensitive.toFixed(2);
             };
@@ -149,8 +149,8 @@ function guanlianrenwu() {
                 '</div>'+
                 '<img class="play2" src="'+photo+'" alt="">'+
                 '<div class="play23" style="margin-left: 15px;">'+
-                '<a href="" class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
-                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string+'</span></a>'+
+                '<a class="renzh1">认证类型:<span class="renzh11">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
+                '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
                 '</div>'+
                 '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
                 '<a class="bus1">业务标签：</a>'+
@@ -167,6 +167,47 @@ function guanlianrenwu() {
                 '</div>';
         });
         $("#run2").append(str);
+        var step=0;
+        $('#container #people .peotwo .peotwo2 #run2').width((data.length+5)*255);
+        $('#container #people .peotwo .peotwo2 .right').on('click',function () {
+            step++;
+            var plays=$("#container #people .peotwo .peotwo2 #run2");
+            walk=(-1020)*step;
+            $(plays).css({
+                "-webkit-transform":"translateX("+walk+"px)",
+                "-moz-transform":"translateX("+walk+"px)",
+                "-ms-transform":"translateX("+walk+"px)",
+                "-o-transform":"translateX("+walk+"px)",
+                "transform":"translateX("+walk+"px)",
+            });
+            if (step >= data.length/4){
+                alert('已经是最后一页了~~');
+                $(plays).css({
+                    "-webkit-transform":"translateX(0px)",
+                    "-moz-transform":"translateX(0px)",
+                    "-ms-transform":"translateX(0px)",
+                    "-o-transform":"translateX(0px)",
+                    "transform":"translateX(0px)",
+                });
+                step=0;
+            }
+        });
+        $('#container #people .peotwo .peotwo2 .left').on('click',function () {
+            step--;
+            var plays=$("#container #people .peotwo .peotwo2 #run2");
+            walk=(-1020)*step;
+            $(plays).css({
+                "-webkit-transform":"translateX("+walk+"px)",
+                "-moz-transform":"translateX("+walk+"px)",
+                "-ms-transform":"translateX("+walk+"px)",
+                "-o-transform":"translateX("+walk+"px)",
+                "transform":"translateX("+walk+"px)",
+            });
+            if (step < 0){
+                alert('已经是第一页了~~');
+                step=0;
+            }
+        });
         //卡片效果
         $.each($("#people .play"),function (index,item) {
             $(item).hover(function () {
@@ -218,7 +259,6 @@ function guanlianrenwu() {
         $.each($("#people .xingming"),function(index,item){
             $(item).on('click',function () {
                 var p_uid=$(this).siblings('#uid').html();
-                // console.log(p_uid)
                 window.open('/index/person/?p_uid='+p_uid);
             });
         })
@@ -260,7 +300,6 @@ function baohanshijian() {
     function territory(data) {
         $("#run").empty();
         var data=eval(data);
-        console.log(data);
         var str='';
         $.each(data,function (index,item) {
             var weizhi,biaoqian,shuoming;
@@ -313,6 +352,56 @@ function baohanshijian() {
 
         $("#run").append(str);
         //卡片效果
+        var step=0;
+        $('#container #similar .peotwo #case #run').width((data.length+5)*255);
+        $('#container #similar .definite .deftwo .right').on('click',function () {
+            if (data.length<=4){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step++;
+                var plays=$("#container #similar .peotwo #case #run");
+                walk=(-1020)*step;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step >= data.length/4){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step=0;
+                }
+            }
+        });
+        $('#container #similar .definite .deftwo .left').on('click',function () {
+            if (data.length<=4){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step--;
+                var plays=$("#container #similar .peotwo #case #run");
+                walk=(-1020)*step;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step < 0){
+                    alert('已经是第一页了~~');
+                    step=0;
+                }
+            };
+
+        });
         $.each($(".play"),function (index,item) {
             $(item).hover(function () {
                 $(item).find(".play5").css({
@@ -363,7 +452,6 @@ function baohanshijian() {
         $.each($("#similar .xingming"),function(index,item){
             $(item).on('click',function () {
                 var t_uid=$(this).html();
-                // console.log(p_uid)
                 window.open('/index/search_result/?t_uid='+t_uid);
             });
         })

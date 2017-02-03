@@ -275,7 +275,7 @@ a,a:link,a:hover,a:visited,a:active {
 #container #similar .definite .deftwo .play .play5,
 #container #people .peotwo .peotwo2 .play .play5{
     position: relative;
-    top:20px;
+    top:-20px;
     left: -5px;
     z-index: 10;
     width: 236px;

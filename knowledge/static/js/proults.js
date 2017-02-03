@@ -752,7 +752,7 @@ function guanlianrenwu() {
             $.each(data,function (index,item) {
                 var influe,name,huoyue,mingan,tag,photo;
                 if (item.influence=='null'||item.influence=='unknown'){
-                    influe='暂无';
+                    influe=0;
                 }else {
                     influe=item.influence.toFixed(2);
                 };
@@ -763,7 +763,7 @@ function guanlianrenwu() {
                 };
                 var huoyue=item.activeness.toFixed(2);
                 if (item.sensitive=='null'||item.sensitive=='unknown'){
-                    mingan='暂无';
+                    mingan=0;
                 }else {
                     mingan=item.sensitive.toFixed(2);
                 };
@@ -778,6 +778,7 @@ function guanlianrenwu() {
                     photo=item.photo_url;
                 };
                 str+='<div class="play">'+
+                    '<span id="uid" style="display:none;">'+item.uid+'</span>'+
                     '<div class="play1">'+
                     '<div class="p11">'+
                     '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
@@ -797,8 +798,8 @@ function guanlianrenwu() {
                     '</div>'+
                     '<img class="play2" src="'+photo+'" alt="">'+
                     '<div class="play23" style="margin-left: 15px;">'+
-                    '<a class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
-                    '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>'+
+                    '<a class="renzh1">认证类型:<span class="renzh11">'+item.topic_string.replace(/&/g,' ')+'</span></a>'+
+                    '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string.replace(/&/g,' ')+'</span></a>'+
                     '</div>'+
                     '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
                     '<a class="bus1">业务标签：</a>'+
@@ -809,12 +810,17 @@ function guanlianrenwu() {
                     '<!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->'+
                     '<!--</p>-->'+
                     '<!--</div>-->'+
-                    '<div class="play5" type="button" data-toggle="modal">'+
-                    '<a>加入群体探索</a>'+
-                    '</div>'+
+                    // '<div class="play5" type="button" data-toggle="modal">'+
+                    // '<a>加入群体探索</a>'+
+                    // '</div>'+
                     '</div>';
             });
             $("#run").append(str);
+            $.each( $(".xingming"),function(index,item){
+                $(item).on('click',function () {
+                    window.open('/index/person/?p_uid'+$('.play #uid').html());
+                });
+            });
         }else {
             $("#run").append('暂无数据！！');
         }
@@ -907,7 +913,6 @@ function guanlianshijian() {
         var data=eval(data);
         var str='';
         $.each(data,function (index,item) {
-            console.log(item)
             var weizhi,biaoqian,shuoming,photo;
             if (item.location=='null'){
                 weizhi='未知';
@@ -955,11 +960,12 @@ function guanlianshijian() {
                 shuoming+
                 '</p>'+
                 '</div>'+
-                '<!-- <div class="play5" type="button" data-toggle="modal">'+
+                '<div class="play5" type="button" data-toggle="modal">'+
                 '<a>加入专题</a>'+
-                '</div> -->'+
+                '</div>'+
                 '</div>';
         });
+        $("#run2").append(str);
         //卡片效果
         $.each($("#people .play"),function (index,item) {
             $(item).hover(function () {
@@ -985,12 +991,12 @@ function guanlianshijian() {
             $(item).find(".play5").on('click',function(){
                 if (changecolorq==1) {
                     $(this).parent('.play').css({backgroundColor:'#09F'});
-                    $(this).find('a').text('取消群体探索');
+                    $(this).find('a').text('取消专题');
                     changecolorq=2;
                     $('#join4').modal("show");
                 } else {
                     $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
-                    $(this).find('a').text('加入群体探索');
+                    $(this).find('a').text('加入专题');
                     changecolorq=1;
                 }
             });
@@ -1008,9 +1014,12 @@ function guanlianshijian() {
                 }
             })
         });
-        $("#run2").append(str);
-    }
-
+        $.each($('.xingming'),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
+        });
+    };
     var include=new include();
     function nums() {
         var point;

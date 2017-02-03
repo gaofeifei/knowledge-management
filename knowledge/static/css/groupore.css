@@ -232,7 +232,7 @@ a,a:link,a:hover,a:visited,a:active {
 }
 #container #shijian .play5,#shijian2 .play5 {
     position: relative;
-    top:15px;
+    top:-15px;
     left: -5px;
     z-index: 10;
     width: 239px;

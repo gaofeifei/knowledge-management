@@ -1,11 +1,11 @@
 /**
  * Created by Administrator on 2016/12/12.
  */
-$.each($(".det"),function(index,item){
-    $(item).on('click',function(){
-        $(this).parent().fadeOut(300);
-    })
-});
+// $.each($(".det"),function(index,item){
+//     $(item).on('click',function(){
+//         $(this).parent().fadeOut(300);
+//     })
+// });
 $("#container #total .twright .twr1:even").css("background-color","#eeeeee");
 $("#container #total .twright2 .twr1:even").css("background-color","#eeeeee");
 var show = 0;

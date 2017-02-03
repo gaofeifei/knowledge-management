@@ -664,7 +664,7 @@ var play=$("#container .associat .assright .assright2 .play");
             function getLocalTime(nS) {     
                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10).replace(/:\d{1,2}$/,' ');    
             }  
-            if (data.photo_url=='unknown') {
+            if (data.photo_url=='unknown'||data.photo_url=='') {
                 srcimg='/static/image/pan.jpg';
             }else{
                 srcimg=data.photo_url;

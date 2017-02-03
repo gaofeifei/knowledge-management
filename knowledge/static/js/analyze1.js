@@ -33,7 +33,7 @@ function zong() {
         $.each(data,function (index,item) {
             $("#container .choose1 .menu form #list").append('<option value="'+item[0]+'">'+item[0]+'</option>');
             $(".xinzeng #list1").append('<option value="'+item[0]+'">'+item[0]+'</option>');
-            $("#container .choose1 .menu #condet .condet1").after('<span class="condet2"><i>'+item[0]+'</i><b class="icon icon-remove det"></b></span>')
+            $("#container .choose1 .menu #condet .condet1").after('<span class="condet2"><i>'+item[0]+'</i></span>')
             anlname.push(item[0]);
             anlnum.push(item[1]);
         });

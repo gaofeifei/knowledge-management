@@ -105,7 +105,6 @@ function show(){
     if ((!point1)||(!point2)){
         $('#join2').modal("show");
     }else {
-        console.log(show_url)
         $(".result").show(300);
         $.ajax({
             url: show_url,
@@ -122,7 +121,6 @@ function relation_line(data) {
     $('#container .result .re3 .re3lf .route .dote .geshu').empty();
     $('#container .result .re3 .re3lf #se_ka').empty();
     var json=eval(data);
-    console.log(json);
     var myChart = echarts.init(document.getElementById('complex'));
     myChart.showLoading();
     var node_value=[],link_value=[];
@@ -236,7 +234,7 @@ function relation_line(data) {
         };
         var influe,name,huoyue,mingan,tag,photo;
         if (json.start_node_card.influence=='null'){
-            influe='无';
+            influe=0;
         }else {
             influe=json.start_node_card.influence.toFixed(2);
         };
@@ -247,7 +245,7 @@ function relation_line(data) {
         };
         var huoyue=json.start_node_card.activeness.toFixed(2);
         if (json.start_node_card.sensitive=='null'||json.start_node_card.sensitive=='unknown'){
-            mingan='无';
+            mingan=0;
         }else {
             mingan=json.start_node_card.sensitive.toFixed(2);
         };
@@ -283,8 +281,8 @@ function relation_line(data) {
             '</div>'+
             '<img class="play2" src="'+photo+'" alt="">'+
             '<div class="play23" style="margin-left: 15px;">'+
-            '<a href="###" class="renzh1">认证类型:<span class="renzh11">'+json.start_node_card.topic_string+'</span></a>'+
-            '<a href="###" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string+'</span></a>'+
+            '<a href="###" class="renzh1">认证类型:<span class="renzh11">'+json.start_node_card.topic_string.replace(/&/g,'  ')+'</span></a>'+
+            '<a href="###" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+json.start_node_card.topic_string.replace(/&/g,'  ')+'</span></a>'+
             '</div>'+
             '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
             '<a class="bus1">业务标签：</a>'+
@@ -300,6 +298,11 @@ function relation_line(data) {
             '</div>'+
             '</div>'
         );
+        $.each( $(".xingming"),function(index,item){
+            $(item).on('click',function () {
+                window.open('/index/person/?p_uid'+$('.play #uid').html());
+            });
+        })
     }else {
         uname1=json.start_node_card.name;
         var weizhi,biaoqian,shuoming,photo;
@@ -351,7 +354,12 @@ function relation_line(data) {
             '<a>加入专题</a>'+
             '</div> -->'+
             '</div>'
-        )
+        );
+        $.each($('.xingming'),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
+        });
     };
 
     if (json.end_node_card.uid){
@@ -362,7 +370,7 @@ function relation_line(data) {
         };
         var influe2,name2,huoyue2,mingan2,tag2,photo2;
         if (json.end_node_card.influence=='null'){
-            influe2='无';
+            influe2=0;
         }else {
             influe2=json.end_node_card.influence.toFixed(2);
         };
@@ -373,7 +381,7 @@ function relation_line(data) {
         };
         var huoyue2=json.end_node_card.activeness.toFixed(2);
         if (json.end_node_card.sensitive=='null'||json.end_node_card.sensitive=='unknown'){
-            mingan2='无';
+            mingan2=0;
         }else {
             mingan2=json.end_node_card.sensitive.toFixed(2);
         };
@@ -409,8 +417,8 @@ function relation_line(data) {
             '</div>'+
             '<img class="play2" src="'+photo2+'" alt="">'+
             '<div class="play23" style="margin-left: 15px;">'+
-            '<a href="###" class="renzh1">认证类型:<span class="renzh11">'+json.end_node_card.topic_string+'</span></a>'+
-            '<a href="###" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string+'</span></a>'+
+            '<a href="###" class="renzh1">认证类型:<span class="renzh11">'+json.end_node_card.topic_string.replace(/&/g,'  ')+'</span></a>'+
+            '<a href="###" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+json.end_node_card.topic_string.replace(/&/g,'  ')+'</span></a>'+
             '</div>'+
             '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
             '<a class="bus1">业务标签：</a>'+
@@ -426,6 +434,11 @@ function relation_line(data) {
             '</div>'+
             '</div>'
         );
+        $.each( $(".xingming"),function(index,item){
+            $(item).on('click',function () {
+                window.open('/index/person/?p_uid'+$('.play #uid').html());
+            });
+        })
     }else {
         uname2=json.end_node_card.name;
         var weizhi2,biaoqian2,shuoming2,photo2;
@@ -477,7 +490,12 @@ function relation_line(data) {
             '<a>加入专题</a>'+
             '</div> -->'+
             '</div>'
-        )
+        );
+        $.each($('.xingming'),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
+        });
     };
     $('#container .result .re3 .re3lf .route .path').html(uname1+'-'+uname2);
     $('#container .result .re3 .re3lf .route .dote .geshu').html(json.middle_card.length);
@@ -486,7 +504,7 @@ function relation_line(data) {
         if (item.uid){
             var influe,name,huoyue,mingan,tag,photo;
             if (item.influence==''){
-                influe='无';
+                influe=0;
             }else {
                 influe=item.influence.toFixed(2);
             };
@@ -497,7 +515,7 @@ function relation_line(data) {
             };
             var huoyue=item.activeness.toFixed(2);
             if (item.sensitive=='null'||item.sensitive=='unknown'){
-                mingan='无';
+                mingan=0;
             }else {
                 mingan=item.sensitive.toFixed(2);
             };
@@ -532,8 +550,8 @@ function relation_line(data) {
                 '</div>'+
                 '<img class="play2" src="'+photo+'" alt="">'+
                 '<div class="play23" style="margin-left: 15px;">'+
-                '<a href="" class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
-                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string+'</span></a>'+
+                '<a href="" class="renzh1">认证类型:<span class="renzh11">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
+                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
                 '</div>'+
                 '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
                 '<a class="bus1">业务标签：</a>'+
@@ -547,7 +565,12 @@ function relation_line(data) {
                 '<div class="play5" type="button" data-toggle="modal">'+
                 '<a>加入群体探索</a>'+
                 '</div>'+
-                '</div>'
+                '</div>';
+            $.each( $(".xingming"),function(index,item){
+                $(item).on('click',function () {
+                    window.open('/index/person/?p_uid'+$('.play #uid').html());
+                });
+            })
         }else {
             var weizhi,biaoqian,shuoming;
             if (item.location=='null'){
@@ -596,7 +619,12 @@ function relation_line(data) {
                 '<!-- <div class="play5" type="button" data-toggle="modal">'+
                 '<a>加入专题</a>'+
                 '</div> -->'+
-                '</div>'
+                '</div>';
+            $.each($('.xingming'),function(index,item){
+                $(item).on('click',function(){
+                    window.open('/index/search_result/?t_uid='+$(this).html());
+                })
+            });
         }
     });
     $("#container .result .re3 .re3rg .midd .midd2").append(line_mid);

@@ -200,8 +200,8 @@ function quntixinjianyonghushijian() {
                 '</div>'+
                 '<img class="play2" src="'+photo+'" alt="">'+
                 '<div class="play23" style="margin-left: 15px;">'+
-                '<a href="" class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
-                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>'+
+                '<a class="renzh1">认证类型:<span class="renzh11">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
+                '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
                 '</div>'+
                 '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
                 '<a class="bus1">业务标签：</a>'+
@@ -224,7 +224,7 @@ function quntixinjianyonghushijian() {
         // }
 
         // $("#container .associat .assright .assright2 #case #crmid").width(cwidth);
-        $("#container .con_bot .add .sjmr #case #crmid #run").append(str);
+        $("#container .con_bot .add .sjmr #case33 #crmid #run00").append(str);
         //卡片效果
         var heart=$(".play .play1 .p11 .xin");
         $.each(heart,function(index,item){
@@ -276,6 +276,11 @@ function quntixinjianyonghushijian() {
                 }
             });
         });
+        $.each( $(".xingming"),function(index,item){
+            $(item).on('click',function () {
+                window.open('/index/person/?p_uid'+$('.con_bot .play #uid').html());
+            });
+        })
     };
     var place=new place();
     var place2=new place2();
@@ -289,6 +294,7 @@ function quntixinjianyonghushijian() {
     };
     var maths='all',s;
     $("#container .con_bot .sjt .sjt2").on('click',function () {
+        $('#container .con_bot #shijian .bag .sjmr #crmid #run00').empty();
         s=$("#container .con_bot .sjt .sjt1").val();
         if (!s==''){
             nums(s);
@@ -296,7 +302,6 @@ function quntixinjianyonghushijian() {
         }else {
             $('#join111').modal("show");
         };
-
     });
 
     $.each($("#shijian2 .bag .sjmr1 .direct1 input"),function (index,item) {
@@ -322,7 +327,6 @@ function sureadd2() {
     var node_ids2=node_ids.join(',');
     var newpro=$("#shuru2").val();
     var newurl='/group/g_create_new_relation/?node1_id='+node_ids2+'&node2_id='+newpro;
-    console.log(newurl)
     $.ajax({
         url: newurl,
         type: 'GET',

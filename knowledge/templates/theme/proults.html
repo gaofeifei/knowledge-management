@@ -143,14 +143,15 @@
                 </div>
                 <div class="deftwo">
                     <div class="sjmr1">
-                        <img src="/static/image/left.png" alt="" class="left">
-                        <div id="case" style="display: inline-block;width:1050px;overflow: hidden;">
-                            <div id="run" style="width: 2100px;">
+                        <img src="/static/image/left.png" class="left">
+                        <div id="case" style="display: inline-block;width:1020px;overflow: hidden;
+                        margin-left: 15px;">
+                            <div id="run" style="transition: all 1s linear;">
                                 
                             
                             </div>
                         </div>
-                        <img src="/static/image/right.png" alt="" class="right">
+                        <img src="/static/image/right.png" class="right" style='left:15px;'>
                     </div>
                 </div>
             </div>
@@ -358,7 +359,7 @@
                                 </div>
                             </div>
                         </div>
-                        <img src="/static/image/right.png" alt="" class="right">
+                        <img src="/static/image/right.png" class="right">
                     </div>
                 </div>
             </div>
@@ -386,13 +387,14 @@
                 </div>
                 <div class="peotwo2">
                     <div class="sjmr1">
-                        <img src="/static/image/left.png" alt="" class="left">
-                        <div id="case2" style="display: inline-block;width:1050px;overflow: hidden;">
-                            <div id="run2" style="width: 2100px;">
+                        <img src="/static/image/left.png" class="left">
+                        <div id="case2" style="display: inline-block;width:1020px;margin-left: 15px;
+                        overflow: hidden;">
+                            <div id="run2" style="transition: all 1s linear;">
                                 
                             </div>
                         </div>
-                        <img src="/static/image/right.png" alt="" class="right">
+                        <img src="/static/image/right.png" class="right" style="left:15px;">
                     </div>
                 </div>
             </div>
@@ -693,53 +695,53 @@
         }
     });
     //
-    var go2 = 22;
-    $('#container #people .peotwo .peotwo2 .right').on('click',function () {
-        if(go2==22){
-            var plays=$("#container #people .peotwo2 #run2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(-1050px)",
-                "-moz-transform":"translateX(-1050px)",
-                "-ms-transform":"translateX(-1050px)",
-                "-o-transform":"translateX(-1050px)",
-                "transform":"translateX(-1050px)",
-            });
-            go2 = 33;
-        } else{
-            var plays=$("#container #people .peotwo2 #run2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go2 = 22;
-        }
-    });
-    $('#container #people .peotwo .peotwo2 .left').on('click',function () {
-        if(go2==22){
-            var plays=$("#container #people .peotwo2 #run2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(-1050px)",
-                "-moz-transform":"translateX(-1050px)",
-                "-ms-transform":"translateX(-1050px)",
-                "-o-transform":"translateX(-1050px)",
-                "transform":"translateX(-1050px)",
-            });
-            go2 = 33;
-        } else{
-            var plays=$("#container #people .peotwo2 #run2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go2 = 22;
-        }
-    });
+    // var go2 = 22;
+    // $('#container #people .peotwo .peotwo2 .right').on('click',function () {
+    //     if(go2==22){
+    //         var plays=$("#container #people .peotwo2 #run2 .play");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(-1050px)",
+    //             "-moz-transform":"translateX(-1050px)",
+    //             "-ms-transform":"translateX(-1050px)",
+    //             "-o-transform":"translateX(-1050px)",
+    //             "transform":"translateX(-1050px)",
+    //         });
+    //         go2 = 33;
+    //     } else{
+    //         var plays=$("#container #people .peotwo2 #run2 .play");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(0px)",
+    //             "-moz-transform":"translateX(0px)",
+    //             "-ms-transform":"translateX(0px)",
+    //             "-o-transform":"translateX(0px)",
+    //             "transform":"translateX(0px)",
+    //         });
+    //         go2 = 22;
+    //     }
+    // });
+    // $('#container #people .peotwo .peotwo2 .left').on('click',function () {
+    //     if(go2==22){
+    //         var plays=$("#container #people .peotwo2 #run2 .play");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(-1050px)",
+    //             "-moz-transform":"translateX(-1050px)",
+    //             "-ms-transform":"translateX(-1050px)",
+    //             "-o-transform":"translateX(-1050px)",
+    //             "transform":"translateX(-1050px)",
+    //         });
+    //         go2 = 33;
+    //     } else{
+    //         var plays=$("#container #people .peotwo2 #run2 .play");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(0px)",
+    //             "-moz-transform":"translateX(0px)",
+    //             "-ms-transform":"translateX(0px)",
+    //             "-o-transform":"translateX(0px)",
+    //             "transform":"translateX(0px)",
+    //         });
+    //         go2 = 22;
+    //     }
+    // });
     //
 
     var play=$(".play");
@@ -798,11 +800,11 @@ function check2(value){
         $('.shuru2').hide();
     };
 };
-$.each($("#similar .xingming"),function(index,item){
-    $(item).on('click',function () {
-        window.open('/index/search_result/');
-    });
-});
+// $.each($("#similar .xingming"),function(index,item){
+//     $(item).on('click',function () {
+//         window.open('/index/search_result/');
+//     });
+// });
 
 </script>
 {% endblock %}

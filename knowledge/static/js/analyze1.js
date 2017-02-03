@@ -244,6 +244,8 @@ function zhutibianjibiaoge() {
         place.call_request(url,territory);
     }
     $(".xinzeng .add99").on('click',function () {
+        $('#site2').empty();
+        $('#container .xinzeng .instr #case #run').empty();
         if (!n==1){
             $("#join99").modal("show");
         }else {
@@ -346,6 +348,19 @@ function biaogeshijian() {
                     $(this).attr('src','/static/image/heart.png');
                     chan=1;
                 }
+            })
+        });
+        var  cwidth;
+        if (data.length% 2 == 0){
+            cwidth=(data.length*490)/6;
+        }else {
+            cwidth=(data.length*490)/6 + 490;
+        };
+        $("#container .xinzeng #shijian2 .sjmr1 #case #crmid").width(cwidth);
+
+        $.each($('.xinzeng .sjmr .sjmr1 #case #crmid #run .xingming'),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
             })
         });
     };
@@ -567,7 +582,6 @@ function yonghushijian() {
 
             // $("#container .associat .assright .assright2 #case #crmid").width(cwidth);
             $(".xinzeng .sjmr .sjmr1 #case #crmid #run12").append(str);
-            //卡片效果
 
         }
         //卡片效果
@@ -620,8 +634,13 @@ function yonghushijian() {
                     node_ids.removeByValue($a);
                     $(this).find('a').text('加入专题');
                 }
-                console.log(node_ids);
+                // console.log(node_ids);
             });
+        });
+        $.each($('.xinzeng .sjmr .sjmr1 #case #crmid #run12 .xingming'),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
         });
 
     };
@@ -637,6 +656,8 @@ function yonghushijian() {
     };
     var maths='all',s;
     $("#shijian2 .sjt .sjt2").on('click',function () {
+        $('#site').empty();
+        $('#shijian2 #case #run12').empty();
         s=$(" #shijian2 .sjt .sjt1").val();
         if (!s==''){
             nums(s);

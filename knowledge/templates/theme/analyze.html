@@ -99,10 +99,12 @@
                                     </label>
                                     <button class="add22" type="button" data-toggle="modal">添加</button>
                                 </p> -->
-                                <img src="/static/image/left.png" style="" class="left">
-                                <div id="case" style="display: inline-block;width:750px;height:340px;overflow: hidden;">
-                                    <div id="crmid" style="width:750px;">
-                                        <div id="run" style="width: 750px;height:340px;float:left;">
+                                <img src="/static/image/left.png" class="left">
+                                <div id="case" style="display: inline-block;width:735px;height:370px;
+                                overflow: hidden;">
+                                    <div id="crmid" style="width:735px;">
+                                        <div id="run" style="height:370px;float:left;
+                                        transition: all 1s linear;">
                                             
                                         </div>
                                     </div>
@@ -135,9 +137,10 @@
                                             <button class="add44">添加</button>
                                         </p>
                                         <img src="/static/image/left.png" alt="" class="left">
-                                        <div id="case" style="display: inline-block;width:750px;overflow: hidden;">
-                                            <div id="crmid" style="width:750px;">
-                                                <div id="run12" style="width: 750px;height:340px;float:left;">
+                                        <div id="case12" style="display: inline-block;width:735px;overflow: hidden;">
+                                            <div id="crmid12" style="width:735px;">
+                                                <div id="run12" style="height:370px;float:left;
+                                                transition: all 1s linear;">
                                                     
                                                 </div>
                                         
@@ -178,9 +181,10 @@
                                 <button class="add22" type="button" data-toggle="modal">添加</button>
                             </p>
                             <img src="/static/image/left.png" alt="" class="left">
-                            <div id="case" style="display: inline-block;width:750px;height:360px;overflow: hidden;">
-                                <div id='crmid' style='width:750px;'>
-                                    <div id="run33" style="width: 750px;">
+                            <div id="case33" 
+                            style="display: inline-block;width:735px;height:370px;overflow: hidden;">
+                                <div id='crmid33' style='width:735px;'>
+                                    <div id="run33" style="height:370px;transition: all 1s linear;">
                                         
                                     </div>
                                 </div>
@@ -526,12 +530,12 @@
     //     $('.instr').show(20);
     // });
     $('.condet4').on('click',function () {
+        console.log(theme_list)
         if (theme_list.length==2) {
             window.open("/theme/different/?theme1="+theme_list[0]+'&theme2='+theme_list[1]);
         }else{
             $('#liangge').modal("show");
         };
-        // $('#aaa').modal("show");
     });
     $('.add22').on('click',function () {
         $('#join').modal("show");
@@ -577,53 +581,53 @@
     // $('#container .con_bot .add #shijian .sjt .sjt2').on('click',function(){
     //     $('#container .con_bot .add #shijian .bag').slideDown(100);
     // });
-    var go = 00;
-    $('#container .con_bot .add #shijian .bag .sjmr1 .right').on('click',function () {
-        if(go==00){
-            var plays=$("#container .con_bot .add #shijian .bag .sjmr1 #crmid");
-            $(plays).css({
-                "-webkit-transform":"translateX(-750px)",
-                "-moz-transform":"translateX(-750px)",
-                "-ms-transform":"translateX(-750px)",
-                "-o-transform":"translateX(-750px)",
-                "transform":"translateX(-750px)",
-            });
-            go = 11;
-        } else{
-            var plays=$("#container .con_bot .add #shijian .bag .sjmr1 #crmid");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 00;
-        }
-    });
-    $('#container .con_bot .add #shijian .bag .sjmr1 .left').on('click',function () {
-        if(go==00){
-            var plays=$("#container .con_bot .add #shijian .bag .sjmr1 #crmid");
-            $(plays).css({
-                "-webkit-transform":"translateX(-750px)",
-                "-moz-transform":"translateX(-750px)",
-                "-ms-transform":"translateX(-750px)",
-                "-o-transform":"translateX(-750px)",
-                "transform":"translateX(-750px)",
-            });
-            go = 11;
-        } else{
-            var plays=$("#container .con_bot .add #shijian .bag .sjmr1 #crmid");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 00;
-        }
-    });
+    // var go = 00;
+    // $('#container .con_bot .add #shijian .bag .sjmr1 .right').on('click',function () {
+    //     if(go==00){
+    //         var plays=$("#container .con_bot .add #shijian .bag .sjmr1 #crmid");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(-750px)",
+    //             "-moz-transform":"translateX(-750px)",
+    //             "-ms-transform":"translateX(-750px)",
+    //             "-o-transform":"translateX(-750px)",
+    //             "transform":"translateX(-750px)",
+    //         });
+    //         go = 11;
+    //     } else{
+    //         var plays=$("#container .con_bot .add #shijian .bag .sjmr1 #crmid");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(0px)",
+    //             "-moz-transform":"translateX(0px)",
+    //             "-ms-transform":"translateX(0px)",
+    //             "-o-transform":"translateX(0px)",
+    //             "transform":"translateX(0px)",
+    //         });
+    //         go = 00;
+    //     }
+    // });
+    // $('#container .con_bot .add #shijian .bag .sjmr1 .left').on('click',function () {
+    //     if(go==00){
+    //         var plays=$("#container .con_bot .add #shijian .bag .sjmr1 #crmid");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(-750px)",
+    //             "-moz-transform":"translateX(-750px)",
+    //             "-ms-transform":"translateX(-750px)",
+    //             "-o-transform":"translateX(-750px)",
+    //             "transform":"translateX(-750px)",
+    //         });
+    //         go = 11;
+    //     } else{
+    //         var plays=$("#container .con_bot .add #shijian .bag .sjmr1 #crmid");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(0px)",
+    //             "-moz-transform":"translateX(0px)",
+    //             "-ms-transform":"translateX(0px)",
+    //             "-o-transform":"translateX(0px)",
+    //             "transform":"translateX(0px)",
+    //         });
+    //         go = 00;
+    //     }
+    // });
     //
     $(function() {
         $('a.show-option').click(function(evt) {

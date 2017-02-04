@@ -118,7 +118,7 @@ function guanlianrenwu() {
             }else {
                 mingan=item.sensitive.toFixed(2);
             };
-            if (item.user_tag==''||item.sensitive=='unknown'){
+            if (item.user_tag==''||item.sensitive=='unknown'||item.sensitive=='null'){
                 tag='无';
             }else {
                 tag=item.user_tag;
@@ -168,7 +168,7 @@ function guanlianrenwu() {
         });
         $("#run2").append(str);
         var step=0;
-        $('#container #people .peotwo .peotwo2 #run2').width((data.length+5)*255);
+        $('#container #people .peotwo .peotwo2 #run2').width((data.length)*255);
         $('#container #people .peotwo .peotwo2 .right').on('click',function () {
             step++;
             var plays=$("#container #people .peotwo .peotwo2 #run2");
@@ -194,18 +194,19 @@ function guanlianrenwu() {
         });
         $('#container #people .peotwo .peotwo2 .left').on('click',function () {
             step--;
-            var plays=$("#container #people .peotwo .peotwo2 #run2");
-            walk=(-1020)*step;
-            $(plays).css({
-                "-webkit-transform":"translateX("+walk+"px)",
-                "-moz-transform":"translateX("+walk+"px)",
-                "-ms-transform":"translateX("+walk+"px)",
-                "-o-transform":"translateX("+walk+"px)",
-                "transform":"translateX("+walk+"px)",
-            });
             if (step < 0){
                 alert('已经是第一页了~~');
                 step=0;
+            }else {
+                var plays=$("#container #people .peotwo .peotwo2 #run2");
+                walk=(-1020)*step;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
             }
         });
         //卡片效果
@@ -349,11 +350,10 @@ function baohanshijian() {
                 '</div> -->'+
                 '</div>';
         });
-
         $("#run").append(str);
         //卡片效果
         var step=0;
-        $('#container #similar .peotwo #case #run').width((data.length+5)*255);
+        $('#container #similar .deftwo #case #run').width((data.length)*255);
         $('#container #similar .definite .deftwo .right').on('click',function () {
             if (data.length<=4){
                 alert('没有其他卡片内容了~~');
@@ -386,18 +386,19 @@ function baohanshijian() {
                 alert('没有其他卡片内容了~~');
             }else {
                 step--;
-                var plays=$("#container #similar .peotwo #case #run");
-                walk=(-1020)*step;
-                $(plays).css({
-                    "-webkit-transform":"translateX("+walk+"px)",
-                    "-moz-transform":"translateX("+walk+"px)",
-                    "-ms-transform":"translateX("+walk+"px)",
-                    "-o-transform":"translateX("+walk+"px)",
-                    "transform":"translateX("+walk+"px)",
-                });
                 if (step < 0){
                     alert('已经是第一页了~~');
                     step=0;
+                }else {
+                    var plays=$("#container #similar .peotwo #case #run");
+                    walk=(-1020)*step;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
                 }
             };
 

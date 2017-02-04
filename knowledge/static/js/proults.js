@@ -745,6 +745,8 @@ function guanlianrenwu() {
         },
     };
     function territory(data) {
+        $('#container #similar .definite .deftwo .left').unbind("click");
+        $('#container #similar .definite .deftwo .right').unbind("click");
         $("#run").empty();
         var data=eval(data);
         var str='';
@@ -816,13 +818,55 @@ function guanlianrenwu() {
                     '</div>';
             });
             $("#run").append(str);
+            var step=0;
+            $('#run').width((data.length)*255);
+            $('#container #similar .definite .deftwo .right').on('click',function () {
+                step++;
+                var plays=$("#run");
+                walk=(-1020)*step;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step >= data.length/4){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step=0;
+                }
+            });
+            $('#container #similar .definite .deftwo .left').on('click',function () {
+                step--;
+                if (step < 0){
+                    alert('已经是第一页了~~');
+                    step=0;
+                }else {
+                    var plays=$("#run");
+                    walk=(-1020)*step;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
+                }
+            });
             $.each( $(".xingming"),function(index,item){
                 $(item).on('click',function () {
                     window.open('/index/person/?p_uid'+$('.play #uid').html());
                 });
             });
         }else {
-            $("#run").append('暂无数据！！');
+            $("#run").html('暂无数据！！');
         }
 
         //卡片效果
@@ -894,6 +938,8 @@ function guanlianrenwu() {
 guanlianrenwu();
 
 function guanlianshijian() {
+    $('#container #people .peotwo .peotwo2 .left').unbind("click");
+    $('#container #people .peotwo .peotwo2 .right').unbind("click");
     function include() {
         //this.ajax_method='GET'; // body...
     }
@@ -912,60 +958,107 @@ function guanlianshijian() {
         $("#run2").empty();
         var data=eval(data);
         var str='';
-        $.each(data,function (index,item) {
-            var weizhi,biaoqian,shuoming,photo;
-            if (item.location=='null'){
-                weizhi='未知';
-            }else {
-                weizhi=item.location;
-            };
-            if (item.user_tag=='null'){
-                biaoqian='暂无';
-            }else {
-                biaoqian=item.user_tag;
-            };
-            if (item.description=='null'){
-                biaoqian='暂无数据';
-            }else {
-                biaoqian=item.user_tag;
-            };
-            if (item.photo_url=='null'||item.photo_url==''){
-                photo='/static/image/xuyuyu.png';
-            }else {
-                photo=item.photo_url;
-            };
-            function getLocalTime(nS) {
-                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,17)
-            };
-            str+='<div class="play">'+
-                '<div class="play1">'+
-                '<div class="p11">'+
-                '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
-                '--><img src="/static/image/dingwei.png" title="位置"><!--'+
-                '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
-                '--><img class="xin" src="/static/image/heart.png" alt="">'+
-                '</div>'+
-                '<div class="p22">'+
-                '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
-                '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
-                '</div>'+
-                '</div>'+
-                '<img class="play2" src="'+photo+'" alt="">'+
-                '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
-                '<a class="bus1">业务标签：</a>'+
-                '<a class="bus2">'+biaoqian+'</a>'+
-                '</div>'+
-                '<div class="play4">'+
-                '<p class="shuoming">'+
-                shuoming+
-                '</p>'+
-                '</div>'+
-                '<div class="play5" type="button" data-toggle="modal">'+
-                '<a>加入专题</a>'+
-                '</div>'+
-                '</div>';
-        });
-        $("#run2").append(str);
+        if (!data==[]){
+            $("#run2").html('暂无数据~~');
+        }else {
+            $.each(data,function (index,item) {
+                var weizhi,biaoqian,shuoming,photo;
+                if (item.location=='null'){
+                    weizhi='未知';
+                }else {
+                    weizhi=item.location;
+                };
+                if (item.user_tag=='null'){
+                    biaoqian='暂无';
+                }else {
+                    biaoqian=item.user_tag;
+                };
+                if (item.description=='null'){
+                    biaoqian='暂无数据';
+                }else {
+                    biaoqian=item.user_tag;
+                };
+                if (item.photo_url=='null'||item.photo_url==''){
+                    photo='/static/image/xuyuyu.png';
+                }else {
+                    photo=item.photo_url;
+                };
+                function getLocalTime(nS) {
+                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,17)
+                };
+                str+='<div class="play">'+
+                    '<div class="play1">'+
+                    '<div class="p11">'+
+                    '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
+                    '--><img src="/static/image/dingwei.png" title="位置"><!--'+
+                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+                    '--><img class="xin" src="/static/image/heart.png" alt="">'+
+                    '</div>'+
+                    '<div class="p22">'+
+                    '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
+                    '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
+                    '</div>'+
+                    '</div>'+
+                    '<img class="play2" src="'+photo+'" alt="">'+
+                    '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
+                    '<a class="bus1">业务标签：</a>'+
+                    '<a class="bus2">'+biaoqian+'</a>'+
+                    '</div>'+
+                    '<div class="play4">'+
+                    '<p class="shuoming">'+
+                    shuoming+
+                    '</p>'+
+                    '</div>'+
+                    '<div class="play5" type="button" data-toggle="modal">'+
+                    '<a>加入专题</a>'+
+                    '</div>'+
+                    '</div>';
+            });
+            $("#run2").append(str);
+            var step=0;
+            $('#run2').width((data.length)*255);
+            $('#container #people .peotwo .peotwo2 .right').on('click',function () {
+                step++;
+                var plays=$("#run");
+                walk=(-1020)*step;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step >= data.length/4){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step=0;
+                }
+            });
+            $('#container #people .peotwo .peotwo2 .left').on('click',function () {
+                step--;
+                if (step < 0){
+                    alert('已经是第一页了~~');
+                    step=0;
+                }else {
+                    var plays=$("#run");
+                    walk=(-1020)*step;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
+                }
+            });
+        }
+
         //卡片效果
         $.each($("#people .play"),function (index,item) {
             $(item).hover(function () {

@@ -67,13 +67,13 @@
                             </p>    
                             <img src='/static/image/left.png' class="left" style='display:inline-block;margin: -160px 20px 0 0;'/>
                             <div class="midd" style='width:1020px;overflow:hidden;display:inline-block;'>
-                                <div class="midd2" style="width:20400px;transition: all 0.8s linear;">
+                                <div class="midd2" style="transition: all 0.8s linear;height:190px;">
                                     
                                 </div>
                             </div>  
                         
                             <img src="/static/image/right.png" class='right' style='display:inline-block;
-                                                    margin:-160px 0 0 24px;'/>
+                                                    margin:-160px 0 0 15px;'/>
                         </div>
                     </div>
         </div>
@@ -259,46 +259,7 @@
     // $('.add22').on('click',function () {
     //     $('#join6').modal("show");
     // });
-    $.each($('.xingming'),function(index,item){
-        $(item).on('click',function(){
-            window.location.href='/index/person/';
-        })
-    });
-    var play=$("#container .result .re3 .play");
-    $.each(play,function (index,item) {
-        $(item).hover(function () {
-            $(item).find(".play5").css({
-                "-webkit-transform":"translateY(-40px)",
-                "-moz-transform":"translateY(-40px)",
-                "-ms-transform":"translateY(-40px)",
-                "-o-transform":"translateY(-40px)",
-                "transform":"translateY(-40px)",
-            })
-        },function () {
-            $(item).find(".play5").css({
-                "-webkit-transform":"translateY(40px)",
-                "-moz-transform":"translateY(40px)",
-                "-ms-transform":"translateY(40px)",
-                "-o-transform":"translateY(40px)",
-                "transform":"translateY(40px)",
-            })
-        });
-    });
-    $.each(play,function (index,item) {
-            var changecolor=1;
-            $(item).find(".play5").on('click',function(){
-                if (changecolor==1) {
-                    $(this).parent('.play').css({backgroundColor:'#09F'});
-                    changecolor=2;
-                    $(this).find('a').text('取消群体探索');
-                    $('#join4').modal("show");
-                } else {
-                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
-                    changecolor=1;
-                    $(this).find('a').text('加入群体探索');
-                }
-            }); 
-        });
+   
     var heart=$("#container .result .play .p11 .xin");
     $.each(heart,function(index,item){
         var chan=1;
@@ -323,53 +284,5 @@
         $(this).attr('src','/static/image/right.png');
     });
 
-    //
-    var go = 66;
-    $('#container .result .re3 .re3rg .left').on('click',function () {
-        if(go==66){
-            var plays=$("#container .result .re3 .re3rg .midd2");
-            $(plays).css({
-                "-webkit-transform":"translateX(-518px)",
-                "-moz-transform":"translateX(-518px)",
-                "-ms-transform":"translateX(-518px)",
-                "-o-transform":"translateX(-518px)",
-                "transform":"translateX(-518px)",
-            });
-            go = 88;
-        } else{
-            var plays=$("#container .result .re3 .re3rg .midd2");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 66;
-        }
-    });
-    $('#container .result .re3 .re3rg .right').on('click',function () {
-        if(go==66){
-            var plays=$("#container .result .re3 .re3rg .midd2");
-            $(plays).css({
-                "-webkit-transform":"translateX(-518px)",
-                "-moz-transform":"translateX(-518px)",
-                "-ms-transform":"translateX(-518px)",
-                "-o-transform":"translateX(-518px)",
-                "transform":"translateX(-518px)",
-            });
-            go = 88;
-        } else{
-            var plays=$("#container .result .re3 .re3rg .midd2");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 66;
-        }
-    });
 </script>
 {% endblock %}

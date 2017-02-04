@@ -1,6 +1,14 @@
 /**
  * Created by Administrator on 2016/11/25.
  */
+Array.prototype.removeByValue = function(val) {
+    for(var i=0; i<this.length; i++) {
+        if(this[i] == val) {
+            this.splice(i, 1);
+            break;
+        }
+    }
+};
 var group_list=[];
 var groupname,groupname1,ii,jj,node_ids=[];
 function qunti(value) {
@@ -70,6 +78,8 @@ function zongqunti() {
                     group_list.push($(this).find('i').html());
                 }else {
                     $(this).css({backgroundColor:'#0099FF'});
+                    var $a = $(this).find('i').html();
+                    group_list.removeByValue($a);
                     gg=1;
                 }
             });
@@ -170,8 +180,6 @@ function zongqunti() {
     nums();
 };
 zongqunti();
-
-
 
 function quntibiaoge() {
     function place() {
@@ -296,6 +304,7 @@ function biaogequnti() {
     };
     function things(data) {
         var data=eval(data);
+        cwidth=data.length;
         var str='';
         function getLocalTime(nS) {
             return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18);
@@ -350,14 +359,60 @@ function biaogequnti() {
                 '</div> -->'+
                 '</div>';
         });
-        // if (data.length% 2 == 0){
-        //     cwidth=(data.length*490)/4;
-        // }else {
-        //     cwidth=(data.length*490)/4 + 490;
-        // }
-
-        // $("#container .associat .assright .assright2 #case #crmid").width(cwidth);
         $(".xinzeng .instr #tbrg .sjmr1 #case2 #run3").append(str);
+        var step=0;
+        var shang=Math.floor(cwidth/6);
+        var yu=cwidth%6;
+        $('#container .xinzeng .instr #tbrg .sjmr1 #case2 #run3').width((3*shang+yu)*245);
+        $('#container .xinzeng .instr #tbrg .sjmr1 .right').on('click',function () {
+            if (cwidth<=6){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step++;
+                var plays=$("#container .xinzeng .instr #tbrg .sjmr1 #case2 #run3");
+                walk=(-735)*step;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step >= data.length/6){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step=0;
+                }
+            }
+        });
+        $('#container .xinzeng .instr #tbrg .sjmr1 .left').on('click',function () {
+            if (cwidth<=6){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step--;
+                if (step < 0){
+                    alert('已经是第一页了~~');
+                    step=0;
+                }else {
+                    var plays=$("#container .xinzeng .instr #tbrg .sjmr1 #case2 #run3");
+                    walk=(-735)*step;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
+                }
+            };
+
+        });
         //卡片效果
         var heart=$(".play .play1 .p11 .xin");
         $.each(heart,function(index,item){
@@ -533,7 +588,7 @@ function yonghushijian() {
         $.each(data,function (index,item) {
             var influe,name,huoyue,mingan,tag,photo;
             if (item.influence=='null'){
-                influe='无';
+                influe=0;
             }else {
                 influe=item.influence.toFixed(2);
             };
@@ -544,7 +599,7 @@ function yonghushijian() {
             };
             var huoyue=item.activeness.toFixed(2);
             if (item.sensitive=='null'||item.sensitive=='unknown'){
-                mingan='无';
+                mingan=0;
             }else {
                 mingan=item.sensitive.toFixed(2);
             };
@@ -596,14 +651,61 @@ function yonghushijian() {
                 '</div>'+
                 '</div>';
         });
-        // if (data.length% 2 == 0){
-        //     cwidth=(data.length*490)/4;
-        // }else {
-        //     cwidth=(data.length*490)/4 + 490;
-        // }
-
-        // $("#container .associat .assright .assright2 #case #crmid").width(cwidth);
         $(".xinzeng #shijian2 .sjmr .sjmr1 #case #crmid #run").append(str);
+
+        var step=0;
+        var shang=Math.floor(data.length/6);
+        var yu=data.length%6;
+        $('#container .xinzeng #shijian2 .sjmr .sjmr1 #case #crmid #run').width((3*shang+yu)*245);
+        $('#container .xinzeng #shijian2 .bag .sjmr .sjmr1 .right').on('click',function () {
+            if (data.length<=6){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step++;
+                var plays=$("#container .xinzeng #shijian2 .sjmr1 #case12 #crmid12 #run12");
+                walk=(-735)*step;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step >= data.length/6){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step=0;
+                }
+            }
+        });
+        $('#container .xinzeng #shijian2 .bag .sjmr .sjmr1 .left').on('click',function () {
+            if (data.length<=6){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step--;
+                if (step < 0){
+                    alert('已经是第一页了~~');
+                    step=0;
+                }else {
+                    var plays=$("#container .xinzeng #shijian2 .sjmr1 #case12 #crmid12 #run12");
+                    walk=(-735)*step;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
+                }
+            };
+
+        });
         //卡片效果
         var heart=$(".play .play1 .p11 .xin");
         $.each(heart,function(index,item){

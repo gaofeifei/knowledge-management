@@ -1537,118 +1537,228 @@ function shijianduibi(numa) {
         var data=eval(data);
         $("#run4").empty();
         $("#run5").empty();
+        var step4=0,step5=0;
         var data=eval(data);
         var str1='';
         var str2='';
-        $.each(data.detail_result1,function (index,item) {
-            var weizhi,biaoqian,shuoming,photo;
-            if (item.location=='null'){
-                weizhi='未知';
+        if (!data.detail_result1==[]){
+            $("#run4").html('暂无数据~~');
+        }else {
+            $.each(data.detail_result1,function (index,item) {
+                var weizhi,biaoqian,shuoming,photo;
+                if (item.location=='null'){
+                    weizhi='未知';
+                }else {
+                    weizhi=item.location;
+                };
+                if (item.user_tag=='null'){
+                    biaoqian='暂无';
+                }else {
+                    biaoqian=item.user_tag;
+                };
+                if (item.description=='null'){
+                    shuoming='暂无数据';
+                }else {
+                    shuoming=item.user_tag;
+                };
+                if (item.photo_url=='null'){
+                    photo='/static/image/xuyuyu.png';
+                }else {
+                    photo=item.photo_url;
+                };
+                function getLocalTime(nS) {
+                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18)
+                };
+                str1+='<div class="play">'+
+                    '<div class="play1">'+
+                    '<div class="p11">'+
+                    '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
+                    '--><img src="/static/image/dingwei.png" title="位置"><!--'+
+                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+                    '--><img class="xin" src="/static/image/heart.png" alt="">'+
+                    '</div>'+
+                    '<div class="p22">'+
+                    '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
+                    '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
+                    '</div>'+
+                    '</div>'+
+                    '<img class="play2" src="'+photo+'" alt="">'+
+                    '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
+                    '<a class="bus1">业务标签：</a>'+
+                    '<a class="bus2">'+biaoqian+'</a>'+
+                    '</div>'+
+                    '<div class="play4">'+
+                    '<p class="shuoming">'+
+                    shuoming+
+                    '</p>'+
+                    '</div>'+
+                    '<!-- <div class="play5" type="button" data-toggle="modal">'+
+                    '<a>加入专题</a>'+
+                    '</div> -->'+
+                    '</div>';
+            });
+            $("#run4").append(str1);
+            $('#run4').width((data.detail_result1.length)*255);
+
+        };
+        if (!data.detail_result2==[]){
+            $("#run5").html('暂无数据~~');
+        }else {
+            $.each(data.detail_result2,function (index,item) {
+                var weizhi,biaoqian,shuoming,photo;
+                if (item.location=='null'){
+                    weizhi='未知';
+                }else {
+                    weizhi=item.location;
+                };
+                if (item.user_tag=='null'){
+                    biaoqian='暂无';
+                }else {
+                    biaoqian=item.user_tag;
+                };
+                if (item.description=='null'){
+                    shuoming='暂无数据';
+                }else {
+                    shuoming=item.user_tag;
+                };
+                if (item.photo_url=='null'){
+                    photo='/static/image/xuyuyu.png';
+                }else {
+                    photo=item.photo_url;
+                };
+                function getLocalTime(nS) {
+                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18)
+                };
+                str2+='<div class="play">'+
+                    '<div class="play1">'+
+                    '<div class="p11">'+
+                    '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
+                    '--><img src="/static/image/dingwei.png" title="位置"><!--'+
+                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+                    '--><img class="xin" src="/static/image/heart.png" alt="">'+
+                    '</div>'+
+                    '<div class="p22">'+
+                    '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
+                    '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
+                    '</div>'+
+                    '</div>'+
+                    '<img class="play2" src="'+photo+'" alt="">'+
+                    '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
+                    '<a class="bus1">业务标签：</a>'+
+                    '<a class="bus2">'+biaoqian+'</a>'+
+                    '</div>'+
+                    '<div class="play4">'+
+                    '<p class="shuoming">'+
+                    shuoming+
+                    '</p>'+
+                    '</div>'+
+                    '<!-- <div class="play5" type="button" data-toggle="modal">'+
+                    '<a>加入专题</a>'+
+                    '</div> -->'+
+                    '</div>';
+            });
+            $("#run5").append(str2);
+            $('#run5').width((data.detail_result2.length)*255);
+        }
+        $('#container #middle .thingtrast .lawyer2 .right').on('click',function () {
+            if (data.detail_result1.length<=4){
+                alert('没有其他卡片内容了~~');
             }else {
-                weizhi=item.location;
-            };
-            if (item.user_tag=='null'){
-                biaoqian='暂无';
-            }else {
-                biaoqian=item.user_tag;
-            };
-            if (item.description=='null'){
-                shuoming='暂无数据';
-            }else {
-                shuoming=item.user_tag;
-            };
-            if (item.photo_url=='null'){
-                photo='/static/image/xuyuyu.png';
-            }else {
-                photo=item.photo_url;
-            };
-            function getLocalTime(nS) {
-                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18)
-            };
-            str1+='<div class="play">'+
-                '<div class="play1">'+
-                '<div class="p11">'+
-                '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
-                '--><img src="/static/image/dingwei.png" title="位置"><!--'+
-                '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
-                '--><img class="xin" src="/static/image/heart.png" alt="">'+
-                '</div>'+
-                '<div class="p22">'+
-                '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
-                '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
-                '</div>'+
-                '</div>'+
-                '<img class="play2" src="'+photo+'" alt="">'+
-                '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
-                '<a class="bus1">业务标签：</a>'+
-                '<a class="bus2">'+biaoqian+'</a>'+
-                '</div>'+
-                '<div class="play4">'+
-                '<p class="shuoming">'+
-                shuoming+
-                '</p>'+
-                '</div>'+
-                '<!-- <div class="play5" type="button" data-toggle="modal">'+
-                '<a>加入专题</a>'+
-                '</div> -->'+
-                '</div>';
+                step4++;
+                var plays=$("#run4");
+                walk=(-1020)*step4;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step4 >= data.detail_result1.length/4){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step4=0;
+                }
+            }
         });
-        $.each(data.detail_result2,function (index,item) {
-            var weizhi,biaoqian,shuoming,photo;
-            if (item.location=='null'){
-                weizhi='未知';
+        $('#container #middle .thingtrast .lawyer2 .left').on('click',function () {
+            if (data.detail_result1.length<=4){
+                alert('没有其他卡片内容了~~');
             }else {
-                weizhi=item.location;
+                step4--;
+                if (step4 < 0){
+                    alert('已经是第一页了~~');
+                    step4=0;
+                }else {
+                    var plays=$("#run4");
+                    walk=(-1020)*step4;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
+                }
             };
-            if (item.user_tag=='null'){
-                biaoqian='暂无';
+
+        });
+        $('#container #middle .thingtrast .safeguard2 .right').on('click',function () {
+            if (data.detail_result2.length<=4){
+                alert('没有其他卡片内容了~~');
             }else {
-                biaoqian=item.user_tag;
-            };
-            if (item.description=='null'){
-                shuoming='暂无数据';
+                step5++;
+                var plays=$("#run5");
+                walk=(-1020)*step5;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step5 >= data.detail_result2.length/4){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step5=0;
+                }
+            }
+        });
+        $('#container #middle .thingtrast .safeguard2 .left').on('click',function () {
+            if (data.detail_result2.length<=4){
+                alert('没有其他卡片内容了~~');
             }else {
-                shuoming=item.user_tag;
+                step5--;
+                if (step < 0){
+                    alert('已经是第一页了~~');
+                    step5=0;
+                }else {
+                    var plays=$("#run5");
+                    walk=(-1020)*step5;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
+                }
             };
-            if (item.photo_url=='null'){
-                photo='/static/image/xuyuyu.png';
-            }else {
-                photo=item.photo_url;
-            };
-            function getLocalTime(nS) {
-                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18)
-            };
-            str2+='<div class="play">'+
-                '<div class="play1">'+
-                '<div class="p11">'+
-                '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
-                '--><img src="/static/image/dingwei.png" title="位置"><!--'+
-                '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
-                '--><img class="xin" src="/static/image/heart.png" alt="">'+
-                '</div>'+
-                '<div class="p22">'+
-                '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
-                '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
-                '</div>'+
-                '</div>'+
-                '<img class="play2" src="'+photo+'" alt="">'+
-                '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
-                '<a class="bus1">业务标签：</a>'+
-                '<a class="bus2">'+biaoqian+'</a>'+
-                '</div>'+
-                '<div class="play4">'+
-                '<p class="shuoming">'+
-                shuoming+
-                '</p>'+
-                '</div>'+
-                '<!-- <div class="play5" type="button" data-toggle="modal">'+
-                '<a>加入专题</a>'+
-                '</div> -->'+
-                '</div>';
+
         });
 
-        $("#run4").append(str1);
-        $("#run5").append(str2);
         //卡片效果
         var heart=$("#container .play .play1 .p11 .xin");
         $.each(heart,function(index,item){

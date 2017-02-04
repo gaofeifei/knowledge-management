@@ -6,8 +6,8 @@
 //         $(this).parent().fadeOut(300);
 //     })
 // });
-$("#container #total .twright .twr1:even").css("background-color","#eeeeee");
-$("#container #total .twright2 .twr1:even").css("background-color","#eeeeee");
+// $("#container #total .twright .twr1:even").css("background-color","#eeeeee");
+// $("#container #total .twright2 .twr1:even").css("background-color","#eeeeee");
 var show = 0;
 $(".ptnew").on("click",function () {
     if (show==0) {
@@ -64,152 +64,6 @@ $('#container #people .peotwo .peotwo2 .right').hover(function () {
     $(this).attr('src','/static/image/right.png');
 });
 
-
-//点击箭头滑动的效果
-var go = 22;
-$('#container #similar .definite .deftwo .right').on('click',function () {
-    if(go==22){
-        var plays=$("#container #similar .definite .deftwo .play");
-        $(plays).css({
-            "-webkit-transform":"translateX(-1050px)",
-            "-moz-transform":"translateX(-1050px)",
-            "-ms-transform":"translateX(-1050px)",
-            "-o-transform":"translateX(-1050px)",
-            "transform":"translateX(-1050px)",
-        });
-        go = 33;
-    } else{
-        var plays=$("#container #similar .definite .deftwo .play");
-        $(plays).css({
-            "-webkit-transform":"translateX(0px)",
-            "-moz-transform":"translateX(0px)",
-            "-ms-transform":"translateX(0px)",
-            "-o-transform":"translateX(0px)",
-            "transform":"translateX(0px)",
-        });
-        go = 22;
-    }
-});
-$('#container #similar .definite .deftwo .left').on('click',function () {
-    if(go==22){
-        var plays=$("#container #similar .definite .deftwo .play");
-        $(plays).css({
-            "-webkit-transform":"translateX(-1050px)",
-            "-moz-transform":"translateX(-1050px)",
-            "-ms-transform":"translateX(-1050px)",
-            "-o-transform":"translateX(-1050px)",
-            "transform":"translateX(-1050px)",
-        });
-        go = 33;
-    } else{
-        var plays=$("#container #similar .definite .deftwo .play");
-        $(plays).css({
-            "-webkit-transform":"translateX(0px)",
-            "-moz-transform":"translateX(0px)",
-            "-ms-transform":"translateX(0px)",
-            "-o-transform":"translateX(0px)",
-            "transform":"translateX(0px)",
-        });
-        go = 22;
-    }
-});
-
-//
-var go1 = 22;
-$('#container #similar .samevent .sametwo .right').on('click',function () {
-    if(go1==22){
-        var plays=$("#container #similar .samevent .sametwo .play");
-        $(plays).css({
-            "-webkit-transform":"translateX(-1050px)",
-            "-moz-transform":"translateX(-1050px)",
-            "-ms-transform":"translateX(-1050px)",
-            "-o-transform":"translateX(-1050px)",
-            "transform":"translateX(-1050px)",
-        });
-        go1 = 33;
-    } else{
-        var plays=$("#container #similar .samevent .sametwo .play");
-        $(plays).css({
-            "-webkit-transform":"translateX(0px)",
-            "-moz-transform":"translateX(0px)",
-            "-ms-transform":"translateX(0px)",
-            "-o-transform":"translateX(0px)",
-            "transform":"translateX(0px)",
-        });
-        go1 = 22;
-    }
-});
-$('#container #similar .samevent .sametwo .left').on('click',function () {
-    if(go1==22){
-        var plays=$("#container #similar .samevent .sametwo .play");
-        $(plays).css({
-            "-webkit-transform":"translateX(-1050px)",
-            "-moz-transform":"translateX(-1050px)",
-            "-ms-transform":"translateX(-1050px)",
-            "-o-transform":"translateX(-1050px)",
-            "transform":"translateX(-1050px)",
-        });
-        go1 = 33;
-    } else{
-        var plays=$("#container #similar .samevent .sametwo .play");
-        $(plays).css({
-            "-webkit-transform":"translateX(0px)",
-            "-moz-transform":"translateX(0px)",
-            "-ms-transform":"translateX(0px)",
-            "-o-transform":"translateX(0px)",
-            "transform":"translateX(0px)",
-        });
-        go1 = 22;
-    }
-});
-//
-var go2 = 22;
-$('#container #people .peotwo .peotwo2 .right').on('click',function () {
-    if(go2==22){
-        var plays=$("#container #people .peotwo2 #run2 .play");
-        $(plays).css({
-            "-webkit-transform":"translateX(-1050px)",
-            "-moz-transform":"translateX(-1050px)",
-            "-ms-transform":"translateX(-1050px)",
-            "-o-transform":"translateX(-1050px)",
-            "transform":"translateX(-1050px)",
-        });
-        go2 = 33;
-    } else{
-        var plays=$("#container #people .peotwo2 #run2 .play");
-        $(plays).css({
-            "-webkit-transform":"translateX(0px)",
-            "-moz-transform":"translateX(0px)",
-            "-ms-transform":"translateX(0px)",
-            "-o-transform":"translateX(0px)",
-            "transform":"translateX(0px)",
-        });
-        go2 = 22;
-    }
-});
-$('#container #people .peotwo .peotwo2 .left').on('click',function () {
-    if(go2==22){
-        var plays=$("#container #people .peotwo2 #run2 .play");
-        $(plays).css({
-            "-webkit-transform":"translateX(-1050px)",
-            "-moz-transform":"translateX(-1050px)",
-            "-ms-transform":"translateX(-1050px)",
-            "-o-transform":"translateX(-1050px)",
-            "transform":"translateX(-1050px)",
-        });
-        go2 = 33;
-    } else{
-        var plays=$("#container #people .peotwo2 #run2 .play");
-        $(plays).css({
-            "-webkit-transform":"translateX(0px)",
-            "-moz-transform":"translateX(0px)",
-            "-ms-transform":"translateX(0px)",
-            "-o-transform":"translateX(0px)",
-            "transform":"translateX(0px)",
-        });
-        go2 = 22;
-    }
-});
 //
 var play=$(".play");
 $.each(play,function (index,item) {
@@ -294,14 +148,14 @@ function check2(value){
         $('.shuru2').hide();
     };
 };
-$.each($("#people .xingming"),function(index,item){
-    $(item).on('click',function () {
-        window.open('/index/person/');
-    });
-});
-$.each($("#similar .xingming"),function(index,item){
-    $(item).on('click',function () {
-        window.open('/index/search_result/');
-    });
-});
+// $.each($("#people .xingming"),function(index,item){
+//     $(item).on('click',function () {
+//         window.open('/index/person/');
+//     });
+// });
+// $.each($("#similar .xingming"),function(index,item){
+//     $(item).on('click',function () {
+//         window.open('/index/search_result/');
+//     });
+// });
 

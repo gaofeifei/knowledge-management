@@ -154,7 +154,7 @@ function quntixinjianyonghushijian() {
         $.each(data,function (index,item) {
             var influe,name,huoyue,mingan,tag,photo;
             if (item.influence=='null'){
-                influe='无';
+                influe=0;
             }else {
                 influe=item.influence.toFixed(2);
             };
@@ -165,7 +165,7 @@ function quntixinjianyonghushijian() {
             };
             var huoyue=item.activeness.toFixed(2);
             if (item.sensitive=='null'||item.sensitive=='unknown'){
-                mingan='无';
+                mingan=0;
             }else {
                 mingan=item.sensitive.toFixed(2);
             };
@@ -217,14 +217,61 @@ function quntixinjianyonghushijian() {
                 '</div>'+
                 '</div>';
         });
-        // if (data.length% 2 == 0){
-        //     cwidth=(data.length*490)/4;
-        // }else {
-        //     cwidth=(data.length*490)/4 + 490;
-        // }
+        $("#container .con_bot .add .sjmr #case33 #crmid33 #run00").append(str);
 
-        // $("#container .associat .assright .assright2 #case #crmid").width(cwidth);
-        $("#container .con_bot .add .sjmr #case33 #crmid #run00").append(str);
+        var step=0;
+        var shang=Math.floor(data.length/6);
+        var yu=data.length%6;
+        $('#container .con_bot .add .sjmr #case33 #crmid33 #run00').width((3*shang+yu)*245);
+        $('#container .con_bot .add #shijian .bag .right').on('click',function () {
+            if (data.length<=6){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step++;
+                var plays=$("#container .con_bot .add .sjmr #case33 #crmid33 #run00");
+                walk=(-735)*step;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step >= data.length/6){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step=0;
+                }
+            }
+        });
+        $('#container .con_bot .add #shijian .bag .left').on('click',function () {
+            if (data.length<=6){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step--;
+                if (step < 0){
+                    alert('已经是第一页了~~');
+                    step=0;
+                }else {
+                    var plays=$("#container .con_bot .add .sjmr #case33 #crmid33 #run00");
+                    walk=(-735)*step;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
+                }
+            };
+
+        });
         //卡片效果
         var heart=$(".play .play1 .p11 .xin");
         $.each(heart,function(index,item){
@@ -294,7 +341,7 @@ function quntixinjianyonghushijian() {
     };
     var maths='all',s;
     $("#container .con_bot .sjt .sjt2").on('click',function () {
-        $('#container .con_bot #shijian .bag .sjmr #crmid #run00').empty();
+        $('#container .con_bot #shijian .bag .sjmr #crmid33 #run00').empty();
         s=$("#container .con_bot .sjt .sjt1").val();
         if (!s==''){
             nums(s);
@@ -304,7 +351,7 @@ function quntixinjianyonghushijian() {
         };
     });
 
-    $.each($("#shijian2 .bag .sjmr1 .direct1 input"),function (index,item) {
+    $.each($("#shijian .bag .sjmr1 .direct1 input"),function (index,item) {
         $(item).on('click',function () {
             if (index==0){
                 maths=1;

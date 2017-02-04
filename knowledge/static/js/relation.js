@@ -120,7 +120,10 @@ function relation_line(data) {
     $('#container .result .re3 .re3lf .route .path').empty();
     $('#container .result .re3 .re3lf .route .dote .geshu').empty();
     $('#container .result .re3 .re3lf #se_ka').empty();
+    $('#container .result .re3 .left').unbind("click");
+    $('#container .result .re3 .right').unbind("click");
     var json=eval(data);
+    console.log(json)
     var myChart = echarts.init(document.getElementById('complex'));
     myChart.showLoading();
     var node_value=[],link_value=[];
@@ -227,7 +230,7 @@ function relation_line(data) {
     //--------------------
     var uname1,uname2;
     if (json.start_node_card.uid){
-        if (json.start_node_card.uname==''){
+        if (json.start_node_card.uname==''||json.start_node_card.uname=='unknown'){
             uname1=json.start_node_card.uid;
         }else {
             uname1=json.start_node_card.uname;
@@ -363,7 +366,7 @@ function relation_line(data) {
     };
 
     if (json.end_node_card.uid){
-        if (json.end_node_card.uname==''){
+        if (json.end_node_card.uname==''||json.end_node_card.uname=='unknown'){
             uname2=json.end_node_card.uid;
         }else {
             uname2=json.end_node_card.uname;
@@ -628,6 +631,50 @@ function relation_line(data) {
         }
     });
     $("#container .result .re3 .re3rg .midd .midd2").append(line_mid);
+
+
+    var step=0;
+    $('#container .result .re3 .re3rg .midd .midd2').width((json.middle_card.length)*255);
+    $('#container .result .re3 .re3rg .right').on('click',function () {
+        step++;
+        var plays=$("#container .result .re3 .re3rg .midd .midd2");
+        walk=(-1020)*step;
+        $(plays).css({
+            "-webkit-transform":"translateX("+walk+"px)",
+            "-moz-transform":"translateX("+walk+"px)",
+            "-ms-transform":"translateX("+walk+"px)",
+            "-o-transform":"translateX("+walk+"px)",
+            "transform":"translateX("+walk+"px)",
+        });
+        if (step >= json.middle_card.length/4){
+            alert('已经是最后一页了~~');
+            $(plays).css({
+                "-webkit-transform":"translateX(0px)",
+                "-moz-transform":"translateX(0px)",
+                "-ms-transform":"translateX(0px)",
+                "-o-transform":"translateX(0px)",
+                "transform":"translateX(0px)",
+            });
+            step=0;
+        }
+    });
+    $('#container .result .re3 .re3rg .left').on('click',function () {
+        step--;
+        if (step < 0){
+            alert('已经是第一页了~~');
+            step=0;
+        }else {
+            var plays=$("#container .result .re3 .re3rg .midd .midd2");
+            walk=(-1020)*step;
+            $(plays).css({
+                "-webkit-transform":"translateX("+walk+"px)",
+                "-moz-transform":"translateX("+walk+"px)",
+                "-ms-transform":"translateX("+walk+"px)",
+                "-o-transform":"translateX("+walk+"px)",
+                "transform":"translateX("+walk+"px)",
+            });
+        }
+    });
     //卡片效果
     $.each($(".play"),function (index,item) {
         $(item).hover(function () {

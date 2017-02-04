@@ -90,98 +90,98 @@
     });
 
     //------------------滚动区域-----------------
-    var go = 5;
-    $('#container #middle .thingtrast .lawyer2 .right').on('click',function () {
-        if(go==5){
-            var plays=$("#container #middle .thingtrast .lawyer2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(-1050px)",
-                "-moz-transform":"translateX(-1050px)",
-                "-ms-transform":"translateX(-1050px)",
-                "-o-transform":"translateX(-1050px)",
-                "transform":"translateX(-1050px)",
-            });
-            go = 8;
-        } else{
-            var plays=$("#container #middle .thingtrast .lawyer2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 5;
-        }
-    });
-    $('#container #middle .thingtrast .lawyer2 .left').on('click',function () {
-        if(go==5){
-            var plays=$("#container #middle .thingtrast .lawyer2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(-1050px)",
-                "-moz-transform":"translateX(-1050px)",
-                "-ms-transform":"translateX(-1050px)",
-                "-o-transform":"translateX(-1050px)",
-                "transform":"translateX(-1050px)",
-            });
-            go = 8;
-        } else{
-            var plays=$("#container #middle .thingtrast .lawyer2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 5;
-        }
-    });
-    $('#container #middle .thingtrast .safeguard2 .right').on('click',function () {
-        if(go==5){
-            var plays=$("#container #middle .thingtrast .safeguard2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(-1050px)",
-                "-moz-transform":"translateX(-1050px)",
-                "-ms-transform":"translateX(-1050px)",
-                "-o-transform":"translateX(-1050px)",
-                "transform":"translateX(-1050px)",
-            });
-            go = 8;
-        } else{
-            var plays=$("#container #middle .thingtrast .safeguard2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 5;
-        }
-    });
-    $('#container #middle .thingtrast .safeguard2 .left').on('click',function () {
-        if(go==5){
-            var plays=$("#container #middle .thingtrast .safeguard2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(-1050px)",
-                "-moz-transform":"translateX(-1050px)",
-                "-ms-transform":"translateX(-1050px)",
-                "-o-transform":"translateX(-1050px)",
-                "transform":"translateX(-1050px)",
-            });
-            go = 8;
-        } else{
-            var plays=$("#container #middle .thingtrast .safeguard2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 5;
-        }
-    });
+    // var go = 5;
+    // $('#container #middle .thingtrast .lawyer2 .right').on('click',function () {
+    //     if(go==5){
+    //         var plays=$("#container #middle .thingtrast .lawyer2 .play");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(-1050px)",
+    //             "-moz-transform":"translateX(-1050px)",
+    //             "-ms-transform":"translateX(-1050px)",
+    //             "-o-transform":"translateX(-1050px)",
+    //             "transform":"translateX(-1050px)",
+    //         });
+    //         go = 8;
+    //     } else{
+    //         var plays=$("#container #middle .thingtrast .lawyer2 .play");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(0px)",
+    //             "-moz-transform":"translateX(0px)",
+    //             "-ms-transform":"translateX(0px)",
+    //             "-o-transform":"translateX(0px)",
+    //             "transform":"translateX(0px)",
+    //         });
+    //         go = 5;
+    //     }
+    // });
+    // $('#container #middle .thingtrast .lawyer2 .left').on('click',function () {
+    //     if(go==5){
+    //         var plays=$("#container #middle .thingtrast .lawyer2 .play");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(-1050px)",
+    //             "-moz-transform":"translateX(-1050px)",
+    //             "-ms-transform":"translateX(-1050px)",
+    //             "-o-transform":"translateX(-1050px)",
+    //             "transform":"translateX(-1050px)",
+    //         });
+    //         go = 8;
+    //     } else{
+    //         var plays=$("#container #middle .thingtrast .lawyer2 .play");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(0px)",
+    //             "-moz-transform":"translateX(0px)",
+    //             "-ms-transform":"translateX(0px)",
+    //             "-o-transform":"translateX(0px)",
+    //             "transform":"translateX(0px)",
+    //         });
+    //         go = 5;
+    //     }
+    // });
+    // $('#container #middle .thingtrast .safeguard2 .right').on('click',function () {
+    //     if(go==5){
+    //         var plays=$("#container #middle .thingtrast .safeguard2 .play");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(-1050px)",
+    //             "-moz-transform":"translateX(-1050px)",
+    //             "-ms-transform":"translateX(-1050px)",
+    //             "-o-transform":"translateX(-1050px)",
+    //             "transform":"translateX(-1050px)",
+    //         });
+    //         go = 8;
+    //     } else{
+    //         var plays=$("#container #middle .thingtrast .safeguard2 .play");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(0px)",
+    //             "-moz-transform":"translateX(0px)",
+    //             "-ms-transform":"translateX(0px)",
+    //             "-o-transform":"translateX(0px)",
+    //             "transform":"translateX(0px)",
+    //         });
+    //         go = 5;
+    //     }
+    // });
+    // $('#container #middle .thingtrast .safeguard2 .left').on('click',function () {
+    //     if(go==5){
+    //         var plays=$("#container #middle .thingtrast .safeguard2 .play");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(-1050px)",
+    //             "-moz-transform":"translateX(-1050px)",
+    //             "-ms-transform":"translateX(-1050px)",
+    //             "-o-transform":"translateX(-1050px)",
+    //             "transform":"translateX(-1050px)",
+    //         });
+    //         go = 8;
+    //     } else{
+    //         var plays=$("#container #middle .thingtrast .safeguard2 .play");
+    //         $(plays).css({
+    //             "-webkit-transform":"translateX(0px)",
+    //             "-moz-transform":"translateX(0px)",
+    //             "-ms-transform":"translateX(0px)",
+    //             "-o-transform":"translateX(0px)",
+    //             "transform":"translateX(0px)",
+    //         });
+    //         go = 5;
+    //     }
+    // });
 
 }();

@@ -478,12 +478,12 @@
         var changecolor=1;
         $(item).find(".play5").on('click',function(){
             if (changecolor==1) {
-                $(this).parent('.play').css({backgroundColor:'#09F'});
+                $(this).parent('.play').find('.xingming').css({color:'red'});
                 $(this).find('a').text('取消专题');
                 changecolor=2;
                 $('#join4').modal("show");
             } else {
-                $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                $(this).parent('.play').css({color:'#000'});
                 $(this).find('a').text('加入专题');
                 changecolor=1;
             }

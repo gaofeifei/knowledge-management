@@ -7,6 +7,12 @@
         .compile b,.compile a {
             color: #0099FF!important;
         }
+        .bootstrap-table {
+            width: 485px;
+        }
+        .fixed-table-pagination .pagination-detail {
+            display: none!important;
+        }
     </style>
 {% endblock %}
 
@@ -63,17 +69,29 @@
                     <input type="checkbox" id='node1'/> 输入节点1
                 </label>
             </div>
-            <input type="text" class="editor111" style="width: 230px;padding: 5px;font-size: 12px"/>
-            <div class="checkbox editor2" style="margin-left: 50px">
+            <input type="text" class="editor111" style="width: 170px;padding: 5px;font-size: 12px"/>
+            <select name="" id="list77" onchange='choselx1(this.value)' 
+            style='width:150px;padding: 5px;font-size: 12px;border: 1px solid #0099FF;margin-left:10px;'>
+                <option value="" disabled selected>请选择节点类型</option>
+                <option value="人物">人物</option>
+                <option value="事件">事件</option>
+            </select>
+            <div class="checkbox editor2" style="margin-left:20px">
                 <label>
                     <input type="checkbox" id='node2'/> 输入节点2
                 </label>
             </div>
-            <input type="text" class="editor222" style="width: 230px;padding: 5px;font-size: 12px"/>
+            <input type="text" class="editor222" style="width: 170px;padding: 5px;font-size: 12px"/>
+            <select name="" id="list88" onchange='choselx2(this.value)'
+            style='width:150px;padding: 5px;font-size: 12px;border: 1px solid #0099FF;margin-left:10px;'>
+                <option value="" disabled selected>请选择节点类型</option>
+                <option value="人物">人物</option>
+                <option value="事件">事件</option>
+            </select>
             <button class="editor3">确定</button>
         </div>
         <div class="listcell">
-            <div class="lcleft" id='lcleft' style="display:none;">
+            <div class="lcleft" id='lcleft'>
                 
             </div>
             <div class="lcright" style='display:none;'>

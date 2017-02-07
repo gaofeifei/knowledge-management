@@ -306,7 +306,6 @@ function handleFileSelect(evt){
                     if( data ){
                         var data=data;
                         wenjianchuanshu(data);
-                        // alert("批量导入成功！");
                     }
                 }
             });

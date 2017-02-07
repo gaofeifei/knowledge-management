@@ -261,21 +261,21 @@
                 <div class="twright">
                     <div id="group_emotion_loading" style="display:block;text-align:center;">
                         正在加载，请稍后...
-                </div>
-                <div id="influeweibo" style="overflow-x: auto; overflow-y: auto;height:320px;">
-                    <table id="input-table" class="In-table">
-                        <tbody class="In-table">
-                        </tbody>
-                    </table>
-                </div>
-                <div class='fanye' style="width:100%;text-align:center;">
-                      <span style="display:inline-block;">每页显示<input type="text" id="PageNo" size="3" value="3" style='text-align:center;border:1px solid #ccc;'/>组</span>
-                      <div id="div-button" style="display:inline-block;margin-left:5px;">
-                          <input type="button" value="首页" id="F-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
-                          <input type="button" value="上一页" id="Pre-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
-                          <input type="button" value="下一页" id="Nex-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
-                          <input type="button" value="尾页" id="L-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
                     </div>
+                    <div id="influeweibo" style="overflow-x: auto; overflow-y: auto;height:320px;">
+                        <table id="input-table" class="In-table">
+                            <tbody class="In-table">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class='fanye' style="width:100%;text-align:center;">
+                          <span style="display:inline-block;">每页显示<input type="text" id="PageNo" size="3" value="3" style='text-align:center;border:1px solid #ccc;'/>组</span>
+                          <div id="div-button" style="display:inline-block;margin-left:5px;">
+                              <input type="button" value="首页" id="F-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="上一页" id="Pre-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="下一页" id="Nex-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="尾页" id="L-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                          </div>
 
                     <span style="display:inline-block;">&nbsp;当前第<span id="s2"></span>页</span>
                     <span style="display:inline-block;">总共<span id="s1"></span>页</span>
@@ -490,6 +490,11 @@
 </div>
 {% endblock %}
 {% block my_js %}
+<script type="text/javascript">
+    var uid='{{p_uid}}';
+    // console.log(uid);
+    // $("#container .present .preone .preonemd").html(theme_explanation);
+</script>
 <script src="/static/js/person.js"></script>
 <script src="/static/js/person2.js"></script>
 <script>
@@ -654,16 +659,17 @@ var play=$("#container .associat .assright .assright2 .play");
         };
         function territory(data) {
             var data=eval(data);
-            var location,tag,description,srcimg;
+            console.log(data)
+            var location,tag,description,srcimg,name;
             function getLocalTime(nS) {     
                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10).replace(/:\d{1,2}$/,' ');    
             }  
-            if (data.photo_url=='null') {
+            if (data.photo_url=='unknown'||data.photo_url=='') {
                 srcimg='/static/image/pan.jpg';
             }else{
                 srcimg=data.photo_url;
             }; 
-            if (data.location=='null') {
+            if (data.location=='unknown') {
                 location='暂无';
             }else {
                 location=data.location;
@@ -678,8 +684,13 @@ var play=$("#container .associat .assright .assright2 .play");
             }else {
                 description=data.description;
             };
+            if (data.uname=='unknown'||data.uname=='') {
+                name=uid;
+            }else {
+                name=data.uname;
+            };
             $('#container .keyman .kmlf .kmimg').attr('src',srcimg)
-            $("#container .keyman .kmrg .rgname .xingming").append(data.uname);
+            $("#container .keyman .kmrg .rgname .xingming").append(name);
             $("#container .keyman .kmrg .rgname .difang").append(data.fansnum);
             $("#container .keyman .kmrg .rgname .influence").append(data.influence.toFixed(2));
             $("#container .keyman .kmrg .rgname .huoyuedu").append(data.activeness.toFixed(2));
@@ -695,7 +706,7 @@ var play=$("#container .associat .assright .assright2 .play");
         };
         var place=new place();
         function nums() {
-            var url = '/index/person_detail/';
+            var url = '/index/person_detail/?uid='+uid;
             place.call_request(url,territory);
         }
         nums();

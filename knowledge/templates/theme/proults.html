@@ -1,5 +1,5 @@
 {% extends "public_nav.html" %}
-{% block title %}<title>图谱分析 - 专题结果</title>{% endblock %}
+{% block title %}<title>图谱探索 - 专题结果</title>{% endblock %}
 {% block my_css %}
     <link rel="stylesheet" href="/static/css/proults.css">
     <style type="text/css">
@@ -20,7 +20,7 @@
 {% block main %}
 <div id="container">
     <div class="present">
-        <span class="preone">当前选择：<a class="preonemd" href="###">电信诈骗</a>专题 ，</span>
+        <span class="preone">当前选择：<a class="preonemd" href="###"></a>专题 ，</span>
         <span class="pretwo">共包含<a href="###" class="pretwomd"></a>个事件</span>
         <div class="checkbox prethr" style="margin-left: 30px">
             <label>
@@ -143,14 +143,15 @@
                 </div>
                 <div class="deftwo">
                     <div class="sjmr1">
-                        <img src="/static/image/left.png" alt="" class="left">
-                        <div id="case" style="display: inline-block;width:1050px;overflow: hidden;">
-                            <div id="run" style="width: 2100px;">
+                        <img src="/static/image/left.png" class="left">
+                        <div id="case" style="display: inline-block;width:1020px;overflow: hidden;
+                        margin-left: 15px;">
+                            <div id="run" style="transition: all 1s linear;height:190px;text-align:center;">
                                 
                             
                             </div>
                         </div>
-                        <img src="/static/image/right.png" alt="" class="right">
+                        <img src="/static/image/right.png" class="right" style='left:15px;'>
                     </div>
                 </div>
             </div>
@@ -180,153 +181,8 @@
                 <div class="sametwo">
                     <div class="sjmr1">
                         <img src="/static/image/left.png" alt="" class="left">
-                        <div id="case1" style="display: inline-block;width:1050px;overflow: hidden;">
-                            <div id="run1" style="width: 2100px;">
-                                <div class="play">
-                                    <div class="play1">
-                                        <div class="p11">
-                                            <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                            --><img src="/static/image/dingwei.png" alt=""><!--
-                                            --><span class="difang" style="font-size: 8px">山东</span><!--
-                                            --><img class="xin" src="/static/image/heart.png" alt="">
-                                        </div>
-                                        <div class="p22">
-                                            <span class="fasheng" style="font-weight: bold">发生时间：</span>
-                                            <span class="riqi">2016-08-19</span>
-                                        </div>
-                                    </div>
-                                    <img class="play2" src="/static/image/xuyuyu.png" alt="">
-                                    <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
-                                        <a class="bus1">业务标签：</a>
-                                        <a class="bus2">诈骗</a>
-                                        <a class="bus2">大学生</a>
-                                        <a class="bus2">离世</a>
-                                    </div>
-                                    <div class="play4">
-                                        <p class="shuoming">
-                                            徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。
-                                        </p>
-                                    </div>
-                                    <div class="play5" type="button" data-toggle="modal">
-                                        <a>加入专题</a>
-                                    </div>
-                                </div>
-                                <div class="play">
-                                    <div class="play1">
-                                        <div class="p11">
-                                            <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                            --><img src="/static/image/dingwei.png" alt=""><!--
-                                            --><span class="difang" style="font-size: 8px">山东</span><!--
-                                            --><img class="xin" src="/static/image/heart.png" alt="">
-                                        </div>
-                                        <div class="p22">
-                                            <span class="fasheng" style="font-weight: bold">发生时间：</span>
-                                            <span class="riqi">2016-08-19</span>
-                                        </div>
-                                    </div>
-                                    <img class="play2" src="/static/image/xuyuyu.png" alt="">
-                                    <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
-                                        <a class="bus1">业务标签：</a>
-                                        <a class="bus2">诈骗</a>
-                                        <a class="bus2">大学生</a>
-                                        <a class="bus2">离世</a>
-                                    </div>
-                                    <div class="play4">
-                                        <p class="shuoming">
-                                            徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。
-                                        </p>
-                                    </div>
-                                    <div class="play5" type="button" data-toggle="modal">
-                                        <a>加入专题</a>
-                                    </div>
-                                </div>
-                                <div class="play">
-                                    <div class="play1">
-                                        <div class="p11">
-                                            <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                            --><img src="/static/image/dingwei.png" alt=""><!--
-                                            --><span class="difang" style="font-size: 8px">山东</span><!--
-                                            --><img class="xin" src="/static/image/heart.png" alt="">
-                                        </div>
-                                        <div class="p22">
-                                            <span class="fasheng" style="font-weight: bold">发生时间：</span>
-                                            <span class="riqi">2016-08-19</span>
-                                        </div>
-                                    </div>
-                                    <img class="play2" src="/static/image/xuyuyu.png" alt="">
-                                    <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
-                                        <a class="bus1">业务标签：</a>
-                                        <a class="bus2">诈骗</a>
-                                        <a class="bus2">大学生</a>
-                                        <a class="bus2">离世</a>
-                                    </div>
-                                    <div class="play4">
-                                        <p class="shuoming">
-                                            徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。
-                                        </p>
-                                    </div>
-                                    <div class="play5" type="button" data-toggle="modal">
-                                        <a>加入专题</a>
-                                    </div>
-                                </div>
-                                <div class="play">
-                                    <div class="play1">
-                                        <div class="p11">
-                                            <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                            --><img src="/static/image/dingwei.png" alt=""><!--
-                                            --><span class="difang" style="font-size: 8px">山东</span><!--
-                                            --><img class="xin" src="/static/image/heart.png" alt="">
-                                        </div>
-                                        <div class="p22">
-                                            <span class="fasheng" style="font-weight: bold">发生时间：</span>
-                                            <span class="riqi">2016-08-19</span>
-                                        </div>
-                                    </div>
-                                    <img class="play2" src="/static/image/xuyuyu.png" alt="">
-                                    <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
-                                        <a class="bus1">业务标签：</a>
-                                        <a class="bus2">诈骗</a>
-                                        <a class="bus2">大学生</a>
-                                        <a class="bus2">离世</a>
-                                    </div>
-                                    <div class="play4">
-                                        <p class="shuoming">
-                                            徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。
-                                        </p>
-                                    </div>
-                                    <div class="play5" type="button" data-toggle="modal">
-                                        <a>加入专题</a>
-                                    </div>
-                                </div>
-                                <div class="play">
-                                    <div class="play1">
-                                        <div class="p11">
-                                            <span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">徐玉玉事件</span><!--
-                                            --><img src="/static/image/dingwei.png" alt=""><!--
-                                            --><span class="difang" style="font-size: 8px">山东</span><!--
-                                            --><img class="xin" src="/static/image/heart.png" alt="">
-                                        </div>
-                                        <div class="p22">
-                                            <span class="fasheng" style="font-weight: bold">发生时间：</span>
-                                            <span class="riqi">2016-08-19</span>
-                                        </div>
-                                    </div>
-                                    <img class="play2" src="/static/image/xuyuyu.png" alt="">
-                                    <div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">
-                                        <a class="bus1">业务标签：</a>
-                                        <a class="bus2">诈骗</a>
-                                        <a class="bus2">大学生</a>
-                                        <a class="bus2">离世</a>
-                                    </div>
-                                    <div class="play4">
-                                        <p class="shuoming">
-                                            徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。
-                                        </p>
-                                    </div>
-                                    <div class="play5" type="button" data-toggle="modal">
-                                        <a>加入专题</a>
-                                    </div>
-                                </div>
+                        <div id="case1" style="display: inline-block;width:1020px;overflow: hidden;">
+                            <div id="run1" style="transition: all 1s linear;height:190px;text-align:center;">
                                 <div class="play">
                                     <div class="play1">
                                         <div class="p11">
@@ -358,7 +214,7 @@
                                 </div>
                             </div>
                         </div>
-                        <img src="/static/image/right.png" alt="" class="right">
+                        <img src="/static/image/right.png" class="right" style='left:15px;'>
                     </div>
                 </div>
             </div>
@@ -386,13 +242,14 @@
                 </div>
                 <div class="peotwo2">
                     <div class="sjmr1">
-                        <img src="/static/image/left.png" alt="" class="left">
-                        <div id="case2" style="display: inline-block;width:1050px;overflow: hidden;">
-                            <div id="run2" style="width: 2100px;">
+                        <img src="/static/image/left.png" class="left">
+                        <div id="case2" style="display: inline-block;width:1020px;margin-left: 15px;
+                        overflow: hidden;">
+                            <div id="run2" style="transition: all 1s linear;height:190px;text-align:center;">
                                 
                             </div>
                         </div>
-                        <img src="/static/image/right.png" alt="" class="right">
+                        <img src="/static/image/right.png" class="right" style="left:15px;">
                     </div>
                 </div>
             </div>
@@ -423,14 +280,14 @@
                                 <select name="" id="list1" onchange='check(this.value)'>
                                     <option value="" disabled selected>请选择群体名称</option> 
                                     <option value="新建群体">新建群体</option>
-                                    <option value="律师群体">律师群体</option>
+                                    <!-- <option value="律师群体">律师群体</option> -->
                                 </select>
                                 <input type="text" class="shuru2" placeholder="请输入群体名称"/>
                             </form>
                             <div class="shij">
                                 <span class="sjr">加入人物</span>
-                                <a class="sj1">邓海峰 <b class="icon icon-remove det"></b> </a>
-                                <a class="sj2">潘强 <b class="icon icon-remove det"></b> </a>
+                                <!-- <a class="sj1">邓海峰 <b class="icon icon-remove det"></b> </a>
+                                <a class="sj2">潘强 <b class="icon icon-remove det"></b> </a> -->
                             </div>
                         </div>
             </div>
@@ -529,10 +386,13 @@
     </div>
 </div> -->
 {% endblock %}
-
 {% block my_js %}
 <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=oHDtLqS40HV7dTqlNWYUc5IYvSLq60pS">
 </script>-->
+<script type="text/javascript">
+    var theme_explanation='{{t_name}}';
+    $("#container .present .preone .preonemd").html(theme_explanation);
+</script>
 <script src="/static/js/proults2.js"></script>
 <script src="/static/js/proults3.js"></script>
 <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
@@ -542,6 +402,10 @@
         if (show==0) {
             $(".prethrmd").css({display:'inline-block'});
             show = 1;
+            $('#container .present .prethr .prethrmd .ptm3').on('click',function(){
+                var tnew_name=$('#container .present .prethr .prethrmd #ptm2').val();
+                window.open("/theme/detail/?t_name="+tnew_name);
+            });
         }else {
             $(".prethrmd").css({display:'none'});
             show = 0;
@@ -589,152 +453,7 @@
         $(this).attr('src','/static/image/right.png');
     });
 
-    //
-    var go = 22;
-    $('#container #similar .definite .deftwo .right').on('click',function () {
-        if(go==22){
-            var plays=$("#container #similar .definite .deftwo .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(-1050px)",
-                "-moz-transform":"translateX(-1050px)",
-                "-ms-transform":"translateX(-1050px)",
-                "-o-transform":"translateX(-1050px)",
-                "transform":"translateX(-1050px)",
-            });
-            go = 33;
-        } else{
-            var plays=$("#container #similar .definite .deftwo .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 22;
-        }
-    });
-    $('#container #similar .definite .deftwo .left').on('click',function () {
-        if(go==22){
-            var plays=$("#container #similar .definite .deftwo .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(-1050px)",
-                "-moz-transform":"translateX(-1050px)",
-                "-ms-transform":"translateX(-1050px)",
-                "-o-transform":"translateX(-1050px)",
-                "transform":"translateX(-1050px)",
-            });
-            go = 33;
-        } else{
-            var plays=$("#container #similar .definite .deftwo .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 22;
-        }
-    });
-    //
-    var go1 = 22;
-    $('#container #similar .samevent .sametwo .right').on('click',function () {
-        if(go1==22){
-            var plays=$("#container #similar .samevent .sametwo .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(-1050px)",
-                "-moz-transform":"translateX(-1050px)",
-                "-ms-transform":"translateX(-1050px)",
-                "-o-transform":"translateX(-1050px)",
-                "transform":"translateX(-1050px)",
-            });
-            go1 = 33;
-        } else{
-            var plays=$("#container #similar .samevent .sametwo .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go1 = 22;
-        }
-    });
-    $('#container #similar .samevent .sametwo .left').on('click',function () {
-        if(go1==22){
-            var plays=$("#container #similar .samevent .sametwo .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(-1050px)",
-                "-moz-transform":"translateX(-1050px)",
-                "-ms-transform":"translateX(-1050px)",
-                "-o-transform":"translateX(-1050px)",
-                "transform":"translateX(-1050px)",
-            });
-            go1 = 33;
-        } else{
-            var plays=$("#container #similar .samevent .sametwo .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go1 = 22;
-        }
-    });
-    //
-    var go2 = 22;
-    $('#container #people .peotwo .peotwo2 .right').on('click',function () {
-        if(go2==22){
-            var plays=$("#container #people .peotwo2 #run2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(-1050px)",
-                "-moz-transform":"translateX(-1050px)",
-                "-ms-transform":"translateX(-1050px)",
-                "-o-transform":"translateX(-1050px)",
-                "transform":"translateX(-1050px)",
-            });
-            go2 = 33;
-        } else{
-            var plays=$("#container #people .peotwo2 #run2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go2 = 22;
-        }
-    });
-    $('#container #people .peotwo .peotwo2 .left').on('click',function () {
-        if(go2==22){
-            var plays=$("#container #people .peotwo2 #run2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(-1050px)",
-                "-moz-transform":"translateX(-1050px)",
-                "-ms-transform":"translateX(-1050px)",
-                "-o-transform":"translateX(-1050px)",
-                "transform":"translateX(-1050px)",
-            });
-            go2 = 33;
-        } else{
-            var plays=$("#container #people .peotwo2 #run2 .play");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go2 = 22;
-        }
-    });
-    //
-
+    
     var play=$(".play");
     $.each(play,function (index,item) {
         $(item).hover(function () {
@@ -791,16 +510,11 @@ function check2(value){
         $('.shuru2').hide();
     };
 };
-$.each($("#people .xingming"),function(index,item){
-    $(item).on('click',function () {
-        window.open('/index/person/');
-    });
-})
-$.each($("#similar .xingming"),function(index,item){
-    $(item).on('click',function () {
-        window.open('/index/search_result/');
-    });
-});
+// $.each($("#similar .xingming"),function(index,item){
+//     $(item).on('click',function () {
+//         window.open('/index/search_result/');
+//     });
+// });
 
 </script>
 {% endblock %}

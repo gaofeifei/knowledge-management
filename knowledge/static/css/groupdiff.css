@@ -239,7 +239,7 @@ a,a:link,a:hover,a:visited,a:active {
     /*display: inline-block;*/
     float: left;
     width: 550px;
-    height: 820px;
+    /*height: 820px;*/
     border: 1px solid #9d9d9d;
     border-radius: 10px;
     padding:20px;

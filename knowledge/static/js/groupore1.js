@@ -1,7 +1,16 @@
 /**
  * Created by Administrator on 2016/11/25.
  */
-var groupname,groupname1,ii,jj;
+Array.prototype.removeByValue = function(val) {
+    for(var i=0; i<this.length; i++) {
+        if(this[i] == val) {
+            this.splice(i, 1);
+            break;
+        }
+    }
+};
+var group_list=[];
+var groupname,groupname1,ii,jj,node_ids=[];
 function qunti(value) {
     groupname=value;
     jj=1;
@@ -15,8 +24,16 @@ $("#container .choose1 .menu .msure").on('click',function () {
     if (!jj==1){
         $("#join99").modal("show");
     }else {
-        window.open('/group/detail/');
+        window.open('/group/detail/?group_name='+groupname);
     }
+});
+$('.condet4').on('click',function () {
+    if (group_list.length==2) {
+        window.open("/group/comparison/?group_name1="+group_list[0]+'&group_name2='+group_list[1]);
+    }else{
+        $('#liangge').modal("show");
+    };
+    // $('#aaa').modal("show");
 });
 $("#container .choose1 .menu .compare").on('click',function () {
     if (!jj==1){
@@ -25,6 +42,7 @@ $("#container .choose1 .menu .compare").on('click',function () {
         $('#condet').show(30);
     }
 });
+
 function zongqunti() {
     function place() {
         //this.ajax_method='GET'; // body...
@@ -46,10 +64,27 @@ function zongqunti() {
         $.each(data,function (index,item) {
             $("#container .choose1 .menu form #list").append('<option value="'+item[0]+'">'+item[0]+'</option>');
             $(".xinzeng #list1").append('<option value="'+item[0]+'">'+item[0]+'</option>');
-            $("#container .choose1 .menu #condet .condet1").after('<span class="condet2">'+item[0]+'<b class="icon icon-remove det"></b></span>')
+            $("#container .choose1 .menu #condet .condet1").after('<span class="condet2"><i>'+item[0]+'</i></span>')
             anlname.push(item[0]);
             anlnum.push(item[1]);
         });
+        var condet2_g=$('#container .choose1 .menu #condet .condet2');
+        $.each(condet2_g,function (index,item) {
+            var gg=1;
+            $(item).on('click',function () {
+                if (gg==1){
+                    $(this).css({backgroundColor:'rgb(76, 174, 76)'});
+                    gg=2;
+                    group_list.push($(this).find('i').html());
+                }else {
+                    $(this).css({backgroundColor:'#0099FF'});
+                    var $a = $(this).find('i').html();
+                    group_list.removeByValue($a);
+                    gg=1;
+                }
+            });
+        });
+
         // 路径配置
         require.config({
             paths: {
@@ -65,6 +100,8 @@ function zongqunti() {
             function (ec) {
                 // 基于准备好的dom，初始化echarts图表
                 var myChart = ec.init(document.getElementById('spread'));
+                //var ecConfig = require('echarts/config');
+                //myChart.on(ecConfig.EVENT.CLICK, eConsole);
                 var option = {
                     // title: {
                     //     x: 'center',
@@ -94,6 +131,7 @@ function zongqunti() {
                             show: false
                         }
                     ],
+                    clickable : true,
                     series: [
                         {
                             // name: 'ECharts例子个数统计',
@@ -125,6 +163,14 @@ function zongqunti() {
                 myChart.setOption(option);
             }
         );
+        // function eConsole(param) {
+        //     if (typeof param.seriesIndex == 'undefined') {
+        //         return;
+        //     }
+        //     if (param.type == 'click') {
+        //         alert(param.date);
+        //     }
+        // }
     };
     var place=new place();
     function nums() {
@@ -152,6 +198,7 @@ function quntibiaoge() {
     };
     function territory(data) {
         var data=eval(data);
+        $('#sheet2').bootstrapTable('load',data);
         $('#sheet2').bootstrapTable({
             //url: influ_url,
             data:data,
@@ -210,6 +257,12 @@ function quntibiaoge() {
                 },
 
             ],
+            onClickRow: function (row, tr) {
+                if ($(tr.context).index()==2) {
+                    del_uid=row[0];
+                    $('#del_ject').modal("show");
+                }
+            }
 
         });
     };
@@ -220,6 +273,7 @@ function quntibiaoge() {
         place.call_request(url,territory);
     }
     $(".xinzeng .add99").on('click',function () {
+        $('#container .xinzeng .instr #tbrg #case2 #run3').empty();
         if (!ii==1){
             $("#join99").modal("show");
         }else {
@@ -228,6 +282,8 @@ function quntibiaoge() {
             $('.instr').show(20);
         }
     });
+
+
 };
 quntibiaoge();
 
@@ -248,6 +304,7 @@ function biaogequnti() {
     };
     function things(data) {
         var data=eval(data);
+        cwidth=data.length;
         var str='';
         function getLocalTime(nS) {
             return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18);
@@ -302,14 +359,60 @@ function biaogequnti() {
                 '</div> -->'+
                 '</div>';
         });
-        // if (data.length% 2 == 0){
-        //     cwidth=(data.length*490)/4;
-        // }else {
-        //     cwidth=(data.length*490)/4 + 490;
-        // }
-
-        // $("#container .associat .assright .assright2 #case #crmid").width(cwidth);
         $(".xinzeng .instr #tbrg .sjmr1 #case2 #run3").append(str);
+        var step=0;
+        var shang=Math.floor(cwidth/6);
+        var yu=cwidth%6;
+        $('#container .xinzeng .instr #tbrg .sjmr1 #case2 #run3').width((3*shang+yu)*245);
+        $('#container .xinzeng .instr #tbrg .sjmr1 .right').on('click',function () {
+            if (cwidth<=6){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step++;
+                var plays=$("#container .xinzeng .instr #tbrg .sjmr1 #case2 #run3");
+                walk=(-735)*step;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step >= data.length/6){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step=0;
+                }
+            }
+        });
+        $('#container .xinzeng .instr #tbrg .sjmr1 .left').on('click',function () {
+            if (cwidth<=6){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step--;
+                if (step < 0){
+                    alert('已经是第一页了~~');
+                    step=0;
+                }else {
+                    var plays=$("#container .xinzeng .instr #tbrg .sjmr1 #case2 #run3");
+                    walk=(-735)*step;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
+                }
+            };
+
+        });
         //卡片效果
         var heart=$(".play .play1 .p11 .xin");
         $.each(heart,function(index,item){
@@ -324,6 +427,11 @@ function biaogequnti() {
                 }
             })
         });
+        $.each( $(".xingming"),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
+        })
     };
     var touch=new touch();
     function nums() {
@@ -480,7 +588,7 @@ function yonghushijian() {
         $.each(data,function (index,item) {
             var influe,name,huoyue,mingan,tag,photo;
             if (item.influence=='null'){
-                influe='无';
+                influe=0;
             }else {
                 influe=item.influence.toFixed(2);
             };
@@ -491,7 +599,7 @@ function yonghushijian() {
             };
             var huoyue=item.activeness.toFixed(2);
             if (item.sensitive=='null'||item.sensitive=='unknown'){
-                mingan='无';
+                mingan=0;
             }else {
                 mingan=item.sensitive.toFixed(2);
             };
@@ -506,6 +614,7 @@ function yonghushijian() {
                 photo=item.photo_url;
             };
             str+='<div class="play">'+
+                '<span id="uid" style="display:none;">'+item.uid+'</span>'+
                 '<div class="play1">'+
                 '<div class="p11">'+
                 '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
@@ -525,8 +634,8 @@ function yonghushijian() {
                 '</div>'+
                 '<img class="play2" src="'+photo+'" alt="">'+
                 '<div class="play23" style="margin-left: 15px;">'+
-                '<a href="" class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
-                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>'+
+                '<a class="renzh1">认证类型:<span class="renzh11">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
+                '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
                 '</div>'+
                 '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
                 '<a class="bus1">业务标签：</a>'+
@@ -542,14 +651,61 @@ function yonghushijian() {
                 '</div>'+
                 '</div>';
         });
-        // if (data.length% 2 == 0){
-        //     cwidth=(data.length*490)/4;
-        // }else {
-        //     cwidth=(data.length*490)/4 + 490;
-        // }
-
-        // $("#container .associat .assright .assright2 #case #crmid").width(cwidth);
         $(".xinzeng #shijian2 .sjmr .sjmr1 #case #crmid #run").append(str);
+
+        var step=0;
+        var shang=Math.floor(data.length/6);
+        var yu=data.length%6;
+        $('#container .xinzeng #shijian2 .sjmr .sjmr1 #case #crmid #run').width((3*shang+yu)*245);
+        $('#container .xinzeng #shijian2 .bag .sjmr .sjmr1 .right').on('click',function () {
+            if (data.length<=6){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step++;
+                var plays=$("#container .xinzeng #shijian2 .sjmr1 #case12 #crmid12 #run12");
+                walk=(-735)*step;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step >= data.length/6){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step=0;
+                }
+            }
+        });
+        $('#container .xinzeng #shijian2 .bag .sjmr .sjmr1 .left').on('click',function () {
+            if (data.length<=6){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step--;
+                if (step < 0){
+                    alert('已经是第一页了~~');
+                    step=0;
+                }else {
+                    var plays=$("#container .xinzeng #shijian2 .sjmr1 #case12 #crmid12 #run12");
+                    walk=(-735)*step;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
+                }
+            };
+
+        });
         //卡片效果
         var heart=$(".play .play1 .p11 .xin");
         $.each(heart,function(index,item){
@@ -564,6 +720,50 @@ function yonghushijian() {
                 }
             })
         });
+        $.each($(".play"),function (index,item) {
+            $(item).hover(function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(-40px)",
+                    "-moz-transform":"translateY(-40px)",
+                    "-ms-transform":"translateY(-40px)",
+                    "-o-transform":"translateY(-40px)",
+                    "transform":"translateY(-40px)",
+                })
+            },function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(40px)",
+                    "-moz-transform":"translateY(40px)",
+                    "-ms-transform":"translateY(40px)",
+                    "-o-transform":"translateY(40px)",
+                    "transform":"translateY(40px)",
+                })
+            });
+        });
+
+        $.each($(".play"),function (index,item) {
+            var changecolor=1;
+            $(item).find(".play5").on('click',function(){
+                if (changecolor==1) {
+                    $(this).parent('.play').css({backgroundColor:'#09F'});
+                    changecolor=2;
+                    node_ids.push($(this).siblings('#uid').html());
+                    $(this).find('a').text('取消群体探索');
+                    $('#join3').modal("show");
+                } else {
+                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                    changecolor=1;
+                    var $a = $(this).siblings('#uid').html();
+                    node_ids.removeByValue($a);
+                    $(this).find('a').text('加入群体探索');
+                }
+                // console.log(node_ids);
+            });
+        });
+        $.each( $(".xingming"),function(index,item){
+            $(item).on('click',function () {
+                window.open('/index/person/?p_uid'+$('.play #uid').html());
+            });
+        })
     };
     var place=new place();
     var place2=new place2();
@@ -577,6 +777,8 @@ function yonghushijian() {
     };
     var maths='all',s;
     $("#shijian2 .sjt .sjt2").on('click',function () {
+        $('#shijian2 .bag #site').empty();
+        $('#shijian2 .bag .sjmr1 #crmid #run').empty();
         s=$("#shijian2 .sjt .sjt1").val();
         if (!s==''){
             nums(s);
@@ -586,6 +788,7 @@ function yonghushijian() {
         };
 
     });
+
     $.each($("#shijian2 .bag .sjmr1 .direct1 input"),function (index,item) {
         $(item).on('click',function () {
             if (index==0){
@@ -601,135 +804,58 @@ function yonghushijian() {
         });
 
     });
+
 };
 yonghushijian();
 
-~function(){
-    // 路径配置
-    //第二个图表
-    require.config({
-        paths: {
-            echarts: 'http://echarts.baidu.com/build/dist'
-        }
+function sureadd() {
+    var node_ids2=node_ids.join(',');
+    var addurl='/group/g_create_relation/?node1_id='+node_ids2+'&node2_id='+groupname1;
+    $.ajax({
+        url: addurl,
+        type: 'GET',
+        dataType: 'json',
+        async: true,
+        success:g_join
     });
-    require(
-        [
-            'echarts',
-            'echarts/chart/force' // 使用柱状图就加载bar模块，按需加载
-        ],
-        function (ec) {
-            // 基于准备好的dom，初始化echarts图表
-            var myChart = ec.init(document.getElementById('site'));
-
-            var option = {
-                title : {
-                    text: '人物关系：乔布斯',
-                    subtext: '数据来自人立方',
-                    x:'right',
-                    y:'bottom'
-                },
-                tooltip : {
-                    trigger: 'item',
-                    formatter: '{a} : {b}'
-                },
-                legend: {
-                    x: 'left',
-                    data:['家人','朋友']
-                },
-                series : [
-                    {
-                        type:'force',
-                        name : "人物关系",
-                        ribbonType: false,
-                        categories : [
-                            {
-                                name: '人物'
-                            },
-                            {
-                                name: '家人'
-                            },
-                            {
-                                name:'朋友'
-                            }
-                        ],
-                        itemStyle: {
-                            normal: {
-                                label: {
-                                    show: true,
-                                    textStyle: {
-                                        color: '#333'
-                                    }
-                                },
-                                nodeStyle : {
-                                    brushType : 'both',
-                                    borderColor : 'rgba(255,215,0,0.4)',
-                                    borderWidth : 1
-                                },
-                                linkStyle: {
-                                    type: 'curve'
-                                }
-                            },
-                            emphasis: {
-                                label: {
-                                    show: false
-                                    // textStyle: null      // 默认使用全局文本样式，详见TEXTSTYLE
-                                },
-                                nodeStyle : {
-                                    //r: 30
-                                },
-                                linkStyle : {}
-                            }
-                        },
-                        useWorker: false,
-                        minRadius : 15,
-                        maxRadius : 25,
-                        gravity: 1.1,
-                        scaling: 1.1,
-                        roam: 'move',
-                        nodes:[
-                            {category:0, name: '乔布斯', value : 10, label: '乔布斯\n（主要）'},
-                            {category:1, name: '丽萨-乔布斯',value : 2},
-                            {category:1, name: '保罗-乔布斯',value : 3},
-                            {category:1, name: '克拉拉-乔布斯',value : 3},
-                            {category:1, name: '劳伦-鲍威尔',value : 7},
-                            {category:2, name: '史蒂夫-沃兹尼艾克',value : 5},
-                            {category:2, name: '奥巴马',value : 8},
-                        ],
-                        links : [
-                            {source : '丽萨-乔布斯', target : '乔布斯', weight : 1, name: '女儿'},
-                            {source : '保罗-乔布斯', target : '乔布斯', weight : 2, name: '父亲'},
-                            {source : '克拉拉-乔布斯', target : '乔布斯', weight : 1, name: '母亲'},
-                            {source : '劳伦-鲍威尔', target : '乔布斯', weight : 2},
-                            {source : '史蒂夫-沃兹尼艾克', target : '乔布斯', weight : 3, name: '合伙人'},
-                            {source : '奥巴马', target : '乔布斯', weight : 1},
-                        ]
-                    }
-                ]
-            };
-            var ecConfig = require('echarts/config');
-            function focus(param) {
-                var data = param.data;
-                var links = option.series[0].links;
-                var nodes = option.series[0].nodes;
-                if (
-                    data.source !== undefined
-                    && data.target !== undefined
-                ) { //点击的是边
-                    var sourceNode = nodes.filter(function (n) {return n.name == data.source})[0];
-                    var targetNode = nodes.filter(function (n) {return n.name == data.target})[0];
-                    //console.log("选中了边 " + sourceNode.name + ' -> ' + targetNode.name + ' (' + data.weight + ')');
-                } else { // 点击的是点
-                    //console.log("选中了" + data.name + '(' + data.value + ')');
-                }
-            }
-            myChart.on(ecConfig.EVENT.CLICK, focus);
-
-            myChart.on(ecConfig.EVENT.FORCE_LAYOUT_END, function () {
-                //console.log(myChart.chart.force.getPosition());
-            });
-
-            // 为echarts对象加载数据
-            myChart.setOption(option);
+    function g_join(data) {
+        var data=eval(data);
+        if (data==2){
+            $('#chengong').modal("show");
+        }else {
+            $('#shibai').modal("show");
         }
-    );
-}();
+    }
+}
+
+Array.prototype.removeByValue = function(val) {
+    for(var i=0; i<this.length; i++) {
+        if(this[i] == val) {
+            this.splice(i, 1);
+            break;
+        }
+    }
+}
+
+
+//群体编辑表格中删除
+var del_uid;
+function delete_yes() {
+    var del_url='/group/del_user_in_group/?group_name='+groupname1+'&uid='+del_uid;
+    console.log(del_url);
+    $.ajax({
+        url: del_url,
+        type: 'GET',
+        dataType: 'json',
+        async: true,
+        success:del_sure
+    });
+    function del_sure(data) {
+        var data=eval(data);
+        if (data=='true'){
+            $("#del_cg").modal("show");
+        }else {
+            $("#del_sb").modal("show");
+        }
+    }
+}

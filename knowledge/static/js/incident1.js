@@ -1,4 +1,4 @@
-var eventname='马来西亚抓获电信欺诈案犯';
+// var eventname='马来西亚抓获电信欺诈案犯';
 
 function guanlianrenwu() {
     function place() {
@@ -23,12 +23,12 @@ function guanlianrenwu() {
             $("#container .associat .assleft .assleft2 .often .oftenimg").text('<span style="text-align: center">暂无数据~~</span>');
         }else {
             $.each(data.join,function (index,item) {
-                if (item[1]==''){
+                if (item[1]==''||item[1]=='unknown'){
                     name=item[0];
                 }else {
                     name=item[1];
                 };
-                if (item[2]==''){
+                if (item[2]==''||item[2]=='unknown'){
                     picture='/static/image/pangzi.png';
                 }else {
                     picture=item[2];
@@ -89,12 +89,12 @@ function guanlianrenwu() {
             $("#container .associat .assleft .assleft2 .other .oftenimg").append('<span style="text-align: center">暂无数据~~</span>');
         }else{
             $.each(data.other_rel,function (index,item) {
-                if (item[1]==''){
+                if (item[1]==''||item[1]=='unknown'){
                     name3=item[0];
                 }else {
                     name3=item[1];
                 };
-                if (item[2]==''){
+                if (item[2]==''||item[2]=='unknown'){
                     picture3='/static/image/pangzi.png';
                 }else {
                     picture3=item[2];
@@ -111,7 +111,7 @@ function guanlianrenwu() {
     }
     var place=new place();
     function nums() {
-        var url = '/index/event_detail_people/';
+        var url = '/index/event_detail_people/?event_name='+eventname;
         place.call_request(url,territory);
     }
     nums();
@@ -211,14 +211,32 @@ function guanlianshijian() {
                 }
             })
         });
+        $.each($('.xingming'),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
+        });
     }
 
     var touch=new touch();
-    function nums() {
-        var url = '/index/event_detail_event/';
+    function nums(point) {
+        var url = '/index/event_detail_event/?event_name='+eventname+'&layer='+point;
         touch.call_request(url,things);
-    }
-    nums();
+    };
+    nums('all');
+    $.each($("#container .associat .xuan input"),function (index,item) {
+        $(item).on('click',function () {
+            if (index==0){
+                nums(1);
+            }else if (index==1){
+                nums(2);
+            }else {
+                maths='all';
+                nums(maths);
+            }
+        });
+
+    });
 };
 guanlianshijian();
 

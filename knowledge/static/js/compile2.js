@@ -1,3 +1,19 @@
+var chos1_type,chos2_type;
+function choselx1(value) {
+    if (value=='人物'){
+        chos1_type=1;
+    }else {
+        chos1_type=2;
+    }
+};
+function choselx2(value) {
+    if (value=='人物'){
+        chos2_type=1;
+    }else {
+        chos2_type=2;
+    }
+};
+
 function guanxibianji() {
     var node1,node2,oldrel,newrel;
     $("#container .conright2 .editor .editor3").on('click',function () {
@@ -27,13 +43,14 @@ function guanxibianji() {
     };
     function relt(data) {
         var data=eval(data);
-        //console.log(data);
+        console.log(data)
+        $('#lcleft').bootstrapTable('load',data);
         $('#lcleft').bootstrapTable({
             //url: influ_url,
             data:data,
             search: true,//是否搜索
             pagination: true,//是否分页
-            pageSize: 10,//单页记录数
+            pageSize: 5,//单页记录数
             pageList: [5, 10, 20, 50],//分页步进值
             sidePagination: "client",//服务端分页
             searchAlign: "left",
@@ -66,10 +83,11 @@ function guanxibianji() {
                     align: "center",//水平
                     valign: "middle",//垂直
                     formatter: function (value, row, index) {
-                        if (row.uname1==''||row.uname1=='unknown'){
-                            value=uid1;
+                        if (!value || !(value=='unknown')){
+                            return row.uid1;
+                        }else {
+                            return value;
                         }
-                        return value;
                     },
                 },
                 {
@@ -80,10 +98,11 @@ function guanxibianji() {
                     align: "center",//水平
                     valign: "middle",//垂直
                     formatter: function (value, row, index) {
-                        if (row.uname2==''||row.uname2=='unknown'){
-                            value=uid2;
+                        if (!value || !(value=='unknown')){
+                            return row.uid2;
+                        }else {
+                            return value;
                         }
-                        return value;
                     },
                 },
                 {

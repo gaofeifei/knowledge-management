@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask
+from extensions import db, admin
 from knowledge.index.views import mod as indexModule
 from knowledge.theme.views import mod as themeModule
 from knowledge.group.views import mod as groupModule
@@ -8,6 +9,8 @@ from knowledge.relation.views import mod as relationModule
 from knowledge.construction.views import mod as constructionModule
 from knowledge.mymap.views import mod as mymapModule
 from knowledge.sysadmin.views import mod as adminModule
+
+import model
 
 def create_app():
     app = Flask(__name__)
@@ -34,5 +37,9 @@ def create_app():
     # debug toolbar
     # toolbar = DebugToolbarExtension(app)
 
+    # Create database
+    db.init_app(app)
+    with app.test_request_context():
+        db.create_all()
 
     return app

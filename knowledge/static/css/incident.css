@@ -27,7 +27,7 @@ a,a:link,a:hover,a:visited,a:active {
 #container .keyman {
     width: 1200px;
     height: 280px;
-    padding: 20px 50px;
+    padding: 20px 0 20px 50px;
     background-color: #d9edf7;
     border-radius: 10px;
     border: 2px solid #0099FF;
@@ -44,6 +44,7 @@ a,a:link,a:hover,a:visited,a:active {
 }
 #container .keyman .kmrg {
     margin-left: 50px;
+    width: 80%;
 }
 #container .keyman .kmrg .rgname span,#container .keyman .kmrg .rgname span,
 #container .medias .medias2 {

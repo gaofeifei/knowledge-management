@@ -1,5 +1,5 @@
-var themename1='电信诈骗';
-var themename2='港澳台';
+var themename1=theme_diff.theme1;
+var themename2=theme_diff.theme2;
 //事件对比
 function shijianduibi(numa) {
     function thing() {
@@ -119,40 +119,13 @@ function shijianduibi(numa) {
                 '</div> -->'+
                 '</div>';
         });
+        $("#run4").append(str1);
+        $("#run5").append(str2);
         //卡片效果
-        $.each($(".play"),function (index,item) {
-            $(item).hover(function () {
-                $(item).find(".play5").css({
-                    "-webkit-transform":"translateY(-40px)",
-                    "-moz-transform":"translateY(-40px)",
-                    "-ms-transform":"translateY(-40px)",
-                    "-o-transform":"translateY(-40px)",
-                    "transform":"translateY(-40px)",
-                })
-            },function () {
-                $(item).find(".play5").css({
-                    "-webkit-transform":"translateY(40px)",
-                    "-moz-transform":"translateY(40px)",
-                    "-ms-transform":"translateY(40px)",
-                    "-o-transform":"translateY(40px)",
-                    "transform":"translateY(40px)",
-                })
-            });
-        });
-        $.each($(".play"),function (index,item) {
-            var changecolorq=1;
-            $(item).find(".play5").on('click',function(){
-                if (changecolorq==1) {
-                    $(this).parent('.play').css({backgroundColor:'#09F'});
-                    $(this).find('a').text('取消群体探索');
-                    changecolorq=2;
-                    $('#join4').modal("show");
-                } else {
-                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
-                    $(this).find('a').text('加入群体探索');
-                    changecolorq=1;
-                }
-            });
+        $.each($('.xingming'),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
         });
         var heart=$(".play .play1 .p11 .xin");
         $.each(heart,function(index,item){
@@ -167,8 +140,108 @@ function shijianduibi(numa) {
                 }
             })
         });
-        $("#run4").append(str1);
-        $("#run5").append(str2);
+
+        var step4=0,step5=0;
+        $('#run4').width((data.detail_result1.length)*255);
+        $('#run5').width((data.detail_result2.length)*255);
+        $('#container #middle .thingtrast .lawyer2 .right').on('click',function () {
+            if (data.detail_result1.length<=4){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step4++;
+                var plays=$("#run4");
+                walk=(-1020)*step4;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step4 >= data.detail_result1.length/4){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step4=0;
+                }
+            }
+        });
+        $('#container #middle .thingtrast .lawyer2 .left').on('click',function () {
+            if (data.detail_result1.length<=4){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step4--;
+                if (step4 < 0){
+                    alert('已经是第一页了~~');
+                    step4=0;
+                }else {
+                    var plays=$("#run4");
+                    walk=(-1020)*step4;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
+                }
+            };
+
+        });
+        $('#container #middle .thingtrast .safeguard2 .right').on('click',function () {
+            if (data.detail_result2.length<=4){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step5++;
+                var plays=$("#run5");
+                walk=(-1020)*step5;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step5 >= data.detail_result2.length/4){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step5=0;
+                }
+            }
+        });
+        $('#container #middle .thingtrast .safeguard2 .left').on('click',function () {
+            if (data.detail_result2.length<=4){
+                alert('没有其他卡片内容了~~');
+            }else {
+                step5--;
+                if (step < 0){
+                    alert('已经是第一页了~~');
+                    step5=0;
+                }else {
+                    var plays=$("#run5");
+                    walk=(-1020)*step5;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
+                }
+            };
+
+        });
     }
     var thing=new thing();
     var point,numberd=numa;
@@ -217,6 +290,7 @@ function renwuduibi(numa2) {
     };
     function territory2(data) {
         var data=eval(data);
+        $('#tab1').bootstrapTable('load',data);
         $('#tab1').bootstrapTable({
             //url: influ_url,
             data:data.detail_result1,
@@ -312,6 +386,7 @@ function renwuduibi(numa2) {
             ],
 
         });
+        $('#tab2').bootstrapTable('load',data);
         $('#tab2').bootstrapTable({
             //url: influ_url,
             data:data.detail_result2,

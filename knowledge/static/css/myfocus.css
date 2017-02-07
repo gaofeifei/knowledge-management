@@ -4,7 +4,7 @@ th,textarea,select,table,form {
     margin: 0;
     padding: 0;
     -webkit-user-select: none;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "微软雅黑";
 }
 ul,li,ol {
     list-style: none;
@@ -21,7 +21,7 @@ a,a:link,a:hover,a:visited,a:active {
 }
 /*内容样式*/
 #container {
-    margin-left: 125px;
+    margin-left: 175px;
     padding: 20px 0 0;
 }
 #container .main,#container .maintwo {
@@ -31,7 +31,6 @@ a,a:link,a:hover,a:visited,a:active {
     width: 1000px;
     height: 300px;
     border: 2px solid #0099FF;
-    box-shadow: 3px 3px 3px #c7c7c7;
 }
 #container .main .focusper {
     font-size: 20px;
@@ -49,9 +48,9 @@ a,a:link,a:hover,a:visited,a:active {
     width: 700px;
     float: left;
 }
-#container .main .main1 {
-    width: 1100px;
-}
+/*#container .main .main1 {*/
+    /*width: 00px;*/
+/*}*/
 #container .main .table th,#container .main .table td {
     text-align: center;
 }
@@ -146,7 +145,6 @@ a,a:link,a:hover,a:visited,a:active {
     width: 1000px;
     height: 300px;
     border: 2px solid #0099FF;
-    box-shadow: 3px 3px 3px #c7c7c7;
 }
 #container .maintwo .focusper {
     font-size: 20px;
@@ -163,9 +161,6 @@ a,a:link,a:hover,a:visited,a:active {
     margin: 30px 0 0 30px;
     width: 700px;
     float: left;
-}
-#container .maintwo .main1 {
-    width: 1100px;
 }
 #container .maintwo .table th,#container .maintwo .table td {
     text-align: center;

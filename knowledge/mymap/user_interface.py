@@ -71,7 +71,7 @@ def update_topic():
 def select_group(name):
     conn = getconn()
     cur = conn.cursor()
-    sql = "select * from group where name=%s"
+    sql = "select * from `group` where name=%s"
     print sql
     count = cur.execute(sql, (name,))
     result = cur.fetchmany(count)
@@ -84,7 +84,7 @@ def select_group(name):
 def delete_group(name, groupName):
     conn = getconn()
     cur = conn.cursor()
-    sql = "delete from group where name=%s and groupName=%s"
+    sql = "delete from `group` where name=%s and groupName=%s"
     result = cur.execute(sql, (name, groupName))
     closeAll(conn, cur)
     return result
@@ -94,7 +94,7 @@ def delete_group(name, groupName):
 def insert_group(list):
     conn = getconn()
     cur = conn.cursor()
-    sql = "insert into group (name,groupName,people,peopleCount,createTime,modifyTime) values(%s,%s,%s,%s,%s,%s)"
+    sql = "insert into `group` (name,groupName,people,peopleCount,createTime,modifyTime) values(%s,%s,%s,%s,%s,%s)"
     result = cur.execute(sql, list)
     closeAll(conn, cur)
     return result

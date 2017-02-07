@@ -165,9 +165,10 @@ a,a:link,a:hover,a:visited,a:active {
     height: 170px;
     margin-right: 15px;
     margin-top: 15px;
+    background: url("/static/image/the_card.jpg") no-repeat;
+    background-size: 240px 170px;
     background-color: #d2dcf7;
-    border:2px solid #0099FF;
-    box-shadow: 2px 2px 2px #878787;
+    border-radius:5px;
     transition: all 1s linear;
 }
 #container #similar .definite .deftwo .play,#container #similar .samevent .sametwo .play,
@@ -175,48 +176,60 @@ a,a:link,a:hover,a:visited,a:active {
     overflow: hidden;
     display: inline-block;
 }
-#container #similar .definite .deftwo .play .play1,
-#container #people .peotwo .peotwo2 .play .play1 {
-    width: 170px;
-    margin-top: 5px;
-    display: inline-block;
+#container #similar .definite .deftwo .play .play1 {
+    width: 80px;
+    margin-top: 55px;
+    /*display: inline-block;*/
 }
 #container #similar .definite .deftwo .play1 .p11 span,#container #similar .definite .deftwo .play1 .p11 img,
 #container #similar .samevent .sametwo .play1 .p11 span,#container #similar .samevent .sametwo .play1 .p11 img,
 #container #people .peotwo .peotwo2 .play1 .p11 span,#container #people .peotwo .peotwo2 .play1 .p11 img {
     display: inline-block;
+    color: #fff;
 }
-#container #similar .definite .deftwo .play2,#container #similar .samevent .sametwo .play2,
-#container #people .peotwo .peotwo2 .play2 {
+#container #similar .definite .deftwo .play1 .p22 span,#container #similar .samevent .sametwo .play1 .p22 span,
+#container #people .peotwo .peotwo2 .play1 .p22 span {
+    color: #fff;
+    font-size: 8px;
+}
+#container #similar .definite .deftwo .play2,#container #similar .samevent .sametwo .play2{
     display: inline-block;
-    width: 50px;
-    height: 55px;
+    width: 40px;
+    height: 45px;
     margin-top: -20px;
 }
-#container #similar .definite .deftwo .play3 .bus1,#container #similar .samevent .sametwo .play3 .bus1,
-#container #people .peotwo .peotwo2 .play3 .bus1 {
+#container #similar .definite .deftwo .play3 .bus1,#container #similar .samevent .sametwo .play3 .bus1{
     font-weight: bold;
     display: inline-block;
     padding-top: 2px;
     color: #000;
 }
-#container #similar .definite .deftwo .play3 .bus2,#container #similar .samevent .sametwo .play3 .bus2,
-#container #people .peotwo .peotwo2 .play3 .bus2 {
-    color: #fff;
+#container #similar .definite .deftwo .play3 .bus2,#container #similar .samevent .sametwo .play3 .bus2{
     display: inline-block;
+    color: black;
     margin-left: 5px;
-    background-color: #0099FF;
+    background-color: #999;
     padding: 3px 2px 0 2px;
     border-radius: 5px;
     font-size: 8px;
 }
+#container #similar .definite .deftwo .play4 ,
+#container #similar .samevent .sametwo .play4 {
+    float: right;
+    width: 100px;
+    height: 70px;
+    margin-right: 10px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
 #container #similar .definite .deftwo .play4 .shuoming,
 #container #similar .samevent .sametwo .play4 .shuoming {
+    text-indent:10px;
     margin-top: 10px;
     font-size: 12px;
     color: rgba(75, 75, 75, 0.84);
 }
-#container #people .peotwo2 #run2 .play,#container #similar .samevent .sametwo .play {
+#container #similar .samevent .sametwo .play {
     width: 240px;
     padding: 5px;
     height: 170px;
@@ -227,48 +240,73 @@ a,a:link,a:hover,a:visited,a:active {
     box-shadow: 2px 2px 2px #878787;
     transition: all 1s linear;
 }
+#container #people .peotwo2 #run2 .play {
+    width: 240px;
+    padding: 5px;
+    height: 170px;
+    margin-right: 15px;
+    margin-top: 15px;
+    background: url("/static/image/peo_card.jpg") no-repeat;
+    background-size: 240px 170px;
+    background-color: #d2dcf7;
+    border-radius:5px;
+    transition: all 1s linear;
+}
 #container #similar .samevent .sametwo .play .play1,#container #people .peotwo2 #run2 .play .play1 {
-    width: 170px;
-    margin-top: 5px;
-    display: inline-block;
-    padding-left: 0;
+    width: 110px;
+    text-align: left;
 }
-#container #people .peotwo2 #run2 .play .play1 .p11 span,
+#container #people .peotwo2 #run2 .play .p_top span,
 #container #people .peotwo2 #run2 .play .play1 .p11 img {
-    display: inline-block;
-}
-#container #people .peotwo2 #run2 .play .play2 {
     display: inline-block;
 }
 #container #people .peotwo2 #run2 .play .play2 {
     width: 50px;
     height: 55px;
+    display: block;
+    border: 3px solid black;
+    border-radius: 50%;
+    margin: 0 auto;
 }
 #container #people .peotwo2 #run2 .play .play23 a {
     display: block;
     margin-top: 5px;
-    color: #000;
+    color: #fff;
     font-weight: bold;
     font-size: 10px;
 }
 #container #people .peotwo2 #run2 .play .play23 a span {
+    display: block;
+    width: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    font-size: 8px;
     font-weight: 100;
-    padding-left: 20px;
+    color: white;
+}
+#container #people .peotwo2 #run2 .play .play3 {
+    width: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
 }
 #container #people .peotwo2 #run2 .play .play3 .bus1 {
-    font-weight: bold;
-    display: inline-block;
-    padding-top: 2px;
-    color: #000;
+    display: block;
+    margin-top: 5px;
+    font-size: 8px;
+    font-weight: 100;
+    color: white;
 }
 #container #people .peotwo2 #run2 .play .play3 .bus2 {
-    color: #000;
-    display: inline-block;
     margin-left: 5px;
-    background-color: #0099FF;
+    display: inline-block;
     padding: 3px 2px 0 2px;
     border-radius: 5px;
     font-size: 8px;
+    font-weight: 100;
+    color: white;
+    background-color: #999;
 }
 #container #people .peotwo2 #run2 .play .play4 .shuoming,#container #similar .samevent .sametwo .play .play4 .shuoming {
     margin-top: 10px;
@@ -280,21 +318,20 @@ a,a:link,a:hover,a:visited,a:active {
 #container #similar .definite .deftwo .play5,
 #container #similar .samevent .sametwo .play5{
     position: relative;
-    top:-20px;
+    top:3px;
     left: -5px;
     z-index: 10;
-    width: 236px;
-    height: 40px;
     transition: all .4s linear;
+    clear: both;
 }
 #container #people .peotwo2 #run2 .play .play5 a,
 #container #similar .samevent .sametwo .play .play5 a,
 #container #similar .definite .deftwo .play5 a,
 #container #similar .samevent .sametwo .play5 a {
     display: block;
-    width: 100%;
+    width: 240px;
     height: 40px;
-    background-color: #0099FF;
+    background-color: #44b4e6;
     line-height: 40px;
     font-size: 12px;
     color: white;

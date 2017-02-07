@@ -1,5 +1,5 @@
-# -*-coding:utf-8-*-
-from flask import Blueprint, url_for, render_template, request, abort, flash, session, redirect
+﻿# -*-coding:utf-8-*-
+from flask import Blueprint, url_for, render_template, request, abort, flash, session, redirect,make_response,request
 from neo4j_event import select_rels_all, select_rels, create_person, create_rel_from_uid2group, create_node_or_node_rel, \
     update_node, update_node_or_node_rel, delete_rel, delete_node,nodes_rels,get_es_status
 from knowledge.global_config import *
@@ -334,3 +334,15 @@ def select_user_status():
         result["id"] =item["_id"]
         list.append(result)
     return json.dumps(list)
+
+
+
+@mod.route('/set_session/')
+def set_session():
+    response = make_response("hellow")
+    response.set_cookie("Name","zhaishujie")
+    return response
+
+@mod.route('/get_session/')
+def get_session():
+    return request.cookies.get("Name")

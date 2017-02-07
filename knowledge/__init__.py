@@ -6,6 +6,7 @@ from knowledge.theme.views import mod as themeModule
 from knowledge.group.views import mod as groupModule
 from knowledge.relation.views import mod as relationModule
 from knowledge.construction.views import mod as constructionModule
+from knowledge.mymap.views import mod as mymapModule
 from knowledge.sysadmin.views import mod as adminModule
 
 def create_app():
@@ -19,6 +20,7 @@ def create_app():
     app.register_blueprint(relationModule)
     app.register_blueprint(constructionModule)
     app.register_blueprint(adminModule)
+    app.register_blueprint(mymapModule)
     
     
     # Enable the toolbar?

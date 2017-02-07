@@ -22,6 +22,11 @@ from utils import query_current_week_increase, query_special_event, query_group,
 
 mod = Blueprint('index', __name__, url_prefix='/index')
 
+@mod.route('/login/')
+def login():
+
+    return render_template('index/login.html')
+
 @mod.route('/')
 def index():
 

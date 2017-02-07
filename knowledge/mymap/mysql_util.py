@@ -1,16 +1,17 @@
 # coding=utf-8
 import MySQLdb
+from config import mysql_charset,mysql_db,mysql_host,mysql_passwd,mysql_port,mysql_user
 import hashlib
 
 
 def getconn():
     conn = MySQLdb.connect(
-        host='219.224.134.225',
-        port=3306,
-        user='root',
-        passwd='',
-        db='knowledge_management',
-        charset='utf8'
+        host=mysql_host,
+        port=mysql_port,
+        user=mysql_user,
+        passwd=mysql_passwd,
+        db=mysql_db,
+        charset=mysql_charset
     )
     return conn
 

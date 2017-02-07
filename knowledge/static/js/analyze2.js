@@ -10,7 +10,7 @@ Array.prototype.removeByValue = function(val) {
         }
     }
 };
-var node_ids=[];
+var node_ids=[],node_ids2=[];
 function theme_newbuild_searchut() {
     function place() {
         //this.ajax_method='GET'; // body...
@@ -304,6 +304,7 @@ function theme_newbuild_searchut() {
                         $(this).parent('.play').css({backgroundColor:'#09F'});
                         changecolor=2;
                         node_ids.push($(this).siblings('#uid').html());
+                        node_ids2.push($(this).siblings('.play1').find('.xingming').html());
                         $(this).find('a').text('取消专题');
                         $('#join2').modal("show");
                     } else {
@@ -311,6 +312,8 @@ function theme_newbuild_searchut() {
                         changecolor=1;
                         var $a = $(this).siblings('#uid').html();
                         node_ids.removeByValue($a);
+                        var $a2 = $(this).siblings('.play1').find('.xingming').html();
+                        node_ids2.removeByValue($a2);
                         $(this).find('a').text('加入专题');
                     }
                 });
@@ -358,6 +361,22 @@ function theme_newbuild_searchut() {
                 maths='all';
                 nums2(s,maths);
             }
+        });
+
+    });
+    $('.add22').on('click',function () {
+        $('#join .xinjian .shij .sjr').empty();
+        $('#join').modal("show");
+        $(".xinjian").css({display:"block"});
+        $.each(node_ids2,function (index,item) {
+            $('#join .xinjian .shij .sjr').append('<a class="sj1">'+item+'<b class="icon icon-remove det" style="color: red"></b></a>');
+            $.each($('.det'),function (index,item) {
+                $(item).on('click',function () {
+                    $(this).parent().hide(100);
+                    var $a3 = $(this).parent().html();
+                    node_ids2.removeByValue($a3);
+                });
+            });
         });
 
     });

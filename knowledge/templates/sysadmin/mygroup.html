@@ -6,72 +6,19 @@
         .mygroup b,.mygroup a {
             color: #0099FF!important;
         }
+        .fixed-table-footer,.pagination {
+            display: block!important;
+        }
+        .bootstrap-table,.bootstrap-table .table:not(.table-condensed)>tbody>tr>td {
+            width: 800px;
+        }
     </style>
 {% endblock %}
 
 {% block main %}
 <div id="container">
-    <div class="main">
-        <table class="table">
-            <thead>
-            <tr style="background-color: #0099FF;">
-                <th>序号</th>
-                <th>群体名称</th>
-                <th>包含人物</th>
-                <th>群体人数</th>
-                <th>创建时间</th>
-                <th>最近修改时间</th>
-                <th>编辑</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="active">
-                <td>1</td>
-                <td>群体1</td>
-                <td><a href="">人物1、</a><a href="">人物2、</a><a href="">人物3</a></td>
-                <td>3</td>
-                <td>2016-09-09</td>
-                <td>2016-09-09</td>
-                <td>查看详情</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>群体1</td>
-                <td><a href="">人物1、</a><a href="">人物2、</a><a href="">人物3</a></td>
-                <td>3</td>
-                <td>2016-09-09</td>
-                <td>2016-09-09</td>
-                <td>查看详情</td>
-            </tr>
-            <tr class="active">
-                <td>3</td>
-                <td>群体1</td>
-                <td><a href="">人物1、</a><a href="">人物2、</a><a href="">人物3</a></td>
-                <td>3</td>
-                <td>2016-09-09</td>
-                <td>2016-09-09</td>
-                <td>查看详情</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>群体1</td>
-                <td><a href="">人物1、</a><a href="">人物2、</a><a href="">人物3</a></td>
-                <td>3</td>
-                <td>2016-09-09</td>
-                <td>2016-09-09</td>
-                <td>查看详情</td>
-            </tr>
-            <tr class="active">
-                <td>5</td>
-                <td>群体1</td>
-                <td><a href="">人物1、</a><a href="">人物2、</a><a href="">人物3</a></td>
-                <td>3</td>
-                <td>2016-09-09</td>
-                <td>2016-09-09</td>
-                <td>查看详情</td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="main" id='main'>
+        
     </div>
 </div>
 {% endblock %}

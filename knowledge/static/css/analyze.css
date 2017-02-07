@@ -4,7 +4,7 @@ th,textarea,select,table,form {
     margin: 0;
     padding: 0;
     -webkit-user-select: none;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "微软雅黑";
 }
 ul,li,ol {
     list-style: none;
@@ -279,10 +279,10 @@ a,a:link,a:hover,a:visited,a:active {
     margin-top: 10px;
 }
 .xinzeng .shij a {
-    display: inline-block;
-    margin-left: 30px;
-    background-color: #0099FF;
-    color: white;
+    display: block;
+    margin-left: 85px;
+    /*background-color: #0099FF;*/
+    /*color: white;*/
     font-weight: bold;
 }
 .add33 {

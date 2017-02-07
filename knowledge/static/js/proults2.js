@@ -100,23 +100,37 @@ function guanlianrenwu() {
         $("#run2").empty();
         var data=eval(data);
         var str='';
+        function insert_flg(str,flg,sn){
+            var newstr="";
+            for(var i=0;i<str.length;i+=sn){
+                var tmp=str.substring(i, i+sn);
+                newstr+=tmp+flg;
+            }
+            return newstr;
+        }
         $.each(data,function (index,item) {
-            var influe,name,mingan,tag,photo;
+            var fensi,influe,name,mingan,tag,photo;
+            var fensizfc=item.fansnum.toString();
+            if (fensizfc.length>=5){
+                var fensi2=fensizfc.substr(0,fensizfc.length-3);
+                var fensi3=insert_flg(fensi2,'.',fensi2.length-4);
+                fensi=fensi3.substring(0,fensi3.length-1)+'万';
+            }
             if (item.influence==''||item.influence=='unknown'){
                 influe=0;
             }else {
-                influe=item.influence.toFixed(2);
+                influe=item.influence.toFixed(0);
             };
             if (item.uname==''||item.uname=='unknown'){
                 name=item.uid;
             }else {
                 name=item.uname;
             };
-            var huoyue=item.activeness.toFixed(2);
+            var huoyue=item.activeness.toFixed(0);
             if (item.sensitive==''||item.sensitive=='unknown'){
                 mingan=0;
             }else {
-                mingan=item.sensitive.toFixed(2);
+                mingan=item.sensitive.toFixed(0);
             };
             if (item.user_tag==''||item.user_tag=='unknown'||item.user_tag=='null'){
                 tag='无';
@@ -131,11 +145,12 @@ function guanlianrenwu() {
             str+='<div class="play">'+
                 '<div class="p_top" style="width: 100%"><img class="play2" src="'+photo+'" alt="">'+
                 '<img class=\'xin\' style="margin-top: -24px" src="/static/image/heart.png">' +
-                '<span class="xingming" style="text-align:center;color: #000;display: block;margin-top: -13px">'+name+'</span>'+
+                '<span class="xingming" title="'+name+'" style="color: #000;display: block;' +
+                'width:100px;white-space:nowrap;margin: -13px auto 0;overflow: hidden;text-overflow: ellipsis">'+name+'</span>'+
                 '</div>'+
                 '<div class="play23" style="width: 110px;text-align: left;float: left">'+
                 '<a class="renzh1">认证类型:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh11">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
-                '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
+                '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
                 '</div>'+
                 '<div style="float: left;width: 110px;margin-left: 10px">' +
                 '<div class="play3" style="text-align: left">'+
@@ -149,7 +164,7 @@ function guanlianrenwu() {
                 '<div class="p22" style="float:left;margin-top: -5px">'+
                 '<div><img src="/static/image/fensishu.png" alt=""'+
                 'title=\'粉丝数\'><!--'+
-                '--><span class="difang" style="font-size: 8px">'+item.fansnum+'</span>'+
+                '--><span class="difang" style="font-size: 8px">'+fensi+'</span>'+
                 '<img src="/static/image/mingan.png" title="敏感度">'+
                 '<span class="mingan">'+mingan+'</span></div>'+
                 '<div><img src="/static/image/influence.png" title="影响力">'+

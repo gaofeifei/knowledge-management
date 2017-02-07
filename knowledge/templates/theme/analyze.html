@@ -220,8 +220,10 @@
                         <input type="text" class="shuru2" id='shuru2' placeholder="请输入专题名称"/>
                     </form>
                     <div class="shij">
-                        <span class="sjr">加入事件</span>
-                        <a class="sj1"></a>
+                        加入事件
+                        <div class='sjr'></div>
+                        <!-- <span class="sjr"></span> -->
+                        
                         <!-- <a class="sj2">大学生失联 <b class="icon icon-remove det"></b> </a> -->
                     </div>
                 </div>
@@ -530,17 +532,13 @@
     //     $('.instr').show(20);
     // });
     $('.condet4').on('click',function () {
-        console.log(theme_list)
         if (theme_list.length==2) {
             window.open("/theme/different/?theme1="+theme_list[0]+'&theme2='+theme_list[1]);
         }else{
             $('#liangge').modal("show");
         };
     });
-    $('.add22').on('click',function () {
-        $('#join').modal("show");
-        $(".xinjian").css({display:"block"});
-    });
+    
     $('.add44').on('click',function(){
         $('#join1').modal("show");
     });

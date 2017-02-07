@@ -6,7 +6,7 @@ Array.prototype.removeByValue = function(val) {
         }
     }
 };
-var node_ids=[];
+var node_ids=[],user_ids=[];
 function quntixinjianyonghushijian() {
     function place() {
         //this.ajax_method='GET'; // body...
@@ -312,6 +312,7 @@ function quntixinjianyonghushijian() {
                     $(this).parent('.play').css({backgroundColor:'#09F'});
                     changecolor=2;
                     node_ids.push($(this).siblings('#uid').html());
+                    user_ids.push($(this).siblings('.play1').find('.xingming').html());
                     $(this).find('a').text('取消群体探索');
                     $('#join3').modal("show");
                 } else {
@@ -319,6 +320,8 @@ function quntixinjianyonghushijian() {
                     changecolor=1;
                     var $a = $(this).siblings('#uid').html();
                     node_ids.removeByValue($a);
+                    var $a22 = $(this).siblings('.play1').find('.xingming').html();
+                    user_ids.removeByValue($a22);
                     $(this).find('a').text('加入群体探索');
                 }
             });
@@ -365,6 +368,22 @@ function quntixinjianyonghushijian() {
             }
         });
 
+    });
+
+    $(".con_bot .add22").on('click',function () {
+        $('#join6 .xinjian .shij .sjr').empty();
+        $('#join6').modal("show");
+        $(".xinjian").css({display:"block"});
+        $.each(user_ids,function (index,item) {
+            $('#join6 .xinjian .shij .sjr').append('<a class="sj1">'+item+'<b class="icon icon-remove det" style="color: red"></b></a>');
+            $.each($('.det'),function (index,item) {
+                $(item).on('click',function () {
+                    $(this).parent().hide(100);
+                    var $a3 = $(this).parent().html();
+                    user_ids.removeByValue($a3);
+                });
+            });
+        });
     });
 
 };

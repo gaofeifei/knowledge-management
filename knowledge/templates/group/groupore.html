@@ -315,10 +315,8 @@
                                 </select> -->
                                 <input type="text" class="shuru2" id='shuru2' placeholder="请输入群体名称"/>
                             </form>
-                            <div class="shij">
-                                <span class="sjr">加入人物</span>
-                                <a class="sj1">邓海峰 <b class="icon icon-remove det"></b> </a>
-                                <a class="sj2">潘强 <b class="icon icon-remove det"></b> </a>
+                            <div class="shij">加入人物
+                                <div class="sjr"></div>
                             </div>
                         </div>
             </div>
@@ -485,10 +483,7 @@
         $("#shijian2 .add22").on('click',function () {
             $('#join1').modal("show");
         });
-        $(".con_bot .add22").on('click',function () {
-            $('#join6').modal("show");
-            $(".xinjian").css({display:"block"});
-        });
+        
         $(".gai").on('click',function(){
             $(".tuli").show(20);
             $(".choose1").hide(20);

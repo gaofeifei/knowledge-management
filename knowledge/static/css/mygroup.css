@@ -4,7 +4,7 @@ th,textarea,select,table,form {
     margin: 0;
     padding: 0;
     -webkit-user-select: none;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: '微软雅黑';
 }
 ul,li,ol {
     list-style: none;
@@ -21,15 +21,15 @@ a,a:link,a:hover,a:visited,a:active {
 }
 /*内容样式*/
 #container {
-    margin-left: 125px;
+    margin-left: 175px;
     padding: 20px 0 0;
 }
-#container .main {
-    width: 1000px;
-    /*height: 500px;*/
-    border: 2px solid #0099FF;
-    box-shadow: 3px 3px 3px #c7c7c7;
-}
+/*#container .main {*/
+    /*width: 1000px;*/
+    /*!*height: 500px;*!*/
+    /*border: 2px solid #0099FF;*/
+    /*box-shadow: 3px 3px 3px #c7c7c7;*/
+/*}*/
 #container .main .table th,#container .main .table td {
     text-align: center;
 }

@@ -300,10 +300,10 @@ a,a:link,a:hover,a:visited,a:active {
     margin-top: 10px;
 }
 .xinzeng .shij a {
-    display: inline-block;
-    margin-left: 30px;
-    background-color: #0099FF;
-    color: white;
+    display: block;
+    margin-left: 85px;
+    /*background-color: #0099FF;*/
+    /*color: white;*/
     font-weight: bold;
 }
 .add33 {

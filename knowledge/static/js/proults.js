@@ -266,7 +266,6 @@ function events() {
 }
 events();
 
-
 //地图配置，地址请求
 function ditu() {
     var myChart = echarts.init(document.getElementById('placeimg'));
@@ -728,6 +727,14 @@ function ditu() {
 };
 ditu();
 
+Array.prototype.removeByValue = function(val) {
+    for(var i=0; i<this.length; i++) {
+        if(this[i] == val) {
+            this.splice(i, 1);
+            break;
+        }
+    }
+};
 
 function guanlianrenwu() {
     function include() {
@@ -954,6 +961,7 @@ function guanlianshijian() {
             });
         },
     };
+    var theme_ids=[];
     function territory(data) {
         $("#run2").empty();
         var data=eval(data);
@@ -1085,15 +1093,20 @@ function guanlianshijian() {
                 if (changecolorq==1) {
                     $(this).parent('.play').css({backgroundColor:'#09F'});
                     $(this).find('a').text('取消专题');
+                    theme_ids.push($(this).siblings('.play1').find('.xingming').html());
                     changecolorq=2;
                     $('#join4').modal("show");
                 } else {
                     $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
                     $(this).find('a').text('加入专题');
+                    var $a = $(this).siblings('.play1').find('.xingming').html();
+                    theme_ids.removeByValue($a);
                     changecolorq=1;
                 }
             });
         });
+
+
         var heart=$(".play .play1 .p11 .xin");
         $.each(heart,function(index,item){
             var chan=1;

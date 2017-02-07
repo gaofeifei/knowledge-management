@@ -131,11 +131,24 @@ $.each(heart,function(index,item){
 $('#similar .add22').on('click',function () {
     $('#join5').modal("show");
 });
-$('#people .add22').on('click',function () {
-    $('#join6').modal("show");
+
+var url = '/theme/overview/';
+$.ajax({
+    url: url,
+    type: 'GET',
+    dataType: 'json',
+    async: true,
+    success:theme
 });
+function theme(data) {
+    var data=eval(data);
+    $.each(data,function (index,item) {
+        $(".xinzeng #list1").append('<option value="'+item[0]+'">'+item[0]+'</option>');
+
+    });
+}
 function check(value){
-    if (value=='新建群体') {
+    if (value=='新建专题') {
         $('.shuru2').show();
     }else{
         $('.shuru2').hide();

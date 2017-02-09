@@ -645,9 +645,15 @@
                         success: function(data){
                             if( data ){
                                 var data=data;
-                                console.log(data);
                                 //请在此部分写传输给翟树杰数据的函数wenjianchuanshu(data);
                                 // alert("批量导入成功！");
+                                $("#container .conright2 .uploading .upload2").on('click',function(){
+                                    if($('#container .conright2 .uploading .upload1 input').is(":checked")){
+                                        trans(data);
+                                    }else {
+                                        $('#way').modal("show");
+                                    }
+                                });
                             }
                         }
                     });
@@ -701,8 +707,18 @@
         function trans(rel_lists) {
              // var url = '/construction/create_relation/?node_key1='+onelx+'&node1_id='+one+'&node1_index_name='+
              //    oneidx+'&rel=join&node_key2='+twolx+'&node2_id='+two+'&node2_index_name='+twoidx;
-            var url = '/construction/nodes_or_nodes_rel/?list='+rel_lists;
-            transport.call_request(url,setup);
+            // var url = '/construction/nodes_or_nodes_rel/?list='+rel_lists;
+            var url = '/construction/nodes_or_nodes_rel/';
+            var relationships={'list':rel_lists};
+            // transport.call_request(url,setup);
+            $.ajax({
+                type:'POST',
+                url: url,
+                contentType:"application/json",
+                data: JSON.stringify(relationships),
+                dataType: "json",
+                success: setup
+            });
         }
         $("#container .conright2 .uploading .upload3").on('click',function(){
             if($('#container .conright2 .manual .manual1 input').is(":checked")){
@@ -736,26 +752,20 @@
                 $('#way').modal("show");
             }
         });
-        $("#container .conright2 .uploading .upload2").on('click',function(){
-            if($('#container .conright2 .uploading .upload1 input').is(":checked")){
-                trans();
-            }else {
-                $('#way').modal("show");
-            }
-        });
+        
        
         function setup(information) {
             // var information=eval(information);
-            console.log(information);
-            if (information=='node1 does not exist') {
-                $("#ot").text('节点一不存在，请重新输入。');
-            }else if (information=='node2 does not exist') {
-                $("#ot").text('节点二不存在，请重新输入。');
-            }else if (information=='create success'){
-                $("#ot").text('节点创建成功。');
-            }else if (information=='The current two nodes already have a relationship') {
-                $("#ot").text('关系已经存在，请勿重复添加。');
-            };
+            if (information=='1') {
+                $("#ot").text('创建成功');
+            }else  {
+                $("#ot").text('创建失败，可能是关系已经存在，请勿重复添加。');
+            }
+            // else if (information=='create success'){
+            //     $("#ot").text('节点创建成功。');
+            // }else if (information=='The current two nodes already have a relationship') {
+            //     $("#ot").text('关系已经存在，请勿重复添加。');
+            // };
             $('.upload333').modal("show");
         }
         

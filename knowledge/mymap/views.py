@@ -87,10 +87,11 @@ def login_user():
     else:
         result = login(user, password)
         if result != 0:
-            response = make_response("username_login")
+            response = make_response("1")
             response.set_cookie("user", user)
+            print "user+++++++"+user   
             ##############################################需要进行修改
-            return "1"
+            return response
         else:
             return "0"
 
@@ -234,6 +235,7 @@ def insert_peoples():
 @mod.route('/select_event/')
 def select_events():
     user = request.cookies.get("user")
+    print user
     if user != None:
         result = select_event(user)
         list = []
@@ -328,7 +330,19 @@ def select_event_historys():
         list.append(sdb)
     return json.dumps(list)
 
+@mod.route('/get_session/')
+def get_sessions():
+    user = request.cookies.get("user")
+    print user
+    return "1"
 
+
+
+@mod.route('/set_session/')
+def set_sessions():
+    response = make_response("username_login")
+    response.set_cookie("user", "zhaishujie")
+    return "1"
 
 
 

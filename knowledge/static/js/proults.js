@@ -867,7 +867,7 @@ function guanlianrenwu() {
                     });
                 }
             });
-            $.each( $(".xingming"),function(index,item){
+            $.each( $("#container #similar .definite .deftwo .xingming"),function(index,item){
                 $(item).on('click',function () {
                     window.open('/index/person/?p_uid'+$('.play #uid').html());
                 });
@@ -1106,7 +1106,6 @@ function guanlianshijian() {
             });
         });
 
-
         var heart=$(".play .play1 .p11 .xin");
         $.each(heart,function(index,item){
             var chan=1;
@@ -1120,7 +1119,7 @@ function guanlianshijian() {
                 }
             })
         });
-        $.each($('.xingming'),function(index,item){
+        $.each($('#people .xingming'),function(index,item){
             $(item).on('click',function(){
                 window.open('/index/search_result/?t_uid='+$(this).html());
             })

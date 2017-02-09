@@ -1,3 +1,19 @@
+var chos1_type,chos2_type;
+function choselx1(value) {
+    if (value=='人物'){
+        chos1_type=1;
+    }else {
+        chos1_type=2;
+    }
+};
+function choselx2(value) {
+    if (value=='人物'){
+        chos2_type=1;
+    }else {
+        chos2_type=2;
+    }
+};
+
 function guanxibianji() {
     var node1,node2,oldrel,newrel;
     $("#container .conright2 .editor .editor3").on('click',function () {
@@ -27,13 +43,14 @@ function guanxibianji() {
     };
     function relt(data) {
         var data=eval(data);
-        //console.log(data);
+        console.log(data)
+        $('#lcleft').bootstrapTable('load',data);
         $('#lcleft').bootstrapTable({
             //url: influ_url,
             data:data,
             search: true,//是否搜索
             pagination: true,//是否分页
-            pageSize: 10,//单页记录数
+            pageSize: 5,//单页记录数
             pageList: [5, 10, 20, 50],//分页步进值
             sidePagination: "client",//服务端分页
             searchAlign: "left",
@@ -66,10 +83,11 @@ function guanxibianji() {
                     align: "center",//水平
                     valign: "middle",//垂直
                     formatter: function (value, row, index) {
-                        if (row.uname1==''||row.uname1=='unknown'){
-                            value=uid1;
+                        if (value=='' || value=='unknown'){
+                            return row.uid1;
+                        }else {
+                            return value;
                         }
-                        return value;
                     },
                 },
                 {
@@ -80,10 +98,11 @@ function guanxibianji() {
                     align: "center",//水平
                     valign: "middle",//垂直
                     formatter: function (value, row, index) {
-                        if (row.uname2==''||row.uname2=='unknown'){
-                            value=uid2;
+                        if (value=='' || value=='unknown'){
+                            return row.uid2;
+                        }else {
+                            return value;
                         }
-                        return value;
                     },
                 },
                 {
@@ -127,25 +146,23 @@ function guanxibianji() {
                 },
 
             ],
-            onClickRow: function (row, tr) {
-                // console.log($(tr.context).index());
+            onClickRow: function (rows, tr) {
                 if ($(tr.context).index()==4) {
                     //进行你的操作，如弹出新窗口
                     var node_o,node_t;
-                    if (row[0][1]==''||row[0][1]=='unknown'){
-                        node_o=row[0][0];
+                    if (rows.uname1==''||rows.uname1=='unknown'){
+                        node_o=rows.uid1;
                     }else {
-                        node_o=row[0][1];
+                        node_o=rows.uname1;
                     };
-                    if (row[2][1]==''||row[2][1]=='unknown'){
-                        node_t=row[2][0];
+                    if (rows.uname2==''||rows.uname2=='unknown'){
+                        node_t=rows.uid2;
                     }else {
-                        node_t=row[2][1];
+                        node_t=rows.uname2;
                     };
                     $("#container .conright2 .listcell .lcright .lcr1 .lcrone").text(node_o);
                     $("#container .conright2 .listcell .lcright .lcr1 .lcrtwo").text(node_t);
-                    // $('.lcright').show(20);
-                    revamprel();
+                    $('.lcright').show(20);
                 };
                 if ($(tr.context).index()==5) {
                     $('#join55').modal("show");
@@ -154,6 +171,10 @@ function guanxibianji() {
             
         });
     }
+    $('.yes').on('click',function () {
+        revamprel();
+        // $('.yes22').modal("show");
+    });
     var run=new run();
     function go() {
         var url = '/construction/node_or_node_query/?node1_uid='+node1+'&node2_uid='+node2;

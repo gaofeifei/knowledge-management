@@ -7,9 +7,9 @@ DEBUG = True
 ADMINS = frozenset(['youremail@yourdomain.com'])
 SECRET_KEY = 'SecretKeyForSessionSigning'
 
-##SQLALCHEMY_DATABASE_URI = 'mysql+mysqldb://root:@localhost/lrhome?charset=utf8'
-##SQLALCHEMY_ECHO = False
-##DATABASE_CONNECT_OPTIONS = {}
+SQLALCHEMY_DATABASE_URI = 'mysql+mysqldb://root:@localhost/knowledge_management?charset=utf8'
+SQLALCHEMY_ECHO = False
+DATABASE_CONNECT_OPTIONS = {}
 
 THREADS_PER_PAGE = 8
 

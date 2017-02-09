@@ -22,6 +22,11 @@ from utils import query_current_week_increase, query_special_event, query_group,
 
 mod = Blueprint('index', __name__, url_prefix='/index')
 
+@mod.route('/login/')
+def login():
+
+    return render_template('index/login.html')
+
 @mod.route('/')
 def index():
 
@@ -30,7 +35,9 @@ def index():
 @mod.route('/search_result/')
 def show_searche_result():
 
-    return render_template('index/incident.html')
+    # return render_template('index/incident.html')
+    t_uid = request.args.get('t_uid', u'电信诈骗')
+    return render_template('index/incident.html', t_uid = t_uid)
 
 #事件-详细页面上方卡片结果
 @mod.route('/event_detail/') 
@@ -150,12 +157,16 @@ def user_weibo():
 @mod.route('/person/')
 def show_person():
 
-    return render_template('index/person.html')
+    p_uid = request.args.get('p_uid', '1006385463')
+
+    return render_template('index/person.html', p_uid = p_uid)
 
 @mod.route('/event/')
 def show_event():
 
-    return render_template('index/serp.html')
+    t_uid = request.args.get('t_uid', u'马来西亚抓获电信欺诈案犯')
+
+    return render_template('index/serp.html', t_uid = t_uid)
 
 
 # 近7天新增人数和事件数，总数

@@ -89,14 +89,14 @@ a,a:link,a:hover,a:visited,a:active {
     width: 400px;
     float: left;
 }
-#container .conright .crt2 .crt2lf th {
-    /*color: white;*/
-    font-weight: 600;
-}
-#container .conright .crt2 .crt2lf th,#container .conright .crt2 .crt2lf td {
-    text-align: center;
-    width: 133px;
-}
+/*#container .conright .crt2 .crt2lf th {*/
+    /*!*color: white;*!*/
+    /*font-weight: 600;*/
+/*}*/
+/*#container .conright .crt2 .crt2lf th,#container .conright .crt2 .crt2lf td {*/
+    /*text-align: center;*/
+    /*width: 133px;*/
+/*}*/
 #container .conright .crt3 .crt2rg .play {
     width: 240px;
     padding: 5px;
@@ -207,20 +207,21 @@ a,a:link,a:hover,a:visited,a:active {
     margin-top: 30px;
     margin-left: 30px;
 }
-#container .conright2 .listcell .lcleft th,#container .conright2 .listcell .lcleft td {
-    text-align: center;
-}
-#container .conright2 .listcell thead {
-    background-color: #00cc66;
-}
-#container .conright2 .listcell thead th {
-    color: white;
-    font-weight: 700;
-}
+/*#container .conright2 .listcell .lcleft th,#container .conright2 .listcell .lcleft td {*/
+    /*text-align: center;*/
+/*}*/
+/*#container .conright2 .listcell thead {*/
+    /*background-color: #00cc66;*/
+/*}*/
+/*#container .conright2 .listcell thead th {*/
+    /*color: white;*/
+    /*font-weight: 700;*/
+/*}*/
 #container .conright2 .listcell .lcleft,#container .conright2 .listcell .lcright {
     float: left;
 }
-#container .conright2 .listcell .lcleft,#container .conright2 .listcell .lcright {
+/*#container .conright2 .listcell .lcleft,*/
+#container .conright2 .listcell .lcright {
     width: 450px;
     height: 300px;
 }

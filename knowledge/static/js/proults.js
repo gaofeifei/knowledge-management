@@ -1,7 +1,6 @@
 /**
  * Created by Administrator on 2016/11/30.
  */
-var groupname='媒体';
 //事件人物点配置
 function peo() {
     //this.ajax_method='GET'; // body...
@@ -36,7 +35,6 @@ peo2.prototype= {
 };
 var peo2=new peo2();
 var url2='/group/group_map_filter/?group_name='+groupname;
-
 var friend='friend',relative='relative', colleague='colleague', user_tag='user_tag',
     join='join',pusher='pusher', maker='maker',other_rel='other_relationship',
     node_type;
@@ -133,17 +131,16 @@ function events() {
     myChart.showLoading();
     $.getJSON(url, function (json) {
         var json=eval(json);
-        // var categories = [{name:'人物'},{name:'事件'}];
-        var node_value=[],link_value=[];
-            // ,event_value=[];
-        for (var key in json.user_nodes){
+        var node_value=[],link_value=[],g_down_nums=0;
+        for (var key in json.node.uid){
+            g_down_nums++;
             var num1=Math.random()*(-1000-700)+1000;
             var num2=Math.random()*(-1000-700)+1000;
             var name;
-            if (json.user_nodes[key]==''||json.user_nodes[key]=="unknown") {
+            if (json.node.uid[key]==''||json.node.uid[key]=="unknown") {
                 name=key;
             }else {
-                name=json.user_nodes[key];
+                name=json.node.uid[key];
             };
             node_value.push(
                 {
@@ -154,20 +151,21 @@ function events() {
                     symbolSize: 14,
                     itemStyle: {
                         normal: {
-                            color: '#00cc66'
+                            color: '#ffa500'
                         }
                     }
                 }
             );
         };
-        for (var key2 in json.event_nodes){
+        $("#container .present .pretwo .pretwomd").html(g_down_nums);
+        for (var key2 in json.node.group){
             var num3=Math.random()*(-1000-700)+1000;
             var num4=Math.random()*(-1000-700)+1000;
             var name2;
-            if (json.event_nodes[key2]==''||json.event_nodes[key2]=="unknown") {
+            if (json.node.group[key2]==''||json.node.group[key2]=="unknown") {
                 name2=key2;
             }else {
-                name2=json.event_nodes[key2];
+                name2=json.node.group[key2];
             }
             node_value.push(
                 {
@@ -178,13 +176,13 @@ function events() {
                     symbolSize: 14,
                     itemStyle: {
                         normal: {
-                            color: '#a73cff'
+                            color: 'blue'
                         }
                     }
                 }
             );
         };
-        $.each(json.relation,function (index,item) {
+        $.each(json.result_relation,function (index,item) {
             link_value.push(
                 {
                     source: item[0],
@@ -267,7 +265,6 @@ function events() {
     });
 }
 events();
-
 
 //地图配置，地址请求
 function ditu() {
@@ -730,6 +727,14 @@ function ditu() {
 };
 ditu();
 
+Array.prototype.removeByValue = function(val) {
+    for(var i=0; i<this.length; i++) {
+        if(this[i] == val) {
+            this.splice(i, 1);
+            break;
+        }
+    }
+};
 
 function guanlianrenwu() {
     function include() {
@@ -747,70 +752,130 @@ function guanlianrenwu() {
         },
     };
     function territory(data) {
+        $('#container #similar .definite .deftwo .left').unbind("click");
+        $('#container #similar .definite .deftwo .right').unbind("click");
         $("#run").empty();
         var data=eval(data);
         var str='';
-        $.each(data,function (index,item) {
-            var influe,name,huoyue,mingan,tag;
-            if (item.importnace=='null'){
-                influe='暂无';
-            }else {
-                influe=item.importnace.toFixed(2);
-            };
-            if (item.uname=='null'||item.uname=='unknown'||item.uname==''){
-                name='暂无';
-            }else {
-                name=item.uname;
-            };
-            var huoyue=item.activeness.toFixed(2);
-            if (item.sensitive=='null'||item.sensitive=='unknown'){
-                mingan='暂无';
-            }else {
-                mingan=item.sensitive.toFixed(2);
-            };
-            if (item.user_tag=='null'||item.sensitive=='unknown'){
-                tag='暂无';
-            }else {
-                tag=item.user_tag;
-            };
-            str+='<div class="play">'+
-                '<div class="play1">'+
-                '<div class="p11">'+
-                '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
-                '--><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""'+
-                'title=\'粉丝数\'><!--'+
-                '--><span class="difang" style="font-size: 8px">'+item.fansnum+'</span><!--'+
-                '--><img class=\'xin\' style="margin-left: 10px;" src="/static/image/heart.png">'+
-                '</div>'+
-                '<div class="p22" style="margin-top: 5px">'+
-                '<img style="margin-left: 10px;" src="/static/image/influence.png" title="重要度">'+
-                '<span class="influence">'+influe+'</span>'+
-                '<img src="/static/image/huoyuedu.png" title="活跃度">'+
-                '<span class="huoyuedu">'+huoyue+'</span>'+
-                '<img src="/static/image/mingan.png" title="敏感度">'+
-                '<span class="mingan">'+mingan+'</span>'+
-                '</div>'+
-                '</div>'+
-                '<img class="play2" src="/static/image/pangzi.png" alt="">'+
-                '<div class="play23" style="margin-left: 15px;">'+
-                '<a href="" class="renzh1">认证类型:<span class="renzh11">'+item.topic_string+'</span></a>'+
-                '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">民生类_健康</span></a>'+
-                '</div>'+
-                '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
-                '<a class="bus1">业务标签：</a>'+
-                '<a class="bus2">'+tag+'</a>'+
-                '</div>'+
-                '<!--<div class="play4">-->'+
-                '<!--<p class="shuoming">-->'+
-                '<!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->'+
-                '<!--</p>-->'+
-                '<!--</div>-->'+
-                '<div class="play5" type="button" data-toggle="modal">'+
-                '<a>加入群体探索</a>'+
-                '</div>'+
-                '</div>';
-        });
-        $("#run").append(str);
+        if (data){
+            $.each(data,function (index,item) {
+                var influe,name,huoyue,mingan,tag,photo;
+                if (item.influence=='null'||item.influence=='unknown'){
+                    influe=0;
+                }else {
+                    influe=item.influence.toFixed(2);
+                };
+                if (item.uname=='null'||item.uname=='unknown'||item.uname==''){
+                    name=item.uid;
+                }else {
+                    name=item.uname;
+                };
+                var huoyue=item.activeness.toFixed(2);
+                if (item.sensitive=='null'||item.sensitive=='unknown'){
+                    mingan=0;
+                }else {
+                    mingan=item.sensitive.toFixed(2);
+                };
+                if (item.user_tag=='null'||item.sensitive=='unknown'){
+                    tag='暂无';
+                }else {
+                    tag=item.user_tag;
+                };
+                if (item.photo_url==''||item.photo_url=='null'||item.photo_url=='unknown'){
+                    photo='/static/image/pangzi.png';
+                }else {
+                    photo=item.photo_url;
+                };
+                str+='<div class="play">'+
+                    '<span id="uid" style="display:none;">'+item.uid+'</span>'+
+                    '<div class="play1">'+
+                    '<div class="p11">'+
+                    '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
+                    '--><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""'+
+                    'title=\'粉丝数\'><!--'+
+                    '--><span class="difang" style="font-size: 8px">'+item.fansnum+'</span><!--'+
+                    '--><img class=\'xin\' style="margin-left: 10px;" src="/static/image/heart.png">'+
+                    '</div>'+
+                    '<div class="p22" style="margin-top: 5px">'+
+                    '<img style="margin-left: 10px;" src="/static/image/influence.png" title="影响力">'+
+                    '<span class="influence">'+influe+'</span>'+
+                    '<img src="/static/image/huoyuedu.png" title="活跃度">'+
+                    '<span class="huoyuedu">'+huoyue+'</span>'+
+                    '<img src="/static/image/mingan.png" title="敏感度">'+
+                    '<span class="mingan">'+mingan+'</span>'+
+                    '</div>'+
+                    '</div>'+
+                    '<img class="play2" src="'+photo+'" alt="">'+
+                    '<div class="play23" style="margin-left: 15px;">'+
+                    '<a class="renzh1">认证类型:<span class="renzh11">'+item.topic_string.replace(/&/g,' ')+'</span></a>'+
+                    '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string.replace(/&/g,' ')+'</span></a>'+
+                    '</div>'+
+                    '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
+                    '<a class="bus1">业务标签：</a>'+
+                    '<a class="bus2">'+tag+'</a>'+
+                    '</div>'+
+                    '<!--<div class="play4">-->'+
+                    '<!--<p class="shuoming">-->'+
+                    '<!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->'+
+                    '<!--</p>-->'+
+                    '<!--</div>-->'+
+                    // '<div class="play5" type="button" data-toggle="modal">'+
+                    // '<a>加入群体探索</a>'+
+                    // '</div>'+
+                    '</div>';
+            });
+            $("#run").append(str);
+            var step=0;
+            $('#run').width((data.length)*255);
+            $('#container #similar .definite .deftwo .right').on('click',function () {
+                step++;
+                var plays=$("#run");
+                walk=(-1020)*step;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step >= data.length/4){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step=0;
+                }
+            });
+            $('#container #similar .definite .deftwo .left').on('click',function () {
+                step--;
+                if (step < 0){
+                    alert('已经是第一页了~~');
+                    step=0;
+                }else {
+                    var plays=$("#run");
+                    walk=(-1020)*step;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
+                }
+            });
+            $.each( $(".xingming"),function(index,item){
+                $(item).on('click',function () {
+                    window.open('/index/person/?p_uid'+$('.play #uid').html());
+                });
+            });
+        }else {
+            $("#run").html('暂无数据！！');
+        }
+
         //卡片效果
         $.each($(".play"),function (index,item) {
             $(item).hover(function () {
@@ -880,6 +945,8 @@ function guanlianrenwu() {
 guanlianrenwu();
 
 function guanlianshijian() {
+    $('#container #people .peotwo .peotwo2 .left').unbind("click");
+    $('#container #people .peotwo .peotwo2 .right').unbind("click");
     function include() {
         //this.ajax_method='GET'; // body...
     }
@@ -894,58 +961,112 @@ function guanlianshijian() {
             });
         },
     };
+    var theme_ids=[];
     function territory(data) {
         $("#run2").empty();
         var data=eval(data);
         var str='';
-        $.each(data,function (index,item) {
-            var weizhi,biaoqian,shuoming;
-            if (item.location=='null'){
-                weizhi='未知';
-            }else {
-                weizhi=item.location;
-            };
-            if (item.user_tag=='null'){
-                biaoqian='暂无';
-            }else {
-                biaoqian=item.user_tag;
-            };
-            if (item.description=='null'){
-                biaoqian='暂无数据';
-            }else {
-                biaoqian=item.user_tag;
-            };
-            function getLocalTime(nS) {
-                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,17)
-            };
-            str+='<div class="play">'+
-                '<div class="play1">'+
-                '<div class="p11">'+
-                '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
-                '--><img src="/static/image/dingwei.png" title="位置"><!--'+
-                '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
-                '--><img class="xin" src="/static/image/heart.png" alt="">'+
-                '</div>'+
-                '<div class="p22">'+
-                '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
-                '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
-                '</div>'+
-                '</div>'+
-                '<img class="play2" src="/static/image/xuyuyu.png" alt="">'+
-                '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
-                '<a class="bus1">业务标签：</a>'+
-                '<a class="bus2">'+biaoqian+'</a>'+
-                '</div>'+
-                '<div class="play4">'+
-                '<p class="shuoming">'+
-                shuoming+
-                '</p>'+
-                '</div>'+
-                '<!-- <div class="play5" type="button" data-toggle="modal">'+
-                '<a>加入专题</a>'+
-                '</div> -->'+
-                '</div>';
-        });
+        if (!data==[]){
+            $("#run2").html('暂无数据~~');
+        }else {
+            $.each(data,function (index,item) {
+                var weizhi,biaoqian,shuoming,photo;
+                if (item.location=='null'){
+                    weizhi='未知';
+                }else {
+                    weizhi=item.location;
+                };
+                if (item.user_tag=='null'){
+                    biaoqian='暂无';
+                }else {
+                    biaoqian=item.user_tag;
+                };
+                if (item.description=='null'){
+                    biaoqian='暂无数据';
+                }else {
+                    biaoqian=item.user_tag;
+                };
+                if (item.photo_url=='null'||item.photo_url==''){
+                    photo='/static/image/xuyuyu.png';
+                }else {
+                    photo=item.photo_url;
+                };
+                function getLocalTime(nS) {
+                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,17)
+                };
+                str+='<div class="play">'+
+                    '<div class="play1">'+
+                    '<div class="p11">'+
+                    '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
+                    '--><img src="/static/image/dingwei.png" title="位置"><!--'+
+                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+                    '--><img class="xin" src="/static/image/heart.png" alt="">'+
+                    '</div>'+
+                    '<div class="p22">'+
+                    '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
+                    '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
+                    '</div>'+
+                    '</div>'+
+                    '<img class="play2" src="'+photo+'" alt="">'+
+                    '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
+                    '<a class="bus1">业务标签：</a>'+
+                    '<a class="bus2">'+biaoqian+'</a>'+
+                    '</div>'+
+                    '<div class="play4">'+
+                    '<p class="shuoming">'+
+                    shuoming+
+                    '</p>'+
+                    '</div>'+
+                    '<div class="play5" type="button" data-toggle="modal">'+
+                    '<a>加入专题</a>'+
+                    '</div>'+
+                    '</div>';
+            });
+            $("#run2").append(str);
+            var step=0;
+            $('#run2').width((data.length)*255);
+            $('#container #people .peotwo .peotwo2 .right').on('click',function () {
+                step++;
+                var plays=$("#run");
+                walk=(-1020)*step;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+                if (step >= data.length/4){
+                    alert('已经是最后一页了~~');
+                    $(plays).css({
+                        "-webkit-transform":"translateX(0px)",
+                        "-moz-transform":"translateX(0px)",
+                        "-ms-transform":"translateX(0px)",
+                        "-o-transform":"translateX(0px)",
+                        "transform":"translateX(0px)",
+                    });
+                    step=0;
+                }
+            });
+            $('#container #people .peotwo .peotwo2 .left').on('click',function () {
+                step--;
+                if (step < 0){
+                    alert('已经是第一页了~~');
+                    step=0;
+                }else {
+                    var plays=$("#run");
+                    walk=(-1020)*step;
+                    $(plays).css({
+                        "-webkit-transform":"translateX("+walk+"px)",
+                        "-moz-transform":"translateX("+walk+"px)",
+                        "-ms-transform":"translateX("+walk+"px)",
+                        "-o-transform":"translateX("+walk+"px)",
+                        "transform":"translateX("+walk+"px)",
+                    });
+                }
+            });
+        }
+
         //卡片效果
         $.each($("#people .play"),function (index,item) {
             $(item).hover(function () {
@@ -971,16 +1092,21 @@ function guanlianshijian() {
             $(item).find(".play5").on('click',function(){
                 if (changecolorq==1) {
                     $(this).parent('.play').css({backgroundColor:'#09F'});
-                    $(this).find('a').text('取消群体探索');
+                    $(this).find('a').text('取消专题');
+                    theme_ids.push($(this).siblings('.play1').find('.xingming').html());
                     changecolorq=2;
                     $('#join4').modal("show");
                 } else {
                     $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
-                    $(this).find('a').text('加入群体探索');
+                    $(this).find('a').text('加入专题');
+                    var $a = $(this).siblings('.play1').find('.xingming').html();
+                    theme_ids.removeByValue($a);
                     changecolorq=1;
                 }
             });
         });
+
+
         var heart=$(".play .play1 .p11 .xin");
         $.each(heart,function(index,item){
             var chan=1;
@@ -994,9 +1120,12 @@ function guanlianshijian() {
                 }
             })
         });
-        $("#run2").append(str);
-    }
-
+        $.each($('.xingming'),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
+        });
+    };
     var include=new include();
     function nums() {
         var point;

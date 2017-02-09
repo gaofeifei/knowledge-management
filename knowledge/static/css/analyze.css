@@ -4,7 +4,7 @@ th,textarea,select,table,form {
     margin: 0;
     padding: 0;
     -webkit-user-select: none;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "微软雅黑";
 }
 ul,li,ol {
     list-style: none;
@@ -175,7 +175,7 @@ a,a:link,a:hover,a:visited,a:active {
     width: 240px;
     padding: 5px;
     height: 160px;
-    margin-left: 5px;
+    margin-right: 5px;
     margin-top: 15px;
     border:1px solid #0099FF;
     box-shadow: 2px 2px 2px #878787;
@@ -221,7 +221,7 @@ a,a:link,a:hover,a:visited,a:active {
 }
 #container #shijian .play5,#shijian2 .play5,.xinzeng .play5 {
     position: relative;
-    top:25px;
+    top:-25px;
     left: -5px;
     z-index: 10;
     width: 239px;
@@ -279,10 +279,10 @@ a,a:link,a:hover,a:visited,a:active {
     margin-top: 10px;
 }
 .xinzeng .shij a {
-    display: inline-block;
-    margin-left: 30px;
-    background-color: #0099FF;
-    color: white;
+    display: block;
+    margin-left: 85px;
+    /*background-color: #0099FF;*/
+    /*color: white;*/
     font-weight: bold;
 }
 .add33 {
@@ -298,7 +298,7 @@ a,a:link,a:hover,a:visited,a:active {
     bottom: 5px;
     right: 20px;
 }
-.add33:hover {
+.add33:hover,#shijian2 .sjt .sjt2:hover {
     background-color: #4cae4c;
 }
 

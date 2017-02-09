@@ -23,7 +23,7 @@ function jiedianbianji() {
     };
     function territory(data) {
         var data=eval(data);
-        console.log(data);
+        $('#crt2lf').bootstrapTable('load',data);
         $('#crt2lf').bootstrapTable({
             //url: influ_url,
             data:data[0],
@@ -63,9 +63,10 @@ function jiedianbianji() {
                     valign: "middle",//垂直
                     formatter: function (value, row, index) {
                         if (row.uname==''||row.uname=='unknown'){
-                            value=row.uid;
+                            return row.uid;
+                        }else {
+                            return value;
                         }
-                        return value;
                     },
                 },
                 {

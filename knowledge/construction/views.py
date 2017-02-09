@@ -1,5 +1,5 @@
-# -*-coding:utf-8-*-
-from flask import Blueprint, url_for, render_template, request, abort, flash, session, redirect
+﻿# -*-coding:utf-8-*-
+from flask import Blueprint, url_for, render_template, request, abort, flash, session, redirect,make_response,request
 from neo4j_event import select_rels_all, select_rels, create_person, create_rel_from_uid2group, create_node_or_node_rel, \
     update_node, update_node_or_node_rel, delete_rel, delete_node,nodes_rels,get_es_status
 from knowledge.global_config import *
@@ -241,12 +241,22 @@ def delete_nodes():
 @mod.route('/node_or_node_query/')
 def node_or_node_query():
     node1_uid = request.args.get('node1_uid', '')
+    node1_type = request.args.get('node1_type','')
     node2_uid = request.args.get('node2_uid', '')
+    node2_type = request.args.get('node2_type','')
+    if node1_type== '2':
+        node1_index_name=event_index_name
+    else:
+        node1_index_name=node_index_name
+    if node2_type== '2':
+        node2_index_name=event_index_name
+    else:
+        node2_index_name=node_index_name
     if node1_uid == '' or node2_uid == '':
         print ("incoming there null")
         return '0'
     c_string = "start start_node= node:%s('uid:*%s*'),end_node=node:%s('uid:*%s*') match (start_node)-[r]->(end_node) return start_node.uid,start_node.uname,r,end_node.uid,end_node.uname order by start_node.id limit 10" \
-                % (node_index_name, node1_uid, node_index_name, node2_uid)
+                % (node1_index_name, node1_uid, node2_index_name, node2_uid)
     print c_string
     result = select_rels_all(c_string)
     list = []
@@ -324,3 +334,15 @@ def select_user_status():
         result["id"] =item["_id"]
         list.append(result)
     return json.dumps(list)
+
+
+
+@mod.route('/set_session/')
+def set_session():
+    response = make_response("hellow")
+    response.set_cookie("Name","zhaishujie")
+    return response
+
+@mod.route('/get_session/')
+def get_session():
+    return request.cookies.get("Name")

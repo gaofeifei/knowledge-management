@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 2016/11/30.
  */
-var thname='电信诈骗';
+var thname=theme_explanation;
 
 //事件人物点配置
 function peo() {
@@ -88,7 +88,7 @@ $("#evother").change(function () {
         event_other=' ';
     }
 });
-var layer;
+var layer,theme_down_nums=0;
 function nums() {
     if ($("#event").is(":checked")){node_type='Event';}
     if ($("#user").is(":checked")){node_type='User';}
@@ -115,17 +115,15 @@ function events() {
     myChart.showLoading();
     $.getJSON(url, function (json) {
         var json=eval(json);
-        // var categories = [{name:'人物'},{name:'事件'}];
         var node_value=[], event_link=[];
-            // link_value=[],event_value=[],
-        for (var key in json.user_nodes){
+        for (var key in json.node.event){
             var num1=Math.random()*(-1000-700)+1000;
             var num2=Math.random()*(-1000-700)+1000;
             var name;
-            if (json.user_nodes[key]==''||json.user_nodes[key]=="unknow") {
+            if (json.node.event[key]==''||json.node.event[key]=="unknow") {
                 name=key;
             }else {
-                name=json.user_nodes[key];
+                name=json.node.event[key];
             };
             node_value.push(
                 {
@@ -137,20 +135,21 @@ function events() {
                     symbolSize: 14,
                     itemStyle: {
                         normal: {
-                            color: '#00cc66'
+                            color: 'red'
                         }
                     }
                 }
             );
         };
-        for (var key2 in json.event_nodes){
+        for (var key2 in json.node.event_id){
+            theme_down_nums++;
             var num3=Math.random()*(-1000-700)+1000;
             var num4=Math.random()*(-1000-700)+1000;
             var name2;
-            if (json.event_nodes[key2]==''||json.event_nodes[key2]=="unknow") {
+            if (json.node.event_id[key2]==''||json.node.event_id[key2]=="unknow") {
                 name2=key2;
             }else {
-                name2=json.event_nodes[key2];
+                name2=json.node.event_id[key2];
             }
             node_value.push(
                 {
@@ -167,7 +166,8 @@ function events() {
                 }
             );
         };
-        $.each(json.relation,function (index,item) {
+        $("#container .present .pretwo .pretwomd").html(theme_down_nums);
+        $.each(json.result_relation,function (index,item) {
             event_link.push(
                 {
                     source: item[0],
@@ -175,7 +175,6 @@ function events() {
                 }
             );
         });
-        console.log(event_link)
         myChart.hideLoading();
         myChart.setOption(option = {
             title: {
@@ -254,8 +253,8 @@ function events() {
             ]
         }, true);
 
-
     });
+
 }
 events();
 

@@ -1,7 +1,6 @@
 /**
  * Created by Administrator on 2016/11/28.
  */
-
 //事件关系图
 function things() {
     // 路径配置
@@ -289,7 +288,7 @@ function jiedianshijian() {
 }
 jiedianshijian();
 
-//--文件传输----
+//--文件传输-人物---
 function handleFileSelect(evt){
     var files = evt;
     for(var i=0,f;f=files[i];i++){
@@ -306,14 +305,14 @@ function handleFileSelect(evt){
                     if( data ){
                         var data=data;
                         wenjianchuanshu(data);
-                        // alert("批量导入成功！");
                     }
                 }
             });
         };
         reader.readAsText(f,'GB2312');
     }
-}
+};
+
 function wenjianchuanshu(uid) {
     function place() {
         //this.ajax_method='GET'; // body...
@@ -330,43 +329,55 @@ function wenjianchuanshu(uid) {
         },
     };
     function territory(data) {
+        var data=eval(data);
         console.log(data);
     }
     var place=new place();
     function nums(timestamp) {
         var url = '/construction/user_upload_file/?uid_list='+uid+'&upload_time='+timestamp;
         place.call_request(url,territory);
-    }
-
+    };
     $("#container .conright .crm .crm2").on('click',function () {
         var timestamp=new Date().getTime();
-        nums(timestamp);
+        if($('#container .conright .crm .crm1 input').is(":checked")){
+            nums(timestamp);
+        }else {
+            $('#way').modal("show");
+        }
+    });
+    $("#container .conright .crmrg .crmrg3").on('click',function () {
+        var timestamp2=new Date().getTime();
+        if($('#container .conright .crmrg .crmrg1 input').is(":checked")){
+            nums(timestamp2);
+        }else {
+            $('#way').modal("show");
+        }
     });
 };
 
 //添加关系的文件读取函数
-function relationFileSelect(evt){
-    var files = evt;
-    for(var i=0,f;f=files[i];i++){
-        var reader = new FileReader();
-        reader.onload = function (oFREvent) {
-            var a = oFREvent.target.result;
-            $.ajax({
-                type:"POST",
-                url:"/construction/read_relation/",
-                dataType: "json",
-                async:false,
-                data:{new_words:a},
-                success: function(data){
-                    if( data ){
-                        var data=data;
-                        console.log(data);
-                        //请在此部分写传输给翟树杰数据的函数wenjianchuanshu(data);
-                        // alert("批量导入成功！");
-                    }
-                }
-            });
-        };
-        reader.readAsText(f,'GB2312');
-    }
-}
+// function relationFileSelect(evt){
+//     var files = evt;
+//     for(var i=0,f;f=files[i];i++){
+//         var reader = new FileReader();
+//         reader.onload = function (oFREvent) {
+//             var a = oFREvent.target.result;
+//             $.ajax({
+//                 type:"POST",
+//                 url:"/construction/read_relation/",
+//                 dataType: "json",
+//                 async:false,
+//                 data:{new_words:a},
+//                 success: function(data){
+//                     if( data ){
+//                         var data=data;
+//                         console.log(data);
+//                         //请在此部分写传输给翟树杰数据的函数wenjianchuanshu(data);
+//                         // alert("批量导入成功！");
+//                     }
+//                 }
+//             });
+//         };
+//         reader.readAsText(f,'GB2312');
+//     }
+// }

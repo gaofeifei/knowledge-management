@@ -2,7 +2,7 @@
  * Created by Administrator on 2016/12/2.
  */
 //事件人物点配置
-var uid='1006385463';
+// var uid='1006385463';
 function peo() {
     //this.ajax_method='GET'; // body...
 }
@@ -133,17 +133,17 @@ function events() {
     myChart.showLoading();
     $.getJSON(url, function (json) {
         var json=eval(json);
-        // var categories = [{name:'人物'},{name:'事件'}];
+        console.log(json);
         var node_value=[],link_value=[];
         // ,event_value=[];
-        for (var key in json.user_nodes){
+        for (var key in json.node.uid){
             var num1=Math.random()*(-1000-700)+1000;
             var num2=Math.random()*(-1000-700)+1000;
             var name;
-            if (json.user_nodes[key]==''||json.user_nodes[key]=="unknown") {
+            if (json.node.uid[key]==''||json.node.uid[key]=="unknown") {
                 name=key;
             }else {
-                name=json.user_nodes[key];
+                name=json.node.uid[key];
             };
             node_value.push(
                 {
@@ -154,37 +154,37 @@ function events() {
                     symbolSize: 14,
                     itemStyle: {
                         normal: {
-                            color: '#00cc66'
+                            color: '#ffa500'
                         }
                     }
                 }
             );
         };
-        for (var key2 in json.event_nodes){
+        for (var key2 in json.node.event_id){
             var num3=Math.random()*(-1000-700)+1000;
             var num4=Math.random()*(-1000-700)+1000;
             var name2;
-            if (json.event_nodes[key2]==''||json.event_nodes[key2]=="unknown") {
+            if (json.node.event_id[key2]==''||json.node.event_id[key2]=="unknown") {
                 name2=key2;
             }else {
-                name2=json.event_nodes[key2];
+                name2=json.node.event_id[key2];
             }
             node_value.push(
                 {
                     x: num3,
                     y: num4,
                     id: key2,
-                    name:key2,
+                    name:name2,
                     symbolSize: 14,
                     itemStyle: {
                         normal: {
-                            color: '#a73cff'
+                            color: 'purple'
                         }
                     }
                 }
             );
         };
-        $.each(json.relation,function (index,item) {
+        $.each(json.result_relation,function (index,item) {
             link_value.push(
                 {
                     source: item[0],
@@ -192,7 +192,6 @@ function events() {
                 }
             );
         });
-        console.log(link_value)
         myChart.hideLoading();
         myChart.setOption(option = {
             title: {
@@ -263,7 +262,6 @@ function events() {
                 // },
             ]
         }, true);
-
 
     });
 }

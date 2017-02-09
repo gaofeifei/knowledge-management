@@ -14,8 +14,9 @@
     <div class="present">
         <span class="preone"><!-- <i class="icon icon-remove det"></i> -->
             当前对比群体：
-            <a style="color: white;font-weight: 700;background-color: #0099FF" class="preonemd">律师群体  </a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a style="color: white;font-weight: 700;background-color: #0099FF" class="preonemd">维权群体  </a>
+            <a style="color: white;font-weight: 700;background-color: #0099FF" class="preonemd preonemd1">  </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="color: white;font-weight: 700;background-color: #0099FF" class="preonemd preonemd2">  </a>
         </span>
         <!-- <div class="checkbox prethr" style="margin-left: 30px">
             <label>
@@ -39,7 +40,7 @@
                 font-weight: 900;font-size: 20px;">图谱对比</p>
         </div>
             <div class="midleft">
-                <p class="conevents">律师群体&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:#5e5e5e;font-size: 8px;">共<a href="" class="peonum">20</a>人</b></p>
+                <p class="conevents"><span></span>&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:#5e5e5e;font-size: 8px;">共<a href="" class="peonum"></a>人</b></p>
                 <div id="eventimg">
 
                 </div>
@@ -103,7 +104,7 @@
                 </div>
             </div>
             <div class="midright" style="margin-right: 0">
-                <p class="placet">维权群体&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:#5e5e5e;font-size: 8px;">共<a class="peonum">17</a>人</b></p>
+                <p class="placet"><span></span>&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:#5e5e5e;font-size: 8px;">共<a class="peonum"></a>人</b></p>
                 <div id="placeimg">
 
                 </div>
@@ -170,7 +171,7 @@
             </div>
             <div class="lawyer">
                 <div class="lawyer1" style="color: #000;font-size: 20px;font-weight: 700;margin:30px 0 10px 75px;">
-                    <span class='lawyer111'>媒体</span>
+                    <span class='lawyer111'></span>
                     <!-- <p class="direct1" style='float:right;font-size:12px;color: #9d9d9d;margin-right: 60px;'>
                         <label class="radio-inline">
                             <input type="radio" name="angle" value="option1"> 1跳
@@ -195,8 +196,8 @@
                 <div class="lawyer2">
                     <div class="sjmr1" style='padding-left:30px;'>
                         <img src="/static/image/left.png" alt="" class="left">
-                        <div id="case4" style="display: inline-block;width:1050px;overflow: hidden;">
-                            <div id="run4" style="width: 4000px;">
+                        <div id="case4" style="display: inline-block;width:1020px;overflow: hidden;">
+                            <div id="run4" style="transition: all 1s linear;height:190px;text-align:center;">
                                 
                             </div>
                         </div>
@@ -205,12 +206,13 @@
                 </div>
             </div>
             <div class="safeguard">
-                <p class="safeguard1" style="color: #000;font-size: 20px;font-weight: 700;margin:30px 0 10px 75px;">法律人士</p>
+                <p class="safeguard1" style="color: #000;font-size: 20px;font-weight: 700;margin:30px 0 10px 75px;">
+                </p>
                 <div class="safeguard2">
                     <div class="sjmr1" style='padding-left:30px;'>
                         <img src="/static/image/left.png" alt="" class="left">
-                        <div id="case5" style="display: inline-block;width:1050px;overflow: hidden;">
-                            <div id="run5" style="width: 4000px;">
+                        <div id="case5" style="display: inline-block;width:1020px;overflow: hidden;">
+                            <div id="run5" style="transition: all 1s linear;height:190px;text-align:center;">
                                 
                             </div>
                         </div>
@@ -227,7 +229,7 @@
             <div class="textrast1">
                 <p class="tone">高影响力微博</p>
                 <p class="ttwo">敏感微博</p>
-                <div style='float:right;margin-right:65px;'>
+                <div style='float:right;margin-right:65px;margin-top:-2px;'>
                         <button type="button" class="btn btn-primary xiangtong3" 
                                                     style="font-size:14px;font-weight:700;">相同文本</button>
                         <button type="button" class="btn btn-primary butong3"
@@ -238,34 +240,51 @@
             </div>
             <div class="tweets">
                 <div class="txtleft">
-                    
-                </div>
-                <div class="txtleft2" style="display:none;">
-                    
-                </div>
-                <div class="txtright" style="margin-left: 30px;">
-                    
-                </div>
-                <div class="txtright2" style="margin-left: 30px;display: none;">
-                    <div class="tlt">
-                        <p class="master">
-                            微博内容：
-                            <span class="master1">
-                                记得初中时老师出了个半命题作文《------压力》或《压力------》,我们都写了“成长的压力”，“考试
-                                的压力”或是“压力下的我们”,唯独我们班一旷世奇才写了一篇说明文——《压力锅》……
-                            </span>
-                        </p>
-                        <div class="time">
-                            <span class="time1">来自微博用户：</span>
-                            <a class="time2">唐老鸭</a>
-                            <span class="time3">发表于&nbsp;&nbsp;<i>2016-12-1</i></span>
-                            <span class="time4" style="display: inline-block;margin-left: 15px">转发数(221)</span>&nbsp;|&nbsp;
-                            <span class="time5">评论数(56)</span>&nbsp;|&nbsp;
-                            <span class="time6">言论敏感度(78)</span>
-                        </div>
+                    <div id="group_emotion_loading" style="display:block;text-align:center;">
+                        正在加载，请稍后...
                     </div>
+                    <div id="influeweibo" style="overflow-x: auto; overflow-y: auto;height:580px;">
+                        <table id="input-table" class="In-table">
+                            <tbody class="In-table">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class='fanye' style="width:100%;text-align:center;margin-top:10px;">
+                          <span style="display:inline-block;">每页显示<input type="text" id="PageNo" size="3" value="5" style='text-align:center;border:1px solid #ccc;'/>组</span>
+                          <div id="div-button" style="display:inline-block;margin-left:5px;">
+                              <input type="button" value="首页" id="F-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="上一页" id="Pre-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="下一页" id="Nex-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="尾页" id="L-page" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                          </div>
+
+                    <span style="display:inline-block;">&nbsp;当前第<span id="s2"></span>页</span>
+                    <span style="display:inline-block;">总共<span id="s1"></span>页</span>
                 </div>
+                
             </div>
+            <div class="txtright" style="margin-left:10px;">
+                    <div id="group_emotion_loading2" style="display:block;text-align:center;">
+                        正在加载，请稍后...
+                    </div>
+                    <div id="influeweibo2" style="overflow-x: auto; overflow-y: auto;height:580px;">
+                        <table id="input-table2" class="In-table">
+                            <tbody class="In-table">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class='fanye2' style="width:100%;text-align:center;margin-top:10px;">
+                          <span style="display:inline-block;">每页显示<input type="text" id="PageNo2" size="3" value="5" style='text-align:center;border:1px solid #ccc;'/>组</span>
+                          <div id="div-button2" style="display:inline-block;margin-left:5px;">
+                              <input type="button" value="首页" id="F-page2" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="上一页" id="Pre-page2" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="下一页" id="Nex-page2" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                              <input type="button" value="尾页" id="L-page2" style='border-radius: 5px;padding: 3px 5px;font-size: 10px;'>
+                          </div>
+
+                    <span style="display:inline-block;">&nbsp;当前第<span id="s22"></span>页</span>
+                    <span style="display:inline-block;">总共<span id="s12"></span>页</span>
+                </div>
 
         </div>
     </div>
@@ -273,6 +292,16 @@
 {% endblock %}
     
 {% block my_js %}
+    <script type="text/javascript">
+        var groupname1='{{group_name1}}';
+        var groupname2='{{group_name2}}';
+        $('#container .present .preone .preonemd1').html(groupname1);
+        $('#container .present .preone .preonemd2').html(groupname2);
+        $('#container #middle .midleft .conevents span').html(groupname1);
+        $('#container #middle .midright .placet span').html(groupname2);
+        $('#container #middle .thingtrast .lawyer1 .lawyer111').html(groupname1);
+        $('#container #middle .thingtrast .safeguard .safeguard1').html(groupname2); 
+    </script>
     <script src="/static/js/groupdiff1.js"></script>
     <script src="/static/js/groupdiff2.js"></script>
     <script type="text/javascript">
@@ -280,20 +309,6 @@
         $(item).on('click',function(){
             $(this).parent().fadeOut(300);
         });
-    });
-    var heart=$(".play .play1 .p11 .xin");
-    $.each(heart,function(index,item){
-        var chan=1;
-        $(item).on('click',function(){
-            if (chan==1) {
-                $(this).attr('src','/static/image/focus.png');
-                chan=2;
-            }else {
-                $(this).attr('src','/static/image/heart.png');
-                chan=1;
-            }
-            
-        })
     });
     $.each($(".xingming"),function(index,item){
         $(item).on('click',function () {

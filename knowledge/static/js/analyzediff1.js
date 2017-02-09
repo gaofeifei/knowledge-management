@@ -1,8 +1,8 @@
 /**
  * Created by Administrator on 2016/12/16.
  */
-var themename1='电信诈骗';
-var themename2='港澳台';
+var themename1=theme_diff.theme1;
+var themename2=theme_diff.theme2;
 //图谱与地图的对比情况
 function tupu() {
     var point=0,numberd=0;
@@ -63,8 +63,11 @@ function tupu() {
         myChart.showLoading();
         $.getJSON(url, function (json) {
             var json=eval(json);
-            var node_value=[],link_value=[];
+            console.log(json);
+            var node_value=[],link_value=[],q=0;
+
             for (var key in json.e1.node.event_id){
+                q++;
                 var num1=Math.random()*(-1000-700)+1000;
                 var num2=Math.random()*(-1000-700)+1000;
                 var name=json.e1.node.event_id[key];
@@ -77,13 +80,14 @@ function tupu() {
                         symbolSize: 14,
                         itemStyle: {
                             normal: {
-                                color: '#00cc66'
+                                color: 'purple'
                             }
                         }
                     }
                 );
             };
             for (var key2 in json.e1.node.uid){
+                q++;
                 var num3=Math.random()*(-1000-700)+1000;
                 var num4=Math.random()*(-1000-700)+1000;
                 var name2;
@@ -101,13 +105,14 @@ function tupu() {
                         symbolSize: 14,
                         itemStyle: {
                             normal: {
-                                color: '#a73cff'
+                                color: '#ffa500'
                             }
                         }
                     }
                 );
             };
             for (var key3 in json.e1.node.event){
+                q++;
                 var num5=Math.random()*(-1000-700)+1000;
                 var num6=Math.random()*(-1000-700)+1000;
                 var name3=json.e1.node.event[key3];;
@@ -120,13 +125,14 @@ function tupu() {
                         symbolSize: 14,
                         itemStyle: {
                             normal: {
-                                color: '#a73cff'
+                                color: 'red'
                             }
                         }
                     }
                 );
             };
             for (var key4 in json.e1.node.group){
+                q++;
                 var num7=Math.random()*(-1000-700)+1000;
                 var num8=Math.random()*(-1000-700)+1000;
                 var name4;
@@ -144,12 +150,13 @@ function tupu() {
                         symbolSize: 14,
                         itemStyle: {
                             normal: {
-                                color: '#a73cff'
+                                color: 'blue'
                             }
                         }
                     }
                 );
             };
+            $('#container #middle .centre .midleft .conevents .peonum').html(q);
             $.each(json.e1.result_relation,function (index,item) {
                 link_value.push(
                     {
@@ -209,9 +216,10 @@ function tupu() {
         $.getJSON(url, function (json) {
             var json=eval(json);
             // var categories = [{name:'人物'},{name:'事件'}];
-            var node_value2=[],link_value2=[];
+            var node_value2=[],link_value2=[],p=0;
             // ,event_value=[];
             for (var key in json.e2.node.event_id){
+                p++;
                 var num1=Math.random()*(-1000-700)+1000;
                 var num2=Math.random()*(-1000-700)+1000;
                 var name=json.e2.node.event_id[key];
@@ -224,13 +232,14 @@ function tupu() {
                         symbolSize: 14,
                         itemStyle: {
                             normal: {
-                                color: '#00cc66'
+                                color: 'purple'
                             }
                         }
                     }
                 );
             };
             for (var key2 in json.e2.node.uid){
+                p++;
                 var num3=Math.random()*(-1000-700)+1000;
                 var num4=Math.random()*(-1000-700)+1000;
                 var name2;
@@ -248,13 +257,14 @@ function tupu() {
                         symbolSize: 14,
                         itemStyle: {
                             normal: {
-                                color: '#a73cff'
+                                color: '#ffa500'
                             }
                         }
                     }
                 );
             };
             for (var key3 in json.e2.node.event){
+                p++;
                 var num5=Math.random()*(-1000-700)+1000;
                 var num6=Math.random()*(-1000-700)+1000;
                 node_value2.push(
@@ -266,13 +276,14 @@ function tupu() {
                         symbolSize: 14,
                         itemStyle: {
                             normal: {
-                                color: '#a73cff'
+                                color: 'red'
                             }
                         }
                     }
                 );
             };
             for (var key4 in json.e2.node.group){
+                p++;
                 var num7=Math.random()*(-1000-700)+1000;
                 var num8=Math.random()*(-1000-700)+1000;
                 var name4;
@@ -290,12 +301,13 @@ function tupu() {
                         symbolSize: 14,
                         itemStyle: {
                             normal: {
-                                color: '#a73cff'
+                                color: 'blue'
                             }
                         }
                     }
                 );
             };
+            $('#container #middle .centre .midright .placet .peonum').html(p);
             $.each(json.e2.result_relation,function (index,item) {
                 link_value2.push(
                     {
@@ -351,7 +363,6 @@ function tupu() {
 
         });
     }
-    events();
 
     function ditu() {
         var myChart = echarts.init(document.getElementById('eventimg2'));
@@ -1268,7 +1279,6 @@ function tupu() {
             }
         });
     };
-    ditu();
 };
 tupu();
 

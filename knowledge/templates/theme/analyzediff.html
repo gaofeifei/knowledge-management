@@ -1,5 +1,5 @@
 {% extends "public_nav.html" %}
-{% block title %}<title>专题分析 - 专题对比</title>{% endblock %}
+{% block title %}<title>专题探索 - 专题对比</title>{% endblock %}
 {% block my_css %}
     <link rel="stylesheet" href="/static/css/analyzediff.css">
     <style type="text/css">
@@ -14,8 +14,8 @@
     <div class="present">
         <span class="preone"><!-- <i class="icon icon-remove det"></i> -->
             当前对比专题：
-            <a style="color: white;font-weight: 700;background-color: #0099FF" class="preonemd">电信诈骗  </a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a style="color: white;font-weight: 700;background-color: #0099FF" class="preonemd">港澳台  </a>
+            <a style="color: white;font-weight: 700;background-color: #0099FF" class="preonemd preonemd1">  </a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="color: white;font-weight: 700;background-color: #0099FF" class="preonemd preonemd2">  </a>
         </span>
         <!-- <div class="checkbox prethr" style="margin-left: 30px">
             <label>
@@ -39,8 +39,8 @@
                 font-weight: 900;font-size: 20px;">图谱对比</p>
         </div>
             <div class="midleft">
-                <p class="conevents">电信专题&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:#5e5e5e;font-size: 8px;">
-                    共<a href="###" class="peonum">20</a>人</b></p>
+                <p class="conevents"><span></span>&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:#5e5e5e;font-size: 8px;">
+                    共<a href="###" class="peonum"></a>人</b></p>
                 <div id="eventimg">
 
                 </div>
@@ -104,7 +104,7 @@
                 </div>
             </div>
             <div class="midright" style="margin-right: 0">
-                <p class="placet">维权群体&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:#5e5e5e;font-size: 8px;">共<a class="peonum">17</a>人</b></p>
+                <p class="placet"><span></span>&nbsp;&nbsp;&nbsp;&nbsp;<b style="color:#5e5e5e;font-size: 8px;">共<a class="peonum"></a>人</b></p>
                 <div id="placeimg">
 
                 </div>
@@ -132,7 +132,7 @@
             </div>
             <div class="lawyer">
                 <div class="lawyer1" style="color: #000;font-size: 20px;font-weight: 700;margin:30px 0 10px 75px;">
-                    <span class='lawyer111'>电信诈骗</span>
+                    <span class='lawyer111'></span>
                     <!-- <p class="direct1" style='float:right;font-size:12px;color: #9d9d9d;margin-right: 60px;'>
                         <label class="radio-inline">
                             <input type="radio" name="angle" value="option1"> 1跳
@@ -157,8 +157,8 @@
                 <div class="lawyer2">
                     <div class="sjmr1" style='padding-left:30px;'>
                         <img src="/static/image/left.png" alt="" class="left">
-                        <div id="case4" style="display: inline-block;width:1050px;overflow: hidden;">
-                            <div id="run4" style="width: 4000px;">
+                        <div id="case4" style="display: inline-block;width:1020px;overflow: hidden;">
+                            <div id="run4" style="transition: all 1s linear;height:190px;text-align:center;">
                                 
                             </div>
                         </div>
@@ -167,16 +167,17 @@
                 </div>
             </div>
             <div class="safeguard">
-                <p class="safeguard1" style="color: #000;font-size: 20px;font-weight: 700;margin:30px 0 10px 75px;">港澳台</p>
+                <p class="safeguard1" style="color: #000;font-size: 20px;font-weight: 700;margin:30px 0 10px 75px;">
+                </p>
                 <div class="safeguard2">
                     <div class="sjmr1" style='padding-left:30px;'>
-                        <img src="/static/image/left.png" alt="" class="left">
-                        <div id="case5" style="display: inline-block;width:1050px;overflow: hidden;">
-                            <div id="run5" style="width: 4000px;">
+                        <img src="/static/image/left.png" class="left">
+                        <div id="case5" style="display: inline-block;width:1020px;overflow: hidden;">
+                            <div id="run5" style="transition: all 1s linear;height:190px;text-align:center;">
                                 
                             </div>
                         </div>
-                        <img src="/static/image/right.png" alt="" class="right">
+                        <img src="/static/image/right.png" class="right" style="left:15px;">
                     </div>
                 </div>
             </div>
@@ -251,6 +252,29 @@
 {% endblock %}
     
 {% block my_js %}
+    <script type="text/javascript">
+        // var parm1 = getParam('theme1');
+        // var parm2 = getParam('theme2');
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            var theRequest = new Object();
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
+                }
+            }
+            return theRequest;
+        }
+        var theme_diff=GetRequest();
+        $('#container .present .preone .preonemd1').html(theme_diff.theme1);
+        $('#container .present .preone .preonemd2').html(theme_diff.theme2);  
+        $('#container #middle .midleft .conevents span').html(theme_diff.theme1);
+        $('#container #middle .midright .placet span').html(theme_diff.theme2);
+        $('#container #middle .thingtrast .lawyer1 .lawyer111').html(theme_diff.theme1);
+        $('#container #middle .thingtrast .safeguard .safeguard1').html(theme_diff.theme2); 
+    </script>
     <script src="/static/js/analyzediff1.js"></script>
     <script src="/static/js/analyzediff2.js"></script>
     <script src="/static/js/analyzediff3.js"></script>

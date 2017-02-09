@@ -1476,3 +1476,48 @@ def advance_search_card(name_results,layer):
         result_card = related_user_search(uid_list_all,'activeness')
 
     return result_card
+
+
+def advance_search_graph(name_list,layer, rel_type):
+    only_uid = []
+    user_uid_list = []
+    u_nodes_list = {}
+    for i in name_list:
+        uid = i
+        uname = user_name_search(i)
+        only_uid.append(uid)
+        u_nodes_list[uid] = uname
+        user_uid_list.append([uid, uname])
+    print  len(user_uid_list)
+    e_nodes_list = {}
+    user_relation = []
+    mid_uid_list = []  #存放第一层的数据，再以这些为起始点，扩展第二层
+    mid_eid_list = []
+    for uid_value in user_uid_list: 
+        c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
+        if rel_type:
+            rel_type_list = rel_type.split(',')
+            c_string += 'MATCH (s0)-[r1]-(s1) WHERE type(r1) in '+ json.dumps(rel_type_list)  +') return s0,r1,s1 LIMIT 1'
+        else:
+            c_string += 'MATCH (s0)-[r1]-(s1) return s0,r1,s1 LIMIT 1'
+        result = graph.run(c_string)
+        # print list(result),'-----------------'
+        for i in list(result):
+            start_id = i['s0']['uid']
+            # # start_id = s0['uid']
+            relation1 = i['r1'].type()
+            m_id = dict(i['s1'])
+            if m_id.has_key('uid'):
+                middle_id = m_id['uid']
+                mid_uid_list.append(middle_id)
+                user_name = user_name_search(middle_id)
+                u_nodes_list[str(middle_id)] = user_name
+                user_relation.append([start_id,relation1,middle_id])
+            if m_id.has_key('envent_id'):
+                middle_id = m_id['envent_id']
+                mid_eid_list.append(middle_id)
+                event_name = event_name_search(middle_id)
+                e_nodes_list[str(middle_id)] = event_name
+                user_relation.append([start_id,relation1,middle_id])
+    return {'total_user':len(user_uid_list),'user_nodes':u_nodes_list,'event_nodes':e_nodes_list,\
+            'relation':user_relation,'draw_nodes_length':len(u_nodes_list)}

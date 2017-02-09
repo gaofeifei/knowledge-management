@@ -50,8 +50,8 @@ def read_relation():
         return json.dumps('No Content!')
 
     for li in line:
-        n1,n2,r = li.split(',')
-        uid_list.append([n1,n2,r])
+        n1,t1,r,n2,t2 = li.split(',')
+        uid_list.append([[t1,n1],r,[t2,n2]])
 
     return json.dumps(uid_list)
 
@@ -305,7 +305,7 @@ def node_or_node_update():
     else:
         return '0'
 
-@mod.route('/nodes_or_nodes_rel/')
+@mod.route('/nodes_or_nodes_rel/', methods=['GET', 'POST'])
 def nodes_create_rels():
     list = request.args.get('list', '')
     result = nodes_rels(list)

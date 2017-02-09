@@ -115,9 +115,11 @@
 			// var login_url='/group/overview/';
 	        function login(data) {
 	        	var data=eval(data);
+	        	console.log(data)
 	        	if (data==0) {
 	        		$('#errors').modal('show');
 	        	}else {
+	        		// window.open('/index/');
 	        		window.location.href='/index/';
 	        	};
 	        }

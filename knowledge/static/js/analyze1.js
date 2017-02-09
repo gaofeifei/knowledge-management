@@ -343,22 +343,27 @@ function biaogeshijian() {
                 '</div>';
         });
         $(".xinzeng .sjmr .sjmr1 #case #crmid #run").append(str);
-
-    };
     //卡片效果
-    var heart=$(".play .play1 .p11 .xin");
-    $.each(heart,function(index,item){
-        var chan=1;
-        $(item).on('click',function(){
-            if (chan==1) {
-                $(this).attr('src','/static/image/focus.png');
-                chan=2;
-            }else {
-                $(this).attr('src','/static/image/heart.png');
-                chan=1;
-            }
-        })
-    });
+        var heart=$(".xin");
+        $.each(heart,function(index,item){
+            var chan=1;
+            $(item).on('click',function(){
+                if (chan==1) {
+                    $(this).attr('src','/static/image/focus.png');
+                    chan=2;
+                }else {
+                    $(this).attr('src','/static/image/heart.png');
+                    chan=1;
+                }
+            })
+        });
+        $.each($('.xingming'),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
+        });
+    };
+
     var step=0;
     var shang=Math.floor(cwidth/6);
     var yu=cwidth%6;
@@ -412,11 +417,7 @@ function biaogeshijian() {
         };
 
     });
-    $.each($('.xinzeng .sjmr .sjmr1 #case #crmid #run .xingming'),function(index,item){
-        $(item).on('click',function(){
-            window.open('/index/search_result/?t_uid='+$(this).html());
-        })
-    });
+
     var touch=new touch();
     function nums() {
         var url = '/theme/theme_detail/?theme_name='+thname2;

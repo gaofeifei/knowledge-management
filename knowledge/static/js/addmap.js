@@ -1,7 +1,6 @@
 /**
  * Created by Administrator on 2016/11/28.
  */
-
 //人物关系图
 function maps() {
     // 路径配置
@@ -110,7 +109,6 @@ function monkey(data) {
     var data=eval(data);
     // console.log(data);
     $.each(data,function (index,item) {
-        // console.log(item[0].influence);
         var name,influence,active;
         if (item[0].uname==''||item[0].uname=='unknown') {
             name=item[0].uid;

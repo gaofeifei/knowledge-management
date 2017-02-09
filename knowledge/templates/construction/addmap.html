@@ -332,7 +332,7 @@
                     <span>节点一</span>
                     <input type="text" class="manone"/>
                 </div>
-                <select name="" onchange='build(this.value)'>
+                <select class="jie1">
                     <option value="" disabled selected>请选择节点类型</option>
                     <option value="人物">人物</option>
                     <option value="事件">事件</option>
@@ -341,15 +341,15 @@
                     <span>节点二</span>
                     <input type="text" class="mantwo"/>
                 </div>
-                <select name="" onchange='build2(this.value)'>
+                <select class="jie2">
                     <option value="" disabled selected>请选择节点类型</option>
                     <option value="人物">人物</option>
                     <option value="事件">事件</option>
                 </select>
                 <div class="manual23">
                     <span>关系类型</span>
-                    <select class='manthr'>
-                        <option value="" disabled selected>请选择节点类型</option>
+                    <select class='manthr' id='manthr' name="">
+                        <option value="" disabled selected>请选择关系类型</option>
                         <option value="好友">好友</option>
                         <option value="同事">同事</option>
                         <option value="亲属">亲属</option>
@@ -367,7 +367,7 @@
                     <input type="checkbox"/> 上传文件:
                 </label>
                 <div class="form-group filem">
-                    <input type="file" id="exampleInputFile" 
+                    <input type="file" id="relationFile" 
                     multiple onchange="relationFileSelect(this.files)"/>
                 </div>
             </div>
@@ -489,6 +489,29 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="way" tabindex="-2">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">温馨提示</h2>
+            </div>
+            <div class="modal-body">
+                <p>请选择您添加的方式：上传文件/手动输入。</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    取消
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 {% block my_js %} 
     <script src="/static/js/addmap.js"></script>
@@ -532,7 +555,6 @@
     $.each($('.jia'),function(index,item){
         $(item).on('click',function(){
             var ming=$(this).parent().prev().html();
-            console.log(ming);
             var str ="<div class='manual2' style='margin-top:10px;'>"+ming+"</div>"
             $(this).parent().prev().after(str);
         });
@@ -606,6 +628,33 @@
         });
 
         //-----------关系的传送添加--------------
+
+        //添加关系的文件读取函数
+        function relationFileSelect(evt){
+            var files = evt;
+            for(var i=0,f;f=files[i];i++){
+                var reader = new FileReader();
+                reader.onload = function (oFREvent) {
+                    var a = oFREvent.target.result;
+                    $.ajax({
+                        type:"POST",
+                        url:"/construction/read_relation/",
+                        dataType: "json",
+                        async:false,
+                        data:{new_words:a},
+                        success: function(data){
+                            if( data ){
+                                var data=data;
+                                console.log(data);
+                                //请在此部分写传输给翟树杰数据的函数wenjianchuanshu(data);
+                                // alert("批量导入成功！");
+                            }
+                        }
+                    });
+                };
+                reader.readAsText(f,'GB2312');
+            }
+        }
         transport.prototype= {
             call_request:function(url,callback) {
                 $.ajax({
@@ -622,40 +671,77 @@
             //this.ajax_method='GET'; // body...
         }
             
-            var onelx,twolx,oneidx,twoidx;
-            function build(value){
-                if (value=='人物') {
-                    onelx='uid';
-                    oneidx='node_index';
-                }else{
-                    onelx='event';
-                    oneidx='event_index';
-                };
-            };
-            function build2(value){
-                if (value=='人物') {
-                    twolx='uid';
-                    twoidx='node_index';
-                }else{
-                    twolx='event';
-                    twoidx='node_index';
-                };
-            }
-        function trans() {
-            var one=$(".manone").val();
-            var two=$(".mantwo").val();
-            if (one==''||two=='') {
-                alert('节点不能为空');
-            }else {
-                var url = '/construction/create_relation/?node_key1='+onelx+'&node1_id='+one+'&node1_index_name='+
-                oneidx+'&rel=join&node_key2='+twolx+'&node2_id='+two+'&node2_index_name='+twoidx;
-                // console.log(url);
-                transport.call_request(url,setup);
-            };
-            
+        // var onelx,twolx,oneidx,twoidx;
+        // var rel_lx;
+        // function build(value){
+        //     if (value=='人物') {
+        //         // onelx='uid';
+        //         // oneidx='node_index';
+        //         onelx='1';
+        //     }else{
+        //         // onelx='event';
+        //         // oneidx='event_index';
+        //         onelx='2';
+        //     };
+        // };
+        // function build2(value){
+        //     if (value=='人物') {
+        //         // twolx='uid';
+        //         // twoidx='node_index';
+        //         twolx='1';
+        //     }else{
+        //         // twolx='event';
+        //         // twoidx='node_index';
+        //         twolx='2';
+        //     };
+        // };
+        // function build3(value){
+        //     rel_lx=value;
+        // }
+        function trans(rel_lists) {
+             // var url = '/construction/create_relation/?node_key1='+onelx+'&node1_id='+one+'&node1_index_name='+
+             //    oneidx+'&rel=join&node_key2='+twolx+'&node2_id='+two+'&node2_index_name='+twoidx;
+            var url = '/construction/nodes_or_nodes_rel/?list='+rel_lists;
+            transport.call_request(url,setup);
         }
         $("#container .conright2 .uploading .upload3").on('click',function(){
-            trans();
+            if($('#container .conright2 .manual .manual1 input').is(":checked")){
+                var rel_list=[];
+                for (var i =0;i<= $(".manual2").length-1; i++) {
+                    var one=$($(".manual2")[i]).find(".manone").val();
+                    var two=$($(".manual2")[i]).find(".mantwo").val();
+                    var onelx_1=$($(".manual2")[i]).find(".jie1").val();
+                    var twolx_2=$($(".manual2")[i]).find(".jie2").val();
+                    var rel_lx=$($(".manual2")[i]).find("#manthr").val();
+                    var onelx,twolx;
+                    if (one==''||two=='') {
+                        alert('节点不能为空');
+                    }else {
+                        if (onelx_1=='人物') {
+                            onelx='1';
+                        }else{
+                            onelx='2';
+                        };
+                        if (twolx_2=='人物') {
+                            twolx='1';
+                        }else{
+                            twolx='2';
+                        };
+                    };
+                    var rel=[[onelx,one],rel_lx,[twolx,two]];
+                    rel_list.push(rel);
+                };
+                trans(rel_list);
+            }else {
+                $('#way').modal("show");
+            }
+        });
+        $("#container .conright2 .uploading .upload2").on('click',function(){
+            if($('#container .conright2 .uploading .upload1 input').is(":checked")){
+                trans();
+            }else {
+                $('#way').modal("show");
+            }
         });
        
         function setup(information) {

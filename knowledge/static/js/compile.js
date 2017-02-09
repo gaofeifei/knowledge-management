@@ -63,9 +63,10 @@ function jiedianbianji() {
                     valign: "middle",//垂直
                     formatter: function (value, row, index) {
                         if (row.uname==''||row.uname=='unknown'){
-                            value=row.uid;
+                            return row.uid;
+                        }else {
+                            return value;
                         }
-                        return value;
                     },
                 },
                 {

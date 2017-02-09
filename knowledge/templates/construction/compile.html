@@ -9,10 +9,18 @@
         }
         .bootstrap-table {
             width: 485px;
+            float: left;
         }
-        .fixed-table-pagination .pagination-detail {
+        #container .conright .crt2 .bootstrap-table {
+            width: 400px;
+        }
+        #container .conright .crt2 .bootstrap-table .table:not(.table-condensed)>tbody>tr>td {
+            width: 100px;
+        }
+        .fixed-table-pagination .pagination-detail,.clearfix {
             display: none!important;
         }
+
     </style>
 {% endblock %}
 
@@ -94,7 +102,7 @@
             <div class="lcleft" id='lcleft'>
                 
             </div>
-            <div class="lcright" style='display:none;'>
+            <div class="lcright" style='display:none;margin-top:10px;'>
                 <p class="lcr1">
                     <span class="lcrone"></span>
                     <span class="icon icon-paperclip"></span>
@@ -609,9 +617,6 @@
         if (index==1) {
             $(item).css({display:'block'});
         };
-    });
-    $('.yes').on('click',function () {
-        $('.yes22').modal("show");
     });
     $(".lfone").on('click',function () {
         $(".conright").css({display:'block'});

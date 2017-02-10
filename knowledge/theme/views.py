@@ -87,7 +87,7 @@ def theme_map_filter():
     relation_type = request.args.get('relation_type',relation_str)
     relation_type_list = relation_type.split(',')
     relation_type_list.extend(user_event_relation)
-    layer = request.args.get('layer','1') #'0' or '1' or '2'
+    layer = request.args.get('layer','0') #'0' or '1' or '2'
     filter_map_result = theme_tab_map(theme_name, node_type, relation_type_list, layer)
     return json.dumps(filter_map_result)
 

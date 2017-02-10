@@ -29,7 +29,7 @@ def search_node():
 @mod.route('/find_min_way/')
 def find_min_way():
     node1 = request.args.get('item1', '1035566190')
-    node2 = request.args.get('item2', '1906884194')
+    node2 = request.args.get('item2', '1660862654')
     node_type1 = request.args.get('node_type1', 'User') #User  Event
     node_type2 = request.args.get('node_type2', 'User') #User  Event
     result = search_way(node1, node2, node_type1, node_type2)

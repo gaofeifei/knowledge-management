@@ -287,6 +287,7 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
 
 # 地图
 def theme_tab_map(theme_name, node_type, relation_type, layer):
+    # return 1
     black_country = [u'美国',u'其他',u'法国',u'英国']
     tab_theme_result = theme_tab_graph(theme_name, node_type, relation_type, layer)
     uid_list_origin = tab_theme_result['map_eid']
@@ -308,7 +309,7 @@ def theme_tab_map(theme_name, node_type, relation_type, layer):
                 location_dict[geo[0]+' '+k] += v
             except:
                 location_dict[geo[0]+' '+k] = v
-    print location_dict
+    # print location_dict
     filter_location = dict()
     for k,v in location_dict.iteritems():
         tmp = k.split(' ')
@@ -328,7 +329,7 @@ def theme_tab_map(theme_name, node_type, relation_type, layer):
                 filter_location[tmp[1]] = v
  
     return_results = sorted(filter_location.iteritems(), key=lambda x:x[1], reverse=True)
-    return return_results
+    return return_results[:50]
 
 
 def event_list_theme(event):

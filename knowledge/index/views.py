@@ -10,6 +10,7 @@ from datetime import datetime
 from knowledge.global_config import portrait_name, flow_text_name, portrait_type, flow_text_type, event_name, event_analysis_name, \
         neo4j_name, event_type, event_special, special_event_index_name, group_index_name, \
         group_rel, node_index_name,user_event_relation, event_relation_list, relation_list
+
 from knowledge.global_utils import es_user_portrait, es_flow_text, es_event, graph,user_search_sth,\
         user_name_search, event_name_search,event_name_to_id,es_search_sth,event_detail_search, related_user_search
 
@@ -17,7 +18,7 @@ from utils import query_current_week_increase, query_special_event, query_group,
      query_new_relationship, query_hot_location, query_event_detail,query_event_people,filter_event_nodes,\
      get_weibo,query_person_detail,query_person_people,query_person_event,query_event_event,get_user_weibo,\
      group_tab_graph,group_tab_map, search_related_user_card, search_related_user, search_related_event_f,\
-     search_related_e_card, advance_search_card
+     search_related_e_card, advance_search_card, advance_search_graph, advance_search_card_e, advance_search_graph_e
 
 
 mod = Blueprint('index', __name__, url_prefix='/index')
@@ -206,40 +207,44 @@ def ajax_new_map():
 
 
 @mod.route('/search_basic_graph/')
-def search_basic():  #基本搜索
+def search_basic():  #基本搜索，图谱
     search_item = request.args.get('item', 'xiang')
-    user_graph = search_related_user(search_item)
-    event_graph = search_related_event_f(search_item)
+    layer = request.args.get('layer', '0')#'2'  'all','0','1'  不要all，bu传
+    relation_list.extend(user_event_relation)
+    relation_list.extend(event_relation_list)
+    relation_list.extend(['group','special_event'])
+    user_graph = search_related_user(search_item,layer,relation_list)
+    # event_graph = ''
+    event_graph = search_related_event_f(search_item,layer,relation_list)
     return json.dumps({'user':user_graph,'event':event_graph})
 
 @mod.route('/search_basic_card/')
 def search_basic_card():  #基本搜索，卡片
     search_item = request.args.get('item', 'ai')
-    layer = request.args.get('layer', 'all')#'2'  'all'
+    layer = request.args.get('layer', '0')#'2'  'all','0','1'  不要all，bu传
     user_card = search_related_user_card(search_item,layer)
     event_card = search_related_e_card(search_item, layer)
     return json.dumps({'user':user_card,'event':event_card})
 
-@mod.route('/search_advance_graph/')
-def search_advance_graph():  #高级搜索
-    node_type = request.args.get('node_type', 'User') #User event
-    search_item = request.args.get('item', 'xiang')
-    user_graph = search_related_user(search_item)
-    event_graph = advance_graph(search_item)
-    return json.dumps({'user':user_graph,'event':event_graph})
+# @mod.route('/search_advance_graph/')
+# def search_advance_graph():  #高级搜索
+#     node_type = request.args.get('node_type', 'User') #User event
+#     search_item = request.args.get('item', 'xiang')
+#     user_graph = search_related_user(search_item)
+#     event_graph = advance_graph(search_item)
+#     return json.dumps({'user':user_graph,'event':event_graph})
 
-@mod.route('/search_advance_card_user/')  #搜uid或name，领域 话题 活跃地 用户标签
-def search_advance_card_user():  #高级搜索，卡片
+@mod.route('/search_advance_user/')  #搜uid或name，领域 话题 活跃地 用户标签
+def search_advance_user():  #高级搜索，卡片和图谱
     result = {}
     query_data = {}
     query = []
     query_list = []
     condition_num = 0
-    query_list = []
     fuzz_item = ['activity_geo']
     multi_item = ['domain','topic_string']
     simple_fuzz_item = ['uid', 'uname']
-    item_data = request.args.get('term', '23')
+    item_data = request.args.get('term', '')
     #print 'item_data:', item_data
     for item in simple_fuzz_item:
         if item_data:
@@ -284,12 +289,102 @@ def search_advance_card_user():  #高级搜索，卡片
         result = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
                     body={'query':{'bool':{'must':query}}, 'sort':[{sort:{'order':'desc'}}], 'size':size},fields= ['uid'])['hits']['hits']
     else:
+    	return 'no filter'
         result = es_user_portrait.search(index=portrait_name, doc_type=portrait_type, \
                 body={'query':{'match_all':{}}, 'sort':[{sort:{"order":"desc"}}], 'size':size}, fields= ['uid'])['hits']['hits']
     id_list = []
     for i in result:
         id_list.append(i['fields']['uid'][0])
 
+    layer = request.args.get('layer', '0')  #0,1,2
+
+    result = advance_search_card(id_list,layer)#卡片
+    relation_list2 = []
+    relation_list2.extend(relation_list)
+    relation_list2.extend(user_event_relation)
+    relation_list2.extend(event_relation_list)
+    relation_list2.extend(['group','special_event'])
+    rel_type_str = ','.join(relation_list2)
+    rel_type = request.args.get('rel_type', rel_type_str)  #字符串，用逗号人物之间的把关系串联起来
+    relation_list2 = rel_type.split(',')
+    print relation_list2,'----'
+    graph_info = advance_search_graph(id_list, layer, relation_list2)
+
+    return json.dumps({'card_info':result,'graph_info':graph_info})
+
+
+@mod.route('/search_advance_event/')  #搜事件名称或者id，事件类型，时间（start_ts）,发生地（es没有），用户标签
+def search_advance_event():  #高级搜索，事件卡片和图谱
+    result = {}
+    query_data = {}
+    query = []
+    query_list = []
+    condition_num = 0
+    fuzz_item = ['event_type','e_location']
+    # time_item = ['']
+    # multi_item = ['event_type','topic_string']
+    simple_fuzz_item = ['en_name', 'name', 'keywords']
+    item_data = request.args.get('term', '')
+    #print 'item_data:', item_data
+    for item in simple_fuzz_item:
+        if item_data:
+            query_list.append({'wildcard':{item: '*'+item_data+'*'}})
+            condition_num += 1
+    if query_list:
+        query.append({'bool': {'should': query_list}}) 
+    for item in fuzz_item:
+        item_data = request.args.get(item, '')
+        if item_data:
+            query.append({'wildcard':{item:'*'+item_data+'*'}})
+            condition_num += 1
+    # custom_attribute
+    tag_items = request.args.get('tag', '')
+    if tag_items != '':
+        tag_item_list = tag_items.split(',')
+        for tag_item in tag_item_list:
+            attribute_name_value = tag_item.split(':')
+            attribute_name = attribute_name_value[0]
+            attribute_value = attribute_name_value[1]
+            field_key = submit_user + '-tag'
+            if attribute_name and attribute_value:
+                query.append({'wildcard':{field_key: '*'+attribute_name + '-' + attribute_value+'*'}})
+                condition_num += 1
+
+    tag_items = request.args.get('tag', '')
+    start_ts = request.args.get('start_ts', '')
+    end_ts_o = int(time.time())
+    print end_ts_o,'end_ts_o'
+    end_ts = request.args.get('end_ts', end_ts_o)
+    if start_ts:
+        query.append({'bool':{'must':[{'range':{'start_ts':{'gte':start_ts}}},\
+                                    {'range':{'end_ts':{'lte':end_ts}}}]}})
+        condition_num += 1
+    # print query,'---------'
+        
+    size = 10
+    sort = '_score'
+    #print 'query condition:', query
+    if condition_num >0:
+        result = es_user_portrait.search(index=event_name, doc_type=event_type, \
+                    body={'query':{'bool':{'must':query}}, 'sort':[{sort:{'order':'desc'}}], 'size':size},fields= ['en_name'])['hits']['hits']
+    else:
+    	return 'no filter'
+        result = es_user_portrait.search(index=event_name, doc_type=event_type, \
+                body={'query':{'match_all':{}}, 'sort':[{sort:{"order":"desc"}}], 'size':size}, fields= ['en_name'])['hits']['hits']
+    id_list = []
+    for i in result:
+        id_list.append(i['fields']['en_name'][0])
     layer = request.args.get('layer', '1')  #1,2,all
-    result = advance_search_card(id_list,layer)   
-    return json.dumps(result)
+    result = advance_search_card_e(id_list,layer)
+
+    relation_list2 = []
+    relation_list2.extend(relation_list)
+    relation_list2.extend(user_event_relation)
+    relation_list2.extend(event_relation_list)
+    relation_list2.extend(['group','special_event'])
+    rel_type_str = ','.join(relation_list2)
+    rel_type = request.args.get('rel_type', rel_type_str)  #字符串，用逗号人物之间的把关系串联起来
+    relation_list2 = rel_type.split(',')
+    # graph_info = ''
+    graph_info = advance_search_graph_e(id_list, layer, relation_list)
+    return json.dumps({'card_info':result,'graph_info':graph_info})

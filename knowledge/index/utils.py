@@ -464,7 +464,6 @@ def filter_event_map(event_name, node_type, relation_type, layer):
                 # filter_location[k] = v
                 filter_location[tmp[1]] = v
  
-    #检查一下群体和话题的两层关系，然后再看这个地理位置对不对修改了189/192行
     return_results = sorted(filter_location.iteritems(), key=lambda x:x[1], reverse=True)
     return return_results
 
@@ -871,7 +870,7 @@ def get_graph_single_u(uid_list, node_type, relation_type, layer):
                 relation_list.append(r1)
         if layer == '1':
             c_string = 'START s0=node:node_index(uid="'+str(i)+'") '
-            c_string += 'MATCH (s0:User)-[r]-(s1'+node_type+') WHERE type(r) in '+ json.dumps(relation_type) +' return r LIMIT 100'
+            c_string += 'MATCH (s0:User)-[r]-(s1'+node_type+') WHERE type(r) in '+ json.dumps(relation_type) +' return r LIMIT 10'
             # print c_string,'!!!!!!!!!!!!!!'
             result = graph.run(c_string)
             for r in result:
@@ -880,7 +879,7 @@ def get_graph_single_u(uid_list, node_type, relation_type, layer):
         if layer == '2':
             c_string = 'START s0=node:node_index(uid="'+str(i)+'") '
             c_string += 'MATCH (s0)-[r]-(s1)-[r2]->(s2) WHERE (type(r) in '+ json.dumps(relation_type)\
-                     + 'and type(r2) in '+ json.dumps(relation_type)  +') return r,r2 LIMIT 100'
+                     + 'and type(r2) in '+ json.dumps(relation_type)  +') return r,r2 LIMIT 10'
             print c_string,'++++++'
             result = graph.run(c_string)
             for r in result:
@@ -1099,7 +1098,7 @@ def group_tab_map(uid, node_type, relation_type, layer):
     return_results = sorted(filter_location.iteritems(), key=lambda x:x[1], reverse=True)
     return return_results[:500]
 
-def search_related_user_card(item,layer):
+def search_related_user_card(item,layer):  #简单搜索，卡片
     # print item,'-------------'
     query_body = {
         "query":{
@@ -1132,6 +1131,9 @@ def search_related_user_card(item,layer):
         u_nodes_list[uid] = uname
         user_uid_list.append([uid, uname])
     print  len(user_uid_list),'========='
+    if layer == '0':
+        result_card = related_user_search(only_uid, 'activeness')
+
     if layer == '1':
         for uid_value in user_uid_list: 
             c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
@@ -1141,6 +1143,7 @@ def search_related_user_card(item,layer):
                 m_id = dict(i['s1'])['uid']
                 only_uid.append(m_id)
         result_card = related_user_search(only_uid, 'activeness')
+
     if layer == '2':
         for uid_value in user_uid_list: 
             c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
@@ -1151,17 +1154,17 @@ def search_related_user_card(item,layer):
                 only_uid.append(m_id)
         result_card = related_user_search(only_uid, 'activeness')
 
-    if layer == 'all':
-        uid_list_all =[]
-        result = search_related_user(item)
-        uid_dict = result['user_nodes']
-        for k,v in uid_dict.iteritems():
-            uid_list_all.append(k)
-        result_card = related_user_search(uid_list_all,'activeness')
+    # if layer == 'all':
+    #     uid_list_all =[]
+    #     result = search_related_user(item)
+    #     uid_dict = result['user_nodes']
+    #     for k,v in uid_dict.iteritems():
+    #         uid_list_all.append(k)
+    #     result_card = related_user_search(uid_list_all,'activeness')
 
     return result_card
 
-def search_related_user(item):
+def search_related_user(item, layer, relation_list):
     query_body = {
         "query":{
             'bool':{
@@ -1194,74 +1197,98 @@ def search_related_user(item):
         u_nodes_list[uid] = uname
         user_uid_list.append([uid, uname])
     print  len(user_uid_list)
-    e_nodes_list = {}
-    user_relation = []
-    mid_uid_list = []  #存放第一层的数据，再以这些为起始点，扩展第二层
-    mid_eid_list = []
-    for uid_value in user_uid_list: 
-        c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
-        c_string += 'MATCH (s0)-[r1]-(s1) return s0,r1,s1 LIMIT 1'
+    relation = get_graph_single_u(only_uid, '', relation_list, layer)
+    # print relation,'len(relation)'
+    # relation.extend(origin_relation)
+    relation = [i for i in set(relation)]
+    result = draw_graph_u(relation)
+    for i in only_uid:
+        try:
+            result['map_uid'].append(i)
+        except:
+            result['map_uid'] = []
+            result['map_uid'].append(i)
+    result['map_uid'] = [i for i in set(result['map_uid'])]
+    for ii in only_uid:
+        try:
+            result['node']['uid'][ii] = user_name_search(ii)
+        except:
+            result['node']['uid']={}
+            result['node']['uid'][ii] = user_name_search(ii)
 
-        result = graph.run(c_string)
-        # print list(result),'-----------------'
-        for i in list(result):
-            start_id = i['s0']['uid']
-            # # start_id = s0['uid']
-            relation1 = i['r1'].type()
-            m_id = dict(i['s1'])
-            if m_id.has_key('uid'):
-                middle_id = m_id['uid']
-                mid_uid_list.append(middle_id)
-                user_name = user_name_search(middle_id)
-                # print middle_id,'2222222222222222222'
-                u_nodes_list[str(middle_id)] = user_name
-                user_relation.append([start_id,relation1,middle_id])
-            if m_id.has_key('envent_id'):
-                middle_id = m_id['envent_id']
-                mid_eid_list.append(middle_id)
-                event_name = event_name_search(middle_id)
-                e_nodes_list[str(middle_id)] = event_name
-                user_relation.append([start_id,relation1,middle_id])
-    print len(mid_uid_list)
-    print len(mid_eid_list),'++++++++++++++++'
-    for mid_uid in mid_uid_list:
-        c_string = 'START s1 = node:node_index(uid="'+str(mid_uid)+'") '
-        c_string += 'MATCH (s1)-[r2]->(s2:User) return s1,r2,s2 LIMIT 5'
-        # print c_string
-        result = graph.run(c_string)
-        for i in result:
-            start_mid_id = i['s1']['uid']
-            relation2 = i['r2'].type()
-            end_id = dict(i['s2'])
-            if end_id.has_key('uid'):
-                user_name = user_name_search(end_id['uid'])
-                # print end_id['uid'],'333333333333333333333333'
-                u_nodes_list[end_id['uid']] = user_name
-                user_relation.append([start_mid_id,relation2,end_id['uid']])
-            if end_id.has_key('envent_id'):
-                event_name = event_name_search(end_id['event_id'])
-                e_nodes_list[end_id['event_id']] = event_name
-                user_relation.append([start_mid_id,relation2,end_id['envent_id']])
-    for mid_eid in mid_eid_list:
-        c_string = 'START s1 = node:event_index(event="'+str(mid_eid)+'") '
-        c_string += 'MATCH (s1)-[r2]->(s2:User) return s1,r2,s2 LIMIT 3'
-        event_result = graph.run(c_string)
-        for i in event_result:
-            relation2 = i['r2'].type()
-            end_id = dict(i['s2'])
-            if end_id.has_key('uid'):
-                # print end_id['uid'],'44444444444444444444444'
-                user_name = user_name_search(end_id['uid'])
-                u_nodes_list[end_id['uid']] = user_name
-                user_relation.append([mid_eid,relation2,end_id['uid']])
-            if end_id.has_key('envent_id'):
-                event_name = event_name_search(end_id['event_id'])
-                e_nodes_list[end_id['event_id']] = event_name
-                user_relation.append([mid_eid,relation2,end_id['envent_id']])
-    return {'total_user':len(user_uid_list),'user_nodes':u_nodes_list,'event_nodes':e_nodes_list,\
-            'relation':user_relation,'draw_nodes_length':len(u_nodes_list)}
+    # print len(result['node']['uid']), len(result['map_uid'])
+    return result
 
-def search_related_event_f(item):
+
+
+    # e_nodes_list = {}
+    # user_relation = []
+    # mid_uid_list = []  #存放第一层的数据，再以这些为起始点，扩展第二层
+    # mid_eid_list = []
+    # for uid_value in user_uid_list: 
+    #     c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
+    #     c_string += 'MATCH (s0)-[r1]-(s1) return s0,r1,s1 LIMIT 1'
+
+    #     result = graph.run(c_string)
+    #     # print list(result),'-----------------'
+    #     for i in list(result):
+    #         start_id = i['s0']['uid']
+    #         # # start_id = s0['uid']
+    #         relation1 = i['r1'].type()
+    #         m_id = dict(i['s1'])
+    #         if m_id.has_key('uid'):
+    #             middle_id = m_id['uid']
+    #             mid_uid_list.append(middle_id)
+    #             user_name = user_name_search(middle_id)
+    #             # print middle_id,'2222222222222222222'
+    #             u_nodes_list[str(middle_id)] = user_name
+    #             user_relation.append([start_id,relation1,middle_id])
+    #         if m_id.has_key('envent_id'):
+    #             middle_id = m_id['envent_id']
+    #             mid_eid_list.append(middle_id)
+    #             event_name = event_name_search(middle_id)
+    #             e_nodes_list[str(middle_id)] = event_name
+    #             user_relation.append([start_id,relation1,middle_id])
+    # print len(mid_uid_list)
+    # print len(mid_eid_list),'++++++++++++++++'
+    # for mid_uid in mid_uid_list:
+    #     c_string = 'START s1 = node:node_index(uid="'+str(mid_uid)+'") '
+    #     c_string += 'MATCH (s1)-[r2]->(s2:User) return s1,r2,s2 LIMIT 5'
+    #     # print c_string
+    #     result = graph.run(c_string)
+    #     for i in result:
+    #         start_mid_id = i['s1']['uid']
+    #         relation2 = i['r2'].type()
+    #         end_id = dict(i['s2'])
+    #         if end_id.has_key('uid'):
+    #             user_name = user_name_search(end_id['uid'])
+    #             # print end_id['uid'],'333333333333333333333333'
+    #             u_nodes_list[end_id['uid']] = user_name
+    #             user_relation.append([start_mid_id,relation2,end_id['uid']])
+    #         if end_id.has_key('envent_id'):
+    #             event_name = event_name_search(end_id['event_id'])
+    #             e_nodes_list[end_id['event_id']] = event_name
+    #             user_relation.append([start_mid_id,relation2,end_id['envent_id']])
+    # for mid_eid in mid_eid_list:
+    #     c_string = 'START s1 = node:event_index(event="'+str(mid_eid)+'") '
+    #     c_string += 'MATCH (s1)-[r2]->(s2:User) return s1,r2,s2 LIMIT 3'
+    #     event_result = graph.run(c_string)
+    #     for i in event_result:
+    #         relation2 = i['r2'].type()
+    #         end_id = dict(i['s2'])
+    #         if end_id.has_key('uid'):
+    #             # print end_id['uid'],'44444444444444444444444'
+    #             user_name = user_name_search(end_id['uid'])
+    #             u_nodes_list[end_id['uid']] = user_name
+    #             user_relation.append([mid_eid,relation2,end_id['uid']])
+    #         if end_id.has_key('envent_id'):
+    #             event_name = event_name_search(end_id['event_id'])
+    #             e_nodes_list[end_id['event_id']] = event_name
+    #             user_relation.append([mid_eid,relation2,end_id['envent_id']])
+    # return {'total_user':len(user_uid_list),'user_nodes':u_nodes_list,'event_nodes':e_nodes_list,\
+    #         'relation':user_relation,'draw_nodes_length':len(u_nodes_list)}
+
+def search_related_event_f(item, layer,relation_list):
     query_body = {
         "query":{
             'bool':{
@@ -1294,73 +1321,96 @@ def search_related_event_f(item):
         only_eid.append(en_name)
         e_nodes_list[en_name] = name
         event_id_list.append([en_name, name])
+    relation = get_graph_single_e(only_eid, '', relation_list, layer)
+    # relation.extend(relation_list_o)
+    relation = [i for i in set(relation)]
+    result = draw_graph_e(relation)
+    for i in only_eid:
+        try:
+            result['map_eid'].append(i)
+        except:
+            result['map_eid'] = []
+            result['map_eid'].append(i)
 
-    for event_value in event_id_list:
-        c_string = 'START s0 = node:event_index(event="'+str(event_value[0])+'") '
-        c_string += 'MATCH (s0)-[r1]-(s1) return s0,r1,s1 LIMIT 10'
-        # print c_string,'==========='
+    result['map_eid'] = [i for i in set(result['map_eid'])]
+    for ii in only_eid:
+        try:
+            result['node']['event_id'][ii] = e_nodes_list[ii]
+        except:
+            result['node']['event_id']={}
+            result['node']['event_id'][ii] = e_nodes_list[ii]
+        print len(result['node']['event_id']), len(result['map_eid'])
+    return result
+
+
+
+
+    # for event_value in event_id_list:
+    #     c_string = 'START s0 = node:event_index(event="'+str(event_value[0])+'") '
+    #     c_string += 'MATCH (s0)-[r1]-(s1) return s0,r1,s1 LIMIT 10'
+    #     # print c_string,'==========='
         
-        mid_eid_list = []  #存放第一层的数据，再以这些为起始点，扩展第二层
-        mid_uid_list = []
-        result = graph.run(c_string)
-        # print list(result),'-----------------'
-        for i in list(result):
-            print i
-            start_id = i['s0']['event_id']
-            # start_id = s0['event']
-            relation1 = i['r1'].type()
-            m_id = dict(i['s1'])
-            if m_id.has_key('uid'):
-                middle_id = m_id['uid']
-                mid_uid_list.append(middle_id)
-                user_name = user_name_search(middle_id)
-                u_nodes_list[middle_id] = user_name
-                event_relation.append([start_id,relation1,middle_id])
-            if m_id.has_key('envent_id'):
-                middle_id = m_id['envent_id']
-                mid_eid_list.append(middle_id)
-                event_name2 = event_name_search(middle_id)
-                e_nodes_list[middle_id] = event_name2
-                event_relation.append([start_id,relation1,middle_id])
+    #     mid_eid_list = []  #存放第一层的数据，再以这些为起始点，扩展第二层
+    #     mid_uid_list = []
+    #     result = graph.run(c_string)
+    #     # print list(result),'-----------------'
+    #     for i in list(result):
+    #         print i
+    #         start_id = i['s0']['event_id']
+    #         # start_id = s0['event']
+    #         relation1 = i['r1'].type()
+    #         m_id = dict(i['s1'])
+    #         if m_id.has_key('uid'):
+    #             middle_id = m_id['uid']
+    #             mid_uid_list.append(middle_id)
+    #             user_name = user_name_search(middle_id)
+    #             u_nodes_list[middle_id] = user_name
+    #             event_relation.append([start_id,relation1,middle_id])
+    #         if m_id.has_key('envent_id'):
+    #             middle_id = m_id['envent_id']
+    #             mid_eid_list.append(middle_id)
+    #             event_name2 = event_name_search(middle_id)
+    #             e_nodes_list[middle_id] = event_name2
+    #             event_relation.append([start_id,relation1,middle_id])
 
-    # print mid_uid_list
-    # print mid_eid_list,'++++++++++++++++'
-    for mid_uid in mid_uid_list:
-        c_string = 'START s1 = node:node_index(uid="'+str(mid_uid)+'") '
-        c_string += 'MATCH (s1)-[r2]->(s2:Event) return s1,r2,s2 LIMIT 5'
-        uid_result = graph.run(c_string)
+    # # print mid_uid_list
+    # # print mid_eid_list,'++++++++++++++++'
+    # for mid_uid in mid_uid_list:
+    #     c_string = 'START s1 = node:node_index(uid="'+str(mid_uid)+'") '
+    #     c_string += 'MATCH (s1)-[r2]->(s2:Event) return s1,r2,s2 LIMIT 5'
+    #     uid_result = graph.run(c_string)
 
-        for i in uid_result:
-            relation2 = i['r2'].type()
-            end_id = dict(i['s2'])
-            if end_id.has_key('uid'):
-                user_name = user_name_search(end_id['uid'])
-                u_nodes_list[end_id['uid']] = user_name
-                event_relation.append([mid_uid,relation2,end_id['uid']])
-            if end_id.has_key('envent_id'):
-                event_name2 = event_name_search(end_id['envent_id'])
-                e_nodes_list[end_id['envent_id']] = event_name2
-                event_relation.append([mid_uid, relation2,end_id['envent_id']])
-    for mid_eid in mid_eid_list:
-        c_string = 'START s1 = node:event_index(event="'+str(mid_eid)+'") '
-        c_string += 'MATCH (s1)-[r2]->(s2:Event) return s1,r2,s2 LIMIT 5'
-        eid_result = graph.run(c_string)
-        for i in eid_result:
-            relation2 = i['r2'].type()
-            end_id = dict(i['s2'])
-            if end_id.has_key('uid'):
-                user_name = user_name_search(end_id['uid'])
-                u_nodes_list[end_id['uid']] = user_name
-                event_relation.append([mid_eid,relation2,end_id['uid']])
-            if end_id.has_key('envent_id'):
-                event_name2 = event_name_search(end_id['envent_id'])
-                e_nodes_list[end_id['envent_id']] = event_name2
-                event_relation.append([mid_eid, relation2,end_id['envent_id']])
+    #     for i in uid_result:
+    #         relation2 = i['r2'].type()
+    #         end_id = dict(i['s2'])
+    #         if end_id.has_key('uid'):
+    #             user_name = user_name_search(end_id['uid'])
+    #             u_nodes_list[end_id['uid']] = user_name
+    #             event_relation.append([mid_uid,relation2,end_id['uid']])
+    #         if end_id.has_key('envent_id'):
+    #             event_name2 = event_name_search(end_id['envent_id'])
+    #             e_nodes_list[end_id['envent_id']] = event_name2
+    #             event_relation.append([mid_uid, relation2,end_id['envent_id']])
+    # for mid_eid in mid_eid_list:
+    #     c_string = 'START s1 = node:event_index(event="'+str(mid_eid)+'") '
+    #     c_string += 'MATCH (s1)-[r2]->(s2:Event) return s1,r2,s2 LIMIT 5'
+    #     eid_result = graph.run(c_string)
+    #     for i in eid_result:
+    #         relation2 = i['r2'].type()
+    #         end_id = dict(i['s2'])
+    #         if end_id.has_key('uid'):
+    #             user_name = user_name_search(end_id['uid'])
+    #             u_nodes_list[end_id['uid']] = user_name
+    #             event_relation.append([mid_eid,relation2,end_id['uid']])
+    #         if end_id.has_key('envent_id'):
+    #             event_name2 = event_name_search(end_id['envent_id'])
+    #             e_nodes_list[end_id['envent_id']] = event_name2
+    #             event_relation.append([mid_eid, relation2,end_id['envent_id']])
 
-    return {'total_event':len(event_id_list),'user_nodes':u_nodes_list,'event_nodes':e_nodes_list,\
-            'relation':event_relation}   
+    # return {'total_event':len(event_id_list),'user_nodes':u_nodes_list,'event_nodes':e_nodes_list,\
+    #         'relation':event_relation}   
 
-def search_related_e_card(item,layer):
+def search_related_e_card(item,layer):  #简单搜索，事件卡片
     query_body = {
         "query":{
             'bool':{
@@ -1437,8 +1487,51 @@ def search_related_e_card(item,layer):
 
     return result_card
 
+def advance_search_card_e(name_results,layer): #高级搜索 事件卡片
+    only_uid = name_results
+    u_nodes_list = {}
+    user_uid_list = []
+    for i in name_results:
+        uid = i
+        uname = event_name_search(i)
+        u_nodes_list[uid] = uname
+        user_uid_list.append([uid, uname])
+    print  len(user_uid_list),'========='
+    if layer == '0':
+        result_card =event_detail_search(only_uid,'start_ts')
+    if layer == '1':
+        for uid_value in user_uid_list: 
+            c_string = 'START s0 = node:event_index(event="'+str(uid_value[0])+'") '
+            c_string += 'MATCH (s0)-[r1]-(s1:Event) return s0,r1,s1 LIMIT 100'
+            result = graph.run(c_string)
+            for i in list(result):
+                m_id = dict(i['s1'])['event_id']
+                only_uid.append(m_id)
+        result_card = event_detail_search(only_uid, 'start_ts')
+    if layer == '2':
+        for uid_value in user_uid_list: 
+            c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
+            c_string += 'MATCH (s0)-[r1]-()-[r]-(s1:Event) return s1 LIMIT 100'
+            result = graph.run(c_string)
+            for i in list(result):
+                m_id = dict(i['s1'])['event_id']
+                only_uid.append(m_id)
+        result_card = event_detail_search(only_uid, 'start_ts')
 
-def advance_search_card(name_results,layer):
+    # if layer == 'all':
+    #     uid_list_all =[]
+    #     result = search_related_event_f(item)
+    #     uid_dict = result['event_nodes']
+    #     for k,v in uid_dict.iteritems():
+    #         uid_list_all.append(k)
+    #     result_card = event_detail_search(uid_list_all,'start_ts')
+
+    return result_card
+
+
+
+
+def advance_search_card(name_results,layer):#高级搜索  人物卡片
     only_uid = name_results
     u_nodes_list = {}
     user_uid_list = []
@@ -1448,6 +1541,8 @@ def advance_search_card(name_results,layer):
         u_nodes_list[uid] = uname
         user_uid_list.append([uid, uname])
     print  len(user_uid_list),'========='
+    if layer == '0':
+        result_card = related_user_search(name_results,'activeness')
     if layer == '1':
         for uid_value in user_uid_list: 
             c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
@@ -1467,12 +1562,146 @@ def advance_search_card(name_results,layer):
                 only_uid.append(m_id)
         result_card = related_user_search(only_uid, 'activeness')
 
-    if layer == 'all':
-        uid_list_all =[]
-        result = search_related_user(item)
-        uid_dict = result['user_nodes']
-        for k,v in uid_dict.iteritems():
-            uid_list_all.append(k)
-        result_card = related_user_search(uid_list_all,'activeness')
+    # if layer == 'all':
+    #     uid_list_all =[]
+    #     result = search_related_user(item)
+    #     uid_dict = result['user_nodes']
+    #     for k,v in uid_dict.iteritems():
+    #         uid_list_all.append(k)
+    #     result_card = related_user_search(uid_list_all,'activeness')
 
     return result_card
+
+def advance_search_graph_e(name_list,layer, relation_list):  #高级搜索，事件图谱
+    only_eid = []
+    user_uid_list = []
+    u_nodes_list = {}
+    for i in name_list:
+        uid = i
+        uname = user_name_search(i)
+        only_eid.append(uid)
+        u_nodes_list[uid] = uname
+        user_uid_list.append([uid, uname])
+    print  len(user_uid_list)
+    relation = get_graph_single_e(only_eid, '', relation_list, layer)
+    # relation.extend(relation_list_o)
+    relation = [i for i in set(relation)]
+    result = draw_graph_e(relation)
+    for i in only_eid:
+        try:
+            result['map_eid'].append(i)
+        except:
+            result['map_eid'] = []
+            result['map_eid'].append(i)
+
+    result['map_eid'] = [i for i in set(result['map_eid'])]
+    for ii in only_eid:
+        try:
+            result['node']['event_id'][ii] = u_nodes_list[ii]
+        except:
+            result['node']['event_id']={}
+            result['node']['event_id'][ii] = u_nodes_list[ii]
+        print len(result['node']['event_id']), len(result['map_eid'])
+    return result    
+    # e_nodes_list = {}
+    # user_relation = []
+    # mid_uid_list = []  #存放第一层的数据，再以这些为起始点，扩展第二层
+    # mid_eid_list = []
+    # for uid_value in user_uid_list: 
+    #     c_string = 'START s0 = node:event_index(event="'+str(uid_value[0])+'") '
+    #     if rel_type:
+    #         rel_type_list = rel_type.split(',')
+    #         c_string += 'MATCH (s0)-[r1]-(s1) WHERE type(r1) in '+ json.dumps(rel_type_list)  +') return s0,r1,s1 LIMIT 1'
+    #     else:
+    #         c_string += 'MATCH (s0)-[r1]-(s1) return s0,r1,s1 LIMIT 1'
+    #     result = graph.run(c_string)
+    #     # print list(result),'-----------------'
+    #     for i in list(result):
+    #         start_id = i['s0']['uid']
+    #         # # start_id = s0['uid']
+    #         relation1 = i['r1'].type()
+    #         m_id = dict(i['s1'])
+    #         if m_id.has_key('uid'):
+    #             middle_id = m_id['uid']
+    #             mid_uid_list.append(middle_id)
+    #             user_name = user_name_search(middle_id)
+    #             u_nodes_list[str(middle_id)] = user_name
+    #             user_relation.append([start_id,relation1,middle_id])
+    #         if m_id.has_key('envent_id'):
+    #             middle_id = m_id['envent_id']
+    #             mid_eid_list.append(middle_id)
+    #             event_name = event_name_search(middle_id)
+    #             e_nodes_list[str(middle_id)] = event_name
+    #             user_relation.append([start_id,relation1,middle_id])
+    # return {'total_user':len(user_uid_list),'user_nodes':u_nodes_list,'event_nodes':e_nodes_list,\
+    #         'relation':user_relation,'draw_nodes_length':len(u_nodes_list)}
+
+
+def advance_search_graph(name_list,layer, relation_list):  #高级搜索，人物图谱,
+    only_uid = []
+    user_uid_list = []
+    u_nodes_list = {}
+    for i in name_list:
+        uid = i
+        uname = user_name_search(i)
+        only_uid.append(uid)
+        u_nodes_list[uid] = uname
+        user_uid_list.append([uid, uname])
+    print  len(user_uid_list)
+
+    relation = get_graph_single_u(only_uid, '', relation_list, layer)
+    # print relation,'len(relation)'
+    # relation.extend(origin_relation)
+    relation = [i for i in set(relation)]
+    result = draw_graph_u(relation)
+    for i in only_uid:
+        try:
+            result['map_uid'].append(i)
+        except:
+            result['map_uid'] = []
+            result['map_uid'].append(i)
+    result['map_uid'] = [i for i in set(result['map_uid'])]
+    for ii in only_uid:
+        try:
+            result['node']['uid'][ii] = user_name_search(ii)
+        except:
+            result['node']['uid']={}
+            result['node']['uid'][ii] = user_name_search(ii)
+
+    # print len(result['node']['uid']), len(result['map_uid'])
+    return result
+
+
+
+    # e_nodes_list = {}
+    # user_relation = []
+    # mid_uid_list = []  #存放第一层的数据，再以这些为起始点，扩展第二层
+    # mid_eid_list = []
+    # for uid_value in user_uid_list: 
+    #     c_string = 'START s0 = node:node_index(uid="'+str(uid_value[0])+'") '
+    #     if rel_type:
+    #         rel_type_list = rel_type.split(',')
+    #         c_string += 'MATCH (s0)-[r1]-(s1) WHERE type(r1) in '+ json.dumps(rel_type_list)  +') return s0,r1,s1 LIMIT 1'
+    #     else:
+    #         c_string += 'MATCH (s0)-[r1]-(s1) return s0,r1,s1 LIMIT 1'
+    #     result = graph.run(c_string)
+    #     # print list(result),'-----------------'
+    #     for i in list(result):
+    #         start_id = i['s0']['uid']
+    #         # # start_id = s0['uid']
+    #         relation1 = i['r1'].type()
+    #         m_id = dict(i['s1'])
+    #         if m_id.has_key('uid'):
+    #             middle_id = m_id['uid']
+    #             mid_uid_list.append(middle_id)
+    #             user_name = user_name_search(middle_id)
+    #             u_nodes_list[str(middle_id)] = user_name
+    #             user_relation.append([start_id,relation1,middle_id])
+    #         if m_id.has_key('envent_id'):
+    #             middle_id = m_id['envent_id']
+    #             mid_eid_list.append(middle_id)
+    #             event_name = event_name_search(middle_id)
+    #             e_nodes_list[str(middle_id)] = event_name
+    #             user_relation.append([start_id,relation1,middle_id])
+    # return {'total_user':len(user_uid_list),'user_nodes':u_nodes_list,'event_nodes':e_nodes_list,\
+    #         'relation':user_relation,'draw_nodes_length':len(u_nodes_list)}

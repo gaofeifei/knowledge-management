@@ -198,6 +198,11 @@ a,a:link,a:hover,a:visited,a:active {
     height: 45px;
     margin-top: -20px;
 }
+#container #similar .definite .deftwo .play3,#container #similar .samevent .sametwo .play3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
 #container #similar .definite .deftwo .play3 .bus1,#container #similar .samevent .sametwo .play3 .bus1{
     font-weight: bold;
     display: inline-block;
@@ -212,6 +217,10 @@ a,a:link,a:hover,a:visited,a:active {
     padding: 3px 2px 0 2px;
     border-radius: 5px;
     font-size: 8px;
+    width: 35px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
 }
 #container #similar .definite .deftwo .play4 ,
 #container #similar .samevent .sametwo .play4 {

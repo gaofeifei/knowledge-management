@@ -333,7 +333,8 @@
         window.location.href='/sysadmin/focus/';
     });
     $('.magnify').on('click',function () {
-        window.location.href='/index/event/';
+        var cont=$('#nav_top .search .ts_r .word').val();
+        window.location.href='/index/event/?t_uid='+cont;
     });
     ~function(){
         var title = window.parent.document.title;

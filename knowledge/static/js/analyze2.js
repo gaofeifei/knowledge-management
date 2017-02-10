@@ -155,7 +155,7 @@ function theme_newbuild_searchut() {
             var data=eval(data);
             var str='';
             function getLocalTime(nS) {
-                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18);
+                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10);
             };
             var weizhi,biaoqian,shuoming,photo;
             $.each(data,function (index,item) {
@@ -180,23 +180,26 @@ function theme_newbuild_searchut() {
                     shuoming=item.user_tag;
                 };
                 str+='<div class="play">'+
-                    '<span id="uid" style="display:none;">'+item.en_name+'</span>'+
-                    '<div class="play1">'+
-                    '<div class="p11">'+
-                    '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
-                    '--><img src="/static/image/dingwei.png" title="位置"><!--'+
-                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
-                    '--><img class="xin" src="/static/image/heart.png" alt="">'+
-                    '</div>'+
+                    '<div class="play1" style="float:left;">'+
+                    '<div class="p11" style="text-align: left;padding-left: 30px">'+
+                    '<span class="xingming" title="'+item.name+'" ' +
+                    'style="display:block;color: #fff;font-weight: 900;font-size: 18px;width: 80px;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;">' +item.name+'</span>'+
                     '<div class="p22">'+
-                    '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
+                    '<span class="fasheng" style="width: 80px">发生时间：</span>'+
                     '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
                     '</div>'+
                     '</div>'+
-                    '<img class="play2" src="'+photo+'" alt="">'+
-                    '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
+                    '</div>'+
+                    '<div style="float:left;margin: 10px 0 0 34px"><div style="display: inline-block"><img src="/static/image/dingwei.png" title="位置"><!--'+
+                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+                    '--><img class="xin" src="/static/image/heart2.png" alt="">' +
+                    '<div><div style="text-align: center"><img src="/static/image/weiboshu.png" title="微博数"><!--'+
+                    '--><span class="weiboshu" style="font-size: 8px">'+item.weibo_counts+'</span></div>'+
+                    '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+item.uid_counts+'</span></div></div></div>'+
+                    '<img class="play2" style="margin-top: -50px" src="/static/image/xuyuyu.png" alt=""></div>'+
+                    '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 39px;vertical-align:bottom;">'+
                     '<a class="bus1">业务标签：</a>'+
-                    '<a class="bus2">'+biaoqian+'</a>'+
+                    '<a class="bus2" title="'+biaoqian+'">'+biaoqian+'</a>'+
                     '</div>'+
                     '<div class="play4">'+
                     '<p class="shuoming">'+
@@ -265,15 +268,15 @@ function theme_newbuild_searchut() {
 
             });
 
-            var heart=$(".con_bot .play .play1 .p11 .xin");
+            var heart=$(".con_bot .play .xin");
             $.each(heart,function(index,item){
                 var chan=1;
                 $(item).on('click',function(){
                     if (chan==1) {
-                        $(this).attr('src','/static/image/focus.png');
+                        $(this).attr('src','/static/image/focus2.png');
                         chan=2;
                     }else {
-                        $(this).attr('src','/static/image/heart.png');
+                        $(this).attr('src','/static/image/heart2.png');
                         chan=1;
                     }
                 })
@@ -301,14 +304,14 @@ function theme_newbuild_searchut() {
                 var changecolor=1;
                 $(item).find(".play5").on('click',function(){
                     if (changecolor==1) {
-                        $(this).parent('.play').css({backgroundColor:'#09F'});
+                        $(this).parent('.play').find('.xingming').css({color:'red'});
                         changecolor=2;
                         node_ids.push($(this).siblings('#uid').html());
                         node_ids2.push($(this).siblings('.play1').find('.xingming').html());
                         $(this).find('a').text('取消专题');
                         $('#join2').modal("show");
                     } else {
-                        $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                        $(this).parent('.play').find('.xingming').css({color:'#000'});
                         changecolor=1;
                         var $a = $(this).siblings('#uid').html();
                         node_ids.removeByValue($a);

@@ -392,7 +392,8 @@
                                 </select>
                                 <input type="text" class="shuru2" placeholder="请输入群体名称"/>
                             </form>
-                            <div class="shij">加入事件
+                            <div class="shij">
+                                加入事件
                                 <div class="sjr"></div>
                                 <!-- <a class="sj1"> <b class="icon icon-remove det"></b> </a> -->
                             </div>
@@ -531,9 +532,9 @@ function getLocalTime(nS) {
         function nums(s) {
             var url;
             if (s==1) {
-                url = '/group/group_weibo/?group_name='+'法律人士'+'&sort_flag=retweeted';
+                url = '/group/group_weibo/?group_name='+groupname+'&sort_flag=retweeted';
             }else {
-                url = '/group/group_weibo/?group_name='+'法律人士'+'&sort_flag=sensitive';
+                url = '/group/group_weibo/?group_name='+groupname+'&sort_flag=sensitive';
             };
         
             place.call_request(url,territory);
@@ -541,10 +542,14 @@ function getLocalTime(nS) {
         nums(1);
         $("#container #total .twleft .lfone").on('click',function () {
             // $("#container #total .twright").empty();
+            $(this).css({backgroundColor:'#00cc66'});
+            $("#container #total .twleft .lftwo").css({backgroundColor:'#09F'});
             nums(1);
         });
         $("#container #total .twleft .lftwo").on('click',function () {
             // $("#container #total .twright").empty();
+            $(this).css({backgroundColor:'#09F'});
+            $("#container #total .twleft .lfone").css({backgroundColor:'#00cc66'});
             nums(2);
         });
         function Draw_weibo_table(data){

@@ -142,11 +142,11 @@
                     <button class="add22" type="button" data-toggle="modal">添加</button>
                 </p>              
             </p>
-            <div class="assright2" style='padding:10px 0 10px 10px;'>
+            <div class="assright2" style='padding:5px 0 5px 10px;'>
                 <img src="/static/image/left.png" alt="" class="left" style='margin-right:5px;'>
                 <div id="case" style="float:left;width:490px;overflow: hidden;">
-                    <div id='crmid' style='width:490px;transition: all 0.5s linear;'>
-                        <div id="run" style='width:15000px;'>
+                    <div id='crmid' style=''>
+                        <div id="run" style="transition: all 1s linear;height:370px;text-align:center;">
                            
                         </div>
                     </div>
@@ -543,157 +543,52 @@
         $(this).attr('src','/static/image/right.png');
     });
 
-    var go = 66;
-    $('#container .associat .assright .assright2 .right').on('click',function () {
-        if(go==66){
-            var plays=$("#container .associat .assright .assright2 #crmid");
-            $(plays).css({
-                "-webkit-transform":"translateX(-500px)",
-                "-moz-transform":"translateX(-500px)",
-                "-ms-transform":"translateX(-500px)",
-                "-o-transform":"translateX(-500px)",
-                "transform":"translateX(-500px)",
-            });
-            go = 88;
-        } else{
-            var plays=$("#container .associat .assright .assright2 #crmid");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 66;
-        }
+    var theme_url='/index/event_detail/?event_name='+eventname;
+    $.ajax({
+        url: theme_url,
+        type: 'GET',
+        dataType: 'json',
+        async: true,
+        success:the_card,
     });
-    $('#container .associat .assright .assright2 .left').on('click',function () {
-        if(go==66){
-            var plays=$("#container .associat .assright .assright2 #crmid");
-            $(plays).css({
-                "-webkit-transform":"translateX(-500px)",
-                "-moz-transform":"translateX(-500px)",
-                "-ms-transform":"translateX(-500px)",
-                "-o-transform":"translateX(-500px)",
-                "transform":"translateX(-500px)",
-            });
-            go = 88;
-        } else{
-            var plays=$("#container .associat .assright .assright2 #crmid");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 66;
-        }
-    });
-    var play=$("#container .associat .play");
-        $.each(play,function (index,item) {
-            $(item).hover(function () {
-                $(item).find(".play5").css({
-                    "-webkit-transform":"translateY(-40px)",
-                    "-moz-transform":"translateY(-40px)",
-                    "-ms-transform":"translateY(-40px)",
-                    "-o-transform":"translateY(-40px)",
-                    "transform":"translateY(-40px)",
-                })
-            },function () {
-                $(item).find(".play5").css({
-                    "-webkit-transform":"translateY(40px)",
-                    "-moz-transform":"translateY(40px)",
-                    "-ms-transform":"translateY(40px)",
-                    "-o-transform":"translateY(40px)",
-                    "transform":"translateY(40px)",
-                })
-            });
-        });
-        $.each(play,function (index,item) {
-            var changecolor=1;
-            $(item).find(".play5").on('click',function(){
-                if (changecolor==1) {
-                    $(this).parent('.play').css({backgroundColor:'#09F'});
-                    changecolor=2;
-                    $('#join2').modal("show");
-                } else {
-                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
-                    changecolor=1;
-                }
-            }); 
-        });
-        //
-        // $("#container .correlation2 .twleft .lfone").on('click',function(){
-        //     $('#container .correlation .correlation2 .twright').show();
-        //     $('#container .correlation .correlation2 .twright2').hide();
-        // });
-        // $("#container .correlation2 .twleft .lftwo").on('click',function(){
-        //     $('#container .correlation .correlation2 .twright').hide();
-        //     $('#container .correlation .correlation2 .twright2').show();
-        // });  
-
-        function kapian(){
-            function place() {
-                //this.ajax_method='GET'; // body...
-            }
-            place.prototype= {
-                call_request:function(url,callback) {
-                    $.ajax({
-                        url: url,
-                        type: 'GET',
-                        dataType: 'json',
-                        async: true,
-                        success:callback
-                    });
-                },
+    function the_card (data) {
+        var date=eval(data);
+        console.log(data)
+        var location,tag,description,srcimg,name;
+            function getLocalTime(nS) {     
+               return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10).replace(/:\d{1,2}$/,' ');    
+            }  
+            if (data.photo_url=='unknown'||data.photo_url=='null') {
+                srcimg='/static/image/pangzi.png';
+            }else{
+                srcimg=data.photo_url;
+            }; 
+            if (data.location=='unknown'||data.location=='null') {
+                location='未知';
+            }else {
+                location=data.location;
             };
-            function territory(data) {
-                var data=eval(data);
-                var location,tag,description,photo;
-                function getLocalTime(nS) {     
-                   return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10).replace(/:\d{1,2}$/,' ');     
-                }
-                if (data.photo_url=='null') {
-                    photo='/static/image/xuyuyu2.jpg';
-                }else {
-                    photo=data.photo_url;
-                };   
-                if (data.location=='null') {
-                    location='暂无';
-                }else {
-                    location=data.location;
-                };
-                if (data.user_tag=='null') {
-                    tag='暂无';
-                }else {
-                    tag=data.user_tag;
-                };
-                if (data.description=='null') {
-                    description='暂无';
-                }else {
-                    description=data.description;
-                };
-                $('#container .keyman .kmlf .kmimg').attr('src',photo);
-                $("#container .keyman .kmrg .rgname .xingming").html(themename);
-                $("#container .keyman .kmrg .rgname .difang").append(location);
-                $("#container .keyman .kmrg .rgname .influence").append(getLocalTime(data.start_ts));
-                $("#container .keyman .kmrg .rgname .huoyuedu").append(data.weibo_counts);
-                $("#container .keyman .kmrg .kmrg2 .zhuce").append(data.uid_counts);
-                $("#container .keyman .kmrg .kmrg2 .biao").append('<span class="yewu">'+tag+'</span>');
-                $("#container .keyman .kmrg .kmrg2 .times1").append(getLocalTime(data.start_ts));
-                $("#container .keyman .kmrg .kmrg2 .times2").append(getLocalTime(data.end_ts));
-                $("#container .keyman .kmrg .kmrg2 p .miaoshu").append(description);
-                $("#container .keyman .kmrg .kmrg2 .rgcreat .date").append(getLocalTime(data.submit_ts));
-                $("#container .keyman .kmrg .kmrg2 p.rgcreat .peson").append(data.submit_user);
+            if (data.user_tag=='null') {
+                tag='暂无';
+            }else {
+                tag=data.user_tag;
             };
-            var place=new place();
-            function nums() {
-                var url = '/index/event_detail/?event_name='+themename;
-                place.call_request(url,territory);
-            }
-            nums();
-        }
-        kapian();
+            if (data.description=='null') {
+                description='暂无';
+            }else {
+                description=data.description;
+            };
+            $('#container .keyman .kmlf .kmimg').attr('src',srcimg)
+            $("#container .keyman .kmrg .rgname .xingming").append(themename);
+            $("#container .keyman .kmrg .rgname .difang").append(location);
+            $("#container .keyman .kmrg .rgname .influence").append(getLocalTime(data.start_ts));
+            $("#container .keyman .kmrg .rgname .huoyuedu").append(data.weibo_counts);
+            $("#container .keyman .kmrg .kmrg2 .zhuce").append(tag);
+            $("#container .keyman .kmrg .kmrg2 .times1").append(getLocalTime(data.start_ts));
+            $("#container .keyman .kmrg .kmrg2 .times2").append(getLocalTime(data.end_ts));
+            $("#container .keyman .kmrg .kmrg2 p .miaoshu").append(description);
+            $("#container .keyman .kmrg .kmrg2 .rgcreat .date").append(getLocalTime(data.submit_ts));
+            $("#container .keyman .kmrg .kmrg2 .person").append(data.submit_user);
+    }
 </script>
 {% endblock %}

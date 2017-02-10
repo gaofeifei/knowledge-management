@@ -174,65 +174,89 @@ a,a:link,a:hover,a:visited,a:active {
 #container .con_bot .add #shijian .bag .play,#shijian2 .bag .play,.xinzeng .play {
     width: 240px;
     padding: 5px;
-    height: 160px;
+    height: 170px;
     margin-right: 5px;
-    margin-top: 15px;
-    border:1px solid #0099FF;
-    box-shadow: 2px 2px 2px #878787;
-    transition: all 0.8s linear;
+    margin-top: 10px;
+    background: url("/static/image/the_card.jpg") no-repeat;
+    background-size: 240px 170px;
     background-color: #d2dcf7;
+    border-radius:5px;
+    transition: all 1s linear;
     overflow: hidden;
     display: inline-block;
 }
 #container .con_bot .add #shijian .bag .play .play1,#shijian2 .bag .play .play1,.xinzeng .play .play1 {
-    width: 170px;
-    margin-top: 5px;
-    float: left;
+    width: 80px;
+    margin-top: 55px;
 }
 #shijian2 .play1 .p11 span,#shijian2 .play1 .p11 img,
 #container #shijian .play1 .p11 span,#container #shijian .play1 .p11 img,
 .xizneng .play1 .p11 span,.xinzeng .play1 .p11 img {
     display: inline-block;
+    color: #fff;
+}
+#container .play1 .p22 span {
+    display: inline-block;
+    color: #fff;
+    font-size: 8px;
 }
 #container #shijian .play2,#shijian2 .play2,.xinzeng .play2 {
-    float: left;
-    width: 50px;
-    height: 55px;
+    display: inline-block;
+    width: 40px;
+    height: 45px;
+    margin-top: -20px;
+}
+#container #shijian .play3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
 }
 #container #shijian .play3 .bus1,#shijian2 .play3 .bus1,.xinzeng .play3 .bus1 {
-    font-weight: bold;
     display: inline-block;
     padding-top: 2px;
     color: #000;
+    font-size: 10px;
 }
 #container #shijian .play3 .bus2,#shijian2 .play3 .bus2,.xinzeng .play3 .bus2 {
-    color: #000;
     display: inline-block;
+    color: black;
     margin-left: 5px;
-    background-color: #0099FF;
+    background-color: #999;
     padding: 3px 2px 0 2px;
     border-radius: 5px;
     font-size: 8px;
+    width: 35px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+#container #shijian .play4,#shijian2 .play4,.xinzeng .play4 {
+    float: right;
+    width: 100px;
+    height: 50px;
+    margin-right: 10px;
+    overflow: hidden;
+    text-overflow:ellipsis;
 }
 #container #shijian .play4 .shuoming,#shijian2 .play4 .shuoming,.xinzeng .play4 .shuoming {
+    text-indent:10px;
     margin-top: 10px;
     font-size: 12px;
     color: rgba(75, 75, 75, 0.84);
 }
 #container #shijian .play5,#shijian2 .play5,.xinzeng .play5 {
     position: relative;
-    top:-25px;
+    top:3px;
     left: -5px;
     z-index: 10;
-    width: 239px;
-    height: 40px;
-    transition: all 0.3s linear;
+    transition: all .4s linear;
+    clear: both;
 }
 #container #shijian .play5 a,#shijian2 .play5 a,.xinzeng .play5 a {
     display: block;
-    width: 100%;
+    width: 240px;
     height: 40px;
-    background-color: #0099FF;
+    background-color: #44b4e6;
     line-height: 40px;
     font-size: 12px;
     color: white;

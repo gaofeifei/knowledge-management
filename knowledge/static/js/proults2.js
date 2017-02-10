@@ -52,13 +52,16 @@ function baohanshijian() {
                 '</div>'+
                 '</div>'+
                 '</div>'+
-                '<div style="float:left;margin: 30px 0 0 30px"><div style="display: inline-block"><img src="/static/image/dingwei.png" title="位置"><!--'+
+                '<div style="float:left;margin: 10px 0 0 34px"><div style="display: inline-block"><img src="/static/image/dingwei.png" title="位置"><!--'+
                 '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
-                '--><img class="xin" src="/static/image/heart.png" alt=""></div>'+
-                '<img class="play2" src="/static/image/xuyuyu.png" alt=""></div>'+
+                '--><img class="xin" src="/static/image/heart2.png" alt="">' +
+                '<div><div style="text-align: center"><img src="/static/image/weiboshu.png" title="微博数"><!--'+
+                '--><span class="weiboshu" style="font-size: 8px">'+item.weibo_counts+'</span></div>'+
+                '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+item.uid_counts+'</span></div></div></div>'+
+                '<img class="play2" style="margin-top: -50px" src="/static/image/xuyuyu.png" alt=""></div>'+
                 '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 30px;vertical-align:bottom;">'+
                 '<a class="bus1">业务标签：</a>'+
-                '<a class="bus2">'+biaoqian+'</a>'+
+                '<a class="bus2" title="'+biaoqian+'">'+biaoqian+'</a>'+
                 '</div>'+
                 '<div class="play4">'+
                 '<p class="shuoming">'+
@@ -142,7 +145,7 @@ function baohanshijian() {
                 })
             });
         });
-        $.each($("play"),function (index,item) {
+        $.each($(".play"),function (index,item) {
             var changecolorq=1;
             $(item).find(".play5").on('click',function(){
                 if (changecolorq==1) {
@@ -162,10 +165,10 @@ function baohanshijian() {
             var chan=1;
             $(item).on('click',function(){
                 if (chan==1) {
-                    $(this).attr('src','/static/image/focus.png');
+                    $(this).attr('src','/static/image/focus2.png');
                     chan=2;
                 }else {
-                    $(this).attr('src','/static/image/heart.png');
+                    $(this).attr('src','/static/image/heart2.png');
                     chan=1;
                 }
             })
@@ -224,13 +227,7 @@ function guanlianrenwu() {
             return newstr;
         }
         $.each(data,function (index,item) {
-            var fensi,influe,name,mingan,tag,photo;
-            // var fensizfc=item.fansnum.toString();
-            // if (fensizfc.length>=5){
-            //     var fensi2=fensizfc.substr(0,fensizfc.length-3);
-            //     var fensi3=insert_flg(fensi2,'.',fensi2.length-4);
-            //     fensi=fensi3.substring(0,fensi3.length-1)+'万';
-            // }
+            var influe,name,mingan,tag,photo;
             if (item.influence==''||item.influence=='unknown'){
                 influe=0;
             }else {
@@ -270,14 +267,14 @@ function guanlianrenwu() {
                 '<div style="float: left;width: 110px;margin-left: 10px">' +
                 '<div class="play3" style="text-align: left">'+
                 '<a class="bus1">业务标签：</a>'+
-                '<a class="bus2">'+tag+'</a>'+
+                '<a class="bus2" title="'+tag+'">'+tag+'</a>'+
                 '</div>'+
                 '<div class="play1">'+
                 '<div class="p11">'+
                 '<span id="uid" style="display: none">'+item.uid+'</span>'+
                 '</div>'+
                 '<div class="p22" style="float:left;margin-top: -5px">'+
-                '<div><img src="/static/image/fensishu.png" alt=""'+
+                '<div><img src="/static/image/fensishu.png"'+
                 'title=\'粉丝数\'><!--'+
                 '--><span class="difang" style="font-size: 8px">'+item.fansnum+'</span>'+
                 '<img src="/static/image/mingan.png" title="敏感度">'+
@@ -382,10 +379,10 @@ function guanlianrenwu() {
             var chan=1;
             $(item).on('click',function(){
                 if (chan==1) {
-                    $(this).attr('src','/static/image/focus.png');
+                    $(this).attr('src','/static/image/focus2.png');
                     chan=2;
                 }else {
-                    $(this).attr('src','/static/image/heart.png');
+                    $(this).attr('src','/static/image/heart2.png');
                     chan=1;
                 }
             })

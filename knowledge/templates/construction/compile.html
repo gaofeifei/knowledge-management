@@ -73,9 +73,10 @@
     <div class="conright2" style="display: none">
         <div class="editor">
             <div class="checkbox editor1">
-                <label>
+                输入节点1
+                <!-- <label>
                     <input type="checkbox" id='node1'/> 输入节点1
-                </label>
+                </label> -->
             </div>
             <input type="text" class="editor111" style="width: 170px;padding: 5px;font-size: 12px"/>
             <select name="" id="list77" onchange='choselx1(this.value)' 
@@ -85,9 +86,10 @@
                 <option value="事件">事件</option>
             </select>
             <div class="checkbox editor2" style="margin-left:20px">
-                <label>
+                输入节点2
+                <!-- <label>
                     <input type="checkbox" id='node2'/> 输入节点2
-                </label>
+                </label> -->
             </div>
             <input type="text" class="editor222" style="width: 170px;padding: 5px;font-size: 12px"/>
             <select name="" id="list88" onchange='choselx2(this.value)'
@@ -165,7 +167,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="please" tabindex="-2">
+<!-- <div class="modal fade" id="please" tabindex="-2">
     <div class="modal-dialog">
         <div class=modal-content>
             <div class="modal-header">
@@ -187,7 +189,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <div class="modal fade" id="fail" tabindex="-1">
     <div class="modal-dialog">
         <div class=modal-content>
@@ -612,6 +614,16 @@
     $('#container .conright .crt1 .crt133').on('click',function(){
         $("#container .conright .crt2").show(20);
     })
+
+    $('#container .conleft .lfone').on('click',function () {
+        $(this).css({backgroundColor:'#00cc66'});
+        $('#container .conleft .lftwo').css({backgroundColor:'#0099ff'});
+    });
+    $('#container .conleft .lftwo').on('click',function () {
+        $(this).css({backgroundColor:'#00cc66'});
+        $('#container .conleft .lfone').css({backgroundColor:'#0099ff'});
+    })
+
     $.each($('.menuList'),function(index,item){
         $(item).css({display:'none'});
         if (index==1) {

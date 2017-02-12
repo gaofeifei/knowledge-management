@@ -17,13 +17,16 @@ function choselx2(value) {
 function guanxibianji() {
     var node1,node2,oldrel,newrel;
     $("#container .conright2 .editor .editor3").on('click',function () {
-        if ($("#node1").is(':checked')&&$("#node2").is(':checked')){
-            node1=$("#container .conright2 .editor .editor111").val();
-            node2=$("#container .conright2 .editor .editor222").val();
-            go();
-        }else {
-            $('#please').modal("show");
-        }
+        node1=$("#container .conright2 .editor .editor111").val();
+        node2=$("#container .conright2 .editor .editor222").val();
+        go();
+        // if ($("#node1").is(':checked')&&$("#node2").is(':checked')){
+        //     node1=$("#container .conright2 .editor .editor111").val();
+        //     node2=$("#container .conright2 .editor .editor222").val();
+        //     go();
+        // }else {
+        //     $('#please').modal("show");
+        // }
 
     });
 

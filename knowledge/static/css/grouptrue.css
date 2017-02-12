@@ -154,60 +154,97 @@ a,a:link,a:hover,a:visited,a:active {
     margin-top: -180px;
     cursor: pointer;
 }
-/*#container #similar .definite .deftwo .play,#container #people .peotwo .peotwo2 .play {*/
-    /*width: 170px;*/
-    /*padding: 5px;*/
-    /*height: 110px;*/
-    /*margin-left: 30px;*/
-    /*margin-top: 15px;*/
-    /*border:2px solid #0099FF;*/
-    /*box-shadow: 2px 2px 2px #878787;*/
-    /*transition: all 1s linear;*/
-/*}*/
+#container #similar .definite .deftwo .play,#container #similar .samevent .sametwo .play {
+    width: 240px;
+    padding: 5px;
+    height: 170px;
+    margin-right: 5px;
+    margin-top: 10px;
+    background: url("/static/image/peo_card.jpg") no-repeat;
+    background-size: 240px 170px;
+    border-radius:5px;
+    transition: all 1s linear;
+}
 #container #similar .definite .deftwo .play,#container #similar .samevent .sametwo .play,
 #container #people .peotwo .peotwo2 .play{
     overflow: hidden;
     display: inline-block;
-    background-color: #d2dcf7;
+    /*background-color: #d2dcf7;*/
 }
-/*#container #similar .definite .deftwo .play .play1,*/
-/*#container #people .peotwo .peotwo2 .play .play1 {*/
-    /*width: 100px;*/
-    /*padding-left: 10px;*/
-    /*margin-top: 5px;*/
-    /*float: left;*/
-/*}*/
+#container #similar .play .play1 {
+    width: 110px;
+    text-align: left;
+}
 #container #similar .definite .deftwo .play1 .p11 span,#container #similar .definite .deftwo .play1 .p11 img,
 #container #similar .samevent .sametwo .play1 .p11 span,#container #similar .samevent .sametwo .play1 .p11 img,
 #container #people .peotwo .peotwo2 .play1 .p11 span,#container #people .peotwo .peotwo2 .play1 .p11 img {
     display: inline-block;
+    color: white;
+    font-size: 8px;
 }
-#container #similar .definite .deftwo .play2,#container #similar .samevent .sametwo .play2,
-#container #people .peotwo .peotwo2 .play2 {
+#container #similar .p22 span {
+    color: white;
+    font-size: 8px;
+}
+#container #similar .play .p_top span,
+#container #people  .play .play1 .p11 img {
     display: inline-block;
+}
+#container #similar .play2,
+#container #people .peotwo .peotwo2 .play2 {
     width: 50px;
     height: 55px;
-    margin-top: -20px;
+    display: block;
+    border: 3px solid black;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+#container #similar .play23 a {
+    display: block;
+    margin-top: 5px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 10px;
+}
+#container #similar .play23 a span {
+    display: block;
+    width: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    font-size: 8px;
+    font-weight: 100;
+    color: white;
+}
+
+#container #similar .play .play3 {
+    width: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
 }
 #container #similar .definite .deftwo .play3 .bus1,#container #similar .samevent .sametwo .play3 .bus1,
 #container #people .peotwo .peotwo2 .play3 .bus1 {
-    font-weight: bold;
-    display: inline-block;
-    padding-top: 2px;
-    color: #000;
+    display: block;
+    margin-top: 5px;
+    font-size: 8px;
+    font-weight: 100;
+    color: white;
 }
 #container #similar .definite .deftwo .play3 .bus2,#container #similar .samevent .sametwo .play3 .bus2,
 #container #people .peotwo .peotwo2 .play3 .bus2 {
-    color: #000;
-    display: inline-block;
     margin-left: 5px;
-    background-color: #0099FF;
+    display: inline-block;
     padding: 3px 2px 0 2px;
     border-radius: 5px;
     font-size: 8px;
+    font-weight: 100;
+    color: white;
+    background-color: #999;
 }
-#container #similar .definite .deftwo .play,#container #people .peotwo .peotwo2 .play,
-#container #people .peotwo2 #run2 .play,#container #similar .samevent .sametwo .play {
+#container #people .peotwo .peotwo2 .play,
+#container #people .peotwo2 #run2 .play {
     width: 240px;
     padding: 5px;
     height: 170px;
@@ -218,14 +255,11 @@ a,a:link,a:hover,a:visited,a:active {
     box-shadow: 2px 2px 2px #878787;
     transition: all 1s linear;
 }
-#container #similar .samevent .sametwo .play .play1,#container #people .peotwo2 #run2 .play .play1,
-#container #similar .definite .deftwo .play .play1 {
+#container #people .peotwo2 #run2 .play .play1 {
     width: 170px;
     margin-top: 5px;
     padding-left: 0;
     display: inline-block;
-}
-#container #people .peotwo .peotwo2 .play .play1 {
 }
 #container #people .peotwo2 #run2 .play .play1 .p11 span,
 #container #people .peotwo2 #run2 .play .play1 .p11 img {
@@ -246,10 +280,7 @@ a,a:link,a:hover,a:visited,a:active {
     font-weight: bold;
     font-size: 10px;
 }
-#container .play .play23 a span {
-    font-weight: 100;
-    padding-left: 20px;
-}
+
 #container #people .peotwo2 #run2 .play .play3 .bus1 {
     font-weight: bold;
     display: inline-block;
@@ -275,20 +306,19 @@ a,a:link,a:hover,a:visited,a:active {
 #container #similar .definite .deftwo .play .play5,
 #container #people .peotwo .peotwo2 .play .play5{
     position: relative;
-    top:-20px;
+    top:3px;
     left: -5px;
     z-index: 10;
-    width: 236px;
-    height: 40px;
     transition: all .4s linear;
+    clear: both;
 }
 #container #people .peotwo2 #run2 .play .play5 a,#container #similar .samevent .sametwo .play .play5 a,
 #container #similar .definite .deftwo .play .play5 a,
 #container #people .peotwo .peotwo2 .play .play5 a {
     display: block;
-    width: 100%;
+    width: 240px;
     height: 40px;
-    background-color: #0099FF;
+    background-color: #44b4e6;
     line-height: 40px;
     font-size: 12px;
     color: white;

@@ -107,43 +107,66 @@ people.prototype= {
 };
 function monkey(data) {
     var data=eval(data);
-    // console.log(data);
+    var str='';
     $.each(data,function (index,item) {
-        var name,influence,active;
-        if (item[0].uname==''||item[0].uname=='unknown') {
+        var influe,name,mingan,tag,photo;
+        if (item[0].influence==''||item[0].influence=='unknown'){
+            influe=0;
+        }else {
+            influe=item[0].influence.toFixed(0);
+        };
+        if (item[0].uname==''||item[0].uname=='unknown'){
             name=item[0].uid;
         }else {
             name=item[0].uname;
-        }
-        influence=item[0].influence.toFixed(0);
-        active=item[0].activeness.toFixed(2);
-        var str='';
+        };
+        var huoyue=item[0].activeness.toFixed(0);
+        if (item[0].sensitive==''||item[0].sensitive=='unknown'){
+            mingan=0;
+        }else {
+            mingan=item[0].sensitive.toFixed(0);
+        };
+        if (item[0].user_tag=='undefined'||item[0].user_tag=='unknown'||item[0].user_tag=='null'){
+            tag='无';
+        }else {
+            tag=item[0].user_tag;
+        };
+        if (item[0].photo_url==''||item[0].photo_url=='unknown'){
+            photo='/static/image/pangzi.png';
+        }else {
+            photo=item[0].photo_url;
+        };
         str+='<div class="play">'+
+            '<div class="p_top" style="width: 100%"><img class="play2" src="'+photo+'" alt="">'+
+            '<img class=\'xin\' style="margin-top: -24px;margin-left: 100px;" src="/static/image/heart.png">' +
+            '<span class="xingming" title="'+name+'" style="color: #000;display: block;' +
+            'width:100px;white-space:nowrap;margin: -13px auto 0;overflow: hidden;text-overflow: ellipsis">'+name+'</span>'+
+            '</div>'+
+            '<div class="play23" style="width: 110px;text-align: left;float: left">'+
+            '<a class="renzh1">认证类型:<span title="'+item[0].topic_string.replace(/&/g,'  ')+'" class="renzh11">'+item[0].topic_string.replace(/&/g,'  ')+'</span></a>'+
+            '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span title="'+item[0].topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item[0].topic_string.replace(/&/g,'  ')+'</span></a>'+
+            '</div>'+
+            '<div style="float: left;width: 110px;margin-left: 10px">' +
+            '<div class="play3" style="text-align: left">'+
+            '<a class="bus1">业务标签：</a>'+
+            '<a class="bus2" title="'+tag+'">'+tag+'</a>'+
+            '</div>'+
             '<div class="play1">'+
             '<div class="p11">'+
-            '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
-            '--><img class="xin" style="margin-left: 10px;" src="/static/image/heart.png"><!--'+
-            '--><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""><!--'+
+            '<span id="uid" style="display: none">'+item[0].uid+'</span>'+
+            '</div>'+
+            '<div class="p22" style="float:left;margin-top: -5px">'+
+            '<div><img src="/static/image/fensishu.png"'+
+            'title=\'粉丝数\'><!--'+
             '--><span class="difang" style="font-size: 8px">'+item[0].fansnum+'</span>'+
-            '</div>'+
-            '<div class="p22">'+
-            '<img style="margin-left: 10px;" src="/static/image/influence.png" alt="">'+
-            '<span class="influence">'+influence+'</span>'+
-            '<img src="/static/image/huoyuedu.png" alt="">'+
-            '<span class="huoyuedu">'+active+'</span>'+
-            '<img src="/static/image/mingan.png" alt="">'+
-            '<span class="mingan">'+item[0].sensitive+'</span>'+
+            '<img src="/static/image/mingan.png" title="敏感度">'+
+            '<span class="mingan">'+mingan+'</span></div>'+
+            '<div><img src="/static/image/influence.png" title="影响力">'+
+            '<span class="influence">'+influe+'</span>'+
+            '<img src="/static/image/huoyuedu.png" title="活跃度">'+
+            '<span class="huoyuedu">'+huoyue+'</span></div>'+
             '</div>'+
             '</div>'+
-            '<img class="play2" src="/static/image/pangzi.png" alt="">'+
-            '<div class="play23" style="margin-left: 15px;">'+
-            '<a href="###" class="renzh1">认证类型:<span class="renzh11">'+item[0].verified+'</span></a>'+
-            '<a href="###" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item[0].domain+'</span></a>'+
-            '</div>'+
-            '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
-            '<a class="bus1">业务标签：</a>'+
-            '<a class="bus2">律师</a>'+
-            '<a class="bus2">法律人士</a>'+
             '</div>'+
             '<!--<div class="play4">-->'+
             '<!--<p class="shuoming">-->'+
@@ -154,12 +177,64 @@ function monkey(data) {
             '<a>加入群体探索</a>'+
             '</div>'+
             '</div>';
-        $("#container .relevant .relevant3 .re3lf").append(str);
     });
-
+    $("#container .relevant .relevant3 .re3lf").append(str);
 
     //效果实现
-    var heart=$("#container .relevant2 .play .p11 .xin");
+    var step=0;
+    var shang=Math.floor(data.length/3);
+    var yu=data.length%3;
+    $('#container .relevant .relevant3 .re3lf').width((1*shang+yu)*245);
+    $('#container .conright .relevant .right').on('click',function () {
+        if (data.length<=6){
+            alert('没有其他卡片内容了~~');
+        }else {
+            step++;
+            var plays=$("#container .relevant .relevant3 .re3lf");
+            walk=(-490)*step;
+            $(plays).css({
+                "-webkit-transform":"translateX("+walk+"px)",
+                "-moz-transform":"translateX("+walk+"px)",
+                "-ms-transform":"translateX("+walk+"px)",
+                "-o-transform":"translateX("+walk+"px)",
+                "transform":"translateX("+walk+"px)",
+            });
+            if (step >= data.length/6){
+                alert('已经是最后一页了~~');
+                $(plays).css({
+                    "-webkit-transform":"translateX(0px)",
+                    "-moz-transform":"translateX(0px)",
+                    "-ms-transform":"translateX(0px)",
+                    "-o-transform":"translateX(0px)",
+                    "transform":"translateX(0px)",
+                });
+                step=0;
+            }
+        }
+    });
+    $('#container .conright .relevant .left').on('click',function () {
+        if (data.length<=6){
+            alert('没有其他卡片内容了~~');
+        }else {
+            step--;
+            if (step < 0){
+                alert('已经是第一页了~~');
+                step=0;
+            }else {
+                var plays=$("#container .relevant .relevant3 .re3lf");
+                walk=(-490)*step;
+                $(plays).css({
+                    "-webkit-transform":"translateX("+walk+"px)",
+                    "-moz-transform":"translateX("+walk+"px)",
+                    "-ms-transform":"translateX("+walk+"px)",
+                    "-o-transform":"translateX("+walk+"px)",
+                    "transform":"translateX("+walk+"px)",
+                });
+            }
+        };
+
+    });
+    var heart=$("#container .relevant .xin");
     $.each(heart,function(index,item){
         var chan=1;
         $(item).on('click',function(){
@@ -173,7 +248,7 @@ function monkey(data) {
         })
     });
 
-    var play=$("#container .relevant3 .play");
+    var play=$("#container .relevant .play");
     $.each(play,function (index,item) {
         $(item).hover(function () {
             $(item).find(".play5").css({
@@ -197,12 +272,12 @@ function monkey(data) {
         var changecolor=1;
         $(item).find(".play5").on('click',function(){
             if (changecolor==1) {
-                $(this).parent('.play').css({backgroundColor:'#09F'});
+                $(this).parent('.play').find('.xingming').css({color:'red'});
                 changecolor=2;
                 $('#join4').modal("show");
                 $(this).find("a").text('取消加入群体');
             } else {
-                $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                $(this).parent('.play').find('.xingming').css({color:'#000'});
                 changecolor=1;
                 $(this).find("a").text('加入群体探索');
             }
@@ -210,12 +285,8 @@ function monkey(data) {
     });
     $.each( $(".relevant .xingming"),function(index,item){
         $(item).on('click',function () {
-            window.open('/index/person/');
-        });
-    })
-    $.each( $(".relevanttwo .xingming"),function(index,item){
-        $(item).on('click',function () {
-            window.open('/index/search_result/');
+            var p_uid=$(this).siblings('#uid').html();
+            window.open('/index/person/?p_uid='+p_uid);
         });
     })
 }

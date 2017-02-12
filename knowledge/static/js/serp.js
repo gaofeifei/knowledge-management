@@ -18,14 +18,14 @@ function sch_result(data) {
         var myChart = echarts.init(document.getElementById('statis1'));
         myChart.showLoading();
         var node_value=[],link_value=[];
-        for (var key in json.event.user_nodes){
+        for (var key in json.event.node.event_id){
             var num1=Math.random()*(-1000-700)+1000;
             var num2=Math.random()*(-1000-700)+1000;
             var name;
-            if (json.event.user_nodes[key]==''||json.event.user_nodes[key]=="unknown") {
+            if (json.event.node.event_id[key]==''||json.event.node.event_id[key]=="unknown") {
                 name=key;
             }else {
-                name=json.event.user_nodes[key];
+                name=json.event.node.event_id[key];
             };
             node_value.push(
                 {
@@ -42,7 +42,7 @@ function sch_result(data) {
                 }
             );
         };
-        for (var key2 in json.event.event_nodes){
+        for (var key2 in json.event.node.event_nodes){
             var num3=Math.random()*(-1000-700)+1000;
             var num4=Math.random()*(-1000-700)+1000;
             var name2;
@@ -115,7 +115,7 @@ function sch_result(data) {
                 }
             );
         };
-        $.each(json.event.relation,function (index,item) {
+        $.each(json.event.result_relation,function (index,item) {
             link_value.push(
                 {
                     source: item[0],
@@ -171,7 +171,7 @@ function sch_result(data) {
 
 
 
-var point='all';
+var point='1';
 function card() {
     var card_url='/index/search_basic_card/?item='+search_uid+'&layer='+point;
     $.ajax({
@@ -189,10 +189,21 @@ function card_result(data) {
     $('#container .con_right .left').unbind("click");
     $('#container .con_right .right').unbind("click");
     var data=eval(data);
-    console.log(data)
     var str='';
     $.each(data.event,function (index,item) {
-        var weizhi,biaoqian,shuoming;
+        var weizhi,biaoqian,shuoming,weibonums,canyunums;
+        var weibo=Math.round((item.weibo_counts /10000) * 100) / 100;
+        var canyu=Math.round((item.uid_counts /10000) * 100) / 100;
+        if (weibo.toString().length>6){
+            weibonums=weibo.toFixed().substr(0,6)+'万';
+        }else {
+            weibonums=weibo.toFixed(2)+'万';
+        };
+        if (canyu.toString().length>6){
+            canyunums=canyu.toFixed().substr(0,6)+'万';
+        }else {
+            canyunums=canyu.toFixed(2)+'万';
+        };
         if (item.location=='null'){
             weizhi='未知';
         }else {
@@ -226,8 +237,8 @@ function card_result(data) {
             '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
             '--><img class="xin" src="/static/image/heart2.png" alt="">' +
             '<div><div style="text-align: center"><img src="/static/image/weiboshu.png" title="微博数"><!--'+
-            '--><span class="weiboshu" style="font-size: 8px">'+item.weibo_counts+'</span></div>'+
-            '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+item.uid_counts+'</span></div></div></div>'+
+            '--><span class="weiboshu" style="font-size: 8px">'+weibonums+'</span></div>'+
+            '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+canyunums+'</span></div></div></div>'+
             '<img class="play2" style="margin-top: -50px" src="/static/image/xuyuyu.png" alt=""></div>'+
             '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 40px;vertical-align:bottom;">'+
             '<a class="bus1">业务标签：</a>'+
@@ -316,11 +327,11 @@ function card_result(data) {
     $("#container .con_right .re3lf").append(str);
     //卡片效果
     var step=0;
-    var shang=Math.floor(data.length/6);
-    var yu=data.length%6;
-    $('#container .con_right .re3lf').width((2*shang+yu)*245);
+    var shang=Math.floor(data.event.length/3);
+    var yu=data.event.length%3;
+    $('#container .con_right .re3lf').width((1*shang+yu)*245);
     $('#container .con_right .right').on('click',function () {
-        if (data.length<=6){
+        if (data.event.length<=6){
             alert('没有其他卡片内容了~~');
         }else {
             step++;
@@ -333,7 +344,7 @@ function card_result(data) {
                 "-o-transform":"translateX("+walk+"px)",
                 "transform":"translateX("+walk+"px)",
             });
-            if (step >= data.length/6){
+            if (step >= data.event.length/6){
                 alert('已经是最后一页了~~');
                 $(plays).css({
                     "-webkit-transform":"translateX(0px)",
@@ -347,7 +358,7 @@ function card_result(data) {
         }
     });
     $('#container .con_right .left').on('click',function () {
-        if (data.length<=6){
+        if (data.event.length<=6){
             alert('没有其他卡片内容了~~');
         }else {
             step--;

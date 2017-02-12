@@ -343,11 +343,11 @@ function guanlianrenwu() {
         $.each($("#people .play"),function (index,item) {
             $(item).hover(function () {
                 $(item).find(".play5").css({
-                    "-webkit-transform":"translateY(0px)",
-                    "-moz-transform":"translateY(0px)",
-                    "-ms-transform":"translateY(0px)",
-                    "-o-transform":"translateY(0px)",
-                    "transform":"translateY(0px)",
+                    "-webkit-transform":"translateY(-40px)",
+                    "-moz-transform":"translateY(-40px)",
+                    "-ms-transform":"translateY(-40px)",
+                    "-o-transform":"translateY(-40px)",
+                    "transform":"translateY(-40px)",
                 })
             },function () {
                 $(item).find(".play5").css({
@@ -379,10 +379,10 @@ function guanlianrenwu() {
             var chan=1;
             $(item).on('click',function(){
                 if (chan==1) {
-                    $(this).attr('src','/static/image/focus2.png');
+                    $(this).attr('src','/static/image/focus.png');
                     chan=2;
                 }else {
-                    $(this).attr('src','/static/image/heart2.png');
+                    $(this).attr('src','/static/image/heart.png');
                     chan=1;
                 }
             })

@@ -759,69 +759,80 @@ function guanlianrenwu() {
         var str='';
         if (data){
             $.each(data,function (index,item) {
-                var influe,name,huoyue,mingan,tag,photo;
-                if (item.influence=='null'||item.influence=='unknown'){
+                var influe,name,mingan,tag,photo,fensinum;
+                var fensi=Math.round((item.fansnum /10000) * 100) / 100;
+                if (fensi.toString().length>6){
+                    fensinum=fensi.toFixed(2).substr(0,6)+'万';
+                }else {
+                    fensinum=fensi.toFixed(2)+'万';
+                };
+
+                if (item.influence==''||item.influence=='unknown'){
                     influe=0;
                 }else {
-                    influe=item.influence.toFixed(2);
+                    influe=item.influence.toFixed(0);
                 };
-                if (item.uname=='null'||item.uname=='unknown'||item.uname==''){
+                if (item.uname==''||item.uname=='unknown'){
                     name=item.uid;
                 }else {
                     name=item.uname;
                 };
-                var huoyue=item.activeness.toFixed(2);
-                if (item.sensitive=='null'||item.sensitive=='unknown'){
+                var huoyue=item.activeness.toFixed(0);
+                if (item.sensitive==''||item.sensitive=='unknown'){
                     mingan=0;
                 }else {
-                    mingan=item.sensitive.toFixed(2);
+                    mingan=item.sensitive.toFixed(0);
                 };
-                if (item.user_tag=='null'||item.sensitive=='unknown'){
-                    tag='暂无';
+                if (item.user_tag==''||item.user_tag=='unknown'||item.user_tag=='null'){
+                    tag='无';
                 }else {
                     tag=item.user_tag;
                 };
-                if (item.photo_url==''||item.photo_url=='null'||item.photo_url=='unknown'){
+                if (item.photo_url==''||item.photo_url=='unknown'){
                     photo='/static/image/pangzi.png';
                 }else {
                     photo=item.photo_url;
                 };
                 str+='<div class="play">'+
-                    '<span id="uid" style="display:none;">'+item.uid+'</span>'+
+                    '<div class="p_top" style="width: 100%"><img class="play2" src="'+photo+'" alt="">'+
+                    '<img class=\'xin\' style="margin: -24px 0 0 0px" src="/static/image/heart.png">' +
+                    '<span class="xingming" title="'+name+'" style="color: #000;display: block;text-align:center;' +
+                    'width:100px;white-space:nowrap;margin: -13px auto 0;overflow: hidden;text-overflow: ellipsis">'+name+'</span>'+
+                    '</div>'+
+                    '<div class="play23" style="width: 110px;text-align: left;float: left">'+
+                    '<a class="renzh1">认证类型:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh11">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
+                    '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
+                    '</div>'+
+                    '<div style="float: left;width: 110px;margin-left: 10px">' +
+                    '<div class="play3" style="text-align: left">'+
+                    '<a class="bus1">业务标签：</a>'+
+                    '<a class="bus2" title="'+tag+'">'+tag+'</a>'+
+                    '</div>'+
                     '<div class="play1">'+
                     '<div class="p11">'+
-                    '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
-                    '--><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""'+
-                    'title=\'粉丝数\'><!--'+
-                    '--><span class="difang" style="font-size: 8px">'+item.fansnum+'</span><!--'+
-                    '--><img class=\'xin\' style="margin-left: 10px;" src="/static/image/heart.png">'+
+                    '<span id="uid" style="display: none">'+item.uid+'</span>'+
                     '</div>'+
-                    '<div class="p22" style="margin-top: 5px">'+
-                    '<img style="margin-left: 10px;" src="/static/image/influence.png" title="影响力">'+
+                    '<div class="p22" style="float:left;margin-top: -5px">'+
+                    '<div><img src="/static/image/fensishu.png"'+
+                    'title=\'粉丝数\'><!--'+
+                    '--><span class="difang">'+fensinum+'</span>'+
+                    '<img src="/static/image/mingan.png" title="敏感度">'+
+                    '<span class="mingan">'+mingan+'</span></div>'+
+                    '<div><img src="/static/image/influence.png" title="影响力">'+
                     '<span class="influence">'+influe+'</span>'+
                     '<img src="/static/image/huoyuedu.png" title="活跃度">'+
-                    '<span class="huoyuedu">'+huoyue+'</span>'+
-                    '<img src="/static/image/mingan.png" title="敏感度">'+
-                    '<span class="mingan">'+mingan+'</span>'+
+                    '<span class="huoyuedu">'+huoyue+'</span></div>'+
                     '</div>'+
                     '</div>'+
-                    '<img class="play2" src="'+photo+'" alt="">'+
-                    '<div class="play23" style="margin-left: 15px;">'+
-                    '<a class="renzh1">认证类型:<span class="renzh11">'+item.topic_string.replace(/&/g,' ')+'</span></a>'+
-                    '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22">'+item.topic_string.replace(/&/g,' ')+'</span></a>'+
-                    '</div>'+
-                    '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
-                    '<a class="bus1">业务标签：</a>'+
-                    '<a class="bus2">'+tag+'</a>'+
                     '</div>'+
                     '<!--<div class="play4">-->'+
                     '<!--<p class="shuoming">-->'+
                     '<!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->'+
                     '<!--</p>-->'+
                     '<!--</div>-->'+
-                    // '<div class="play5" type="button" data-toggle="modal">'+
-                    // '<a>加入群体探索</a>'+
-                    // '</div>'+
+                    '<!--<div class="play5" type="button" data-toggle="modal">-->'+
+                    '<!--<a>加入群体探索</a>-->'+
+                    '<!--</div>-->'+
                     '</div>';
             });
             $("#run").append(str);
@@ -900,18 +911,18 @@ function guanlianrenwu() {
             var changecolorq=1;
             $(item).find(".play5").on('click',function(){
                 if (changecolorq==1) {
-                    $(this).parent('.play').css({backgroundColor:'#09F'});
+                    $(this).parent('.play').find('.xingming').css({color:'red'});
                     $(this).find('a').text('取消群体探索');
                     changecolorq=2;
                     $('#join4').modal("show");
                 } else {
-                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
+                    $(this).parent('.play').find('.xingming').css({color:'#000'});
                     $(this).find('a').text('加入群体探索');
                     changecolorq=1;
                 }
             });
         });
-        var heart=$(".play .play1 .p11 .xin");
+        var heart=$(".play .xin");
         $.each(heart,function(index,item){
             var chan=1;
             $(item).on('click',function(){

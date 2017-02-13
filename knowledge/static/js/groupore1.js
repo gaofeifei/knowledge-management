@@ -161,6 +161,13 @@ function zongqunti() {
                 };
                 // 为echarts对象加载数据
                 myChart.setOption(option);
+                var ecConfig = require('echarts/config');
+                function eConsole(param) {
+                    if (typeof param.seriesIndex != 'undefined') {
+                        window.open('/group/detail/?group_name='+param.name);
+                    }
+                }
+                myChart.on(ecConfig.EVENT.CLICK, eConsole);
             }
         );
         // function eConsole(param) {
@@ -204,8 +211,8 @@ function quntibiaoge() {
             data:data,
             search: true,//是否搜索
             pagination: true,//是否分页
-            pageSize: 2,//单页记录数
-            pageList: [2, 4, 8, 20],//分页步进值
+            pageSize: 3,//单页记录数
+            pageList: [6, 12, 20],//分页步进值
             sidePagination: "client",//服务端分页
             searchAlign: "left",
             searchOnEnterKey: false,//回车搜索
@@ -321,7 +328,12 @@ function biaogequnti() {
             if (item.influence==''||item.influence=='unknown'){
                 influe=0;
             }else {
-                influe=item.influence.toFixed(0);
+                var yingxiang=Math.round((item.influence /10000) * 100) / 100;
+                if (yingxiang.toString().length>6){
+                    influe=yingxiang.toFixed(2).substr(0,6)+'万';
+                }else {
+                    influe=yingxiang.toFixed(2)+'万';
+                };
             };
             if (item.uname==''||item.uname=='unknown'){
                 name=item.uid;
@@ -351,8 +363,8 @@ function biaogequnti() {
                 'width:100px;white-space:nowrap;margin: -13px auto 0;overflow: hidden;text-overflow: ellipsis">'+name+'</span>'+
                 '</div>'+
                 '<div class="play23" style="width: 110px;text-align: left;float: left">'+
-                '<a class="renzh1">认证类型:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh11">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
-                '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
+                '<a class="renzh1">身&nbsp;&nbsp;&nbsp;份:<span class="renzh11">'+item.domain+'</span></a>'+
+                '<a class="renzh2">领&nbsp;&nbsp;&nbsp;域:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
                 '</div>'+
                 '<div style="float: left;width: 110px;margin-left: 10px">' +
                 '<div class="play3" style="text-align: left">'+
@@ -456,7 +468,7 @@ function biaogequnti() {
         });
         $.each( $(".xingming"),function(index,item){
             $(item).on('click',function(){
-                window.open('/index/search_result/?t_uid='+$(this).html());
+                window.open('/index/person/?p_uid='+$(this).html());
             })
         })
     };
@@ -620,11 +632,15 @@ function yonghushijian() {
             }else {
                 fensinum=fensi.toFixed(2)+'万';
             };
-
             if (item.influence==''||item.influence=='unknown'){
                 influe=0;
             }else {
-                influe=item.influence.toFixed(0);
+                var yingxiang=Math.round((item.influence /10000) * 100) / 100;
+                if (yingxiang.toString().length>6){
+                    influe=yingxiang.toFixed(2).substr(0,6)+'万';
+                }else {
+                    influe=yingxiang.toFixed(2)+'万';
+                };
             };
             if (item.uname==''||item.uname=='unknown'){
                 name=item.uid;
@@ -654,8 +670,8 @@ function yonghushijian() {
                 'width:100px;white-space:nowrap;margin: -13px auto 0;overflow: hidden;text-overflow: ellipsis">'+name+'</span>'+
                 '</div>'+
                 '<div class="play23" style="width: 110px;text-align: left;float: left">'+
-                '<a class="renzh1">认证类型:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh11">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
-                '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
+                '<a class="renzh1">身&nbsp;&nbsp;&nbsp;份:<span title="'+item.domain+'" class="renzh11">'+item.domain+'</span></a>'+
+                '<a class="renzh2">话&nbsp;&nbsp;&nbsp;题:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
                 '</div>'+
                 '<div style="float: left;width: 110px;margin-left: 10px">' +
                 '<div class="play3" style="text-align: left">'+
@@ -783,17 +799,16 @@ function yonghushijian() {
                 if (changecolor==1) {
                     $(this).parent('.play').find('.xingming').css({color:'red'});
                     changecolor=2;
-                    node_ids.push($(this).siblings('#uid').html());
+                    node_ids.push($(this).parent('.play').find('#uid').html());
                     $(this).find('a').text('取消群体探索');
                     $('#join3').modal("show");
                 } else {
                     $(this).parent('.play').find('.xingming').css({color:'#000'});
                     changecolor=1;
-                    var $a = $(this).siblings('#uid').html();
+                    var $a = $(this).parent('.play').find('#uid').html();
                     node_ids.removeByValue($a);
                     $(this).find('a').text('加入群体探索');
                 }
-                // console.log(node_ids);
             });
         });
         $.each( $(".xingming"),function(index,item){
@@ -845,6 +860,7 @@ function yonghushijian() {
 };
 yonghushijian();
 
+
 function sureadd() {
     var node_ids2=node_ids.join(',');
     var addurl='/group/g_create_relation/?node1_id='+node_ids2+'&node2_id='+groupname1;
@@ -853,7 +869,7 @@ function sureadd() {
         type: 'GET',
         dataType: 'json',
         async: true,
-        success:g_join
+        // success:g_join
     });
     function g_join(data) {
         var data=eval(data);
@@ -890,9 +906,9 @@ function delete_yes() {
     function del_sure(data) {
         var data=eval(data);
         if (data=='true'){
-            $("#del_cg").modal("show");
-        }else {
             $("#del_sb").modal("show");
+        }else {
+            $("#del_cg").modal("show");
         }
     }
 }

@@ -766,11 +766,15 @@ function guanlianrenwu() {
                 }else {
                     fensinum=fensi.toFixed(2)+'万';
                 };
-
                 if (item.influence==''||item.influence=='unknown'){
                     influe=0;
                 }else {
-                    influe=item.influence.toFixed(0);
+                    var yingxiang=Math.round((item.influence /10000) * 100) / 100;
+                    if (yingxiang.toString().length>6){
+                        influe=yingxiang.toFixed(2).substr(0,6)+'万';
+                    }else {
+                        influe=yingxiang.toFixed(2)+'万';
+                    };
                 };
                 if (item.uname==''||item.uname=='unknown'){
                     name=item.uid;
@@ -800,8 +804,8 @@ function guanlianrenwu() {
                     'width:100px;white-space:nowrap;margin: -13px auto 0;overflow: hidden;text-overflow: ellipsis">'+name+'</span>'+
                     '</div>'+
                     '<div class="play23" style="width: 110px;text-align: left;float: left">'+
-                    '<a class="renzh1">认证类型:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh11">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
-                    '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
+                    '<a class="renzh1">身&nbsp;&nbsp;&nbsp;份:<span title="'+item.domain+'" class="renzh11">'+item.domain+'</span></a>'+
+                    '<a class="renzh2">话&nbsp;&nbsp;&nbsp;题:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
                     '</div>'+
                     '<div style="float: left;width: 110px;margin-left: 10px">' +
                     '<div class="play3" style="text-align: left">'+
@@ -830,9 +834,9 @@ function guanlianrenwu() {
                     '<!--徐玉玉接到骗子电话后被骗9900元学费，报案回来的路上心脏骤停，离世。-->'+
                     '<!--</p>-->'+
                     '<!--</div>-->'+
-                    '<!--<div class="play5" type="button" data-toggle="modal">-->'+
-                    '<!--<a>加入群体探索</a>-->'+
-                    '<!--</div>-->'+
+                    // '<div class="play5" type="button" data-toggle="modal">'+
+                    // '<a>加入群体探索</a>'+
+                    // '</div>'+
                     '</div>';
             });
             $("#run").append(str);
@@ -981,8 +985,20 @@ function guanlianshijian() {
             $("#run2").html('暂无数据~~');
         }else {
             $.each(data,function (index,item) {
-                var weizhi,biaoqian,shuoming,photo;
-                if (item.location=='null'){
+                var weizhi,biaoqian,shuoming,weibonums,canyunums;
+                var weibo=Math.round((item.weibo_counts /10000) * 100) / 100;
+                var canyu=Math.round((item.uid_counts /10000) * 100) / 100;
+                if (weibo.toString().length>6){
+                    weibonums=weibo.toFixed(2).substr(0,6)+'万';
+                }else {
+                    weibonums=weibo.toFixed(2)+'万';
+                };
+                if (canyu.toString().length>6){
+                    canyunums=canyu.toFixed(2).substr(0,6)+'万';
+                }else {
+                    canyunums=canyu.toFixed(2)+'万';
+                };
+                if (item.location=='null'||item.location==''){
                     weizhi='未知';
                 }else {
                     weizhi=item.location;
@@ -992,45 +1008,44 @@ function guanlianshijian() {
                 }else {
                     biaoqian=item.user_tag;
                 };
-                if (item.description=='null'){
-                    biaoqian='暂无数据';
+                if (item.description=='null'||item.description==''){
+                    shuoming='暂无数据';
                 }else {
-                    biaoqian=item.user_tag;
-                };
-                if (item.photo_url=='null'||item.photo_url==''){
-                    photo='/static/image/xuyuyu.png';
-                }else {
-                    photo=item.photo_url;
+                    shuoming=item.user_tag;
                 };
                 function getLocalTime(nS) {
-                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,17)
+                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10)
                 };
                 str+='<div class="play">'+
-                    '<div class="play1">'+
-                    '<div class="p11">'+
-                    '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
-                    '--><img src="/static/image/dingwei.png" title="位置"><!--'+
-                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
-                    '--><img class="xin" src="/static/image/heart.png" alt="">'+
-                    '</div>'+
+                    '<div class="play1" style="float:left;">'+
+                    '<div class="p11" style="text-align: left;padding-left: 30px">'+
+                    '<span class="xingming" title="'+item.name+'" ' +
+                    'style="display:block;color: #fff;font-weight: 900;font-size: 18px;width: 80px;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;">' +item.name+'</span>'+
                     '<div class="p22">'+
-                    '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
+                    '<span class="fasheng" style="width: 80px">发生时间：</span>'+
                     '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
                     '</div>'+
                     '</div>'+
-                    '<img class="play2" src="'+photo+'" alt="">'+
-                    '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
+                    '</div>'+
+                    '<div style="float:left;margin: 10px 0 0 34px"><div style="display: inline-block"><img src="/static/image/dingwei.png" title="位置"><!--'+
+                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+                    '--><img class="xin" src="/static/image/heart2.png" alt="">' +
+                    '<div><div style="text-align: center"><img src="/static/image/weiboshu.png" title="微博数"><!--'+
+                    '--><span class="weiboshu" style="font-size: 8px">'+weibonums+'</span></div>'+
+                    '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+canyunums+'</span></div></div></div>'+
+                    '<img class="play2" style="margin-top: -50px" src="/static/image/xuyuyu.png" alt=""></div>'+
+                    '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 40px;vertical-align:bottom;">'+
                     '<a class="bus1">业务标签：</a>'+
-                    '<a class="bus2">'+biaoqian+'</a>'+
+                    '<a class="bus2" title="'+biaoqian+'">'+biaoqian+'</a>'+
                     '</div>'+
                     '<div class="play4">'+
                     '<p class="shuoming">'+
                     shuoming+
                     '</p>'+
                     '</div>'+
-                    '<div class="play5" type="button" data-toggle="modal">'+
-                    '<a>加入专题</a>'+
-                    '</div>'+
+                    // '<div class="play5" type="button" data-toggle="modal">'+
+                    // '<a>加入专题</a>'+
+                    // '</div>'+
                     '</div>';
             });
             $("#run2").append(str);

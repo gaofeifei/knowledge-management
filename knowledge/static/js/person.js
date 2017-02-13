@@ -133,9 +133,7 @@ function events() {
     myChart.showLoading();
     $.getJSON(url, function (json) {
         var json=eval(json);
-        console.log(json);
         var node_value=[],link_value=[];
-        // ,event_value=[];
         for (var key in json.node.uid){
             var num1=Math.random()*(-1000-700)+1000;
             var num2=Math.random()*(-1000-700)+1000;

@@ -1,6 +1,23 @@
 /**
  * Created by Administrator on 2016/12/19.
  */
+Array.prototype.removeByValue = function(val) {
+    for(var i=0; i<this.length; i++) {
+        if(this[i] == val) {
+            this.splice(i, 1);
+            break;
+        }
+    }
+};
+function search(arr,dst){
+    var i = arr.length;
+    while(i-=1){
+        if (arr[i] == dst){
+            return i;
+        }
+    }
+    return false;
+}
 var thname=theme_explanation;
 function baohanshijian() {
     function include() {
@@ -22,8 +39,20 @@ function baohanshijian() {
         var data=eval(data);
         var str='';
         $.each(data,function (index,item) {
-            var weizhi,biaoqian,shuoming;
-            if (item.location=='null'){
+            var weizhi,biaoqian,shuoming,weibonums,canyunums;
+            var weibo=Math.round((item.weibo_counts /10000) * 100) / 100;
+            var canyu=Math.round((item.uid_counts /10000) * 100) / 100;
+            if (weibo.toString().length>6){
+                weibonums=weibo.toFixed(2).substr(0,6)+'万';
+            }else {
+                weibonums=weibo.toFixed(2)+'万';
+            };
+            if (canyu.toString().length>6){
+                canyunums=canyu.toFixed(2).substr(0,6)+'万';
+            }else {
+                canyunums=canyu.toFixed(2)+'万';
+            };
+            if (item.location=='null'||item.location==''){
                 weizhi='未知';
             }else {
                 weizhi=item.location;
@@ -33,7 +62,7 @@ function baohanshijian() {
             }else {
                 biaoqian=item.user_tag;
             };
-            if (item.description=='null'){
+            if (item.description=='null'||item.description==''){
                 shuoming='暂无数据';
             }else {
                 shuoming=item.user_tag;
@@ -56,10 +85,10 @@ function baohanshijian() {
                 '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
                 '--><img class="xin" src="/static/image/heart2.png" alt="">' +
                 '<div><div style="text-align: center"><img src="/static/image/weiboshu.png" title="微博数"><!--'+
-                '--><span class="weiboshu" style="font-size: 8px">'+item.weibo_counts+'</span></div>'+
-                '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+item.uid_counts+'</span></div></div></div>'+
+                '--><span class="weiboshu" style="font-size: 8px">'+weibonums+'</span></div>'+
+                '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+canyunums+'</span></div></div></div>'+
                 '<img class="play2" style="margin-top: -50px" src="/static/image/xuyuyu.png" alt=""></div>'+
-                '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 30px;vertical-align:bottom;">'+
+                '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 40px;vertical-align:bottom;">'+
                 '<a class="bus1">业务标签：</a>'+
                 '<a class="bus2" title="'+biaoqian+'">'+biaoqian+'</a>'+
                 '</div>'+
@@ -68,9 +97,9 @@ function baohanshijian() {
                 shuoming+
                 '</p>'+
                 '</div>'+
-                '<!-- <div class="play5" type="button" data-toggle="modal">'+
-                '<a>加入专题</a>'+
-                '</div> -->'+
+                // '<div class="play5" type="button" data-toggle="modal">'+
+                // '<a>加入专题</a>'+
+                // '</div>'+
                 '</div>';
         });
         $("#run").append(str);
@@ -160,7 +189,7 @@ function baohanshijian() {
                 }
             });
         });
-        var heart=$(".play .play1 .p11 .xin");
+        var heart=$("#similar .play .xin");
         $.each(heart,function(index,item){
             var chan=1;
             $(item).on('click',function(){
@@ -199,6 +228,7 @@ function baohanshijian() {
 };
 baohanshijian();
 
+var uid_list=[],uid_list2=[];
 function guanlianrenwu() {
     function place() {
         //this.ajax_method='GET'; // body...
@@ -227,11 +257,22 @@ function guanlianrenwu() {
             return newstr;
         }
         $.each(data,function (index,item) {
-            var influe,name,mingan,tag,photo;
+            var influe,name,mingan,tag,photo,fensinum;
+            var fensi=Math.round((item.fansnum /10000) * 100) / 100;
+            if (fensi.toString().length>6){
+                fensinum=fensi.toFixed(2).substr(0,6)+'万';
+            }else {
+                fensinum=fensi.toFixed(2)+'万';
+            };
             if (item.influence==''||item.influence=='unknown'){
                 influe=0;
             }else {
-                influe=item.influence.toFixed(0);
+                var yingxiang=Math.round((item.influence /10000) * 100) / 100;
+                if (yingxiang.toString().length>6){
+                    influe=yingxiang.toFixed(2).substr(0,6)+'万';
+                }else {
+                    influe=yingxiang.toFixed(2)+'万';
+                };
             };
             if (item.uname==''||item.uname=='unknown'){
                 name=item.uid;
@@ -255,14 +296,15 @@ function guanlianrenwu() {
                 photo=item.photo_url;
             };
             str+='<div class="play">'+
+                '<span id="uid" style="display: none;">'+item.uid +'</span>'+
                 '<div class="p_top" style="width: 100%"><img class="play2" src="'+photo+'" alt="">'+
                 '<img class=\'xin\' style="margin-top: -24px" src="/static/image/heart.png">' +
                 '<span class="xingming" title="'+name+'" style="color: #000;display: block;' +
                 'width:100px;white-space:nowrap;margin: -13px auto 0;overflow: hidden;text-overflow: ellipsis">'+name+'</span>'+
                 '</div>'+
                 '<div class="play23" style="width: 110px;text-align: left;float: left">'+
-                '<a class="renzh1">认证类型:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh11">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
-                '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
+                '<a class="renzh1">身&nbsp;&nbsp;&nbsp;份:<span title="'+item.domain+'" class="renzh11">'+item.domain+'</span></a>'+
+                '<a class="renzh2">话&nbsp;&nbsp;&nbsp;题:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
                 '</div>'+
                 '<div style="float: left;width: 110px;margin-left: 10px">' +
                 '<div class="play3" style="text-align: left">'+
@@ -276,7 +318,7 @@ function guanlianrenwu() {
                 '<div class="p22" style="float:left;margin-top: -5px">'+
                 '<div><img src="/static/image/fensishu.png"'+
                 'title=\'粉丝数\'><!--'+
-                '--><span class="difang" style="font-size: 8px">'+item.fansnum+'</span>'+
+                '--><span class="difang" style="font-size: 8px">'+fensinum+'</span>'+
                 '<img src="/static/image/mingan.png" title="敏感度">'+
                 '<span class="mingan">'+mingan+'</span></div>'+
                 '<div><img src="/static/image/influence.png" title="影响力">'+
@@ -298,6 +340,7 @@ function guanlianrenwu() {
         });
         $("#run2").append(str);
         var step=0;
+
         $('#container #people .peotwo .peotwo2 #run2').width((data.length)*255);
         $('#container #people .peotwo .peotwo2 .right').on('click',function () {
             step++;
@@ -340,6 +383,7 @@ function guanlianrenwu() {
             }
         });
         //卡片效果
+
         $.each($("#people .play"),function (index,item) {
             $(item).hover(function () {
                 $(item).find(".play5").css({
@@ -365,16 +409,22 @@ function guanlianrenwu() {
                 if (changecolorq==1) {
                     $(this).parent('.play').find('.xingming').css({color:'red'});
                     $(this).find('a').text('取消群体探索');
+                    uid_list.push($(this).parent('.play').find('.xingming').html());
+                    uid_list2.push($(this).parent('.play').find('#uid').html());
                     changecolorq=2;
                     $('#join4').modal("show");
                 } else {
                     $(this).parent('.play').find('.xingming').css({color:'#000'});
                     $(this).find('a').text('加入群体探索');
                     changecolorq=1;
+                    var $a = $(this).parent('.play').find('.xingming').html();
+                    uid_list.removeByValue($a);
+                    var $a2 = $(this).parent('.play').find('#uid').html();
+                    uid_list2.removeByValue($a2);
                 }
             });
         });
-        var heart=$(".play .xin");
+        var heart=$("#people .play .xin");
         $.each(heart,function(index,item){
             var chan=1;
             $(item).on('click',function(){
@@ -410,6 +460,7 @@ function guanlianrenwu() {
         });
     });
     nums();
+
 }
 guanlianrenwu();
 
@@ -491,6 +542,75 @@ function zhexiantu() {
     nums();
 }
 zhexiantu();
+
+
+var gg_group='/group/overview/';
+$.ajax({
+    url: gg_group,
+    type: 'GET',
+    dataType: 'json',
+    async: true,
+    success:group_list
+});
+function group_list(data) {
+    var data=eval(data);
+    $.each(data,function (index,item) {
+        $("#join6 .xinzeng #list1").append('<option value="'+item[0]+'">'+item[0]+'</option>');
+    });
+
+}
+var newpro;
+function group_t1(value) {
+    if (value=='新建群体'){
+        $("#join6 .xinzeng .shuru2").show();
+        newpro=$("#join6 .xinzeng .shuru2").val();
+    }else {
+        $("#join6 .xinzeng .shuru2").hide();
+        newpro=value;
+    }
+};
+var $a3;
+$('#people .add22').on('click',function () {
+    $('#join6 .xinzeng .shij .sjr').empty();
+    $.each(uid_list,function (index,item) {
+        $('#join6 .xinzeng .shij .sjr').append('<a class="sj1"><b>'+item+'</b><b class="icon icon-remove det" style="color: red"></b></a>');
+    });
+    $('#join6').modal("show");
+    $.each($('.det'),function (index,item) {
+        $(item).on('click',function () {
+            $(this).parent().hide(100);
+            $a3 = $(this).parent().find('b').text();
+            uid_list.removeByValue($a3);
+        });
+    });
+});
+
+
+function group_add() {
+    var node_ids2=uid_list.join(',');
+    var newurl='/group/g_create_new_relation/?node1_id='+node_ids2+'&node2_id='+newpro;
+    console.log(newurl)
+    $.ajax({
+        url: newurl,
+        type: 'GET',
+        dataType: 'json',
+        async: true,
+        success:n_join
+    });
+    function n_join(data) {
+        if (data=='group already exist'){
+            alert('加入失败');
+        }else {
+            var data=eval(data);
+            if (data=='2'){
+                $('#chengong').modal("show");
+            }else {
+                $('#shibai').modal("show");
+            }
+        }
+
+    }
+}
 
 
 

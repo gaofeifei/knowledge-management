@@ -277,15 +277,17 @@
                             <!-- <p class="tit">新建专题</p> -->
                             <form style="margin-left: 40px;">
                                 <span class="xz1">群体名称</span>
-                                <select name="" id="list1" onchange='check(this.value)'>
+                                <select name="" id="list1" onchange='group_t1(this.value)'>
                                     <option value="" disabled selected>请选择群体名称</option> 
                                     <option value="新建群体">新建群体</option>
                                     <!-- <option value="律师群体">律师群体</option> -->
                                 </select>
-                                <input type="text" class="shuru2" placeholder="请输入群体名称"/>
+                                <input type="text" class="shuru2" style='display:none;' 
+                                placeholder="请输入群体名称"/>
                             </form>
                             <div class="shij">
-                                <span class="sjr">加入人物</span>
+                                加入人物
+                                <div class="sjr"></div>
                                 <!-- <a class="sj1">邓海峰 <b class="icon icon-remove det"></b> </a>
                                 <a class="sj2">潘强 <b class="icon icon-remove det"></b> </a> -->
                             </div>
@@ -295,7 +297,8 @@
                 <button type="button" class="btn btn-info" data-dismiss="modal">
                     关闭
                 </button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" 
+                onclick='group_add()'>
                     确定
                 </button>
             </div>
@@ -346,33 +349,17 @@
         </div>
     </div>
 </div>
-<!-- <div class="modal fade" id="join5" tabindex="-1">
+<div class="modal fade" id="chengong" tabindex="-2">
     <div class="modal-dialog">
         <div class=modal-content>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
                 </button>
-                <h2 class="modal-title">编辑专题</h2>
+                <h2 class="modal-title">添加提示</h2>
             </div>
             <div class="modal-body">
-                <div class="xinzeng" style="margin-top: 20px;padding-left: 20px;"> -->
-                    <!-- <p class="tit">专题编辑</p> -->
-                    <!-- <form style="margin-left: 40px;">
-                        <span class="xz1">专题名称</span>
-                        <select name="" id="list1" onchange='check2(this.value)'>
-                            <option value="" disabled selected>请选择专题名称</option> 
-                            <option value="新建专题">新建专题</option>
-                            <option value="电信诈骗">电信诈骗</option>
-                        </select>
-                        <input type="text" class="shuru2" placeholder="请输入专题名称" style='display:none'/>
-                    </form>
-                    <div class="shij">
-                        <span class="sjr">加入事件</span>
-                        <a class="sj1">徐玉玉事件 <b class="icon icon-remove det"></b> </a>
-                        <a class="sj2">大学生失联 <b class="icon icon-remove det"></b> </a>
-                    </div>
-                </div>
+                <p>添加成功</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-info" data-dismiss="modal">
@@ -384,7 +371,30 @@
             </div>
         </div>
     </div>
-</div> -->
+</div>
+<div class="modal fade" id="shibai" tabindex="-2">
+    <div class="modal-dialog">
+        <div class=modal-content>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+                <h2 class="modal-title">添加提示</h2>
+            </div>
+            <div class="modal-body">
+                <p>添加失败</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">
+                    关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 {% block my_js %}
 <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=oHDtLqS40HV7dTqlNWYUc5IYvSLq60pS">
@@ -493,23 +503,21 @@
 $('#similar .add22').on('click',function () {
     $('#join5').modal("show");
 });
-$('#people .add22').on('click',function () {
-    $('#join6').modal("show");
-});
-function check(value){
-    if (value=='新建群体') {
-        $('.shuru2').show();
-    }else{
-        $('.shuru2').hide();
-    };
-};
-function check2(value){
-    if (value=='新建专题') {
-        $('.shuru2').show();
-    }else{
-        $('.shuru2').hide();
-    };
-};
+
+// function check(value){
+//     if (value=='新建群体') {
+//         $('.shuru2').show();
+//     }else{
+//         $('.shuru2').hide();
+//     };
+// };
+// function check2(value){
+//     if (value=='新建专题') {
+//         $('.shuru2').show();
+//     }else{
+//         $('.shuru2').hide();
+//     };
+// };
 // $.each($("#similar .xingming"),function(index,item){
 //     $(item).on('click',function () {
 //         window.open('/index/search_result/');

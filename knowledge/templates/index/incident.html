@@ -34,23 +34,23 @@
                     <span class="influence"></span>
                     <img src="/static/image/weibo1.png" alt="" style="margin-left: 10px">
                     <span class="huoyuedu"></span>
-                    <img class="phones" src="/static/image/phones.png" alt="" width="75" height="75"
-                    style=""/>
+                    <!-- <img class="phones" src="/static/image/phones.png" alt="" width="75" height="75"
+                    style=""/> -->
                     <!--<img src="/image/mingan.png" alt="" style="margin-left: 10px">-->
                     <!--<span class="mingan">80</span>-->
                 </div>
             </div>
             <div class="kmrg2" style="margin-left: 15px;">
-                <p>参与人数:  <span class="zhuce"></span></p>
-                <p>民众情绪： <span class="huoyue">消极</span></p>
+                <p>参与人数:  <span class="canyu"></span></p>
+                <!-- <p>民众情绪： <span class="huoyue">消极</span></p> -->
                 <!--<p>认证类型:  <span class="renzheng">律师</span></p>-->
                 <!--<p>领域： <span class="lingyu">法律人士</span></p>-->
-                <p class='biao'>业务标签：</p>
+                <p class='biao'>业务标签：<span class="zhuce"></span></p>
                 <p>时间跨度：<span class="times1"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="times2"></span></p>
                 <p>事件描述：<span class="miaoshu"></span></p>
                 <p class="rgcreat">
                     节点创建时间：  <span class="date"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                    创建人：  <span class="peson"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    创建人：  <span class="person"></span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="icon icon-pencil edit" data-toggle="modal" style="cursor: pointer">编辑</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="history" data-toggle="modal" style="cursor: pointer">修改历史</span>
@@ -145,8 +145,8 @@
             <div class="assright2" style='padding:5px 0 5px 10px;'>
                 <img src="/static/image/left.png" alt="" class="left" style='margin-right:5px;'>
                 <div id="case" style="float:left;width:490px;overflow: hidden;">
-                    <div id='crmid' style=''>
-                        <div id="run" style="transition: all 1s linear;height:370px;text-align:center;">
+                    <div id='crmid' style='width:490px;'>
+                        <div id="run" style="transition: all 1s linear;height:370px;">
                            
                         </div>
                     </div>
@@ -500,8 +500,7 @@
     var themename='{{t_uid}}';
     var eventname='{{t_uid}}';
 </script>
-<script type="text/javascript" src='/static/js/incident1.js'></script>
-<script type="text/javascript" src='/static/js/incident2.js'></script>
+
 <script>
     $('.history').on('click',function () {
         $('.histant').modal("show");
@@ -563,7 +562,7 @@
             }else{
                 srcimg=data.photo_url;
             }; 
-            if (data.location=='unknown'||data.location=='null') {
+            if (data.location=='unknown'||data.location=='null'||data.location=='') {
                 location='未知';
             }else {
                 location=data.location;
@@ -573,7 +572,7 @@
             }else {
                 tag=data.user_tag;
             };
-            if (data.description=='null') {
+            if (data.description=='null'||data.description=='') {
                 description='暂无';
             }else {
                 description=data.description;
@@ -583,12 +582,15 @@
             $("#container .keyman .kmrg .rgname .difang").append(location);
             $("#container .keyman .kmrg .rgname .influence").append(getLocalTime(data.start_ts));
             $("#container .keyman .kmrg .rgname .huoyuedu").append(data.weibo_counts);
+            $("#container .keyman .kmrg .kmrg2 .canyu").append(data.uid_counts);
             $("#container .keyman .kmrg .kmrg2 .zhuce").append(tag);
             $("#container .keyman .kmrg .kmrg2 .times1").append(getLocalTime(data.start_ts));
             $("#container .keyman .kmrg .kmrg2 .times2").append(getLocalTime(data.end_ts));
-            $("#container .keyman .kmrg .kmrg2 p .miaoshu").append(description);
+            $("#container .keyman .kmrg .kmrg2 .miaoshu").append(description);
             $("#container .keyman .kmrg .kmrg2 .rgcreat .date").append(getLocalTime(data.submit_ts));
             $("#container .keyman .kmrg .kmrg2 .person").append(data.submit_user);
     }
 </script>
+<script type="text/javascript" src='/static/js/incident1.js'></script>
+<script type="text/javascript" src='/static/js/incident2.js'></script>
 {% endblock %}

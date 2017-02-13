@@ -233,7 +233,7 @@ def del_user_group_rel(group_name, uid):
     s_string = 'START s0 = node:group_index(group="%s"),s = node:node_index(uid="%s")\
                 MATCH (s0)-[r]-(s) DELETE r' %(group_name, uid)
 
-    print s_string
+    # print s_string
     graph.run(s_string)
     return 'true'
 
@@ -241,7 +241,7 @@ def add_user_group_rel(group_name, uid):
     s_string = 'START s0 = node:group_index(group="%s"),s = node:node_index(uid="%s")\
                 MATCH (s0)-[r]-(s) RETURN r' %(group_name, uid)
 
-    print s_string
+    # print s_string
     graph.run(s_string)
     return 'true'
 
@@ -346,7 +346,7 @@ def search_related_user(item):
     if len(name_results) == 0:
         return 'node does not exist'
     for i in name_results:
-        print i
+        # print i
         uid = i['fields']['uid'][0]
         uname = i['fields']['uname'][0]
         only_uid.append(uid)
@@ -475,7 +475,7 @@ def compare_event_group(group_name1,group_name2,sort_flag,diff):
         # print c_string
         result = graph.run(c_string)
         for i in list(result):
-            print i
+            # print i
             end_id = dict(i['s1'])
             event_list1.append(end_id['event_id'])
     print len(event_list1)

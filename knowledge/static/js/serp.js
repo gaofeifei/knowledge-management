@@ -195,7 +195,7 @@ function card_result(data) {
         var weibo=Math.round((item.weibo_counts /10000) * 100) / 100;
         var canyu=Math.round((item.uid_counts /10000) * 100) / 100;
         if (weibo.toString().length>6){
-            weibonums=weibo.toFixed().substr(0,6)+'万';
+            weibonums=weibo.toFixed(2).substr(0,6)+'万';
         }else {
             weibonums=weibo.toFixed(2)+'万';
         };

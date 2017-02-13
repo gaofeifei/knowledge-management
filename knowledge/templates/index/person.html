@@ -238,11 +238,11 @@
                     <button class="add22" type="button" data-toggle="modal">添加</button>
                 </p>              
             </p>
-            <div class="assright2" style='padding:10px 0 10px 10px;'>
+            <div class="assright2" style='padding:5px 0 0px 10px;'>
                 <img src="/static/image/left.png" alt="" class="left" style='margin-right:5px;'>
-                <div id="case" style="float:left;width:490px;overflow: hidden;">
-                    <div id='crmid' style='width:2000px;transition: all 0.5s linear;'>
-                        <div id="run" style="display:inline-block;">
+                <div id="case" style="float:left;width:490px;height:360px;overflow: hidden;">
+                    <div id='crmid' style='width:490px;'>
+                        <div id="run" style="height:360px;transition: all 1s linear;">
                             
                         </div>
                     </div>
@@ -495,8 +495,7 @@
     // console.log(uid);
     // $("#container .present .preone .preonemd").html(theme_explanation);
 </script>
-<script src="/static/js/person.js"></script>
-<script src="/static/js/person2.js"></script>
+
 <script>
     $('.history').on('click',function () {
         $('.histant').modal("show");
@@ -526,28 +525,7 @@
             $(this).parent().next().after(str);
         });
     });
-    // $("#container .correlation2 .twleft .lfone").on('click',function(){
-    //         $('#container .correlation .correlation2 .twright').show();
-    //         $('#container .correlation .correlation2 .twright2').hide();
-    //     });
-    // $("#container .correlation2 .twleft .lftwo").on('click',function(){
-    //     $('#container .correlation .correlation2 .twright').hide();
-    //     $('#container .correlation .correlation2 .twright2').show();
-    // }); 
-    var heart=$("#container .associat .assright2 #case #crmid #run .play .play1 .p11 .xin");
-        $.each(heart,function(index,item){
-            var chan=1;
-            $(item).on('click',function(){
-                if (chan==1) {
-                    $(this).attr('src','/static/image/focus.png');
-                    chan=2;
-                }else {
-                    $(this).attr('src','/static/image/heart.png');
-                    chan=1;
-                }
-                
-            })
-        });
+    
     $(' #container .associat .assright .assright2 .left').hover(function () {
         $(this).attr('src','/static/image/left_hv.png');
     },function () {
@@ -558,89 +536,6 @@
     },function () {
         $(this).attr('src','/static/image/right.png');
     });
-//
-var play=$("#container .associat .assright .assright2 .play");
-        $.each(play,function (index,item) {
-            $(item).hover(function () {
-                $(item).find(".play5").css({
-                    "-webkit-transform":"translateY(-40px)",
-                    "-moz-transform":"translateY(-40px)",
-                    "-ms-transform":"translateY(-40px)",
-                    "-o-transform":"translateY(-40px)",
-                    "transform":"translateY(-40px)",
-                })
-            },function () {
-                $(item).find(".play5").css({
-                    "-webkit-transform":"translateY(40px)",
-                    "-moz-transform":"translateY(40px)",
-                    "-ms-transform":"translateY(40px)",
-                    "-o-transform":"translateY(40px)",
-                    "transform":"translateY(40px)",
-                })
-            });
-        });
-        $.each(play,function (index,item) {
-            var changecolor=1;
-            $(item).find(".play5").on('click',function(){
-                if (changecolor==1) {
-                    $(this).parent('.play').css({backgroundColor:'#09F'});
-                    changecolor=2;
-                    $('#join2').modal("show");
-                } else {
-                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
-                    changecolor=1;
-                }
-            }); 
-        });
-//
-     var go = 66;
-    $('#container .associat .assright .assright2 .right').on('click',function () {
-        if(go==66){
-            var plays=$("#container .associat .assright .assright2 #crmid");
-            $(plays).css({
-                "-webkit-transform":"translateX(-500px)",
-                "-moz-transform":"translateX(-500px)",
-                "-ms-transform":"translateX(-500px)",
-                "-o-transform":"translateX(-500px)",
-                "transform":"translateX(-500px)",
-            });
-            go = 88;
-        } else{
-            var plays=$("#container .associat .assright .assright2 #crmid");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 66;
-        }
-    });
-    $('#container .associat .assright .assright2 .left').on('click',function () {
-        if(go==66){
-            var plays=$("#container .associat .assright .assright2 #crmid");
-            $(plays).css({
-                "-webkit-transform":"translateX(-500px)",
-                "-moz-transform":"translateX(-500px)",
-                "-ms-transform":"translateX(-500px)",
-                "-o-transform":"translateX(-500px)",
-                "transform":"translateX(-500px)",
-            });
-            go = 88;
-        } else{
-            var plays=$("#container .associat .assright .assright2 #crmid");
-            $(plays).css({
-                "-webkit-transform":"translateX(0px)",
-                "-moz-transform":"translateX(0px)",
-                "-ms-transform":"translateX(0px)",
-                "-o-transform":"translateX(0px)",
-                "transform":"translateX(0px)",
-            });
-            go = 66;
-        }
-    });
-
 
     function peokapian(){
         function place() {
@@ -668,12 +563,12 @@ var play=$("#container .associat .assright .assright2 .play");
             }else{
                 srcimg=data.photo_url;
             }; 
-            if (data.location=='unknown') {
+            if (data.location=='unknown'||data.location=='') {
                 location='暂无';
             }else {
                 location=data.location;
             };
-            if (data.tag=='null') {
+            if (data.tag=='null'||data.tag=='') {
                 tag='暂无';
             }else {
                 tag=data.user_tag;
@@ -711,5 +606,8 @@ var play=$("#container .associat .assright .assright2 .play");
         nums();
     }
     peokapian();
+
 </script>
+<script src="/static/js/person.js"></script>
+<script src="/static/js/person2.js"></script>
 {% endblock %}

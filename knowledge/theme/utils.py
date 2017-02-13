@@ -349,8 +349,18 @@ def del_e_theme_rel(theme_name, event_id):
     s_string = 'START s0 = node:special_event_index(event="%s"),s3 = node:event_index(event="%s")\
                 MATCH (s0)-[r]-(s3) DELETE r' %(theme_name, event_id)
 
-    print s_string
+    # print s_string.encode('utf-8'),'00000000000000000000'
     graph.run(s_string)
+    s_string2 = 'START s0 = node:special_event_index(event="%s")\
+                MATCH (s0)-[r]-() return r' %(theme_name)
+    print s_string2.encode('utf-8'),'00000000000000000000'
+    result = graph.run(s_string2)
+    result_list = []
+    for i in result:
+        result_list.append(i)
+    # result_d = dict(result)
+    print result_list,'@@@@@@@@@@@@@'
+    
     return 'true'
 
 def search_related_event_f(item):

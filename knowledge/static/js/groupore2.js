@@ -150,7 +150,7 @@ function quntixinjianyonghushijian() {
         function getLocalTime(nS) {
             return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18);
         };
-        var weizhi,biaoqian,shuoming,cwidth;
+        var cwidth;
         $.each(data,function (index,item) {
             var influe,name,mingan,tag,photo,fensinum;
             var fensi=Math.round((item.fansnum /10000) * 100) / 100;
@@ -159,11 +159,15 @@ function quntixinjianyonghushijian() {
             }else {
                 fensinum=fensi.toFixed(2)+'万';
             };
-
             if (item.influence==''||item.influence=='unknown'){
                 influe=0;
             }else {
-                influe=item.influence.toFixed(0);
+                var yingxiang=Math.round((item.influence /10000) * 100) / 100;
+                if (yingxiang.toString().length>6){
+                    influe=yingxiang.toFixed(2).substr(0,6)+'万';
+                }else {
+                    influe=yingxiang.toFixed(2)+'万';
+                };
             };
             if (item.uname==''||item.uname=='unknown'){
                 name=item.uid;
@@ -188,13 +192,13 @@ function quntixinjianyonghushijian() {
             };
             str+='<div class="play">'+
                 '<div class="p_top" style="width: 100%"><img class="play2" src="'+photo+'" alt="">'+
-                '<img class=\'xin\' style="margin: -24px 0 0 0px" src="/static/image/heart.png">' +
+                '<img class=\'xin\' style="margin: -24px 0 0 100px" src="/static/image/heart.png">' +
                 '<span class="xingming" title="'+name+'" style="color: #000;display: block;text-align:center;' +
                 'width:100px;white-space:nowrap;margin: -13px auto 0;overflow: hidden;text-overflow: ellipsis">'+name+'</span>'+
                 '</div>'+
                 '<div class="play23" style="width: 110px;text-align: left;float: left">'+
-                '<a class="renzh1">认证类型:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh11">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
-                '<a class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
+                '<a class="renzh1">身&nbsp;&nbsp;&nbsp;份:<span title="'+item.domain+'" class="renzh11">'+item.domain+'</span></a>'+
+                '<a class="renzh2">话&nbsp;&nbsp;&nbsp;题:<span title="'+item.topic_string.replace(/&/g,'  ')+'" class="renzh22">'+item.topic_string.replace(/&/g,'  ')+'</span></a>'+
                 '</div>'+
                 '<div style="float: left;width: 110px;margin-left: 10px">' +
                 '<div class="play3" style="text-align: left">'+
@@ -322,14 +326,14 @@ function quntixinjianyonghushijian() {
                 if (changecolor==1) {
                     $(this).parent('.play').find('.xingming').css({color:'red'});
                     changecolor=2;
-                    node_ids.push($(this).siblings('#uid').html());
+                    node_ids.push($(this).parent('.play').find('#uid').html());
                     user_ids.push($(this).siblings('.p_top').find('.xingming').html());
                     $(this).find('a').text('取消群体探索');
                     $('#join3').modal("show");
                 } else {
                     $(this).parent('.play').find('.xingming').css({color:'#000'});
                     changecolor=1;
-                    var $a = $(this).siblings('#uid').html();
+                    var $a = $(this).parent('.play').find('#uid').html();
                     node_ids.removeByValue($a);
                     var $a22 = $(this).siblings('.p_top').find('.xingming').html();
                     user_ids.removeByValue($a22);
@@ -400,6 +404,8 @@ function quntixinjianyonghushijian() {
 };
 quntixinjianyonghushijian();
 
+
+
 function sureadd2() {
     var node_ids2=node_ids.join(',');
     var newpro=$("#shuru2").val();
@@ -412,8 +418,8 @@ function sureadd2() {
         success:n_join
     });
     function n_join(data) {
-        var data=eval(data);
-        console.log(data)
+        // var data=eval(data);
+        // console.log(data)
         if (data==2){
             $('#chengong').modal("show");
         }else {

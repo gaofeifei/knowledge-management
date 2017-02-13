@@ -137,8 +137,17 @@ function zong() {
 
                 // 为echarts对象加载数据
                 myChart.setOption(option);
+                var ecConfig = require('echarts/config');
+                function eConsole(param) {
+                    if (typeof param.seriesIndex != 'undefined') {
+                        window.open('/theme/detail/?t_name='+param.name);
+                    }
+                }
+                myChart.on(ecConfig.EVENT.CLICK, eConsole);
             }
+
         );
+
 
 
     }
@@ -190,8 +199,8 @@ function zhutibianjibiaoge() {
             data:data,
             search: true,//是否搜索
             pagination: true,//是否分页
-            pageSize: 2,//单页记录数
-            pageList: [2, 4, 8, 20],//分页步进值
+            pageSize: 3,//单页记录数
+            pageList: [6 , 12, 20],//分页步进值
             sidePagination: "client",//服务端分页
             searchAlign: "left",
             searchOnEnterKey: false,//回车搜索
@@ -292,27 +301,38 @@ function biaogeshijian() {
         function getLocalTime(nS) {
             return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10);
         };
-        var weizhi,biaoqian,shuoming,photo;
+
         $.each(data,function (index,item) {
-            if (item.location=='null'){
+            var weizhi,biaoqian,shuoming,weibonums,canyunums;
+            var weibo=Math.round((item.weibo_counts /10000) * 100) / 100;
+            var canyu=Math.round((item.uid_counts /10000) * 100) / 100;
+            if (weibo.toString().length>6){
+                weibonums=weibo.toFixed(2).substr(0,6)+'万';
+            }else {
+                weibonums=weibo.toFixed(2)+'万';
+            };
+            if (canyu.toString().length>6){
+                canyunums=canyu.toFixed(2).substr(0,6)+'万';
+            }else {
+                canyunums=canyu.toFixed(2)+'万';
+            };
+            if (item.location=='null'||item.location==''){
                 weizhi='未知';
             }else {
                 weizhi=item.location;
-            };
-            if (item.photo_url=='null'){
-                photo='/static/image/xuyuyu.png';
-            }else {
-                photo=item.photo_url;
             };
             if (item.user_tag=='null'){
                 biaoqian='暂无';
             }else {
                 biaoqian=item.user_tag;
             };
-            if (item.description=='null'){
-                shuoming ='暂无数据';
+            if (item.description=='null'||item.description==''){
+                shuoming='暂无数据';
             }else {
                 shuoming=item.user_tag;
+            };
+            function getLocalTime(nS) {
+                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10)
             };
             str+='<div class="play">'+
                 '<div class="play1" style="float:left;">'+
@@ -329,10 +349,10 @@ function biaogeshijian() {
                 '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
                 '--><img class="xin" src="/static/image/heart2.png" alt="">' +
                 '<div><div style="text-align: center"><img src="/static/image/weiboshu.png" title="微博数"><!--'+
-                '--><span class="weiboshu" style="font-size: 8px">'+item.weibo_counts+'</span></div>'+
-                '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+item.uid_counts+'</span></div></div></div>'+
+                '--><span class="weiboshu" style="font-size: 8px">'+weibonums+'</span></div>'+
+                '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+canyunums+'</span></div></div></div>'+
                 '<img class="play2" style="margin-top: -50px" src="/static/image/xuyuyu.png" alt=""></div>'+
-                '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 39px;vertical-align:bottom;">'+
+                '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 40px;vertical-align:bottom;">'+
                 '<a class="bus1">业务标签：</a>'+
                 '<a class="bus2" title="'+biaoqian+'">'+biaoqian+'</a>'+
                 '</div>'+
@@ -341,9 +361,9 @@ function biaogeshijian() {
                 shuoming+
                 '</p>'+
                 '</div>'+
-                '<!-- <div class="play5" type="button" data-toggle="modal">'+
-                '<a>加入专题</a>'+
-                '</div> -->'+
+                // '<div class="play5" type="button" data-toggle="modal">'+
+                // '<a>加入专题</a>'+
+                // '</div>'+
                 '</div>';
         });
         $(".xinzeng .sjmr .sjmr1 #case #crmid #run").append(str);
@@ -449,12 +469,11 @@ function biaogeshijian() {
         if (data=='node does not exist'){
             alert('无数据~~');
         }else {
+            $(".xinzeng #shijian2 .bag").show(20);
             var json=eval(data);
             var myChart = echarts.init(document.getElementById('site'));
             myChart.showLoading();
-            // var categories = [{name:'人物'},{name:'事件'}];
             var node_value=[],link_value=[];
-            // ,event_value=[];
             for (var key in json.user_nodes){
                 var num1=Math.random()*(-1000-700)+1000;
                 var num2=Math.random()*(-1000-700)+1000;
@@ -554,6 +573,18 @@ function biaogeshijian() {
                     },
                 ]
             }, true);
+            var ecConfig = require('echarts/config');
+            function eConsole(param) {
+                if (typeof param.seriesIndex != 'undefined') {
+                    if (param.color=='#a73cff'){
+                        window.open('/index/search_result/?t_uid='+param.name);
+                    }else {
+                        window.open('/index/person/?p_uid='+param.data.id);
+                    }
+
+                }
+            }
+            myChart.on(ecConfig.EVENT.CLICK, eConsole);
         }
 
     }
@@ -575,37 +606,49 @@ function biaogeshijian() {
         $('#container .xinzeng #shijian2 .bag .sjmr .sjmr1 .left').unbind("click");
         $('#container .xinzeng #shijian2 .bag .sjmr .sjmr1 .right').unbind("click");
         if (data=='node does not exist'){
-            alert('无数据~~');
+            // alert('无数据~~');
+            null;
         }else {
             var data=eval(data);
-            $(".xinzeng #shijian2 .bag").show(20);
             var str='';
             function getLocalTime(nS) {
                 return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10);
             };
-            var weizhi,biaoqian,shuoming,photo;
+
             $.each(data,function (index,item) {
-                if (item.location=='null'){
+                var weizhi,biaoqian,shuoming,weibonums,canyunums;
+                var weibo=Math.round((item.weibo_counts /10000) * 100) / 100;
+                var canyu=Math.round((item.uid_counts /10000) * 100) / 100;
+                if (weibo.toString().length>6){
+                    weibonums=weibo.toFixed(2).substr(0,6)+'万';
+                }else {
+                    weibonums=weibo.toFixed(2)+'万';
+                };
+                if (canyu.toString().length>6){
+                    canyunums=canyu.toFixed(2).substr(0,6)+'万';
+                }else {
+                    canyunums=canyu.toFixed(2)+'万';
+                };
+                if (item.location=='null'||item.location==''){
                     weizhi='未知';
                 }else {
                     weizhi=item.location;
-                };
-                if (item.photo_url=='null'){
-                    photo='/static/image/xuyuyu.png';
-                }else {
-                    photo=item.photo_url;
                 };
                 if (item.user_tag=='null'){
                     biaoqian='暂无';
                 }else {
                     biaoqian=item.user_tag;
                 };
-                if (item.description=='null'){
-                    shuoming ='暂无数据';
+                if (item.description=='null'||item.description==''){
+                    shuoming='暂无数据';
                 }else {
                     shuoming=item.user_tag;
                 };
+                function getLocalTime(nS) {
+                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10)
+                };
                 str+='<div class="play">'+
+                    '<span id="tid" style="display: none">'+item.en_name+'</span>'+
                     '<div class="play1" style="float:left;">'+
                     '<div class="p11" style="text-align: left;padding-left: 30px">'+
                     '<span class="xingming" title="'+item.name+'" ' +
@@ -620,10 +663,10 @@ function biaogeshijian() {
                     '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
                     '--><img class="xin" src="/static/image/heart2.png" alt="">' +
                     '<div><div style="text-align: center"><img src="/static/image/weiboshu.png" title="微博数"><!--'+
-                    '--><span class="weiboshu" style="font-size: 8px">'+item.weibo_counts+'</span></div>'+
-                    '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+item.uid_counts+'</span></div></div></div>'+
+                    '--><span class="weiboshu" style="font-size: 8px">'+weibonums+'</span></div>'+
+                    '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+canyunums+'</span></div></div></div>'+
                     '<img class="play2" style="margin-top: -50px" src="/static/image/xuyuyu.png" alt=""></div>'+
-                    '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 39px;vertical-align:bottom;">'+
+                    '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 40px;vertical-align:bottom;">'+
                     '<a class="bus1">业务标签：</a>'+
                     '<a class="bus2" title="'+biaoqian+'">'+biaoqian+'</a>'+
                     '</div>'+
@@ -731,17 +774,16 @@ function biaogeshijian() {
                 if (changecolor==1) {
                     $(this).parent('.play').find('.xingming').css({color:'red'});
                     changecolor=2;
-                    node_ids.push($(this).siblings('#uid').html());
+                    node_ids.push($(this).parent('.play').find('#tid').html());
                     $(this).find('a').text('取消专题');
                     $('#join2').modal("show");
                 } else {
                     $(this).parent('.play').find('.xingming').css({color:'#fff'});
                     changecolor=1;
-                    var $a = $(this).siblings('#uid').html();
+                    var $a = $(this).parent('.play').find('#tid').html();
                     node_ids.removeByValue($a);
                     $(this).find('a').text('加入专题');
                 }
-                // console.log(node_ids);
             });
         });
         $.each($('.xinzeng .sjmr .sjmr1 #case12 #crmid12 #run12 .xingming'),function(index,item){
@@ -806,13 +848,12 @@ function delete_yes() {
     function del_eventsure(data) {
         var data=eval(data);
         if (data=='true'){
-            $("#del_cg").modal("show");
-        }else {
             $("#del_sb").modal("show");
+        }else {
+            $("#del_cg").modal("show");
         }
     }
 }
-
 
 function theme_add() {
     var node_ids2=node_ids.join(',');

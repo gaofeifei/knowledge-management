@@ -217,6 +217,7 @@ a,a:link,a:hover,a:visited,a:active {
     font-size: 10px;
 }
 #container #shijian .play3 .bus2,#shijian2 .play3 .bus2,.xinzeng .play3 .bus2 {
+    text-align: center;
     display: inline-block;
     color: black;
     margin-left: 5px;

@@ -139,27 +139,37 @@ function guanlianshijian() {
         function getLocalTime(nS) {
             return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10);
         };
-        var weizhi,biaoqian,shuoming,photo;
         $.each(data,function (index,item) {
-            if (item.location=='null'){
+            var weizhi,biaoqian,shuoming,weibonums,canyunums;
+            var weibo=Math.round((item.weibo_counts /10000) * 100) / 100;
+            var canyu=Math.round((item.uid_counts /10000) * 100) / 100;
+            if (weibo.toString().length>6){
+                weibonums=weibo.toFixed(2).substr(0,6)+'万';
+            }else {
+                weibonums=weibo.toFixed(2)+'万';
+            };
+            if (canyu.toString().length>6){
+                canyunums=canyu.toFixed(2).substr(0,6)+'万';
+            }else {
+                canyunums=canyu.toFixed(2)+'万';
+            };
+            if (item.location=='null'||item.location==''){
                 weizhi='未知';
             }else {
                 weizhi=item.location;
-            };
-            if (item.photo_url=='null'){
-                photo='/static/image/xuyuyu.png';
-            }else {
-                photo=item.photo_url;
             };
             if (item.user_tag=='null'){
                 biaoqian='暂无';
             }else {
                 biaoqian=item.user_tag;
             };
-            if (item.description=='null'){
-                shuoming ='暂无数据';
+            if (item.description=='null'||item.description==''){
+                shuoming='暂无数据';
             }else {
                 shuoming=item.user_tag;
+            };
+            function getLocalTime(nS) {
+                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10)
             };
             str+='<div class="play">'+
                 '<div class="play1" style="float:left;">'+
@@ -176,10 +186,10 @@ function guanlianshijian() {
                 '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
                 '--><img class="xin" src="/static/image/heart2.png" alt="">' +
                 '<div><div style="text-align: center"><img src="/static/image/weiboshu.png" title="微博数"><!--'+
-                '--><span class="weiboshu" style="font-size: 8px">'+item.weibo_counts+'</span></div>'+
-                '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+item.uid_counts+'</span></div></div></div>'+
+                '--><span class="weiboshu" style="font-size: 8px">'+weibonums+'</span></div>'+
+                '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+canyunums+'</span></div></div></div>'+
                 '<img class="play2" style="margin-top: -50px" src="/static/image/xuyuyu.png" alt=""></div>'+
-                '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 39px;vertical-align:bottom;">'+
+                '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 40px;vertical-align:bottom;">'+
                 '<a class="bus1">业务标签：</a>'+
                 '<a class="bus2" title="'+biaoqian+'">'+biaoqian+'</a>'+
                 '</div>'+
@@ -188,9 +198,9 @@ function guanlianshijian() {
                 shuoming+
                 '</p>'+
                 '</div>'+
-                '<div class="play5" type="button" data-toggle="modal">'+
-                '<a>加入专题</a>'+
-                '</div>'+
+                // '<div class="play5" type="button" data-toggle="modal">'+
+                // '<a>加入专题</a>'+
+                // '</div>'+
                 '</div>';
         });
 
@@ -292,7 +302,7 @@ function guanlianshijian() {
                     changecolorq=2;
                     $('#join2').modal("show");
                 } else {
-                    $(this).parent('.play').find('.xingming').css({color:'#000'});
+                    $(this).parent('.play').find('.xingming').css({color:'#fff'});
                     $(this).find('a').text('加入专题');
                     changecolorq=1;
                 }

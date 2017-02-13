@@ -80,7 +80,7 @@ def theme_node_filter():
 
 @mod.route('/theme_map_filter/')
 def theme_map_filter():
-    theme_name = request.args.get('theme_name', '电信诈骗')
+    theme_name = request.args.get('theme_name', u'电信诈骗')
     node_type = request.args.get('node_type', '')#User,Event
     event_relation_list.extend(user_event_relation)
     relation_str = ','.join(event_relation_list)
@@ -93,15 +93,15 @@ def theme_map_filter():
 
 @mod.route('/event_in_theme/')#专题编辑的上半部分-表格
 def event_in_theme():  
-    theme_name = request.args.get('theme_name', '电信诈骗')
+    theme_name = request.args.get('theme_name', u'电信诈骗')
     # uid = request.args.get('uid', '2682428145')
     event_list = event_list_theme(theme_name)
     return json.dumps(event_list)
 
 @mod.route('/del_event_in_theme/')
 def del_event_in_theme():  #专题编辑-删除事件
-    theme_name = request.args.get('theme_name', '港澳2台')
-    event_id = request.args.get('event_id', '受骗后自杀')
+    theme_name = request.args.get('theme_name', u'港澳2台')
+    event_id = request.args.get('event_id', u'受骗后自杀')
     flag = del_e_theme_rel(theme_name, event_id)
     return json.dumps(flag)
 

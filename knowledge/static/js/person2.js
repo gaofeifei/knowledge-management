@@ -161,9 +161,9 @@ function guanlianshijian() {
         });
         $("#container .associat .assright .assright2 #case #crmid #run").append(str);
         var step=0;
-        var shang=Math.floor(cwidth/6);
-        var yu=cwidth%6;
-        $('#container .associat .assright .assright2 #case #crmid #run').width((3*shang+yu)*245);
+        var shang=Math.floor(cwidth/4);
+        var yu=cwidth%4;
+        $('#container .associat .assright .assright2 #case #crmid #run').width((2*shang+yu)*245);
         $('#container .associat .assright .assright2 .right').on('click',function () {
             if (cwidth<=6){
                 alert('没有其他卡片内容了~~');

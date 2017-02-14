@@ -630,10 +630,10 @@ function picmap() {
                     },
                     geo: {
                         map: 'china',
-                        left: '10',
-                        right: '35%',
+                        left: '700',
+                        right: '95%',
                         center: [117.98561551896913, 31.205000490896193],
-                        zoom: 2.5,
+                        zoom: 0,
                         label: {
                             emphasis: {
                                 show: false
@@ -654,10 +654,11 @@ function picmap() {
                         trigger: 'item'
                     },
                     grid: {
-                        right: 40,
-                        top: 100,
+                        // right: 40,
+                        top: 300,
                         bottom: 40,
-                        width: '30%'
+                        width: '30%',
+                        height:'40%'
                     },
                     xAxis: {
                         type: 'value',
@@ -671,7 +672,7 @@ function picmap() {
                     },
                     yAxis: {
                         type: 'category',
-                        name: 'TOP 20',
+                        name: 'TOP 5',
                         nameGap: 16,
                         axisLine: {show: false, lineStyle: {color: '#ddd'}},
                         axisTick: {show: false, lineStyle: {color: '#ddd'}},
@@ -773,7 +774,7 @@ function picmap() {
                     var sum = 0;
                     var count = 0;
 
-                    for (var i = 0; i < mainSeries.dataIndex.length; i++) {
+                    for (var i = 0; i < 5; i++) {
                         var rawIndex = mainSeries.dataIndex[i];
                         var dataItem = convertedData[0][rawIndex];
                         var pmValue = dataItem.value[2];
@@ -812,7 +813,7 @@ function picmap() {
                 };
                 // myChart.setOption(option);
             }else {
-                $("#eventimg2").text('暂无新数据更新~~');
+                $("#eventimg2").html('<p style="text-align: center;height: 500px;line-height: 500px;">无新数据更新</p>');
             }
         });
 
@@ -1087,10 +1088,10 @@ function picmap() {
                     },
                     geo: {
                         map: 'china',
-                        left: '10',
-                        right: '35%',
+                        left: '700',
+                        right: '95%',
                         center: [117.98561551896913, 31.205000490896193],
-                        zoom: 2.5,
+                        zoom: 0,
                         label: {
                             emphasis: {
                                 show: false
@@ -1111,10 +1112,11 @@ function picmap() {
                         trigger: 'item'
                     },
                     grid: {
-                        right: 40,
-                        top: 100,
+                        // right: 40,
+                        top: 300,
                         bottom: 40,
-                        width: '30%'
+                        width: '30%',
+                        height:'40%'
                     },
                     xAxis: {
                         type: 'value',
@@ -1128,7 +1130,7 @@ function picmap() {
                     },
                     yAxis: {
                         type: 'category',
-                        name: 'TOP 20',
+                        name: 'TOP 5',
                         nameGap: 16,
                         axisLine: {show: false, lineStyle: {color: '#ddd'}},
                         axisTick: {show: false, lineStyle: {color: '#ddd'}},
@@ -1230,7 +1232,7 @@ function picmap() {
                     var sum = 0;
                     var count = 0;
 
-                    for (var i = 0; i < mainSeries.dataIndex.length; i++) {
+                    for (var i = 0; i < 5; i++) {
                         var rawIndex = mainSeries.dataIndex[i];
                         var dataItem = convertedData[0][rawIndex];
                         var pmValue = dataItem.value[2];
@@ -1269,7 +1271,7 @@ function picmap() {
                 };
                 // myChart.setOption(option);
             }else {
-                $("#placeimg2").text('暂无新数据更新~~');
+                $("#placeimg2").html('<p style="text-align: center;height: 500px;line-height: 500px;">无新数据更新</p>');
             }
         });
     };
@@ -1541,12 +1543,24 @@ function shijianduibi(numa) {
         var data=eval(data);
         var str1='';
         var str2='';
-        if (!data.detail_result1==[]){
-            $("#run4").html('暂无数据~~');
+        if (data.detail_result1.length==0){
+            $("#run4").html('<p style="text-align: center;height: 190px;line-height: 190px;">无新数据更新</p>');
         }else {
             $.each(data.detail_result1,function (index,item) {
-                var weizhi,biaoqian,shuoming,photo;
-                if (item.location=='null'){
+                var weizhi,biaoqian,shuoming,weibonums,canyunums;
+                var weibo=Math.round((item.weibo_counts /10000) * 100) / 100;
+                var canyu=Math.round((item.uid_counts /10000) * 100) / 100;
+                if (weibo.toString().length>6){
+                    weibonums=weibo.toFixed(2).substr(0,6)+'万';
+                }else {
+                    weibonums=weibo.toFixed(2)+'万';
+                };
+                if (canyu.toString().length>6){
+                    canyunums=canyu.toFixed(2).substr(0,6)+'万';
+                }else {
+                    canyunums=canyu.toFixed(2)+'万';
+                };
+                if (item.location=='null'||item.location==''){
                     weizhi='未知';
                 }else {
                     weizhi=item.location;
@@ -1556,57 +1570,67 @@ function shijianduibi(numa) {
                 }else {
                     biaoqian=item.user_tag;
                 };
-                if (item.description=='null'){
+                if (item.description=='null'||item.description==''){
                     shuoming='暂无数据';
                 }else {
                     shuoming=item.user_tag;
                 };
-                if (item.photo_url=='null'){
-                    photo='/static/image/xuyuyu.png';
-                }else {
-                    photo=item.photo_url;
-                };
                 function getLocalTime(nS) {
-                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18)
+                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10)
                 };
                 str1+='<div class="play">'+
-                    '<div class="play1">'+
-                    '<div class="p11">'+
-                    '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
-                    '--><img src="/static/image/dingwei.png" title="位置"><!--'+
-                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
-                    '--><img class="xin" src="/static/image/heart.png" alt="">'+
-                    '</div>'+
+                    '<div class="play1" style="float:left;">'+
+                    '<div class="p11" style="text-align: left;padding-left: 30px">'+
+                    '<span class="xingming" title="'+item.name+'" ' +
+                    'style="display:block;color: #fff;font-weight: 900;font-size: 18px;width: 80px;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;">' +item.name+'</span>'+
                     '<div class="p22">'+
-                    '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
+                    '<span class="fasheng" style="width: 80px">发生时间：</span>'+
                     '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
                     '</div>'+
                     '</div>'+
-                    '<img class="play2" src="'+photo+'" alt="">'+
-                    '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
+                    '</div>'+
+                    '<div style="float:left;margin: 10px 0 0 34px"><div style="display: inline-block"><img src="/static/image/dingwei.png" title="位置"><!--'+
+                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+                    '--><img class="xin" src="/static/image/heart2.png" alt="">' +
+                    '<div><div style="text-align: center"><img src="/static/image/weiboshu.png" title="微博数"><!--'+
+                    '--><span class="weiboshu" style="font-size: 8px">'+weibonums+'</span></div>'+
+                    '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+canyunums+'</span></div></div></div>'+
+                    '<img class="play2" style="margin-top: -50px" src="/static/image/xuyuyu.png" alt=""></div>'+
+                    '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 40px;vertical-align:bottom;">'+
                     '<a class="bus1">业务标签：</a>'+
-                    '<a class="bus2">'+biaoqian+'</a>'+
+                    '<a class="bus2" title="'+biaoqian+'">'+biaoqian+'</a>'+
                     '</div>'+
                     '<div class="play4">'+
                     '<p class="shuoming">'+
                     shuoming+
                     '</p>'+
                     '</div>'+
-                    '<!-- <div class="play5" type="button" data-toggle="modal">'+
-                    '<a>加入专题</a>'+
-                    '</div> -->'+
+                    // '<div class="play5" type="button" data-toggle="modal">'+
+                    // '<a>加入专题</a>'+
+                    // '</div>'+
                     '</div>';
             });
             $("#run4").append(str1);
             $('#run4').width((data.detail_result1.length)*255);
-
         };
-        if (!data.detail_result2==[]){
-            $("#run5").html('暂无数据~~');
+        if (data.detail_result2.length==0){
+            $("#run5").html('<p style="text-align: center;height: 190px;line-height: 190px;">无新数据更新</p>');
         }else {
             $.each(data.detail_result2,function (index,item) {
-                var weizhi,biaoqian,shuoming,photo;
-                if (item.location=='null'){
+                var weizhi,biaoqian,shuoming,weibonums,canyunums;
+                var weibo=Math.round((item.weibo_counts /10000) * 100) / 100;
+                var canyu=Math.round((item.uid_counts /10000) * 100) / 100;
+                if (weibo.toString().length>6){
+                    weibonums=weibo.toFixed(2).substr(0,6)+'万';
+                }else {
+                    weibonums=weibo.toFixed(2)+'万';
+                };
+                if (canyu.toString().length>6){
+                    canyunums=canyu.toFixed(2).substr(0,6)+'万';
+                }else {
+                    canyunums=canyu.toFixed(2)+'万';
+                };
+                if (item.location=='null'||item.location==''){
                     weizhi='未知';
                 }else {
                     weizhi=item.location;
@@ -1616,45 +1640,44 @@ function shijianduibi(numa) {
                 }else {
                     biaoqian=item.user_tag;
                 };
-                if (item.description=='null'){
+                if (item.description=='null'||item.description==''){
                     shuoming='暂无数据';
                 }else {
                     shuoming=item.user_tag;
                 };
-                if (item.photo_url=='null'){
-                    photo='/static/image/xuyuyu.png';
-                }else {
-                    photo=item.photo_url;
-                };
                 function getLocalTime(nS) {
-                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18)
+                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10)
                 };
                 str2+='<div class="play">'+
-                    '<div class="play1">'+
-                    '<div class="p11">'+
-                    '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
-                    '--><img src="/static/image/dingwei.png" title="位置"><!--'+
-                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
-                    '--><img class="xin" src="/static/image/heart.png" alt="">'+
-                    '</div>'+
+                    '<div class="play1" style="float:left;">'+
+                    '<div class="p11" style="text-align: left;padding-left: 30px">'+
+                    '<span class="xingming" title="'+item.name+'" ' +
+                    'style="display:block;color: #fff;font-weight: 900;font-size: 18px;width: 80px;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;">' +item.name+'</span>'+
                     '<div class="p22">'+
-                    '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
+                    '<span class="fasheng" style="width: 80px">发生时间：</span>'+
                     '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
                     '</div>'+
                     '</div>'+
-                    '<img class="play2" src="'+photo+'" alt="">'+
-                    '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
+                    '</div>'+
+                    '<div style="float:left;margin: 10px 0 0 34px"><div style="display: inline-block"><img src="/static/image/dingwei.png" title="位置"><!--'+
+                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+                    '--><img class="xin" src="/static/image/heart2.png" alt="">' +
+                    '<div><div style="text-align: center"><img src="/static/image/weiboshu.png" title="微博数"><!--'+
+                    '--><span class="weiboshu" style="font-size: 8px">'+weibonums+'</span></div>'+
+                    '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+canyunums+'</span></div></div></div>'+
+                    '<img class="play2" style="margin-top: -50px" src="/static/image/xuyuyu.png" alt=""></div>'+
+                    '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 40px;vertical-align:bottom;">'+
                     '<a class="bus1">业务标签：</a>'+
-                    '<a class="bus2">'+biaoqian+'</a>'+
+                    '<a class="bus2" title="'+biaoqian+'">'+biaoqian+'</a>'+
                     '</div>'+
                     '<div class="play4">'+
                     '<p class="shuoming">'+
                     shuoming+
                     '</p>'+
                     '</div>'+
-                    '<!-- <div class="play5" type="button" data-toggle="modal">'+
-                    '<a>加入专题</a>'+
-                    '</div> -->'+
+                    // '<div class="play5" type="button" data-toggle="modal">'+
+                    // '<a>加入专题</a>'+
+                    // '</div>'+
                     '</div>';
             });
             $("#run5").append(str2);
@@ -1758,17 +1781,16 @@ function shijianduibi(numa) {
             };
 
         });
-
         //卡片效果
-        var heart=$("#container .play .play1 .p11 .xin");
+        var heart=$("#container .play .xin");
         $.each(heart,function(index,item){
             var chan=1;
             $(item).on('click',function(){
                 if (chan==1) {
-                    $(this).attr('src','/static/image/focus.png');
+                    $(this).attr('src','/static/image/focus2.png');
                     chan=2;
                 }else {
-                    $(this).attr('src','/static/image/heart.png');
+                    $(this).attr('src','/static/image/heart2.png');
                     chan=1;
                 }
             })
@@ -1782,6 +1804,7 @@ function shijianduibi(numa) {
         if($('#option32').is(':checked')) { point='weibo_counts'; };
         var url = '/group/g_compare_event/?group_name1='+groupname1+'&group_name2='+groupname2+'&sort_flag='+
             point+'&diff='+numberd;
+        console.log(url)
         thing.call_request(url,territory);
     };
     $.each($("#container #middle .thingtrast .ttone input"),function (index,item) {

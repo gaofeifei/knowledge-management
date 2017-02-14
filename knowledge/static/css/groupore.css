@@ -70,8 +70,15 @@ a,a:link,a:hover,a:visited,a:active {
     margin-left: 15px;
     width: 200px;
 }
+#container .choose1 .menu .compare {
+    font-weight: 900;
+    font-size: 14px;
+    color: #4b4b4b;
+    float: left;
+    margin-top: 40px;
+}
 #container .choose1 .menu .msure,#container .con_bot .add #shijian .sjt .sjt2,#shijian2 .sjt .sjt2,
-#container .choose1 .menu .compare, #container .choose1 #condet .condet4,#shijian2 .bag .sjmr1 .add22,
+ #container .choose1 #condet .condet4,#shijian2 .bag .sjmr1 .add22,
 #container .con_bot .add #shijian .bag .sjmr1 .add22,.add99 {
     width: 70px;
     height: 32px;
@@ -85,7 +92,7 @@ a,a:link,a:hover,a:visited,a:active {
 }
 #shijian2 .sjt .sjt2:hover,#shijian2 .bag .sjmr1 .add22:hover,
 #container .con_bot .add #shijian .sjt .sjt2:hover,#container .choose1 .menu .msure:hover,
-#container .choose1 .menu .compare:hover,#container .choose1 #condet .condet4:hover,
+#container .choose1 #condet .condet4:hover,
 #container .con_bot .add #shijian .bag .sjmr1 .add22:hover,.add99:hover {
     background-color: #4cae4c;
 }
@@ -189,7 +196,7 @@ a,a:link,a:hover,a:visited,a:active {
 }
 #shijian2 .play2,
 #container #shijian .play2,#tbrg .play .play2 {
-    width: 50px;
+    width: 55px;
     height: 55px;
     display: block;
     border: 3px solid black;
@@ -333,9 +340,8 @@ a,a:link,a:hover,a:visited,a:active {
     padding: 2px 5px;
     background-color: #0099FF;
     border-radius: 10px;
-    position: absolute;
-    bottom: 5px;
-    right: 20px;
+    float: right;
+    margin-top: 10px;
 }
 .add33:hover {
     background-color: #4cae4c;

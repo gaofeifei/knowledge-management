@@ -271,7 +271,7 @@ a,a:link,a:hover,a:visited,a:active {
     display: inline-block;
 }
 #container #people .peotwo2 #run2 .play .play2 {
-    width: 50px;
+    width: 55px;
     height: 55px;
     display: block;
     border: 3px solid black;
@@ -389,5 +389,8 @@ a,a:link,a:hover,a:visited,a:active {
     background-color: #0099FF;
     color: white;
     font-weight: bold;
+}
+.xingming {
+    cursor: pointer;
 }
 

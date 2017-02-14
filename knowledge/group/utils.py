@@ -93,7 +93,8 @@ def group_tab_graph(group_name, node_type, relation_type, layer):
 
 # 地图
 def group_tab_map(group_name, node_type, relation_type, layer):
-    black_country = [u'美国',u'其他',u'法国',u'英国']
+    black_country = [u'美国',u'其他',u'法国',u'英国',u'中国',u'局域网']
+    # black_country = [u'美国',u'其他',u'法国',u'英国']
     tab_graph_result = group_tab_graph(group_name, node_type, relation_type, layer)
     uid_list = [i for i in tab_graph_result['map_uid'] if str(i) != 'null']
     print uid_list
@@ -748,7 +749,8 @@ def compare_graph_group(group_name1, group_name2, layer, diff):
 #画地图    
 def draw_map(uid_list):
     uid_list = [i for i in set(uid_list)]
-    black_country = [u'美国',u'其他',u'法国',u'英国']
+    black_country = [u'美国',u'其他',u'法国',u'英国',u'中国',u'局域网']
+    # black_country = [u'美国',u'其他',u'法国',u'英国']
 
     print len(uid_list),'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1'
     query_body = {

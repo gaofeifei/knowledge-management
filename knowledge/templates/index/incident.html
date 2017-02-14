@@ -26,7 +26,9 @@
         <div class="kmrg">
             <div class="kmrg1">
                 <div class="rgname">
-                    <span class="xingming" style="color: #000;font-weight: 900;font-size: 38px;margin-left: 15px;">
+                    <span class="xingming" style="max-width:560px;white-space: nowrap;
+                    overflow: hidden;text-overflow:ellipsis;
+                    color: #000;font-weight: 900;font-size: 38px;margin-left: 15px;">
                     </span>
                     <img src="/static/image/dingwei.png" alt="" style="margin-left: 30px">
                     <span class="difang" style="font-size: 8px"></span>
@@ -579,6 +581,7 @@
             };
             $('#container .keyman .kmlf .kmimg').attr('src',srcimg)
             $("#container .keyman .kmrg .rgname .xingming").append(themename);
+            $("#container .keyman .kmrg .rgname .xingming").attr('title',themename);
             $("#container .keyman .kmrg .rgname .difang").append(location);
             $("#container .keyman .kmrg .rgname .influence").append(getLocalTime(data.start_ts));
             $("#container .keyman .kmrg .rgname .huoyuedu").append(data.weibo_counts);

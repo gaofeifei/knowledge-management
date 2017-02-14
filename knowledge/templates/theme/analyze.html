@@ -35,27 +35,30 @@
     <div class="choose1" style='display:none;'>
         <!-- <p class="ch2">专题查看</p> -->
         <div class="menu">
-            <span class="zhmi">专题名称</span>
-            <form>
-                <select name="" id="list" onchange='chakan(this.value)'>
-                    <option value="" disabled selected>请选择专题名称</option> 
-                
-                </select>
-            </form>
-            <!-- <span id="wrapper">
-                <div class="demo">
-                    时间
-                    <input id="date-range0" value="" placeholder="时间">
-                </div>
-            </span> -->
-            <button class="msure">进入专题</button>
-            <button class="compare">加入对比</button>
-            <div id="condet" style="margin-top:20px;display:none;">
-                <span class="condet1">加入对比专题（最多选择两个）：</span>
-                <!-- <span class="condet2"> <b class="icon icon-remove det"></b> </span>
-                <span class="condet3"> <b class="icon icon-remove det"></b> </span> -->
-                <button class="condet4">对比分析</button>
+            <div>
+                <span class="zhmi">选择专题</span>
+                <form>
+                    <select name="" id="list" onchange='chakan(this.value)'>
+                        <option value="" disabled selected>请选择专题名称</option> 
+                    
+                    </select>
+                </form>
+                <button class="msure">进入专题</button>
             </div>
+            <div>
+                <div class="compare">专题对比</div>
+                <div id="condet" style="margin-top:20px;display:inline-block;">
+                    <div class='condet111' style="margin-top:20px;">
+                        <span class="condet1" style='display:inline-block;;margin-left:20px;'>
+                        加入对比专题（最多选择两个）：</span>
+                        <!-- <span class="condet2"> <b class="icon icon-remove det"></b> </span>
+                        <span class="condet3"> <b class="icon icon-remove det"></b> </span> -->
+                        <button class="condet4" style=''>对比分析</button>
+                    </div>
+                    
+                </div>
+            </div>
+            
         </div>
     </div>
     <div class="xinzeng" style="width:1200px;padding:20px 0 20px 0;display:none;border: 1px solid #09F;

@@ -318,11 +318,11 @@ function guanlianrenwu() {
                 '<div class="p22" style="float:left;margin-top: -5px">'+
                 '<div><img src="/static/image/fensishu.png"'+
                 'title=\'粉丝数\'><!--'+
-                '--><span class="difang" style="font-size: 8px">'+fensinum+'</span>'+
+                '--><span class="difang" style="font-size: 8px;display: inline-block;width: 50.06px">'+fensinum+'</span>'+
                 '<img src="/static/image/mingan.png" title="敏感度">'+
                 '<span class="mingan">'+mingan+'</span></div>'+
                 '<div><img src="/static/image/influence.png" title="影响力">'+
-                '<span class="influence">'+influe+'</span>'+
+                '<span class="influence" style="display: inline-block;width: 50.06px">'+influe+'</span>'+
                 '<img src="/static/image/huoyuedu.png" title="活跃度">'+
                 '<span class="huoyuedu">'+huoyue+'</span></div>'+
                 '</div>'+
@@ -536,7 +536,7 @@ function zhexiantu() {
 
     var place=new place();
     function nums() {
-        var url = '/theme/theme_river/?theme_name'+thname;
+        var url = '/theme/theme_river/?theme_name='+thname;
         place.call_request(url,territory);
     }
     nums();

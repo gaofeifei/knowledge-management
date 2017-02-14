@@ -213,47 +213,45 @@ function guanlianshijian() {
             };
 
         });
-    };
-    //卡片效果
-    $.each($(".play"),function (index,item) {
-        $(item).hover(function () {
-            $(item).find(".play5").css({
-                "-webkit-transform":"translateY(-40px)",
-                "-moz-transform":"translateY(-40px)",
-                "-ms-transform":"translateY(-40px)",
-                "-o-transform":"translateY(-40px)",
-                "transform":"translateY(-40px)",
-            })
-        },function () {
-            $(item).find(".play5").css({
-                "-webkit-transform":"translateY(40px)",
-                "-moz-transform":"translateY(40px)",
-                "-ms-transform":"translateY(40px)",
-                "-o-transform":"translateY(40px)",
-                "transform":"translateY(40px)",
+        //卡片效果
+        $.each($(".play"),function (index,item) {
+            $(item).hover(function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(-40px)",
+                    "-moz-transform":"translateY(-40px)",
+                    "-ms-transform":"translateY(-40px)",
+                    "-o-transform":"translateY(-40px)",
+                    "transform":"translateY(-40px)",
+                })
+            },function () {
+                $(item).find(".play5").css({
+                    "-webkit-transform":"translateY(40px)",
+                    "-moz-transform":"translateY(40px)",
+                    "-ms-transform":"translateY(40px)",
+                    "-o-transform":"translateY(40px)",
+                    "transform":"translateY(40px)",
+                })
+            });
+        });
+        var heart=$(".play .xin");
+        $.each(heart,function(index,item){
+            var chan=1;
+            $(item).on('click',function(){
+                if (chan==1) {
+                    $(this).attr('src','/static/image/focus2.png');
+                    chan=2;
+                }else {
+                    $(this).attr('src','/static/image/heart2.png');
+                    chan=1;
+                }
             })
         });
-    });
-    var heart=$(".play .xin");
-    $.each(heart,function(index,item){
-        var chan=1;
-        $(item).on('click',function(){
-            if (chan==1) {
-                $(this).attr('src','/static/image/focus2.png');
-                chan=2;
-            }else {
-                $(this).attr('src','/static/image/heart2.png');
-                chan=1;
-            }
-        })
-    });
-    $.each($('.xingming'),function(index,item){
-        $(item).on('click',function(){
-            window.open('/index/search_result/?t_uid='+$(this).html());
-        })
-    });
-
-
+        $.each($('.xingming'),function(index,item){
+            $(item).on('click',function(){
+                window.open('/index/search_result/?t_uid='+$(this).html());
+            })
+        });
+    };
 
     var touch=new touch();
     function nums(point) {
@@ -304,9 +302,9 @@ function gaoyingxiangliweibo() {
     function nums(s) {
         var url;
         if (s==1) {
-            url = '/index/event_weibo/?uid='+uid+'&weibo_type=retweeted';
+            url = '/index/user_weibo/?uid='+uid+'&weibo_type=retweeted';
         }else {
-            url = '/index/event_weibo/?uid='+uid+'&weibo_type=sensitive';
+            url = '/index/user_weibo/?uid='+uid+'&weibo_type=sensitive';
         };
         place.call_request(url,territory);
     }
@@ -356,7 +354,7 @@ function gaoyingxiangliweibo() {
             //将创建的tbody添加入table
             var html_c = '';
             if(dataArray==''){
-                html_c = "<div style='width:100%;'><span><img src='/static/img/pencil-icon.png' style='height:12px;width:12px;margin:0px;margin-right:8px;float:left;'>用户未发布任何微博</span></div>";
+                html_c = "<p style='width:1000px;text-align: center'>用户未发布任何微博</p>";
                 oTBody.innerHTML = html_c;
             }else{
 
@@ -417,7 +415,7 @@ function gaoyingxiangliweibo() {
                 var html_c = '';
 
                 if(dataArray==''){
-                    html_c = "<div style='width:100%;'><span style='margin-left:20px;'>用户未发布任何微博</span></div>";
+                    html_c = "<p style='width:1000px;text-align: center'>用户未发布任何微博</p>";
                     oTBody.rows[0].cells[0].innerHTML = html_c;
                 }else{
 

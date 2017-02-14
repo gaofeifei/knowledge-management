@@ -41,7 +41,7 @@ function zong() {
         $.each(data,function (index,item) {
             $("#container .choose1 .menu form #list").append('<option value="'+item[0]+'">'+item[0]+'</option>');
             $(".xinzeng #list1").append('<option value="'+item[0]+'">'+item[0]+'</option>');
-            $("#container .choose1 .menu #condet .condet1").after('<span class="condet2"><i>'+item[0]+'</i></span>')
+            $("#container .choose1 .menu #condet .condet111").before('<span class="condet2"><i>'+item[0]+'</i></span>')
             anlname.push(item[0]);
             anlnum.push(item[1]);
         });
@@ -169,13 +169,15 @@ $("#container .choose1 .menu .msure").on('click',function () {
         window.open("/theme/detail/?t_name="+t_name);
     }
 });
-$("#container .choose1 .menu .compare").on('click',function () {
-    if (!m==1){
-        $("#join99").modal("show");
-    }else {
-        $('#condet').show(30);
-    }
-});
+
+// $("#container .choose1 .menu .compare").on('click',function () {
+//     if (!m==1){
+//         $("#join99").modal("show");
+//     }else {
+//         $('#condet').show(30);
+//     }
+// });
+
 function zhutibianjibiaoge() {
     function place() {
         //this.ajax_method='GET'; // body...
@@ -851,6 +853,7 @@ function delete_yes() {
             $("#del_sb").modal("show");
         }else {
             $("#del_cg").modal("show");
+            window.location.reload();
         }
     }
 }

@@ -43,7 +43,9 @@
             <div class="kmrg">
                 <div class="kmrg1">
                     <div class="rgname">
-                        <span class="xingming" style="color: #000;font-weight: 900;font-size: 38px;margin-left: 15px;"></span>
+                        <span class="xingming" style="max-width:560px;white-space: nowrap;
+                        overflow: hidden;text-overflow:ellipsis;
+                        color: #000;font-weight: 900;font-size: 38px;margin-left: 15px;"></span>
                         <img src="/static/image/fensishu.png" title="粉丝数" style="margin-left: 30px">
                         <span class="difang" style="font-size: 8px"></span>
                         <img src="/static/image/influence.png" title="影响力" style="margin-left: 10px">
@@ -57,8 +59,8 @@
                 <div class="kmrg2" style="margin-left: 15px;">
                     <p>注册地:  <span class="zhuce"></span></p>
                     <p>活跃地： <span class="huoyue"></span></p>
-                    <p>认证类型:  <span class="renzheng"></span></p>
-                    <p>领域： <span class="lingyu"></span></p>
+                    <p>身份:  <span class="renzheng"></span></p>
+                    <p>话题： <span class="lingyu"></span></p>
                     <p>业务标签：<span class="yewu"></span></p>
                     <p>个人描述：<span class="miaoshu"></span></p>
                     <p class="rgcreat">
@@ -225,7 +227,7 @@
             <div class="assright" style="margin-left: 40px;">
                 <p class="assright1">
                 <p class='guanlian' style='display:inline-block;'>关联事件</span>
-                <p class="xuan" style='display:inline-block;float:right;'>
+                <!-- <p class="xuan" style='display:inline-block;float:right;'>
                     <label class="radio-inline">
                         <input type="radio" name="idiefo" value="option1"> 1跳
                     </label>
@@ -236,7 +238,7 @@
                         <input type="radio" name="idiefo" value="option2" checked> 全部
                     </label>
                     <button class="add22" type="button" data-toggle="modal">添加</button>
-                </p>              
+                </p>  -->             
             </p>
             <div class="assright2" style='padding:5px 0 0px 10px;'>
                 <img src="/static/image/left.png" alt="" class="left" style='margin-right:5px;'>
@@ -526,6 +528,15 @@
         });
     });
     
+    $("#container .correlation2 .twleft .lfone").on('click',function(){
+        $(this).css({backgroundColor:'#00cc66'});
+        $("#container .correlation2 .twleft .lftwo").css({backgroundColor:'#0099ff'});
+    });
+    $("#container .correlation2 .twleft .lftwo").on('click',function(){
+        $(this).css({backgroundColor:'#00cc66'});
+        $("#container .correlation2 .twleft .lfone").css({backgroundColor:'#0099ff'});
+    })
+
     $(' #container .associat .assright .assright2 .left').hover(function () {
         $(this).attr('src','/static/image/left_hv.png');
     },function () {
@@ -583,14 +594,26 @@
             }else {
                 name=data.uname;
             };
+            var str_huoyuedi;
+            if (!(data.activity_geo.indexOf('&')==-1)) {
+                str_huoyuedi=data.activity_geo.replace(/&/g,' ');
+                if (!(str_huoyuedi.indexOf('局域网')==-1)) {
+                    str_huoyuedi = str_huoyuedi.replace(/局域网/g, "");
+                };
+            }else{
+                str_huoyuedi=data.activity_geo;
+            };
+            
+            // var pattern = "局域网";
             $('#container .keyman .kmlf .kmimg').attr('src',srcimg)
             $("#container .keyman .kmrg .rgname .xingming").append(name);
+            $("#container .keyman .kmrg .rgname .xingming").attr('title',name);
             $("#container .keyman .kmrg .rgname .difang").append(data.fansnum);
             $("#container .keyman .kmrg .rgname .influence").append(data.influence.toFixed(2));
             $("#container .keyman .kmrg .rgname .huoyuedu").append(data.activeness.toFixed(2));
             $("#container .keyman .kmrg .rgname .mingan").append(data.sensitive.toFixed(2));
             $("#container .keyman .kmrg .kmrg2 .zhuce").append(location);
-            $("#container .keyman .kmrg .kmrg2 .huoyue").append(data.activity_geo.replace(/&/g,' '));
+            $("#container .keyman .kmrg .kmrg2 .huoyue").append(str_huoyuedi);
             $("#container .keyman .kmrg .kmrg2 .renzheng").append(data.domain);
             $("#container .keyman .kmrg .kmrg2 .lingyu").append(data.topic_string.replace(/&/g,' '));
             $("#container .keyman .kmrg .kmrg2 .yewu").append(tag);

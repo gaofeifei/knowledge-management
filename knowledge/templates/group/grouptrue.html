@@ -288,12 +288,14 @@
                 width: 28px;
                 text-align: center;
                 padding: 5px;
-                background-color: #0099ff;
                 color: white;
                 font-weight: 700;
                 border-radius: 5px;
                 border: 1px solid #337ab7;
                 margin-top: 40px;
+            }
+            #container #total .twleft .lfone {
+                background-color: #00cc66;
             }
             #container #total .twright,#container #total .twright2 {
                 display: inline-block;
@@ -304,7 +306,7 @@
                 padding:30px;
             }
             #container #total .twleft .lftwo {
-                background-color: #00cc66;
+                background-color: #0099ff;
                 margin-top: 10px;
             }
             #container #total .twright .twr1,#container #total .twright2 .twr1 {
@@ -504,6 +506,7 @@
 <script src="/static/js/proults.js"></script>
 <script src="/static/js/grouptrue2.js"></script>
 <script type="text/javascript">
+ 
 function getLocalTime(nS) {
     return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,20)
 };
@@ -548,10 +551,11 @@ function getLocalTime(nS) {
         });
         $("#container #total .twleft .lftwo").on('click',function () {
             // $("#container #total .twright").empty();
-            $(this).css({backgroundColor:'#09F'});
-            $("#container #total .twleft .lfone").css({backgroundColor:'#00cc66'});
+            $(this).css({backgroundColor:'#00cc66'});
+            $("#container #total .twleft .lfone").css({backgroundColor:'#09F'});
             nums(2);
         });
+       
         function Draw_weibo_table(data){
         $('#group_emotion_loading').css('display', 'none');
         $('#input-table').show();

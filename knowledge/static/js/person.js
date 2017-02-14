@@ -132,134 +132,145 @@ function events() {
     var myChart = echarts.init(document.getElementById('eventimg'));
     myChart.showLoading();
     $.getJSON(url, function (json) {
-        var json=eval(json);
-        var node_value=[],link_value=[];
-        for (var key in json.node.uid){
-            var num1=Math.random()*(-1000-700)+1000;
-            var num2=Math.random()*(-1000-700)+1000;
-            var name;
-            if (json.node.uid[key]==''||json.node.uid[key]=="unknown") {
-                name=key;
-            }else {
-                name=json.node.uid[key];
+        if (json=='node does not exist'){
+            alert('无数据');
+        }else {
+            var json=eval(json);
+            var node_value=[],link_value=[];
+            for (var key in json.node.uid){
+                var num1=Math.random()*(-1000-700)+1000;
+                var num2=Math.random()*(-1000-700)+1000;
+                var name;
+                if (json.node.uid[key]==''||json.node.uid[key]=="unknown") {
+                    name=key;
+                }else {
+                    name=json.node.uid[key];
+                };
+                node_value.push(
+                    {
+                        x: num1,
+                        y: num2,
+                        id: key,
+                        name:name,
+                        symbolSize: 14,
+                        itemStyle: {
+                            normal: {
+                                color: '#ffa500'
+                            }
+                        }
+                    }
+                );
             };
-            node_value.push(
-                {
-                    x: num1,
-                    y: num2,
-                    id: key,
-                    name:name,
-                    symbolSize: 14,
-                    itemStyle: {
-                        normal: {
-                            color: '#ffa500'
+            for (var key2 in json.node.event_id){
+                var num3=Math.random()*(-1000-700)+1000;
+                var num4=Math.random()*(-1000-700)+1000;
+                var name2;
+                if (json.node.event_id[key2]==''||json.node.event_id[key2]=="unknown") {
+                    name2=key2;
+                }else {
+                    name2=json.node.event_id[key2];
+                }
+                node_value.push(
+                    {
+                        x: num3,
+                        y: num4,
+                        id: key2,
+                        name:name2,
+                        symbolSize: 14,
+                        itemStyle: {
+                            normal: {
+                                color: 'purple'
+                            }
                         }
                     }
-                }
-            );
-        };
-        for (var key2 in json.node.event_id){
-            var num3=Math.random()*(-1000-700)+1000;
-            var num4=Math.random()*(-1000-700)+1000;
-            var name2;
-            if (json.node.event_id[key2]==''||json.node.event_id[key2]=="unknown") {
-                name2=key2;
-            }else {
-                name2=json.node.event_id[key2];
-            }
-            node_value.push(
-                {
-                    x: num3,
-                    y: num4,
-                    id: key2,
-                    name:name2,
-                    symbolSize: 14,
-                    itemStyle: {
-                        normal: {
-                            color: 'purple'
-                        }
+                );
+            };
+            $.each(json.result_relation,function (index,item) {
+                link_value.push(
+                    {
+                        source: item[0],
+                        target: item[2]
                     }
-                }
-            );
-        };
-        $.each(json.result_relation,function (index,item) {
-            link_value.push(
-                {
-                    source: item[0],
-                    target: item[2]
-                }
-            );
-        });
-        myChart.hideLoading();
-        myChart.setOption(option = {
-            title: {
-                // text: 'NPM Dependencies'
-            },
-            legend: {
-                // data: ["人物","事件"]
-                // data:categories.map(function (a) {
-                //     return a;
-                // })
-            },
-            animationDurationUpdate: 1500,
-            animationEasingUpdate: 'quinticInOut',
-            series : [
-                {
-                    // name:'人物',
-                    type: 'graph',
-                    layout: 'none',
-                    // progressiveThreshold: 700,
-                    data:node_value,
-                    edges: link_value,
-                    itemStyle:{
-                        normal:{
-                            color:'#00cc66'
-                        }
-                    },
-                    label: {
-                        emphasis: {
-                            position: 'right',
-                            show: true
-                        }
-                    },
-                    focusNodeAdjacency: true,
-                    lineStyle: {
-                        normal: {
-                            width: 1.5,
-                            curveness: 0.3,
-                            opacity: 0.8
-                        }
-                    }
+                );
+            });
+            myChart.hideLoading();
+            myChart.setOption(option = {
+                title: {
+                    // text: 'NPM Dependencies'
                 },
-                // {
-                //     name:'事件',
-                //     type: 'graph',
-                //     layout: 'none',
-                //     // progressiveThreshold: 700,
-                //     // data:node_value,
-                //     // edges: link_value,
-                //     itemStyle:{
-                //         normal:{
-                //             color:'#a73cff'
-                //         }
-                //     },
-                //     label: {
-                //         emphasis: {
-                //             position: 'right',
-                //             show: true
-                //         }
-                //     },
-                //     focusNodeAdjacency: true,
-                //     lineStyle: {
-                //         normal: {
-                //             width: 1.5,
-                //             curveness: 0.3,
-                //             opacity: 0.8
-                //         }
-                //     }
-                // },
-            ]
-        }, true);
+                legend: {
+                    // data: ["人物","事件"]
+                    // data:categories.map(function (a) {
+                    //     return a;
+                    // })
+                },
+                animationDurationUpdate: 1500,
+                animationEasingUpdate: 'quinticInOut',
+                series : [
+                    {
+                        // name:'人物',
+                        type: 'graph',
+                        layout: 'none',
+                        // progressiveThreshold: 700,
+                        data:node_value,
+                        edges: link_value,
+                        itemStyle:{
+                            normal:{
+                                color:'#00cc66'
+                            }
+                        },
+                        label: {
+                            emphasis: {
+                                position: 'right',
+                                show: true
+                            }
+                        },
+                        focusNodeAdjacency: true,
+                        lineStyle: {
+                            normal: {
+                                width: 1.5,
+                                curveness: 0.3,
+                                opacity: 0.8
+                            }
+                        }
+                    },
+                    // {
+                    //     name:'事件',
+                    //     type: 'graph',
+                    //     layout: 'none',
+                    //     // progressiveThreshold: 700,
+                    //     // data:node_value,
+                    //     // edges: link_value,
+                    //     itemStyle:{
+                    //         normal:{
+                    //             color:'#a73cff'
+                    //         }
+                    //     },
+                    //     label: {
+                    //         emphasis: {
+                    //             position: 'right',
+                    //             show: true
+                    //         }
+                    //     },
+                    //     focusNodeAdjacency: true,
+                    //     lineStyle: {
+                    //         normal: {
+                    //             width: 1.5,
+                    //             curveness: 0.3,
+                    //             opacity: 0.8
+                    //         }
+                    //     }
+                    // },
+                ]
+            }, true);
+            myChart.on('click', function (param) {
+                if (param.color=='purple'){
+                    window.open('/index/search_result/?t_uid='+param.name);
+                }else {
+                    window.open('/index/person/?p_uid='+param.data.id);
+                }
+            });
+        }
 
     });
 }
@@ -271,11 +282,6 @@ function ditu() {
     $.getJSON(url2, function (data3) {
         var data2=eval(data3);
         var data = [];
-        $.each(data2, function (index, item) {
-            data.push(
-                {name: item[0],value: item[1]}
-            );
-        });
         var geoCoordMap = {
             '香港':[114.15,22.15],
             "鹰潭": [117.03,28.14],
@@ -471,6 +477,12 @@ function ditu() {
             "大庆":[125.03,46.58],
             "鹰潭":[28.14, 117.03],
         };
+        $.each(data2, function (index, item) {
+            data.push(
+                {name: item[0],value: item[1]}
+            );
+
+        });
         if (data.length>0){
             var convertData = function (data) {
                 var res = [];
@@ -538,10 +550,10 @@ function ditu() {
                 },
                 geo: {
                     map: 'china',
-                    left: '10',
-                    right: '35%',
+                    left: '700',
+                    right: '95%',
                     center: [117.98561551896913, 31.205000490896193],
-                    zoom: 2.5,
+                    zoom: 0,
                     label: {
                         emphasis: {
                             show: false
@@ -562,10 +574,11 @@ function ditu() {
                     trigger: 'item'
                 },
                 grid: {
-                    right: 40,
-                    top: 100,
+                    // right: 40,
+                    top: 300,
                     bottom: 40,
-                    width: '30%'
+                    width: '30%',
+                    height:'40%'
                 },
                 xAxis: {
                     type: 'value',
@@ -579,7 +592,7 @@ function ditu() {
                 },
                 yAxis: {
                     type: 'category',
-                    name: 'TOP 20',
+                    name: 'TOP 5',
                     nameGap: 16,
                     axisLine: {show: false, lineStyle: {color: '#ddd'}},
                     axisTick: {show: false, lineStyle: {color: '#ddd'}},
@@ -680,15 +693,18 @@ function ditu() {
                 var maxBar = 30;
                 var sum = 0;
                 var count = 0;
-
-                for (var i = 0; i < mainSeries.dataIndex.length; i++) {
+                var nums_length;
+                if (mainSeries.dataIndex.length>=5){
+                    nums_length=5;
+                }else {
+                    nums_length=mainSeries.dataIndex.length;
+                }
+                for (var i = 0; i < nums_length; i++) {
                     var rawIndex = mainSeries.dataIndex[i];
                     var dataItem = convertedData[0][rawIndex];
                     var pmValue = dataItem.value[2];
-
                     sum += pmValue;
                     count++;
-
                     selectedItems.push(dataItem);
                 }
 
@@ -718,9 +734,8 @@ function ditu() {
                     }
                 });
             };
-            // myChart.setOption(option);
         }else {
-            $("#placeimg").text('最近无新数据更新~~');
+            $("#placeimg").html('<p style="text-align: center;height: 500px;line-height: 500px;">无新数据更新</p>');
         }
     });
 };

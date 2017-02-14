@@ -288,7 +288,8 @@ def theme_tab_graph(theme_name, node_type, relation_type, layer):
 # 地图
 def theme_tab_map(theme_name, node_type, relation_type, layer):
     # return 1
-    black_country = [u'美国',u'其他',u'法国',u'英国']
+    black_country = [u'美国',u'其他',u'法国',u'英国',u'中国',u'局域网']
+    # black_country = [u'美国',u'其他',u'法国',u'英国']
     tab_theme_result = theme_tab_graph(theme_name, node_type, relation_type, layer)
     uid_list_origin = tab_theme_result['map_eid']
     uid_list = [i for i in uid_list_origin]
@@ -814,8 +815,9 @@ def compare_graph_theme(theme_name1, theme_name2, layer, diff):
     
 def draw_map(uid_list):
     uid_list = [i for i in set(uid_list)]
-    black_country = [u'美国',u'其他',u'法国',u'英国']
-
+    black_country = [u'美国',u'其他',u'法国',u'英国',u'中国',u'局域网']
+    if len(uid_list) == 0:
+        return ''
     results = es_event.mget(index=event_analysis_name, doc_type=event_type, \
                 body={'ids': uid_list},_source=False, fields=['geo_weibo_count'])['docs']
     

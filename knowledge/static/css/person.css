@@ -276,15 +276,17 @@ a,a:link,a:hover,a:visited,a:active {
     width: 28px;
     text-align: center;
     padding: 5px;
-    background-color: #0099ff;
     color: white;
     font-weight: 700;
     border-radius: 5px;
     border: 1px solid #337ab7;
     margin-top: 40px;
 }
-#container .correlation .correlation2 .twleft .lftwo {
+#container .correlation .correlation2 .twleft .lfone {
     background-color: #00cc66;
+}
+#container .correlation .correlation2 .twleft .lftwo {
+    background-color: #0099ff;
     margin-top: 10px;
 }
 #container .correlation2 .twright .twr1,#container .correlation2 .twright2 .twr1 {

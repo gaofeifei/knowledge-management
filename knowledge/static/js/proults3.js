@@ -532,10 +532,10 @@ function maps() {
                 },
                 geo: {
                     map: 'china',
-                    left: '10',
-                    right: '35%',
+                    left: '700',
+                    right: '95%',
                     center: [117.98561551896913, 31.205000490896193],
-                    zoom: 2.5,
+                    zoom: 0,
                     label: {
                         emphasis: {
                             show: false
@@ -556,10 +556,11 @@ function maps() {
                     trigger: 'item'
                 },
                 grid: {
-                    right: 40,
-                    top: 100,
+                    // right: 40,
+                    top: 300,
                     bottom: 40,
-                    width: '30%'
+                    width: '30%',
+                    height: '40%',
                 },
                 xAxis: {
                     type: 'value',
@@ -573,7 +574,7 @@ function maps() {
                 },
                 yAxis: {
                     type: 'category',
-                    name: 'TOP 20',
+                    name: 'TOP 5',
                     nameGap: 16,
                     axisLine: {show: false, lineStyle: {color: '#ddd'}},
                     axisTick: {show: false, lineStyle: {color: '#ddd'}},
@@ -676,7 +677,7 @@ function maps() {
                 var sum = 0;
                 var count = 0;
 
-                for (var i = 0; i < mainSeries.dataIndex.length; i++) {
+                for (var i = 0; i < 5; i++) {
                     var rawIndex = mainSeries.dataIndex[i];
                     var dataItem = convertedData[0][rawIndex];
                     var pmValue = dataItem.value[2];
@@ -715,7 +716,7 @@ function maps() {
             };
             // myChart.setOption(option);
         }else {
-            $("#placeimg").append('<span>暂时无新数据更新~~</span> ');
+            $("#placeimg").append('暂时无新数据更新~~ ');
         }
     });
 }

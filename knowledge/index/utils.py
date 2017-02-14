@@ -422,7 +422,8 @@ def query_person_event(uid,layer):
 
 #事件-控制面板地图
 def filter_event_map(event_name, node_type, relation_type, layer):
-    black_country = [u'美国',u'其他',u'法国',u'英国']
+    black_country = [u'美国',u'其他',u'法国',u'英国',u'中国',u'局域网']
+    # black_country = [u'美国',u'其他',u'法国',u'英国']
     tab_theme_result = filter_event_nodes(event_name, node_type, relation_type, layer)
     uid_list_origin = tab_theme_result['map_eid']
     # print uid_list_origin,'000000000000000'
@@ -1053,7 +1054,8 @@ def group_tab_graph(root_uid, node_type, relation_type, layer):
 
 # 地图
 def group_tab_map(uid, node_type, relation_type, layer):
-    black_country = [u'美国',u'其他',u'法国',u'英国']
+    black_country = [u'美国',u'其他',u'法国',u'英国',u'中国',u'局域网']
+    # black_country = [u'美国',u'其他',u'法国',u'英国']
     tab_graph_result = group_tab_graph(uid, node_type, relation_type, layer)
     uid_list = [i for i in tab_graph_result['map_uid']]
     # print uid_list,'++++wwwwwwwwwwwww'

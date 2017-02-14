@@ -23,102 +23,145 @@ function shijianduibi(numa) {
         var data=eval(data);
         var str1='';
         var str2='';
-        $.each(data.detail_result1,function (index,item) {
-            var weizhi,biaoqian,shuoming;
-            if (item.location=='null'){
-                weizhi='未知';
-            }else {
-                weizhi=item.location;
-            };
-            if (item.user_tag=='null'){
-                biaoqian='暂无';
-            }else {
-                biaoqian=item.user_tag;
-            };
-            if (item.description=='null'){
-                shuoming='暂无数据';
-            }else {
-                shuoming=item.user_tag;
-            };
-            function getLocalTime(nS) {
-                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18)
-            };
-            str1+='<div class="play">'+
-                '<div class="play1">'+
-                '<div class="p11">'+
-                '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
-                '--><img src="/static/image/dingwei.png" title="位置"><!--'+
-                '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
-                '--><img class="xin" src="/static/image/heart.png" alt="">'+
-                '</div>'+
-                '<div class="p22">'+
-                '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
-                '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
-                '</div>'+
-                '</div>'+
-                '<img class="play2" src="/static/image/xuyuyu.png" alt="">'+
-                '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
-                '<a class="bus1">业务标签：</a>'+
-                '<a class="bus2">'+biaoqian+'</a>'+
-                '</div>'+
-                '<div class="play4">'+
-                '<p class="shuoming">'+
-                shuoming+
-                '</p>'+
-                '</div>'+
-                '<!-- <div class="play5" type="button" data-toggle="modal">'+
-                '<a>加入专题</a>'+
-                '</div> -->'+
-                '</div>';
-        });
-        $.each(data.detail_result2,function (index,item) {
-            var weizhi,biaoqian,shuoming;
-            if (item.location=='null'){
-                weizhi='未知';
-            }else {
-                weizhi=item.location;
-            };
-            if (item.user_tag=='null'){
-                biaoqian='暂无';
-            }else {
-                biaoqian=item.user_tag;
-            };
-            if (item.description=='null'){
-                shuoming='暂无数据';
-            }else {
-                shuoming=item.user_tag;
-            };
-            function getLocalTime(nS) {
-                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,18)
-            };
-            str2+='<div class="play">'+
-                '<div class="play1">'+
-                '<div class="p11">'+
-                '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px">'+item.name+'</span><!--'+
-                '--><img src="/static/image/dingwei.png" title="位置"><!--'+
-                '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
-                '--><img class="xin" src="/static/image/heart.png" alt="">'+
-                '</div>'+
-                '<div class="p22">'+
-                '<span class="fasheng" style="font-weight: bold">发生时间：</span>'+
-                '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
-                '</div>'+
-                '</div>'+
-                '<img class="play2" src="/static/image/xuyuyu.png" alt="">'+
-                '<div class="play3" style="display: inline-block;margin-top: 10px;vertical-align:bottom;">'+
-                '<a class="bus1">业务标签：</a>'+
-                '<a class="bus2">'+biaoqian+'</a>'+
-                '</div>'+
-                '<div class="play4">'+
-                '<p class="shuoming">'+
-                shuoming+
-                '</p>'+
-                '</div>'+
-                '<!-- <div class="play5" type="button" data-toggle="modal">'+
-                '<a>加入专题</a>'+
-                '</div> -->'+
-                '</div>';
-        });
+        if (data.detail_result1.length==0){
+            $("#run4").html('<p style="width:1020px;text-align:center;height: 190px;line-height: 190px">无数据更新</p>');
+        }else {
+            $.each(data.detail_result1,function (index,item) {
+                var weizhi,biaoqian,shuoming,weibonums,canyunums;
+                var weibo=Math.round((item.weibo_counts /10000) * 100) / 100;
+                var canyu=Math.round((item.uid_counts /10000) * 100) / 100;
+                if (weibo.toString().length>6){
+                    weibonums=weibo.toFixed(2).substr(0,6)+'万';
+                }else {
+                    weibonums=weibo.toFixed(2)+'万';
+                };
+                if (canyu.toString().length>6){
+                    canyunums=canyu.toFixed(2).substr(0,6)+'万';
+                }else {
+                    canyunums=canyu.toFixed(2)+'万';
+                };
+                if (item.location=='null'||item.location==''){
+                    weizhi='未知';
+                }else {
+                    weizhi=item.location;
+                };
+                if (item.user_tag=='null'){
+                    biaoqian='暂无';
+                }else {
+                    biaoqian=item.user_tag;
+                };
+                if (item.description=='null'||item.description==''){
+                    shuoming='暂无数据';
+                }else {
+                    shuoming=item.user_tag;
+                };
+                function getLocalTime(nS) {
+                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10)
+                };
+                str1+='<div class="play">'+
+                    '<span id="tid" style="display: none">'+item.en_name+'</span>'+
+                    '<div class="play1" style="float:left;">'+
+                    '<div class="p11" style="text-align: left;padding-left: 30px">'+
+                    '<span class="xingming" title="'+item.name+'" ' +
+                    'style="display:block;color: #fff;font-weight: 900;font-size: 18px;width: 80px;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;">' +item.name+'</span>'+
+                    '<div class="p22">'+
+                    '<span class="fasheng" style="width: 80px">发生时间：</span>'+
+                    '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
+                    '</div>'+
+                    '</div>'+
+                    '</div>'+
+                    '<div style="float:left;margin: 10px 0 0 34px"><div style="display: inline-block"><img src="/static/image/dingwei.png" title="位置"><!--'+
+                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+                    '--><img class="xin" src="/static/image/heart2.png" alt="">' +
+                    '<div><div style="text-align: center"><img src="/static/image/weiboshu.png" title="微博数"><!--'+
+                    '--><span class="weiboshu" style="font-size: 8px">'+weibonums+'</span></div>'+
+                    '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+canyunums+'</span></div></div></div>'+
+                    '<img class="play2" style="margin-top: -50px" src="/static/image/xuyuyu.png" alt=""></div>'+
+                    '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 40px;vertical-align:bottom;">'+
+                    '<a class="bus1">业务标签：</a>'+
+                    '<a class="bus2" title="'+biaoqian+'">'+biaoqian+'</a>'+
+                    '</div>'+
+                    '<div class="play4">'+
+                    '<p class="shuoming">'+
+                    shuoming+
+                    '</p>'+
+                    '</div>'+
+                    // '<div class="play5" type="button" data-toggle="modal">'+
+                    // '<a>加入专题</a>'+
+                    // '</div>'+
+                    '</div>';
+            });
+        };
+        if (data.detail_result2.length==0){
+            $("#run5").html('<p style="width:1020px;text-align:center;height: 190px;line-height: 190px">无数据更新</p>');
+        }else {
+            $.each(data.detail_result2,function (index,item) {
+                var weizhi,biaoqian,shuoming,weibonums,canyunums;
+                var weibo=Math.round((item.weibo_counts /10000) * 100) / 100;
+                var canyu=Math.round((item.uid_counts /10000) * 100) / 100;
+                if (weibo.toString().length>6){
+                    weibonums=weibo.toFixed(2).substr(0,6)+'万';
+                }else {
+                    weibonums=weibo.toFixed(2)+'万';
+                };
+                if (canyu.toString().length>6){
+                    canyunums=canyu.toFixed(2).substr(0,6)+'万';
+                }else {
+                    canyunums=canyu.toFixed(2)+'万';
+                };
+                if (item.location=='null'||item.location==''){
+                    weizhi='未知';
+                }else {
+                    weizhi=item.location;
+                };
+                if (item.user_tag=='null'){
+                    biaoqian='暂无';
+                }else {
+                    biaoqian=item.user_tag;
+                };
+                if (item.description=='null'||item.description==''){
+                    shuoming='暂无数据';
+                }else {
+                    shuoming=item.user_tag;
+                };
+                function getLocalTime(nS) {
+                    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10)
+                };
+                str2+='<div class="play">'+
+                    '<span id="tid" style="display: none">'+item.en_name+'</span>'+
+                    '<div class="play1" style="float:left;">'+
+                    '<div class="p11" style="text-align: left;padding-left: 30px">'+
+                    '<span class="xingming" title="'+item.name+'" ' +
+                    'style="display:block;color: #fff;font-weight: 900;font-size: 18px;width: 80px;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;">' +item.name+'</span>'+
+                    '<div class="p22">'+
+                    '<span class="fasheng" style="width: 80px">发生时间：</span>'+
+                    '<span class="riqi">'+getLocalTime(item.start_ts)+'</span>'+
+                    '</div>'+
+                    '</div>'+
+                    '</div>'+
+                    '<div style="float:left;margin: 10px 0 0 34px"><div style="display: inline-block"><img src="/static/image/dingwei.png" title="位置"><!--'+
+                    '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
+                    '--><img class="xin" src="/static/image/heart2.png" alt="">' +
+                    '<div><div style="text-align: center"><img src="/static/image/weiboshu.png" title="微博数"><!--'+
+                    '--><span class="weiboshu" style="font-size: 8px">'+weibonums+'</span></div>'+
+                    '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+canyunums+'</span></div></div></div>'+
+                    '<img class="play2" style="margin-top: -50px" src="/static/image/xuyuyu.png" alt=""></div>'+
+                    '<div class="play3" style="width: 103px;display: inline-block;margin: 10px 0 0 40px;vertical-align:bottom;">'+
+                    '<a class="bus1">业务标签：</a>'+
+                    '<a class="bus2" title="'+biaoqian+'">'+biaoqian+'</a>'+
+                    '</div>'+
+                    '<div class="play4">'+
+                    '<p class="shuoming">'+
+                    shuoming+
+                    '</p>'+
+                    '</div>'+
+                    // '<div class="play5" type="button" data-toggle="modal">'+
+                    // '<a>加入专题</a>'+
+                    // '</div>'+
+                    '</div>';
+            });
+        }
+
         $("#run4").append(str1);
         $("#run5").append(str2);
         //卡片效果
@@ -127,15 +170,15 @@ function shijianduibi(numa) {
                 window.open('/index/search_result/?t_uid='+$(this).html());
             })
         });
-        var heart=$(".play .play1 .p11 .xin");
+        var heart=$(".play .xin");
         $.each(heart,function(index,item){
             var chan=1;
             $(item).on('click',function(){
                 if (chan==1) {
-                    $(this).attr('src','/static/image/focus.png');
+                    $(this).attr('src','/static/image/focus2.png');
                     chan=2;
                 }else {
-                    $(this).attr('src','/static/image/heart.png');
+                    $(this).attr('src','/static/image/heart2.png');
                     chan=1;
                 }
             })

@@ -177,22 +177,6 @@ function events() {
         });
         myChart.hideLoading();
         myChart.setOption(option = {
-            title: {
-                // text: 'NPM Dependencies'
-            },
-            legend: {
-                // data: ["人物"]
-                // data:categories.map(function (a) {
-                //     return a;
-                // })
-            },
-            // edgeLabel: {
-            //     normal: {
-            //         show: false,
-            //         position: 'middle',
-            //         formatter:'{b} : {c}',
-            //     },
-            // },
             animationDurationUpdate: 1500,
             animationEasingUpdate: 'quinticInOut',
             series : [
@@ -252,6 +236,13 @@ function events() {
                 // },
             ]
         }, true);
+        myChart.on('click', function (param) {
+            if (param.color=='red'){
+                window.open('/theme/detail/?t_name='+param.name);
+            }else {
+                window.open('/index/search_result/?t_uid='+param.name);
+            }
+        });
 
     });
 
@@ -676,8 +667,13 @@ function maps() {
                 var maxBar = 30;
                 var sum = 0;
                 var count = 0;
-
-                for (var i = 0; i < 5; i++) {
+                var nums_length;
+                if (mainSeries.dataIndex.length>=5){
+                    nums_length=5;
+                }else {
+                    nums_length=mainSeries.dataIndex.length;
+                }
+                for (var i = 0; i < nums_length; i++) {
                     var rawIndex = mainSeries.dataIndex[i];
                     var dataItem = convertedData[0][rawIndex];
                     var pmValue = dataItem.value[2];

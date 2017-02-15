@@ -156,8 +156,8 @@
                 <div class="deftwo">
                     <div class="sjmr1">
                         <img src="/static/image/left.png" alt="" class="left">
-                        <div id="case" style="display: inline-block;width:1020px;overflow: hidden;">
-                            <div id="run" style="transition: all 1s linear;height:190px;text-align:center;">
+                        <div id="case" style="display: inline-block;width:980px;overflow: hidden;">
+                            <div id="run" style="transition: all 1s linear;height:190px;">
                                
                             </div>
                         </div>
@@ -557,6 +557,7 @@ function getLocalTime(nS) {
         });
        
         function Draw_weibo_table(data){
+            console.log(data)
         $('#group_emotion_loading').css('display', 'none');
         $('#input-table').show();
         var dataArray = data;
@@ -606,6 +607,7 @@ function getLocalTime(nS) {
                     }else {
                         name=dataArray[i].uname;
                     };
+                    var _ci=data[i].sensitive_words_string;
                     html_c = '<div class="twr1">'+
                         '                        <p class="master">'+
                         '                            微博内容：'+
@@ -615,7 +617,7 @@ function getLocalTime(nS) {
                         '                        </p>'+
                         '                        <p class="time">'+
                         '                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
-                        '                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+                        '                            <a href='+'"http://www.weibo.com/u/'+dataArray[i].uid+'"'+'  class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
                         '                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
                         getLocalTime(dataArray[i].timestamp)+'</i></span>'+
                         '<span style="display: inline-block;float:right;">'+
@@ -626,6 +628,13 @@ function getLocalTime(nS) {
                         '                    </div>';
                     oTBody.rows[i].insertCell(0);
                     oTBody.rows[i].cells[0].innerHTML = html_c;
+
+                    if (data[i].sensitive_words_string==''){
+                        null;
+                    }else {
+                        var reg = new RegExp("(" + _ci + ")", "g");
+                        $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                    }
                 }
             }
         }
@@ -667,6 +676,7 @@ function getLocalTime(nS) {
                         }else {
                             name=dataArray[i].uname;
                         };
+                        var _ci=data[i].sensitive_words_string;
                         html_c = '<div class="twr1">'+
                             '                        <p class="master">'+
                             '                            微博内容：'+
@@ -676,7 +686,7 @@ function getLocalTime(nS) {
                             '                        </p>'+
                             '                        <p class="time">'+
                             '                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
-                            '                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+                            '                            <a href='+'"http://www.weibo.com/u/'+dataArray[i].uid+'"'+'  class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
                             '                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
                             getLocalTime(dataArray[i].timestamp)+'</i></span>'+
                             '<span style="display:inline-block;float:right;">'+
@@ -687,6 +697,12 @@ function getLocalTime(nS) {
                             '                    </div>';
                         oTBody.rows[i].insertCell(0);
                         oTBody.rows[i].cells[0].innerHTML = html_c;
+                        if (data[i].sensitive_words_string==''){
+                            null;
+                        }else {
+                            var reg = new RegExp("(" + _ci + ")", "g");
+                            $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                        }
                     }
                 }
             }
@@ -727,11 +743,12 @@ function getLocalTime(nS) {
                 {
                     oTBody.insertRow(i);
                     var name;
-                    if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
-                        name=dataArray[i].uid;
+                    if (dataArray[i+a].uname==''||dataArray[i+a].uname=='unknown') {
+                        name=dataArray[i+a].uid;
                     }else {
-                        name=dataArray[i].uname;
+                        name=dataArray[i+a].uname;
                     };
+                    var _ci=data[i+a].sensitive_words_string;
                     oTBody.rows[i].insertCell(0);
                     html_c = '<div class="twr1">'+
                         '                        <p class="master">'+
@@ -742,7 +759,7 @@ function getLocalTime(nS) {
                         '                        </p>'+
                         '                        <p class="time">'+
                         '                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
-                        '                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+                        '                            <a href='+'"http://www.weibo.com/u/'+dataArray[i+a].uid+'"'+'  class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
                         '                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
                         getLocalTime(dataArray[i+a].timestamp)+'</i></span>'+
                         '<span style="float:right;display:inline-block;">'+
@@ -753,6 +770,12 @@ function getLocalTime(nS) {
                         '                    </div>';
                     oTBody.rows[i].cells[0].innerHTML = html_c;
                     //数组从第i+a开始取值
+                    if (data[i+a].sensitive_words_string==''){
+                        null;
+                    }else {
+                        var reg = new RegExp("(" + _ci + ")", "g");
+                        $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                    }
                 }
             }
         }
@@ -784,12 +807,13 @@ function getLocalTime(nS) {
                 {
                     oTBody.insertRow(i);
                     var name;
-                    if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
-                        name=dataArray[i].uid;
+                    if (dataArray[i+a].uname==''||dataArray[i+a].uname=='unknown') {
+                        name=dataArray[i+a].uid;
                     }else {
-                        name=dataArray[i].uname;
+                        name=dataArray[i+a].uname;
                     };
                     oTBody.rows[i].insertCell(0);
+                    var _ci=data[i+a].sensitive_words_string;
                     html_c = '<div class="twr1">'+
                         '                        <p class="master">'+
                         '                            微博内容：'+
@@ -799,7 +823,7 @@ function getLocalTime(nS) {
                         '                        </p>'+
                         '                        <p class="time">'+
                         '                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
-                        '                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+                        '                            <a href='+'"http://www.weibo.com/u/'+dataArray[i+a].uid+'"'+'  class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
                         '                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
                         getLocalTime(dataArray[i+a].timestamp)+'</i></span>'+
                         '<span style="float:right;display:inline-block;">'+
@@ -809,6 +833,12 @@ function getLocalTime(nS) {
                         '                        </p>'+
                         '                    </div>';
                     oTBody.rows[i].cells[0].innerHTML = html_c;
+                    if (data[i+a].sensitive_words_string==''){
+                        null;
+                    }else {
+                        var reg = new RegExp("(" + _ci + ")", "g");
+                        $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                    }
                 }
             }
         }
@@ -847,11 +877,12 @@ function getLocalTime(nS) {
             {
                 oTBody.insertRow(i);
                 var name;
-                if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
-                    name=dataArray[i].uid;
+                if (dataArray[i+a].uname==''||dataArray[i+a].uname=='unknown') {
+                    name=dataArray[i+a].uid;
                 }else {
-                    name=dataArray[i].uname;
+                    name=dataArray[i+a].uname;
                 };
+                var _ci=data[i+a].sensitive_words_string;
                 oTBody.rows[i].insertCell(0);
                 html_c = '<div class="twr1">'+
                     '                        <p class="master">'+
@@ -862,7 +893,7 @@ function getLocalTime(nS) {
                     '                        </p>'+
                     '                        <p class="time">'+
                     '                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
-                    '                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+                    '                            <a href='+'"http://www.weibo.com/u/'+dataArray[i+a].uid+'"'+'  class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
                     '                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
                     getLocalTime(dataArray[i+a].timestamp)+'</i></span>'+
                     '<span style="display:inline-block;float:right;">'+
@@ -872,6 +903,12 @@ function getLocalTime(nS) {
                     '                        </p>'+
                     '                    </div>';
                 oTBody.rows[i].cells[0].innerHTML = html_c;
+                if (data[i+a].sensitive_words_string==''){
+                    null;
+                }else {
+                    var reg = new RegExp("(" + _ci + ")", "g");
+                    $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                }
             }
         }
 

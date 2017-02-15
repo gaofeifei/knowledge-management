@@ -1,7 +1,6 @@
 # -*-coding:utf-8-*-
 import json
 import sys
-from elasticsearch import Elasticsearch
 from py2neo.ext.batman import ManualIndexManager
 from py2neo import Node, Relationship
 from py2neo.packages.httpstream import http
@@ -10,7 +9,9 @@ from knowledge.global_utils import graph
 from knowledge.global_config import *
 from myutil import get_type_key
 from knowledge.global_utils import es_event as es
+
 http.socket_timeout = 9999
+
 
 # 对es进行读取数据
 def get_es_node():
@@ -36,6 +37,7 @@ def get_es_node():
                        body=query_search)['hits']['hits']
     return result
 
+
 def get_es_status(index_name):
     query_search = {
         "query": {
@@ -59,6 +61,7 @@ def get_es_status(index_name):
                        body=query_search)['hits']['hits']
     return result
 
+
 # 返回需要的查询结果
 def select_rels_all(c_string):
     list = []
@@ -81,7 +84,7 @@ def select_rels(node_key, node_id, node_name_index):
         print "node does not exist"
         return None
     c_string = "START start_node=node:%s(%s='%s') MATCH (start_node)-[r]-() return r" % (
-    node_name_index, node_key, node_id)
+        node_name_index, node_key, node_id)
     print c_string
     result = graph.run(c_string)
     for item in result:
@@ -113,7 +116,7 @@ def create_person(node_type, node_key, node_id, node_name_index, attribute_dict=
 
 
 # 对多个节点和类建立关系
-def create_rel_from_uid2group(node_key,uid_list, node_index_name, group_rel, group_key, group_id, group_index_name):
+def create_rel_from_uid2group(node_key, uid_list, node_index_name, group_rel, group_key, group_id, group_index_name):
     count = 0
     Index = ManualIndexManager(graph)
     node_index = Index.get_index(Node, node_index_name)
@@ -134,7 +137,8 @@ def create_rel_from_uid2group(node_key,uid_list, node_index_name, group_rel, gro
             tx = graph.begin()
     tx.commit()
 
-#多对多创建节点关系([node1_type,node1_id],rel,[node2_type,node2_id])
+
+# 多对多创建节点关系([node1_type,node1_id],rel,[node2_type,node2_id])
 def nodes_rels(list):
     count = 0
     Index = ManualIndexManager(graph)
@@ -154,21 +158,46 @@ def nodes_rels(list):
             return '0'
         if node1_key == "uid":
             if node2_key == 'uid':
-                node1 = node_index.get(node1_key, node1_uid)[0]
-                node2 = node_index.get(node2_key, node2_uid)[0]
+                node1 = node_index.get(node1_key, node1_uid)
+                if (node1 == []):
+                    return '%d' % node1_uid
+                node1 = node1[0]
+                node2 = node_index.get(node2_key, node2_uid)
+                if (node2 == []):
+                    return '%d' % node2_uid
+                node2 = node2[0]
                 print 11
+
             else:
                 node1 = node_index.get(node1_key, node1_uid)[0]
+                if (node1 == []):
+                    return '%d' % node1_uid
+                node1 = node1[0]
                 node2 = event_index.get(node2_key, node2_uid)[0]
+                if (node1 == []):
+                    return '%d' % node2_uid
+                node2 = node2[0]
                 print 12
         else:
             if node2_key == 'uid':
                 node1 = event_index.get(node1_key, node1_uid)[0]
+                if (node1 == []):
+                    return '%d' % node1_uid
+                node1 = node1[0]
                 node2 = node_index.get(node2_key, node2_uid)[0]
+                if (node1 == []):
+                    return '%d' % node2_uid
+                node2 = node2[0]
                 print 21
             else:
                 node1 = event_index.get(node1_key, node1_uid)[0]
+                if (node1 == []):
+                    return '%d' % node1_uid
+                node1 = node1[0]
                 node2 = event_index.get(node2_key, node2_uid)[0]
+                if (node1 == []):
+                    return '%d' % node2_uid
+                node2 = node2[0]
                 print 22
         rel = Relationship(node1, rel, node2)
         tx.create(rel)
@@ -179,6 +208,7 @@ def nodes_rels(list):
             tx = graph.begin()
     tx.commit()
     return '1'
+
 
 # 对单节点和单节点建立关系
 def create_node_or_node_rel(node_key1, node1_id, node1_index_name, rel, node_key2, node2_id, node2_index_name):
@@ -191,19 +221,19 @@ def create_node_or_node_rel(node_key1, node1_id, node1_index_name, rel, node_key
     if len(node_index.get(node_key1, node1_id)) == 0:
         print "node1 does not exist"
         return 'node1 does not exist'
-    print node2_id,'======='
+    print node2_id, '======='
     print group_index.get(node_key2, node2_id)
-    print 'node_key2',node_key2
+    print 'node_key2', node_key2
     if len(group_index.get(node_key2, node2_id)) == 0:
         print "node2 does not exist"
-        return "node2 does not exist"    
+        return "node2 does not exist"
     node1 = node_index.get(node_key1, node1_id)[0]
     node2 = group_index.get(node_key2, node2_id)[0]
     if not (node1 and node2):
         print "node does not exist"
         return None
     c_string = "START start_node=node:%s(%s='%s'),end_node=node:%s(%s='%s') MATCH (start_node)-[r:%s]->(end_node) RETURN r" \
-         % (node1_index_name, node_key1, node1_id, node2_index_name, node_key2, node2_id, rel)
+               % (node1_index_name, node_key1, node1_id, node2_index_name, node_key2, node2_id, rel)
     print c_string
     result = graph.run(c_string)
     # print result
@@ -262,7 +292,7 @@ def delete_rel(node_key1, node1_id, node1_index_name, rel, node_key2, node2_id, 
     if not (node1 or node2):
         print ("node does not exist")
     c_string = "START start_node=node:%s(%s='%s'),end_node=node:%s(%s='%s') MATCH (start_node)-[r:%s]-(end_node) RETURN r" % (
-    node1_index_name, node_key1, node1_id, node2_index_name, node_key2, node2_id, rel)
+        node1_index_name, node_key1, node1_id, node2_index_name, node_key2, node2_id, rel)
     result = graph.run(c_string)
     for item in result:
         list.append(item)
@@ -270,7 +300,7 @@ def delete_rel(node_key1, node1_id, node1_index_name, rel, node_key2, node2_id, 
         print "Deleted rel does not exist"
         return None
     c_string = "START start_node=node:%s(%s='%s'),end_node=node:%s(%s='%s') MATCH (start_node)-[r:%s]-(end_node) DELETE r" % (
-    node1_index_name, node_key1, node1_id, node2_index_name, node_key2, node2_id, rel)
+        node1_index_name, node_key1, node1_id, node2_index_name, node_key2, node2_id, rel)
     print c_string
     graph.run(c_string)
     print "delete success"
@@ -288,7 +318,7 @@ def delete_node(node_key, node_id, node_index_name):
         print "The node does not exist"
         return None
     c_string = "START start_node=node:%s(%s='%s') MATCH (start_node)-[r]-()  DELETE r" % (
-    node_index_name, node_key, node_id)
+        node_index_name, node_key, node_id)
     graph.run(c_string)
     print "delete rel success"
     c_string = "START start_node=node:%s(%s='%s') delete start_node" % (node_index_name, node_key, node_id)
@@ -297,3 +327,20 @@ def delete_node(node_key, node_id, node_index_name):
     return True
 
 
+if __name__ == '__main__':
+    result = "1,2,3,1,5|1,2,3,1,5"
+    result = result.split("|")
+    list = []
+    if  len(result)== 1 :
+        result =eval(result[0])
+        list  = [[result[0],result[1]],result[2],[result[3],result[4]],]
+    else :
+        for item in result:
+            item = eval(item)
+            list.append([[item[0],item[1]],item[2],[item[3],item[4]]])
+    print list
+
+    for ls in list :
+        print ls[0][0]
+    result = nodes_rels(list)
+    print result

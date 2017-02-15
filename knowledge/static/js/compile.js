@@ -23,14 +23,14 @@ function jiedianbianji() {
     };
     function territory(data) {
         var data=eval(data);
+        console.log(data)
         $('#crt2lf').bootstrapTable('load',data);
         $('#crt2lf').bootstrapTable({
-            //url: influ_url,
-            data:data[0],
+            data:data,
             search: true,//是否搜索
             pagination: true,//是否分页
-            pageSize: 10,//单页记录数
-            pageList: [5, 10, 20, 50],//分页步进值
+            pageSize: 5,//单页记录数
+            pageList: [ 10, 20, 50],//分页步进值
             sidePagination: "client",//服务端分页
             searchAlign: "left",
             searchOnEnterKey: false,//回车搜索
@@ -62,11 +62,16 @@ function jiedianbianji() {
                     align: "center",//水平
                     valign: "middle",//垂直
                     formatter: function (value, row, index) {
-                        if (row.uname==''||row.uname=='unknown'){
-                            return row.uid;
+                        if (!row[0].uname){
+                            value=row[0].uid;
                         }else {
-                            return value;
+                            if (row[0].uname==''||row[0].uname=='unknown'){
+                                value=row[0].uid;
+                            }else {
+                                value=row[0].uname;
+                            }
                         }
+                        return value
                     },
                 },
                 {
@@ -94,89 +99,88 @@ function jiedianbianji() {
 
             ],
             onClickRow: function (row, tr) {
-                // console.log($(tr.context).index());
                 if ($(tr.context).index()==2) {
                     //进行你的操作，如弹出新窗口
-                    //图片
-                    uids=row.uid;
-                    if (row.photo_url==''||row.photo_url=='unknown'){
+                    uids=row[0].uid;
+                    if (row[0].photo_url==''||row[0].photo_url=='unknown'){
                         $("#join7 .main .topleft img").attr('src','/static/image/pan.jpg');
                     }else {
-                        $("#join7 .main .topleft img").attr('src',row.photo_url);
+                        $("#join7 .main .topleft img").attr('src',row[0].photo_url);
                     };
                     //名字
-                    if (row.uname==''||row.uname=='unknown'){
-                        $("#join7 .sjmc").val(row.uid);
+                    if (row[0].uname==''||row[0].uname=='unknown'){
+                        $("#join7 .sjmc").val(row[0].uid);
                     }else {
-                        $("#join7 .sjmc").val(row.uname);
+                        $("#join7 .sjmc").val(row[0].uname);
                     };
                     //粉丝
-                    if (row.fansnum==''||row.fansnum=='unknown'){
+                    if (row[0].fansnum==''||row[0].fansnum=='unknown'){
                         $("#join7 .fss").val('暂无数据');
                     }else {
-                        $("#join7 .fss").val(row.fansnum);
+                        $("#join7 .fss").val(row[0].fansnum);
                     };
                     //影响力
-                    if (row.influence==''||row.influence=='unknown'){
+                    if (row[0].influence==''||row[0].influence=='unknown'){
                         $("#join7 .fssj").val('暂无数据');
                     }else {
-                        var n=row.influence;
+                        var n=row[0].influence;
                         $("#join7 .fssj").val(n.toFixed(2));
                     };
                     //活跃度
-                    if (row.activeness==''||row.activeness=='unknown'){
+                    if (row[0].activeness==''||row[0].activeness=='unknown'){
                         $("#join7 .hyd").val('暂无数据');
                     }else {
-                        var n=row.activeness;
+                        var n=row[0].activeness;
                         $("#join7 .hyd").val(n.toFixed(2));
                     };
                     //敏感度
-                    if (row.statusnum==''||row.statusnum=='unknown'){
+                    if (row[0].statusnum==''||row[0].statusnum=='unknown'){
                         $("#join7 .mgd").val('暂无数据');
                     }else {
-                        var n=row.statusnum;
+                        var n=row[0].statusnum;
                         $("#join7 .mgd").val(n.toFixed(2));
                     };
                     //领域
-                    if (row.domain==''||row.domain=='unknown'){
+                    if (row[0].domain==''||row[0].domain=='unknown'){
                         $("#join7 .ly").append('<option value="暂无数据">暂无数据</option>');
                     }else {
-                        $("#join7 .ly").append('<option value="'+row.domain+'">'+row.domain+'</option>');
+                        $("#join7 .ly").append('<option value="'+row[0].domain+'">'+row[0].domain+'</option>');
                     };
                     //注册地
-                    if (row.location==''||row.location=='unknown'){
+                    if (row[0].location==''||row[0].location=='unknown'){
                         $("#join7 .zcd").val("暂无数据");
                     }else {
-                        $("#join7 .zcd").val(row.location);
+                        $("#join7 .zcd").val(row[0].location);
                     };
                     //活跃地
-                    if (row.activity_geo==''||row.activity_geo=='unknown'){
+                    if (row[0].activity_geo==''||row[0].activity_geo=='unknown'){
                         $("#join7 .hydi").append('<option value="暂无数据">暂无数据</option>');
                     }else {
-                        $("#join7 .hydi").append('<option value="'+row.domain+'">'+row.activity_geo.replace(/&/g,' ')+'</option>');
+                        $("#join7 .hydi").append('<option value="'+row[0].activity_geo.replace(/&/g,' ')+'">'+row[0].activity_geo.replace(/&/g,' ')+'</option>');
                     };
                     $('#join7').modal("show");
                     
                 };
                 if ($(tr.context).index()==3) {
+                    uids=row[0].uid;
                     $('#join1').modal("show");
                 }
             },
             onClickCell:function (value,$element,row) {
                 if (value=='uname'){
                     var influe,name,huoyue,mingan,tag;
-                    if (row.importance=='null'){
+                    if (row[0].importance=='null'){
                         influe='无';
                     }else {
-                        var n=row.importance;
+                        var n=row[0].importance;
                         influe=n.toFixed(2);
                     };
-                    if (row.uname=='null'||row.uname=='unknown'){
+                    if (row[0].uname=='null'||row[0].uname=='unknown'){
                         name='无';
                     }else {
-                        name=row.uname;
+                        name=row[0].uname;
                     };
-                    var m=row.activeness;
+                    var m=row[0].activeness;
                     var huoyue=m.toFixed(2);
                     // if (row.sensitive=='null'||row.sensitive=='unknown'){
                     //     mingan='无';
@@ -184,10 +188,10 @@ function jiedianbianji() {
                     //     var m=row.sensitive;
                     //     mingan=m.toFixed(2);
                     // };
-                    if (row.user_tag=='null'||row.sensitive=='unknown'){
+                    if (row[0].user_tag=='null'||row[0].sensitive=='unknown'){
                         tag='无';
                     }else {
-                        tag=row.user_tag;
+                        tag=row[0].user_tag;
                     };
                     $(".conright .crt3 .crt2rg").append(
                         '<div class="play">'+
@@ -196,7 +200,7 @@ function jiedianbianji() {
                         '<span class="xingming" style="color: #000;font-weight: 900;font-size: 18px;margin-left: 15px">'+name+'</span><!--'+
                         '--><img style="margin-left: 15px;" src="/static/image/fensishu.png" alt=""'+
                         'title=\'粉丝数\'><!--'+
-                        '--><span class="difang" style="font-size: 8px">'+row.fansnum+'</span><!--'+
+                        '--><span class="difang" style="font-size: 8px">'+row[0].fansnum+'</span><!--'+
                         '--><img class=\'xin\' style="margin-left: 10px;" src="/static/image/heart.png">'+
                         '</div>'+
                         '<div class="p22" style="margin-top: 5px">'+
@@ -210,7 +214,7 @@ function jiedianbianji() {
                         '</div>'+
                         '<img class="play2" src="/static/image/pangzi.png" alt="">'+
                         '<div class="play23" style="margin-left: 15px;">'+
-                        '<a href="" class="renzh1">认证类型:<span class="renzh11">'+row.topic_string+'</span></a>'+
+                        '<a href="" class="renzh1">认证类型:<span class="renzh11">'+row[0].topic_string+'</span></a>'+
                         '<a href="" class="renzh2">领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域:<span class="renzh22"></span></a>'+
                         '</div>'+
                         '<div class="play3" style="display:block;margin-top: 10px;vertical-align:bottom;padding-left: 15px">'+
@@ -291,36 +295,36 @@ function jiedianbianji() {
         }
         nums2();
     };
-    function delt() {
-        function bmw() {
-            //this.ajax_method='GET'; // body...
-        }
-        bmw.prototype= {
-            call_request:function(url,callback) {
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    dataType: 'json',
-                    async: true,
-                    success:callback
-                });
-            },
-        };
-        function dte(data) {
-            var data=eval(data);
-            if (data==0){
-                $('#fail2').modal("show");
-            }else {
-                $('#succ2').modal("show");
-            };
-        }
-        var bmw=new bmw();
-        function nums3() {
-            var url = '/construction/delete_node/?node_type='+node_type+'&uid='+uids;
-            bmw.call_request(url,dte);
-        }
-        nums3();
-    }
 
 };
 jiedianbianji();
+
+function delt() {
+    function bmw() {
+    }
+    bmw.prototype= {
+        call_request:function(url,callback) {
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success:callback
+            });
+        },
+    };
+    function dte(data) {
+        var data=eval(data);
+        if (data==0){
+            $('#fail2').modal("show");
+        }else {
+            $('#succ2').modal("show");
+        };
+    }
+    var bmw=new bmw();
+    function nums3() {
+        var url = '/construction/delete_node/?node_type='+node_type+'&uid='+uids;
+        bmw.call_request(url,dte);
+    }
+    nums3();
+}

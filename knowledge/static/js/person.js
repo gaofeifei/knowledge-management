@@ -113,16 +113,16 @@ function nums() {
     if($('#zero').is(':checked')) { layer=0; }
     if($('#onecg').is(':checked')) { layer=1; }
     if($('#twocg').is(':checked')) { layer=2; }
-    url = '/index/event_node_filter/?uid='+uid+'&node_type='+node_type+'&relation_type='+friend+','+relative+
+    url = '/index/group_node_filter/?uid='+uid+'&node_type='+node_type+'&relation_type='+friend+','+relative+
         ','+colleague+','+user_tag+','+join+','+pusher+
         ','+maker+','+other_rel+'&layer='+layer;
-    url2 = '/index/event_map_filter/?uid='+uid+'&node_type='+node_type+'&relation_type='+friend+','+relative+
+    url2 = '/index/group_map_filter/?uid='+uid+'&node_type='+node_type+'&relation_type='+friend+','+relative+
         ','+colleague+','+user_tag+','+join+','+pusher+
         ','+maker+','+other_rel+'&layer='+layer;
     peo.call_request(url,events);
     peo2.call_request(url2,ditu);
 };
-
+nums();
 $(".cdt5").on("click",function () {
     nums();
 });
@@ -189,21 +189,12 @@ function events() {
                 link_value.push(
                     {
                         source: item[0],
-                        target: item[2]
+                        target: ""+item[2]+""
                     }
                 );
             });
             myChart.hideLoading();
             myChart.setOption(option = {
-                title: {
-                    // text: 'NPM Dependencies'
-                },
-                legend: {
-                    // data: ["人物","事件"]
-                    // data:categories.map(function (a) {
-                    //     return a;
-                    // })
-                },
                 animationDurationUpdate: 1500,
                 animationEasingUpdate: 'quinticInOut',
                 series : [
@@ -234,33 +225,6 @@ function events() {
                             }
                         }
                     },
-                    // {
-                    //     name:'事件',
-                    //     type: 'graph',
-                    //     layout: 'none',
-                    //     // progressiveThreshold: 700,
-                    //     // data:node_value,
-                    //     // edges: link_value,
-                    //     itemStyle:{
-                    //         normal:{
-                    //             color:'#a73cff'
-                    //         }
-                    //     },
-                    //     label: {
-                    //         emphasis: {
-                    //             position: 'right',
-                    //             show: true
-                    //         }
-                    //     },
-                    //     focusNodeAdjacency: true,
-                    //     lineStyle: {
-                    //         normal: {
-                    //             width: 1.5,
-                    //             curveness: 0.3,
-                    //             opacity: 0.8
-                    //         }
-                    //     }
-                    // },
                 ]
             }, true);
             myChart.on('click', function (param) {
@@ -481,7 +445,6 @@ function ditu() {
             data.push(
                 {name: item[0],value: item[1]}
             );
-
         });
         if (data.length>0){
             var convertData = function (data) {

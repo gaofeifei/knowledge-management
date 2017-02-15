@@ -196,15 +196,6 @@ function events() {
             });
             myChart.hideLoading();
             myChart.setOption(option = {
-                title: {
-                    // text: 'NPM Dependencies'
-                },
-                legend: {
-                    // data: ["人物","事件"]
-                    // data:categories.map(function (a) {
-                    //     return a;
-                    // })
-                },
                 animationDurationUpdate: 1500,
                 animationEasingUpdate: 'quinticInOut',
                 series : [
@@ -235,35 +226,18 @@ function events() {
                             }
                         }
                     },
-                    // {
-                    //     name:'事件',
-                    //     type: 'graph',
-                    //     layout: 'none',
-                    //     // progressiveThreshold: 700,
-                    //     // data:node_value,
-                    //     // edges: link_value,
-                    //     itemStyle:{
-                    //         normal:{
-                    //             color:'#a73cff'
-                    //         }
-                    //     },
-                    //     label: {
-                    //         emphasis: {
-                    //             position: 'right',
-                    //             show: true
-                    //         }
-                    //     },
-                    //     focusNodeAdjacency: true,
-                    //     lineStyle: {
-                    //         normal: {
-                    //             width: 1.5,
-                    //             curveness: 0.3,
-                    //             opacity: 0.8
-                    //         }
-                    //     }
-                    // },
                 ]
             }, true);
+            myChart.on('click', function (params) {
+                if (typeof params.seriesIndex != 'undefined') {
+                    if (params.color=='#ffa500'){
+                        window.open('/index/person/?p_uid='+params.data.id);
+                    }else {
+                        window.open('/group/detail/?group_name='+params.name);
+                    }
+
+                }
+            });
         }
 
     });
@@ -689,8 +663,13 @@ function ditu() {
                     var maxBar = 30;
                     var sum = 0;
                     var count = 0;
-
-                    for (var i = 0; i < 5; i++) {
+                    var nums_length;
+                    if (mainSeries.dataIndex.length>=5){
+                        nums_length=5;
+                    }else {
+                        nums_length=mainSeries.dataIndex.length;
+                    }
+                    for (var i = 0; i < nums_length; i++) {
                         var rawIndex = mainSeries.dataIndex[i];
                         var dataItem = convertedData[0][rawIndex];
                         var pmValue = dataItem.value[2];
@@ -809,7 +788,7 @@ function guanlianrenwu() {
                 };
                 str+='<div class="play">'+
                     '<div class="p_top" style="width: 100%"><img class="play2" src="'+photo+'" alt="">'+
-                    '<img class=\'xin\' style="margin: -24px 0 0 0px" src="/static/image/heart.png">' +
+                    '<img class=\'xin\' style="margin: -24px 0 0 100px" src="/static/image/heart.png">' +
                     '<span class="xingming" title="'+name+'" style="color: #000;display: block;text-align:center;' +
                     'width:100px;white-space:nowrap;margin: -13px auto 0;overflow: hidden;text-overflow: ellipsis">'+name+'</span>'+
                     '</div>'+
@@ -894,7 +873,9 @@ function guanlianrenwu() {
             });
             $.each( $("#container #similar .definite .deftwo .xingming"),function(index,item){
                 $(item).on('click',function () {
-                    window.open('/index/person/?p_uid'+$('.play #uid').html());
+                    var uid=$(this).parents('.play').find('#uid').html();
+                    console.log('/index/person/?p_uid='+uid)
+                    window.open('/index/person/?p_uid='+uid);
                 });
             });
         }else {

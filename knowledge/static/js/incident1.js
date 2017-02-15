@@ -338,7 +338,7 @@ function guanlianshijian() {
 guanlianshijian();
 
 function getLocalTime(nS) {
-    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,20);
+    return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10);
 };
 function gaoyingxiangliweibo() {
     function place() {
@@ -429,16 +429,17 @@ function gaoyingxiangliweibo() {
                     }else {
                         name=dataArray[i].uname;
                     };
+                    var _ci=data[i].sensitive_words_string;
                     html_c = '<div class="twr1">'+
                         '                        <p class="master">'+
                         '                            微博内容：'+
                         '                            <span class="master1">'+
-                        dataArray[i].text+
+                        data[i].text+
                         '                            </span>'+
-                        '                        </p>'+
+                        '                        </pid>'+
                         '                        <p class="time">'+
                         '                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
-                        '                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+                        '                            <a href='+'"http://www.weibo.com/u/'+dataArray[i].uid+'"'+' class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
                         '                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
                         getLocalTime(dataArray[i].timestamp)+'</i></span>'+
                         '<span style="display: inline-block;float:right;">'+
@@ -449,9 +450,17 @@ function gaoyingxiangliweibo() {
                         '                    </div>';
                     oTBody.rows[i].insertCell(0);
                     oTBody.rows[i].cells[0].innerHTML = html_c;
+                    if (data[i].sensitive_words_string==''){
+                        null;
+                    }else {
+                        var reg = new RegExp("(" + _ci + ")", "g");
+                        $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                    }
                 }
+
             }
         }
+
         Fp.onclick=function()
         {
 
@@ -490,16 +499,17 @@ function gaoyingxiangliweibo() {
                         }else {
                             name=dataArray[i].uname;
                         };
+                        var _ci=data[i].sensitive_words_string;
                         html_c = '<div class="twr1">'+
                             '                        <p class="master">'+
                             '                            微博内容：'+
                             '                            <span class="master1">'+
-                            dataArray[i].text+
+                            data[i].text+
                             '                            </span>'+
                             '                        </p>'+
                             '                        <p class="time">'+
                             '                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
-                            '                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+                            '                            <ahref='+'"http://www.weibo.com/u/'+dataArray[i].uid+'"'+' class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
                             '                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
                             getLocalTime(dataArray[i].timestamp)+'</i></span>'+
                             '<span style="display:inline-block;float:right;">'+
@@ -510,10 +520,17 @@ function gaoyingxiangliweibo() {
                             '                    </div>';
                         oTBody.rows[i].insertCell(0);
                         oTBody.rows[i].cells[0].innerHTML = html_c;
+                        if (data[i].sensitive_words_string==''){
+                            null;
+                        }else {
+                            var reg = new RegExp("(" + _ci + ")", "g");
+                            $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                        }
                     }
                 }
             }
         }
+
         Nep.onclick=function()
         {
             if(currentPage<SumPage)                                 //判断当前页数小于总页数
@@ -550,22 +567,23 @@ function gaoyingxiangliweibo() {
                 {
                     oTBody.insertRow(i);
                     var name;
-                    if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
-                        name=dataArray[i].uid;
+                    if (dataArray[i+a].uname==''||dataArray[i+a].uname=='unknown') {
+                        name=dataArray[i+a].uid;
                     }else {
-                        name=dataArray[i].uname;
+                        name=dataArray[i+a].uname;
                     };
+                    var _ci=data[i+a].sensitive_words_string;
                     oTBody.rows[i].insertCell(0);
                     html_c = '<div class="twr1">'+
                         '                        <p class="master">'+
                         '                            微博内容：'+
                         '                            <span class="master1">'+
-                        dataArray[i+a].text+
+                        data[i+a].text+
                         '                            </span>'+
                         '                        </p>'+
                         '                        <p class="time">'+
                         '                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
-                        '                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+                        '                            <a href='+'"http://www.weibo.com/u/'+dataArray[i+a].uid+'"'+' class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
                         '                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
                         getLocalTime(dataArray[i+a].timestamp)+'</i></span>'+
                         '<span style="float:right;display:inline-block;">'+
@@ -576,6 +594,12 @@ function gaoyingxiangliweibo() {
                         '                    </div>';
                     oTBody.rows[i].cells[0].innerHTML = html_c;
                     //数组从第i+a开始取值
+                    if (data[i+a].sensitive_words_string==''){
+                        null;
+                    }else {
+                        var reg = new RegExp("(" + _ci + ")", "g");
+                        $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                    }
                 }
             }
         }
@@ -607,22 +631,23 @@ function gaoyingxiangliweibo() {
                 {
                     oTBody.insertRow(i);
                     var name;
-                    if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
-                        name=dataArray[i].uid;
+                    if (dataArray[i+a].uname==''||dataArray[i+a].uname=='unknown') {
+                        name=dataArray[i+a].uid;
                     }else {
-                        name=dataArray[i].uname;
+                        name=dataArray[i+a].uname;
                     };
+                    var _ci=data[i+a].sensitive_words_string;
                     oTBody.rows[i].insertCell(0);
                     html_c = '<div class="twr1">'+
                         '                        <p class="master">'+
                         '                            微博内容：'+
                         '                            <span class="master1">'+
-                        dataArray[i+a].text+
+                        data[i+a].text+
                         '                            </span>'+
                         '                        </p>'+
                         '                        <p class="time">'+
                         '                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
-                        '                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+                        '                            <a href='+'"http://www.weibo.com/u/'+dataArray[i+a].uid+'"'+' class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
                         '                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
                         getLocalTime(dataArray[i+a].timestamp)+'</i></span>'+
                         '<span style="float:right;display:inline-block;">'+
@@ -632,6 +657,12 @@ function gaoyingxiangliweibo() {
                         '                        </p>'+
                         '                    </div>';
                     oTBody.rows[i].cells[0].innerHTML = html_c;
+                    if (data[i+a].sensitive_words_string==''){
+                        null;
+                    }else {
+                        var reg = new RegExp("(" + _ci + ")", "g");
+                        $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                    }
                 }
             }
         }
@@ -670,22 +701,23 @@ function gaoyingxiangliweibo() {
             {
                 oTBody.insertRow(i);
                 var name;
-                if (dataArray[i].uname==''||dataArray[i].uname=='unknown') {
-                    name=dataArray[i].uid;
+                if (dataArray[i+a].uname==''||dataArray[i+a].uname=='unknown') {
+                    name=dataArray[i+a].uid;
                 }else {
-                    name=dataArray[i].uname;
+                    name=dataArray[i+a].uname;
                 };
+                var _ci=data[i+a].sensitive_words_string;
                 oTBody.rows[i].insertCell(0);
                 html_c = '<div class="twr1">'+
                     '                        <p class="master">'+
                     '                            微博内容：'+
                     '                            <span class="master1">'+
-                    dataArray[i+a].text+
+                    data[i+a].text+
                     '                            </span>'+
                     '                        </p>'+
                     '                        <p class="time">'+
                     '                            <span class="time1">来自微博用户：</span>&nbsp;&nbsp;'+
-                    '                            <a class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
+                    '                            <a href='+'"http://www.weibo.com/u/'+dataArray[i+a].uid+'"'+' class="time2">'+name+'</a>&nbsp;&nbsp;&nbsp;&nbsp;'+
                     '                            <span class="time3">发表于&nbsp;&nbsp;<i>'+
                     getLocalTime(dataArray[i+a].timestamp)+'</i></span>'+
                     '<span style="display:inline-block;float:right;">'+
@@ -695,6 +727,12 @@ function gaoyingxiangliweibo() {
                     '                        </p>'+
                     '                    </div>';
                 oTBody.rows[i].cells[0].innerHTML = html_c;
+                if (data[i+a].sensitive_words_string==''){
+                    null;
+                }else {
+                    var reg = new RegExp("(" + _ci + ")", "g");
+                    $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                }
             }
         }
 

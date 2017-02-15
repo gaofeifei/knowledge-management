@@ -170,15 +170,6 @@ function tupu() {
                 });
                 myChart.hideLoading();
                 myChart.setOption(option = {
-                    title: {
-                        // text: 'NPM Dependencies'
-                    },
-                    legend: {
-                        // data: ["人物","事件"]
-                        // data:categories.map(function (a) {
-                        //     return a;
-                        // })
-                    },
                     animationDurationUpdate: 1500,
                     animationEasingUpdate: 'quinticInOut',
                     series : [
@@ -324,15 +315,6 @@ function tupu() {
                 });
                 myChart2.hideLoading();
                 myChart2.setOption(option = {
-                    title: {
-                        // text: 'NPM Dependencies'
-                    },
-                    legend: {
-                        // data: ["人物","事件"]
-                        // data:categories.map(function (a) {
-                        //     return a;
-                        // })
-                    },
                     animationDurationUpdate: 1500,
                     animationEasingUpdate: 'quinticInOut',
                     series : [
@@ -366,6 +348,16 @@ function tupu() {
                     ]
                 }, true);
 
+            }
+        });
+
+        myChart.on('click', function (param) {
+            if (typeof param.seriesIndex != 'undefined') {
+                if (param.color=='purple'){
+                    window.open('/index/search_result/?t_uid='+param.name);
+                }else if(param.color=='#ffa500'){
+                    window.open('/index/person/?p_uid='+param.data.id);
+                }
             }
         });
     }
@@ -788,8 +780,13 @@ function tupu() {
                         var maxBar = 30;
                         var sum = 0;
                         var count = 0;
-
-                        for (var i = 0; i < 5; i++) {
+                        var nums_length;
+                        if (mainSeries.dataIndex.length>=5){
+                            nums_length=5;
+                        }else {
+                            nums_length=mainSeries.dataIndex.length;
+                        }
+                        for (var i = 0; i < nums_length; i++) {
                             var rawIndex = mainSeries.dataIndex[i];
                             var dataItem = convertedData[0][rawIndex];
                             var pmValue = dataItem.value[2];
@@ -1251,8 +1248,13 @@ function tupu() {
                         var maxBar = 30;
                         var sum = 0;
                         var count = 0;
-
-                        for (var i = 0; i < 5; i++) {
+                        var nums_length;
+                        if (mainSeries.dataIndex.length>=5){
+                            nums_length=5;
+                        }else {
+                            nums_length=mainSeries.dataIndex.length;
+                        }
+                        for (var i = 0; i < nums_length; i++) {
                             var rawIndex = mainSeries.dataIndex[i];
                             var dataItem = convertedData[0][rawIndex];
                             var pmValue = dataItem.value[2];

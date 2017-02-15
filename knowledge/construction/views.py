@@ -307,7 +307,17 @@ def node_or_node_update():
 
 @mod.route('/nodes_or_nodes_rel/', methods=['GET', 'POST'])
 def nodes_create_rels():
-    list = request.args.get('list', '')
+    result = request.args.get("list",'')
+    result = result.split("|")
+    list = []
+    if len(result)==1:
+        result =eval(result[0])
+        list  = [[result[0],result[1]],result[2],[result[3],result[4]],]
+    else :
+        for item in result:
+            item = eval(item)
+            list.append([[item[0],item[1]],item[2],[item[3],item[4]]])
+    print list 
     result = nodes_rels(list)
     return json.dumps(result)
 

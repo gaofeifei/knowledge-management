@@ -9,9 +9,7 @@ function maps() {
     myChart.showLoading();
     $.getJSON('/construction/select_relation', function (json) {
         var json=eval(json);
-        // var categories = [{name:'人物'},{name:'事件'}];
         var node_value=[], link_value=[];
-        // link_value=[],event_value=[],
         for (var i=0;i<json.node.length;i++){
             var num1=Math.random()*(-1000-700)+1000;
             var num2=Math.random()*(-1000-700)+1000;
@@ -41,15 +39,6 @@ function maps() {
         });
         myChart.hideLoading();
         myChart.setOption(option = {
-            title: {
-                // text: 'NPM Dependencies'
-            },
-            legend: {
-                // data: ["人物"]
-                // data:categories.map(function (a) {
-                //     return a;
-                // })
-            },
             animationDurationUpdate: 1500,
             animationEasingUpdate: 'quinticInOut',
             series : [
@@ -82,9 +71,11 @@ function maps() {
                 },
             ]
         }, true);
-
-
-
+        myChart.on('click', function (param) {
+            if (typeof param.seriesIndex != 'undefined') {
+                window.open('/index/person/?p_uid='+param.data.id);
+            }
+        });
     });
 }
 maps();

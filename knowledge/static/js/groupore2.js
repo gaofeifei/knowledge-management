@@ -359,7 +359,7 @@ function quntixinjianyonghushijian() {
             });
             $.each( $(".xingming"),function(index,item){
                 $(item).on('click',function () {
-                    window.open('/index/person/?p_uid'+$('.con_bot .play #uid').html());
+                    window.open('/index/person/?p_uid='+$(this).parents('.play').find('#uid').html());
                 });
             })
         }

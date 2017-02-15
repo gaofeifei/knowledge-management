@@ -439,7 +439,7 @@ function guanlianrenwu() {
         });
         $.each($("#people .xingming"),function(index,item){
             $(item).on('click',function () {
-                var p_uid=$(this).siblings('#uid').html();
+                var p_uid=$(this).parents('.play').find('#uid').html();
                 window.open('/index/person/?p_uid='+p_uid);
             });
         })

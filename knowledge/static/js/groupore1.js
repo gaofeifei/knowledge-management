@@ -35,13 +35,6 @@ $('.condet4').on('click',function () {
     };
     // $('#aaa').modal("show");
 });
-// $("#container .choose1 .menu .compare").on('click',function () {
-//     if (!jj==1){
-//         $("#join99").modal("show");
-//     }else {
-//         $('#condet').show(30);
-//     }
-// });
 
 function zongqunti() {
     function place() {
@@ -100,8 +93,6 @@ function zongqunti() {
             function (ec) {
                 // 基于准备好的dom，初始化echarts图表
                 var myChart = ec.init(document.getElementById('spread'));
-                //var ecConfig = require('echarts/config');
-                //myChart.on(ecConfig.EVENT.CLICK, eConsole);
                 var option = {
                     // title: {
                     //     x: 'center',
@@ -170,14 +161,7 @@ function zongqunti() {
                 myChart.on(ecConfig.EVENT.CLICK, eConsole);
             }
         );
-        // function eConsole(param) {
-        //     if (typeof param.seriesIndex == 'undefined') {
-        //         return;
-        //     }
-        //     if (param.type == 'click') {
-        //         alert(param.date);
-        //     }
-        // }
+
     };
     var place=new place();
     function nums() {
@@ -468,7 +452,7 @@ function biaogequnti() {
         });
         $.each( $(".xingming"),function(index,item){
             $(item).on('click',function(){
-                window.open('/index/person/?p_uid='+$(this).html());
+                window.open('/index/person/?p_uid='+$(this).parents('.play').find('#uid').html());
             })
         })
     };

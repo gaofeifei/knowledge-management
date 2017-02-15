@@ -9,10 +9,7 @@ function things() {
     myChart.showLoading();
     $.getJSON('/construction/select_event/', function (json) {
         var json=eval(json);
-        // console.log(json)
-        // var categories = [{name:'人物'},{name:'事件'}];
         var node_value=[], link_value=[];
-        // link_value=[],event_value=[],
         for (var i=0;i<json.node.length;i++){
             var num1=Math.random()*(-1000-700)+1000;
             var num2=Math.random()*(-1000-700)+1000;
@@ -421,29 +418,3 @@ function wenjianchuanshu(uid) {
     });
 };
 
-//添加关系的文件读取函数
-// function relationFileSelect(evt){
-//     var files = evt;
-//     for(var i=0,f;f=files[i];i++){
-//         var reader = new FileReader();
-//         reader.onload = function (oFREvent) {
-//             var a = oFREvent.target.result;
-//             $.ajax({
-//                 type:"POST",
-//                 url:"/construction/read_relation/",
-//                 dataType: "json",
-//                 async:false,
-//                 data:{new_words:a},
-//                 success: function(data){
-//                     if( data ){
-//                         var data=data;
-//                         console.log(data);
-//                         //请在此部分写传输给翟树杰数据的函数wenjianchuanshu(data);
-//                         // alert("批量导入成功！");
-//                     }
-//                 }
-//             });
-//         };
-//         reader.readAsText(f,'GB2312');
-//     }
-// }

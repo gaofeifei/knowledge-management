@@ -318,7 +318,7 @@
                 </select>
                 <div class="manual23">
                     <span>关系类型</span>
-                    <select class='manthr' id='manthr' name="">
+                    <select class='manthr' id='manthr'>
                         <option value="" disabled selected>请选择关系类型</option>
                         <option value="好友">好友</option>
                         <option value="同事">同事</option>
@@ -617,7 +617,7 @@
         });
 
         //-----------关系的传送添加--------------
-
+       
         //添加关系的文件读取函数
         function relationFileSelect(evt){
             var files = evt;
@@ -665,53 +665,37 @@
         function transport() {
             //this.ajax_method='GET'; // body...
         }
-            
-        // var onelx,twolx,oneidx,twoidx;
-        // var rel_lx;
-        // function build(value){
-        //     if (value=='人物') {
-        //         // onelx='uid';
-        //         // oneidx='node_index';
-        //         onelx='1';
-        //     }else{
-        //         // onelx='event';
-        //         // oneidx='event_index';
-        //         onelx='2';
-        //     };
-        // };
-        // function build2(value){
-        //     if (value=='人物') {
-        //         // twolx='uid';
-        //         // twoidx='node_index';
-        //         twolx='1';
-        //     }else{
-        //         // twolx='event';
-        //         // twoidx='node_index';
-        //         twolx='2';
-        //     };
-        // };
-        // function build3(value){
-        //     rel_lx=value;
-        // }
-        function trans(rel_lists) {
+    
+        function trans(rel_lists222) {
+            console.log(rel_lists222)
+            var rel_lists=rel_lists222.substring(0,rel_lists222.length-1);
              // var url = '/construction/create_relation/?node_key1='+onelx+'&node1_id='+one+'&node1_index_name='+
              //    oneidx+'&rel=join&node_key2='+twolx+'&node2_id='+two+'&node2_index_name='+twoidx;
-            // var url = '/construction/nodes_or_nodes_rel/?list='+rel_lists;
-            var url = '/construction/nodes_or_nodes_rel/';
-            var relationships={'list':rel_lists};
-            // transport.call_request(url,setup);
+            var url_rel = "/construction/nodes_or_nodes_rel/?list="+rel_lists;
+            // var url_rel = '/construction/nodes_or_nodes_rel/';
+            // var relationships={'list':rel_lists};
+            // $.ajax({
+            //     type:'GET',
+            //     url: url_rel,
+            //     traditional: true,
+            //     contentType:"application/json",
+            //     data: JSON.stringify({'list':rel_lists}),
+            //     dataType: "json",
+            //     success: setup
+            // });
+console.log(url_rel)
             $.ajax({
-                type:'POST',
-                url: url,
-                contentType:"application/json",
-                data: JSON.stringify(relationships),
-                dataType: "json",
-                success: setup
+                url: url_rel,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success:setup
             });
+        
         }
         $("#container .conright2 .uploading .upload3").on('click',function(){
             if($('#container .conright2 .manual .manual1 input').is(":checked")){
-                var rel_list=[];
+                var rel_list='';
                 for (var i =0;i<= $(".manual2").length-1; i++) {
                     var one=$($(".manual2")[i]).find(".manone").val();
                     var two=$($(".manual2")[i]).find(".mantwo").val();
@@ -733,8 +717,14 @@
                             twolx='2';
                         };
                     };
-                    var rel=[[onelx,one],rel_lx,[twolx,two]];
-                    rel_list.push(rel);
+                    if (rel_lx=='好友') {
+                        rel_lx='friend';
+                    }else if (rel_lx=='其他') {
+                        rel_lx='other';
+                    };
+                    // var rel=[[onelx,one],rel_lx,[twolx,two]];
+                    // rel_list.push(rel);
+                    rel_list+=onelx+","+one+",'"+rel_lx+"',"+twolx+","+two+"|";
                 };
                 trans(rel_list);
             }else {
@@ -742,19 +732,12 @@
             }
         });
         
-       
         function setup(information) {
-            // var information=eval(information);
             if (information=='1') {
                 $("#ot").text('创建成功');
             }else  {
                 $("#ot").text('创建失败，可能是关系已经存在，请勿重复添加。');
             }
-            // else if (information=='create success'){
-            //     $("#ot").text('节点创建成功。');
-            // }else if (information=='The current two nodes already have a relationship') {
-            //     $("#ot").text('关系已经存在，请勿重复添加。');
-            // };
             $('.upload333').modal("show");
         }
         

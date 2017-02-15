@@ -122,7 +122,7 @@ function nums() {
     peo.call_request(url,events);
     peo2.call_request(url2,ditu);
 };
-
+nums();
 $(".cdt5").on("click",function () {
     nums();
 });
@@ -133,10 +133,7 @@ function events() {
     myChart.showLoading();
     $.getJSON(url, function (json) {
         var json=eval(json);
-        console.log(json);
-        // var categories = [{name:'人物'},{name:'事件'}];
         var node_value=[],link_value=[];
-        // ,event_value=[];
         for (var key in json.node.event_id){
             var num1=Math.random()*(-1000-700)+1000;
             var num2=Math.random()*(-1000-700)+1000;
@@ -195,15 +192,6 @@ function events() {
         });
         myChart.hideLoading();
         myChart.setOption(option = {
-            title: {
-                // text: 'NPM Dependencies'
-            },
-            legend: {
-                // data: ["人物","事件"]
-                // data:categories.map(function (a) {
-                //     return a;
-                // })
-            },
             animationDurationUpdate: 1500,
             animationEasingUpdate: 'quinticInOut',
             series : [
@@ -234,36 +222,17 @@ function events() {
                         }
                     }
                 },
-                // {
-                //     name:'事件',
-                //     type: 'graph',
-                //     layout: 'none',
-                //     // progressiveThreshold: 700,
-                //     // data:node_value,
-                //     // edges: link_value,
-                //     itemStyle:{
-                //         normal:{
-                //             color:'#a73cff'
-                //         }
-                //     },
-                //     label: {
-                //         emphasis: {
-                //             position: 'right',
-                //             show: true
-                //         }
-                //     },
-                //     focusNodeAdjacency: true,
-                //     lineStyle: {
-                //         normal: {
-                //             width: 1.5,
-                //             curveness: 0.3,
-                //             opacity: 0.8
-                //         }
-                //     }
-                // },
             ]
         }, true);
-
+        myChart.on('click', function (params) {
+            if (typeof param.seriesIndex != 'undefined') {
+                if (param.color=='purple'){
+                    window.open('/index/search_result/?t_uid='+param.name);
+                }else {
+                    window.open('/index/person/?p_uid='+param.data.id);
+                }
+            }
+        });
 
     });
 }
@@ -542,10 +511,10 @@ function ditu() {
                 },
                 geo: {
                     map: 'china',
-                    left: '10',
-                    right: '35%',
+                    left: '700',
+                    right: '95%',
                     center: [117.98561551896913, 31.205000490896193],
-                    zoom: 2.5,
+                    zoom: 0,
                     label: {
                         emphasis: {
                             show: false
@@ -566,10 +535,11 @@ function ditu() {
                     trigger: 'item'
                 },
                 grid: {
-                    right: 40,
-                    top: 100,
+                    // right: 40,
+                    top: 300,
                     bottom: 40,
-                    width: '30%'
+                    width: '30%',
+                    height:'40%'
                 },
                 xAxis: {
                     type: 'value',
@@ -583,7 +553,7 @@ function ditu() {
                 },
                 yAxis: {
                     type: 'category',
-                    name: 'TOP 20',
+                    name: 'TOP 5',
                     nameGap: 16,
                     axisLine: {show: false, lineStyle: {color: '#ddd'}},
                     axisTick: {show: false, lineStyle: {color: '#ddd'}},
@@ -684,8 +654,13 @@ function ditu() {
                 var maxBar = 30;
                 var sum = 0;
                 var count = 0;
-
-                for (var i = 0; i < mainSeries.dataIndex.length; i++) {
+                var nums_length;
+                if (mainSeries.dataIndex.length>=5){
+                    nums_length=5;
+                }else {
+                    nums_length=mainSeries.dataIndex.length;
+                }
+                for (var i = 0; i < nums_length; i++) {
                     var rawIndex = mainSeries.dataIndex[i];
                     var dataItem = convertedData[0][rawIndex];
                     var pmValue = dataItem.value[2];
@@ -724,7 +699,7 @@ function ditu() {
             };
             // myChart.setOption(option);
         }else {
-            alert('无数据');
+            $("#placeimg").html('<p style="text-align: center;height: 500px;line-height: 500px;">无新数据更新</p>');
         }
     });
 };

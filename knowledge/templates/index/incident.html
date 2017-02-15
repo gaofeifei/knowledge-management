@@ -131,7 +131,7 @@
         <div class="assright" style="margin-left: 40px;">
             <p class="assright1">
                 <p class='guanlian' style='display:inline-block;'>关联事件</span>
-                <p class="xuan" style='display:inline-block;float:right;'>
+                <!-- <p class="xuan" style='display:inline-block;float:right;'>
                     <label class="radio-inline">
                         <input type="radio" name="idiefo" id="option1"> 1跳
                     </label>
@@ -142,7 +142,7 @@
                         <input type="radio" name="idiefo" id="option3" checked> 全部
                     </label>
                     <button class="add22" type="button" data-toggle="modal">添加</button>
-                </p>              
+                </p>     -->          
             </p>
             <div class="assright2" style='padding:5px 0 5px 10px;'>
                 <img src="/static/image/left.png" alt="" class="left" style='margin-right:5px;'>
@@ -174,10 +174,10 @@
                         <div class="cdt2">
                             <div class="checkbox">
                                 <label style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
-                                    <input id='user' class="per" type="checkbox" checked/> 人物
+                                    <input id='user' class="per" type="checkbox"/> 人物
                                 </label>
                                 <label style="display: block;margin-left: 50px;color: #9d9d9d;font-size: 12px">
-                                    <input id="event" class="per" type="checkbox"/> 事件
+                                    <input id="event" class="per" type="checkbox" checked/> 事件
                                 </label>
                             </div>
                         </div>
@@ -268,7 +268,7 @@
                         正在加载，请稍后...
                 </div>
                 <div id="influeweibo" style="overflow-x: auto; overflow-y: auto;height:320px;">
-                    <table id="input-table" class="In-table">
+                    <table id="input-table" class="In-table" style='width:100%;'>
                         <tbody class="In-table">
                         </tbody>
                     </table>
@@ -554,7 +554,6 @@
     });
     function the_card (data) {
         var date=eval(data);
-        console.log(data)
         var location,tag,description,srcimg,name;
             function getLocalTime(nS) {     
                return new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10).replace(/:\d{1,2}$/,' ');    

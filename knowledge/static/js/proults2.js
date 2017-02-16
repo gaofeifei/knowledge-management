@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 2016/12/19.
  */
+//-----------------事件详情=-----
 Array.prototype.removeByValue = function(val) {
     for(var i=0; i<this.length; i++) {
         if(this[i] == val) {
@@ -83,7 +84,7 @@ function baohanshijian() {
                 '</div>'+
                 '<div style="float:left;margin: 10px 0 0 34px"><div style="display: inline-block"><img src="/static/image/dingwei.png" title="位置"><!--'+
                 '--><span class="difang" style="font-size: 8px">'+weizhi+'</span><!--'+
-                '--><img class="xin" src="/static/image/heart2.png" alt="">' +
+                '--><im class="xin" src="/static/image/heart2.png" alt="">' +
                 '<div><div style="text-align: center"><img src="/static/image/weiboshu.png" title="微博数"><!--'+
                 '--><span class="weiboshu" style="font-size: 8px">'+weibonums+'</span></div>'+
                 '<div style="text-align: center"><img class="canyuren" src="/static/image/canyuren.png" title="参与人数"><span style="font-size: 8px">'+canyunums+'</span></div></div></div>'+

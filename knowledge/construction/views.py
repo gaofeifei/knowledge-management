@@ -317,14 +317,11 @@ def nodes_create_rels():
     if len(result)==1:
         print "1"
         result =eval(result[0])
-        list  =[[[result[0],result[1]],result[2],[result[3],result[4]]],]
+        list  = [[[result[0],result[1]],result[2],[result[3],result[4]]],]
     else :
         for item in result:
             item = eval(item)
             list.append([[item[0],item[1]],item[2],[item[3],item[4]]])
-    print list
-    for item in list:
-        print item 
     result = nodes_rels(list)
     return json.dumps(result)
 

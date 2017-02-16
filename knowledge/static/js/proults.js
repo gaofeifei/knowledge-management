@@ -1,6 +1,7 @@
 /**
  * Created by Administrator on 2016/11/30.
  */
+//------------群体详情--
 //事件人物点配置
 function peo() {
     //this.ajax_method='GET'; // body...

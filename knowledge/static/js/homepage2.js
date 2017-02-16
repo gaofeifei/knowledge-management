@@ -47,7 +47,7 @@ $.get('/index/count_special_event/',function (data) {
         },
         series: [
             {
-                name: '发生次数',
+                name: '事件数量',
                 type: 'bar',
                 data: xx,
             },

@@ -46,13 +46,13 @@
             </div>
             <button class="crt133">确&nbsp;&nbsp;&nbsp;&nbsp;定</button>
         </div>
-        <div class="crt2" style="width:400px;display:inline-block;">
+        <div class="crt2" style="float:left;width:400px;">
             <div class="crt2lf" id='crt2lf'>
                 
             </div>
             
         </div>
-        <div class="crt3" style='display:none;position:relative;top:60px;'>
+        <div class="crt3" style='display:none;float:left;margin-top:60px;'>
             <p class='jump' style='float:left;font-size:12px;margin: 5px 0px 0 50px;'>
                     <!-- <label class="radio-inline">
                         <input type="radio" name="ioja" value="option1"> 1跳
@@ -485,22 +485,99 @@
                             </div>
                             <div class="rgthr">
                                 敏感度 <input type="text" class="mgd"  style="margin:0 32px"/>
-                                领域 
+                                身份 
                                 <select class="ly" style="margin-left:18px" onchange='lingyu(this.value)'>
-                                    <option value="" disabled selected>请选择领域</option>
-                                    <!-- <option value="商业人士">商业人士</option> -->
+                                    <option value="" disabled selected>请选择身份</option>
+                                    <option value="高校">高校</option>
+                                    <option value="境内机构">境内机构</option>
+                                    <option value="境外机构">境外机构</option>
+                                    <option value="媒体">媒体</option>
+                                    <option value="境外媒体">境外媒体</option>
+                                    <option value="民间组织">民间组织</option>
+                                    <option value="法律机构及人士">法律机构及人士</option>
+                                    <option value="政府机构及人士">政府机构及人士</option>
+                                    <option value="媒体人士">媒体人士</option>
+                                    <option value="活跃人士">活跃人士</option>
+                                    <option value="商业人士">商业人士</option>
+                                    <option value="草根">草根</option>
+                                    <option value="其他">其他</option>
                                 </select>
                             </div>
                             <div class="rgfour">
                                 注册地 &nbsp;
                                 <input class="zcd" style="margin:0 24px"/>
-                                <!-- <select class="zcd"  onchange='zhucedi(this.value)'>  -->
-                                    <!-- <option value="北京">北京</option> -->
-                                <!-- </select> -->
+                                <select class="zcd"  onchange='zhucedi(this.value)'> 
+                                    <option value="北京市">北京市</option>
+                                    <option value="天津市">天津市</option>
+                                    <option value="上海市">上海市</option>
+                                    <option value="重庆市">重庆市</option>
+                                    <option value="河北省">河北省</option>
+                                    <option value="河南省">河南省</option>
+                                    <option value="云南省">云南省</option>
+                                    <option value="辽宁省">辽宁省</option>
+                                    <option value="黑龙江省">黑龙江省</option>
+                                    <option value="安徽省">安徽省</option>
+                                    <option value="湖南省">湖南省</option>
+                                    <option value="山东省">山东省</option>
+                                    <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                                    <option value="江苏省">江苏省</option>
+                                    <option value="浙江省">浙江省</option>
+                                    <option value="江西省">江西省</option>
+                                    <option value="湖北省">湖北省</option>
+                                    <option value="广西壮族自治区">广西壮族自治区</option>
+                                    <option value="甘肃省">甘肃省</option>
+                                    <option value="山西省">山西省</option>
+                                    <option value="内蒙古自治区">内蒙古自治区</option>
+                                    <option value="陕西省">陕西省</option>
+                                    <option value="吉林省">吉林省</option>
+                                    <option value="福建省">福建省</option>
+                                    <option value="贵州省">贵州省</option>
+                                    <option value="广东省">广东省</option>
+                                    <option value="青海省">青海省</option>
+                                    <option value="西藏自治区">西藏自治区</option>
+                                    <option value="四川省">四川省</option>
+                                    <option value="宁夏回族自治区">宁夏回族自治区</option>
+                                    <option value="海南省">海南省</option>
+                                    <option value="台湾省">台湾省</option>
+                                    <option value="香港特别行政区">香港特别行政区</option>
+                                    <option value="澳门特别行政区">澳门特别行政区</option>
+                                </select>
                                 活跃地
                                 <select class="hydi" style="margin-left:12px" onchange='huoyuedi(this.value)'>
-                                    <option value="" disabled selected>请选择活跃地</option>
-                                    <!-- <option value="北京">北京</option> -->
+                                    <option value="北京市">北京市</option>
+                                    <option value="天津市">天津市</option>
+                                    <option value="上海市">上海市</option>
+                                    <option value="重庆市">重庆市</option>
+                                    <option value="河北省">河北省</option>
+                                    <option value="河南省">河南省</option>
+                                    <option value="云南省">云南省</option>
+                                    <option value="辽宁省">辽宁省</option>
+                                    <option value="黑龙江省">黑龙江省</option>
+                                    <option value="安徽省">安徽省</option>
+                                    <option value="湖南省">湖南省</option>
+                                    <option value="山东省">山东省</option>
+                                    <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                                    <option value="江苏省">江苏省</option>
+                                    <option value="浙江省">浙江省</option>
+                                    <option value="江西省">江西省</option>
+                                    <option value="湖北省">湖北省</option>
+                                    <option value="广西壮族自治区">广西壮族自治区</option>
+                                    <option value="甘肃省">甘肃省</option>
+                                    <option value="山西省">山西省</option>
+                                    <option value="内蒙古自治区">内蒙古自治区</option>
+                                    <option value="陕西省">陕西省</option>
+                                    <option value="吉林省">吉林省</option>
+                                    <option value="福建省">福建省</option>
+                                    <option value="贵州省">贵州省</option>
+                                    <option value="广东省">广东省</option>
+                                    <option value="青海省">青海省</option>
+                                    <option value="西藏自治区">西藏自治区</option>
+                                    <option value="四川省">四川省</option>
+                                    <option value="宁夏回族自治区">宁夏回族自治区</option>
+                                    <option value="海南省">海南省</option>
+                                    <option value="台湾省">台湾省</option>
+                                    <option value="香港特别行政区">香港特别行政区</option>
+                                    <option value="澳门特别行政区">澳门特别行政区</option>
                                 </select>
                             </div>
                         </div>
@@ -569,35 +646,6 @@
 <!-- <script src="/static/js/bootstrap-table.min.js"></script>
 <script src="/static/js/bootstrap-table-zh-CN.min.js"></script> -->
 <script>
-    $.each($(".delt"),function(index,item){
-        $(item).on('click',function(){
-            // $('#join1').modal("show");
-            // $(item).parents('tr').hide();
-        });
-    })
-    // var td2=$(".conright .table tr").find('td');
-    // $.each(td2,function(index,item){
-    //     $(item).on('click',function () {
-    //         if (index==1) {
-    //             $(".conright .crt2rg").show(100);
-    //             $(".conright .jump").show(100);
-    //         };           
-    //     })
-    // });
-    // $("#container .conright2 .editor .editor3").on('click',function () {
-    //     $('.lcleft').show(20);
-    // });
-    // var xiu=$("#container .conright2 .listcell tr");
-    // $.each(xiu,function(index,item){
-    //     $(item).on('click',function(){
-    //         $('.lcright').show(20);
-    //     })
-    // });
-    // $.each($('.xiugai'),function(index,item){
-    //     $(item).on('click',function(){
-    //         $('#join7').modal("show");
-    //     })
-    // })
     $.each($('.zeng1'),function(index,item){
         $('.zeng1').on('click',function(){
             var ming=$(this).parent().next().html();
@@ -624,12 +672,12 @@
         $('#container .conleft .lfone').css({backgroundColor:'#0099ff'});
     })
 
-    $.each($('.menuList'),function(index,item){
-        $(item).css({display:'none'});
-        if (index==1) {
-            $(item).css({display:'block'});
-        };
-    });
+    // $.each($('.menuList'),function(index,item){
+    //     $(item).css({display:'none'});
+    //     if (index==1) {
+    //         $(item).css({display:'block'});
+    //     };
+    // });
     $(".lfone").on('click',function () {
         $(".conright").css({display:'block'});
         $(".conright2").css({display:'none'});
@@ -638,60 +686,6 @@
         $(".conright").css({display:'none'});
         $(".conright2").css({display:'block'});
     });
-    $.each($('.conright .xingming'),function(index,item){
-        $(item).on('click',function () {
-            window.open('/index/person/');
-        })
-    })
-    var play=$("#container .conright .play");
-        $.each(play,function (index,item) {
-            $(item).hover(function () {
-                $(item).find(".play5").css({
-                    "-webkit-transform":"translateY(-40px)",
-                    "-moz-transform":"translateY(-40px)",
-                    "-ms-transform":"translateY(-40px)",
-                    "-o-transform":"translateY(-40px)",
-                    "transform":"translateY(-40px)",
-                })
-            },function () {
-                $(item).find(".play5").css({
-                    "-webkit-transform":"translateY(40px)",
-                    "-moz-transform":"translateY(40px)",
-                    "-ms-transform":"translateY(40px)",
-                    "-o-transform":"translateY(40px)",
-                    "transform":"translateY(40px)",
-                })
-            });
-        });
-        $.each(play,function (index,item) {
-            var changecolor=1;
-            $(item).find(".play5").on('click',function(){
-                if (changecolor==1) {
-                    $(this).parent('.play').css({backgroundColor:'#09F'});
-                    changecolor=2;
-                    $(this).find('a').text('取消群体探索');
-                    $('#join4').modal("show");
-                } else {
-                    $(this).parent('.play').css({backgroundColor:'#d2dcf7'});
-                    changecolor=1;
-                    $(this).find('a').text('加入群体探索');
-                }
-            }); 
-        });
-        var heart=$(".play .play1 .p11 .xin");
-        $.each(heart,function(index,item){
-            var chan=1;
-            $(item).on('click',function(){
-                if (chan==1) {
-                    $(this).attr('src','/static/image/focus.png');
-                    chan=2;
-                }else {
-                    $(this).attr('src','/static/image/heart.png');
-                    chan=1;
-                }
-                
-            })
-        });
         function check(value){
             if (value=='新建群体') {
                 $('.shuru2').show();

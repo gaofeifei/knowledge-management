@@ -733,10 +733,10 @@ console.log(url_rel)
         });
         
         function setup(information) {
-            if (information=='1') {
+            if (information=='success') {
                 $("#ot").text('创建成功');
             }else  {
-                $("#ot").text('创建失败，可能是关系已经存在，请勿重复添加。');
+                $("#ot").text('创建失败，请检查您输入的ID。');
             }
             $('.upload333').modal("show");
         }

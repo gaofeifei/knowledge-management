@@ -46,7 +46,6 @@ function guanxibianji() {
     };
     function relt(data) {
         var data=eval(data);
-        console.log(data)
         $('#lcleft').bootstrapTable('load',data);
         $('#lcleft').bootstrapTable({
             //url: influ_url,

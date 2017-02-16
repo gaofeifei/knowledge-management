@@ -223,11 +223,8 @@ def nodes_rels(list):
             tx.commit()
             tx = graph.begin()
     tx.commit()
-    if result == '':
-        result = "success"
-    else:
-        result=result[1:]
-    return result
+    return 'success'
+
 
 
 # 对单节点和单节点建立关系

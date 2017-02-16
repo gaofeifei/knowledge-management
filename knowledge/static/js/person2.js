@@ -367,7 +367,7 @@ function gaoyingxiangliweibo() {
                     }else {
                         name=dataArray[i].uname;
                     };
-                    var _ci=data[i].sensitive_words_string;
+                    var _ci=data[i].sensitive_words_string.replace(/&/g,'');
                     html_c = '<div class="twr1">'+
                         '                        <p class="master">'+
                         '                            微博内容：'+
@@ -391,8 +391,10 @@ function gaoyingxiangliweibo() {
                     if (data[i].sensitive_words_string==''){
                         null;
                     }else {
-                        var reg = new RegExp("(" + _ci + ")", "g");
-                        $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                        for (var i=0;i<_ci.length;i++){
+                            var reg = new RegExp("(" + _ci[i] + ")", "g");
+                            $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                        }
                     }
                 }
             }
@@ -436,7 +438,7 @@ function gaoyingxiangliweibo() {
                         }else {
                             name=dataArray[i].uname;
                         };
-                        var _ci=data[i].sensitive_words_string
+                        var _ci=data[i].sensitive_words_string.replace(/&/g,'');
                         html_c = '<div class="twr1">'+
                             '                        <p class="master">'+
                             '                            微博内容：'+
@@ -460,8 +462,10 @@ function gaoyingxiangliweibo() {
                         if (data[i].sensitive_words_string==''){
                             null;
                         }else {
-                            var reg = new RegExp("(" + _ci + ")", "g");
-                            $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                            for (var i=0;i<_ci.length;i++){
+                                var reg = new RegExp("(" + _ci[i] + ")", "g");
+                                $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                            }
                         }
                     }
                 }
@@ -509,7 +513,7 @@ function gaoyingxiangliweibo() {
                     }else {
                         name=dataArray[i+a].uname;
                     };
-                    var _ci=data[i+a].sensitive_words_string;
+                    var _ci=data[i+a].sensitive_words_string.replace(/&/g,'');
                     oTBody.rows[i].insertCell(0);
                     html_c = '<div class="twr1">'+
                         '                        <p class="master">'+
@@ -534,8 +538,10 @@ function gaoyingxiangliweibo() {
                     if (data[i+a].sensitive_words_string==''){
                         null;
                     }else {
-                        var reg = new RegExp("(" + _ci + ")", "g");
-                        $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                        for (var i=0;i<_ci.length;i++){
+                            var reg = new RegExp("(" + _ci[i] + ")", "g");
+                            $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                        }
                     }
                 }
             }
@@ -573,7 +579,7 @@ function gaoyingxiangliweibo() {
                     }else {
                         name=dataArray[i+a].uname;
                     };
-                    var _ci=data[i+a].sensitive_words_string
+                    var _ci=data[i+a].sensitive_words_string.replace(/&/g,'');
                     oTBody.rows[i].insertCell(0);
                     html_c = '<div class="twr1">'+
                         '                        <p class="master">'+
@@ -597,8 +603,10 @@ function gaoyingxiangliweibo() {
                     if (data[i+a].sensitive_words_string==''){
                         null;
                     }else {
-                        var reg = new RegExp("(" + _ci + ")", "g");
-                        $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                        for (var i=0;i<_ci.length;i++){
+                            var reg = new RegExp("(" + _ci[i] + ")", "g");
+                            $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                        }
                     }
                 }
             }
@@ -643,7 +651,7 @@ function gaoyingxiangliweibo() {
                 }else {
                     name=dataArray[+a].uname;
                 };
-                var _ci=data[i+a].sensitive_words_string;
+                var _ci=data[i+a].sensitive_words_string.replace(/&/g,'');
                 oTBody.rows[i].insertCell(0);
                 html_c = '<div class="twr1">'+
                     '                        <p class="master">'+
@@ -667,8 +675,10 @@ function gaoyingxiangliweibo() {
                 if (data[i+a].sensitive_words_string==''){
                     null;
                 }else {
-                    var reg = new RegExp("(" + _ci + ")", "g");
-                    $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                    for (var i=0;i<_ci.length;i++){
+                        var reg = new RegExp("(" + _ci[i] + ")", "g");
+                        $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                    }
                 }
             }
         }

@@ -176,7 +176,8 @@ def fuzzy_query():
         result = select_rels_all(c_string)
         return json.dumps(result)
     elif node_type == '2':  # event query
-        c_string = "start n = node:%s('event:*%d*') match (n) return n order by n.id limit 50" % (node_index_name, uid)
+        c_string = "start n = node:%s('event:*%s*') match (n) return n order by n.id limit 50" % (event_index_name, uid)
+        print c_string
         result = select_rels_all(c_string)
         return json.dumps(result)
     else:
@@ -312,12 +313,11 @@ def nodes_create_rels():
     list = []
     if len(result)==1:
         result =eval(result[0])
-        list  = [[result[0],result[1]],result[2],[result[3],result[4]],]
+        list  = [[[result[0],result[1]],result[2],[result[3],result[4]]],]
     else :
         for item in result:
             item = eval(item)
             list.append([[item[0],item[1]],item[2],[item[3],item[4]]])
-    print list 
     result = nodes_rels(list)
     return json.dumps(result)
 

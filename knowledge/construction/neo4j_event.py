@@ -207,7 +207,7 @@ def nodes_rels(list):
             print count
             tx = graph.begin()
     tx.commit()
-    return '1'
+    return 'success'
 
 
 # 对单节点和单节点建立关系

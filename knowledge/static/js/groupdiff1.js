@@ -1926,6 +1926,7 @@ function wenbenduibi() {
                         }else {
                             name=dataArray[i].uname;
                         };
+                        var _ci=dataArray[i].sensitive_words_string.replace(/&/g,'');
                         html_c = '<div class="twr1">'+
                             '                        <p class="master">'+
                             '                            微博内容：'+
@@ -1945,6 +1946,14 @@ function wenbenduibi() {
                             '                    </div>';
                         oTBody.rows[i].insertCell(0);
                         oTBody.rows[i].cells[0].innerHTML = html_c;
+                        if (dataArray[i].sensitive_words_string==''){
+                            null;
+                        }else {
+                            for (var i=0;i<_ci.length;i++){
+                                var reg = new RegExp("(" + _ci[i] + ")", "g");
+                                $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                            }
+                        }
                     }
                 }
             };
@@ -2005,6 +2014,15 @@ function wenbenduibi() {
                                 '                    </div>';
                             oTBody.rows[i].insertCell(0);
                             oTBody.rows[i].cells[0].innerHTML = html_c;
+                            if (dataArray[i].sensitive_words_string==''){
+                                null;
+                            }else {
+                                var _ci=dataArray[i].sensitive_words_string.replace(/&/g,'');
+                                for (var i=0;i<_ci.length;i++){
+                                    var reg = new RegExp("(" + _ci[i] + ")", "g");
+                                    $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                                }
+                            }
                         }
                     }
                 }
@@ -2070,6 +2088,15 @@ function wenbenduibi() {
                             '                    </div>';
                         oTBody.rows[i].cells[0].innerHTML = html_c;
                         //数组从第i+a开始取值
+                        if (dataArray[i+a].sensitive_words_string==''){
+                            null;
+                        }else {
+                            var _ci=dataArray[i+a].sensitive_words_string.replace(/&/g,'');
+                            for (var i=0;i<_ci.length;i++){
+                                var reg = new RegExp("(" + _ci[i] + ")", "g");
+                                $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                            }
+                        }
                     }
                 }
             };
@@ -2125,6 +2152,15 @@ function wenbenduibi() {
                             '                        </p>'+
                             '                    </div>';
                         oTBody.rows[i].cells[0].innerHTML = html_c;
+                        if (dataArray[i+a].sensitive_words_string==''){
+                            null;
+                        }else {
+                            var _ci=dataArray[i+a].sensitive_words_string.replace(/&/g,'');
+                            for (var i=0;i<_ci.length;i++){
+                                var reg = new RegExp("(" + _ci[i] + ")", "g");
+                                $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                            }
+                        }
                     }
                 }
             };
@@ -2187,6 +2223,15 @@ function wenbenduibi() {
                         '                        </p>'+
                         '                    </div>';
                     oTBody.rows[i].cells[0].innerHTML = html_c;
+                    if (dataArray[i+a].sensitive_words_string==''){
+                        null;
+                    }else {
+                        var _ci=dataArray[i+a].sensitive_words_string.replace(/&/g,'');
+                        for (var i=0;i<_ci.length;i++){
+                            var reg = new RegExp("(" + _ci[i] + ")", "g");
+                            $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                        }
+                    }
                 }
             };
             // -------------------------
@@ -2259,6 +2304,15 @@ function wenbenduibi() {
                             '                    </div>';
                         oTBody.rows[i].insertCell(0);
                         oTBody.rows[i].cells[0].innerHTML = html_c;
+                        if (dataArray2[i].sensitive_words_string==''){
+                            null;
+                        }else {
+                            var _ci=dataArray2[i].sensitive_words_string.replace(/&/g,'');
+                            for (var i=0;i<_ci.length;i++){
+                                var reg = new RegExp("(" + _ci[i] + ")", "g");
+                                $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                            }
+                        }
                     }
                 }
             }
@@ -2319,6 +2373,15 @@ function wenbenduibi() {
                                 '                    </div>';
                             oTBody.rows[i].insertCell(0);
                             oTBody.rows[i].cells[0].innerHTML = html_c;
+                            if (dataArray2[i].sensitive_words_string==''){
+                                null;
+                            }else {
+                                var _ci=dataArray2[i].sensitive_words_string.replace(/&/g,'');
+                                for (var i=0;i<_ci.length;i++){
+                                    var reg = new RegExp("(" + _ci[i] + ")", "g");
+                                    $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                                }
+                            }
                         }
                     }
                 }
@@ -2384,6 +2447,15 @@ function wenbenduibi() {
                             '                    </div>';
                         oTBody.rows[i].cells[0].innerHTML = html_c;
                         //数组从第i+a开始取值
+                        if (dataArray2[i+a].sensitive_words_string==''){
+                            null;
+                        }else {
+                            var _ci=dataArray2[i+a].sensitive_words_string.replace(/&/g,'');
+                            for (var i=0;i<_ci.length;i++){
+                                var reg = new RegExp("(" + _ci[i] + ")", "g");
+                                $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                            }
+                        }
                     }
                 }
             }
@@ -2439,6 +2511,15 @@ function wenbenduibi() {
                             '                        </p>'+
                             '                    </div>';
                         oTBody.rows[i].cells[0].innerHTML = html_c;
+                        if (dataArray2[i+a].sensitive_words_string==''){
+                            null;
+                        }else {
+                            var _ci=dataArray2[i+a].sensitive_words_string.replace(/&/g,'');
+                            for (var i=0;i<_ci.length;i++){
+                                var reg = new RegExp("(" + _ci[i] + ")", "g");
+                                $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                            }
+                        }
                     }
                 }
             }
@@ -2501,6 +2582,15 @@ function wenbenduibi() {
                         '                        </p>'+
                         '                    </div>';
                     oTBody.rows[i].cells[0].innerHTML = html_c;
+                    if (dataArray2[i+a].sensitive_words_string==''){
+                        null;
+                    }else {
+                        var _ci=dataArray2[i+a].sensitive_words_string.replace(/&/g,'');
+                        for (var i=0;i<_ci.length;i++){
+                            var reg = new RegExp("(" + _ci[i] + ")", "g");
+                            $('.master1').html($('.master1').html().replace(reg,"<font color=red>$1</font>"));
+                        }
+                    }
                 }
             }
 

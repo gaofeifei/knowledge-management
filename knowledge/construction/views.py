@@ -1,7 +1,8 @@
 ﻿# -*-coding:utf-8-*-
 from flask import Blueprint, url_for, render_template, request, abort, flash, session, redirect,make_response,request
 from neo4j_event import select_rels_all, select_rels, create_person, create_rel_from_uid2group, create_node_or_node_rel, \
-    update_node, update_node_or_node_rel, delete_rel, delete_node,nodes_rels,get_es_status
+    update_node, update_node_or_node_rel, delete_rel, delete_node,nodes_rels,get_es_status,select_event_es,\
+    select_people_es
 from knowledge.global_config import *
 import json
 import csv
@@ -172,12 +173,15 @@ def fuzzy_query():
         print "incoming there null"
         return '0'
     if node_type == '1':  # user query
-        c_string = "start n = node:%s('uid:*%s*') match (n) return n order by n.id limit 50" % (node_index_name, uid)
+        c_string = "start n = node:%s('uid:*%s*') match (n) return n.uid order by n.id limit 50" % (node_index_name, uid)
+        print c_string
         result = select_rels_all(c_string)
+        result = select_people_es(result)
         return json.dumps(result)
     elif node_type == '2':  # event query
-        c_string = "start n = node:%s('event:*%d*') match (n) return n order by n.id limit 50" % (node_index_name, uid)
+        c_string = "start n = node:%s('event:*%s*') match (n) return n order by n.id limit 50" % (event_index_name, uid)
         result = select_rels_all(c_string)
+        result = select_event_es(result)
         return json.dumps(result)
     else:
         print "node_type is error"
@@ -311,13 +315,16 @@ def nodes_create_rels():
     result = result.split("|")
     list = []
     if len(result)==1:
+        print "1"
         result =eval(result[0])
-        list  = [[result[0],result[1]],result[2],[result[3],result[4]],]
+        list  =[[[result[0],result[1]],result[2],[result[3],result[4]]],]
     else :
         for item in result:
             item = eval(item)
             list.append([[item[0],item[1]],item[2],[item[3],item[4]]])
-    print list 
+    print list
+    for item in list:
+        print item 
     result = nodes_rels(list)
     return json.dumps(result)
 

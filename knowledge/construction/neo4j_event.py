@@ -140,6 +140,7 @@ def create_rel_from_uid2group(node_key, uid_list, node_index_name, group_rel, gr
 
 # 多对多创建节点关系([node1_type,node1_id],rel,[node2_type,node2_id])
 def nodes_rels(list):
+    result = ''
     count = 0
     Index = ManualIndexManager(graph)
     node_index = Index.get_index(Node, node_index_name)
@@ -155,59 +156,78 @@ def nodes_rels(list):
         node2_uid = item[2][1]
         rel = item[1]
         if node1_key == '' or node2_key == '' or node1_uid == '' or node2_uid == '' or rel == '':
-            return '0'
+            continue
+        flag = 0
         if node1_key == "uid":
             if node2_key == 'uid':
                 node1 = node_index.get(node1_key, node1_uid)
                 if (node1 == []):
-                    return '%d' % node1_uid
+                    result =result + ",%d" % node1_uid
+                    flag=1
                 node1 = node1[0]
                 node2 = node_index.get(node2_key, node2_uid)
                 if (node2 == []):
-                    return '%d' % node2_uid
+                    result = result +",%d" % node2_uid
+                    flag=1
                 node2 = node2[0]
                 print 11
 
             else:
-                node1 = node_index.get(node1_key, node1_uid)[0]
+                node1 = node_index.get(node1_key, node1_uid)
                 if (node1 == []):
-                    return '%d' % node1_uid
-                node1 = node1[0]
-                node2 = event_index.get(node2_key, node2_uid)[0]
+                    result =result + ",%d" % node1_uid
+                    flag=1
+                else:
+                    node1 = node1[0]
+                node2 = event_index.get(node2_key, node2_uid)
                 if (node1 == []):
-                    return '%d' % node2_uid
-                node2 = node2[0]
+                    result = result +",%d" % node2_uid
+                    flag=1
+                else:
+                    node2 = node2[0]
                 print 12
         else:
             if node2_key == 'uid':
-                node1 = event_index.get(node1_key, node1_uid)[0]
+                node1 = event_index.get(node1_key, node1_uid)
                 if (node1 == []):
-                    return '%d' % node1_uid
-                node1 = node1[0]
-                node2 = node_index.get(node2_key, node2_uid)[0]
+                    result =result + ",%d" % node1_uid
+                    flag=1
+                else:
+                    node1 = node1[0]
+                node2 = node_index.get(node2_key, node2_uid)
                 if (node1 == []):
-                    return '%d' % node2_uid
-                node2 = node2[0]
+                    result = result +",%d" % node2_uid
+                    flag=1
+                else:
+                    node2 = node2[0]
                 print 21
             else:
-                node1 = event_index.get(node1_key, node1_uid)[0]
+                node1 = event_index.get(node1_key, node1_uid)
                 if (node1 == []):
-                    return '%d' % node1_uid
-                node1 = node1[0]
-                node2 = event_index.get(node2_key, node2_uid)[0]
+                    result =result + ",%d" % node1_uid
+                    flag=1
+                else:
+                    node1 = node1[0]
+                node2 = event_index.get(node2_key, node2_uid)
                 if (node1 == []):
-                    return '%d' % node2_uid
-                node2 = node2[0]
+                    result = result +",%d" % node2_uid
+                    flag=1
+                else:
+                    node2 = node2[0]
                 print 22
-        rel = Relationship(node1, rel, node2)
-        tx.create(rel)
-        count += 1
+        if flag == 0:
+            rel = Relationship(node1, rel, node2)
+            tx.create(rel)
+            count += 1
         if count % 100 == 0:
             tx.commit()
-            print count
             tx = graph.begin()
     tx.commit()
-    return '1'
+    if result == '':
+        result = "success"
+    else:
+        result=result[1:]
+    return result
 
 
 # 对单节点和单节点建立关系
@@ -326,21 +346,52 @@ def delete_node(node_key, node_id, node_index_name):
     print "delete node success"
     return True
 
-
-if __name__ == '__main__':
-    result = "1,2,3,1,5|1,2,3,1,5"
-    result = result.split("|")
+def select_event_es(result):
+    print "111"
     list = []
-    if  len(result)== 1 :
-        result =eval(result[0])
-        list  = [[result[0],result[1]],result[2],[result[3],result[4]],]
-    else :
-        for item in result:
-            item = eval(item)
-            list.append([[item[0],item[1]],item[2],[item[3],item[4]]])
-    print list
+    for ls in result:
+        event_dict= {}
+        uid = dict(ls)["n"]["event_id"]
+        item=es.get(index=event_analysis_name,doc_type=event_type,id=uid)
+        event_dict["id"]=item["_id"]
+        item = item["_source"]
+        event_dict["name"]=item["name"]
+        event_dict["weibo_counts"]=item["weibo_counts"]
+        event_dict["uid_counts"]=item["uid_counts"]
+        event_dict["start_ts"]=item["start_ts"]
+        event_dict["location"]=item["location"]
+        event_dict["tag"]=item["tag"]
+        event_dict["description"]=item["description"]
+        event_dict["submit_ts"]=item["submit_ts"]
+        event_dict["end_ts"]=item["end_ts"]
+        print event_dict
+        list.append(event_dict)
+    return list
 
-    for ls in list :
-        print ls[0][0]
-    result = nodes_rels(list)
-    print result
+def select_people_es(result):
+    list = []
+    for ls in result:
+        uid = dict(ls)["n.uid"]
+        item=es.get(index=portrait_name,doc_type=portrait_type,id=uid)
+        people_dict["id"]=result["_id"]
+        item = item["_source"]
+        people_dict["domain"]=item["domain"]
+        people_dict["influence"]=item["influence"]
+        people_dict["uname"]=item["uname"]
+        people_dict["sensitive_string"]=item["sensitive_string"]
+        people_dict["activity_geo_aggs"]=item["activity_geo_aggs"]
+        people_dict["importnace"]=item["importnace"]
+        people_dict["activeness"]=item["activeness"]
+        people_dict["location"]=item["location"]
+        people_dict["importance"]=item["importance"]
+        people_dict["hashtag"]=item["hashtag"]
+        people_dict["photo_url"]=item["photo_url"]
+        people_dict["topic_string"]=item["topic_string"]
+        people_dict["friendsnum"]=item["friendsnum"]
+        people_dict["create_time"]=item["create_time"]
+        people_dict["description"]=item["description"]
+        people_dict["create_user"]=item["create_user"]
+        people_dict["tag"]=item["tag"]
+        list.append(people_dict)
+    return list
+

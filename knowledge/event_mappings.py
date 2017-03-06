@@ -24,7 +24,7 @@ def get_mappings(index_name):
             'mappings':{
                 'text':{
                     'properties':{
-                        'comput_status':{
+                        'compute_status':{
                             'type': 'string',
                             'index': 'not_analyzed'
                             },
@@ -52,7 +52,13 @@ def get_mappings(index_name):
                             },
                         'submit_ts':{
                             'type': 'long'
-                            }
+                            },
+                        "first_compute":{
+                            "type":"long"
+                        },
+                        "immediate_compute":{
+                            "type":"long"
+                        }
                         }
                     }
                 }

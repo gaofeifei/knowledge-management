@@ -22,8 +22,10 @@ portrait_name = "user_portrait"
 flow_text_name = "flow_text_2016-11-26"
 portrait_type = "user"
 flow_text_type = "text"
-event_name = "event" # 事件基本信息
-event_analysis_name = "event_analysis" # 事件分析结果
+event_name = "event_task"#"event" # 事件基本信息
+event_analysis_name = 'event_result'#"event_analysis" # 事件分析结果
+event_text = "event_text"
+event_text_type ="text"
 event_type = "text"
 neo4j_name = "neo4j"
 neo4j_password = "database"
@@ -93,3 +95,85 @@ relation_list = ['friend','relative','colleague','user_tag']
 group_rel = "group"
 
 #机构和机构没有关系，
+
+#jln:for getTopicByNameStEt
+TOPIC_ES_HOST = '219.224.134.216:9204'
+topic_es = Elasticsearch(TOPIC_ES_HOST,timeout=1000)
+topic_index_name = 'topics'
+topic_index_type ='text'
+
+WEIBO_ES_HOST = '219.224.134.216:9204'
+weibo_es = Elasticsearch(WEIBO_ES_HOST,timeout=1000)
+weibo_index_name = 'weibo'
+weibo_index_type ='text'
+topics_river_index_name='topics_river'
+topics_river_index_type='text'
+subopinion_index_type='text'
+subopinion_index_name='subopinion'
+
+#jln
+SENTIMENT_TYPE_COUNT = 7
+SENTIMENT_FIRST = ['0', '1', '7']
+SENTIMENT_SECOND = ['2', '3', '4', '5', '6']
+MAX_REPOST_SEARCH_SIZE = '100'
+MAX_FREQUENT_WORDS = 100
+MAX_LANGUAGE_WEIBO = 200
+NEWS_LIMIT = 100
+
+
+
+REDIS_CLUSTER_HOST_FLOW1 = '219.224.134.212'
+REDIS_CLUSTER_HOST_FLOW1_LIST = ["219.224.134.211", "219.224.134.212", "219.224.134.213"]
+REDIS_CLUSTER_PORT_FLOW1 = '6669'#'6379'
+REDIS_CLUSTER_PORT_FLOW1_LIST = ["6379", "6380"]
+REDIS_CLUSTER_HOST_FLOW2 = '219.224.134.212'
+REDIS_CLUSTER_PORT_FLOW2 = '6666'
+#JLN for keyword find user
+REDIS_KEYWORD_HOST = '219.224.134.212'
+REDIS_KEYWORD_PORT = '6381'
+#flow2用了
+REDIS_HOST = '219.224.134.212'#'219.224.134.212'
+REDIS_PORT = '6670'#'6381'
+#uname to uid 
+UNAME2UID_HOST = '219.224.134.211'
+UNAME2UID_PORT = '7381'
+# uname2uid in redis: {'weibo_user': {uname:uid, ...}}
+UNAME2UID_HASH = 'weibo_user'
+REDIS_TEXT_MID_HOST = '219.224.134.211' # 注意；和redis flow1的host/port相同
+REDIS_TEXT_MID_PORT = '7381'
+#flow3:retweet/be_retweet redis
+RETWEET_REDIS_HOST = '219.224.134.215'#'219.224.134.212'
+RETWEET_REDIS_PORT = '6667'#'6381'
+#flow3:comment/be_comment redis
+COMMENT_REDIS_HOST = '219.224.134.215'#'219.224.134.212'
+COMMENT_REDIS_PORT = '6668'
+ZMQ_VENT_PORT_FLOW1 = '6387'
+ZMQ_CTRL_VENT_PORT_FLOW1 = '5585'
+ZMQ_VENT_HOST_FLOW1 = '219.224.134.213'
+ZMQ_CTRL_HOST_FLOW1 = '219.224.134.213'
+
+ZMQ_VENT_PORT_FLOW2 = '6388'
+ZMQ_CTRL_VENT_PORT_FLOW2 = '5586'
+
+ZMQ_VENT_PORT_FLOW3 = '6389'
+ZMQ_CTRL_VENT_PORT_FLOW3 = '5587'
+
+ZMQ_VENT_PORT_FLOW4 = '6390'
+ZMQ_CTRL_VENT_PORT_FLOW4 = '5588'
+
+ZMQ_VENT_PORT_FLOW5 = '6391'
+ZMQ_CTRL_VENT_PORT_FLOW5 = '5589'
+
+#use to save txt file
+WRITTEN_TXT_PATH = '/home/ubuntu2/txt'
+REPLICA_BIN_FILE_PATH = '/home/ubuntu2/txt'
+
+# csv file path
+'''
+BIN_FILE_PATH = '/home/ubuntu8/yuankun/data' # '219.224.135.93:/home/ubuntu8/yuankun'
+'''
+BIN_FILE_PATH = '/home/ubuntu2/txt'
+
+# first part of csv file1
+
+FIRST_FILE_PART = 'MB_QL_9_7_NODE'
